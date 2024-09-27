@@ -10,7 +10,7 @@
     "lint-staged": "yarn format && git add .",
     "format": "next lint ./src --fix && prettier '**/*.{json,yaml,yml}' --write --ignore-path .gitignore",
     "test": "ts-jest",
-    "prepare": "husky",
+    "prepare": "husky install",
     "commit": "cz",
     "commitlint": "commitlint --edit",
     "init-cz": "commitizen init @commitlint/cz-commitlint --yarn --dev --exact"
