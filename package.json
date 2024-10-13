@@ -3,17 +3,18 @@
   "packageManager": "yarn@4.5.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint ./src",
-    "lint-staged": "yarn format && git add .",
-    "format": "next lint ./src --fix && prettier '**/*.{json,yaml,yml}' --write --ignore-path .gitignore",
-    "test": "jest",
-    "prepare": "husky install",
+    "check-types": "tsc --noEmit --pretty",
     "commit": "cz",
     "commitlint": "commitlint --edit",
-    "init-cz": "commitizen init @commitlint/cz-commitlint --yarn --dev --exact"
+    "dev": "next dev",
+    "format": "next lint ./src --fix && prettier '**/*.{json,yaml,yml}' --write --ignore-path .gitignore",
+    "init-cz": "commitizen init @commitlint/cz-commitlint --yarn --dev --exact",
+    "lint": "next lint ./src",
+    "lint-staged": "yarn format && git add .",
+    "prepare": "husky install",
+    "start": "next start",
+    "test": "jest"
   },
   "dependencies": {
     "next": "14.2.13",
