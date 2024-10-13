@@ -2,5 +2,4 @@
 /.yarn/releases/*    binary
 /.yarn/plugins/**/*  binary
 /.pnp.*              binary linguist-generated
-.yarn/unplugged/**
 .yarn/unplugged/** filter=lfs diff=lfs merge=lfs -text
