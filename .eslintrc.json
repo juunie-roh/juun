@@ -50,6 +50,7 @@
         "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
         "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
+        "@typescript-eslint/no-explicit-any": "off",
         "no-restricted-syntax": [
           "error",
           "ForInStatement",
