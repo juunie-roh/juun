@@ -2,6 +2,7 @@
   "name": "juun",
   "packageManager": "yarn@4.5.1",
   "private": true,
+  "author": "juun",
   "scripts": {
     "build": "next build",
     "check-types": "tsc --noEmit --pretty",
