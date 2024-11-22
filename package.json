@@ -1,6 +1,6 @@
 {
   "name": "juun",
-  "packageManager": "yarn@4.5.1",
+  "packageManager": "yarn@4.5.2",
   "private": true,
   "author": "juun",
   "scripts": {
@@ -15,19 +15,30 @@
     "lint-staged": "yarn format && git add .",
     "prepare": "husky install",
     "start": "next start",
-    "test": "echo 'Test not specified'"
+    "test": "echo 'Test not specified'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "daisyui": "^4.12.14",
     "next": "14.2.18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "storybook": "^8.4.5",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/cz-commitlint": "^19.5.0",
+    "@storybook/addon-essentials": "^8.4.5",
+    "@storybook/addon-interactions": "^8.4.5",
+    "@storybook/addon-onboarding": "^8.4.5",
+    "@storybook/blocks": "^8.4.5",
+    "@storybook/nextjs": "^8.4.5",
+    "@storybook/react": "^8.4.5",
+    "@storybook/test": "^8.4.5",
     "@types/eslint-plugin-jsx-a11y": "^6.9.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.9.1",
@@ -59,7 +70,8 @@
     "semantic-release": "^24.2.0",
     "tailwindcss": "^3.4.15",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1"
   },
   "config": {
     "commitizen": {
