@@ -1,6 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 
+import { useBearStore } from '@/stores/slices/bear';
+
 export default function Home() {
+  const { bears, increase, decrease } = useBearStore();
+
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
@@ -47,6 +53,44 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+        <div className="flex items-center justify-center">
+          <button className="btn btn-circle" onClick={() => increase(1)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              // className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 5l0 14" />
+              <path d="M5 12l14 0" />
+            </svg>
+          </button>
+          <span>{bears}</span>
+          <button className="btn btn-circle" onClick={() => decrease(1)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              // className="icon icon-tabler icons-tabler-outline icon-tabler-minus"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M5 12l14 0" />
+            </svg>
+          </button>
         </div>
       </main>
       <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
