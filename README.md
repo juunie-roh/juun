@@ -18,3 +18,4 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Automatic changelog generation with Semantic Release
 - Absolute Imports using `@` prefix
 - Global State Management using [zustand](https://zustand.docs.pmnd.rs/)
+- Storybook for UI development
