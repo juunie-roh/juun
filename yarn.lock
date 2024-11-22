@@ -3221,6 +3221,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
+  languageName: node
+  linkType: hard
+
 "cmd-shim@npm:^7.0.0":
   version: 7.0.0
   resolution: "cmd-shim@npm:7.0.0"
@@ -7038,6 +7045,7 @@ __metadata:
     "@types/node": "npm:^22.9.1"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
+    clsx: "npm:^2.1.1"
     commitizen: "npm:^4.3.1"
     daisyui: "npm:^4.12.14"
     eslint: "npm:8.57.1"

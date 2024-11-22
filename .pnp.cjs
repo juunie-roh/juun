@@ -35,6 +35,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.9.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
+          ["clsx", "npm:2.1.1"],\
           ["commitizen", "npm:4.3.1"],\
           ["daisyui", "npm:4.12.14"],\
           ["eslint", "npm:8.57.1"],\
@@ -4344,6 +4345,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/clone-npm-1.0.4-a610fcbcf9-10c0.zip/node_modules/clone/",\
         "packageDependencies": [\
           ["clone", "npm:1.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["clsx", [\
+      ["npm:2.1.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/clsx-npm-2.1.1-96125b98be-10c0.zip/node_modules/clsx/",\
+        "packageDependencies": [\
+          ["clsx", "npm:2.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8918,6 +8928,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.9.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
+          ["clsx", "npm:2.1.1"],\
           ["commitizen", "npm:4.3.1"],\
           ["daisyui", "npm:4.12.14"],\
           ["eslint", "npm:8.57.1"],\
