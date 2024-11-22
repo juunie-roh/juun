@@ -17,3 +17,4 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Run tests on pull request with GitHub Actions
 - Automatic changelog generation with Semantic Release
 - Absolute Imports using `@` prefix
+- Global State Management using [zustand](https://zustand.docs.pmnd.rs/)
