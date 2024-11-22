@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 
+import Button from '@/components/shared/Button';
 import { useBearStore } from '@/stores/slices/bear';
 
 export default function Home() {
@@ -63,9 +64,9 @@ export default function Home() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               // className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -82,15 +83,43 @@ export default function Home() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               // className="icon icon-tabler icons-tabler-outline icon-tabler-minus"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M5 12l14 0" />
             </svg>
           </button>
+        </div>
+        <div>
+          <Button>Button</Button>
+          <Button variant="neutral">neutral</Button>
+          <Button variant="primary">primary</Button>
+          <Button variant="secondary">secondary</Button>
+          <Button variant="accent">accent</Button>
+          <Button variant="info">info</Button>
+          <Button variant="success">success</Button>
+          <Button variant="warning">warning</Button>
+          <Button variant="error">error</Button>
+          <Button variant="ghost">ghost</Button>
+          <Button variant="link">link</Button>
+          <Button variant="outline">outline</Button>
+          <br />
+          <Button size="lg">large</Button>
+          <Button size="md">middle</Button>
+          <Button size="sm">small</Button>
+          <Button size="xs">extra-small</Button>
+          <br />
+          <Button shape="wide">wide</Button>
+          <Button shape="circle">circle</Button>
+          <Button shape="square">square</Button>
+          <Button shape="block">block</Button>
+          <br />
+          <Button animation={false}>no-animation</Button>
+          <Button disabled>disabled</Button>
+          <Button glass>glass</Button>
         </div>
       </main>
       <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
