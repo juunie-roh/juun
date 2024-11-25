@@ -22,6 +22,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   disabled?: boolean;
   glass?: boolean;
-  animation?: boolean;
+  'no-animation'?: boolean;
   shape?: ButtonShape;
 }

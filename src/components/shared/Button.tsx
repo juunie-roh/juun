@@ -9,7 +9,7 @@ const Button = (props: ButtonProps) => {
     shape,
     disabled = false,
     glass = false,
-    animation = true,
+    'no-animation': noAnimation = true,
     children,
   } = props;
 
@@ -51,7 +51,7 @@ const Button = (props: ButtonProps) => {
       'btn-disabled': disabled,
       // eslint-disable-next-line prettier/prettier
       'glass': glass,
-      'no-animation': !animation,
+      'no-animation': !noAnimation,
     },
   );
 

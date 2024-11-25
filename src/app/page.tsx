@@ -117,7 +117,7 @@ export default function Home() {
           <Button shape="square">square</Button>
           <Button shape="block">block</Button>
           <br />
-          <Button animation={false}>no-animation</Button>
+          <Button 'no-animation'={false}>no-animation</Button>
           <Button disabled>disabled</Button>
           <Button glass>glass</Button>
         </div>
