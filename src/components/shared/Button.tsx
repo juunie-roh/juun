@@ -51,7 +51,7 @@ const Button = (props: ButtonProps) => {
       'btn-disabled': disabled,
       // eslint-disable-next-line prettier/prettier
       'glass': glass,
-      'no-animation': !noAnimation,
+      'no-animation': noAnimation,
     },
   );
 
