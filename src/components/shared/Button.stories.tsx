@@ -82,6 +82,7 @@ const meta: Meta<typeof Button> = {
       control: 'boolean',
       description: 'disable button',
       table: {
+        category: 'others',
         defaultValue: { summary: 'false' },
       },
     },
@@ -89,6 +90,7 @@ const meta: Meta<typeof Button> = {
       control: 'boolean',
       description: 'enable glass effect on button',
       table: {
+        category: 'others',
         defaultValue: { summary: 'false' },
       },
     },
@@ -96,6 +98,7 @@ const meta: Meta<typeof Button> = {
       control: 'boolean',
       description: 'disable animation on button',
       table: {
+        category: 'others',
         defaultValue: { summary: 'false' },
       },
     },
