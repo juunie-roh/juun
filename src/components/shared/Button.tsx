@@ -10,6 +10,7 @@ const Button = (props: ButtonProps) => {
     disabled = false,
     glass = false,
     'no-animation': noAnimation = true,
+    className,
     children,
   } = props;
 
@@ -53,6 +54,7 @@ const Button = (props: ButtonProps) => {
       'glass': glass,
       'no-animation': noAnimation,
     },
+    className,
   );
 
   return (
