@@ -10,11 +10,8 @@ type ButtonVariant =
   | 'ghost'
   | 'link'
   | 'outline';
-
 type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
-
 type ButtonShape = 'wide' | 'block' | 'circle' | 'square';
-
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
