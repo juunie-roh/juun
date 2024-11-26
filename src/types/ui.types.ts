@@ -1,4 +1,4 @@
-type ButtonVariant =
+type BaseVariant =
   | 'neutral'
   | 'primary'
   | 'secondary'
@@ -6,10 +6,9 @@ type ButtonVariant =
   | 'info'
   | 'success'
   | 'warning'
-  | 'error'
-  | 'ghost'
-  | 'link'
-  | 'outline';
+  | 'error';
+
+type ButtonVariant = BaseVariant | ('ghost' | 'link' | 'outline');
 type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 type ButtonShape = 'wide' | 'block' | 'circle' | 'square';
 export interface ButtonProps
@@ -34,4 +33,8 @@ export interface ModalProps {
   backdrop?: boolean;
   onClose?: () => void;
   className?: string;
+}
+
+export interface DropdownProps {
+  items?: React.ReactNode[];
 }
