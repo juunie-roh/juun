@@ -7,7 +7,7 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
     title,
     content,
     footer,
-    interactive = false,
+    backdrop = false,
     onClose,
     className = '',
   } = props;
@@ -67,7 +67,7 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
         </div>
       </div>
 
-      {!interactive && (
+      {backdrop && (
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>

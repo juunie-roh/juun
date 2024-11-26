@@ -17,7 +17,7 @@ const meta: Meta<typeof Modal> = {
   args: {
     title: 'Modal Title',
     content: 'Modal Content',
-    interactive: undefined,
+    backdrop: undefined,
     onClose: fn(),
   },
   argTypes: {
@@ -51,9 +51,15 @@ const meta: Meta<typeof Modal> = {
         },
       },
     },
-    interactive: {
+    backdrop: {
       control: 'boolean',
-      description: 'make modal interactive with ',
+      description: 'make modal closable by clicking background area',
+      table: {
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: 'boolean',
+        },
+      },
     },
   },
   render: (args) => {

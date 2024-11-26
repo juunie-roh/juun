@@ -31,7 +31,7 @@ export interface ModalProps {
   title?: React.ReactNode;
   content?: React.ReactNode;
   footer?: React.ReactNode;
-  interactive?: boolean;
+  backdrop?: boolean;
   onClose?: () => void;
   className?: string;
 }
