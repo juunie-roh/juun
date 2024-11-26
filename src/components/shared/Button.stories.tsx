@@ -209,7 +209,7 @@ export const Shapes: Story = {
 export const Animation: Story = {
   args: {
     variant: 'primary',
-    'no-animation': false,
+    'no-animation': true,
     children: 'Animation Disabled',
   },
 };
