@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import BearCounter from '@/components/features/BearCounter';
+import BearCounterModal from '@/components/features/BearCounterModal';
 
 export default function Home() {
   return (
@@ -51,6 +52,9 @@ export default function Home() {
           </a>
         </div>
         <BearCounter />
+        <div className="flex w-full items-center justify-center">
+          <BearCounterModal />
+        </div>
       </main>
       <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
         <a
