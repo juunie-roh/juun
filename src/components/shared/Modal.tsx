@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import type { ModalProps, ModalRef } from '@/types/ui.types';
@@ -32,8 +33,15 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
     },
   }));
 
+  const modalClass = clsx([
+    'modal',
+    'modal-bottom',
+    'sm:modal-middle',
+    className,
+  ]);
+
   return (
-    <dialog ref={dialogRef} className={`modal ${className}`}>
+    <dialog ref={dialogRef} className={modalClass}>
       <div className="modal-box">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
