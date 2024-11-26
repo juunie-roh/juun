@@ -1,13 +1,8 @@
-'use client';
-
 import Image from 'next/image';
 
-import { SvgMinus, SvgPlus } from '@/assets/svgs';
-import { useBearStore } from '@/stores/slices/bear';
+import BearCounter from '@/components/features/BearCounter';
 
 export default function Home() {
-  const { bears, increase, decrease } = useBearStore();
-
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
@@ -55,15 +50,7 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-        <div className="flex items-center justify-center">
-          <button className="btn btn-circle" onClick={() => increase(1)}>
-            <SvgPlus />
-          </button>
-          <span>{bears}</span>
-          <button className="btn btn-circle" onClick={() => decrease(1)}>
-            <SvgMinus />
-          </button>
-        </div>
+        <BearCounter />
       </main>
       <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
         <a
