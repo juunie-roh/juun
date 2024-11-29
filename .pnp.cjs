@@ -41,7 +41,7 @@ const RAW_RUNTIME_STATE =
           ["@svgr/webpack", "npm:8.1.0"],\
           ["@types/eslint-plugin-jsx-a11y", "npm:6.10.0"],\
           ["@types/jest", "npm:29.5.14"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
           ["clsx", "npm:2.1.1"],\
@@ -68,7 +68,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:29.7.0"],\
           ["next", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:15.0.3"],\
           ["postcss", "npm:8.4.49"],\
-          ["prettier", "npm:3.3.3"],\
+          ["prettier", "npm:3.4.1"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:18.3.1"],\
           ["semantic-release", "npm:24.2.0"],\
@@ -4032,7 +4032,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/figures", "npm:1.0.8"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["ansi-escapes", "npm:4.3.2"],\
           ["yoctocolors-cjs", "npm:2.1.2"]\
         ],\
@@ -4056,7 +4056,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/confirm", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:5.0.2"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"]\
+          ["@types/node", "npm:22.10.1"]\
         ],\
         "packagePeers": [\
           "@types/node"\
@@ -4096,7 +4096,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/editor", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.1.0"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["external-editor", "npm:3.1.0"]\
         ],\
         "packagePeers": [\
@@ -4119,7 +4119,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/expand", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.0.2"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["yoctocolors-cjs", "npm:2.1.2"]\
         ],\
         "packagePeers": [\
@@ -4151,7 +4151,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/input", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.0.2"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"]\
+          ["@types/node", "npm:22.10.1"]\
         ],\
         "packagePeers": [\
           "@types/node"\
@@ -4173,7 +4173,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/number", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:3.0.2"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"]\
+          ["@types/node", "npm:22.10.1"]\
         ],\
         "packagePeers": [\
           "@types/node"\
@@ -4195,7 +4195,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/password", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.0.2"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["ansi-escapes", "npm:4.3.2"]\
         ],\
         "packagePeers": [\
@@ -4226,7 +4226,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/rawlist", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.0.2"],\
           ["@inquirer/search", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:3.0.2"],\
           ["@inquirer/select", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.0.2"],\
-          ["@types/node", "npm:22.9.4"]\
+          ["@types/node", "npm:22.10.1"]\
         ],\
         "packagePeers": [\
           "@types/node"\
@@ -4248,7 +4248,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/rawlist", "virtual:d2ae763b67485fa0ae38096db2483b5f40a19668228b3e959483e05acd562111684dc41cc3249a9afe626c4248ed235e574ed93e4b6fc3a4c936c1d905030c24#npm:4.0.2"],\
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["yoctocolors-cjs", "npm:2.1.2"]\
         ],\
         "packagePeers": [\
@@ -4272,7 +4272,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/figures", "npm:1.0.8"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["yoctocolors-cjs", "npm:2.1.2"]\
         ],\
         "packagePeers": [\
@@ -4296,7 +4296,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/figures", "npm:1.0.8"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["ansi-escapes", "npm:4.3.2"],\
           ["yoctocolors-cjs", "npm:2.1.2"]\
         ],\
@@ -4329,7 +4329,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@inquirer-type-virtual-d2f3c2dc79/4/.yarn/berry/cache/@inquirer-type-npm-3.0.1-5402bd13af-10c0.zip/node_modules/@inquirer/type/",\
         "packageDependencies": [\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"]\
+          ["@types/node", "npm:22.10.1"]\
         ],\
         "packagePeers": [\
           "@types/node"\
@@ -6172,7 +6172,7 @@ const RAW_RUNTIME_STATE =
           ["esbuild", "npm:0.24.0"],\
           ["esbuild-register", "virtual:30fd05b88949bf1fa1d04bcd20e2baccfea2b18cf619925fe6c0c7a581e54bae59f714b2fd91109e0a8e9967d2a9614fd5726c94113859f12938ea55845c7cce#npm:3.6.0"],\
           ["jsdoc-type-pratt-parser", "npm:4.1.0"],\
-          ["prettier", "npm:3.3.3"],\
+          ["prettier", "npm:3.4.1"],\
           ["process", "npm:0.11.10"],\
           ["recast", "npm:0.23.9"],\
           ["semver", "npm:7.6.3"],\
@@ -7317,6 +7317,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/node", [\
+      ["npm:22.10.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-node-npm-22.10.1-db989fc54b-10c0.zip/node_modules/@types/node/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:22.10.1"],\
+          ["undici-types", "npm:6.20.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:22.7.3", {\
         "packageLocation": "../../../.yarn/berry/cache/@types-node-npm-22.7.3-5ce7a3b706-10c0.zip/node_modules/@types/node/",\
         "packageDependencies": [\
@@ -7329,14 +7337,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/@types-node-npm-22.9.1-b841ba9c2c-10c0.zip/node_modules/@types/node/",\
         "packageDependencies": [\
           ["@types/node", "npm:22.9.1"],\
-          ["undici-types", "npm:6.19.8"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:22.9.4", {\
-        "packageLocation": "../../../.yarn/berry/cache/@types-node-npm-22.9.4-f15eaff576-10c0.zip/node_modules/@types/node/",\
-        "packageDependencies": [\
-          ["@types/node", "npm:22.9.4"],\
           ["undici-types", "npm:6.19.8"]\
         ],\
         "linkType": "HARD"\
@@ -11838,7 +11838,7 @@ const RAW_RUNTIME_STATE =
           ["@types/prettier", null],\
           ["eslint", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:9.15.0"],\
           ["eslint-config-prettier", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:9.1.0"],\
-          ["prettier", "npm:3.3.3"],\
+          ["prettier", "npm:3.4.1"],\
           ["prettier-linter-helpers", "npm:1.0.0"],\
           ["synckit", "npm:0.9.1"]\
         ],\
@@ -13677,7 +13677,7 @@ const RAW_RUNTIME_STATE =
           ["@inquirer/core", "npm:10.1.0"],\
           ["@inquirer/prompts", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:7.1.0"],\
           ["@inquirer/type", "virtual:e8c28f421a4755401035c23c5c580e50d615118bf9301ec88197aa64168b0ef3cc06d4e2c6387de3754cf9a8fc83008ff1f2062f5477773c03fc4b3f3f59e33e#npm:3.0.1"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["ansi-escapes", "npm:4.3.2"],\
           ["mute-stream", "npm:2.0.0"],\
           ["run-async", "npm:3.0.0"],\
@@ -15115,7 +15115,7 @@ const RAW_RUNTIME_STATE =
           ["@svgr/webpack", "npm:8.1.0"],\
           ["@types/eslint-plugin-jsx-a11y", "npm:6.10.0"],\
           ["@types/jest", "npm:29.5.14"],\
-          ["@types/node", "npm:22.9.4"],\
+          ["@types/node", "npm:22.10.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
           ["clsx", "npm:2.1.1"],\
@@ -15142,7 +15142,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:29.7.0"],\
           ["next", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:15.0.3"],\
           ["postcss", "npm:8.4.49"],\
-          ["prettier", "npm:3.3.3"],\
+          ["prettier", "npm:3.4.1"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:18.3.1"],\
           ["semantic-release", "npm:24.2.0"],\
@@ -17810,10 +17810,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier", [\
-      ["npm:3.3.3", {\
-        "packageLocation": "./.yarn/unplugged/prettier-npm-3.3.3-e811f023f3/node_modules/prettier/",\
+      ["npm:3.4.1", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.4.1-ebb52d2db5/node_modules/prettier/",\
         "packageDependencies": [\
-          ["prettier", "npm:3.3.3"]\
+          ["prettier", "npm:3.4.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19423,7 +19423,7 @@ const RAW_RUNTIME_STATE =
           ["storybook", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:8.4.5"],\
           ["@storybook/core", "virtual:07fe95ee64d73f1645a9baaf7af54e0e9e1668df3b4d10c6698c301ec3da1035222d66e6a554895960c960a5a5b1abea556dbb63bee234fffcd23033959b9d2d#npm:8.4.5"],\
           ["@types/prettier", null],\
-          ["prettier", "npm:3.3.3"]\
+          ["prettier", "npm:3.4.1"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
@@ -20593,6 +20593,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/undici-types-npm-6.19.8-9f12285b7a-10c0.zip/node_modules/undici-types/",\
         "packageDependencies": [\
           ["undici-types", "npm:6.19.8"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:6.20.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/undici-types-npm-6.20.0-bd21e669af-10c0.zip/node_modules/undici-types/",\
+        "packageDependencies": [\
+          ["undici-types", "npm:6.20.0"]\
         ],\
         "linkType": "HARD"\
       }]\
