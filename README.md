@@ -19,3 +19,4 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Absolute Imports using `@` prefix
 - Global State Management with [zustand](https://zustand.docs.pmnd.rs/)
 - Storybook for UI development
+- PRs & Conventional Commit Ruleset applied from [ruleset-recipes](https://github.com/github/ruleset-recipes)
