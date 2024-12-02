@@ -44,6 +44,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.10.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
+          ["@vercel/speed-insights", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:1.1.0"],\
           ["clsx", "npm:2.1.1"],\
           ["commitizen", "npm:4.3.1"],\
           ["daisyui", "npm:4.12.14"],\
@@ -7756,6 +7757,48 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@vercel/speed-insights", [\
+      ["npm:1.1.0", {\
+        "packageLocation": "./.yarn/unplugged/@vercel-speed-insights-virtual-24b5bd7edf/node_modules/@vercel/speed-insights/",\
+        "packageDependencies": [\
+          ["@vercel/speed-insights", "npm:1.1.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:1.1.0", {\
+        "packageLocation": "./.yarn/unplugged/@vercel-speed-insights-virtual-24b5bd7edf/node_modules/@vercel/speed-insights/",\
+        "packageDependencies": [\
+          ["@vercel/speed-insights", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:1.1.0"],\
+          ["@sveltejs/kit", null],\
+          ["@types/next", null],\
+          ["@types/react", "npm:18.3.12"],\
+          ["@types/svelte", null],\
+          ["@types/sveltejs__kit", null],\
+          ["@types/vue", null],\
+          ["@types/vue-router", null],\
+          ["next", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:15.0.3"],\
+          ["react", "npm:18.3.1"],\
+          ["svelte", null],\
+          ["vue", null],\
+          ["vue-router", null]\
+        ],\
+        "packagePeers": [\
+          "@sveltejs/kit",\
+          "@types/next",\
+          "@types/react",\
+          "@types/svelte",\
+          "@types/sveltejs__kit",\
+          "@types/vue-router",\
+          "@types/vue",\
+          "next",\
+          "react",\
+          "svelte",\
+          "vue-router",\
+          "vue"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@vitest/expect", [\
       ["npm:2.0.5", {\
         "packageLocation": "../../../.yarn/berry/cache/@vitest-expect-npm-2.0.5-8933466cce-10c0.zip/node_modules/@vitest/expect/",\
@@ -15118,6 +15161,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.10.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
+          ["@vercel/speed-insights", "virtual:c456b24f28d16247b92e9af3e8271629b1019b80d7327b160dd58f911f3f8f1f527c78e354116162517a714ad1c68422b7c882d90aff91585fa0359b79937e7a#npm:1.1.0"],\
           ["clsx", "npm:2.1.1"],\
           ["commitizen", "npm:4.3.1"],\
           ["daisyui", "npm:4.12.14"],\

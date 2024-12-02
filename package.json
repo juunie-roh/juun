@@ -20,6 +20,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.1.0",
     "daisyui": "^4.12.14",
     "next": "15.0.3",
     "react": "^18.3.1",
