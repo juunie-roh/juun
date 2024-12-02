@@ -21,6 +21,21 @@ export interface ButtonProps
   shape?: ButtonShape;
 }
 
+export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
+  'collapse-title': React.ReactNode;
+  'collapse-title-className'?: string;
+  'collapse-content': React.ReactNode;
+  icon?: 'arrow' | 'plus';
+  open?: boolean;
+}
+
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  'menu-title'?: React.ReactNode;
+  disabled?: boolean;
+  active?: boolean;
+  focus?: boolean;
+}
+
 export interface ModalRef {
   open: () => void;
   close: () => void;
@@ -33,8 +48,4 @@ export interface ModalProps {
   backdrop?: boolean;
   onClose?: () => void;
   className?: string;
-}
-
-export interface DropdownProps {
-  items?: React.ReactNode[];
 }
