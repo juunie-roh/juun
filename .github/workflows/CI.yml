@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -29,12 +30,10 @@ jobs:
       - run: yarn --immutable
 
       - name: Validate commits
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            yarn commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
-          else
-            yarn commitlint --from ${{ github.event.before }} --to ${{ github.event.after }} --verbose
-          fi
+        uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: .commitlintrc.json # or your config file path
+          failOnWarnings: false
 
       - name: esLinter
         run: yarn lint
