@@ -26,9 +26,7 @@ const meta: Meta<typeof Modal> = {
       description: 'a title of modal',
       table: {
         defaultValue: { summary: 'undefined' },
-        type: {
-          summary: 'React.ReactNode | string | undefined',
-        },
+        type: { summary: 'ReactNode | string | undefined' },
       },
     },
     content: {
@@ -36,9 +34,7 @@ const meta: Meta<typeof Modal> = {
       description: 'content of modal',
       table: {
         defaultValue: { summary: 'undefined' },
-        type: {
-          summary: 'React.ReactNode | string | undefined',
-        },
+        type: { summary: 'ReactNode | string | undefined' },
       },
     },
     footer: {
@@ -46,9 +42,7 @@ const meta: Meta<typeof Modal> = {
       description: 'footer of modal',
       table: {
         defaultValue: { summary: 'undefined' },
-        type: {
-          summary: 'React.ReactNode | string | undefined',
-        },
+        type: { summary: 'ReactNode | string | undefined' },
       },
     },
     backdrop: {
@@ -56,9 +50,15 @@ const meta: Meta<typeof Modal> = {
       description: 'make modal closable by clicking background area',
       table: {
         defaultValue: { summary: 'false' },
-        type: {
-          summary: 'boolean',
-        },
+        type: { summary: 'boolean' },
+      },
+    },
+    onClose: {
+      description: 'callback function to execute on close modal',
+      type: 'function',
+      table: {
+        defaultValue: { summary: 'undefined' },
+        type: { summary: 'function' },
       },
     },
   },
@@ -80,5 +80,10 @@ type Story = StoryObj<typeof Modal>;
 
 // Base story
 export const Default: Story = {
-  args: {},
+  args: {
+    title: 'Modal Title',
+    content: 'Modal Content',
+    backdrop: undefined,
+    onClose: fn(),
+  },
 };

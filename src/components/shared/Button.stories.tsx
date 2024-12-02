@@ -26,6 +26,7 @@ const meta: Meta<typeof Button> = {
     },
     onClick: {
       table: {
+        disable: true,
         category: 'default props',
       },
     },
