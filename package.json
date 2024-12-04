@@ -1,6 +1,6 @@
 {
   "name": "juun",
-  "packageManager": "yarn@4.5.2",
+  "packageManager": "yarn@4.5.3",
   "private": true,
   "author": "juun",
   "scripts": {
@@ -33,6 +33,8 @@
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/cz-commitlint": "^19.5.0",
+    "@eslint/js": "^9.16.0",
+    "@next/eslint-plugin-next": "^15.0.3",
     "@storybook/addon-essentials": "^8.4.6",
     "@storybook/addon-interactions": "^8.4.6",
     "@storybook/addon-onboarding": "^8.4.6",
@@ -46,6 +48,8 @@
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
     "clsx": "^2.1.1",
     "commitizen": "^4.3.1",
     "eslint": "9.16.0",
