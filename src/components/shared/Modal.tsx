@@ -4,14 +4,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import type { ModalProps, ModalRef } from '@/types/ui.types';
 
 const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
-  const {
-    title,
-    content,
-    footer,
-    backdrop = false,
-    onClose,
-    className = '',
-  } = props;
+  const { title, content, footer, backdrop = false, onClose, className = '' } = props;
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -33,37 +26,21 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
     },
   }));
 
-  const modalClass = clsx([
-    'modal',
-    'modal-bottom',
-    'sm:modal-middle',
-    className,
-  ]);
+  const modalClass = clsx(['modal', 'modal-bottom', 'sm:modal-middle', className]);
 
   return (
     <dialog ref={dialogRef} className={modalClass}>
       <div className="modal-box">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
-            ✕
-          </button>
+          <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">✕</button>
         </form>
         {/* Title Section */}
         {title &&
-          (typeof title === 'string' ? (
-            <h3 className="text-lg font-bold">{title}</h3>
-          ) : (
-            title
-          ))}
+          (typeof title === 'string' ? <h3 className="text-lg font-bold">{title}</h3> : title)}
 
         {/* Content Section */}
-        {content &&
-          (typeof content === 'string' ? (
-            <p className="py-4">{content}</p>
-          ) : (
-            content
-          ))}
+        {content && (typeof content === 'string' ? <p className="py-4">{content}</p> : content)}
 
         {/* Footer Section */}
         <div className="modal-action">

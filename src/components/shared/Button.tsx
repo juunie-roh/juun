@@ -54,7 +54,7 @@ const Button = (props: ButtonProps) => {
       'glass': glass,
       'no-animation': noAnimation,
     },
-    className,
+    className
   );
 
   return (
