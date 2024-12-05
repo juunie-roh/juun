@@ -9,14 +9,22 @@ const BearCounter = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <button className="btn btn-circle" onClick={() => increase(1)} style={{ fontSize: 0 }}>
+      <button
+        className="btn btn-circle"
+        onClick={() => increase(1)}
+        style={{ fontSize: 0 }}
+      >
         increase
         <SvgPlus />
       </button>
       <Button variant="ghost" shape="wide">
         {bears}
       </Button>
-      <button className="btn btn-circle" onClick={() => decrease(1)} style={{ fontSize: 0 }}>
+      <button
+        className="btn btn-circle"
+        onClick={() => decrease(1)}
+        style={{ fontSize: 0 }}
+      >
         decrease
         <SvgMinus />
       </button>

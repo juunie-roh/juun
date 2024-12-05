@@ -20,11 +20,16 @@ const Collapse = (props: CollapseProps) => {
     className,
   ]);
 
-  const titleClasses = clsx(['collapse-title', titleClassName || 'text-xl font-medium']);
+  const titleClasses = clsx([
+    'collapse-title',
+    titleClassName || 'text-xl font-medium',
+  ]);
 
   return (
     <div tabIndex={0} className={collapseClasses}>
-      <div className={titleClasses}>{typeof title === 'string' ? <p>title</p> : title}</div>
+      <div className={titleClasses}>
+        {typeof title === 'string' ? <p>title</p> : title}
+      </div>
       <div className="collapse-content">
         {typeof content === 'string' ? <p>content</p> : content}
       </div>

@@ -14,7 +14,12 @@ const BearCounterModal = () => {
   return (
     <>
       <Button onClick={() => modalRef?.current?.toggle()}>open modal</Button>
-      <Modal ref={modalRef} title="Bear Counter" content={<BearCounter />} backdrop />
+      <Modal
+        ref={modalRef}
+        title="Bear Counter"
+        content={<BearCounter />}
+        backdrop
+      />
     </>
   );
 };

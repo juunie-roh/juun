@@ -15,26 +15,12 @@ import storybookPlugin from "eslint-plugin-storybook";
 export default [
   // Base ESLint config
   js.configs.recommended,
-
   // Next.js config
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
-    settings: {
-      next: {
-        rootDir: ".",
-      },
-    },
-    plugins: {
-      "@next/next": nextPlugin
-    },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-      "@next/next/no-html-link-for-pages": "off",
-      "@next/next/no-img-element": "off"
-    }
+    ...nextPlugin.configs["core-web-vitals"],
+    ...nextPlugin.configs.typescript
   },
-  
   // Prettier config
   prettierConfig,
   {
@@ -47,11 +33,7 @@ export default [
         "error",
         {
           singleQuote: true,
-          endOfLine: "auto",
-          semi: true,
-          trailingComma: "es5",
-          tabWidth: 2,
-          printWidth: 100
+          endOfLine: "auto"
         }
       ]
     }
@@ -59,15 +41,7 @@ export default [
 
   // Global settings
   {
-    ignores: [
-      ".next/*",
-      "node_modules/*", 
-      ".yarn/*",
-      "coverage/*",
-      "dist/*",
-      "build/*",
-      "out/*"
-    ]
+    ignores: [".next/*", "node_modules/*", ".yarn/*"]
   },
 
   // Base JS/TS configuration
@@ -75,14 +49,16 @@ export default [
     files: ["**/*.{js,jsx,ts,tsx}"],
     plugins: {
       "@typescript-eslint": typescriptPlugin,
-      prettier: prettierPlugin
+      "prettier": prettierPlugin
     },
     rules: {
       "import/extensions": "off",
       "no-param-reassign": "off",
       "no-underscore-dangle": "off",
-      "no-console": ["warn", { allow: ["warn", "error"] }],
-      "no-debugger": "warn"
+      "prettier/prettier": ["error", {
+        singleQuote: true,
+        endOfLine: "auto"
+      }]
     }
   },
 
@@ -92,25 +68,27 @@ export default [
     plugins: {
       "@typescript-eslint": typescriptPlugin,
       "unused-imports": unusedImportsPlugin,
-      tailwindcss: tailwindPlugin,
+      "tailwindcss": tailwindPlugin,
       "simple-import-sort": simpleImportSortPlugin
     },
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
-        project: "./tsconfig.json",
-        ecmaVersion: "latest",
-        sourceType: "module"
+        project: "./tsconfig.json"
       }
     },
     settings: {
       tailwindcss: {
-        config: "tailwind.config.js",
-        cssFiles: ["**/*.css", "**/*.scss"],
-        whitelist: []
+        config: "tailwind.config.js"
       }
     },
     rules: {
+      // Prettier
+      "prettier/prettier": ["error", {
+        singleQuote: true,
+        endOfLine: "auto"
+      }],
+      
       // React
       "react/function-component-definition": "off",
       "react/destructuring-assignment": "off",
@@ -120,21 +98,9 @@ export default [
       // TypeScript
       "@typescript-eslint/comma-dangle": "off",
       "@typescript-eslint/consistent-type-imports": "error",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": ["warn", { 
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "caughtErrorsIgnorePattern": "^_"
-      }],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-unused-expressions": "off",
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-use-before-define": ["error", { 
-        "functions": false,
-        "classes": true,
-        "variables": true,
-        "typedefs": true
-      }],
       
       // Imports
       "import/extensions": "off",
@@ -144,8 +110,7 @@ export default [
       "simple-import-sort/exports": "error",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": ["error", { 
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
+        "argsIgnorePattern": "^_" 
       }],
       
       // General
@@ -157,20 +122,13 @@ export default [
       ],
       "no-param-reassign": "off",
       "no-underscore-dangle": "off",
-      "consistent-return": "off",
-      "max-len": ["error", { 
-        "code": 100,
-        "ignoreUrls": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
-      }]
+      "consistent-return": "off"
     }
   },
 
   // Testing configuration
   {
-    files: ["**/*.test.*", "**/*.spec.*"],
+    files: ["tests/**/*, *.test.*"],
     plugins: {
       jest: jestPlugin
     },
@@ -178,34 +136,20 @@ export default [
       globals: {
         ...jestPlugin.environments.globals
       }
-    },
-    rules: {
-      "jest/no-disabled-tests": "warn",
-      "jest/no-focused-tests": "error",
-      "jest/no-identical-title": "error",
-      "jest/valid-expect": "error"
     }
   },
 
   // Playwright E2E testing
   {
     files: ["**/*.spec.ts"],
-    plugins: {
-      playwright: playwrightPlugin
-    },
-    rules: {
-      ...playwrightPlugin.configs.recommended.rules
-    }
+    ...playwrightPlugin.configs.recommended
   },
 
   // Storybook configuration
   {
     files: ["*.stories.*"],
-    plugins: {
-      storybook: storybookPlugin
-    },
+    ...storybookPlugin.configs.recommended,
     rules: {
-      ...storybookPlugin.configs.recommended.rules,
       "import/no-extraneous-dependencies": ["error", {
         "devDependencies": true
       }]
