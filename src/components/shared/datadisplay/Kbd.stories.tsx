@@ -64,3 +64,43 @@ export const Sizes: Story = {
     </div>
   ),
 };
+
+export const Full: Story = {
+  render: (args) => (
+    <>
+      <div className="my-1 flex w-full justify-center gap-1">
+        <Kbd {...args}>q</Kbd>
+        <Kbd {...args}>w</Kbd>
+        <Kbd {...args}>e</Kbd>
+        <Kbd {...args}>r</Kbd>
+        <Kbd {...args}>t</Kbd>
+        <Kbd {...args}>y</Kbd>
+        <Kbd {...args}>u</Kbd>
+        <Kbd {...args}>i</Kbd>
+        <Kbd {...args}>o</Kbd>
+        <Kbd {...args}>p</Kbd>
+      </div>
+      <div className="my-1 flex w-full justify-center gap-1">
+        <Kbd {...args}>a</Kbd>
+        <Kbd {...args}>s</Kbd>
+        <Kbd {...args}>d</Kbd>
+        <Kbd {...args}>f</Kbd>
+        <Kbd {...args}>g</Kbd>
+        <Kbd {...args}>h</Kbd>
+        <Kbd {...args}>j</Kbd>
+        <Kbd {...args}>k</Kbd>
+        <Kbd {...args}>l</Kbd>
+      </div>
+      <div className="my-1 flex w-full justify-center gap-1">
+        <Kbd {...args}>z</Kbd>
+        <Kbd {...args}>x</Kbd>
+        <Kbd {...args}>c</Kbd>
+        <Kbd {...args}>v</Kbd>
+        <Kbd {...args}>b</Kbd>
+        <Kbd {...args}>n</Kbd>
+        <Kbd {...args}>m</Kbd>
+        <Kbd {...args}>/</Kbd>
+      </div>
+    </>
+  ),
+};
