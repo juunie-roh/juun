@@ -7,14 +7,14 @@ type BaseVariant =
   | 'success'
   | 'warning'
   | 'error';
+type Size = 'lg' | 'md' | 'sm' | 'xs';
 
 type ButtonVariant = BaseVariant | ('ghost' | 'link' | 'outline');
-type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
 type ButtonShape = 'wide' | 'block' | 'circle' | 'square';
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  size?: ButtonSize;
+  size?: Size;
   disabled?: boolean;
   glass?: boolean;
   'no-animation'?: boolean;
@@ -27,6 +27,10 @@ export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
   'collapse-content': React.ReactNode;
   icon?: 'arrow' | 'plus';
   open?: boolean;
+}
+
+export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
+  size?: Size;
 }
 
 export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
