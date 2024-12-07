@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 
-import Button from '@/components/shared/Button';
-import Modal from '@/components/shared/Modal';
+import Button from '@/components/shared/action/Button';
+import Modal from '@/components/shared/action/Modal';
 import type { ModalRef } from '@/types/ui.types';
 
 import BearCounter from './BearCounter';
