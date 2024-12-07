@@ -1,7 +1,7 @@
 'use client';
 
 import { SvgMinus, SvgPlus } from '@/assets/svgs';
-import Button from '@/components/shared/Button';
+import Button from '@/components/shared/action/Button';
 import { useBearStore } from '@/stores/slices/bear';
 
 const BearCounter = () => {
