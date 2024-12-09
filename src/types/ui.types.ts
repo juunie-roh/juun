@@ -1,13 +1,14 @@
-type BaseVariant =
-  | 'neutral'
-  | 'primary'
-  | 'secondary'
-  | 'accent'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error';
+type ColorVariant = 'neutral' | 'primary' | 'secondary' | 'accent';
+type StatusVariant = 'info' | 'success' | 'warning' | 'error';
+type BaseVariant = ColorVariant | StatusVariant;
 type Size = 'lg' | 'md' | 'sm' | 'xs';
+
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: StatusVariant;
+  'alert-title'?: React.ReactNode;
+  'alert-description'?: React.ReactNode;
+  icon?: React.ReactNode;
+}
 
 type ButtonVariant = BaseVariant | ('ghost' | 'link' | 'outline');
 type ButtonShape = 'wide' | 'block' | 'circle' | 'square';
