@@ -54,3 +54,50 @@ export interface ModalProps {
   onClose?: () => void;
   className?: string;
 }
+
+export type TableData<T> = T & {
+  rowKey: React.Key;
+};
+export interface TableColumn<T> {
+  header: string;
+  accessorKey: keyof T;
+  /**
+   * The render method of the column
+   * @param value a row item of the table
+   */
+  render?: <K extends keyof T>(value: T[K]) => React.ReactNode;
+  className?: string;
+  pin?: boolean;
+}
+export interface TableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
+  data: T[];
+  columns: TableColumn<T>[];
+  isLoading?: boolean;
+  className?: string;
+  // Pagination props
+  pageSize?: number;
+  /**
+   * When you set the pagination as `server`, you should specify the `totalPages` and `onPageChange` props.
+   */
+  pagination?: 'client' | 'server' | false;
+  totalPages?: number;
+  onPageChange?: () => void;
+  // Sorting props
+  onSort?: (by: keyof T, order: any) => T[];
+  // Selection props
+  selectable?: boolean;
+  selectedRows?: T[];
+  onRowSelect?: (row: T) => void;
+  onSelectAll?: (rows: T[]) => void;
+  // Style props
+  zebra?: boolean;
+  /**
+   * For `<table>` to make all the rows inside `<thead>` and `<tfoot>` sticky
+   */
+  'pin-rows'?: boolean;
+  /**
+   * For `<table>` to make all the `<th>` columns sticky
+   */
+  'pin-cols'?: boolean;
+  size?: Size;
+}
