@@ -7,6 +7,12 @@ const meta: Meta<typeof Collapse> = {
   component: Collapse,
   parameters: {
     layout: 'centered',
+    componentSubtitle: 'Collapse is used for showing and hiding content.',
+    docs: {
+      description: {
+        component: 'Details',
+      },
+    },
   },
   tags: ['autodocs'],
   args: {
