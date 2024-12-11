@@ -16,8 +16,9 @@ const meta: Meta<typeof Button> = {
   },
   argTypes: {
     children: {
+      control: 'text',
       table: {
-        category: 'default props',
+        category: 'default',
         defaultValue: { summary: 'Button' },
         type: {
           summary: 'ReactNode | string | undefined',
@@ -25,9 +26,10 @@ const meta: Meta<typeof Button> = {
       },
     },
     onClick: {
+      control: false,
       table: {
         disable: true,
-        category: 'default props',
+        category: 'default',
       },
     },
     variant: {
@@ -44,16 +46,24 @@ const meta: Meta<typeof Button> = {
         'error',
         'ghost',
         'link',
-        'outline',
       ],
       description: 'type of button',
       table: {
-        category: 'variant',
+        category: 'style',
         defaultValue: { summary: 'undefined' },
         type: {
           summary: 'string',
           detail: `undefined | "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "ghost" | "link" | "outline"`,
         },
+      },
+    },
+    outline: {
+      control: 'boolean',
+      description: 'Enable outline effect on the button',
+      table: {
+        category: 'style',
+        defaultValue: { summary: 'undefined' },
+        type: { summary: 'boolean | undefined' },
       },
     },
     size: {
@@ -162,8 +172,44 @@ export const Variants: Story = {
         <Button {...args} variant="link">
           Link
         </Button>
-        <Button {...args} variant="outline">
-          Outline
+      </div>
+    </div>
+  ),
+};
+
+export const Outline: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex items-center gap-2">
+        <Button {...args} variant={undefined} outline>
+          Default
+        </Button>
+        <Button {...args} variant="neutral" outline>
+          Neutral
+        </Button>
+        <Button {...args} variant="primary" outline>
+          Primary
+        </Button>
+        <Button {...args} variant="secondary" outline>
+          Secondary
+        </Button>
+        <Button {...args} variant="accent" outline>
+          Accent
+        </Button>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Button {...args} variant="info" outline>
+          Info
+        </Button>
+        <Button {...args} variant="success" outline>
+          Success
+        </Button>
+        <Button {...args} variant="warning" outline>
+          Warning
+        </Button>
+        <Button {...args} variant="error" outline>
+          Error
         </Button>
       </div>
     </div>

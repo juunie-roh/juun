@@ -5,11 +5,12 @@ import type { ButtonProps } from '@/types/ui.types';
 const Button = (props: ButtonProps) => {
   const {
     variant,
+    outline,
     size = 'md',
     shape,
     disabled = false,
     glass = false,
-    'no-animation': noAnimation = true,
+    'no-animation': noAnimation = false,
     className,
     children,
   } = props;
@@ -28,7 +29,7 @@ const Button = (props: ButtonProps) => {
       'btn-error': variant === 'error',
       'btn-ghost': variant === 'ghost',
       'btn-link': variant === 'link',
-      'btn-outline': variant === 'outline',
+      'btn-outline': outline,
     },
 
     // Button sizes

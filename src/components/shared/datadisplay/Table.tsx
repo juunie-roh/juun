@@ -4,9 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 import type { TableProps } from '@/types/ui.types';
 import { compareBy } from '@/utils/compare';
 
-// TODO: adjustable footer which can be pinned.
-// TODO: handle Select All
-// TODO: handle Select
 function Table<T extends { rowKey: React.Key }>({
   data,
   columns,
