@@ -13,6 +13,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 type BadgeVariant = BaseVariant | 'ghost';
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: BadgeVariant;
+  outline?: boolean;
   size?: Size;
 }
 
