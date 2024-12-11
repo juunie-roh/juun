@@ -7,6 +7,12 @@ const meta: Meta<typeof Kbd> = {
   component: Kbd,
   parameters: {
     layout: 'centered',
+    componentSubtitle: 'Kbd is used to display keyboard shortcuts.',
+    docs: {
+      description: {
+        component: 'Detail',
+      },
+    },
   },
   tags: ['autodocs'],
   args: {

@@ -7,6 +7,13 @@ const meta: Meta<typeof Badge> = {
   component: Badge,
   parameters: {
     layout: 'centered',
+    componentSubtitle:
+      'Badges are used to inform the user of the status of specific data.',
+    docs: {
+      description: {
+        component: 'Detail',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

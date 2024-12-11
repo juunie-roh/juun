@@ -9,6 +9,12 @@ const meta: Meta<typeof Alert> = {
   component: Alert,
   parameters: {
     layout: 'centered',
+    componentSubtitle: 'Alert informs users about important events.',
+    docs: {
+      description: {
+        component: 'Detail',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

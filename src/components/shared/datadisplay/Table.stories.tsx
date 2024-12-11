@@ -162,6 +162,13 @@ const meta: Meta<typeof Table> = {
   component: Table,
   parameters: {
     layout: 'centered',
+    componentSubtitle:
+      'Table can be used to show a list of data in a table format.',
+    docs: {
+      description: {
+        component: 'Detail',
+      },
+    },
   },
   tags: ['autodocs'],
   args: {

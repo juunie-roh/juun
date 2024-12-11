@@ -12,6 +12,13 @@ const meta: Meta<typeof Modal> = {
   component: Modal,
   parameters: {
     layout: 'centered',
+    componentSubtitle:
+      'Modal is used to show a dialog or a box when you click a button.',
+    docs: {
+      description: {
+        component: 'Detail',
+      },
+    },
   },
   tags: ['autodocs'],
   args: {
