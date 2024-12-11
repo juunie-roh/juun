@@ -10,11 +10,18 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;
 }
 
-type ButtonVariant = BaseVariant | ('ghost' | 'link' | 'outline');
+type BadgeVariant = BaseVariant | 'ghost';
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: BadgeVariant;
+  size?: Size;
+}
+
+type ButtonVariant = BaseVariant | 'ghost' | 'link';
 type ButtonShape = 'wide' | 'block' | 'circle' | 'square';
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
+  outline?: boolean;
   size?: Size;
   disabled?: boolean;
   glass?: boolean;

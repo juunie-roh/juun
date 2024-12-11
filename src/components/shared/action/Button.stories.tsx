@@ -162,8 +162,44 @@ export const Variants: Story = {
         <Button {...args} variant="link">
           Link
         </Button>
-        <Button {...args} variant="outline">
-          Outline
+      </div>
+    </div>
+  ),
+};
+
+export const Outline: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex items-center gap-2">
+        <Button {...args} variant={undefined} outline>
+          Default
+        </Button>
+        <Button {...args} variant="neutral" outline>
+          Neutral
+        </Button>
+        <Button {...args} variant="primary" outline>
+          Primary
+        </Button>
+        <Button {...args} variant="secondary" outline>
+          Secondary
+        </Button>
+        <Button {...args} variant="accent" outline>
+          Accent
+        </Button>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Button {...args} variant="info" outline>
+          Info
+        </Button>
+        <Button {...args} variant="success" outline>
+          Success
+        </Button>
+        <Button {...args} variant="warning" outline>
+          Warning
+        </Button>
+        <Button {...args} variant="error" outline>
+          Error
         </Button>
       </div>
     </div>
