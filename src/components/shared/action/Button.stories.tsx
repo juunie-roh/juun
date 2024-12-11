@@ -16,8 +16,9 @@ const meta: Meta<typeof Button> = {
   },
   argTypes: {
     children: {
+      control: 'text',
       table: {
-        category: 'default props',
+        category: 'default',
         defaultValue: { summary: 'Button' },
         type: {
           summary: 'ReactNode | string | undefined',
@@ -25,9 +26,10 @@ const meta: Meta<typeof Button> = {
       },
     },
     onClick: {
+      control: false,
       table: {
         disable: true,
-        category: 'default props',
+        category: 'default',
       },
     },
     variant: {
@@ -44,16 +46,24 @@ const meta: Meta<typeof Button> = {
         'error',
         'ghost',
         'link',
-        'outline',
       ],
       description: 'type of button',
       table: {
-        category: 'variant',
+        category: 'style',
         defaultValue: { summary: 'undefined' },
         type: {
           summary: 'string',
           detail: `undefined | "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "ghost" | "link" | "outline"`,
         },
+      },
+    },
+    outline: {
+      control: 'boolean',
+      description: 'Enable outline effect on the button',
+      table: {
+        category: 'style',
+        defaultValue: { summary: 'undefined' },
+        type: { summary: 'boolean | undefined' },
       },
     },
     size: {
