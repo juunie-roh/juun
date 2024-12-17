@@ -20,16 +20,17 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 type ButtonVariant = BaseVariant | 'ghost' | 'link';
-type ButtonShape = 'wide' | 'block' | 'circle' | 'square';
+type ButtonShape = 'wide' | 'circle' | 'square';
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   outline?: boolean;
   size?: Size;
+  shape?: ButtonShape;
+  block?: boolean;
+  'no-animation'?: boolean;
   disabled?: boolean;
   glass?: boolean;
-  'no-animation'?: boolean;
-  shape?: ButtonShape;
 }
 
 export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
