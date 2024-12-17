@@ -21,6 +21,7 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     href: {
       control: false,
+      description: 'The path or URL to navigate to. It can also be an object.',
       type: { required: true, name: 'string' },
     },
     children: {
@@ -62,15 +63,49 @@ export default meta;
 type Story = StoryObj<typeof Link>;
 
 export const Default: Story = {
-  args: {
-    children: 'Default Link',
-    href: '#',
-  },
+  args: { children: 'Default Link' },
+};
+
+export const Variants: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex items-center gap-2">
+        <Link {...args} variant={undefined}>
+          Default
+        </Link>
+        <Link {...args} variant="neutral">
+          Neutral
+        </Link>
+        <Link {...args} variant="primary">
+          Primary
+        </Link>
+        <Link {...args} variant="secondary">
+          Secondary
+        </Link>
+        <Link {...args} variant="accent">
+          Accent
+        </Link>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Link {...args} variant="info">
+          Info
+        </Link>
+        <Link {...args} variant="success">
+          Success
+        </Link>
+        <Link {...args} variant="warning">
+          Warning
+        </Link>
+        <Link {...args} variant="error">
+          Error
+        </Link>
+      </div>
+    </div>
+  ),
 };
 
 export const HoverOnly: Story = {
-  args: {
-    children: 'Hover Only',
-    'hover-only': true,
-  },
+  args: { children: 'Hover Only' },
+  render: (args) => <Link {...args} hover-only></Link>,
 };
