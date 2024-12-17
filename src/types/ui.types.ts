@@ -1,3 +1,5 @@
+import type { LinkProps as NLinkProps } from 'next/link';
+
 type ColorVariant = 'neutral' | 'primary' | 'secondary' | 'accent';
 type StatusVariant = 'info' | 'success' | 'warning' | 'error';
 type BaseVariant = ColorVariant | StatusVariant;
@@ -40,6 +42,14 @@ export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
   size?: Size;
+}
+
+export interface LinkProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof NLinkProps>,
+    NLinkProps,
+    React.RefAttributes<HTMLAnchorElement> {
+  variant?: BaseVariant;
+  'hover-only'?: boolean;
 }
 
 export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
