@@ -13,6 +13,7 @@ const Button = (props: ButtonProps) => {
     'no-animation': noAnimation = false,
     className,
     children,
+    block,
   } = props;
 
   const buttonClasses = clsx(
@@ -43,13 +44,13 @@ const Button = (props: ButtonProps) => {
     // Button shapes
     {
       'btn-wide': shape === 'wide',
-      'btn-block': shape === 'block',
       'btn-circle': shape === 'circle',
       'btn-square': shape === 'square',
     },
 
     // Special states
     {
+      'btn-block': block,
       'btn-disabled': disabled,
       // eslint-disable-next-line prettier/prettier
       'glass': glass,

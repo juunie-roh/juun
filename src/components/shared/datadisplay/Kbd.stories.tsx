@@ -8,11 +8,6 @@ const meta: Meta<typeof Kbd> = {
   parameters: {
     layout: 'centered',
     componentSubtitle: 'Kbd is used to display keyboard shortcuts.',
-    docs: {
-      description: {
-        component: 'Detail',
-      },
-    },
   },
   tags: ['autodocs'],
   args: {
@@ -31,10 +26,10 @@ const meta: Meta<typeof Kbd> = {
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg'],
-      description: 'size of kbd',
+      description: 'size of Kbd',
       table: {
         category: 'size',
-        defaultValue: { summary: 'undefined' },
+        defaultValue: { summary: 'md' },
         type: { summary: 'string', detail: `"xs" | "sm" | "md" | "lg"` },
       },
     },

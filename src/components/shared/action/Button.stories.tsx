@@ -10,11 +10,6 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
     componentSubtitle:
       'Buttons allow the user to take actions or make choices.',
-    docs: {
-      description: {
-        component: 'Detail',
-      },
-    },
   },
   tags: ['autodocs'],
   args: {
@@ -54,7 +49,7 @@ const meta: Meta<typeof Button> = {
         'ghost',
         'link',
       ],
-      description: 'type of button',
+      description: 'Button with `variant` style',
       table: {
         category: 'style',
         defaultValue: { summary: 'undefined' },
@@ -66,7 +61,7 @@ const meta: Meta<typeof Button> = {
     },
     outline: {
       control: 'boolean',
-      description: 'Enable outline effect on the button',
+      description: 'Transparent Button with colored border',
       table: {
         category: 'style',
         defaultValue: { summary: 'undefined' },
@@ -76,7 +71,7 @@ const meta: Meta<typeof Button> = {
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg'],
-      description: 'size of button',
+      description: 'Size of Button',
       table: {
         category: 'size',
         defaultValue: { summary: 'md' },
@@ -85,8 +80,8 @@ const meta: Meta<typeof Button> = {
     },
     shape: {
       control: 'select',
-      options: [undefined, 'wide', 'block', 'circle', 'square'],
-      description: 'shape of button',
+      options: [undefined, 'wide', 'circle', 'square'],
+      description: 'Shape of button',
       table: {
         category: 'shape',
         defaultValue: { summary: 'undefined' },
@@ -96,9 +91,20 @@ const meta: Meta<typeof Button> = {
         },
       },
     },
+    block: {
+      control: 'boolean',
+      description: 'Full width button',
+      table: {
+        category: 'shape',
+        defaultValue: { summary: 'undefined' },
+        type: {
+          summary: 'boolean | undefined',
+        },
+      },
+    },
     disabled: {
       control: 'boolean',
-      description: 'disable button',
+      description: 'Force button to show disabled state',
       table: {
         category: 'others',
         defaultValue: { summary: 'false' },
@@ -106,7 +112,7 @@ const meta: Meta<typeof Button> = {
     },
     glass: {
       control: 'boolean',
-      description: 'enable glass effect on button',
+      description: 'Button with a glass effect',
       table: {
         category: 'others',
         defaultValue: { summary: 'false' },
@@ -114,7 +120,7 @@ const meta: Meta<typeof Button> = {
     },
     'no-animation': {
       control: 'boolean',
-      description: 'disable animation on button',
+      description: 'Disable click animation',
       table: {
         category: 'others',
         defaultValue: { summary: 'false' },
@@ -260,26 +266,27 @@ export const Shapes: Story = {
   ),
 };
 
-export const Animation: Story = {
-  args: {
-    variant: 'primary',
-    'no-animation': true,
-    children: 'Animation Disabled',
-  },
+export const Block: Story = {
+  render: (args) => (
+    <div className="w-96">
+      <Button {...args} block>
+        Block
+      </Button>
+    </div>
+  ),
+};
+
+export const NoAnimation: Story = {
+  args: { children: 'No Animation' },
+  render: (args) => <Button {...args} no-animation></Button>,
 };
 
 export const Disabled: Story = {
-  args: {
-    variant: 'primary',
-    disabled: true,
-    children: 'Disabled',
-  },
+  args: { children: 'Disabled' },
+  render: (args) => <Button {...args} disabled></Button>,
 };
 
 export const Glass: Story = {
-  args: {
-    variant: undefined,
-    glass: true,
-    children: 'Glass',
-  },
+  args: { children: 'Glass' },
+  render: (args) => <Button {...args} glass></Button>,
 };
