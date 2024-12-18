@@ -74,6 +74,15 @@ export interface ModalProps {
   className?: string;
 }
 
+export interface Step extends React.HTMLAttributes<HTMLLIElement> {
+  variant?: BaseVariant;
+  'data-content'?: string;
+}
+export interface StepsProps extends React.HTMLAttributes<HTMLUListElement> {
+  steps: Step[];
+  direction?: 'vertical' | 'horizontal';
+}
+
 export type TableData<T> = T & {
   rowKey: React.Key;
 };
