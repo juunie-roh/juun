@@ -9,11 +9,11 @@ const meta: Meta<typeof Badge> = {
     layout: 'centered',
     componentSubtitle:
       'Badges are used to inform the user of the status of specific data.',
-    docs: {
-      description: {
-        component: 'Detail',
-      },
-    },
+    // docs: {
+    //   description: {
+    //     component: 'Detail',
+    //   },
+    // },
   },
   tags: ['autodocs'],
   argTypes: {

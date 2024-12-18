@@ -164,11 +164,6 @@ const meta: Meta<typeof Table> = {
     layout: 'centered',
     componentSubtitle:
       'Table can be used to show a list of data in a table format.',
-    docs: {
-      description: {
-        component: 'Detail',
-      },
-    },
   },
   tags: ['autodocs'],
   args: {
@@ -180,7 +175,7 @@ const meta: Meta<typeof Table> = {
   argTypes: {
     data: {
       control: false,
-      description: 'Data array to display in the table as rows.',
+      description: 'Items to be displayed in Table',
       type: {
         required: true,
         name: 'array',
@@ -189,7 +184,7 @@ const meta: Meta<typeof Table> = {
     },
     columns: {
       control: false,
-      description: 'How to seperate the data in the table as columns.',
+      description: 'How to seperate the data in Table by columns.',
       type: {
         required: true,
         name: 'array',
@@ -198,7 +193,8 @@ const meta: Meta<typeof Table> = {
     },
     onSort: {
       control: false,
-      description: 'A function to return sorted array of the data to display.',
+      description:
+        'Function that returns a sorted array of the data to display.',
       table: {
         category: 'sorting',
         defaultValue: { summary: 'undefined' },
@@ -208,7 +204,7 @@ const meta: Meta<typeof Table> = {
     pagination: {
       control: 'select',
       options: ['client', 'server', false],
-      description: 'How to handle the pagination',
+      description: 'Pagination handling method',
       table: {
         categorty: 'pagination',
         defaultValue: { summary: 'client' },
@@ -245,6 +241,7 @@ const meta: Meta<typeof Table> = {
     },
     selectable: {
       control: 'boolean',
+      description: 'Enable the selection of rows',
       table: {
         category: 'selection',
         defaultValue: { summary: 'undefined' },
@@ -256,18 +253,20 @@ const meta: Meta<typeof Table> = {
       },
     },
     onRowSelect: {
+      description: 'Function to be called when a row is selected',
       table: {
         category: 'selection',
       },
     },
     onSelectAll: {
+      description: '',
       table: {
         category: 'selection',
       },
     },
     zebra: {
       control: 'boolean',
-      description: 'Whether to apply the zebra style to the table',
+      description: 'For `<table>` to show zebra stripe rows',
       table: {
         category: 'style',
         defaultValue: { summary: 'undefined' },
@@ -295,7 +294,7 @@ const meta: Meta<typeof Table> = {
     },
     size: {
       control: 'select',
-      description: 'Size of the table',
+      description: 'Size of Table',
       options: ['xs', 'sm', 'md', 'lg'],
       table: {
         category: 'style',

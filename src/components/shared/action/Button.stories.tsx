@@ -10,11 +10,6 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
     componentSubtitle:
       'Buttons allow the user to take actions or make choices.',
-    docs: {
-      description: {
-        component: 'Detail',
-      },
-    },
   },
   tags: ['autodocs'],
   args: {

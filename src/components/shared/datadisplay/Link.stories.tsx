@@ -8,11 +8,6 @@ const meta: Meta<typeof Link> = {
   parameters: {
     layout: 'centered',
     componentSubtitle: 'Link adds the missing underline style to links.',
-    docs: {
-      description: {
-        component: '',
-      },
-    },
   },
   tags: ['autodocs'],
   args: {

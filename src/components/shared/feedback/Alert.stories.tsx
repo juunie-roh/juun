@@ -10,18 +10,13 @@ const meta: Meta<typeof Alert> = {
   parameters: {
     layout: 'centered',
     componentSubtitle: 'Alert informs users about important events.',
-    docs: {
-      description: {
-        component: 'Detail',
-      },
-    },
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
       options: [undefined, 'info', 'success', 'warning', 'error'],
-      description: 'Determines the style and icon of the alert',
+      description: 'Alert with `variant` color',
       table: {
         defaultValue: { summary: 'undefined' },
         type: {
@@ -32,7 +27,7 @@ const meta: Meta<typeof Alert> = {
     },
     'alert-title': {
       control: 'object',
-      description: 'Title text for the alert',
+      description: 'Title of Alert',
       table: {
         defaultValue: { summary: 'undefined' },
         type: { summary: 'React.ReactNode | string | undefined' },
@@ -40,7 +35,7 @@ const meta: Meta<typeof Alert> = {
     },
     'alert-description': {
       control: 'object',
-      description: 'Description text for the alert',
+      description: 'Description of Alert',
       table: {
         defaultValue: { summary: 'undefined' },
         type: { summary: 'React.ReactNode | string | undefined' },
@@ -48,7 +43,7 @@ const meta: Meta<typeof Alert> = {
     },
     icon: {
       control: 'object',
-      description: 'Custom icon of the alert',
+      description: 'Icon of alert',
       table: {
         defaultValue: { summary: 'undefined' },
         type: { summary: 'React.ReactNode | undefined', detail: 'svg element' },
@@ -56,7 +51,7 @@ const meta: Meta<typeof Alert> = {
     },
     children: {
       control: 'object',
-      description: 'Main content of the alert',
+      description: 'Content of Alert',
       table: {
         defaultValue: { summary: '12 unread messages. Tap to see.' },
         type: { summary: 'React.ReactNode | string | undefined' },
