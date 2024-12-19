@@ -11122,6 +11122,7 @@ __metadata:
     "@commitlint/cli": "npm:^19.6.0"
     "@commitlint/config-conventional": "npm:^19.6.0"
     "@commitlint/cz-commitlint": "npm:^19.5.0"
+    "@commitlint/types": "npm:^19.5.0"
     "@storybook/addon-a11y": "npm:^8.4.7"
     "@storybook/addon-essentials": "npm:^8.4.7"
     "@storybook/addon-interactions": "npm:^8.4.7"
