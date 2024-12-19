@@ -1,1 +1,3 @@
-yarn commitlint ${1}
+echo "🚦 COMMIT-MSG | commitlint check..."
+
+yarn commitlint --edit ${1}
