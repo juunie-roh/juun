@@ -1,6 +1,7 @@
 import type { LinkProps as NLinkProps } from 'next/link';
 
 type ColorVariant = 'neutral' | 'primary' | 'secondary' | 'accent';
+type Direction = 'vertical' | 'horizontal';
 type StatusVariant = 'info' | 'success' | 'warning' | 'error';
 type BaseVariant = ColorVariant | StatusVariant;
 type Size = 'lg' | 'md' | 'sm' | 'xs';
@@ -41,6 +42,9 @@ export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {}
+
 export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
   size?: Size;
 }
@@ -53,11 +57,21 @@ export interface LinkProps
   'hover-only'?: boolean;
 }
 
-export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
-  'menu-title'?: React.ReactNode;
-  disabled?: boolean;
+export type MenuItem = {
+  value: React.ReactNode;
+  key: React.Key;
+  href: string;
+  title?: boolean;
   active?: boolean;
   focus?: boolean;
+  disabled?: boolean;
+  dropdown?: boolean;
+  children?: MenuItem[];
+};
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  'menu-items'?: MenuItem[];
+  size?: Size;
+  direction?: Direction;
 }
 
 export interface ModalRef {
@@ -80,7 +94,7 @@ export interface Step extends React.HTMLAttributes<HTMLLIElement> {
 }
 export interface StepsProps extends React.HTMLAttributes<HTMLUListElement> {
   steps: Step[];
-  direction?: 'vertical' | 'horizontal';
+  direction?: Direction;
 }
 
 export type TableData<T> = T & {
