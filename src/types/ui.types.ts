@@ -42,6 +42,12 @@ export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
 }
 
+export interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: BaseVariant;
+  direction?: Direction;
+  position?: 'start' | 'end';
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {}
 
