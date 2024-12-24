@@ -42,6 +42,12 @@ export interface CollapseProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean;
 }
 
+export interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: BaseVariant;
+  direction?: Direction;
+  position?: 'start' | 'end';
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -142,4 +148,11 @@ export interface TableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
    */
   'pin-cols'?: boolean;
   size?: Size;
+}
+
+export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+  'data-tip': string;
+  variant?: BaseVariant;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  open?: boolean;
 }
