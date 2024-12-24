@@ -143,3 +143,10 @@ export interface TableProps<T> extends React.HTMLAttributes<HTMLTableElement> {
   'pin-cols'?: boolean;
   size?: Size;
 }
+
+export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+  'data-tip': string;
+  variant?: BaseVariant;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  open?: boolean;
+}
