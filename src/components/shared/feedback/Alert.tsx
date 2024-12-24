@@ -13,17 +13,6 @@ const Alert = (props: AlertProps) => {
     icon,
   } = props;
 
-  const alertClasses = clsx([
-    'alert',
-    {
-      'alert-info': variant === 'info',
-      'alert-success': variant === 'success',
-      'alert-warning': variant === 'warning',
-      'alert-error': variant === 'error',
-    },
-    className,
-  ]);
-
   const alertIcon = useMemo(() => {
     const defaultClasses = 'h-6 w-6 shrink-0';
     switch (variant) {
@@ -129,7 +118,19 @@ const Alert = (props: AlertProps) => {
   }, [variant]);
 
   return (
-    <div role="alert" className={alertClasses}>
+    <div
+      role="alert"
+      className={clsx([
+        'alert',
+        {
+          'alert-info': variant === 'info',
+          'alert-success': variant === 'success',
+          'alert-warning': variant === 'warning',
+          'alert-error': variant === 'error',
+        },
+        className,
+      ])}
+    >
       {icon || alertIcon}
       {children ? (
         typeof children === 'string' ? (

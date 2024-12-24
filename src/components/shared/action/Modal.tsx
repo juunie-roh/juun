@@ -33,15 +33,11 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
     },
   }));
 
-  const modalClass = clsx([
-    'modal',
-    'modal-bottom',
-    'sm:modal-middle',
-    className,
-  ]);
-
   return (
-    <dialog ref={dialogRef} className={modalClass}>
+    <dialog
+      ref={dialogRef}
+      className={clsx(['modal', 'modal-bottom', 'sm:modal-middle', className])}
+    >
       <div className="modal-box">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}

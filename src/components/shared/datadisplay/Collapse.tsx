@@ -12,22 +12,26 @@ const Collapse = (props: CollapseProps) => {
     className,
   } = props;
 
-  const collapseClasses = clsx([
-    'collapse',
-    { 'collapse-arrow': icon === 'arrow', 'collapse-plus': icon === 'plus' },
-    { 'collapse-open': open },
-    { 'collapse-close': open !== undefined && !open },
-    className,
-  ]);
-
-  const titleClasses = clsx([
-    'collapse-title',
-    titleClassName || 'text-xl font-medium',
-  ]);
-
   return (
-    <div tabIndex={0} className={collapseClasses}>
-      <div className={titleClasses}>
+    <div
+      tabIndex={0}
+      className={clsx([
+        'collapse',
+        {
+          'collapse-arrow': icon === 'arrow',
+          'collapse-plus': icon === 'plus',
+        },
+        { 'collapse-open': open },
+        { 'collapse-close': open !== undefined && !open },
+        className,
+      ])}
+    >
+      <div
+        className={clsx([
+          'collapse-title',
+          titleClassName || 'text-xl font-medium',
+        ])}
+      >
         {typeof title === 'string' ? <p>title</p> : title}
       </div>
       <div className="collapse-content">
