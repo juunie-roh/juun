@@ -23,20 +23,6 @@ function Table<T extends { rowKey: React.Key }>({
   'pin-cols': pinCols,
   size,
 }: TableProps<T>) {
-  const tableClasses = clsx([
-    'table',
-    { 'table-zebra': zebra },
-    { 'table-pin-rows': pinRows },
-    { 'table-pin-cols': pinCols },
-    {
-      'table-xs': size === 'xs',
-      'table-sm': size === 'sm',
-      'table-md': size === 'md',
-      'table-lg': size === 'lg',
-    },
-    'w-full',
-    className,
-  ]);
   // Renders the sort Icon
   const renderSortIcon = (column: keyof T): React.ReactNode | null => {
     if (sortBy !== column) return null;
@@ -129,7 +115,22 @@ function Table<T extends { rowKey: React.Key }>({
   return (
     <div className="w-full">
       <div className="overflow-x-auto" tabIndex={0}>
-        <table className={tableClasses}>
+        <table
+          className={clsx([
+            'table',
+            { 'table-zebra': zebra },
+            { 'table-pin-rows': pinRows },
+            { 'table-pin-cols': pinCols },
+            {
+              'table-xs': size === 'xs',
+              'table-sm': size === 'sm',
+              'table-md': size === 'md',
+              'table-lg': size === 'lg',
+            },
+            'w-full',
+            className,
+          ])}
+        >
           <thead>
             <tr>
               {selectable && (

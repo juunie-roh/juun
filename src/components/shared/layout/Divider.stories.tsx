@@ -27,15 +27,13 @@ const meta: Meta<typeof Divider> = {
         'success',
         'warning',
         'error',
-        'ghost',
-        'link',
       ],
       description: 'Divider with `variant` style',
       table: {
         defaultValue: { summary: 'undefined' },
         type: {
           summary: 'string',
-          detail: `undefined | "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "ghost" | "link" | "outline"`,
+          detail: `undefined | "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error"`,
         },
       },
     },
