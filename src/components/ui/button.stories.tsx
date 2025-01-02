@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 import { Circle, Loader2, Square } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button } from './button';
+import Button from './button';
 
 const meta: Meta<typeof Button> = {
   title: 'Shadcn/Button',
