@@ -116,7 +116,8 @@ export type DialogStyles = {
 
 export interface DialogProps
   extends React.DialogHTMLAttributes<HTMLDialogElement>,
-    React.ComponentPropsWithoutRef<typeof DialogRoot> {
+    React.ComponentPropsWithoutRef<typeof DialogRoot>,
+    DialogPrimitive.DialogProps {
   trigger?: React.ReactNode;
   // overlay?: boolean;
   'dialog-title'?: React.ReactNode;
@@ -134,8 +135,9 @@ const Dialog: React.FC<DialogProps> = ({
   footer,
   close,
   children,
+  ...props
 }) => (
-  <DialogRoot>
+  <DialogRoot {...props}>
     <DialogTrigger asChild>{trigger}</DialogTrigger>
     <DialogPortal>
       <DialogContent className={styles?.content}>
