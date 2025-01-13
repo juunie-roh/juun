@@ -7,7 +7,7 @@ const nextConfig = {
     });
     return config;
   },
-  // output: 'standalone',
+  output: 'standalone',
   experimental: {
     // The serverActions value needs to be an object, not a boolean
     serverActions: {
