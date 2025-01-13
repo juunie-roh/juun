@@ -48,7 +48,6 @@ export interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
   position?: 'start' | 'end';
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
