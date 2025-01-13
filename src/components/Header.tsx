@@ -20,9 +20,9 @@ const navigationItems = [
   { href: '/techrecords', label: 'Tech Records' },
 ];
 
-const Header = () => {
+export default function Header() {
   return (
-    <div className="absolute left-0 top-0 flex w-full items-center justify-between border-b px-8 py-4 backdrop-blur-md">
+    <header className="absolute left-0 top-0 flex w-full items-center justify-between border-b px-8 py-4 backdrop-blur-md">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem className="mr-4">
@@ -52,8 +52,6 @@ const Header = () => {
       </NavigationMenu>
 
       <ThemeController />
-    </div>
+    </header>
   );
-};
-
-export default Header;
+}

@@ -7,6 +7,13 @@ const nextConfig = {
     });
     return config;
   },
+  // output: 'standalone',
+  experimental: {
+    // The serverActions value needs to be an object, not a boolean
+    serverActions: {
+      allowedOrigins: ['*'],
+    },
+  },
 };
 
 export default nextConfig;

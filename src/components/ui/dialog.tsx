@@ -127,7 +127,7 @@ export interface DialogProps
   close?: React.ReactNode;
 }
 
-const Dialog: React.FC<DialogProps> = ({
+const Dialog = ({
   trigger,
   'dialog-title': title,
   'dialog-description': desc,
@@ -136,7 +136,7 @@ const Dialog: React.FC<DialogProps> = ({
   close,
   children,
   ...props
-}) => (
+}: DialogProps) => (
   <DialogRoot {...props}>
     <DialogTrigger asChild>{trigger}</DialogTrigger>
     <DialogPortal>

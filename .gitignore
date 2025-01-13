@@ -7,6 +7,7 @@
 .pnp.cjs
 .yarn/install-state.gz
 .yarn/unplugged/**
+.yarn/cache
 
 # testing
 /coverage
