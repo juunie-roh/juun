@@ -1,0 +1,38 @@
+Dockerfile
+.dockerignore
+
+node_modules
+
+# next.js
+/out/
+src/.next/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# git
+.git
+.gitignore
+.gitattributes
+
+# misc
+.DS_Store
+*.pem
+README.md
+
+# local env files
+.env*.local
+
+# yarn berry
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# storybook
+*storybook.log
