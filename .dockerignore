@@ -27,6 +27,7 @@ README.md
 
 # yarn berry
 .yarn/*
+!.yarn/install-state.gz
 !.yarn/cache
 !.yarn/patches
 !.yarn/plugins
