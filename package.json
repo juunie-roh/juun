@@ -4,6 +4,7 @@
   "private": true,
   "author": "juun",
   "scripts": {
+    "analyze": "ANALYZE=true next build",
     "build": "next build",
     "check-types": "tsc --noEmit --pretty",
     "commit": "cz",
@@ -52,6 +53,7 @@
     "@commitlint/types": "^19.5.0",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
+    "@next/bundle-analyzer": "^15.1.4",
     "@next/eslint-plugin-next": "^15.1.4",
     "@storybook/addon-a11y": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
