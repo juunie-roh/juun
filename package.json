@@ -16,7 +16,7 @@
     "lint-staged": "yarn format && git add .",
     "prepare": "husky install",
     "start": "next start",
-    "test": "echo 'Test not specified'",
+    "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
