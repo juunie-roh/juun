@@ -8,8 +8,11 @@ import Header from '@/components/Header';
 import ThemeProvider from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Juun',
-  description: 'NextJS Boilerplate with daisyUI',
+  title: {
+    template: 'Juun | %s',
+    default: 'Juun',
+  },
+  description: 'NextJS Boilerplate',
 };
 
 export default function RootLayout({
