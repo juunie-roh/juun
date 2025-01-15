@@ -1,10 +1,10 @@
 // src/assets/icons/createIcon.tsx
 import type { SVGProps } from 'react';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '@/utils/className';
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   size?: number | string;
   color?: string;
   strokeWidth?: number;
@@ -13,9 +13,10 @@ interface IconProps extends SVGProps<SVGSVGElement> {
 
 type SvgComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
-export default function createIcon(
-  importPromise: Promise<{ default: SvgComponent }>,
-) {
+// Add return type for better type inference
+export type IconComponent = ReturnType<typeof createIcon>;
+
+export default function createIcon(Svg: SvgComponent) {
   return forwardRef<SVGSVGElement, IconProps>(
     (
       {
@@ -27,16 +28,6 @@ export default function createIcon(
       },
       ref,
     ) => {
-      const [Svg, setSvg] = useState<SvgComponent | null>(null);
-
-      useEffect(() => {
-        importPromise.then((module) => {
-          setSvg(() => module.default);
-        });
-      }, []);
-
-      if (!Svg) return null;
-
       return (
         <Svg
           ref={ref}
