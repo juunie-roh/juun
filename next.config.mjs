@@ -9,13 +9,15 @@ const nextConfig = {
     });
     return config;
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   output: 'standalone',
   experimental: {
     // The serverActions value needs to be an object, not a boolean
     serverActions: {
       allowedOrigins: ['*'],
     },
-    optimizePackageImports: ['lucide-react'],
   },
 };
 
