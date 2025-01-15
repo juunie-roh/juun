@@ -1,6 +1,6 @@
 'use client';
 
-import { Minus, Plus } from '@/assets/svgs';
+import { Minus, Plus } from '@/assets/icons';
 import Button from '@/components/shared/action/Button';
 import { useBearStore } from '@/stores/slices/bear';
 

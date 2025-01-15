@@ -22,7 +22,7 @@ const navigationItems = [
 
 export default function Header() {
   return (
-    <header className="absolute left-0 top-0 flex w-full items-center justify-between border-b px-8 py-4 backdrop-blur-md">
+    <header className="fixed left-0 top-0 flex w-full items-center justify-between border-b px-8 py-4 backdrop-blur-xl bg-background">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem className="mr-4">
