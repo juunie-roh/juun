@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import Link from 'next/link';
 
-import { Circle, Loader2, Square } from '@/assets/icons';
+import { Circle, Loader2, Square } from '@/components/icons';
 
 import Button from './button';
 

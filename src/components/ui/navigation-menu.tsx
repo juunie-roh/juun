@@ -2,7 +2,7 @@ import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
-import { ChevronDown } from '@/assets/icons';
+import { ChevronDown } from '@/components/icons';
 import { cn } from '@/utils/className';
 
 const NavigationMenu = React.forwardRef<

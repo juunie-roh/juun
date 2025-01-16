@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { ChevronRight, Dots } from '@/assets/icons';
+import { ChevronRight, Dots } from '@/components/icons';
 import { cn } from '@/utils/className';
 
 const Breadcrumb = React.forwardRef<

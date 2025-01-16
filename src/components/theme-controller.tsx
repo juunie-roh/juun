@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 
-import { Moon, Sun } from '@/assets/icons';
+import { Moon, Sun } from '@/components/icons';
 
 import Button from './ui/button';
 import {

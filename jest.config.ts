@@ -26,7 +26,7 @@ const config: Config = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@/public/(.*)$': '<rootDir>/public/$1',
     '^__mocks__/(.*)$': '<rootDir>/__mocks__/$1',
-    '\\.svg$': '<rootDir>/__mocks__/svgrMock.tsx',
+    '\\.svg$': '<rootDir>/__mocks__/svgrMock.ts',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   clearMocks: true,
