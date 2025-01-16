@@ -3,14 +3,15 @@
 # dependencies
 /node_modules
 /.pnp
-.pnp.js
 .pnp.cjs
+.pnp.loader.mjs
 .yarn/install-state.gz
 .yarn/unplugged/**
 .yarn/cache
 
 # testing
 /coverage
+/.swc
 
 # next.js
 /.next/

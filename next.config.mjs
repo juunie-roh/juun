@@ -1,3 +1,5 @@
+import NextBundleAnalyzer from '@next/bundle-analyzer';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
@@ -6,6 +8,9 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     });
     return config;
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   output: 'standalone',
   experimental: {
@@ -16,4 +21,8 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+export default withBundleAnalyzer(nextConfig);
