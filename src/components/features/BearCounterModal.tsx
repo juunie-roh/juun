@@ -1,26 +1,20 @@
 'use client';
 
-import { useRef } from 'react';
-
-import Button from '@/components/shared/action/Button';
-import Modal from '@/components/shared/action/Modal';
-import type { ModalRef } from '@/types/ui.types';
+import Button from '@/components/ui/button';
+import Dialog from '@/components/ui/dialog';
 
 import BearCounter from './BearCounter';
 
 const BearCounterModal = () => {
-  const modalRef = useRef<ModalRef>(null);
-
   return (
-    <>
-      <Button onClick={() => modalRef?.current?.toggle()}>open modal</Button>
-      <Modal
-        ref={modalRef}
-        title="Bear Counter"
-        content={<BearCounter />}
-        backdrop
-      />
-    </>
+    <Dialog
+      trigger={<Button variant="secondary">open</Button>}
+      dialog-title="Bear Counter Modal"
+      dialog-description="Modal created by shadcn dialog"
+      close={<Button variant="secondary">close</Button>}
+    >
+      <BearCounter />
+    </Dialog>
   );
 };
 
