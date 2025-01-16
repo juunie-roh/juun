@@ -21,7 +21,7 @@ const createJestConfig = nextJest({
   dir: './',
 });
 
-const config: Config = {
+const customConfig: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@/public/(.*)$': '<rootDir>/public/$1',
@@ -42,4 +42,4 @@ const config: Config = {
   testEnvironment: 'jest-environment-jsdom',
 };
 
-export default createJestConfig(config);
+export default createJestConfig(customConfig);
