@@ -1,10 +1,9 @@
-// src/components/common/Icon/__tests__/Icon.test.tsx
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { type ComponentProps } from 'react';
 
-import createIcon from './createIcon';
-import { Icon } from './Icon';
+import createIcon from '@/components/icons/createIcon';
+import { Icon } from '@/components/icons/Icon';
 
 // First, let's create a mock SVG component that we can use across our tests
 const MockSvg: React.FC<ComponentProps<'svg'>> = (props) => (
@@ -14,10 +13,21 @@ const MockSvg: React.FC<ComponentProps<'svg'>> = (props) => (
 );
 MockSvg.displayName = 'MockSvg';
 
+const MockSvgWithoutDisplayName: React.FC<ComponentProps<'svg'>> = (props) => (
+  <svg data-testid="mock-svg" {...props}>
+    <path d="M1 1 L20 20" />
+  </svg>
+);
+
 // Create a test icon using our createIcon helper
 const TestIcon = createIcon(MockSvg, {
   label: 'Test Icon',
   decorative: false,
+});
+
+const TestIconWithoutDisplayName = createIcon(MockSvgWithoutDisplayName, {
+  label: undefined,
+  decorative: true,
 });
 
 describe('Icon Component', () => {
@@ -174,6 +184,10 @@ describe('Icon Component', () => {
 
       expect(svg).toHaveAttribute('aria-hidden', 'true');
       expect(svg).toHaveAttribute('role', 'presentation');
+    });
+
+    it('creates icon component with default IconComponent name when no display name', () => {
+      expect(TestIconWithoutDisplayName.displayName).toBe('IconComponent');
     });
   });
 });
