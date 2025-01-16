@@ -1,3 +1,4 @@
+import NextMDX from '@next/mdx';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
@@ -7,6 +8,7 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
     return config;
   },
   eslint: {
@@ -25,4 +27,11 @@ const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
-export default withBundleAnalyzer(nextConfig);
+const withMDX = NextMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  }
+})
+
+export default withBundleAnalyzer(withMDX(nextConfig));
