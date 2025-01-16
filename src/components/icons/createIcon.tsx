@@ -1,4 +1,3 @@
-// src/components/common/Icon/createIcon.tsx
 import React from 'react';
 
 import { Icon, type IconProps } from './Icon';
