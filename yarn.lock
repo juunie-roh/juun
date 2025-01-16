@@ -12895,6 +12895,7 @@ __metadata:
     "@eslint/eslintrc": "npm:^3.2.0"
     "@eslint/js": "npm:^9.18.0"
     "@hookform/resolvers": "npm:^3.10.0"
+    "@jest/types": "npm:^29.6.3"
     "@next/bundle-analyzer": "npm:^15.1.4"
     "@next/eslint-plugin-next": "npm:^15.1.4"
     "@radix-ui/react-collapsible": "npm:^1.1.2"
