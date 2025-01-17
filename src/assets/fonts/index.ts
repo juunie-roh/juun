@@ -11,3 +11,9 @@ export const geistMono = localFont({
   variable: '--font-geist-mono',
   weight: '100 900',
 });
+
+export const antonio = localFont({
+  src: 'AntonioVF.ttf',
+  variable: '--font-antonio',
+  weight: '100 400 700',
+});
