@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
 import { ChevronDown } from '@/components/icons';
-import { cn } from '@/utils/className';
+import { cn } from '@/utils';
 
 const NavigationMenu = React.forwardRef<
   React.ComponentRef<typeof NavigationMenuPrimitive.Root>,
