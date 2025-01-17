@@ -1,6 +1,6 @@
 {
   "name": "juun",
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "yarn@4.6.0",
   "private": true,
   "author": "juun",
   "scripts": {
