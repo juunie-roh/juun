@@ -1,4 +1,4 @@
-import { cn } from '@/utils/className';
+import { cn } from '@/utils';
 
 export default function Skeleton({
   className,

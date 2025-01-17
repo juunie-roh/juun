@@ -1,7 +1,7 @@
 import React from 'react';
 import { type SVGProps } from 'react';
 
-import { cn } from '@/utils/className';
+import { cn } from '@/utils';
 
 export interface IconProps extends SVGProps<SVGSVGElement> {
   /**

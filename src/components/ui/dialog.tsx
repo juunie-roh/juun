@@ -4,7 +4,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import * as React from 'react';
 
 import { X } from '@/components/icons';
-import { cn } from '@/utils/className';
+import { cn } from '@/utils';
 
 const DialogRoot = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -161,15 +161,15 @@ Dialog.displayName = 'Dialog';
 
 export default Dialog;
 
-// export {
-//   DialogClose,
-//   DialogContent,
-//   DialogDescription,
-//   DialogFooter,
-//   DialogHeader,
-//   DialogOverlay,
-//   DialogPortal,
-//   DialogRoot,
-//   DialogTitle,
-//   DialogTrigger,
-// };
+export {
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+};
