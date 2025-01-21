@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { Copy } from '@/components/icons';
+import { Copy } from 'lucide-react';
 
 import Button from './button';
 import Dialog from './dialog';
