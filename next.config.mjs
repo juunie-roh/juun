@@ -18,6 +18,7 @@ const nextConfig = {
     serverActions: {
       allowedOrigins: ['*'],
     },
+    optimizePackageImports: ['lucide-react'],
   },
 };
 
