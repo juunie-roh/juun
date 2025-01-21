@@ -1,6 +1,7 @@
 'use client';
 
-import { Minus, Plus } from '@/components/icons';
+import { Minus, Plus } from 'lucide-react';
+
 import Button from '@/components/ui/button';
 import { useBearStore } from '@/stores/slices/bear';
 

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import { Circle, Loader2, Square } from 'lucide-react';
 import Link from 'next/link';
-
-import { Circle, Loader2, Square } from '@/components/icons';
 
 import Button from './button';
 
