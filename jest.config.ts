@@ -28,6 +28,7 @@ const customConfig: JestConfigWithTsJest = {
     '^@/public/(.*)$': '<rootDir>/public/$1',
     '^__mocks__/(.*)$': '<rootDir>/__mocks__/$1',
     '\\.svg$': '<rootDir>/__mocks__/svgrMock.ts',
+    '^lucide-react%': '<rootDir>/__mocks__/lucide-react.tsx',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   clearMocks: true,
