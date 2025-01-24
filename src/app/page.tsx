@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { BuildingLibrary, CityPlan, InfoCircleOutlined } from '@/assets/svgs';
 import BearCounter from '@/components/features/BearCounter';
 import BearCounterModal from '@/components/features/BearCounterModal';
 
@@ -7,6 +8,21 @@ export default function Home() {
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
+        <div className="flex items-center gap-2">
+          <InfoCircleOutlined />
+          <CityPlan
+            viewBox="0 0 40 40"
+            strokeWidth={0}
+            fill="currentColor"
+            className="size-[40px]"
+          />
+          <BuildingLibrary
+            viewBox="0 0 40 40"
+            fill="currentColor"
+            strokeWidth={0}
+            className="size-[40px]"
+          />
+        </div>
         <Image
           className="dark:invert"
           src="https://nextjs.org/icons/next.svg"
