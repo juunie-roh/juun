@@ -2,7 +2,7 @@
 
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { antonio } from '@/assets/fonts';
 import Button from '@/components/ui/button';
@@ -33,10 +33,62 @@ const navigationItems = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [dragPosition, setDragPosition] = useState(0);
+  const dragStartY = useRef(0);
+  const isDragging = useRef(false);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent | React.MouseEvent) => {
+      isDragging.current = true;
+      const clientY =
+        'touches' in e
+          ? (e as React.TouchEvent).touches[0]?.clientY
+          : (e as React.MouseEvent).clientY;
+      if (!clientY) return;
+      dragStartY.current = clientY;
+    },
+    [],
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent | React.MouseEvent) => {
+      if (!isDragging.current) return;
+      const currentY =
+        'touches' in e
+          ? (e as React.TouchEvent).touches[0]?.clientY
+          : (e as React.MouseEvent).clientY;
+      if (!currentY) return;
+      const deltaY = currentY - dragStartY.current;
+
+      // Only allow dragging downwards
+      if (deltaY < 0) return;
+
+      // Limit the drag distance
+      const maxDrag = window.innerHeight / 2;
+      const newPosition = Math.min(deltaY, maxDrag);
+
+      setDragPosition(newPosition);
+
+      // Prevent default to stop scrolling
+      // e.preventDefault();
+    },
+    [],
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    isDragging.current = false;
+
+    // If dragged more than 25% of the sheet height, close it
+    if (dragPosition > window.innerHeight / 8) {
+      setIsOpen(false);
+    }
+
+    // Reset position with animation
+    setDragPosition(0);
+  }, [dragPosition]);
 
   return (
     <header className="fixed left-0 top-0 flex w-full items-center justify-between border-b px-4 md:px-8 py-4 backdrop-blur-xl">
-      {/* Logo - visible on both mobile and desktop */}
       <Link href="/" className="z-50">
         <h1
           className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tight lg:text-5xl`}
@@ -45,7 +97,6 @@ export default function Header() {
         </h1>
       </Link>
 
-      {/* Desktop Navigation - hidden on mobile */}
       <div className="hidden md:flex md:items-center md:gap-4">
         <NavigationMenu>
           <NavigationMenuList>
@@ -74,7 +125,6 @@ export default function Header() {
         <ThemeController />
       </div>
 
-      {/* Mobile Navigation - hidden on desktop */}
       <div className="md:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
@@ -83,21 +133,40 @@ export default function Header() {
               <span className="sr-only">Toggle Navigation Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="top" className="h-screen w-screen border-0 p-0">
+          <SheetContent
+            side="bottom"
+            className="h-[75%] w-screen border-0 p-0 rounded-t-md transition-transform touch-none"
+            style={{
+              transform: `translateY(${dragPosition}px)`,
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleTouchStart}
+            onMouseMove={handleTouchMove}
+            onMouseUp={handleTouchEnd}
+            onMouseLeave={handleTouchEnd}
+          >
+            <div className="w-full flex justify-center py-2">
+              <div className="w-12 h-1 rounded-full bg-muted-foreground/20" />
+            </div>
             <SheetHeader className="absolute left-4 top-4">
-              <SheetTitle>Navigation Menu</SheetTitle>
+              <SheetTitle className={`${antonio.className} font-bold text-3xl`}>
+                Juun
+                <span className="sr-only">Navigation Menu</span>
+              </SheetTitle>
               <SheetDescription className="sr-only">
                 Main navigation menu with links to different sections of the
                 website
               </SheetDescription>
             </SheetHeader>
             <nav className="flex h-full flex-col items-center justify-between px-4 py-20">
-              <div className="flex w-full max-w-sm flex-col items-center gap-8">
+              <div className="flex w-full max-w-md flex-col items-start gap-4">
                 {navigationItems.map((item, index) => (
                   <React.Fragment key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-2xl transition-colors hover:text-primary"
+                      className="text-lg transition-colors hover:text-primary"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
@@ -108,7 +177,7 @@ export default function Header() {
                   </React.Fragment>
                 ))}
               </div>
-              <div className="w-full max-w-sm">
+              <div className="w-full max-w-md">
                 <ThemeController className="w-full" />
               </div>
             </nav>
