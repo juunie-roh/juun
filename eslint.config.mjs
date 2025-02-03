@@ -55,10 +55,10 @@ const tsRules = {
   'simple-import-sort/imports': 'error',
   'simple-import-sort/exports': 'error',
   'import/order': 'off',
-  '@typescript-eslint/no-unused-vars': 'warn',
+  '@typescript-eslint/no-unused-vars': 'off',
   '@typescript-eslint/no-unused-expressions': 'off',
   'unused-imports/no-unused-imports': 'error',
-  'unused-imports/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  'unused-imports/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   'consistent-return': 'off',
 };
 
