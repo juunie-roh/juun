@@ -4,8 +4,9 @@ Dockerfile
 node_modules
 
 # testing
-/coverage
+/__mocks__
 /.swc
+/coverage
 
 # next.js
 /out/
@@ -31,13 +32,11 @@ README.md
 
 # yarn berry
 .yarn/*
-!.yarn/install-state.gz
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
-!.yarn/sdks
 !.yarn/versions
 
 # storybook
 *storybook.log
+.storybook
