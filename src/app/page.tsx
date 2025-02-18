@@ -6,7 +6,7 @@ import BearCounterModal from '@/components/features/BearCounterModal';
 
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] place-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
         <div className="flex items-center gap-2">
           <InfoCircleOutlined />
@@ -29,6 +29,14 @@ export default function Home() {
           alt="Next.js logo"
           width={180}
           height={38}
+          priority
+        />
+        <Image
+          className="dark:invert"
+          src="/images/lisbon/pig.png"
+          alt="pig"
+          width={2480}
+          height={3508}
           priority
         />
         <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left">

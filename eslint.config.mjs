@@ -96,7 +96,7 @@ export default [
     rules: tsRules,
     settings: {
       tailwindcss: {
-        config: 'tailwind.config.js',
+        config: 'tailwind.config.ts',
       },
     },
   },
@@ -138,6 +138,8 @@ export default [
       ],
     },
   },
+
+  ...tailwindcss.configs['flat/recommended'],
 
   // Prettier config (should be last)
   eslintConfigPrettier,

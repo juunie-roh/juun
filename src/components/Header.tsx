@@ -109,7 +109,9 @@ export default function Header() {
   }, [isDragging, dragOffset, isClosing, closeSheet]);
 
   return (
-    <header className="fixed left-0 top-0 flex w-full items-center justify-between border-b px-4 md:px-8 py-4 backdrop-blur-xl">
+    <header className="fixed left-0 top-0 flex w-full items-center justify-between border-b p-4 md:px-8">
+      <div className="absolute inset-0 backdrop-blur-xl" />
+
       <Link href="/" className="z-50">
         <h1
           className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tight lg:text-5xl`}
@@ -118,7 +120,7 @@ export default function Header() {
         </h1>
       </Link>
 
-      <div className="hidden md:flex md:items-center md:gap-4">
+      <div className="z-50 hidden md:flex md:items-center md:gap-4">
         <NavigationMenu>
           <NavigationMenuList>
             {navigationItems.map((item, index) => (
@@ -146,7 +148,7 @@ export default function Header() {
         <ThemeController />
       </div>
 
-      <div className="md:hidden">
+      <div className="z-50 md:hidden">
         <Sheet
           open={isOpen}
           onOpenChange={(open) => !isClosing && setIsOpen(open)}
@@ -159,7 +161,7 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent
             side="bottom"
-            className="h-[75%] w-screen border-0 p-0 rounded-t-md touch-action-pan-y"
+            className="h-3/4 w-screen rounded-t-md border-0 p-0"
             style={{
               position: 'fixed',
               bottom: `-${dragOffset}px`,
@@ -176,11 +178,11 @@ export default function Header() {
             onMouseUp={handleTouchEnd}
             onMouseLeave={handleTouchEnd}
           >
-            <div className="w-full flex justify-center py-2">
-              <div className="w-12 h-1 rounded-full bg-muted-foreground/20" />
+            <div className="flex w-full justify-center py-2">
+              <div className="h-1 w-12 rounded-full bg-muted-foreground/20" />
             </div>
             <SheetHeader className="absolute left-4 top-4">
-              <SheetTitle className={`${antonio.className} font-bold text-3xl`}>
+              <SheetTitle className={`${antonio.className} text-3xl font-bold`}>
                 Juun
                 <span className="sr-only">Navigation Menu</span>
               </SheetTitle>
