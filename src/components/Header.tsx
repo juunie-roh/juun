@@ -161,7 +161,7 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent
             side="bottom"
-            className="touch-action-pan-y h-3/4 w-screen rounded-t-md border-0 p-0"
+            className="h-3/4 w-screen rounded-t-md border-0 p-0"
             style={{
               position: 'fixed',
               bottom: `-${dragOffset}px`,
