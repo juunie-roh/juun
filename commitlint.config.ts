@@ -6,7 +6,7 @@ const config: UserConfig = {
   // parserPreset: 'conventional-changelog-atom',
   formatter: '@commitlint/format',
   rules: {
-    'body-max-line-length': [0, 'never', Infinity],
+    'body-max-line-length': [RuleConfigSeverity.Warning, 'always', 100],
     'scope-enum': [
       RuleConfigSeverity.Warning,
       'always',
