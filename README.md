@@ -5,8 +5,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### This Project is using
 
 - [Next.js](https://nextjs.org) with App Router and Page Router support
+- [Yarn Berry](https://yarnpkg.com/) PnP as a node package manager
 - Type checking [TypeScript](https://www.typescriptlang.org)
-- Integrate with [Tailwind CSS](https://tailwindcss.com)
+- Integrate with [Tailwind CSS](https://tailwindcss.com) and [shadcn/ui](https://ui.shadcn.com/)
 - Linter with [ESLint](https://eslint.org) (default NextJS, NextJS Core Web Vitals, Tailwind CSS)
 - Code Formatter with [Prettier](https://prettier.io)
 - Husky for Git Hooks
