@@ -11,13 +11,13 @@ ENV NODE_ENV=production \
     # Enable PnP with optimized settings
     NODE_OPTIONS="--require ./.pnp.cjs --no-warnings"
 
-# Install dependencies only when needed
-FROM base AS deps
-
 # Install only necessary dependencies for building
 RUN apk add --no-cache libc6-compat && \
     addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
+
+# Install dependencies only when needed
+FROM base AS deps
 
 # Copy the basic yarn dependencies
 COPY --chown=nextjs:nodejs .yarn ./.yarn
@@ -40,10 +40,6 @@ COPY --from=deps --chown=nextjs:nodejs /app/.pnp* \
                                        /app/package.json \
                                        /app/yarn.lock ./
 
-# Create user early
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
-
 # Copy source with appropriate permissions
 COPY --chown=nextjs:nodejs . .
 
@@ -55,12 +51,6 @@ RUN yarn install --immutable && \
 
 # Production image
 FROM base AS runner
-
-# Install only production dependencies and create user
-RUN apk add --no-cache libc6-compat && \
-    addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs && \
-    chown -R nextjs:nodejs /app
 
 # Copy PnP configuration and dependencies
 COPY --from=deps --chown=nextjs:nodejs /app/.yarn ./.yarn
