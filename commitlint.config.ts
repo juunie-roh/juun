@@ -1,3 +1,4 @@
+import type { UserPromptConfig } from '@commitlint/types';
 import { RuleConfigSeverity, type UserConfig } from '@commitlint/types';
 
 const config: UserConfig = {
@@ -5,6 +6,7 @@ const config: UserConfig = {
   // parserPreset: 'conventional-changelog-atom',
   formatter: '@commitlint/format',
   rules: {
+    'body-max-line-length': [0, 'never', Infinity],
     'scope-enum': [
       RuleConfigSeverity.Warning,
       'always',
@@ -169,7 +171,7 @@ const config: UserConfig = {
         },
       },
     },
-  },
+  } as UserPromptConfig,
   // scopes: ['css-style', 'lint', 'formatting'],
 };
 export default config;
