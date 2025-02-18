@@ -109,10 +109,8 @@ export default function Header() {
   }, [isDragging, dragOffset, isClosing, closeSheet]);
 
   return (
-    <header className="fixed left-0 top-0 flex w-full items-center justify-between border-b p-4 md:px-8">
-      <div className="absolute inset-0 backdrop-blur-xl" />
-
-      <Link href="/" className="z-50">
+    <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b p-4 backdrop-blur-xl md:px-8">
+      <Link href="/">
         <h1
           className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tight lg:text-5xl`}
         >
@@ -120,7 +118,7 @@ export default function Header() {
         </h1>
       </Link>
 
-      <div className="z-50 hidden md:flex md:items-center md:gap-4">
+      <div className="hidden md:flex md:items-center md:gap-4">
         <NavigationMenu>
           <NavigationMenuList>
             {navigationItems.map((item, index) => (
@@ -148,7 +146,7 @@ export default function Header() {
         <ThemeController />
       </div>
 
-      <div className="z-50 md:hidden">
+      <div className="md:hidden">
         <Sheet
           open={isOpen}
           onOpenChange={(open) => !isClosing && setIsOpen(open)}
