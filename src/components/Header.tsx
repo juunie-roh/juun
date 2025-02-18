@@ -2,7 +2,7 @@
 
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { antonio } from '@/assets/fonts';
 import Button from '@/components/ui/button';
@@ -31,61 +31,82 @@ const navigationItems = [
   { href: '/techrecords', label: 'Tech Records' },
 ];
 
+const DRAG_THRESHOLD = 0.25; // 25% of sheet height
+const TRANSITION_DURATION = 200; // ms
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [dragPosition, setDragPosition] = useState(0);
-  const dragStartY = useRef(0);
-  const isDragging = useRef(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [startY, setStartY] = useState(0);
+  const [isClosing, setIsClosing] = useState(false);
+
+  // Reset states when sheet is opened
+  useEffect(() => {
+    if (isOpen) {
+      setDragOffset(0);
+      setIsClosing(false);
+    }
+  }, [isOpen]);
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent | React.MouseEvent) => {
-      isDragging.current = true;
+      if (isClosing) return;
       const clientY =
         'touches' in e
-          ? (e as React.TouchEvent).touches[0]?.clientY
+          ? e.touches[0]?.clientY
           : (e as React.MouseEvent).clientY;
-      if (!clientY) return;
-      dragStartY.current = clientY;
+      setStartY(clientY || 0);
+      setIsDragging(true);
     },
-    [],
+    [isClosing],
   );
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent | React.MouseEvent) => {
-      if (!isDragging.current) return;
-      const currentY =
+      if (!isDragging || isClosing) return;
+
+      const clientY =
         'touches' in e
-          ? (e as React.TouchEvent).touches[0]?.clientY
+          ? e.touches[0]?.clientY
           : (e as React.MouseEvent).clientY;
-      if (!currentY) return;
-      const deltaY = currentY - dragStartY.current;
+      const delta = Math.max(0, (clientY || 0) - startY); // Only allow downward drag
 
-      // Only allow dragging downwards
-      if (deltaY < 0) return;
-
-      // Limit the drag distance
-      const maxDrag = window.innerHeight / 2;
-      const newPosition = Math.min(deltaY, maxDrag);
-
-      setDragPosition(newPosition);
-
-      // Prevent default to stop scrolling
-      // e.preventDefault();
+      setDragOffset(delta);
+      e.preventDefault();
     },
-    [],
+    [isDragging, startY, isClosing],
   );
 
-  const handleTouchEnd = useCallback(() => {
-    isDragging.current = false;
+  const closeSheet = useCallback((finalOffset: number) => {
+    setIsClosing(true);
+    setDragOffset(finalOffset);
 
-    // If dragged more than 25% of the sheet height, close it
-    if (dragPosition > window.innerHeight / 8) {
+    // Use window.innerHeight for the full close animation
+    requestAnimationFrame(() => {
+      setDragOffset(window.innerHeight);
+    });
+
+    // Wait for animation to complete before actually closing
+    setTimeout(() => {
       setIsOpen(false);
-    }
+      setIsClosing(false);
+    }, TRANSITION_DURATION);
+  }, []);
 
-    // Reset position with animation
-    setDragPosition(0);
-  }, [dragPosition]);
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging || isClosing) return;
+    setIsDragging(false);
+
+    const sheetHeight = window.innerHeight * 0.75; // 75% of viewport height
+    if (dragOffset > sheetHeight * DRAG_THRESHOLD) {
+      // Close from current position
+      closeSheet(dragOffset);
+    } else {
+      // Reset position
+      setDragOffset(0);
+    }
+  }, [isDragging, dragOffset, isClosing, closeSheet]);
 
   return (
     <header className="fixed left-0 top-0 flex w-full items-center justify-between border-b px-4 md:px-8 py-4 backdrop-blur-xl">
@@ -126,7 +147,10 @@ export default function Header() {
       </div>
 
       <div className="md:hidden">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <Sheet
+          open={isOpen}
+          onOpenChange={(open) => !isClosing && setIsOpen(open)}
+        >
           <SheetTrigger asChild>
             <Button variant="ghost" shape="circle">
               <Menu />
@@ -135,9 +159,14 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent
             side="bottom"
-            className="h-[75%] w-screen border-0 p-0 rounded-t-md transition-transform touch-none"
+            className="h-[75%] w-screen border-0 p-0 rounded-t-md touch-action-pan-y"
             style={{
-              transform: `translateY(${dragPosition}px)`,
+              position: 'fixed',
+              bottom: `-${dragOffset}px`,
+              left: 0,
+              transition: !isDragging
+                ? `bottom ${TRANSITION_DURATION}ms ease-out`
+                : 'none',
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
