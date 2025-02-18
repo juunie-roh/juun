@@ -60,7 +60,7 @@ COPY --from=deps --chown=nextjs:nodejs /app/.pnp.* \
                                        /app/yarn.lock ./
 
 # Copy only the necessary Next.js output
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/public ./standalone/public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./standalone
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./standalone/.next/static
 
