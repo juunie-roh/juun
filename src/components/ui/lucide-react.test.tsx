@@ -18,6 +18,7 @@ describe('Lucide Icons', () => {
   });
 
   it('applies custom props correctly', () => {
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     render(<AlertCircle size={32} color="red" className="custom-class" />);
     const icon = screen.getByTestId('lucide-alert-circle');
 
