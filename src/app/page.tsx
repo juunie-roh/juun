@@ -35,8 +35,8 @@ export default function Home() {
           className="dark:invert"
           src="/images/lisbon/pig.png"
           alt="pig"
-          width={2480}
-          height={3508}
+          width={180}
+          height={38}
           priority
         />
         <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left">
