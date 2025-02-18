@@ -1,10 +1,16 @@
 import { createLucideIcon } from 'lucide-react';
 import { type FC, type ReactElement, type ReactNode } from 'react';
 
-type IconNode = [
-  elementName: string | number | symbol,
-  attrs: Record<string, string>,
-][];
+type SVGElementType =
+  | 'circle'
+  | 'ellipse'
+  | 'g'
+  | 'line'
+  | 'path'
+  | 'polygon'
+  | 'polyline'
+  | 'rect';
+type IconNode = [elementName: SVGElementType, attrs: Record<string, string>][];
 
 export const createIconNode = (Svg: FC): IconNode => {
   const node: IconNode = [];
