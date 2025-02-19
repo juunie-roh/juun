@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # - name: Lint YAML Files
-      #   id: yaml-lint
-      #   run: |
-      #     yamllint .
+      - name: Lint YAML Files
+        id: yaml-lint
+        run: |
+          yamllint .
