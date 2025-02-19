@@ -1,36 +1,35 @@
 ---
-  name: Release
-  on:
-    workflow_run:
-      workflows:
-        - CI
-      types:
-        - completed
-      branches:
-        - main
-  permissions:
-    contents: write
-    issues: write
-  jobs:
-    release:
-      strategy:
-        matrix:
-          node-version:
-            - 22.x
-      name: Create a new release
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v4
-          with:
-            node-version: ${{ matrix.node-version }}
-            cache: yarn
-        - run: HUSKY=0 yarn --immutable
-        - name: Release
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: yarn semantic-release
-  
+name: Release
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+    branches:
+      - main
+permissions:
+  contents: write
+  issues: write
+jobs:
+  release:
+    strategy:
+      matrix:
+        node-version:
+          - 22.x
+    name: Create a new release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+      - run: HUSKY=0 yarn --immutable
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn semantic-release

@@ -1,17 +1,22 @@
 {
   "editor.formatOnSave": false,
+
   "eslint.nodePath": ".yarn/sdks",
   "eslint.enable": true,
   "eslint.format.enable": true,
+
   "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
   "prettier.singleQuote": true,
   "prettier.quoteProps": "preserve",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
+
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
   },
+
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
   "[css]": {
     "editor.suggest.insertMode": "replace",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -33,5 +38,5 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
-  }
+  },
 }
