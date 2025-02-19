@@ -1,6 +1,10 @@
 yaml-files:
 - '*.yaml'
 - '*.yml'
+- '.yamllint'
+
+ignore:
+- .yarn/
 
 rules:
   braces:
