@@ -1,8 +1,13 @@
 ---
+# Source
+
 # Warning
 - color: "ee0701"
   description: "Categorize bug reports."
   name: ":warning: bug"
+- color: "0366d6"
+  description: "Pull requests that update a dependency file"
+  name: ":robot: dependencies"
 
 # Highlight
 - color: "0e8a16"
@@ -11,12 +16,15 @@
 - color: "0e8a16"
   description: "Extra attention is needed."
   name: ":fire: help wanted"
+- color: "0075ca"
+  description: "Improvements or additions to documentation"
+  name: ":memo: documentation"
 
 # Cancel
-- color: "b60205"
+- color: "dddddd"
   description: "This issue or pull request already exists."
   name: ":pray: duplicate"
-- color: "b60205"
+- color: "dddddd"
   description: "This will not be worked on."
   name: ":zzz: wontfix"
 
