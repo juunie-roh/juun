@@ -1,8 +1,8 @@
-name: CI
+name: Build and Test
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev"]
   pull_request:
     branches: ["main"]
     types: [opened]
@@ -44,3 +44,4 @@ jobs:
       # Test via jest
       - name: Unit Tests through jest
         run: yarn test
+  
