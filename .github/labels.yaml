@@ -21,7 +21,7 @@
   name: ":pray: duplicate"
 - color: "b60205"
   description: "This will not be worked on."
-  name: ":pray: wontfix"
+  name: ":zzz: wontfix"
 
 # Size
 - color: "cfd3d7"
