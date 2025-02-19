@@ -3,9 +3,6 @@
 - color: "ee0701"
   description: "Categorize bug reports."
   name: ":warning: bug"
-- color: "ee0701"
-  description: "Categorize vulnerability reports."
-  name: ":warning: vulnerability"
 
 # Highlight
 - color: "0e8a16"
