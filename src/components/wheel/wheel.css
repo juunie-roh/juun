@@ -29,9 +29,9 @@
     transparent calc(50% + 1px),
     transparent
   );
-  transition-property: transform, opacity;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-out;
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.3s ease-out;
   opacity: 0;
   transform: scale(0) rotate(var(--rotation));
 }
@@ -46,12 +46,19 @@
   transition: color 0.3s;
 }
 
+/* Standard colors */
+.wheel .arc {
+  --color: rgba(0, 0, 0, 0.85);
+  --color-border: rgba(0, 0, 0, 0.85);
+}
+
+/* Active wheel */
 .wheel.on .arc {
   opacity: 0.8;
   transform: scale(1) rotate(var(--rotation)) !important;
-  transition-timing-function: ease-out;
 }
 
+/* Selected item highlighting */
 .wheel[data-chosen="0"] .arc:nth-child(1),
 .wheel[data-chosen="1"] .arc:nth-child(2),
 .wheel[data-chosen="2"] .arc:nth-child(3),
@@ -71,16 +78,8 @@
   color: #000;
 }
 
-.wheel .arc:nth-child(1),
-.wheel .arc:nth-child(2),
-.wheel .arc:nth-child(3),
-.wheel .arc:nth-child(4),
-.wheel .arc:nth-child(5) {
-  --color: rgba(0, 0, 0, 0.85);
-  --color-border: rgba(0, 0, 0, 0.85);
-  transition-delay: 0s;
-}
-
+/* Rotation angles for different wheel types */
+/* Confirm wheel (2 options) */
 .wheel.confirm .arc:nth-child(1) {
   --rotation: 45deg;
 }
@@ -88,6 +87,7 @@
   --rotation: 225deg;
 }
 
+/* Four-option wheel */
 .wheel.four .arc:nth-child(1) {
   --rotation: 0deg;
 }
@@ -101,22 +101,29 @@
   --rotation: 270deg;
 }
 
+/* Five-option wheel */
 .wheel.five .arc:nth-child(1) {
-  --rotation: -45deg;
+  --rotation: -9deg;
 }
 .wheel.five .arc:nth-child(2) {
-  --rotation: 27deg;
+  --rotation: 63deg;
 }
 .wheel.five .arc:nth-child(3) {
-  --rotation: 99deg;
+  --rotation: 135deg;
 }
 .wheel.five .arc:nth-child(4) {
-  --rotation: 171deg;
+  --rotation: 207deg;
 }
 .wheel.five .arc:nth-child(5) {
-  --rotation: 243deg;
+  --rotation: 279deg;
 }
 
+.wheel.five .arc {
+  clip-path: polygon(13.5% 13.5%, 100% 0, 86.5% 86.5%, 0 100%);
+  -webkit-clip-path: polygon(13.5% 13.5%, 100% 0, 86.5% 86.5%, 0 100%);
+}
+
+/* Title that appears when hovering */
 .wheel-center-title {
   position: absolute;
   top: 50%;

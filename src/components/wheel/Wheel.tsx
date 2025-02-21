@@ -53,7 +53,7 @@ const Wheel = () => {
             idx = Math.floor((deg / Math.PI) * 2);
             break;
           case 'five':
-            deg = angle + 0.725 * Math.PI;
+            deg = angle + 0.5 * Math.PI;
             while (deg < 0) deg += Math.PI * 2;
             idx = Math.floor((deg / Math.PI) * 2.5);
             break;
