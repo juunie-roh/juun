@@ -3,22 +3,22 @@ import { Check, Menu, X } from 'lucide-react';
 const wheelContent = {
   four: (
     <>
-      <div className="arc" title="menu0">
+      <div className="arc" title="Option 0">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu1">
+      <div className="arc" title="Option 1">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu2">
+      <div className="arc" title="Option 2">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu3">
+      <div className="arc" title="Option 3">
         <i>
           <Menu />
         </i>
@@ -27,27 +27,27 @@ const wheelContent = {
   ),
   five: (
     <>
-      <div className="arc" title="menu0">
+      <div className="arc" title="Option 0">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu1">
+      <div className="arc" title="Option 1">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu2">
+      <div className="arc" title="Option 2">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu3">
+      <div className="arc" title="Option 3">
         <i>
           <Menu />
         </i>
       </div>
-      <div className="arc" title="menu4">
+      <div className="arc" title="Option 4">
         <i>
           <Menu />
         </i>
