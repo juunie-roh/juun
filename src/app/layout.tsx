@@ -6,7 +6,6 @@ import type { Metadata } from 'next';
 import { geistMono, geistSans } from '@/assets/fonts';
 import Header from '@/components/Header';
 import ThemeProvider from '@/components/theme-provider';
-import { Wheel } from '@/components/wheel';
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +33,6 @@ export default function RootLayout({
         >
           <Header />
           {children}
-          <Wheel />
         </ThemeProvider>
         <SpeedInsights />
       </body>
