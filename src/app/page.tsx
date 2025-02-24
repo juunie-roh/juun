@@ -3,7 +3,9 @@ import Image from 'next/image';
 import { BuildingLibrary, CityPlan, InfoCircleOutlined } from '@/assets/svgs';
 import BearCounter from '@/components/features/BearCounter';
 import BearCounterModal from '@/components/features/BearCounterModal';
-import WheelControl from '@/components/features/WheelControl';
+import ConfirmWheel from '@/components/wheel/ConfirmWheel';
+import FiveWheel from '@/components/wheel/FiveWheel';
+import FourWheel from '@/components/wheel/FourWheel';
 
 export default function Home() {
   return (
@@ -46,7 +48,11 @@ export default function Home() {
         <div className="flex w-full items-center justify-center">
           <BearCounterModal />
         </div>
-        <WheelControl />
+        <div className="flex w-full items-center justify-center">
+          <ConfirmWheel />
+          <FourWheel />
+          <FiveWheel />
+        </div>
       </main>
     </div>
   );
