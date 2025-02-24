@@ -35,8 +35,7 @@ interface WheelSectorProps {
 interface WheelTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export interface WheelProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    Omit<WheelRootProps, 'children'> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   type: WheelType;
   onSelect?: (index: number) => void;
   icons?: ElementType[];
