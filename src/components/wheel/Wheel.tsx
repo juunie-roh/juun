@@ -295,13 +295,17 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
 
     const angles = getAngles();
 
+    const viewBoxSize = Math.max(200, 2 * (radius * 1.2)); // 20% extra space for hover scaling
+    const viewBoxOrigin = 100 - viewBoxSize / 2;
+    const viewBox = `${viewBoxOrigin} ${viewBoxOrigin} ${viewBoxSize} ${viewBoxSize}`;
+
     return (
       <WheelRoot
         ref={ref}
         className={cn(wheelVariants({ variant, className }))}
         {...props}
       >
-        <svg viewBox="0 0 200 200">
+        <svg viewBox={viewBox}>
           <g transform="translate(0, 0)">
             {angles.map((angle, i) => {
               const rotation = (angle.start + angle.end) / 2;
