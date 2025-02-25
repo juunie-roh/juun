@@ -1,26 +1,20 @@
 'use client';
 
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { TriangleAlert } from 'lucide-react';
-import { type ElementType, forwardRef, useState } from 'react';
+import type { ElementType, HTMLAttributes, SVGAttributes } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { cn } from '@/utils';
 
-// Types
-interface Angle {
-  start: number;
-  end: number;
-}
-
-interface Point {
-  x: number;
-  y: number;
-}
-
-export type WheelType = 'confirm' | 'four' | 'five';
-
-interface WheelRootProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface WheelSectorProps {
+// Internal Types
+type Angle = { start: number; end: number };
+type Point = { x: number; y: number };
+interface WheelRootProps extends HTMLAttributes<HTMLDivElement> {}
+interface WheelSectorProps
+  extends VariantProps<typeof pathVariants>,
+    VariantProps<typeof iconVariants> {
   index: number;
   angle: Angle;
   radius: number;
@@ -30,19 +24,9 @@ interface WheelSectorProps {
   isHovered: boolean;
   onHoverChange: (index: number | null) => void;
   onSelect?: (index: number) => void;
+  iconSize?: number; // Size of the icon (defaults to 24)
 }
-
-interface WheelTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export interface WheelProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
-  type: WheelType;
-  onSelect?: (index: number) => void;
-  icons?: ElementType[];
-  titles?: string[];
-  radius?: number;
-  innerRadius?: number;
-}
+interface WheelTitleProps extends HTMLAttributes<HTMLDivElement> {}
 
 const DEFAULT_TITLES = [
   'Action 0',
@@ -51,13 +35,101 @@ const DEFAULT_TITLES = [
   'Action 3',
   'Action 4',
 ];
+// Variants:
+const wheelVariants = cva('relative size-[200px]', {
+  variants: {
+    variant: {
+      primary: 'bg-primary text-primary-foreground',
+      secondary: 'bg-secondary text-secondary-foreground',
+      destructive: 'bg-destructive text-destructive-foreground',
+      outline: 'border bg-background',
+    },
+  },
+});
 
-// Helper functions
+const pathVariants = cva('cursor-pointer', {
+  variants: {
+    variant: {
+      primary: 'fill-primary',
+      secondary: 'fill-secondary',
+      destructive: 'fill-destructive',
+      outline: 'fill-background stroke-input',
+    },
+    isHovered: {
+      true: '',
+      false: '',
+    },
+  },
+  compoundVariants: [
+    {
+      variant: 'primary',
+      isHovered: true,
+      className: 'fill-primary/90 stroke-primary',
+    },
+    {
+      variant: 'secondary',
+      isHovered: true,
+      className: 'fill-secondary/80',
+    },
+    {
+      variant: 'destructive',
+      isHovered: true,
+      className: 'fill-destructive/90',
+    },
+    {
+      variant: 'outline',
+      isHovered: true,
+      className: 'fill-accent stroke-accent',
+    },
+  ],
+  defaultVariants: {
+    variant: 'primary',
+    isHovered: false,
+  },
+});
+
+const iconVariants = cva('pointer-events-none', {
+  variants: {
+    variant: {
+      primary: 'stroke-primary-foreground',
+      secondary: 'stroke-secondary-foreground',
+      destructive: 'stroke-destructive-foreground',
+      outline: '',
+    },
+    isHovered: {
+      true: '',
+      false: '',
+    },
+  },
+  compoundVariants: [
+    {
+      variant: 'outline',
+      isHovered: true,
+      className: 'stroke-accent-foreground',
+    },
+  ],
+  defaultVariants: {
+    variant: 'primary',
+    isHovered: false,
+  },
+});
+
+/**
+ * Calculate the Cartesian coordinates from `angle` and `radius`.
+ * @param angle
+ * @param radius
+ */
 const calculatePoint = (angle: number, radius: number): Point => ({
   x: 100 + radius * Math.cos((angle * Math.PI) / 180),
   y: 100 + radius * Math.sin((angle * Math.PI) / 180),
 });
-
+/**
+ * Draw a circle having `radius` from `startAngle` to `endAngle`, excluding the circle having `innerRadius`.
+ * @param startAngle Degree to start circle
+ * @param endAngle Degree to end circle
+ * @param radius Radius of outer circle
+ * @param innerRadius Radius of inner circle to be excluded
+ */
 const getSectorPath = ({
   startAngle,
   endAngle,
@@ -68,7 +140,7 @@ const getSectorPath = ({
   endAngle: number;
   radius: number;
   innerRadius: number;
-}): string => {
+}): SVGAttributes<SVGPathElement>['d'] => {
   const start = calculatePoint(startAngle, innerRadius);
   const end = calculatePoint(startAngle, radius);
   const start2 = calculatePoint(endAngle, radius);
@@ -84,11 +156,18 @@ const getSectorPath = ({
 };
 
 // Internal Components
+/**
+ * Determines the size of the wheel.
+ */
 const WheelRoot = forwardRef<HTMLDivElement, WheelRootProps>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('relative size-[200px]', className)}
+      className={cn(
+        'relative size-[200px]',
+        className,
+        'bg-transparent border-none',
+      )}
       {...props}
     />
   ),
@@ -105,6 +184,8 @@ const WheelSector = ({
   isHovered,
   onHoverChange,
   onSelect = (index) => console.log('Wheel Menu Selected:', index),
+  iconSize = 24,
+  variant = 'primary',
 }: WheelSectorProps) => {
   const midRadius = (radius + innerRadius) / 2;
   const angleInRadians = (rotation * Math.PI) / 180;
@@ -115,7 +196,7 @@ const WheelSector = ({
     <g
       className={cn(
         'origin-center transition-all duration-300',
-        isHovered ? 'scale-110 opacity-100' : 'opacity-80',
+        isHovered && 'scale-110',
       )}
     >
       <path
@@ -126,18 +207,20 @@ const WheelSector = ({
           innerRadius,
         })}
         strokeWidth="1"
-        className="cursor-pointer fill-[hsl(var(--primary))]"
+        className={cn(pathVariants({ variant, isHovered }))}
         onMouseEnter={() => onHoverChange(index)}
         onMouseLeave={() => onHoverChange(null)}
         onClick={() => onSelect?.(index)}
       />
       <Icon
-        x={x - 12}
-        y={y - 12}
+        x={x - iconSize / 2}
+        y={y - iconSize / 2}
         textAnchor="middle"
         dominantBaseline="middle"
-        stroke="hsl(var(--primary-foreground))"
-        className="pointer-events-none"
+        className={cn(
+          iconVariants({ variant, isHovered }),
+          `text-[${iconSize}px]`,
+        )}
       />
     </g>
   );
@@ -149,7 +232,7 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
     <div
       ref={ref}
       className={cn(
-        'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-primary text-primary-foreground px-2 py-1 rounded-sm pointer-events-none whitespace-nowrap text-sm',
+        'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-secondary text-secondary-foreground px-2 py-1 rounded-sm pointer-events-none whitespace-nowrap text-sm',
         className,
       )}
       {...props}
@@ -157,6 +240,18 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
   ),
 );
 WheelTitle.displayName = 'WheelTitle';
+
+export type WheelType = 'confirm' | 'four' | 'five';
+export interface WheelProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'>,
+    VariantProps<typeof wheelVariants> {
+  type: WheelType;
+  onSelect?: (index: number) => void;
+  icons?: ElementType[];
+  titles?: string[];
+  radius?: number;
+  innerRadius?: number;
+}
 
 // Main Component
 const Wheel = forwardRef<HTMLDivElement, WheelProps>(
@@ -169,6 +264,7 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
       radius = 80,
       innerRadius = 35,
       className,
+      variant,
       ...props
     },
     ref,
@@ -202,7 +298,7 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
     return (
       <WheelRoot
         ref={ref}
-        className={cn('relative size-[200px]', className)}
+        className={cn(wheelVariants({ variant, className }))}
         {...props}
       >
         <svg viewBox="0 0 200 200">
@@ -223,6 +319,7 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
                   isHovered={hovered === i}
                   onHoverChange={setHovered}
                   onSelect={onSelect}
+                  variant={variant}
                 />
               );
             })}
