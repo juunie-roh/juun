@@ -6,7 +6,12 @@ import { Wheel } from './Wheel';
 
 function ConfirmWheel() {
   return (
-    <Wheel type="confirm" icons={[Check, X]} titles={['Confirm', 'Cancel']} />
+    <Wheel
+      type="confirm"
+      icons={[Check, X]}
+      titles={['Confirm', 'Cancel']}
+      variant="destructive"
+    />
   );
 }
 

@@ -10,6 +10,7 @@ function FourWheel() {
       type="four"
       icons={[Home, Menu, MessageCircle, Settings]}
       titles={['Home', 'Menu', 'Message', 'Settings']}
+      variant="outline"
     />
   );
 }
