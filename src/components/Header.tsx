@@ -195,7 +195,7 @@ export default function Header() {
                   <React.Fragment key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-lg transition-colors hover:text-primary"
+                      className="text-lg font-bold tracking-tighter transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
