@@ -109,7 +109,7 @@ export default function Header() {
   }, [isDragging, dragOffset, isClosing, closeSheet]);
 
   return (
-    <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b p-4 backdrop-blur-xl md:px-8">
+    <header className="sticky top-0 z-50 flex w-full items-center justify-between border-b p-4 backdrop-blur-xl md:px-8">
       <Link href="/">
         <h1
           className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tight lg:text-5xl`}

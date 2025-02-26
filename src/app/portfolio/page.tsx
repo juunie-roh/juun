@@ -1,5 +1,14 @@
 import Link from 'next/link';
 
+import { Badge } from '@/components/ui/badge';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+
 import { getPosts } from './util';
 
 export default function Portfolio() {
@@ -21,57 +30,54 @@ export default function Portfolio() {
             <Link
               href={`/portfolio/${post.slug}`}
               key={post.slug}
-              className="group flex flex-col overflow-hidden rounded-lg border border-gray-200 transition-all hover:shadow-lg"
+              className="group block"
             >
-              {post.metadata.image ? (
-                <div className="aspect-video w-full overflow-hidden bg-gray-100">
-                  {/* Next.js Image component would be better here with proper imports */}
-                  <div
-                    className="size-full bg-cover bg-center"
-                    style={{ backgroundImage: `url(${post.metadata.image})` }}
-                  />
-                </div>
-              ) : (
-                <div className="aspect-video w-full bg-gradient-to-r from-blue-100 to-indigo-100" />
-              )}
-
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="mb-2 line-clamp-2 text-xl font-medium group-hover:text-blue-600">
-                  {post.metadata.title}
-                </h3>
-
-                {post.metadata.description && (
-                  <p className="mt-2 line-clamp-3 text-secondary-foreground">
-                    {post.metadata.description}
-                  </p>
+              <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
+                {post.metadata.image ? (
+                  <div className="aspect-video w-full overflow-hidden bg-gray-100">
+                    <div
+                      className="size-full bg-cover bg-center"
+                      style={{ backgroundImage: `url(${post.metadata.image})` }}
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-video w-full bg-gradient-to-r from-blue-100 to-indigo-100" />
                 )}
 
-                <div className="mt-auto pt-4">
+                <CardHeader>
+                  <CardTitle className="line-clamp-2 group-hover:text-blue-600">
+                    {post.metadata.title}
+                  </CardTitle>
+                  {post.metadata.description && (
+                    <p className="line-clamp-3 text-secondary-foreground">
+                      {post.metadata.description}
+                    </p>
+                  )}
+                </CardHeader>
+
+                <CardContent>
                   {post.metadata.tags && post.metadata.tags.length > 0 && (
-                    <div className="mb-4 flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {post.metadata.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
-                        >
+                        <Badge key={tag} variant="secondary">
                           {tag}
-                        </span>
+                        </Badge>
                       ))}
                     </div>
                   )}
+                </CardContent>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-blue-600">
-                      View project
+                <CardFooter className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-blue-600">
+                    View project
+                  </span>
+                  {post.metadata.date && (
+                    <span className="text-xs text-gray-500">
+                      {post.metadata.date}
                     </span>
-                    {post.metadata.date && (
-                      <span className="text-xs text-gray-500">
-                        {post.metadata.date}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
+                  )}
+                </CardFooter>
+              </Card>
             </Link>
           ))}
         </div>
