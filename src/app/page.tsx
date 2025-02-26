@@ -48,7 +48,7 @@ export default function Home() {
         <div className="flex w-full items-center justify-center">
           <BearCounterModal />
         </div>
-        <div className="flex w-full items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center md:flex-row">
           <ConfirmWheel />
           <FourWheel />
           <FiveWheel />
