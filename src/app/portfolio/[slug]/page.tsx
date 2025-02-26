@@ -78,13 +78,12 @@ export default function PortfolioItemPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-8">
-        <Link
-          href="/portfolio"
-          className="inline-flex items-center text-sm text-gray-600 hover:text-blue-600"
-        >
-          <ArrowLeft className="mr-2 size-4" />
-          Back to Portfolio
-        </Link>
+        <Button variant="ghost" asChild>
+          <Link href="/portfolio">
+            <ArrowLeft className="mr-2 size-4" />
+            Back to Portfolio
+          </Link>
+        </Button>
       </div>
 
       {/* Render the post component */}

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: 'Juun | %s',
     default: 'Juun',
   },
-  description: 'NextJS Boilerplate',
+  description: 'NextJS Boilerplate with Tailwind CSS and shadcn/ui',
 };
 
 export default function RootLayout({

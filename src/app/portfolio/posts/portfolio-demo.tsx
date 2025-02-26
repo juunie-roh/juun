@@ -1,9 +1,10 @@
 import Image from 'next/image';
 
+import { Badge } from '@/components/ui/badge';
+
 export const metadata = {
-  title: 'E-commerce Website Redesign',
-  description:
-    'A complete redesign of an e-commerce platform focusing on user experience and conversion optimization.',
+  title: 'Portfolio Demo',
+  description: 'A demo page for portfolio demonstration.',
   date: 'January 2024',
   tags: ['Next.js', 'Tailwind CSS', 'E-commerce'],
   image: undefined,
@@ -13,18 +14,17 @@ export default function ProjectPage() {
   return (
     <article className="mx-auto max-w-3xl">
       <div className="mb-8">
-        <h1 className="mb-4 text-3xl font-bold">{metadata.title}</h1>
+        <h1 className="mb-4 text-3xl font-bold tracking-tighter">
+          {metadata.title}
+        </h1>
         <p className="text-lg">{metadata.description}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {metadata.tags &&
             metadata.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
-              >
+              <Badge key={tag} variant="secondary">
                 {tag}
-              </span>
+              </Badge>
             ))}
         </div>
       </div>
