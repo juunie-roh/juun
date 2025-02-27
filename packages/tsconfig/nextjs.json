@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "target": "ES6",
+    "outDir": "out",
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "moduleResolution": "bundler",
+    "incremental": true,
+    "baseUrl": ".",
+    "plugins": [{ "name": "next" }],
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "./next/types/**/*.ts",
+    "./.storybook/**/*"
+  ],
+  "exclude": ["node_modules", "out"]
+}
