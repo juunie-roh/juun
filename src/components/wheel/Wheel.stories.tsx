@@ -125,33 +125,35 @@ export const CustomSized: Story = {
   },
 };
 
+const RenderInteractive = () => {
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+
+  const handleSelect = (index: number) => {
+    setSelectedOption(index);
+    setTimeout(() => setSelectedOption(null), 1000);
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <Wheel
+        type="five"
+        variant="primary"
+        icons={[Home, Search, Bell, Settings, User]}
+        titles={['Home', 'Search', 'Notifications', 'Settings', 'Profile']}
+        onSelect={handleSelect}
+      />
+      {selectedOption !== null && (
+        <div className="mt-4 rounded bg-primary p-2 text-primary-foreground">
+          Selected option: {selectedOption}
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Interactive examples
 export const Interactive: Story = {
-  render: () => {
-    const [selectedOption, setSelectedOption] = useState<number | null>(null);
-
-    const handleSelect = (index: number) => {
-      setSelectedOption(index);
-      setTimeout(() => setSelectedOption(null), 1000);
-    };
-
-    return (
-      <div className="flex flex-col items-center gap-4">
-        <Wheel
-          type="five"
-          variant="primary"
-          icons={[Home, Search, Bell, Settings, User]}
-          titles={['Home', 'Search', 'Notifications', 'Settings', 'Profile']}
-          onSelect={handleSelect}
-        />
-        {selectedOption !== null && (
-          <div className="mt-4 rounded bg-primary p-2 text-primary-foreground">
-            Selected option: {selectedOption}
-          </div>
-        )}
-      </div>
-    );
-  },
+  render: RenderInteractive,
 };
 
 // Combined examples
