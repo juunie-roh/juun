@@ -1,10 +1,10 @@
 yaml-files:
-- '*.yaml'
-- '*.yml'
-- '.yamllint'
+  - "*.yaml"
+  - "*.yml"
+  - ".yamllint"
 
 ignore:
-- .yarn/
+  - .yarn/
 
 rules:
   braces:
@@ -41,7 +41,7 @@ rules:
     max-spaces-after: 1
   indentation:
     spaces: consistent
-    indent-sequences: false
+    indent-sequences: true
   key-duplicates: enable
   key-ordering: disable
   line-length: disable

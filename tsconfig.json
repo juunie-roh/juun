@@ -35,6 +35,7 @@
     "incremental": true,
 
     "baseUrl": ".",
+    "rootDir": ".",
     "plugins": [
       {
         "name": "next"

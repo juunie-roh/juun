@@ -106,11 +106,6 @@
       "path": "@commitlint/cz-commitlint"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "resolutions": {
     "esbuild": "0.25.0"
   }
