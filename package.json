@@ -3,6 +3,11 @@
   "packageManager": "yarn@4.6.0",
   "private": true,
   "author": "juun",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "analyze": "ANALYZE=true next build",
     "build": "next build",

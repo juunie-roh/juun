@@ -1,5 +1,6 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
+// @ts-ignore
 import nextPlugin from '@next/eslint-plugin-next';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
