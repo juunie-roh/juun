@@ -1,6 +1,7 @@
 {
   "name": "@juun/eslint-config",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -15,12 +16,15 @@
     "./unit-test": "./src/unit-test.js",
     "./typescript": "./src/typescript.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.21.0",
     "@next/eslint-plugin-next": "^15.1.7",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/eslint-plugin-tailwindcss": "^3.17.0",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
+    "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.11.0",
