@@ -104,10 +104,9 @@ export default function LisbonCannery() {
         <div className="mt-6 border-y border-blue-800 py-4">
           <p className="text-lg">2025.03.02 - 2025.03.03</p>
           <p className="text-lg">17:00 - 24:00</p>
-          <p className="mt-2 text-sm">Lisbon Cannery Yongdap</p>
-          <p className="text-sm">
-            서울시 성동구 용답동 17, Hangang-daero 50-gil
-          </p>
+          <p className="mt-2 text-sm">Lisbon Cannery Yongnidan</p>
+          <p className="text-sm">서울시 용산구 한강대로 50길 17</p>
+          <p className="text-sm">17, Hangang-daero 50-gil, Yongsan-gu, Seoul</p>
         </div>
       </div>
 
