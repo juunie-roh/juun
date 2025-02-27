@@ -2,6 +2,7 @@
   "name": "@juun/eslint-config",
   "private": true,
   "version": "0.0.0",
+  "types": "./index.d.ts",
   "type": "module",
   "main": "index.js",
   "exports": {

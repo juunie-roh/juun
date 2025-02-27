@@ -1,6 +1,6 @@
 // @ts-ignore
 import nextPlugin from '@next/eslint-plugin-next';
-import { compat } from './util';
+import { compat } from './util.js';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [

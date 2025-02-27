@@ -1,5 +1,5 @@
 import storybook from 'eslint-plugin-storybook';
-import { compat } from './util';
+import { compat } from './util.js';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [

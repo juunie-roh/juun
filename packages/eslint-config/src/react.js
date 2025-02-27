@@ -1,10 +1,15 @@
-import { compat } from './util';
+import react from 'eslint-plugin-react';
+// @ts-ignore
+import reactHooks from 'eslint-plugin-react-hooks';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  ...compat.config({
-    extends: ['plugin/react/recommended', 'plugin:react-hooks/recommended'],
-    plugins: ['react', 'react-hooks'],
+  {
+    files: ['**/*.{jsx,tsx}'],
+    plugins: {
+      react: react,
+      'react-hooks': reactHooks,
+    },
     settings: {
       react: {
         version: 'detect',
@@ -19,5 +24,5 @@ export default [
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
     },
-  }),
+  },
 ];

@@ -3,18 +3,14 @@ import jestDom from 'eslint-plugin-jest-dom';
 // @ts-ignore
 import jestFormatting from 'eslint-plugin-jest-formatting';
 import testingLibrary from 'eslint-plugin-testing-library';
-import { baseRules } from './base';
+import { baseRules } from './base.js';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    files: [
-      'tests/**/*',
-      '**/*.test.{js,jsx,ts,tsx}',
-      '**/*.spec.{js,jsx,ts,tsx}',
-    ],
+    files: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
     plugins: {
-      jest,
+      jest: jest,
       'jest-dom': jestDom,
       'jest-formatting': jestFormatting,
       'testing-library': testingLibrary,

@@ -2,7 +2,7 @@ import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unusedImports from 'eslint-plugin-unused-imports';
-import { baseRules } from './base';
+import { baseRules } from './base.js';
 
 /** @type {import('eslint').Linter.RulesRecord} */
 export const tsRules = {
