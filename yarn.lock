@@ -2550,7 +2550,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juun/eslint-config@npm:*, @juun/eslint-config@workspace:, @juun/eslint-config@workspace:packages/eslint-config":
+"@juun/eslint-config@workspace:, @juun/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
   resolution: "@juun/eslint-config@workspace:packages/eslint-config"
   dependencies:
@@ -2585,23 +2585,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@juun/tsconfig@npm:*, @juun/tsconfig@workspace:packages/tsconfig":
+"@juun/tsconfig@workspace:packages/tsconfig":
   version: 0.0.0-use.local
   resolution: "@juun/tsconfig@workspace:packages/tsconfig"
-  languageName: unknown
-  linkType: soft
-
-"@juun/ui@workspace:packages/ui":
-  version: 0.0.0-use.local
-  resolution: "@juun/ui@workspace:packages/ui"
-  dependencies:
-    "@juun/eslint-config": "npm:*"
-    "@juun/tsconfig": "npm:*"
-    "@types/react": "npm:^19.0.10"
-    "@types/react-dom": "npm:^19.0.4"
-    eslint: "npm:^9.21.0"
-    react: "npm:^19.0.0"
-    typescript: "npm:^5.7.3"
   languageName: unknown
   linkType: soft
 
