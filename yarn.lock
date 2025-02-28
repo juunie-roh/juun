@@ -2550,12 +2550,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juun/common-components@workspace:packages/common-components":
-  version: 0.0.0-use.local
-  resolution: "@juun/common-components@workspace:packages/common-components"
-  languageName: unknown
-  linkType: soft
-
 "@juun/eslint-config@workspace:, @juun/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
   resolution: "@juun/eslint-config@workspace:packages/eslint-config"
