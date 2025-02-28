@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@juun/tsconfig/nextjs.json",
+  "baseUrl": ".",
+  "plugins": [
+    {
+      "name": "next"
+    }
+  ],
+  "paths": {
+    "@/*": ["./*"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "./.storybook/**/*",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "exclude": ["node_modules", "out"]
+}
