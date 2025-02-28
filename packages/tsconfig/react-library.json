@@ -9,9 +9,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitReturns": true,
-    "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "noImplicitReturns": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "out", "dist"]
