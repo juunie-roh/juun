@@ -1,3 +1,2 @@
-import config from '@juun/eslint-config';
-
+import config from '@juun/config/eslint';
 export default config;

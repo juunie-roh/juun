@@ -1,0 +1,17 @@
+{
+  "name": "@juun/nextjs",
+  "version": "2.4.3",
+  "private": true,
+  "author": "juun",
+  "devDependencies": {
+    "@juun/config": "workspace:"
+  },
+  "dependencies": {
+    "next": "15.1.7",
+    "next-themes": "^0.4.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "zustand": "^5.0.3"
+  }
+}
