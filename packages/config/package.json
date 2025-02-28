@@ -19,7 +19,7 @@
     "./eslint/unit-test": "./eslint/src/unit-test.js",
     "./eslint/typescript": "./eslint/src/typescript.js",
     "./tailwind": "./tailwind/index.js",
-    "./tailwind/css": "./tailwind/styles/global.css",
+    "./tailwind/styles": "./tailwind/styles/globals.css",
     "./tsconfig/base": "./tsconfig/base.json",
     "./tsconfig/nextjs": "./tsconfig/nextjs.json",
     "./tsconfig/react-library": "./tsconfig/react-library.json"

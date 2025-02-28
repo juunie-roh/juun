@@ -1,4 +1,4 @@
-import '../src/styles/globals.css';
+import '@juun/config/tailwind/styles';
 
 import type { Preview } from '@storybook/react';
 
