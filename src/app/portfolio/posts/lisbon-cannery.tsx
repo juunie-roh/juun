@@ -17,8 +17,8 @@ export default function LisbonCannery() {
       animal: 'Fish',
       animalKorean: '생선',
       description:
-        "Seasonal fish, shepherd's purse, ikura caviar, tomato pearl, salmon(cannery)",
-      descriptionKorean: '제철생선, 냉이, 연어알, 토마토펄, 연어(cannery)',
+        "Seasonal fish, shepherd's purse, ikura caviar, tomato pearl",
+      descriptionKorean: '제철생선, 냉이, 연어알, 토마토펄',
       image: '/images/lisbon/fish.png',
     },
     {
@@ -26,9 +26,9 @@ export default function LisbonCannery() {
       animal: 'Beef',
       animalKorean: '소',
       description:
-        '1++ hanwoo filet mignon, grissini, pickled shallot, oyster bottarga, egg yolk dijon',
+        '1++ hanwoo filet mignon, grissini, pickled shallot, tuna aioli, egg yolk dijon',
       descriptionKorean:
-        '한우 1++ 안심, 홈메이드 그리시니, 샬롯 피클, 굴 보타르가, 에그 디종',
+        '한우 1++ 안심, 홈메이드 그리시니, 샬롯 피클, 참치 아이올리, 에그 디종',
       image: '/images/lisbon/cow.png',
     },
     {
@@ -51,17 +51,16 @@ export default function LisbonCannery() {
       id: 5,
       animal: 'Pig',
       animalKorean: '돼지',
-      description:
-        'Risotto with prawn stock, chicharon, intestines, mussel(cannery)',
-      descriptionKorean: '새우 스톡 리조토, 돼지껍질, 내장, 홍합(cannery)',
+      description: 'Risotto with prawn stock, chicharon, squid(cannery)',
+      descriptionKorean: '새우 스톡 리조토, 돼지껍질, 오징어(cannery)',
       image: '/images/lisbon/pig.png',
     },
     {
       id: 6,
       animal: 'Rabbit',
       animalKorean: '토끼',
-      description: 'Ballottine, carrot puree&slice, green salad',
-      descriptionKorean: '발로틴, 당근 퓨레&슬라이스, 그린 샐러드',
+      description: 'Ballottine, carrot & carrot puree, green salad',
+      descriptionKorean: '발로틴, 당근 & 당근 퓨레, 그린 샐러드',
       image: '/images/lisbon/rabbit.png',
     },
     {
