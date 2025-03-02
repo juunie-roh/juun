@@ -76,8 +76,8 @@ export default function LisbonCannery() {
       id: 8,
       animal: 'Dessert',
       animalKorean: '디저트',
-      description: 'TBD',
-      descriptionKorean: 'TBD',
+      description: 'Cake',
+      descriptionKorean: '돼지기름, 아몬드',
     },
   ];
 
