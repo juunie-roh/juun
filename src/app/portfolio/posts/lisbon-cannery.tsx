@@ -81,12 +81,12 @@ export default function LisbonCannery() {
   ];
 
   // Extra menu item
-  const extraItem = {
-    animal: 'Extra',
-    animalKorean: '추가 메뉴',
-    description: 'Chicken burger (2p) / 10,000KRW',
-    descriptionKorean: '치킨 버거(2p) / 10,000원',
-  };
+  // const extraItem = {
+  //   animal: 'Extra',
+  //   animalKorean: '추가 메뉴',
+  //   description: 'Chicken burger (2p) / 10,000KRW',
+  //   descriptionKorean: '치킨 버거(2p) / 10,000원',
+  // };
 
   return (
     <div className="-mx-8 -mb-8 min-h-screen bg-yellow-50 py-20 font-sans text-blue-800">
@@ -146,7 +146,7 @@ export default function LisbonCannery() {
           ))}
 
           {/* Extra Item */}
-          <div className="flex flex-col items-center gap-4 pt-6 md:flex-row md:items-start">
+          {/* <div className="flex flex-col items-center gap-4 pt-6 md:flex-row md:items-start">
             <div className="grow text-center md:text-left">
               <h4 className="text-xl font-bold">
                 {extraItem.animal}{' '}
@@ -157,7 +157,7 @@ export default function LisbonCannery() {
               <p className="mt-1">{extraItem.description}</p>
               <p className="mt-1 text-sm">{extraItem.descriptionKorean}</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
