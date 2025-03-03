@@ -1,4 +1,7 @@
 export default {
   '*.+(ts|tsx)': [() => 'yarn tsc -p tsconfig.json --noEmit'],
-  '**/*.+(ts|tsx|js|jsx)': ['eslint --fix'],
+  'packages/ui/**/*.+(ts|tsx)': [
+    () => 'yarn tsc -p packages/ui/tsconfig.json --noEmit',
+  ],
+  '**/*.+(ts|tsx|js|jsx)': ['eslint --fix --cache'],
 };

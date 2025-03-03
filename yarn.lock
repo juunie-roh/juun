@@ -2550,43 +2550,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juun/components@workspace:packages/components":
-  version: 0.0.0-use.local
-  resolution: "@juun/components@workspace:packages/components"
-  dependencies:
-    "@chromatic-com/storybook": "npm:^3.2.5"
-    "@hookform/resolvers": "npm:^4.1.2"
-    "@juun/config": "workspace:"
-    "@radix-ui/react-collapsible": "npm:^1.1.3"
-    "@radix-ui/react-dialog": "npm:^1.1.6"
-    "@radix-ui/react-dropdown-menu": "npm:^2.1.6"
-    "@radix-ui/react-label": "npm:^2.1.2"
-    "@radix-ui/react-navigation-menu": "npm:^1.2.5"
-    "@radix-ui/react-separator": "npm:^1.1.2"
-    "@radix-ui/react-slot": "npm:^1.1.2"
-    "@storybook/addon-a11y": "npm:^8.6.3"
-    "@storybook/addon-essentials": "npm:^8.6.3"
-    "@storybook/addon-interactions": "npm:^8.6.3"
-    "@storybook/addon-onboarding": "npm:^8.6.3"
-    "@storybook/blocks": "npm:^8.6.3"
-    "@storybook/react": "npm:^8.6.3"
-    "@storybook/test": "npm:^8.6.3"
-    class-variance-authority: "npm:^0.7.1"
-    clsx: "npm:^2.1.1"
-    eslint: "npm:^9.21.0"
-    lucide-react: "npm:^0.477.0"
-    react: "npm:^19.0.0"
-    react-dom: "npm:^19.0.0"
-    react-hook-form: "npm:^7.54.2"
-    storybook: "npm:^8.6.3"
-    tailwind-merge: "npm:^3.0.2"
-    tailwindcss: "npm:^3.4.17"
-    tailwindcss-animate: "npm:^1.0.7"
-    typescript: "npm:^5.7.3"
-    webpack: "npm:^5.98.0"
-  languageName: unknown
-  linkType: soft
-
 "@juun/config@workspace:, @juun/config@workspace:packages/config":
   version: 0.0.0-use.local
   resolution: "@juun/config@workspace:packages/config"
@@ -2636,6 +2599,49 @@ __metadata:
     react-dom: "npm:^19.0.0"
     react-hook-form: "npm:^7.54.2"
     zustand: "npm:^5.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@juun/ui@workspace:, @juun/ui@workspace:packages/ui":
+  version: 0.0.0-use.local
+  resolution: "@juun/ui@workspace:packages/ui"
+  dependencies:
+    "@chromatic-com/storybook": "npm:^3.2.5"
+    "@hookform/resolvers": "npm:^4.1.2"
+    "@juun/config": "workspace:"
+    "@radix-ui/react-collapsible": "npm:^1.1.3"
+    "@radix-ui/react-dialog": "npm:^1.1.6"
+    "@radix-ui/react-dropdown-menu": "npm:^2.1.6"
+    "@radix-ui/react-label": "npm:^2.1.2"
+    "@radix-ui/react-navigation-menu": "npm:^1.2.5"
+    "@radix-ui/react-select": "npm:^2.1.6"
+    "@radix-ui/react-separator": "npm:^1.1.2"
+    "@radix-ui/react-slot": "npm:^1.1.2"
+    "@storybook/addon-a11y": "npm:^8.6.3"
+    "@storybook/addon-essentials": "npm:^8.6.3"
+    "@storybook/addon-interactions": "npm:^8.6.3"
+    "@storybook/addon-onboarding": "npm:^8.6.3"
+    "@storybook/blocks": "npm:^8.6.3"
+    "@storybook/react": "npm:^8.6.3"
+    "@storybook/test": "npm:^8.6.3"
+    "@types/react": "npm:^19.0.10"
+    "@types/react-dom": "npm:^19.0.4"
+    class-variance-authority: "npm:^0.7.1"
+    clsx: "npm:^2.1.1"
+    eslint: "npm:^9.21.0"
+    eslint-plugin-prettier: "npm:^5.2.3"
+    lucide-react: "npm:^0.477.0"
+    next-themes: "npm:^0.4.4"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    react-hook-form: "npm:^7.54.2"
+    storybook: "npm:^8.6.3"
+    tailwind-merge: "npm:^3.0.2"
+    tailwindcss: "npm:^3.4.17"
+    tailwindcss-animate: "npm:^1.0.7"
+    typescript: "npm:^5.7.3"
+    webpack: "npm:^5.98.0"
+    zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
 
@@ -3165,6 +3171,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/number@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@radix-ui/number@npm:1.1.0"
+  checksum: 10c0/a48e34d5ff1484de1b7cf5d7317fefc831d49e96a2229f300fd37b657bd8cfb59c922830c00ec02838ab21de3b299a523474592e4f30882153412ed47edce6a4
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.1.1":
   version: 1.1.1
   resolution: "@radix-ui/primitive@npm:1.1.1"
@@ -3605,6 +3618,45 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: 10c0/80e378e1156d5b8af14995e908fe2358c8f4757fbf274e30d2ee3c1cedc3a0c7192524df7e3bb1d5011ee9ab8ab7445b60eff06617370e58abcd1ae97e0e40f6
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-select@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "@radix-ui/react-select@npm:2.1.6"
+  dependencies:
+    "@radix-ui/number": "npm:1.1.0"
+    "@radix-ui/primitive": "npm:1.1.1"
+    "@radix-ui/react-collection": "npm:1.1.2"
+    "@radix-ui/react-compose-refs": "npm:1.1.1"
+    "@radix-ui/react-context": "npm:1.1.1"
+    "@radix-ui/react-direction": "npm:1.1.0"
+    "@radix-ui/react-dismissable-layer": "npm:1.1.5"
+    "@radix-ui/react-focus-guards": "npm:1.1.1"
+    "@radix-ui/react-focus-scope": "npm:1.1.2"
+    "@radix-ui/react-id": "npm:1.1.0"
+    "@radix-ui/react-popper": "npm:1.2.2"
+    "@radix-ui/react-portal": "npm:1.1.4"
+    "@radix-ui/react-primitive": "npm:2.0.2"
+    "@radix-ui/react-slot": "npm:1.1.2"
+    "@radix-ui/react-use-callback-ref": "npm:1.1.0"
+    "@radix-ui/react-use-controllable-state": "npm:1.1.0"
+    "@radix-ui/react-use-layout-effect": "npm:1.1.0"
+    "@radix-ui/react-use-previous": "npm:1.1.0"
+    "@radix-ui/react-visually-hidden": "npm:1.1.2"
+    aria-hidden: "npm:^1.2.4"
+    react-remove-scroll: "npm:^2.6.3"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/bc953806b861c66f01371502ac7404e1e3c783290e979f9446e89b643bff7f90164ce91126f719e5aec4d9601b9ad0e4e7b7e747bfc0fbfcf7a31aeeac0a484d
   languageName: node
   linkType: hard
 
@@ -11784,6 +11836,7 @@ __metadata:
     "@hookform/resolvers": "npm:^4.1.2"
     "@jest/types": "npm:^29.6.3"
     "@juun/config": "workspace:"
+    "@juun/ui": "workspace:"
     "@next/bundle-analyzer": "npm:^15.2.0"
     "@next/eslint-plugin-next": "npm:^15.2.0"
     "@radix-ui/react-collapsible": "npm:^1.1.3"
