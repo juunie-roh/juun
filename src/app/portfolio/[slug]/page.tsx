@@ -1,18 +1,16 @@
 'use client';
 
+import { Button } from '@juun/ui';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-import Button from '@/components/ui/button';
 
 // Convert to client component with appropriate error handling
 export default function PortfolioItemPage() {
   const params = useParams();
   const router = useRouter();
   const [Component, setComponent] = useState<React.ComponentType | null>(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -35,21 +33,11 @@ export default function PortfolioItemPage() {
       } catch (err) {
         console.error('Error loading portfolio item:', err);
         setError(true);
-      } finally {
-        setLoading(false);
       }
     }
 
     loadComponent();
   }, [params, router]);
-
-  if (loading) {
-    return (
-      <div className="flex h-64 w-full items-center justify-center">
-        <div className="size-8 animate-spin rounded-full border-y-2 border-blue-500"></div>
-      </div>
-    );
-  }
 
   if (error) {
     return (
