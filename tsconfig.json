@@ -6,6 +6,12 @@
     "rootDir": ".",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", ".storybook/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".storybook/**/*.ts"
+  ],
   "exclude": ["node_modules", "out"]
 }
