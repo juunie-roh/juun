@@ -1,2 +1,7 @@
 import config from '@juun/config/tailwind';
-export default config;
+import type { Config } from 'tailwindcss';
+const extendedConfig: Config = {
+  ...config,
+  content: ['./src/components/**/*.{js,ts,jsx,tsx,mdx}'],
+};
+export default extendedConfig;

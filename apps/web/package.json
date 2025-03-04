@@ -8,9 +8,9 @@
     "analyze": "ANALYZE=true next build",
     "build": "next build",
     "check-types": "tsc --noEmit --pretty",
-    "dev": "next dev --turbopack",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
@@ -27,6 +27,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "lucide-react": "^0.477.0",
     "postcss": "^8.5.3",
+    "postcss-load-config": "^6.0.1",
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",

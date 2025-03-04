@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@juun/ui';
 import { Label } from '@juun/ui/label';
+import { cn } from '@juun/ui/lib/utils';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
