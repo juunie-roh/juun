@@ -1,3 +1,4 @@
+import { Separator } from '@juun/ui';
 import Image from 'next/image';
 
 export const metadata = {
@@ -89,7 +90,7 @@ export default function LisbonCannery() {
   };
 
   return (
-    <div className="-mx-8 -mb-8 min-h-screen bg-yellow-50 py-20 font-sans text-blue-800">
+    <div className="-m-8 min-h-screen max-w-4xl bg-yellow-50 px-4 py-20 font-sans text-blue-800 lg:mx-auto">
       {/* Title Section */}
       <div className="mb-10 text-center">
         <h1 className="mb-4 font-serif text-4xl font-bold italic md:text-5xl">
@@ -100,12 +101,14 @@ export default function LisbonCannery() {
         </h2>
         <p className="font-serif text-lg italic">by Kyle & Won</p>
 
-        <div className="mt-6 border-y border-blue-800 py-4">
+        <div className="mt-6">
+          <Separator className="mb-4 bg-blue-800" />
           <p className="text-lg">2025.03.02 - 2025.03.03</p>
           <p className="text-lg">17:00 - 24:00</p>
           <p className="mt-2 text-sm">Lisbon Cannery Yongnidan</p>
           <p className="text-sm">서울시 용산구 한강대로 50길 17</p>
           <p className="text-sm">17, Hangang-daero 50-gil, Yongsan-gu, Seoul</p>
+          <Separator className="mt-4 bg-blue-800" />
         </div>
       </div>
 
@@ -117,31 +120,31 @@ export default function LisbonCannery() {
 
         <div className="space-y-8">
           {menuItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-col items-center gap-4 border-b border-blue-800/30 pb-6 md:flex-row md:items-start"
-            >
-              <div className="flex size-24 shrink-0 items-center justify-center">
-                {item.image && (
-                  <Image
-                    src={item.image}
-                    alt={item.animal}
-                    className="size-20 object-contain"
-                    width={100}
-                    height={100}
-                  />
-                )}
+            <div key={item.id}>
+              <div className="flex flex-col items-center gap-4 border-blue-800/30 pb-6 md:flex-row md:items-start">
+                <div className="flex size-24 shrink-0 items-center justify-center">
+                  {item.image && (
+                    <Image
+                      src={item.image}
+                      alt={item.animal}
+                      className="size-20 object-contain"
+                      width={100}
+                      height={100}
+                    />
+                  )}
+                </div>
+                <div className="grow text-center md:text-left">
+                  <h4 className="text-xl font-bold">
+                    {item.id}. <span className="font-serif">{item.animal}</span>{' '}
+                    <span className="text-lg font-normal">
+                      / {item.animalKorean}
+                    </span>
+                  </h4>
+                  <p className="mt-1">{item.description}</p>
+                  <p className="mt-1 text-sm">{item.descriptionKorean}</p>
+                </div>
               </div>
-              <div className="grow text-center md:text-left">
-                <h4 className="text-xl font-bold">
-                  {item.id}. <span className="font-serif">{item.animal}</span>{' '}
-                  <span className="text-lg font-normal">
-                    / {item.animalKorean}
-                  </span>
-                </h4>
-                <p className="mt-1">{item.description}</p>
-                <p className="mt-1 text-sm">{item.descriptionKorean}</p>
-              </div>
+              <Separator className="bg-blue-800/30 md:-mx-8 md:w-auto lg:-mx-12" />
             </div>
           ))}
 
