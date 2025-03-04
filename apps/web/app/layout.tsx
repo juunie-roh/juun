@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 
 import { geistMono, geistSans } from '@/assets/fonts';
 import Header from '@/components/Header';
-import ThemeProvider from '@/components/theme-provider';
+import ThemeProvider from '@/components/theme/provider';
 
 export const metadata: Metadata = {
   title: {

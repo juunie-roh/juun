@@ -14,7 +14,7 @@ Template for extended configuration
 ```json
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@juun/tsconfig/[config-to-extend].json",
+  "extends": "@juun/config/typescript/[config-to-extend].json",
   "compilerOptions": {
     "baseUrl": "",
     "rootDir": "",

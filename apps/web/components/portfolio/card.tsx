@@ -1,13 +1,12 @@
-import Link from 'next/link';
-
-import { Badge } from '@/components/ui/badge';
 import {
+  Badge,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@juun/ui';
+import Link from 'next/link';
 
 // Define the types for our post data
 interface PostMetadata {
@@ -45,7 +44,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
           <CardTitle className="line-clamp-1 group-hover:text-blue-600">
             {post.metadata.title}
           </CardTitle>
-          <p className="line-clamp-3 min-h-[72px] text-secondary-foreground">
+          <p className="text-secondary-foreground line-clamp-3 min-h-[72px]">
             {post.metadata.description}
           </p>
         </CardHeader>

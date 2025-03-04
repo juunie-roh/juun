@@ -81,7 +81,7 @@ function extractMetadataFromFile(filePath: string): PostMetadata {
 
 export function getPosts(): Post[] {
   try {
-    const dir = path.join(process.cwd(), 'src', 'app', 'portfolio', 'posts');
+    const dir = path.join(process.cwd(), 'app', 'portfolio', 'posts');
     if (!fs.existsSync(dir)) {
       console.warn(`Directory not found: ${dir}`);
       return [];

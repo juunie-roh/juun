@@ -16,16 +16,19 @@ const nextConfig = {
   },
   output: 'standalone',
   experimental: {
+    // externalDir: true,
     // The serverActions value needs to be an object, not a boolean
     serverActions: {
       allowedOrigins: ['*'],
     },
     optimizePackageImports: ['lucide-react'],
   },
+  transpilePackages: ['@juun/ui', '@juun/config'],
 };
 
+const analyze = process.env.ANALYZE === 'true';
 const withBundleAnalyzer = NextBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: analyze,
 });
 
-export default withBundleAnalyzer(nextConfig);
+export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;
