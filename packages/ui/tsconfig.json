@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@juun/config/tsconfig/react-library",
+  "extends": "@juun/config/typescript/react-library",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",

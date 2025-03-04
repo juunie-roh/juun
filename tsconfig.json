@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@juun/config/tsconfig/nextjs",
+  "extends": "@juun/config/typescript/nextjs",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
