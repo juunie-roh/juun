@@ -1,3 +1,5 @@
+export * from './components/accordion';
+export * from './components/aspect-ratio';
 export * from './components/badge';
 export * from './components/breadcrumb';
 export * from './components/button';
@@ -13,4 +15,7 @@ export * from './components/navigation-menu';
 export * from './components/separator';
 export * from './components/sheet';
 export * from './components/skeleton';
+export * from './components/slider';
+export * from './components/switch';
+export * from './components/textarea';
 export * from './lib/utils';
