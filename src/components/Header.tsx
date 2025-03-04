@@ -1,34 +1,32 @@
 'use client';
 
-import { Menu } from 'lucide-react';
-import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
-
-import { antonio } from '@/assets/fonts';
-import Button from '@/components/ui/button';
 import {
+  Button,
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { Separator } from '@/components/ui/separator';
-import {
+  Separator,
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
+} from '@juun/ui';
+import { Menu } from 'lucide-react';
+import Link from 'next/link';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import { antonio } from '@/assets/fonts';
 
 import ThemeController from './theme-controller';
 
 const navigationItems = [
   { href: '/about', label: 'About' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/techrecords', label: 'Tech Records' },
+  { href: '/blog', label: 'Blog' },
 ];
 
 const DRAG_THRESHOLD = 0.25; // 25% of sheet height
@@ -152,7 +150,7 @@ export default function Header() {
           onOpenChange={(open) => !isClosing && setIsOpen(open)}
         >
           <SheetTrigger asChild>
-            <Button variant="ghost" shape="circle">
+            <Button variant="ghost" size="icon">
               <Menu />
               <span className="sr-only">Toggle Navigation Menu</span>
             </Button>
