@@ -22,6 +22,7 @@ const nextConfig = {
     },
     optimizePackageImports: ['lucide-react'],
   },
+  transpilePackages: ['@juun/ui', '@juun/config'],
 };
 
 const withBundleAnalyzer = NextBundleAnalyzer({

@@ -24,7 +24,7 @@ const createJestConfig = nextJest({
 
 const customConfig: JestConfigWithTsJest = {
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/$1',
     '^@/public/(.*)$': '<rootDir>/public/$1',
     '^__mocks__/(.*)$': '<rootDir>/__mocks__/$1',
     '\\.svg$': '<rootDir>/__mocks__/svg.ts',
@@ -34,10 +34,10 @@ const customConfig: JestConfigWithTsJest = {
   clearMocks: true,
   collectCoverage: true,
   collectCoverageFrom: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    '!./src/**/_*.{js,jsx,ts,tsx}',
-    '!./src/stories/**',
-    '!./src/**/*.stories.{js,jsx,ts,tsx}',
+    './**/*.{js,jsx,ts,tsx}',
+    '!/**/_*.{js,jsx,ts,tsx}',
+    '!/stories/**',
+    '!/**/*.stories.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
   ],

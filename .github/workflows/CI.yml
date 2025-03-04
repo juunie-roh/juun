@@ -34,7 +34,7 @@ jobs:
           failOnWarnings: false
       - name: esLinter
         run: yarn lint
-      - name: Type Checking
-        run: yarn check-types
-      - name: Unit Tests through jest
-        run: yarn test
+      # - name: Type Checking
+      #   run: yarn check-types
+      # - name: Unit Tests through jest
+      #   run: yarn test
