@@ -1,8 +1,8 @@
 'use client';
 
+import { Button } from '@juun/ui';
 import { Minus, Plus } from 'lucide-react';
 
-import Button from '@/components/ui/button';
 import { useBearStore } from '@/stores/slices/bear';
 
 const BearCounter = () => {
@@ -10,11 +10,21 @@ const BearCounter = () => {
 
   return (
     <div className="flex w-full items-center justify-center">
-      <Button shape="circle" aria-label="increase" onClick={() => increase(1)}>
+      <Button
+        size="icon"
+        aria-label="increase"
+        className="rounded-full"
+        onClick={() => increase(1)}
+      >
         <Plus />
       </Button>
       <div className="flex w-full items-center justify-center">{bears}</div>
-      <Button shape="circle" aria-label="decrease" onClick={() => decrease(1)}>
+      <Button
+        size="icon"
+        aria-label="decrease"
+        className="rounded-full"
+        onClick={() => decrease(1)}
+      >
         <Minus />
       </Button>
     </div>

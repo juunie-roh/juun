@@ -1,5 +1,7 @@
 import tailwindcss from 'eslint-plugin-tailwindcss';
 
+import config from '@juun/config/tailwind';
+
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
@@ -9,7 +11,7 @@ export default [
     },
     settings: {
       tailwindcss: {
-        config: 'tailwind.config.ts',
+        config: config,
       },
     },
   },

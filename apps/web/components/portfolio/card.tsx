@@ -44,7 +44,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
           <CardTitle className="line-clamp-1 group-hover:text-blue-600">
             {post.metadata.title}
           </CardTitle>
-          <p className="text-secondary-foreground line-clamp-3 min-h-[72px]">
+          <p className="line-clamp-3 min-h-[72px] text-secondary-foreground">
             {post.metadata.description}
           </p>
         </CardHeader>

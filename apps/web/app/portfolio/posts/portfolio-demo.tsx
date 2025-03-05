@@ -40,7 +40,7 @@ export default function ProjectPage() {
         </div>
       )}
 
-      <div className="prose text-primary max-w-none">
+      <div className="prose max-w-none text-primary">
         <h2 className="text-primary">Project Overview</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure illo

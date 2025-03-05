@@ -1,7 +1,7 @@
-import type { UserPromptConfig } from '@commitlint/types';
-import { RuleConfigSeverity, type UserConfig } from '@commitlint/types';
+import { RuleConfigSeverity } from '@commitlint/types';
 
-const config: UserConfig = {
+/** @type {import('@commitlint/types').UserConfig} */
+const config = {
   extends: ['@commitlint/config-conventional'],
   // parserPreset: 'conventional-changelog-atom',
   formatter: '@commitlint/format',
@@ -33,6 +33,7 @@ const config: UserConfig = {
       ],
     ],
   },
+  /** @type {import('@commitlint/types').UserPromptConfig} */
   prompt: {
     questions: {
       type: {
@@ -171,7 +172,7 @@ const config: UserConfig = {
         },
       },
     },
-  } as UserPromptConfig,
+  },
   // scopes: ['css-style', 'lint', 'formatting'],
 };
 export default config;
