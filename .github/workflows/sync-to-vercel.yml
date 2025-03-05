@@ -17,6 +17,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
+          token: ${{ secrets.WORKFLOW_PAT }}
 
       - name: Check if vercel branch exists
         id: check-branch
@@ -66,7 +67,7 @@ jobs:
           git add .yarnrc.yml
 
           # Complete the merge
-          git commit -m "Merge main into vercel, preserving .yarnrc.yml"
+          git commit -m "Merge main into vercel, preserving .yarnrc.yml [skip ci]"
 
           # Push to vercel branch
           git push origin vercel
