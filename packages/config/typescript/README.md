@@ -1,4 +1,4 @@
-# @juun/tsconfig
+# @juun/config/typescript
 
 Collection of internal TypeScript configurations.
 
@@ -10,17 +10,20 @@ Override below after extending the common configurations.
 * `include`: file names, name patterns, or paths to include.
 * `exclude`: file names, name patterns, or paths to exclude.
 
-Template for extended configuration
+## Usage
+
+Extend the appropriate configuration in your project's `tsconfig.json`:
+
 ```json
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@juun/config/typescript/[config-to-extend].json",
+  "extends": "@juun/config/typescript/nextjs.json",
   "compilerOptions": {
-    "baseUrl": "",
-    "rootDir": "",
-    "paths": { "@/*": [""] }
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": { "@/*": ["./*"] }
   },
-  "include": [],
-  "exclude": [],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
 ```
