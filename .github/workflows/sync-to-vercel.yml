@@ -33,12 +33,20 @@ jobs:
       - name: Create vercel branch if it doesn't exist
         if: steps.check-branch.outputs.exists == 'false'
         run: |
+          # Configure Git user
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
           git checkout -b vercel
           git push -u origin vercel
 
       - name: Sync main to vercel branch
         if: steps.check-branch.outputs.exists == 'true'
         run: |
+          # Configure Git user
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
           # Checkout the main branch first
           git checkout main
 
