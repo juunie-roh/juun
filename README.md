@@ -21,3 +21,25 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Global State Management with [zustand](https://zustand.docs.pmnd.rs/)
 - Storybook for UI development
 - PRs & Conventional Commit Ruleset applied from [ruleset-recipes](https://github.com/github/ruleset-recipes)
+
+## Deployment Strategy
+
+### Branch Structure
+
+This repository uses a specific branch structure for deployment:
+
+- `main`: Main development branch - all feature development and PRs should target this branch
+- `vercel`: Deployment branch - **DO NOT** directly push or create PRs to this branch
+
+### Vercel Branch
+
+The `vercel` branch is automatically synchronized from `main` through GitHub Actions.
+It's specifically configured for Vercel deployment with the proper settings for the monorepo structure.
+
+#### 🛑 Important:
+
+- Never create pull requests targeting the `vercel` branch
+- Never push directly to the `vercel` branch
+- All changes should go through `main` and will be automatically synced to `vercel`
+
+The `vercel` branch is protected and can only be updated through the automated GitHub Actions workflow.

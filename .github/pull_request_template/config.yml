@@ -1,5 +1,0 @@
-blank_issues_enabled: false
-
-# Prevent suggesting pull requests for vercel branch
-neverSuggestForBranches:
-  - vercel
