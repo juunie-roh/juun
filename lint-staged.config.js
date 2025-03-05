@@ -6,4 +6,5 @@ export default {
     () => 'yarn tsc -p packages/ui/tsconfig.json --noEmit',
   ],
   '**/*.+(ts|tsx|js|jsx)': ['eslint --fix --cache'],
+  '**/*.+(yml|yaml)': ['yamllint .'],
 };
