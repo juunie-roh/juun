@@ -174,7 +174,7 @@ export default function Header() {
             onMouseLeave={handleTouchEnd}
           >
             <div className="flex w-full justify-center py-2">
-              <div className="bg-muted-foreground/20 h-1 w-12 rounded-full" />
+              <div className="h-1 w-12 rounded-full bg-muted-foreground/20" />
             </div>
             <SheetHeader className="absolute left-4 top-4">
               <SheetTitle className={`${antonio.className} text-3xl font-bold`}>

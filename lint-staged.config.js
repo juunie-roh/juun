@@ -1,5 +1,4 @@
 export default {
-  'src/**/*.+(ts|tsx)': [() => 'yarn tsc -p tsconfig.json --noEmit'],
   'apps/web/**/*.+(ts|tsx)': [
     () => 'yarn tsc -p apps/web/tsconfig.json --noEmit',
   ],
