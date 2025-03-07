@@ -1,7 +1,4 @@
-import { Button } from '@juun/ui';
-import { ArrowLeft } from 'lucide-react';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { getPosts } from '../util';
@@ -67,18 +64,6 @@ export default async function PortfolioItemPage({
 
   return (
     <div className="mx-auto w-full">
-      <div className="absolute mt-8">
-        <Button asChild variant="link">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center text-sm font-medium"
-          >
-            <ArrowLeft className="mr-2 size-4" />
-            Back to Portfolio
-          </Link>
-        </Button>
-      </div>
-
       {/* Render the post component */}
       <PostComponent />
     </div>
