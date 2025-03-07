@@ -13,6 +13,8 @@ import {
   DialogTrigger,
 } from '@juun/ui';
 
+import { geistSans } from '@/assets/fonts';
+
 import BearCounter from './BearCounter';
 
 const BearCounterModal = () => {
@@ -22,7 +24,7 @@ const BearCounterModal = () => {
         <Button variant="secondary">open</Button>
       </DialogTrigger>
       <DialogPortal>
-        <DialogContent>
+        <DialogContent className={`${geistSans.className}`}>
           <DialogHeader>
             <DialogTitle>Bear Counter Modal</DialogTitle>
             <DialogDescription>

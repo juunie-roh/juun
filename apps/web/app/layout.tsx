@@ -4,7 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
 import { geistMono, geistSans } from '@/assets/fonts';
-import Header from '@/components/Header';
+import { Header } from '@/components/header';
 import ThemeProvider from '@/components/theme/provider';
 
 export const metadata: Metadata = {
