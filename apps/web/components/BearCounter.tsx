@@ -9,7 +9,7 @@ const BearCounter = () => {
   const { bears, increase, decrease } = useBearStore();
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex w-full items-center justify-between">
       <Button
         size="icon"
         aria-label="increase"
@@ -18,7 +18,7 @@ const BearCounter = () => {
       >
         <Plus />
       </Button>
-      <div className="flex w-full items-center justify-center">{bears}</div>
+      <div className="text-center">{bears}</div>
       <Button
         size="icon"
         aria-label="decrease"

@@ -5,7 +5,8 @@
   "type": "module",
   "author": "juun",
   "scripts": {
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc -p ./tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
