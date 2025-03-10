@@ -1,8 +1,7 @@
 'use client';
 
+import { Wheel } from '@juun/ui';
 import { Home, Menu, MessageCircle, Settings } from 'lucide-react';
-
-import { Wheel } from './Wheel';
 
 function FourWheel() {
   return (

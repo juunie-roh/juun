@@ -1,8 +1,7 @@
 'use client';
 
+import { Wheel } from '@juun/ui';
 import { Copy, Delete, Info, Move, RotateCw } from 'lucide-react';
-
-import { Wheel } from './Wheel';
 
 function FiveWheel() {
   return (

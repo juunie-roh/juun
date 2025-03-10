@@ -1,8 +1,7 @@
 'use client';
 
+import { Wheel } from '@juun/ui';
 import { Check, X } from 'lucide-react';
-
-import { Wheel } from './Wheel';
 
 function ConfirmWheel() {
   return (
