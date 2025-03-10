@@ -14,15 +14,16 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-import { Wheel } from '@/components/wheel';
+import { Wheel } from '../components/wheel';
 
 const meta: Meta<typeof Wheel> = {
-  title: 'shadcn/Custom/Wheel',
+  title: 'shadcn/Wheel',
   component: Wheel,
   parameters: {
     layout: 'centered',
-    componentSubtitle:
-      'A circular menu that provides an object oriented navigation.',
+    docs: {
+      subtitle: 'A circular menu that provides an object oriented navigation.',
+    },
   },
   tags: ['autodocs'],
   argTypes: {

@@ -6,6 +6,6 @@
     "rootDir": ".",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["./**/*.ts", "./**/*.tsx"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./.storybook/**/*"],
   "exclude": ["node_modules"]
 }
