@@ -18,4 +18,5 @@ export * from './components/skeleton';
 export * from './components/slider';
 export * from './components/switch';
 export * from './components/textarea';
+export * from './components/wheel';
 export * from './lib/utils';

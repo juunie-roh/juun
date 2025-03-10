@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-import { Wheel } from './Wheel';
+import { Wheel } from '@/components/wheel';
 
 const meta: Meta<typeof Wheel> = {
   title: 'shadcn/Custom/Wheel',
