@@ -71,11 +71,6 @@ const config = {
             title: 'Bug Fixes',
             emoji: '🐛',
           },
-          docs: {
-            description: 'Documentation only changes',
-            title: 'Documentation',
-            emoji: '📚',
-          },
           style: {
             description:
               'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
