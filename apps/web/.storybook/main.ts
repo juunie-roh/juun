@@ -14,8 +14,9 @@ function getAbsolutePath(value: string): any {
       : new URL(pkgPath, import.meta.url).href;
   return dirname(fileURLToPath(pkgURL));
 }
+
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../**/*.mdx', '../**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-essentials'),
@@ -37,4 +38,5 @@ const config: StorybookConfig = {
     return config;
   },
 };
+
 export default config;

@@ -3,7 +3,7 @@ import { RuleConfigSeverity } from '@commitlint/types';
 /** @type {import('@commitlint/types').UserConfig} */
 const config = {
   extends: ['@commitlint/config-conventional'],
-  // parserPreset: 'conventional-changelog-atom',
+  parserPreset: 'conventional-changelog-atom',
   formatter: '@commitlint/format',
   rules: {
     'body-max-line-length': [RuleConfigSeverity.Warning, 'always', 100],
