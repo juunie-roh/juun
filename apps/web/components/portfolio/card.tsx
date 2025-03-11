@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@juun/ui';
+import Image from 'next/image';
 import Link from 'next/link';
 
 // Define the types for our post data
@@ -27,15 +28,30 @@ interface PortfolioCardProps {
 }
 
 export function PortfolioCard({ post }: PortfolioCardProps) {
+  // prevent XSS(Cross-site scripting)
+  const slug: string | null =
+    typeof post.slug === 'string' ? encodeURIComponent(post.slug) : null;
+
+  if (slug === null) return null;
+
   return (
-    <Link href={`/portfolio/${post.slug}`} className="group block">
+    <Link href={`/portfolio/${slug}`} className="group block">
       <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
         {post.metadata.image ? (
           <div className="aspect-video w-full overflow-hidden bg-gray-100">
-            <div
-              className="size-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${post.metadata.image})` }}
-            />
+            {post.metadata.image ? (
+              <div className="relative aspect-video w-full overflow-hidden bg-gray-100">
+                <Image
+                  src={post.metadata.image}
+                  alt={post.metadata.title || 'Portfolio image'}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            ) : (
+              <div className="aspect-video w-full bg-gradient-to-r from-blue-100 to-indigo-100" />
+            )}
           </div>
         ) : (
           <div className="aspect-video w-full bg-gradient-to-r from-blue-100 to-indigo-100" />
