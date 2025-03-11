@@ -9,6 +9,8 @@ on:
       - main
     types:
       - opened
+permissions:
+  contents: read
 jobs:
   build:
     strategy:
@@ -34,7 +36,7 @@ jobs:
           failOnWarnings: false
       - name: esLinter
         run: yarn lint
-      # - name: Type Checking
-      #   run: yarn check-types
+      - name: Type Checking
+        run: yarn check-types
       # - name: Unit Tests through jest
       #   run: yarn test
