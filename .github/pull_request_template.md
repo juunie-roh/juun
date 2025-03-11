@@ -6,6 +6,9 @@ PLEASE READ CAREFULLY:
 -->
 # Title of this pull request
 
+### Description
+<!-- Describe your changes in detail -->
+
 ## Type of change
 - [ ] Bug fix
 - [ ] Performance improvement
@@ -14,9 +17,6 @@ PLEASE READ CAREFULLY:
 - [ ] Refactoring
 - [ ] Documentation update
 - [ ] Configuration update
-
-## Description
-<!-- Describe your changes in detail -->
 
 <!-- Uncomment below if you have issues resolved -->
 <!-- 
