@@ -9,7 +9,7 @@ import {
   Separator,
 } from '@juun/ui';
 import Link from 'next/link';
-import React from 'react';
+import { Fragment } from 'react';
 
 import { antonio } from '@/assets/fonts';
 
@@ -36,36 +36,39 @@ export default function Header() {
             </h1>
           </Link>
 
-          <div className="hidden md:flex md:items-center md:gap-4">
-            <NavigationMenu>
-              <NavigationMenuList>
-                {navigationItems.map((item, index) => (
-                  <React.Fragment key={item.href}>
-                    <NavigationMenuItem className="flex items-center gap-1">
-                      <Link href={item.href} legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          {item.label}
-                        </NavigationMenuLink>
-                      </Link>
-                      {index < navigationItems.length - 1 && (
-                        <Separator
-                          orientation="vertical"
-                          className="h-5"
-                          decorative
-                        />
-                      )}
-                    </NavigationMenuItem>
-                  </React.Fragment>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-            <ThemeSwitch />
+          {/* Desktop Navigation - properly hidden on mobile */}
+          <div className="hidden md:block">
+            <div className="flex items-center gap-4">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  {navigationItems.map((item, index) => (
+                    <Fragment key={item.href}>
+                      <NavigationMenuItem className="flex items-center gap-1">
+                        <Link href={item.href} legacyBehavior passHref>
+                          <NavigationMenuLink
+                            className={navigationMenuTriggerStyle()}
+                          >
+                            {item.label}
+                          </NavigationMenuLink>
+                        </Link>
+                        {index < navigationItems.length - 1 && (
+                          <Separator
+                            orientation="vertical"
+                            className="h-5"
+                            decorative
+                          />
+                        )}
+                      </NavigationMenuItem>
+                    </Fragment>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+              <ThemeSwitch />
+            </div>
           </div>
 
-          {/* Mobile */}
-          <div className="md:hidden">
+          {/* Mobile Navigation - properly hidden on desktop */}
+          <div className="block md:hidden">
             <HeaderSheet navigationItems={navigationItems} />
           </div>
         </div>

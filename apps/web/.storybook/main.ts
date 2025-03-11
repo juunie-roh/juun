@@ -18,22 +18,39 @@ function getAbsolutePath(value: string): any {
 const config: StorybookConfig = {
   stories: ['../**/*.mdx', '../**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-essentials'),
     getAbsolutePath('@storybook/addon-interactions'),
     getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@chromatic-com/storybook'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/nextjs'),
     options: {},
   },
   webpackFinal: async (config) => {
-    // Add SVGR loader
-    config.module?.rules?.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
+    config.module?.rules?.push(
+      // svgr loader
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      // postcss loader
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: getAbsolutePath('postcss-loader'),
+            options: {
+              postcssOptions: {
+                plugins: [
+                  getAbsolutePath('tailwindcss'),
+                  getAbsolutePath('autoprefixer'),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    );
 
     return config;
   },
