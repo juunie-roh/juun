@@ -2,11 +2,11 @@ import { Badge } from '@juun/ui';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Portfolio Demo',
-  description: 'A demo page for portfolio demonstration.',
+  title: 'Blog Demo',
+  description: 'A demo page for blog post demonstration.',
   date: 'January 2024',
   tags: ['Next.js', 'Tailwind CSS', 'E-commerce'],
-  image: undefined,
+  image: '/images/demo.png',
 };
 
 export default function ProjectPage() {
@@ -29,11 +29,11 @@ export default function ProjectPage() {
       </div>
 
       {metadata.image && (
-        <div className="mb-8 overflow-hidden rounded-lg">
+        <div className="mb-8 overflow-hidden rounded-lg bg-gray-100">
           <Image
             src={metadata.image}
             alt={metadata.title}
-            className="w-full dark:invert"
+            className="w-full"
             width={1000}
             height={1000}
           />
