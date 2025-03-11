@@ -1,4 +1,3 @@
----
 name: Sync labels
 on:
   push:
@@ -6,6 +5,8 @@ on:
       - main
     paths:
       - .github/labels.yaml
+permissions:
+  contents: write
 jobs:
   sync-labels:
     runs-on: ubuntu-latest

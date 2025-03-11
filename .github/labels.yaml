@@ -4,7 +4,10 @@
 # Warning
 - color: "ee0701"
   description: "Categorize bug reports."
-  name: ":warning: bug"
+  name: ":bug: bug"
+- color: "0366d6"
+  description: "Security alerts"
+  name: ":warning: security"
 - color: "0366d6"
   description: "Pull requests that update a dependency file"
   name: ":robot: dependencies"

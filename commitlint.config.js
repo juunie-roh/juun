@@ -8,30 +8,52 @@ const config = {
   rules: {
     'body-max-line-length': [RuleConfigSeverity.Warning, 'always', 100],
     'scope-enum': [
-      RuleConfigSeverity.Warning,
+      RuleConfigSeverity.Error, // Changed to Error for stricter enforcement
       'always',
       [
+        // Component-related
         'component',
         'story',
         'hook',
         'store',
         'util',
         'api',
-        // refactoring codes
-        'wrong',
-        'spaghetti',
-        'alien',
-        // external
+        'ui',
+
+        // Refactoring codes - more professional naming
+        'refactor-major',
+        'refactor-cleanup',
+        'refactor-performance',
+
+        // External
         'asset',
         'package',
-        // settings
+        'deps',
+
+        // Documentation
+        'docs',
+        'readme',
+
+        // Settings
         'config',
         'workflow',
-        // others
+        'ci',
+
+        // Localization
+        'i18n',
+
+        // Testing
+        'test',
+        'e2e',
+
+        // Others
         'breaking',
-        'readme',
+        'security',
+        'accessibility',
+        'types',
       ],
     ],
+    'subject-case': [RuleConfigSeverity.Warning, 'always', 'sentence-case'],
   },
   /** @type {import('@commitlint/types').UserPromptConfig} */
   prompt: {
@@ -48,11 +70,6 @@ const config = {
             description: 'A bug fix',
             title: 'Bug Fixes',
             emoji: '🐛',
-          },
-          docs: {
-            description: 'Documentation only changes',
-            title: 'Documentation',
-            emoji: '📚',
           },
           style: {
             description:
@@ -126,21 +143,25 @@ const config = {
             title: 'Utilities',
           },
           api: {
-            description: 'Changes on service api',
+            description: 'Changes on service API',
             title: 'API',
           },
+          ui: {
+            description: 'Changes to UI components',
+            title: 'UI',
+          },
 
-          wrong: {
-            description: 'Fixes on wrong codes',
-            title: 'Wrong Codes',
+          'refactor-major': {
+            description: 'Major refactoring changes',
+            title: 'Major Refactoring',
           },
-          spaghetti: {
-            description: 'Fixes on spaghetti codes',
-            title: 'Spaghetti Codes',
+          'refactor-cleanup': {
+            description: 'Code cleanup and simplification',
+            title: 'Code Cleanup',
           },
-          alien: {
-            description: 'Fixes on incomprehensive codes',
-            title: 'Alien Codes',
+          'refactor-performance': {
+            description: 'Performance-focused refactoring',
+            title: 'Performance Refactoring',
           },
 
           asset: {
@@ -151,6 +172,19 @@ const config = {
             description: 'Changes on node packages',
             title: 'Packages',
           },
+          deps: {
+            description: 'Dependency updates',
+            title: 'Dependencies',
+          },
+
+          docs: {
+            description: 'Documentation changes',
+            title: 'Documentation',
+          },
+          readme: {
+            description: 'Changes on README.md',
+            title: 'README',
+          },
 
           config: {
             description: 'Changes on configurations for this project',
@@ -160,19 +194,45 @@ const config = {
             description: 'Updates on workflows',
             title: 'Workflows',
           },
+          ci: {
+            description: 'Changes to CI configuration',
+            title: 'CI',
+          },
+
+          i18n: {
+            description: 'Internationalization and localization',
+            title: 'i18n',
+          },
+
+          test: {
+            description: 'Changes to tests',
+            title: 'Tests',
+          },
+          e2e: {
+            description: 'End-to-end testing',
+            title: 'E2E Tests',
+          },
 
           breaking: {
             description: 'A BREAKING CHANGE commits',
             title: 'BREAKING',
           },
-          readme: {
-            description: 'Changes on README.md',
-            title: 'README',
+          security: {
+            description: 'Security-related changes',
+            title: 'Security',
+          },
+          accessibility: {
+            description: 'Accessibility improvements',
+            title: 'Accessibility',
+          },
+          types: {
+            description: 'TypeScript type changes',
+            title: 'Types',
           },
         },
       },
     },
   },
-  // scopes: ['css-style', 'lint', 'formatting'],
 };
+
 export default config;
