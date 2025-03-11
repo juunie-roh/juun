@@ -1,6 +1,6 @@
 import { Skeleton } from '@juun/ui';
 
-export default function PortfolioItemLoading() {
+export default function BlogItemLoading() {
   return (
     <article className="mx-auto max-w-3xl">
       {/* Header */}

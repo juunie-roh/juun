@@ -7,6 +7,7 @@ interface PostMetadata {
   date?: string;
   tags?: string[];
   image?: string;
+  wordCount?: number; // New property for word count
 }
 
 export interface Post {
@@ -14,7 +15,7 @@ export interface Post {
   slug: string;
 }
 
-// Function to extract metadata from file contents (simplifying to avoid JSON parse errors)
+// Function to extract metadata and calculate word count from file contents
 function extractMetadataFromFile(filePath: string): PostMetadata {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
@@ -70,9 +71,32 @@ function extractMetadataFromFile(filePath: string): PostMetadata {
       }
     }
 
+    // Calculate word count from the entire post content
+    // This is an approximation - we're trying to exclude the metadata section and focus on the actual content
+
+    // Find the end of the metadata section (often after export default or after the metadata object)
+    const contentStartMatch = content.match(/export\s+default\s+function/);
+
+    let postContent = content;
+    if (contentStartMatch && contentStartMatch.index) {
+      // Get content after the export default
+      postContent = content.substring(contentStartMatch.index);
+    }
+
+    // Clean up the content to remove JSX/HTML tags and code blocks
+    const cleanedContent = postContent
+      .replace(/<[^>]*>/g, ' ') // Remove HTML/JSX tags
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ') // Remove JS comments
+      .replace(/```[\s\S]*?```/g, ' ') // Remove code blocks
+      .replace(/import.*?from.*?;/g, ' '); // Remove import statements
+
+    // Count words (split by whitespace)
+    const words = cleanedContent.split(/\s+/).filter(Boolean);
+    metadata.wordCount = words.length;
+
     return metadata;
   } catch (e) {
-    console.warn(`Error reading file ${filePath}:`, e);
+    console.error(`Error reading file ${filePath}:`, e);
     return {
       title: path.basename(filePath, path.extname(filePath)),
     };

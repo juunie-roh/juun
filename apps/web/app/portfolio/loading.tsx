@@ -1,11 +1,8 @@
 import { PortfolioCardSkeleton } from '@/components/portfolio/card-skeleton';
 
-import { getPosts } from './util';
-
 export default function PortfolioLoading() {
   // Create an array to render multiple skeleton cards
-  const posts = getPosts();
-  const skeletonCards = Array.from({ length: posts.length }, (_, i) => i);
+  const skeletonCards = Array.from({ length: 6 }, (_, i) => i);
 
   return (
     <div className="space-y-12">
