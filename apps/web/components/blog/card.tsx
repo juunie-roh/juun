@@ -92,7 +92,7 @@ export function BlogCard({ post }: BlogCardProps) {
                 <span>{readingTime} min read</span>
               </div>
             </div>
-            <CardTitle className="line-clamp-2 transition-colors group-hover:text-primary">
+            <CardTitle className="line-clamp-2 leading-normal transition-colors group-hover:text-primary">
               {post.metadata.title}
             </CardTitle>
           </CardHeader>
