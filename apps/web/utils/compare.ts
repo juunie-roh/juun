@@ -9,7 +9,7 @@
  * @param b Second value to compare
  * @returns number indicating sort order
  */
-const compare = <T>(a: T, b: T): number => {
+export const compare = <T>(a: T, b: T): number => {
   // Handle null/undefined
   if (a === null || a === undefined) {
     return b === null || b === undefined ? 0 : -1;
@@ -85,5 +85,3 @@ const compare = <T>(a: T, b: T): number => {
 export const compareBy = <T>(key: keyof T) => {
   return (a: T, b: T) => compare(a[key], b[key]);
 };
-
-export default compare;
