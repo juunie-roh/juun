@@ -4,7 +4,7 @@ import { AspectRatio, Label, Switch } from '@juun/ui';
 import { Debug, Physics } from '@react-three/cannon';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useState } from 'react';
+import { Fragment, Suspense, useState } from 'react';
 
 import { Beetle } from '@/components/three/beetle';
 import { Cylinder } from '@/components/three/cylinder';
@@ -22,7 +22,7 @@ export default function CannonRaycastVehicle() {
   const [isDebug, setIsDebug] = useState<boolean>(false);
 
   return (
-    <>
+    <Fragment>
       <AspectRatio
         ratio={16 / 9}
         className="size-full overflow-hidden rounded-md"
@@ -116,6 +116,6 @@ export default function CannonRaycastVehicle() {
         </Switch>
         <Label htmlFor="debug-mode">Debug Mode</Label>
       </div>
-    </>
+    </Fragment>
   );
 }
