@@ -12,7 +12,31 @@ export const metadata: Metadata = {
     template: 'Juun | %s',
     default: 'Juun',
   },
-  description: 'NextJS Boilerplate with Tailwind CSS and shadcn/ui',
+  description: 'NextJS Application with Tailwind CSS and shadcn/ui',
+  applicationName: `Juun's App`,
+  authors: [{ name: 'Juun', url: '' }],
+  generator: 'Next.js',
+  keywords: [
+    'react',
+    'server components',
+    'ssr',
+    'Juun',
+    'monorepo',
+    'turborepo',
+    'tailwindcss',
+    'shadcn/ui',
+    'next',
+  ],
+  openGraph: {
+    type: 'website',
+    title: {
+      template: 'Juun | %s',
+      default: 'Juun',
+    },
+    description: 'NextJS Application with Tailwind CSS and shadcn/ui',
+    siteName: `Juun's App`,
+    images: ['/images/lisbon/pig.png'],
+  },
 };
 
 export default function RootLayout({

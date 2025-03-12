@@ -29,6 +29,7 @@ export async function generateMetadata({
     title: post.metadata.title,
     description:
       post.metadata.description || `Portfolio project: ${post.metadata.title}`,
+    openGraph: {},
   };
 }
 
