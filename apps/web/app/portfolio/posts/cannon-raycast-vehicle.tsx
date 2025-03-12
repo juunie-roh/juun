@@ -1,6 +1,6 @@
 'use client';
 
-import { Label, Switch } from '@juun/ui';
+import { AspectRatio, Label, Switch } from '@juun/ui';
 import { Debug, Physics } from '@react-three/cannon';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
@@ -23,7 +23,10 @@ export default function CannonRaycastVehicle() {
 
   return (
     <>
-      <div className="h-[60vh] w-full overflow-hidden rounded-md">
+      <AspectRatio
+        ratio={16 / 9}
+        className="size-full overflow-hidden rounded-md"
+      >
         <Canvas shadows camera={{ fov: 50, position: [0, 5, 15] }}>
           <fog attach="fog" args={['#171720', 10, 50]} />
           <color attach="background" args={['#171720']} />
@@ -98,7 +101,7 @@ export default function CannonRaycastVehicle() {
           </Suspense>
           <OrbitControls />
         </Canvas>
-      </div>
+      </AspectRatio>
       <p>
         * WASD or Arrow Keys to drive, SPACE to brake
         <br />r to reset
@@ -108,7 +111,9 @@ export default function CannonRaycastVehicle() {
           id="debug-mode"
           checked={isDebug}
           onCheckedChange={(checked) => setIsDebug(checked)}
-        />
+        >
+          Toggle Debug Mode
+        </Switch>
         <Label htmlFor="debug-mode">Debug Mode</Label>
       </div>
     </>
