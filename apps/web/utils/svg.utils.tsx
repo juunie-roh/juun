@@ -24,8 +24,6 @@ export const createIconNode = (Svg: FC): IconNode => {
   return node;
 };
 
-function createIcon(iconName: string, Svg: FC) {
+export function createIcon(iconName: string, Svg: FC) {
   return createLucideIcon(iconName, createIconNode(Svg));
 }
-
-export default createIcon;

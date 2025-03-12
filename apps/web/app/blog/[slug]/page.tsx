@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { getPosts } from '../util';
+import { getPosts } from '@/utils/blog.utils';
 
 // Generate metadata for each slug
 export async function generateMetadata({
@@ -63,9 +63,8 @@ export default async function BlogItemPage({
   }
 
   return (
-    <div className="mx-auto w-full">
-      {/* Render the post component */}
+    <article className="mx-auto max-w-3xl">
       <PostComponent />
-    </div>
+    </article>
   );
 }

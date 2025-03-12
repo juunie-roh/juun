@@ -1,6 +1,7 @@
-import { BlogCard } from '@/components/blog/card';
+import { Suspense } from 'react';
 
-import { getPosts } from './util';
+import { BlogCard, BlogCardSkeleton } from '@/components/blog/card';
+import { getPosts } from '@/utils/blog.utils';
 
 export default function Blog() {
   const posts = getPosts();
@@ -18,7 +19,9 @@ export default function Blog() {
       ) : (
         <div className="flex flex-col space-y-6">
           {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
+            <Suspense fallback={<BlogCardSkeleton />} key={post.slug}>
+              <BlogCard post={post} />
+            </Suspense>
           ))}
         </div>
       )}
