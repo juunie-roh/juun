@@ -3,8 +3,9 @@
 import { cn } from '@juun/ui/lib/utils';
 import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
+import type { createLucideIcon } from 'lucide-react';
 import { TriangleAlert } from 'lucide-react';
-import type { ElementType, HTMLAttributes, SVGAttributes } from 'react';
+import type { HTMLAttributes, SVGAttributes } from 'react';
 import { forwardRef, useState } from 'react';
 
 // Internal Types
@@ -19,7 +20,7 @@ interface WheelSectorProps
   radius: number;
   innerRadius: number;
   rotation: number;
-  icon: ElementType;
+  icon: ReturnType<typeof createLucideIcon>;
   isHovered: boolean;
   onHoverChange: (index: number | null) => void;
   onSelect?: (index: number) => void;
@@ -246,7 +247,7 @@ export interface WheelProps
     VariantProps<typeof wheelVariants> {
   type: WheelType;
   onSelect?: (index: number) => void;
-  icons?: ElementType[];
+  icons?: ReturnType<typeof createLucideIcon>[];
   titles?: string[];
   radius?: number;
   innerRadius?: number;
