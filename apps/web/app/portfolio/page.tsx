@@ -1,6 +1,10 @@
-import { PortfolioCard } from '@/components/portfolio/card';
+import { Suspense } from 'react';
 
-import { getPosts } from './util';
+import {
+  PortfolioCard,
+  PortfolioCardSkeleton,
+} from '@/components/portfolio/card';
+import { getPosts } from '@/utils/portfolio.utils';
 
 export default function Portfolio() {
   const posts = getPosts();
@@ -18,7 +22,9 @@ export default function Portfolio() {
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <PortfolioCard key={post.slug} post={post} />
+            <Suspense fallback={<PortfolioCardSkeleton />} key={post.slug}>
+              <PortfolioCard post={post} />
+            </Suspense>
           ))}
         </div>
       )}

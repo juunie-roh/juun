@@ -24,6 +24,9 @@
   name: ":memo: documentation"
 
 # Cancel
+- color: "C2E0C6"
+  description: "This issue or pull request has been released."
+  name: ":heavy_check_mark: released"
 - color: "dddddd"
   description: "This issue or pull request already exists."
   name: ":pray: duplicate"

@@ -1,5 +1,8 @@
-import { Badge } from '@juun/ui';
+import { AspectRatio, Skeleton } from '@juun/ui';
 import Image from 'next/image';
+import { Fragment, Suspense } from 'react';
+
+import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
 
 export const metadata = {
   title: 'Blog Demo',
@@ -9,38 +12,29 @@ export const metadata = {
   image: '/images/demo.png',
 };
 
-export default function ProjectPage() {
+export default function BlogDemo() {
   return (
-    <article className="mx-auto max-w-3xl">
-      <div className="mb-8">
-        <h1 className="mb-4 text-3xl font-bold tracking-tighter">
-          {metadata.title}
-        </h1>
-        <p className="text-lg">{metadata.description}</p>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {metadata.tags &&
-            metadata.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
-                {tag}
-              </Badge>
-            ))}
-        </div>
-      </div>
-
+    <Fragment>
+      <Suspense fallback={<BlogHeaderSkeleton />}>
+        <BlogHeader metadata={metadata} />
+      </Suspense>
       {metadata.image && (
-        <div className="mb-8 overflow-hidden rounded-lg bg-gray-100">
-          <Image
-            src={metadata.image}
-            alt={metadata.title}
-            className="w-full"
-            width={1000}
-            height={1000}
-          />
-        </div>
+        <AspectRatio
+          ratio={16 / 9}
+          className="mb-8 size-full overflow-hidden rounded-lg bg-gray-100"
+        >
+          <Suspense fallback={<Skeleton className="size-full" />}>
+            <Image
+              src={metadata.image}
+              alt={metadata.title}
+              className="size-full object-cover"
+              fill
+            />
+          </Suspense>
+        </AspectRatio>
       )}
 
-      <div className="prose max-w-none text-primary">
+      <div className="prose mt-8 max-w-none text-primary">
         <h2 className="text-primary">Project Overview</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure illo
@@ -79,6 +73,6 @@ export default function ProjectPage() {
           beatae rem debitis ullam odio veniam adipisci iste laborum. Dicta.
         </p>
       </div>
-    </article>
+    </Fragment>
   );
 }

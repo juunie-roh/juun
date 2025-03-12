@@ -1,22 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
-interface PostMetadata {
-  title: string;
-  description?: string;
-  date?: string;
-  tags?: string[];
-  image?: string;
-  wordCount?: number; // New property for word count
-}
+import type { PortfolioMetadata } from '@/types/portfolio.types';
 
 export interface Post {
-  metadata: PostMetadata;
+  metadata: PortfolioMetadata;
   slug: string;
 }
 
-// Function to extract metadata and calculate word count from file contents
-function extractMetadataFromFile(filePath: string): PostMetadata {
+// Function to extract metadata from file contents (simplifying to avoid JSON parse errors)
+function extractMetadataFromFile(filePath: string): PortfolioMetadata {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
 
@@ -27,7 +20,7 @@ function extractMetadataFromFile(filePath: string): PostMetadata {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
 
-    let metadata: PostMetadata = { title: defaultTitle };
+    let metadata: PortfolioMetadata = { title: defaultTitle };
 
     // Look for title in the file content
     const titleMatch = content.match(/title:\s*['"](.+?)['"]/);
@@ -71,32 +64,9 @@ function extractMetadataFromFile(filePath: string): PostMetadata {
       }
     }
 
-    // Calculate word count from the entire post content
-    // This is an approximation - we're trying to exclude the metadata section and focus on the actual content
-
-    // Find the end of the metadata section (often after export default or after the metadata object)
-    const contentStartMatch = content.match(/export\s+default\s+function/);
-
-    let postContent = content;
-    if (contentStartMatch && contentStartMatch.index) {
-      // Get content after the export default
-      postContent = content.substring(contentStartMatch.index);
-    }
-
-    // Clean up the content to remove JSX/HTML tags and code blocks
-    const cleanedContent = postContent
-      .replace(/<[^>]*>/g, ' ') // Remove HTML/JSX tags
-      .replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ') // Remove JS comments
-      .replace(/```[\s\S]*?```/g, ' ') // Remove code blocks
-      .replace(/import.*?from.*?;/g, ' '); // Remove import statements
-
-    // Count words (split by whitespace)
-    const words = cleanedContent.split(/\s+/).filter(Boolean);
-    metadata.wordCount = words.length;
-
     return metadata;
   } catch (e) {
-    console.error(`Error reading file ${filePath}:`, e);
+    console.warn(`Error reading file ${filePath}:`, e);
     return {
       title: path.basename(filePath, path.extname(filePath)),
     };
@@ -105,9 +75,9 @@ function extractMetadataFromFile(filePath: string): PostMetadata {
 
 export function getPosts(): Post[] {
   try {
-    const dir = path.join(process.cwd(), 'app', 'blog', 'posts');
+    const dir = path.join(process.cwd(), 'app', 'portfolio', 'posts');
     if (!fs.existsSync(dir)) {
-      console.warn('🚀 ~ getPosts ~ :', `Directory not found: ${dir}`);
+      console.warn(`Directory not found: ${dir}`);
       return [];
     }
 

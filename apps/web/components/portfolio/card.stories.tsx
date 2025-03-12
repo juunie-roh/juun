@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 // Mock Next.js components
 import { useEffect, useState } from 'react';
 
-import { PortfolioCard } from '../portfolio/card';
-import { PortfolioCardSkeleton } from '../portfolio/card-skeleton';
+import { PortfolioCard, PortfolioCardSkeleton } from '../portfolio/card';
 import ThemeProvider from '../theme/provider';
 
 // Sample data for stories
