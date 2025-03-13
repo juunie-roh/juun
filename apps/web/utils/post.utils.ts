@@ -1,15 +1,39 @@
 import fs from 'fs';
 import path from 'path';
 
-import type { BlogMetadata } from '@/types/blog.types';
+import { sortPostsByDate } from '@/utils/compare.utils';
+import { parseDate } from '@/utils/date.utils';
 
-export interface Post {
-  metadata: BlogMetadata;
+/**
+ * Base interface for both blog and portfolio post metadata
+ */
+export interface BasePostMetadata {
+  title: string;
+  description?: string;
+  date?: Date | string;
+  tags?: string[];
+  image?: string;
+}
+
+/**
+ * Generic Post interface for both blog and portfolio posts
+ */
+export interface Post<T extends BasePostMetadata> {
+  metadata: T;
   slug: string;
 }
 
-// Function to extract metadata and calculate word count from file contents
-function extractMetadataFromFile(filePath: string): BlogMetadata {
+/**
+ * Extract common metadata properties from a file
+ *
+ * @param filePath Path to the file
+ * @param additionalExtractors Optional functions to extract additional metadata
+ * @returns Metadata object
+ */
+export function extractBaseMetadata<T extends BasePostMetadata>(
+  filePath: string,
+  additionalExtractors?: (content: string, metadata: T) => void,
+): T {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
 
@@ -20,7 +44,7 @@ function extractMetadataFromFile(filePath: string): BlogMetadata {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
 
-    let metadata: BlogMetadata = { title: defaultTitle };
+    const metadata = { title: defaultTitle } as T;
 
     // Look for title in the file content
     const titleMatch = content.match(/title:\s*['"](.+?)['"]/);
@@ -34,10 +58,15 @@ function extractMetadataFromFile(filePath: string): BlogMetadata {
       metadata.description = descriptionMatch[1];
     }
 
-    // Look for date
+    // Look for date and parse it to a Date object
     const dateMatch = content.match(/date:\s*['"](.+?)['"]/);
     if (dateMatch && dateMatch[1]) {
-      metadata.date = dateMatch[1];
+      const parsedDate = parseDate(dateMatch[1]);
+      if (parsedDate) {
+        metadata.date = parsedDate;
+      } else {
+        metadata.date = dateMatch[1]; // Fallback to string if parsing fails
+      }
     }
 
     // Look for image
@@ -64,59 +93,56 @@ function extractMetadataFromFile(filePath: string): BlogMetadata {
       }
     }
 
-    // Calculate word count from the entire post content
-    // This is an approximation - we're trying to exclude the metadata section and focus on the actual content
-
-    // Find the end of the metadata section (often after export default or after the metadata object)
-    const contentStartMatch = content.match(/export\s+default\s+function/);
-
-    let postContent = content;
-    if (contentStartMatch && contentStartMatch.index) {
-      // Get content after the export default
-      postContent = content.substring(contentStartMatch.index);
+    // Run additional extractors if provided
+    if (additionalExtractors) {
+      additionalExtractors(content, metadata);
     }
-
-    // Clean up the content to remove JSX/HTML tags and code blocks
-    const cleanedContent = postContent
-      .replace(/<[^>]*>/g, ' ') // Remove HTML/JSX tags
-      .replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ') // Remove JS comments
-      .replace(/```[\s\S]*?```/g, ' ') // Remove code blocks
-      .replace(/import.*?from.*?;/g, ' '); // Remove import statements
-
-    // Count words (split by whitespace)
-    const words = cleanedContent.split(/\s+/).filter(Boolean);
-    metadata.wordCount = words.length;
 
     return metadata;
   } catch (e) {
     console.error(`Error reading file ${filePath}:`, e);
     return {
       title: path.basename(filePath, path.extname(filePath)),
-    };
+    } as T;
   }
 }
 
-export function getPosts(): Post[] {
+/**
+ * Generic function to get posts from a directory
+ *
+ * @param postsDir Directory containing the posts
+ * @param metadataExtractor Function to extract metadata from a file
+ * @param sortDescending Whether to sort in descending order (newest first)
+ * @returns Array of posts
+ */
+export function getPostsFromDirectory<T extends BasePostMetadata>(
+  postsDir: string,
+  metadataExtractor: (filePath: string) => T,
+  sortDescending = true,
+): Post<T>[] {
   try {
-    const dir = path.join(process.cwd(), 'app', 'blog', 'posts');
-    if (!fs.existsSync(dir)) {
-      console.warn('🚀 ~ getPosts ~ :', `Directory not found: ${dir}`);
+    if (!fs.existsSync(postsDir)) {
+      console.warn(`Directory not found: ${postsDir}`);
       return [];
     }
 
     const files = fs
-      .readdirSync(dir)
+      .readdirSync(postsDir)
       .filter((file) => path.extname(file) === '.tsx');
 
-    return files.map((file) => {
-      const filePath = path.join(dir, file);
-      const metadata = extractMetadataFromFile(filePath);
+    // Convert files to posts
+    const posts = files.map((file) => {
+      const filePath = path.join(postsDir, file);
+      const metadata = metadataExtractor(filePath);
 
       return {
         metadata,
         slug: path.basename(file, path.extname(file)),
       };
     });
+
+    // Sort posts by date
+    return sortPostsByDate(posts, sortDescending);
   } catch (error: any) {
     console.error(`Error reading posts: ${error.message}`);
     return [];
