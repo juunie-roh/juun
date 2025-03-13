@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description: 'NextJS Application with Tailwind CSS and shadcn/ui',
   applicationName: `Juun's App`,
-  authors: [{ name: 'Juun', url: '' }],
+  authors: [{ name: 'Juun', url: 'https://github.com/juunie-roh/juun' }],
   generator: 'Next.js',
   keywords: [
     'react',
@@ -35,7 +35,8 @@ export const metadata: Metadata = {
     },
     description: 'NextJS Application with Tailwind CSS and shadcn/ui',
     siteName: `Juun's App`,
-    images: ['/images/lisbon/pig.png'],
+    images: ['/images/open-graph-template.png'],
+    url: 'https://juun.vercel.app',
   },
 };
 
