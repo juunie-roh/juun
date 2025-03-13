@@ -90,7 +90,9 @@ export default function LisbonCannery() {
   };
 
   return (
-    <div className="-m-8 min-h-screen max-w-4xl bg-yellow-50 px-4 py-20 font-sans text-blue-800 lg:mx-auto">
+    <div
+      className={`-m-8 min-h-screen max-w-4xl bg-yellow-50 px-4 py-20 text-blue-800 lg:mx-auto`}
+    >
       {/* Title Section */}
       <div className="mb-10 text-center">
         <h1 className="mb-4 font-serif text-4xl font-bold italic md:text-5xl">
@@ -151,9 +153,9 @@ export default function LisbonCannery() {
           {/* Extra Item */}
           <div className="flex flex-col items-center gap-4 pt-6 md:flex-row md:items-start">
             <div className="grow text-center md:text-left">
-              <h4 className="text-xl font-bold">
+              <h4 className="font-serif text-xl font-bold">
                 {extraItem.animal}{' '}
-                <span className="text-lg font-normal">
+                <span className="font-sans text-lg font-normal">
                   / {extraItem.animalKorean}
                 </span>
               </h4>
