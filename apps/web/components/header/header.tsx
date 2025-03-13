@@ -43,7 +43,7 @@ export default function Header() {
                 <NavigationMenuList>
                   {navigationItems.map((item, index) => (
                     <Fragment key={item.href}>
-                      <NavigationMenuItem className="flex items-center gap-1">
+                      <NavigationMenuItem className="flex items-center gap-1 tracking-tight">
                         <Link href={item.href} legacyBehavior passHref>
                           <NavigationMenuLink
                             className={navigationMenuTriggerStyle()}

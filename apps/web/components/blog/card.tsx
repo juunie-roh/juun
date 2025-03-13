@@ -67,9 +67,9 @@ export function BlogCard({ post }: BlogCardProps) {
               <Image
                 src={post.metadata.image}
                 alt={post.metadata.title || 'Blog post image'}
-                width={600}
-                height={340}
-                className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                width={256}
+                height={256}
+                className="h-56 w-full object-contain transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 350px"
               />
             </div>

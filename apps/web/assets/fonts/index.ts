@@ -17,3 +17,25 @@ export const antonio = localFont({
   variable: '--font-antonio',
   weight: '100 400 700',
 });
+
+export const rix = localFont({
+  src: [
+    {
+      path: './RixL.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: './RixM.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: './RixB.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-rix',
+  weight: '300 500 700',
+});

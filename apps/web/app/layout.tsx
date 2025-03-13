@@ -1,9 +1,10 @@
 import '@juun/config/tailwind/styles';
 
+import { Toaster } from '@juun/ui';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
-import { geistMono, geistSans } from '@/assets/fonts';
+import { geistMono, geistSans, rix } from '@/assets/fonts';
 import { Header } from '@/components/header';
 import ThemeProvider from '@/components/theme/provider';
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   },
   description: 'NextJS Application with Tailwind CSS and shadcn/ui',
   applicationName: `Juun's App`,
-  authors: [{ name: 'Juun', url: '' }],
+  authors: [{ name: 'Juun', url: 'https://github.com/juunie-roh/juun' }],
   generator: 'Next.js',
   keywords: [
     'react',
@@ -35,7 +36,8 @@ export const metadata: Metadata = {
     },
     description: 'NextJS Application with Tailwind CSS and shadcn/ui',
     siteName: `Juun's App`,
-    images: ['/images/lisbon/pig.png'],
+    images: ['/images/open-graph-template.png'],
+    url: 'https://juun.vercel.app',
   },
 };
 
@@ -47,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -57,6 +59,7 @@ export default function RootLayout({
         >
           <Header />
           {children}
+          <Toaster />
         </ThemeProvider>
         <SpeedInsights />
       </body>
