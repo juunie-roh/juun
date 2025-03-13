@@ -18,20 +18,24 @@ export const antonio = localFont({
   weight: '100 400 700',
 });
 
-export const rixBold = localFont({
-  src: 'RixB.ttf',
-  variable: '--font-rix-bold',
-  weight: '700',
-});
-
-export const rixMedium = localFont({
-  src: 'RixM.ttf',
-  variable: '--font-rix-medium',
-  weight: '500',
-});
-
-export const rixLight = localFont({
-  src: 'RixL.ttf',
-  variable: '--font-rix-light',
-  weight: '300',
+export const rix = localFont({
+  src: [
+    {
+      path: './RixL.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: './RixM.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: './RixB.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-rix',
+  weight: '300 500 700',
 });
