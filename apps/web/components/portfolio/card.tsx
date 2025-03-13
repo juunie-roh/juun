@@ -12,6 +12,7 @@ import Link from 'next/link';
 
 import type { PostMetadata } from '@/types/post.types';
 import { formatDateSafe } from '@/utils/date.utils';
+import { safeUrl } from '@/utils/security.utils';
 
 export interface Post {
   slug: string;
@@ -24,9 +25,7 @@ interface PortfolioCardProps {
 
 export function PortfolioCard({ post }: PortfolioCardProps) {
   // prevent XSS(Cross-site scripting)
-  const slug: string | null =
-    typeof post.slug === 'string' ? encodeURIComponent(post.slug) : null;
-
+  const slug = safeUrl(post.slug);
   if (slug === null) return null;
 
   return (
