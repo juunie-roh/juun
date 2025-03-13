@@ -1,27 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
+import type { BaseMetadata, Post } from '@/types/post.types';
 import { sortPostsByDate } from '@/utils/compare.utils';
 import { parseDate } from '@/utils/date.utils';
-
-/**
- * Base interface for both blog and portfolio post metadata
- */
-export interface BasePostMetadata {
-  title: string;
-  description?: string;
-  date?: Date | string;
-  tags?: string[];
-  image?: string;
-}
-
-/**
- * Generic Post interface for both blog and portfolio posts
- */
-export interface Post<T extends BasePostMetadata> {
-  metadata: T;
-  slug: string;
-}
 
 /**
  * Extract common metadata properties from a file
@@ -30,7 +12,7 @@ export interface Post<T extends BasePostMetadata> {
  * @param additionalExtractors Optional functions to extract additional metadata
  * @returns Metadata object
  */
-export function extractBaseMetadata<T extends BasePostMetadata>(
+export function extractBaseMetadata<T extends BaseMetadata>(
   filePath: string,
   additionalExtractors?: (content: string, metadata: T) => void,
 ): T {
@@ -115,7 +97,7 @@ export function extractBaseMetadata<T extends BasePostMetadata>(
  * @param sortDescending Whether to sort in descending order (newest first)
  * @returns Array of posts
  */
-export function getPostsFromDirectory<T extends BasePostMetadata>(
+export function getPostsFromDirectory<T extends BaseMetadata>(
   postsDir: string,
   metadataExtractor: (filePath: string) => T,
   sortDescending = true,

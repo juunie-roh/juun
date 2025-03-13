@@ -1,13 +1,7 @@
 import path from 'path';
 
-import type { BlogMetadata } from '@/types/blog.types';
-import {
-  extractBaseMetadata,
-  getPostsFromDirectory,
-  type Post as BasePost,
-} from '@/utils/post.utils';
-
-export type Post = BasePost<BlogMetadata>;
+import type { BlogMetadata, Post } from '@/types/post.types';
+import { extractBaseMetadata, getPostsFromDirectory } from '@/utils/post.utils';
 
 /**
  * Extract blog-specific metadata including word count
@@ -42,7 +36,7 @@ function extractBlogMetadata(filePath: string): BlogMetadata {
  * @param sortDescending Whether to sort in descending order (newest first)
  * @returns Array of posts
  */
-export function getPosts(sortDescending = true): Post[] {
+export function getPosts(sortDescending = true): Post<BlogMetadata>[] {
   const postsDir = path.join(process.cwd(), 'app', 'blog', 'posts');
   return getPostsFromDirectory<BlogMetadata>(
     postsDir,

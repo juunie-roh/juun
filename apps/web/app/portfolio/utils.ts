@@ -1,20 +1,14 @@
 import path from 'path';
 
-import type { PortfolioMetadata } from '@/types/portfolio.types';
-import {
-  extractBaseMetadata,
-  getPostsFromDirectory,
-  type Post as BasePost,
-} from '@/utils/post.utils';
-
-export type Post = BasePost<PortfolioMetadata>;
+import type { Post, PostMetadata } from '@/types/post.types';
+import { extractBaseMetadata, getPostsFromDirectory } from '@/utils/post.utils';
 
 /**
  * Extract portfolio-specific metadata
  * Currently uses base implementation, but can be extended with portfolio-specific fields
  */
-function extractPortfolioMetadata(filePath: string): PortfolioMetadata {
-  return extractBaseMetadata<PortfolioMetadata>(filePath);
+function extractPortfolioMetadata(filePath: string): PostMetadata {
+  return extractBaseMetadata<PostMetadata>(filePath);
 }
 
 /**
@@ -22,9 +16,9 @@ function extractPortfolioMetadata(filePath: string): PortfolioMetadata {
  * @param sortDescending Whether to sort in descending order (newest first)
  * @returns Array of posts
  */
-export function getPosts(sortDescending = true): Post[] {
+export function getPosts(sortDescending = true): Post<PostMetadata>[] {
   const postsDir = path.join(process.cwd(), 'app', 'portfolio', 'posts');
-  return getPostsFromDirectory<PortfolioMetadata>(
+  return getPostsFromDirectory<PostMetadata>(
     postsDir,
     extractPortfolioMetadata,
     sortDescending,

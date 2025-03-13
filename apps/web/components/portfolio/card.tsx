@@ -10,14 +10,8 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Define the types for our post data
-interface PostMetadata {
-  title: string;
-  description?: string;
-  image?: string;
-  tags?: string[];
-  date?: string;
-}
+import type { PostMetadata } from '@/types/post.types';
+import { formatDateSafe } from '@/utils/date.utils';
 
 export interface Post {
   slug: string;
@@ -77,7 +71,9 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
             View project
           </span>
           {post.metadata.date && (
-            <span className="text-xs text-gray-500">{post.metadata.date}</span>
+            <span className="text-xs text-muted-foreground">
+              {formatDateSafe(post.metadata.date)}
+            </span>
           )}
         </CardFooter>
       </Card>

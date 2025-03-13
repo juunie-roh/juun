@@ -11,19 +11,12 @@ import { CalendarIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Define the types for our post data
-interface PostMetadata {
-  title: string;
-  description?: string;
-  image?: string;
-  tags?: string[];
-  date?: string;
-  wordCount?: number; // Total word count of the full post content
-}
+import type { BlogMetadata } from '@/types/post.types';
+import { formatDateSafe } from '@/utils/date.utils';
 
 export interface Post {
   slug: string;
-  metadata: PostMetadata;
+  metadata: BlogMetadata;
 }
 
 interface BlogCardProps {
@@ -69,7 +62,7 @@ export function BlogCard({ post }: BlogCardProps) {
                 alt={post.metadata.title || 'Blog post image'}
                 width={256}
                 height={256}
-                className="size-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-56 md:w-full"
+                className="h-56 w-full object-contain transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 350px"
               />
             </div>
@@ -85,7 +78,7 @@ export function BlogCard({ post }: BlogCardProps) {
               {post.metadata.date && (
                 <div className="flex items-center gap-1">
                   <CalendarIcon className="size-3" />
-                  <span>{post.metadata.date}</span>
+                  <span>{formatDateSafe(post.metadata.date)}</span>
                 </div>
               )}
               <div className="flex items-center gap-1">
