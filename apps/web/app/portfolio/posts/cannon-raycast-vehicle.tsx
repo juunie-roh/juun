@@ -1,12 +1,12 @@
 'use client';
 
-import { AspectRatio, Label, Switch } from '@juun/ui';
+import { Label, Switch } from '@juun/ui';
 import { Debug, Physics } from '@react-three/cannon';
 import { Environment, OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
 import { Fragment, Suspense, useState } from 'react';
 
 import { Beetle } from '@/components/three/beetle';
+import { ThreeCanvas, ThreeCanvasSkeleton } from '@/components/three/canvas';
 import { Cylinder } from '@/components/three/cylinder';
 import { Plane } from '@/components/three/plane';
 
@@ -23,11 +23,8 @@ export default function CannonRaycastVehicle() {
 
   return (
     <Fragment>
-      <AspectRatio
-        ratio={16 / 9}
-        className="size-full overflow-hidden rounded-md"
-      >
-        <Canvas shadows camera={{ fov: 50, position: [0, 5, 15] }}>
+      <Suspense fallback={<ThreeCanvasSkeleton />}>
+        <ThreeCanvas shadows camera={{ fov: 50, position: [0, 5, 15] }}>
           <fog attach="fog" args={['#171720', 10, 50]} />
           <color attach="background" args={['#171720']} />
           <ambientLight intensity={0.1} />
@@ -71,7 +68,7 @@ export default function CannonRaycastVehicle() {
                 />
               </Debug>
             ) : (
-              <>
+              <Fragment>
                 <Plane
                   rotation={[-Math.PI / 2, 0, 0]}
                   userData={{ id: 'floor' }}
@@ -93,15 +90,16 @@ export default function CannonRaycastVehicle() {
                   position={[5, 2.5, -5]}
                   userData={{ id: 'pillar-3' }}
                 />
-              </>
+              </Fragment>
             )}
           </Physics>
           <Suspense fallback={null}>
             <Environment preset="city" />
           </Suspense>
           <OrbitControls />
-        </Canvas>
-      </AspectRatio>
+        </ThreeCanvas>
+      </Suspense>
+
       <p>
         * WASD or Arrow Keys to drive, SPACE to brake
         <br />r to reset
