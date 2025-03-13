@@ -8,7 +8,7 @@ export const metadata = {
   title: 'Blog Demo, 블로그 데모',
   description:
     'A demo page for blog post demonstration. 블로그 포스트 시연을 위한 데모 페이지입니다.',
-  date: 'January 2024',
+  date: '2024-01-27',
   tags: ['Next.js', 'Tailwind CSS', 'Code Block'],
   image: '/images/demo.png',
 };

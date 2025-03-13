@@ -13,7 +13,7 @@ import { Plane } from '@/components/three/plane';
 export const metadata = {
   title: 'Three Cannon Raycast Vehicle Example',
   description: 'Three js Vehicle Demonstration with Canno physics applied',
-  date: 'March 2025',
+  date: '2024-04-20',
   tags: ['Next.js', 'Three.js', '3D', 'Cannon'],
   image: '/images/cannon-raycast-vehicle.png',
 };
