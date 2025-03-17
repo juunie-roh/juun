@@ -3,9 +3,9 @@ import { compat } from './util.js';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  ...compat.config(storybook.configs.recommended),
   {
     files: ['*.stories.*'],
-    ...compat.config(storybook.configs.recommended),
     rules: {
       'import/no-extraneous-dependencies': [
         'error',

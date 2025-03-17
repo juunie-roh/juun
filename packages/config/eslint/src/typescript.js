@@ -11,12 +11,27 @@ export const tsRules = {
   'react/destructuring-assignment': 'off',
   'react/require-default-props': 'off',
   'react/jsx-props-no-spreading': 'off',
-  '@typescript-eslint/comma-dangle': 'off',
-  '@typescript-eslint/camelcase': 'off',
-  '@typescript-eslint/consistent-type-imports': 'error',
+
+  '@typescript-eslint/array-type': 'off',
+  '@typescript-eslint/ban-ts-comment': 'off',
+  '@typescript-eslint/ban-tslint-comment': 'off',
+  '@typescript-eslint/class-literal-property-style': 'off',
+  '@typescript-eslint/consistent-generic-constructors': 'off',
+  '@typescript-eslint/consistent-indexed-object-style': 'off',
+  '@typescript-eslint/consistent-type-definitions': 'off',
+  '@typescript-eslint/no-empty-function': 'off',
+  '@typescript-eslint/no-empty-interface': 'off',
+  '@typescript-eslint/no-empty-object-type': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
+  '@typescript-eslint/no-inferrable-types': 'off',
+  '@typescript-eslint/no-namespace': 'off',
+  '@typescript-eslint/no-shadow': 'off',
+  '@typescript-eslint/no-this-alias': 'off',
   '@typescript-eslint/no-unused-vars': 'off',
   '@typescript-eslint/no-unused-expressions': 'off',
+  '@typescript-eslint/no-wrapper-object-types': 'off',
+  '@typescript-eslint/triple-slash-reference': 'off',
+
   'no-restricted-syntax': [
     'error',
     'ForInStatement',
@@ -32,6 +47,7 @@ export const tsRules = {
   'consistent-return': 'off',
 };
 
+/** @type {import('eslint').Linter.Config[]} */
 export default [
   {
     files: ['**/*.ts', '**/*.tsx'],

@@ -1,5 +1,6 @@
 import eslint from '@eslint/js';
-import prettierPlugin from 'eslint-plugin-prettier';
+import prettier from 'eslint-plugin-prettier';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 /** @type {import('eslint').Linter.RulesRecord} */
 export const baseRules = {
@@ -21,7 +22,8 @@ export default [
     files: ['**/*.{js,jsx,ts,tsx}'],
     ...eslint.configs.recommended,
     plugins: {
-      prettier: prettierPlugin,
+      jsdoc,
+      prettier,
     },
     rules: baseRules,
   },

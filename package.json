@@ -15,7 +15,7 @@
     "prepare": "husky install",
     "check-types": "turbo check-types",
     "web": "yarn workspace @juun/nextjs",
-    "config": "yarn workspace @juun/config",
+    "configs": "yarn workspace @juun/config",
     "ui": "yarn workspace @juun/ui"
   },
   "devDependencies": {
