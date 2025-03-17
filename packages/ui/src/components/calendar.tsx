@@ -6,7 +6,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
-  Square,
 } from 'lucide-react';
 import * as React from 'react';
 import { DayPicker } from 'react-day-picker';
@@ -85,7 +84,7 @@ function Calendar({
                 <ChevronDown className={cn('h-4 w-4', className)} {...props} />
               );
             default:
-              return <Square className={cn('h-4 w-4', className)} {...props} />;
+              return <div className={cn('h-4 w-4', className)} {...props} />;
           }
         },
       }}
