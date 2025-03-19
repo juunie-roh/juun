@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@juun/ui';
+import { Button } from '@pkg/ui';
 import { Minus, Plus } from 'lucide-react';
 
 import { useBearStore } from '@/stores/slices/bear';

@@ -1,4 +1,4 @@
-# @juun/config
+# @pkg/config
 
 Shared configuration files for Juun projects.
 

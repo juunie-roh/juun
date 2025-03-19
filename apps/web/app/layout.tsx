@@ -1,6 +1,6 @@
-import '@juun/config/tailwind/styles';
+import '@pkg/config/tailwind/styles';
 
-import { Toaster } from '@juun/ui';
+import { Toaster } from '@pkg/ui';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 

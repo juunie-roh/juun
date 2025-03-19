@@ -34,7 +34,7 @@ RUN mkdir -p /app/.yarn/cache && \
 
 USER nextjs
 # Install the required packages needed only to run
-RUN yarn workspaces focus @juun/nextjs --production
+RUN yarn workspaces focus @app/nextjs --production
 
 # Builder stage
 FROM base AS builder

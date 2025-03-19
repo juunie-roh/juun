@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
   Skeleton,
-} from '@juun/ui';
+} from '@pkg/ui';
 import { CalendarIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

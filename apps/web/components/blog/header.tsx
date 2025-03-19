@@ -1,4 +1,4 @@
-import { Badge, Skeleton } from '@juun/ui';
+import { Badge, Skeleton } from '@pkg/ui';
 
 import type { BlogMetadata } from '@/types/post.types';
 

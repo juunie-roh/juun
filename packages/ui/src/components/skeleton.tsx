@@ -1,4 +1,4 @@
-import { cn } from '@juun/ui/lib/utils';
+import { cn } from '@pkg/ui/lib/utils';
 
 function Skeleton({
   className,

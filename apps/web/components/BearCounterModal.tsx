@@ -11,7 +11,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from '@juun/ui';
+} from '@pkg/ui';
 
 import BearCounter from './BearCounter';
 

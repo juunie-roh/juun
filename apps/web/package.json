@@ -1,5 +1,5 @@
 {
-  "name": "@juun/nextjs",
+  "name": "@app/nextjs",
   "version": "3.0.1",
   "private": true,
   "author": "juun",
@@ -15,8 +15,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@juun/config": "workspace:",
     "@next/bundle-analyzer": "^15.2.3",
+    "@pkg/config": "workspace:",
     "@storybook/addon-a11y": "^8.6.7",
     "@storybook/addon-essentials": "^8.6.7",
     "@storybook/addon-interactions": "^8.6.7",
@@ -47,7 +47,7 @@
     "webpack": "^5.98.0"
   },
   "dependencies": {
-    "@juun/ui": "workspace:",
+    "@pkg/ui": "workspace:",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",

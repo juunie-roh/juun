@@ -1,4 +1,4 @@
-import { Skeleton } from '@juun/ui';
+import { Skeleton } from '@pkg/ui';
 
 export default function BlogItemLoading() {
   return (

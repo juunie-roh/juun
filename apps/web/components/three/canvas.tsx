@@ -1,4 +1,4 @@
-import { AspectRatio, Skeleton } from '@juun/ui';
+import { AspectRatio, Skeleton } from '@pkg/ui';
 import type { CanvasProps } from '@react-three/fiber';
 import { Canvas } from '@react-three/fiber';
 

@@ -11,7 +11,7 @@ import {
   DrawerTrigger,
   ScrollArea,
   Separator,
-} from '@juun/ui';
+} from '@pkg/ui';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';

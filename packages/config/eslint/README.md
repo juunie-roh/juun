@@ -1,4 +1,4 @@
-# @juun/config/eslint
+# @pkg/config/eslint
 
 Collection of internal ESLint configurations for different environments and technologies.
 
@@ -12,7 +12,7 @@ For a standard setup with all rules:
 
 ```js
 // eslint.config.js
-import config from '@juun/config/eslint';
+import config from '@pkg/config/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default config;
@@ -30,7 +30,7 @@ import {
   react,
   typescript,
   prettier,
-} from '@juun/config/eslint';
+} from '@pkg/config/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
