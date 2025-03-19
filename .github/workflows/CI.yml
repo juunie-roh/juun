@@ -30,6 +30,7 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - name: Validate commits
+        if: github.ref != 'refs/heads/main'
         uses: wagoid/commitlint-github-action@v6
         with:
           configFile: commitlint.config.ts
