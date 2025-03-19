@@ -23,7 +23,7 @@ The project uses Turborepo to optimize the development workflow and build proces
 - [Turborepo](https://turbo.build) for high-performance build system
 
 ### Developer Experience
-- [Yarn Berry](https://yarnpkg.com) with PnP (Plug'n'Play) for package management
+- [Yarn](https://yarnpkg.com) for package management with node_modules linker
 - Monorepo structure with workspace dependencies powered by Turborepo
 - [ESLint](https://eslint.org) configuration for Next.js, React, TypeScript, and more
 - [Prettier](https://prettier.io) for code formatting
@@ -130,20 +130,6 @@ docker run -p 3000:3000 juun
 This repository uses a specific branch structure for deployment:
 
 - `main`: Main development branch - all feature development and PRs should target this branch
-- `vercel`: Deployment branch - **DO NOT** directly push or create PRs to this branch
-
-### Vercel Branch
-
-The `vercel` branch is automatically synchronized from `main` through GitHub Actions.
-It's specifically configured for Vercel deployment with the proper settings for the monorepo structure.
-
-#### 🛑 Important:
-
-- Never create pull requests targeting the `vercel` branch
-- Never push directly to the `vercel` branch
-- All changes should go through `main` and will be automatically synced to `vercel`
-
-The `vercel` branch is protected and can only be updated through the automated GitHub Actions workflow.
 
 ## ⚡ Turborepo Integration
 
