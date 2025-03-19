@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Check, Home, Mail, Search, Settings, X } from 'lucide-react';
-import React from 'react';
 
-import { ConfirmWheel, FiveWheel, FourWheel, Wheel } from '.';
+import { Wheel } from '..';
 
 describe('Wheel Component', () => {
   // Basic rendering tests
@@ -185,68 +184,6 @@ describe('Wheel Component', () => {
 
       // Custom title should be visible
       expect(screen.getByText(customTitles[0]!)).toBeInTheDocument();
-    });
-  });
-
-  // Custom Wheels:
-  describe('ConfirmWheel', () => {
-    it('should render without crashing', () => {
-      render(<ConfirmWheel />);
-
-      // Check if SVG rendered
-      const svg = document.querySelector('svg');
-      expect(svg).toBeInTheDocument();
-
-      // Check if at least one path was rendered
-      const paths = document.querySelectorAll('path');
-      expect(paths.length).toBeGreaterThan(0);
-    });
-
-    it('should render with confirm type (2 sectors)', () => {
-      render(<ConfirmWheel />);
-      // Confirm type should have 2 paths (sectors)
-      const paths = document.querySelectorAll('path');
-      expect(paths.length).toBe(4);
-    });
-  });
-
-  describe('FourWheel', () => {
-    it('should render without crashing', () => {
-      render(<FourWheel />);
-
-      // Check if SVG rendered
-      const svg = document.querySelector('svg');
-      expect(svg).toBeInTheDocument();
-
-      // Check if at least one path was rendered
-      const paths = document.querySelectorAll('path');
-      expect(paths.length).toBeGreaterThan(0);
-    });
-
-    it('should render with confirm type (4 sectors)', () => {
-      render(<FourWheel />);
-      const paths = document.querySelectorAll('path');
-      expect(paths.length).toBe(8);
-    });
-  });
-
-  describe('FiveWheel', () => {
-    it('should render without crashing', () => {
-      render(<FiveWheel />);
-
-      // Check if SVG rendered
-      const svg = document.querySelector('svg');
-      expect(svg).toBeInTheDocument();
-
-      // Check if at least one path was rendered
-      const paths = document.querySelectorAll('path');
-      expect(paths.length).toBeGreaterThan(0);
-    });
-
-    it('should render with confirm type (5 sectors)', () => {
-      render(<FiveWheel />);
-      const paths = document.querySelectorAll('path');
-      expect(paths.length).toBe(10);
     });
   });
 });

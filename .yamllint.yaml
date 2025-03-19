@@ -5,6 +5,7 @@ yaml-files:
 
 ignore:
   - .yarn/
+  - node_modules
 
 rules:
   braces:
