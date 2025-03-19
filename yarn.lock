@@ -2589,11 +2589,13 @@ __metadata:
     eslint-plugin-storybook: "npm:^0.11.6"
     eslint-plugin-tailwindcss: "npm:^3.18.0"
     eslint-plugin-testing-library: "npm:^7.1.1"
+    eslint-plugin-turbo: "npm:^2.4.4"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     prettier: "npm:^3.5.3"
     tailwind-merge: "npm:^3.0.2"
     tailwindcss: "npm:^3.4.17"
     tailwindcss-animate: "npm:^1.0.7"
+    turbo: "npm:^2.4.4"
     typescript: "npm:^5.8.2"
   languageName: unknown
   linkType: soft
@@ -8754,6 +8756,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:16.0.3":
+  version: 16.0.3
+  resolution: "dotenv@npm:16.0.3"
+  checksum: 10c0/109457ac5f9e930ca8066ea33887b6f839ab24d647a7a8b49ddcd1f32662e2c35591c5e5b9819063e430148a664d0927f0cbe60cf9575d89bc524f47ff7e78f0
+  languageName: node
+  linkType: hard
+
 "draco3d@npm:^1.4.1":
   version: 1.5.7
   resolution: "draco3d@npm:1.5.7"
@@ -9549,6 +9558,18 @@ __metadata:
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
   checksum: 10c0/648a7dd07ec3f26388eaad89e72ae74441f0e27e337cca7ca10ca55a4ff0437aa6303df5d9f37aeb90aaadd287c536696a7d11f14d1431bb8ae4fabad8c2744e
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-turbo@npm:^2.4.4":
+  version: 2.4.4
+  resolution: "eslint-plugin-turbo@npm:2.4.4"
+  dependencies:
+    dotenv: "npm:16.0.3"
+  peerDependencies:
+    eslint: ">6.6.0"
+    turbo: ">2.0.0"
+  checksum: 10c0/aea89aa67cd1e191c7ce2272fa0c272405a0d60f48c692e073bda156f4b0a53c583f3afed740b0ec2a52455343a462503214ba476eb2e17091c53fbc46aba955
   languageName: node
   linkType: hard
 

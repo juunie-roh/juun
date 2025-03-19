@@ -3,7 +3,9 @@
  * https://jestjs.io/docs/configuration
  */
 
+import type { Config } from 'jest';
 import nextJest from 'next/jest.js';
+import type { JestConfigWithTsJest } from 'ts-jest';
 
 /**
  * This creates Jest configuration for next automatically including:
@@ -20,7 +22,7 @@ const createJestConfig = nextJest({
   dir: './',
 });
 
-const customConfig = {
+const customConfig: JestConfigWithTsJest = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^@/public/(.*)$': '<rootDir>/public/$1',
@@ -45,4 +47,4 @@ const customConfig = {
   testEnvironment: 'jest-environment-jsdom',
 };
 
-export default createJestConfig(customConfig);
+export default createJestConfig(customConfig as Config);
