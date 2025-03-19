@@ -25,7 +25,10 @@ const navigationItems = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/50 p-4 backdrop-blur-lg md:px-8">
+    <header
+      className="sticky top-0 z-50 w-full border-b bg-background/50 p-4 backdrop-blur-lg md:px-8"
+      tabIndex={-1}
+    >
       <div>
         <div className="flex items-center justify-between">
           <Link href="/">
