@@ -7,5 +7,5 @@
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./.storybook/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "coverage"]
 }
