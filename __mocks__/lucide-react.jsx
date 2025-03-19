@@ -1,31 +1,25 @@
-import {
-  forwardRef,
-  type ForwardRefExoticComponent,
-  type RefAttributes,
-  type SVGProps,
-} from 'react';
-
-// Define types for the icon props
-interface IconProps extends SVGProps<SVGSVGElement> {
-  color?: string;
-  size?: string | number;
-  strokeWidth?: string | number;
-  absoluteStrokeWidth?: boolean;
-  className?: string;
-}
+import React, { forwardRef } from 'react';
 
 // Type for the icon component
-type IconComponent = ForwardRefExoticComponent<
-  IconProps & RefAttributes<SVGSVGElement>
->;
+// type IconComponent = ForwardRefExoticComponent<
+//   IconProps & RefAttributes<SVGSVGElement>
+// >;
 
 // Helper function to convert to kebab case
-const toKebabCase = (str: string) =>
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+const toKebabCase = (str) =>
   str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
 // Create a base mock SVG component
-const createMockIcon = (iconName: string): IconComponent => {
-  const MockIcon = forwardRef<SVGSVGElement, IconProps>(
+/**
+ * @param {string} iconName
+ * @returns {React.ForwardRefExoticComponent<SVGProps<SVGSVGElement> & {color?: string; size?: string | number; strokeWidth?: string | number; absoluteStrokeWidth?: boolean; className?: string;} & RefAttributes<SVGSVGElement>>}
+ */
+const createMockIcon = (iconName) => {
+  const MockIcon = forwardRef(
     (
       {
         color = 'currentColor',
@@ -95,10 +89,12 @@ export const User = createMockIcon('User');
 export const X = createMockIcon('X');
 
 // Export createLucideIcon to match the actual API
-export const createLucideIcon = (
-  iconName: string,
-  _iconNode: [string, Record<string, any>][],
-) => {
+/**
+ * @param {string} iconName
+ * @param {[string, Record<string, any>][]} _iconNode
+ * @returns {React.ReactNode}
+ */
+export const createLucideIcon = (iconName, _iconNode) => {
   return createMockIcon(iconName);
 };
 

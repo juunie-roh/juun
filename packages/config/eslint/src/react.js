@@ -7,7 +7,7 @@ export default [
   {
     files: ['**/*.{jsx,tsx}'],
     plugins: {
-      react: react,
+      react,
       'react-hooks': reactHooks,
     },
     settings: {

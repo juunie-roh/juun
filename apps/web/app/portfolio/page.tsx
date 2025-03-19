@@ -4,7 +4,8 @@ import {
   PortfolioCard,
   PortfolioCardSkeleton,
 } from '@/components/portfolio/card';
-import { getPosts } from '@/utils/portfolio.utils';
+
+import { getPosts } from './utils';
 
 export default function Portfolio() {
   const posts = getPosts();

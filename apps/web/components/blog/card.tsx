@@ -11,19 +11,13 @@ import { CalendarIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Define the types for our post data
-interface PostMetadata {
-  title: string;
-  description?: string;
-  image?: string;
-  tags?: string[];
-  date?: string;
-  wordCount?: number; // Total word count of the full post content
-}
+import type { BlogMetadata } from '@/types/post.types';
+import { formatDateSafe } from '@/utils/date.utils';
+import { safeUrl } from '@/utils/security.utils';
 
 export interface Post {
   slug: string;
-  metadata: PostMetadata;
+  metadata: BlogMetadata;
 }
 
 interface BlogCardProps {
@@ -32,9 +26,7 @@ interface BlogCardProps {
 
 export function BlogCard({ post }: BlogCardProps) {
   // Prevent XSS (Cross-site scripting)
-  const slug: string | null =
-    typeof post.slug === 'string' ? encodeURIComponent(post.slug) : null;
-
+  const slug = safeUrl(post.slug);
   if (slug === null) return null;
 
   // Calculate estimated reading time (roughly 200 words per minute)
@@ -85,7 +77,7 @@ export function BlogCard({ post }: BlogCardProps) {
               {post.metadata.date && (
                 <div className="flex items-center gap-1">
                   <CalendarIcon className="size-3" />
-                  <span>{post.metadata.date}</span>
+                  <span>{formatDateSafe(post.metadata.date)}</span>
                 </div>
               )}
               <div className="flex items-center gap-1">

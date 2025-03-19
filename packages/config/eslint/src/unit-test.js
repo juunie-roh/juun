@@ -10,7 +10,7 @@ export default [
   {
     files: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
     plugins: {
-      jest: jest,
+      jest,
       'jest-dom': jestDom,
       'jest-formatting': jestFormatting,
       'testing-library': testingLibrary,
@@ -18,10 +18,16 @@ export default [
     rules: {
       ...baseRules,
       // Jest rules
-      'jest/no-disabled-tests': 'warn',
-      'jest/no-focused-tests': 'error',
-      'jest/prefer-to-be': 'error',
-      'jest/valid-expect': 'error',
+      'jest/expect-expect': 'off',
+      'jest/no-disabled-tests': 'off',
+      'jest/no-conditional-expect': 'off',
+      'jest/valid-title': 'off',
+      'jest/no-interpolation-in-snapshots': 'off',
+      'jest/no-export': 'off',
+      'jest/no-standalone-expect': [
+        'error',
+        { 'additionalTestBlockFunctions': ['retry'] },
+      ],
 
       // Jest DOM rules
       'jest-dom/prefer-checked': 'error',

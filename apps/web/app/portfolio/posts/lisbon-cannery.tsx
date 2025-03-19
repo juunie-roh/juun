@@ -5,7 +5,7 @@ export const metadata = {
   title: 'Lisbon Cannery',
   description:
     'A menu list component that matches the style of the poster with blue illustrations on a cream background.',
-  date: 'March 2025',
+  date: '2025-03-01',
   tags: ['Next.js', 'Tailwind CSS', 'Mobile'],
   image: '/images/lisbon/pig.png',
 };

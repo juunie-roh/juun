@@ -15,7 +15,7 @@ import { antonio } from '@/assets/fonts';
 
 import ThemeSwitch from '../theme/switch';
 import Breadcrumb from './breadcrumb';
-import HeaderSheet from './sheet';
+import HeaderDrawer from './drawer';
 
 const navigationItems = [
   { href: '/about', label: 'About' },
@@ -69,7 +69,7 @@ export default function Header() {
 
           {/* Mobile Navigation - properly hidden on desktop */}
           <div className="block md:hidden">
-            <HeaderSheet navigationItems={navigationItems} />
+            <HeaderDrawer navigationItems={navigationItems} />
           </div>
         </div>
       </div>

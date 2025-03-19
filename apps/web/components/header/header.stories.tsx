@@ -20,7 +20,7 @@ import { antonio } from '@/assets/fonts';
 
 import ThemeProvider from '../theme/provider';
 import ThemeSwitch from '../theme/switch';
-import HeaderSheet from './sheet';
+import HeaderSheet from './drawer';
 
 // For the demo, we'll create a custom Header component that accepts a custom path
 // This mirrors your actual Header component but allows us to control breadcrumbs
