@@ -19,7 +19,7 @@ const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: './',
 });
-/** @type {import('ts-jest').JestConfigWithTsJest} */
+/** @type {import('jest').Config} */
 const customConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
@@ -35,7 +35,7 @@ const customConfig = {
     './**/*.{js,jsx,ts,tsx}',
     '!/**/_*.{js,jsx,ts,tsx}',
     '!**/.next/**',
-    '!coverage/*',
+    '!**/coverage/**',
     '!.storybook/*',
     '!**/*.stories.{js,jsx,ts,tsx}',
     '!**/*.config.{js,jsx,ts,tsx}',
