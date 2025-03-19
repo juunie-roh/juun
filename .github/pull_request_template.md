@@ -1,9 +1,3 @@
-<!-- 
-PLEASE READ CAREFULLY:
-1. Check which branch you're targeting:
-   - If targeting 'vercel' branch: Close this PR immediately - this branch is for deployment only
-   - For all other development work: Target the 'main' branch instead
--->
 # Title of this pull request
 
 ### Description
@@ -19,7 +13,4 @@ PLEASE READ CAREFULLY:
 - [ ] Configuration update
 
 <!-- Uncomment below if you have issues resolved -->
-<!-- 
-## Issues Resolved
-* {issue number}: {how it resolved}
--->
+<!-- ## Issues Resolved -->
