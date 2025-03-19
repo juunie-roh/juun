@@ -13,7 +13,6 @@ const config = {
       [
         // Component-related
         'component',
-        'story',
         'hook',
         'store',
         'util',
@@ -43,7 +42,8 @@ const config = {
         'i18n',
 
         // Testing
-        'test',
+        'jest',
+        'story',
         'e2e',
 
         // Others
@@ -126,10 +126,6 @@ const config = {
             description: 'Changes on components',
             title: 'Components',
           },
-          story: {
-            description: 'Adding or updating storybook components',
-            title: 'Storybook',
-          },
           hook: {
             description: 'Changes on react custom hooks',
             title: 'Custom Hooks',
@@ -204,9 +200,13 @@ const config = {
             title: 'i18n',
           },
 
-          test: {
-            description: 'Changes to tests',
-            title: 'Tests',
+          jest: {
+            description: 'Changes to jest tests',
+            title: 'Jest',
+          },
+          story: {
+            description: 'Adding or updating storybook components',
+            title: 'Storybook',
           },
           e2e: {
             description: 'End-to-end testing',
