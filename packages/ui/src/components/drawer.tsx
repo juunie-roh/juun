@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@juun/ui/lib/utils';
+import { cn } from '@pkg/ui/lib/utils';
 import * as React from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 

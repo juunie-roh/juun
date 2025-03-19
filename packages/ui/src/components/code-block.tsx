@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@juun/ui/lib/utils';
+import { cn } from '@pkg/ui/lib/utils';
 import { Copy } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';

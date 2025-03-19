@@ -23,7 +23,7 @@ const nextConfig = {
     },
     optimizePackageImports: ['lucide-react'],
   },
-  transpilePackages: ['@juun/ui', '@juun/config'],
+  transpilePackages: ['@pkg/ui', '@pkg/config'],
 };
 
 const analyze = process.env.ANALYZE === 'true';

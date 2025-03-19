@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
   Separator,
-} from '@juun/ui';
+} from '@pkg/ui';
 import Link from 'next/link';
 import { Fragment } from 'react';
 

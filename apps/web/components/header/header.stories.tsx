@@ -10,7 +10,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
   Separator,
-} from '@juun/ui';
+} from '@pkg/ui';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Home } from 'lucide-react';
 import Link from 'next/link';

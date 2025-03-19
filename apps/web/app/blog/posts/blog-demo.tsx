@@ -1,4 +1,4 @@
-import { AspectRatio, CodeBlock, Skeleton } from '@juun/ui';
+import { AspectRatio, CodeBlock, Skeleton } from '@pkg/ui';
 import Image from 'next/image';
 import { Fragment, Suspense } from 'react';
 
@@ -114,7 +114,7 @@ RUN mkdir -p /app/.yarn/cache && \\
 
 USER nextjs
 # Install the required packages needed only to run
-RUN yarn workspaces focus @juun/nextjs --production
+RUN yarn workspaces focus @app/nextjs --production
 
 # Builder stage
 FROM base AS builder

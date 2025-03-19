@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
   Skeleton,
-} from '@juun/ui';
+} from '@pkg/ui';
 import Image from 'next/image';
 import Link from 'next/link';
 

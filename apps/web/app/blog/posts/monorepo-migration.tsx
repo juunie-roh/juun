@@ -1,4 +1,4 @@
-import { AspectRatio, Skeleton } from '@juun/ui';
+import { AspectRatio, Skeleton } from '@pkg/ui';
 import Image from 'next/image';
 import { Fragment, Suspense } from 'react';
 
@@ -6,9 +6,9 @@ import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
 
 export const metadata = {
   title: 'Monorepo Migration with Turborepo',
-  description: '한글 폰트 테스트',
+  description: `How I've migrated the project to monorepo structure.`,
   date: '2025-03-13',
-  tags: ['Next.js', 'Turborepo', 'Monorepo'],
+  tags: ['Next.js', 'Turborepo', 'Monorepo', 'Yarn Berry'],
   image: '/images/logo/turborepo-logo.svg',
 };
 
@@ -36,7 +36,7 @@ export default function FontTest() {
 
       <div className="prose mt-8 max-w-none text-primary">
         <h2>Monorepo</h2>
-        <p>하이</p>
+        <p>Nextjs</p>
       </div>
     </Fragment>
   );

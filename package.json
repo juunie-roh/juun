@@ -15,9 +15,9 @@
     "test": "turbo test",
     "prepare": "husky install",
     "check-types": "turbo check-types",
-    "web": "yarn workspace @juun/nextjs",
-    "configs": "yarn workspace @juun/config",
-    "ui": "yarn workspace @juun/ui"
+    "web": "yarn workspace @app/nextjs",
+    "configs": "yarn workspace @pkg/config",
+    "ui": "yarn workspace @pkg/ui"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
@@ -25,7 +25,8 @@
     "@commitlint/cz-commitlint": "^19.8.0",
     "@commitlint/format": "^19.8.0",
     "@commitlint/types": "^19.8.0",
-    "@juun/config": "workspace:",
+    "@pkg/config": "workspace:",
+    "@types/node": "^22.13.10",
     "@types/react": "^19.0.11",
     "@types/react-dom": "^19.0.4",
     "commitizen": "^4.3.1",

@@ -1,6 +1,6 @@
 'use client';
 
-import { Label, Switch } from '@juun/ui';
+import { Label, Switch } from '@pkg/ui';
 import { Debug, Physics } from '@react-three/cannon';
 import { Environment, OrbitControls } from '@react-three/drei';
 import { Fragment, Suspense, useState } from 'react';

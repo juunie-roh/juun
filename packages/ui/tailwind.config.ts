@@ -1,4 +1,4 @@
-import config from '@juun/config/tailwind';
+import config from '@pkg/config/tailwind';
 import type { Config } from 'tailwindcss';
 const extendedConfig: Config = {
   ...config,

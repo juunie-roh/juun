@@ -1,4 +1,4 @@
-# @juun/config/typescript
+# @pkg/config/typescript
 
 Collection of internal TypeScript configurations.
 
@@ -17,7 +17,7 @@ Extend the appropriate configuration in your project's `tsconfig.json`:
 ```json
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@juun/config/typescript/nextjs.json",
+  "extends": "@pkg/config/typescript/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
