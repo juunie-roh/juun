@@ -2602,7 +2602,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@juun/nextjs@workspace:apps/web"
   dependencies:
-    "@jest/types": "npm:^29.6.3"
     "@juun/config": "workspace:"
     "@juun/ui": "workspace:"
     "@next/bundle-analyzer": "npm:^15.2.3"

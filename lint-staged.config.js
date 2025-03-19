@@ -1,3 +1,4 @@
+/** @type {import('lint-staged').Configuration} */
 export default {
   'apps/web/**/*.+(ts|tsx)': [
     () => 'yarn tsc -p apps/web/tsconfig.json --noEmit',
