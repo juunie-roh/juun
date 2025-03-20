@@ -11,6 +11,7 @@ ENV NODE_ENV=production \
 
 # Install only necessary dependencies for building
 RUN apk add --no-cache libc6-compat && \
+    corepack enable && corepack prepare pnpm@latest --activate && \
     addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
@@ -18,8 +19,7 @@ RUN apk add --no-cache libc6-compat && \
 FROM base AS deps
 
 # Optimize cache layers and permissions
-RUN mkdir -p /app/.yarn/cache && \
-    mkdir -p /app/node_modules && \
+RUN mkdir -p /app/node_modules && \
     chown -R nextjs:nodejs /app
 
 USER nextjs
@@ -33,8 +33,8 @@ COPY --chown=nextjs:nodejs . .
 USER root
 
 # Build with full dependencies
-RUN yarn install --immutable && \
-    yarn build
+RUN pnpm install --frozen-lockfile && \
+    pnpm build
 
 # Production image
 FROM base AS runner

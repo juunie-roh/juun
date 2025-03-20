@@ -20,6 +20,9 @@ jobs:
     name: Build with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     steps:
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -27,8 +30,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
-      - run: yarn install --immutable
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Validate commits
         if: github.ref != 'refs/heads/main'
         uses: wagoid/commitlint-github-action@v6
@@ -36,8 +39,8 @@ jobs:
           configFile: commitlint.config.ts
           failOnWarnings: false
       - name: esLinter
-        run: yarn lint
+        run: pnpm lint
       - name: Type Checking
-        run: yarn check-types
+        run: pnpm check-types
       # - name: Unit Tests through jest
       #   run: yarn test
