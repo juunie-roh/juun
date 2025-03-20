@@ -16,7 +16,7 @@ jobs:
       - name: Execute Dedupe
         run: pnpm dedupe
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           title: 'ci(package): Weekly dependency updates'
           body: 'Automated dependency updates'
