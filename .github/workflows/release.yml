@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
-      - run: HUSKY=0 pnpm --frozen-lockfile
+      - run: HUSKY=0 pnpm install --frozen-lockfile
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
