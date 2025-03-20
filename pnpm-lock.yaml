@@ -4,37 +4,167 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  commitlint19:
+    '@commitlint/cli':
+      specifier: ^19
+      version: 19.8.0
+    '@commitlint/config-conventional':
+      specifier: ^19
+      version: 19.8.0
+    '@commitlint/cz-commitlint':
+      specifier: ^19
+      version: 19.8.0
+    '@commitlint/format':
+      specifier: ^19
+      version: 19.8.0
+    '@commitlint/types':
+      specifier: ^19
+      version: 19.8.0
+  default:
+    '@types/node':
+      specifier: ^22.13.10
+      version: 22.13.10
+    autoprefixer:
+      specifier: ^10.4.21
+      version: 10.4.21
+    eslint:
+      specifier: ^9.22.0
+      version: 9.22.0
+    lucide-react:
+      specifier: ^0.483.0
+      version: 0.483.0
+    prettier:
+      specifier: ^3.5.3
+      version: 3.5.3
+    react-hook-form:
+      specifier: ^7.54.2
+      version: 7.54.2
+    ts-node:
+      specifier: ^10.9.2
+      version: 10.9.2
+    turbo:
+      specifier: ^2.4.4
+      version: 2.4.4
+    typescript:
+      specifier: ^5.8.2
+      version: 5.8.2
+    webpack:
+      specifier: ^5.98.0
+      version: 5.98.0
+  jest29:
+    '@types/jest':
+      specifier: ^29
+      version: 29.5.14
+    jest:
+      specifier: ^29
+      version: 29.7.0
+    jest-environment-jsdom:
+      specifier: ^29
+      version: 29.7.0
+    ts-jest:
+      specifier: ^29
+      version: 29.2.6
+  next15:
+    '@next/bundle-analyzer':
+      specifier: ^15
+      version: 15.2.3
+    '@next/eslint-plugin-next':
+      specifier: ^15
+      version: 15.2.3
+    next:
+      specifier: ^15
+      version: 15.2.3
+  postcss:
+    postcss:
+      specifier: ^8.5.3
+      version: 8.5.3
+    postcss-load-config:
+      specifier: ^6.0.1
+      version: 6.0.1
+    postcss-loader:
+      specifier: ^8.1.1
+      version: 8.1.1
+  react19:
+    '@types/react':
+      specifier: ^19
+      version: 19.0.12
+    '@types/react-dom':
+      specifier: ^19
+      version: 19.0.4
+    react:
+      specifier: ^19
+      version: 19.0.0
+    react-dom:
+      specifier: ^19
+      version: 19.0.0
+  storybook8:
+    '@storybook/addon-a11y':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/addon-essentials':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/addon-interactions':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/addon-links':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/blocks':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/nextjs':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/react':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/react-webpack5':
+      specifier: ^8
+      version: 8.6.7
+    '@storybook/test':
+      specifier: ^8
+      version: 8.6.7
+    storybook:
+      specifier: ^8
+      version: 8.6.7
+  tailwind:
+    tailwind-merge:
+      specifier: ^3.0.2
+      version: 3.0.2
+    tailwindcss:
+      specifier: ^3.4.17
+      version: 3.4.17
+    tailwindcss-animate:
+      specifier: ^1.0.7
+      version: 1.0.7
+
 importers:
 
   .:
     devDependencies:
       '@commitlint/cli':
-        specifier: ^19.8.0
+        specifier: catalog:commitlint19
         version: 19.8.0(@types/node@22.13.10)(typescript@5.8.2)
       '@commitlint/config-conventional':
-        specifier: ^19.8.0
+        specifier: catalog:commitlint19
         version: 19.8.0
       '@commitlint/cz-commitlint':
-        specifier: ^19.8.0
+        specifier: catalog:commitlint19
         version: 19.8.0(@types/node@22.13.10)(commitizen@4.3.1(@types/node@22.13.10)(typescript@5.8.2))(inquirer@9.3.7)(typescript@5.8.2)
       '@commitlint/format':
-        specifier: ^19.8.0
+        specifier: catalog:commitlint19
         version: 19.8.0
       '@commitlint/types':
-        specifier: ^19.8.0
+        specifier: catalog:commitlint19
         version: 19.8.0
       '@pkg/config':
         specifier: workspace:^
         version: link:packages/config
       '@types/node':
-        specifier: ^22.13.10
+        specifier: 'catalog:'
         version: 22.13.10
-      '@types/react':
-        specifier: ^19.0.12
-        version: 19.0.12
-      '@types/react-dom':
-        specifier: ^19.0.4
-        version: 19.0.4(@types/react@19.0.12)
       commitizen:
         specifier: ^4.3.1
         version: 4.3.1(@types/node@22.13.10)(typescript@5.8.2)
@@ -42,7 +172,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       eslint:
-        specifier: ^9.22.0
+        specifier: 'catalog:'
         version: 9.22.0(jiti@2.4.2)
       husky:
         specifier: ^9.1.7
@@ -57,10 +187,10 @@ importers:
         specifier: ^24.2.3
         version: 24.2.3(typescript@5.8.2)
       turbo:
-        specifier: ^2.4.4
+        specifier: 'catalog:'
         version: 2.4.4
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
 
   apps/web:
@@ -81,19 +211,19 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0(next@15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       next:
-        specifier: 15.2.3
+        specifier: catalog:next15
         version: 15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
-        specifier: ^19.0.0
+        specifier: catalog:react19
         version: 19.0.0
       react-dom:
-        specifier: ^19.0.0
+        specifier: catalog:react19
         version: 19.0.0(react@19.0.0)
       react-hook-form:
-        specifier: ^7.54.2
+        specifier: 'catalog:'
         version: 7.54.2(react@19.0.0)
       three:
         specifier: ^0.174.0
@@ -103,31 +233,31 @@ importers:
         version: 5.0.3(@types/react@19.0.12)(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
     devDependencies:
       '@next/bundle-analyzer':
-        specifier: ^15.2.3
+        specifier: catalog:next15
         version: 15.2.3
       '@pkg/config':
         specifier: 'workspace:'
         version: link:../../packages/config
       '@storybook/addon-a11y':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-essentials':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(@types/react@19.0.12)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-interactions':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-links':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/blocks':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/nextjs':
-        specifier: ^8.6.7
-        version: 8.6.7(next@15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(type-fest@4.37.0)(typescript@5.8.2)(webpack-hot-middleware@2.26.1)(webpack@5.98.0)
+        specifier: catalog:storybook8
+        version: 8.6.7(esbuild@0.25.1)(next@15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(type-fest@4.37.0)(typescript@5.8.2)(webpack-hot-middleware@2.26.1)(webpack@5.98.0(esbuild@0.25.1))
       '@storybook/react':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@svgr/webpack':
         specifier: ^8.1.0
@@ -136,62 +266,62 @@ importers:
         specifier: ^6.6.3
         version: 6.6.3
       '@types/jest':
-        specifier: ^29.5.14
+        specifier: catalog:jest29
         version: 29.5.14
       '@types/node':
-        specifier: ^22.13.10
+        specifier: 'catalog:'
         version: 22.13.10
       '@types/react':
-        specifier: ^19.0.11
+        specifier: catalog:react19
         version: 19.0.12
       '@types/react-dom':
-        specifier: ^19.0.4
+        specifier: catalog:react19
         version: 19.0.4(@types/react@19.0.12)
       '@types/three':
         specifier: ^0.174.0
         version: 0.174.0
       autoprefixer:
-        specifier: ^10.4.21
+        specifier: 'catalog:'
         version: 10.4.21(postcss@8.5.3)
       eslint:
-        specifier: ^9.22.0
+        specifier: 'catalog:'
         version: 9.22.0(jiti@2.4.2)
       jest:
-        specifier: ^29.7.0
+        specifier: catalog:jest29
         version: 29.7.0(@types/node@22.13.10)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))
       jest-environment-jsdom:
-        specifier: ^29.7.0
+        specifier: catalog:jest29
         version: 29.7.0
       lucide-react:
-        specifier: ^0.483.0
+        specifier: 'catalog:'
         version: 0.483.0(react@19.0.0)
       postcss:
-        specifier: ^8.5.3
+        specifier: catalog:postcss
         version: 8.5.3
       postcss-load-config:
-        specifier: ^6.0.1
+        specifier: catalog:postcss
         version: 6.0.1(jiti@2.4.2)(postcss@8.5.3)(yaml@2.7.0)
       postcss-loader:
-        specifier: ^8.1.1
-        version: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0)
+        specifier: catalog:postcss
+        version: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1))
       storybook:
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(prettier@3.5.3)
       tailwindcss:
-        specifier: ^3.4.17
+        specifier: catalog:tailwind
         version: 3.4.17(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))
       ts-jest:
-        specifier: ^29.2.6
+        specifier: catalog:jest29
         version: 29.2.6(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(esbuild@0.25.1)(jest@29.7.0(@types/node@22.13.10)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2)))(typescript@5.8.2)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@22.13.10)(typescript@5.8.2)
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
       webpack:
-        specifier: ^5.98.0
-        version: 5.98.0
+        specifier: 'catalog:'
+        version: 5.98.0(esbuild@0.25.1)
 
   packages/config:
     devDependencies:
@@ -202,7 +332,7 @@ importers:
         specifier: ^9.22.0
         version: 9.22.0
       '@next/eslint-plugin-next':
-        specifier: ^15.2.3
+        specifier: catalog:next15
         version: 15.2.3
       '@tailwindcss/typography':
         specifier: ^0.5.16
@@ -223,7 +353,7 @@ importers:
         specifier: ^8.26.1
         version: 8.26.1(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)
       eslint:
-        specifier: ^9.22.0
+        specifier: 'catalog:'
         version: 9.22.0(jiti@2.4.2)
       eslint-config-prettier:
         specifier: ^10.1.1
@@ -277,22 +407,22 @@ importers:
         specifier: ^4.1.4
         version: 4.1.4(@typescript-eslint/eslint-plugin@8.26.1(@typescript-eslint/parser@8.26.1(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.22.0(jiti@2.4.2))
       prettier:
-        specifier: ^3.5.3
+        specifier: 'catalog:'
         version: 3.5.3
       tailwind-merge:
-        specifier: ^3.0.2
+        specifier: catalog:tailwind
         version: 3.0.2
       tailwindcss:
-        specifier: ^3.4.17
+        specifier: catalog:tailwind
         version: 3.4.17(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))
       tailwindcss-animate:
-        specifier: ^1.0.7
+        specifier: catalog:tailwind
         version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2)))
       turbo:
-        specifier: ^2.4.4
+        specifier: 'catalog:'
         version: 2.4.4
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
 
   packages/ui:
@@ -361,22 +491,22 @@ importers:
         specifier: ^8.5.2
         version: 8.5.2(react@19.0.0)
       lucide-react:
-        specifier: ^0.483.0
+        specifier: 'catalog:'
         version: 0.483.0(react@19.0.0)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
-        specifier: ^19.0.0
+        specifier: catalog:react19
         version: 19.0.0
       react-day-picker:
         specifier: 9.6.2
         version: 9.6.2(react@19.0.0)
       react-dom:
-        specifier: ^19.0.0
+        specifier: catalog:react19
         version: 19.0.0(react@19.0.0)
       react-hook-form:
-        specifier: ^7.54.2
+        specifier: 'catalog:'
         version: 7.54.2(react@19.0.0)
       react-resizable-panels:
         specifier: ^2.1.7
@@ -416,28 +546,28 @@ importers:
         specifier: 'workspace:'
         version: link:../config
       '@storybook/addon-a11y':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-essentials':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(@types/react@19.0.12)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-interactions':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-links':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/blocks':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/react':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react-webpack5':
-        specifier: ^8.6.7
-        version: 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+        specifier: catalog:storybook8
+        version: 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/test':
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(storybook@8.6.7(prettier@3.5.3))
       '@testing-library/dom':
         specifier: ^10.4.0
@@ -455,68 +585,68 @@ importers:
         specifier: ^7.10.0
         version: 7.10.0
       '@types/jest':
-        specifier: ^29.5.14
+        specifier: catalog:jest29
         version: 29.5.14
       '@types/node':
-        specifier: ^22.13.10
+        specifier: 'catalog:'
         version: 22.13.10
       '@types/react':
-        specifier: ^19.0.11
+        specifier: catalog:react19
         version: 19.0.12
       '@types/react-dom':
-        specifier: ^19.0.4
+        specifier: catalog:react19
         version: 19.0.4(@types/react@19.0.12)
       '@types/react-syntax-highlighter':
         specifier: ^15.5.13
         version: 15.5.13
       autoprefixer:
-        specifier: ^10.4.21
+        specifier: 'catalog:'
         version: 10.4.21(postcss@8.5.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1))
+        version: 10.0.0(@babel/core@7.26.10)(webpack@5.98.0)
       eslint:
-        specifier: ^9.22.0
+        specifier: 'catalog:'
         version: 9.22.0(jiti@2.4.2)
       jest:
-        specifier: ^29.7.0
+        specifier: catalog:jest29
         version: 29.7.0(@types/node@22.13.10)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))
       jest-environment-jsdom:
-        specifier: ^29.7.0
+        specifier: catalog:jest29
         version: 29.7.0
       postcss:
-        specifier: ^8.5.3
+        specifier: catalog:postcss
         version: 8.5.3
       postcss-load-config:
-        specifier: ^6.0.1
+        specifier: catalog:postcss
         version: 6.0.1(jiti@2.4.2)(postcss@8.5.3)(yaml@2.7.0)
       postcss-loader:
-        specifier: ^8.1.1
-        version: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1))
+        specifier: catalog:postcss
+        version: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0)
       storybook:
-        specifier: ^8.6.7
+        specifier: catalog:storybook8
         version: 8.6.7(prettier@3.5.3)
       tailwind-merge:
-        specifier: ^3.0.2
+        specifier: catalog:tailwind
         version: 3.0.2
       tailwindcss:
-        specifier: ^3.4.17
+        specifier: catalog:tailwind
         version: 3.4.17(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2))
       tailwindcss-animate:
-        specifier: ^1.0.7
+        specifier: catalog:tailwind
         version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2)))
       ts-jest:
-        specifier: ^29.2.6
+        specifier: catalog:jest29
         version: 29.2.6(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(esbuild@0.25.1)(jest@29.7.0(@types/node@22.13.10)(ts-node@10.9.2(@types/node@22.13.10)(typescript@5.8.2)))(typescript@5.8.2)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@22.13.10)(typescript@5.8.2)
       typescript:
-        specifier: ^5.8.2
+        specifier: 'catalog:'
         version: 5.8.2
       webpack:
-        specifier: ^5.98.0
-        version: 5.98.0(esbuild@0.25.1)
+        specifier: 'catalog:'
+        version: 5.98.0
 
 packages:
 
@@ -9564,7 +9694,7 @@ snapshots:
 
   '@pkgr/core@0.1.1': {}
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.15(react-refresh@0.14.2)(type-fest@4.37.0)(webpack-hot-middleware@2.26.1)(webpack@5.98.0)':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.15(react-refresh@0.14.2)(type-fest@4.37.0)(webpack-hot-middleware@2.26.1)(webpack@5.98.0(esbuild@0.25.1))':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.41.0
@@ -9574,7 +9704,7 @@ snapshots:
       react-refresh: 0.14.2
       schema-utils: 4.3.0
       source-map: 0.7.4
-      webpack: 5.98.0
+      webpack: 5.98.0(esbuild@0.25.1)
     optionalDependencies:
       type-fest: 4.37.0
       webpack-hot-middleware: 2.26.1
@@ -10504,7 +10634,7 @@ snapshots:
     dependencies:
       storybook: 8.6.7(prettier@3.5.3)
 
-  '@storybook/nextjs@8.6.7(next@15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(type-fest@4.37.0)(typescript@5.8.2)(webpack-hot-middleware@2.26.1)(webpack@5.98.0)':
+  '@storybook/nextjs@8.6.7(esbuild@0.25.1)(next@15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(type-fest@4.37.0)(typescript@5.8.2)(webpack-hot-middleware@2.26.1)(webpack@5.98.0(esbuild@0.25.1))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.26.10)
@@ -10519,30 +10649,30 @@ snapshots:
       '@babel/preset-react': 7.26.3(@babel/core@7.26.10)
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.10)
       '@babel/runtime': 7.26.10
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.15(react-refresh@0.14.2)(type-fest@4.37.0)(webpack-hot-middleware@2.26.1)(webpack@5.98.0)
-      '@storybook/builder-webpack5': 8.6.7(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
-      '@storybook/preset-react-webpack': 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.15(react-refresh@0.14.2)(type-fest@4.37.0)(webpack-hot-middleware@2.26.1)(webpack@5.98.0(esbuild@0.25.1))
+      '@storybook/builder-webpack5': 8.6.7(esbuild@0.25.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+      '@storybook/preset-react-webpack': 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react': 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/test': 8.6.7(storybook@8.6.7(prettier@3.5.3))
       '@types/semver': 7.5.8
-      babel-loader: 9.2.1(@babel/core@7.26.10)(webpack@5.98.0)
-      css-loader: 6.11.0(webpack@5.98.0)
+      babel-loader: 9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1))
+      css-loader: 6.11.0(webpack@5.98.0(esbuild@0.25.1))
       find-up: 5.0.0
       image-size: 1.2.0
       loader-utils: 3.3.1
       next: 15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      node-polyfill-webpack-plugin: 2.0.1(webpack@5.98.0)
+      node-polyfill-webpack-plugin: 2.0.1(webpack@5.98.0(esbuild@0.25.1))
       pnp-webpack-plugin: 1.7.0(typescript@5.8.2)
       postcss: 8.5.3
-      postcss-loader: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0)
+      postcss-loader: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1))
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       react-refresh: 0.14.2
       resolve-url-loader: 5.0.0
-      sass-loader: 14.2.1(webpack@5.98.0)
+      sass-loader: 14.2.1(webpack@5.98.0(esbuild@0.25.1))
       semver: 7.7.1
       storybook: 8.6.7(prettier@3.5.3)
-      style-loader: 3.3.4(webpack@5.98.0)
+      style-loader: 3.3.4(webpack@5.98.0(esbuild@0.25.1))
       styled-jsx: 5.1.6(@babel/core@7.26.10)(react@19.0.0)
       ts-dedent: 2.2.0
       tsconfig-paths: 4.2.0
@@ -10550,7 +10680,7 @@ snapshots:
     optionalDependencies:
       sharp: 0.33.5
       typescript: 5.8.2
-      webpack: 5.98.0
+      webpack: 5.98.0(esbuild@0.25.1)
     transitivePeerDependencies:
       - '@rspack/core'
       - '@swc/core'
@@ -10659,10 +10789,10 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       storybook: 8.6.7(prettier@3.5.3)
 
-  '@storybook/react-webpack5@8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)':
+  '@storybook/react-webpack5@8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)':
     dependencies:
-      '@storybook/builder-webpack5': 8.6.7(esbuild@0.25.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
-      '@storybook/preset-react-webpack': 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+      '@storybook/builder-webpack5': 8.6.7(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+      '@storybook/preset-react-webpack': 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react': 8.6.7(@storybook/test@8.6.7(storybook@8.6.7(prettier@3.5.3)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -11484,18 +11614,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-loader@10.0.0(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)):
+  babel-loader@10.0.0(@babel/core@7.26.10)(webpack@5.98.0):
     dependencies:
       '@babel/core': 7.26.10
       find-up: 5.0.0
-      webpack: 5.98.0(esbuild@0.25.1)
+      webpack: 5.98.0
 
-  babel-loader@9.2.1(@babel/core@7.26.10)(webpack@5.98.0):
+  babel-loader@9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       '@babel/core': 7.26.10
       find-cache-dir: 4.0.0
       schema-utils: 4.3.0
-      webpack: 5.98.0
+      webpack: 5.98.0(esbuild@0.25.1)
 
   babel-plugin-istanbul@6.1.1:
     dependencies:
@@ -14653,7 +14783,7 @@ snapshots:
 
   node-int64@0.4.0: {}
 
-  node-polyfill-webpack-plugin@2.0.1(webpack@5.98.0):
+  node-polyfill-webpack-plugin@2.0.1(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       assert: 2.1.0
       browserify-zlib: 0.2.0
@@ -14680,7 +14810,7 @@ snapshots:
       url: 0.11.4
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.98.0
+      webpack: 5.98.0(esbuild@0.25.1)
 
   node-releases@2.0.19: {}
 
@@ -15564,11 +15694,11 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@14.2.1(webpack@5.98.0):
+  sass-loader@14.2.1(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      webpack: 5.98.0
+      webpack: 5.98.0(esbuild@0.25.1)
 
   saxes@6.0.0:
     dependencies:

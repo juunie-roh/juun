@@ -18,14 +18,14 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
-    "@next/eslint-plugin-next": "^15.2.3",
+    "@next/eslint-plugin-next": "catalog:next15",
     "@tailwindcss/typography": "^0.5.16",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "@types/eslint-plugin-tailwindcss": "^3.17.0",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
-    "eslint": "^9.22.0",
+    "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.11.0",
@@ -43,11 +43,11 @@
     "eslint-plugin-testing-library": "^7.1.1",
     "eslint-plugin-turbo": "^2.4.4",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "prettier": "^3.5.3",
-    "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^3.4.17",
-    "tailwindcss-animate": "^1.0.7",
-    "turbo": "^2.4.4",
-    "typescript": "^5.8.2"
+    "prettier": "catalog:",
+    "tailwind-merge": "catalog:tailwind",
+    "tailwindcss": "catalog:tailwind",
+    "tailwindcss-animate": "catalog:tailwind",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
   }
 }
