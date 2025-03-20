@@ -1,0 +1,17 @@
+packages:
+  - apps/*
+  - packages/*
+catalog:
+  '@types/node': ^22.13.10
+  eslint: ^9.22.0
+  postcss: ^8.5.3
+  tailwindcss: ^3.4.17
+  ts-node: ^10.9.2
+  turbo: ^2.4.4
+  typescript: ^5.8.2
+  webpack: ^5.98.0
+onlyBuiltDependencies:
+  - '@vercel/speed-insights'
+  - core-js-pure
+  - esbuild
+  - sharp
