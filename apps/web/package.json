@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "catalog:next15",
-    "@pkg/config": "workspace:",
+    "@pkg/config": "workspace:^",
     "@storybook/addon-a11y": "catalog:storybook8",
     "@storybook/addon-essentials": "catalog:storybook8",
     "@storybook/addon-interactions": "catalog:storybook8",
@@ -47,7 +47,7 @@
     "webpack": "catalog:"
   },
   "dependencies": {
-    "@pkg/ui": "workspace:",
+    "@pkg/ui": "workspace:^",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
