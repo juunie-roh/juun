@@ -23,7 +23,7 @@ The project uses Turborepo to optimize the development workflow and build proces
 - [Turborepo](https://turbo.build) for high-performance build system
 
 ### Developer Experience
-- [Yarn](https://yarnpkg.com) for package management with node_modules linker
+- [PNPM](https://pnpm.io) for fast, disk space efficient package management
 - Monorepo structure with workspace dependencies powered by Turborepo
 - [ESLint](https://eslint.org) configuration for Next.js, React, TypeScript, and more
 - [Prettier](https://prettier.io) for code formatting
@@ -75,7 +75,7 @@ juun/
 
 ### Prerequisites
 - Node.js 18+ (recommended: 22.x)
-- Yarn (latest)
+- PNPM (latest)
 
 ### Installation
 
@@ -85,30 +85,30 @@ git clone https://github.com/juunie-roh/juun.git
 cd juun
 
 # Install dependencies
-yarn
+pnpm install
 ```
 
 ### Development
 
 ```bash
 # Start the development server
-yarn dev
+pnpm dev
 
 # Run ESLint
-yarn lint
+pnpm lint
 
 # Run type checking
-yarn check-types
+pnpm check-types
 
 # Run tests
-yarn test
+pnpm test
 ```
 
 ### Build
 
 ```bash
 # Build for production
-yarn build
+pnpm build
 ```
 
 ## 🐳 Docker Support

@@ -9,6 +9,20 @@ const extendedConfig: Config = {
         sans: ['var(--font-geist-sans)', 'var(--font-rix)'],
         mono: ['var(--font-geist-mono)'],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: 'hsl(var(--primary))', // Base text color
+            h1: { color: 'hsl(var(--primary))' },
+            h2: { color: 'hsl(var(--primary))' },
+            h3: { color: 'hsl(var(--primary))' },
+            strong: { color: 'hsl(var(--primary))' },
+            a: { color: 'hsl(var(--primary))' },
+            code: { color: 'hsl(var(--primary))' },
+            // Add other elements as needed
+          },
+        },
+      },
     },
   },
   content: [
