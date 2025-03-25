@@ -29,6 +29,16 @@ export async function generateMetadata({
     title: post.metadata.title,
     description:
       post.metadata.description || `Portfolio project: ${post.metadata.title}`,
+    keywords: post.metadata.tags,
+    openGraph: {
+      type: 'article',
+      title: post.metadata.title,
+      description:
+        post.metadata.description ||
+        `Portfolio project: ${post.metadata.title}`,
+      images: post.metadata.image,
+      url: `https://juun.vercel.app/blog/${slug}`,
+    },
   };
 }
 
