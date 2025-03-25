@@ -15,7 +15,6 @@ export async function generateMetadata({
   const posts = getPosts();
   // Find the specific post by slug
   const post = posts.find((post) => post.slug === slug);
-
   // If post not found, return basic metadata
   if (!post) {
     return {
@@ -37,6 +36,7 @@ export async function generateMetadata({
         post.metadata.description ||
         `Portfolio project: ${post.metadata.title}`,
       images: post.metadata.image,
+      siteName: post.metadata.title,
       url: `https://juun.vercel.app/blog/${slug}`,
     },
   };
