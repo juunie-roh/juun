@@ -55,13 +55,13 @@ export function BlogCard({ post }: BlogCardProps) {
         {/* Image container - left side on md+ screens, top on mobile */}
         {post.metadata.image ? (
           <div className="overflow-hidden md:w-1/3 lg:w-2/5">
-            <div className="aspect-video size-full bg-gray-100 md:aspect-auto">
+            <div className="aspect-video size-full bg-gray-300 md:aspect-auto">
               <Image
                 src={post.metadata.image}
                 alt={post.metadata.title || 'Blog post image'}
                 width={256}
                 height={256}
-                className="h-56 w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                className="size-full object-contain transition-transform duration-300 group-hover:scale-105 md:h-56"
                 sizes="(max-width: 768px) 100vw, 350px"
               />
             </div>

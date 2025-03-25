@@ -9,12 +9,18 @@ import { toast } from 'sonner';
 import { Button } from './button';
 import { ScrollArea, ScrollBar } from './scroll-area';
 
+/**
+ * @see {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD AVAILABLE_LANGUAGES_PRISM}
+ */
 type SupportedLanguage =
   | 'typescript'
   | 'javascript'
   | 'json'
   | 'bash'
-  | 'docker';
+  | 'docker'
+  | 'yaml'
+  | 'ignore'
+  | 'text'; // monospaced plain text
 
 const languageMap: Record<string, SupportedLanguage> = {
   ts: 'typescript',
@@ -27,6 +33,11 @@ const languageMap: Record<string, SupportedLanguage> = {
   zsh: 'bash',
   dockerfile: 'docker',
   docker: 'docker',
+  dockerignore: 'ignore',
+  yml: 'yaml',
+  yaml: 'yaml',
+  gitignore: 'ignore',
+  gitattributes: 'text',
 };
 
 export interface CodeBlockProps {

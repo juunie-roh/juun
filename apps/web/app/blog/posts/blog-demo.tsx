@@ -180,7 +180,7 @@ export default function BlogDemo() {
       )}
 
       <div className="prose mt-8 max-w-none text-primary">
-        <h2 className="text-primary">Project Overview</h2>
+        <h2>Project Overview</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure illo
           dolor molestiae atque repellendus doloremque. Aspernatur facilis rem
@@ -188,7 +188,7 @@ export default function BlogDemo() {
           repudiandae et aut ab saepe.
         </p>
 
-        <h2 className="text-primary">Challenge</h2>
+        <h2>Challenge</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ab
           natus sequi, illo iure harum reprehenderit unde, voluptatibus, quod
@@ -196,7 +196,7 @@ export default function BlogDemo() {
           aperiam?
         </p>
 
-        <h2 className="text-primary">Solution</h2>
+        <h2>Solution</h2>
         <p>
           I implemented a complete redesign using Next.js and Tailwind CSS,
           focusing on:
@@ -211,7 +211,7 @@ export default function BlogDemo() {
           <li>Responsive design that works on all device sizes</li>
         </ul>
 
-        <h2 className="text-primary">Results</h2>
+        <h2>Results</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint aliquid
           excepturi velit placeat et quia nam modi voluptatibus, sed nobis
