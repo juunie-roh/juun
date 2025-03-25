@@ -49,7 +49,7 @@
   "dependencies": {
     "@pkg/ui": "workspace:^",
     "@react-three/cannon": "^6.6.0",
-    "@react-three/drei": "^10.0.4",
+    "@react-three/drei": "^10.0.5",
     "@react-three/fiber": "^9.1.0",
     "@vercel/speed-insights": "^1.2.0",
     "next": "catalog:next15",
