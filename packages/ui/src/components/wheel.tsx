@@ -11,7 +11,9 @@ import { forwardRef, useState } from 'react';
 // Internal Types
 type Angle = { start: number; end: number };
 type Point = { x: number; y: number };
-interface WheelRootProps extends HTMLAttributes<HTMLDivElement> {}
+interface WheelRootProps extends HTMLAttributes<HTMLDivElement> {
+  size?: number;
+}
 interface WheelSectorProps
   extends VariantProps<typeof pathVariants>,
     VariantProps<typeof iconVariants> {
@@ -28,13 +30,6 @@ interface WheelSectorProps
 }
 interface WheelTitleProps extends HTMLAttributes<HTMLDivElement> {}
 
-const DEFAULT_TITLES = [
-  'Action 0',
-  'Action 1',
-  'Action 2',
-  'Action 3',
-  'Action 4',
-];
 // Variants:
 const wheelVariants = cva('relative size-[200px]', {
   variants: {
@@ -123,6 +118,7 @@ const calculatePoint = (angle: number, radius: number): Point => ({
   x: 100 + radius * Math.cos((angle * Math.PI) / 180),
   y: 100 + radius * Math.sin((angle * Math.PI) / 180),
 });
+
 /**
  * Draw a circle having `radius` from `startAngle` to `endAngle`, excluding the circle having `innerRadius`.
  * @param startAngle Degree to start circle
@@ -157,14 +153,14 @@ const getSectorPath = ({
 
 // Internal Components
 /**
- * Determines the size of the wheel.
+ * Determines the wrapper size of the wheel.
  */
 const WheelRoot = forwardRef<HTMLDivElement, WheelRootProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, size = 200, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        'relative size-[200px]',
+        `relative size-[${size}px]`,
         className,
         'bg-transparent border-none',
       )}
@@ -241,14 +237,18 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
 );
 WheelTitle.displayName = 'WheelTitle';
 
-export type WheelType = 'confirm' | 'four' | 'five';
 export interface WheelProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'>,
     VariantProps<typeof wheelVariants> {
-  type: WheelType;
+  /** The Number of Wheel Menus */
+  num: number;
+  /** Callback to execute on menu selected */
   onSelect?: (index: number) => void;
+  /** Icons for each menu */
   icons?: ReturnType<typeof createLucideIcon>[];
+  /** Titles for each menu */
   titles?: string[];
+  size?: number;
   radius?: number;
   innerRadius?: number;
 }
@@ -257,10 +257,11 @@ export interface WheelProps
 const Wheel = forwardRef<HTMLDivElement, WheelProps>(
   (
     {
-      type,
+      num,
       onSelect,
       icons,
-      titles = DEFAULT_TITLES,
+      titles,
+      size = 200,
       radius = 80,
       innerRadius = 35,
       className,
@@ -269,44 +270,51 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
     },
     ref,
   ) => {
+    if (num < 2) throw new Error('Invalid Wheel Menu number (lower than 2)');
+    if (icons && icons.length !== num)
+      throw new Error(
+        'The number of wheel menu and the length of icons array does not match.',
+      );
+    if (titles && titles.length !== num) {
+      throw new Error(
+        'The number of wheel menu and the length of titles array does not match.',
+      );
+    }
     const [hovered, setHovered] = useState<number | null>(null);
+    const wheelTitles =
+      titles || Array.from({ length: num }, (_, i) => `Menu ${i}`);
 
     const getAngles = () => {
-      switch (type) {
-        case 'confirm':
-          return [
-            { start: 0 - 45, end: 0 + 45 },
-            { start: 180 - 45, end: 180 + 45 },
-          ];
-        case 'four':
-          return Array.from({ length: 4 }, (_, i) => ({
-            start: i * 90 - 90,
-            end: (i + 1) * 90 - 90,
-          }));
-        case 'five':
-          return Array.from({ length: 5 }, (_, i) => ({
-            start: i * 72 - 90,
-            end: (i + 1) * 72 - 90,
-          }));
-        default:
-          return [];
+      // Specify the shape for wheel with 2 menus.
+      if (num === 2) {
+        return [
+          { start: -45, end: 45 },
+          { start: 135, end: 225 },
+        ];
       }
+
+      const a = 360 / num;
+      return Array.from({ length: num }, (_, i) => ({
+        start: i * a - 90,
+        end: (i + 1) * a - 90,
+      }));
     };
 
     const angles = getAngles();
 
-    const viewBoxSize = Math.max(200, 2 * (radius * 1.2)); // 20% extra space for hover scaling
-    const viewBoxOrigin = 100 - viewBoxSize / 2;
+    const viewBoxSize = Math.max(size, 2 * (radius * 1.2)); // 20% extra space for hover scaling
+    const viewBoxOrigin = size / 2 - viewBoxSize / 2;
     const viewBox = `${viewBoxOrigin} ${viewBoxOrigin} ${viewBoxSize} ${viewBoxSize}`;
 
     return (
       <WheelRoot
         ref={ref}
+        size={viewBoxSize}
         className={cn(wheelVariants({ variant, className }))}
         {...props}
       >
         <svg viewBox={viewBox}>
-          <g transform="translate(0, 0)">
+          <g>
             {angles.map((angle, i) => {
               const rotation = (angle.start + angle.end) / 2;
               const Comp = icons ? icons[i]! : TriangleAlert;
@@ -330,8 +338,8 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
           </g>
         </svg>
 
-        {hovered !== null && titles[hovered] && (
-          <WheelTitle>{titles[hovered]}</WheelTitle>
+        {hovered !== null && wheelTitles[hovered] && (
+          <WheelTitle>{wheelTitles[hovered]}</WheelTitle>
         )}
       </WheelRoot>
     );

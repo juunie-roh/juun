@@ -82,7 +82,7 @@
     "react-hook-form": "catalog:",
     "react-resizable-panels": "^2.1.7",
     "react-syntax-highlighter": "^15.6.1",
-    "sonner": "^2.0.1",
+    "sonner": "^2.0.2",
     "vaul": "^1.1.2",
     "zod": "^3.24.2"
   },

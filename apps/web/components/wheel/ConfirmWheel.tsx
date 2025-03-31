@@ -6,7 +6,7 @@ import { Check, X } from 'lucide-react';
 function ConfirmWheel() {
   return (
     <Wheel
-      type="confirm"
+      num={2}
       icons={[Check, X]}
       titles={['Confirm', 'Cancel']}
       variant="destructive"

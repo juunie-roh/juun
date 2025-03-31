@@ -27,10 +27,9 @@ const meta: Meta<typeof Wheel> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    type: {
-      control: 'select',
-      options: ['confirm', 'four', 'five'],
-      description: 'The type of wheel to render',
+    num: {
+      control: { type: 'range', min: 2, max: 10, step: 1 },
+      description: 'The number of wheel menus',
     },
     variant: {
       control: 'select',
@@ -55,14 +54,14 @@ type Story = StoryObj<typeof Wheel>;
 // Basic examples
 export const Default: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'primary',
   },
 };
 
 export const ConfirmType: Story = {
   args: {
-    type: 'confirm',
+    num: 2,
     variant: 'primary',
     icons: [Check, X],
     titles: ['Confirm', 'Cancel'],
@@ -71,7 +70,7 @@ export const ConfirmType: Story = {
 
 export const FourType: Story = {
   args: {
-    type: 'four',
+    num: 4,
     variant: 'primary',
     icons: [ArrowUp, ArrowRight, ArrowDown, ArrowLeft],
     titles: ['Up', 'Right', 'Down', 'Left'],
@@ -80,7 +79,7 @@ export const FourType: Story = {
 
 export const FiveType: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'primary',
     icons: [Home, Search, Bell, Settings, User],
     titles: ['Home', 'Search', 'Notifications', 'Settings', 'Profile'],
@@ -90,28 +89,28 @@ export const FiveType: Story = {
 // Variant examples
 export const PrimaryVariant: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'primary',
   },
 };
 
 export const SecondaryVariant: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'secondary',
   },
 };
 
 export const DestructiveVariant: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'destructive',
   },
 };
 
 export const OutlineVariant: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'outline',
   },
 };
@@ -119,7 +118,7 @@ export const OutlineVariant: Story = {
 // Customized examples
 export const CustomSized: Story = {
   args: {
-    type: 'five',
+    num: 5,
     variant: 'primary',
     radius: 100,
     innerRadius: 50,
@@ -137,7 +136,7 @@ const RenderInteractive = () => {
   return (
     <div className="flex flex-col items-center gap-4">
       <Wheel
-        type="five"
+        num={5}
         variant="primary"
         icons={[Home, Search, Bell, Settings, User]}
         titles={['Home', 'Search', 'Notifications', 'Settings', 'Profile']}
@@ -165,7 +164,7 @@ export const WheelShowcase: Story = {
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Confirm Wheel</h3>
           <Wheel
-            type="confirm"
+            num={2}
             variant="primary"
             icons={[Check, X]}
             titles={['Confirm', 'Cancel']}
@@ -174,7 +173,7 @@ export const WheelShowcase: Story = {
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Four-Option Wheel</h3>
           <Wheel
-            type="four"
+            num={4}
             variant="secondary"
             icons={[ArrowUp, ArrowRight, ArrowDown, ArrowLeft]}
             titles={['Up', 'Right', 'Down', 'Left']}
@@ -183,7 +182,7 @@ export const WheelShowcase: Story = {
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Five-Option Wheel</h3>
           <Wheel
-            type="five"
+            num={5}
             variant="outline"
             icons={[Home, Search, Bell, Settings, User]}
             titles={['Home', 'Search', 'Notifications', 'Settings', 'Profile']}
@@ -191,12 +190,7 @@ export const WheelShowcase: Story = {
         </div>
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Destructive Wheel</h3>
-          <Wheel
-            type="five"
-            variant="destructive"
-            radius={90}
-            innerRadius={40}
-          />
+          <Wheel num={5} variant="destructive" radius={90} innerRadius={40} />
         </div>
       </div>
     );

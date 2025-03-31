@@ -5,7 +5,7 @@ catalog:
   "@types/node": ^22
   autoprefixer: ^10
   eslint: ^9
-  lucide-react: ^0.483.0
+  lucide-react: ^0
   prettier: ^3
   react-hook-form: ^7
   ts-node: ^10
