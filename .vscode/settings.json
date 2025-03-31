@@ -1,13 +1,11 @@
 {
   "editor.formatOnSave": false,
-  "eslint.nodePath": ".yarn/sdks",
   "eslint.enable": true,
   "eslint.format.enable": true,
   "prettier.singleQuote": true,
   "prettier.quoteProps": "preserve",
   "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/node_modules": true
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "[css]": {
