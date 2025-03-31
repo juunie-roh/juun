@@ -6,7 +6,7 @@ import { Copy, Delete, Info, Move, RotateCw } from 'lucide-react';
 function FiveWheel() {
   return (
     <Wheel
-      type="five"
+      num={5}
       icons={[Move, Delete, Copy, Info, RotateCw]}
       titles={['Move', 'Delete', 'Copy', 'Info', 'Rotate']}
     />
