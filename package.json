@@ -15,9 +15,9 @@
     "test": "turbo test",
     "lint-staged": "lint-staged",
     "check-types": "turbo check-types",
-    "web": "pnpm --filter @juun/nextjs",
-    "configs": "pnpm --filter @juun/config",
-    "ui": "pnpm --filter @juun/ui"
+    "web": "pnpm --filter @app/nextjs",
+    "configs": "pnpm --filter @pkg/config",
+    "ui": "pnpm --filter @pkg/ui"
   },
   "devDependencies": {
     "@commitlint/cli": "catalog:commitlint19",
