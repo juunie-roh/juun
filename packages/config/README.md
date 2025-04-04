@@ -39,7 +39,7 @@ pnpm check-types
 
 ## Package Structure
 
-```
+```text
 config/
 ├── eslint/           # ESLint configurations
 │   ├── src/          # Source files for each config
