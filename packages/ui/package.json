@@ -27,7 +27,7 @@
     "@storybook/test": "catalog:storybook8",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
+    "@testing-library/react": "^16.3.0",
     "@types/babel__core": "^7.20.5",
     "@types/babel__preset-env": "^7.10.0",
     "@types/jest": "catalog:jest29",
@@ -82,7 +82,7 @@
     "react-hook-form": "catalog:",
     "react-resizable-panels": "^2.1.7",
     "react-syntax-highlighter": "^15.6.1",
-    "sonner": "^2.0.2",
+    "sonner": "^2.0.3",
     "vaul": "^1.1.2",
     "zod": "^3.24.2"
   },
