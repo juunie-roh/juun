@@ -1,4 +1,21 @@
 {
+  "cSpell.files": [
+    "*.js",
+    "*.jsx",
+    "*.ts",
+    "*.tsx",
+    "*.md",
+  ],
+  "cSpell.words": [
+    "autoprefixer",
+    "commitizen",
+    "commitlint",
+    "jsdom",
+    "libc",
+    "lucide",
+    "shadcn",
+    "Turborepo"
+  ],
   "editor.formatOnSave": false,
   "eslint.enable": true,
   "eslint.format.enable": true,
@@ -29,5 +46,22 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.formatOnSave": true,
+
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "cSpell.fixSpellingWithRenameProvider": true,
+    "cSpell.advanced.feature.useReferenceProviderWithRename": true,
+    "cSpell.advanced.feature.useReferenceProviderRemove": "/^#+\\s/"
   }
 }

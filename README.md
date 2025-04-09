@@ -15,6 +15,7 @@ The project uses Turborepo to optimize the development workflow and build proces
 ## 🚀 Features
 
 ### Core Technologies
+
 - [Next.js 15](https://nextjs.org) with App Router
 - [React 19](https://react.dev) with Server and Client Components
 - [TypeScript](https://www.typescriptlang.org) for type safety
@@ -23,6 +24,7 @@ The project uses Turborepo to optimize the development workflow and build proces
 - [Turborepo](https://turbo.build) for high-performance build system
 
 ### Developer Experience
+
 - [PNPM](https://pnpm.io) for fast, disk space efficient package management
 - Monorepo structure with workspace dependencies powered by Turborepo
 - [ESLint](https://eslint.org) configuration for Next.js, React, TypeScript, and more
@@ -33,6 +35,7 @@ The project uses Turborepo to optimize the development workflow and build proces
 - [Storybook](https://storybook.js.org) for component development and documentation
 
 ### State Management & UI
+
 - [Zustand](https://zustand.docs.pmnd.rs) with middleware support (logger)
 - Customized [shadcn/ui](https://ui.shadcn.com) components
 - Dark mode with [next-themes](https://github.com/pacocoursey/next-themes)
@@ -41,6 +44,7 @@ The project uses Turborepo to optimize the development workflow and build proces
   - Portfolio system with dynamic routing
 
 ### Deployment & CI/CD
+
 - [GitHub Actions](https://github.com/features/actions) for CI/CD
 - Automated testing, linting, and type checking
 - Docker support with multi-stage builds
@@ -48,7 +52,7 @@ The project uses Turborepo to optimize the development workflow and build proces
 
 ## 📁 Project Structure
 
-```
+```text
 juun/
 ├── apps/
 │   └── web/                # Next.js application
@@ -74,6 +78,7 @@ juun/
 ## 🛠️ Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ (recommended: 22.x)
 - PNPM (latest)
 
