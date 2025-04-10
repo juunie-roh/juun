@@ -29,19 +29,21 @@ export function extractBaseMetadata<T extends BaseMetadata>(
     const metadata = { title: defaultTitle } as T;
 
     // Look for title in the file content
-    const titleMatch = content.match(/title:\s*['"](.+?)['"]/);
+    const titleMatch = content.match(/title:\s*['"`]([^'"`]*)['"`]/);
     if (titleMatch && titleMatch[1]) {
       metadata.title = titleMatch[1];
     }
 
     // Look for description
-    const descriptionMatch = content.match(/description:\s*['"](.+?)['"]/);
+    const descriptionMatch = content.match(
+      /description:\s*['"`]([\s\S]*?)['"`]/,
+    );
     if (descriptionMatch && descriptionMatch[1]) {
       metadata.description = descriptionMatch[1];
     }
 
     // Look for date and parse it to a Date object
-    const dateMatch = content.match(/date:\s*['"](.+?)['"]/);
+    const dateMatch = content.match(/date:\s*['"`](.+?)['"`]/);
     if (dateMatch && dateMatch[1]) {
       const parsedDate = parseDate(dateMatch[1]);
       if (parsedDate) {
@@ -52,20 +54,20 @@ export function extractBaseMetadata<T extends BaseMetadata>(
     }
 
     // Look for image
-    const imageMatch = content.match(/image:\s*['"](.+?)['"]/);
+    const imageMatch = content.match(/image:\s*['"`]([\s\S]*?)['"`]/);
     if (imageMatch && imageMatch[1]) {
       metadata.image = imageMatch[1];
     }
 
     // Look for tags - this is more complex as it's an array
-    const tagsMatch = content.match(/tags:\s*\[(.*?)\]/);
+    const tagsMatch = content.match(/tags:\s*\[([\s\S]*?)\]/);
     if (tagsMatch && tagsMatch[1]) {
       const tagsString = tagsMatch[1];
       const tags = tagsString
         .split(',')
         .map((tag) => {
           // Extract just the text between quotes
-          const match = tag.match(/['"](.+?)['"]/);
+          const match = tag.match(/['"`](.+?)['"`]/);
           return match ? match[1]?.trim() : null;
         })
         .filter(Boolean) as string[];
