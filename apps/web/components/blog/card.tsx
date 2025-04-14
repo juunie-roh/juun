@@ -5,6 +5,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  ScrollArea,
+  ScrollBar,
   Skeleton,
 } from '@pkg/ui';
 import { CalendarIcon, Clock } from 'lucide-react';
@@ -96,13 +98,20 @@ export function BlogCard({ post }: BlogCardProps) {
             </p>
 
             {post.metadata.tags && post.metadata.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {post.metadata.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
+              <ScrollArea>
+                <div className="flex flex-nowrap gap-2">
+                  {post.metadata.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="outline"
+                      className="text-nowrap text-xs"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                <ScrollBar orientation="horizontal" />
+              </ScrollArea>
             )}
           </CardContent>
 
