@@ -31,7 +31,7 @@ export default function Header() {
     >
       <div>
         <div className="flex items-center justify-between">
-          <Link href="/" legacyBehavior>
+          <Link href="/">
             <h1
               className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tighter lg:text-4xl`}
             >
@@ -47,13 +47,12 @@ export default function Header() {
                   {navigationItems.map((item, index) => (
                     <Fragment key={item.href}>
                       <NavigationMenuItem className="flex items-center gap-1 tracking-tight">
-                        <Link href={item.href} legacyBehavior passHref>
-                          <NavigationMenuLink
-                            className={navigationMenuTriggerStyle()}
-                          >
-                            {item.label}
-                          </NavigationMenuLink>
-                        </Link>
+                        <NavigationMenuLink
+                          href={item.href}
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          {item.label}
+                        </NavigationMenuLink>
                         {index < navigationItems.length - 1 && (
                           <Separator
                             orientation="vertical"
