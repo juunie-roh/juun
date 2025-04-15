@@ -1,12 +1,12 @@
-name: Release
+name: Monorepo Release
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'CHANGELOG.md'
-      - 'package.json'
+      - '**/CHANGELOG.md'
+      - '**/package.json'
   workflow_dispatch:
     inputs:
       logLevel:
@@ -17,12 +17,12 @@ on:
         description: 'Automated release tags'
 
 jobs:
-  generate-release-note:
+  release:
+    name: Create GitHub Release
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, 'Release version update')
     permissions:
       contents: write
-      id-token: write
     steps:
       - name: Checkout code repository
         uses: actions/checkout@v4
@@ -32,38 +32,88 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Setup node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Get package version
-        id: package-version
+      - name: Find updated packages
+        id: find-packages
         run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          # Identify packages with version changes in this commit
+          UPDATED_PACKAGES=$(find . -path "*/package.json" -not -path "*/node_modules/*" | xargs grep -l "\"version\"" | xargs git diff HEAD^ HEAD -- | grep "package.json" | grep "+.*version" | awk -F'/' '{print $2"/"$3}' | uniq | tr '\n' ' ')
 
-      - name: Get latest changes from CHANGELOG
-        id: changelog
+          # Fall back to root package if no specific packages found
+          if [ -z "$UPDATED_PACKAGES" ]; then
+            echo "No specific package updates detected, using root package"
+            ROOT_VERSION=$(node -p "require('./package.json').version")
+            echo "root_version=$ROOT_VERSION" >> $GITHUB_OUTPUT
+            echo "packages=root" >> $GITHUB_OUTPUT
+          else
+            echo "Updated packages: $UPDATED_PACKAGES"
+            echo "packages=$UPDATED_PACKAGES" >> $GITHUB_OUTPUT
+          fi
+
+          # Get the latest version tag to use for release
+          LATEST_VERSION=$(git tag -l "v[0-9]*.[0-9]*.[0-9]*" --sort=-v:refname | head -n 1 | sed 's/^v//')
+          if [ -z "$LATEST_VERSION" ]; then
+            LATEST_VERSION=$(node -p "require('./package.json').version")
+          fi
+          echo "release_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        id: release-notes
         run: |
-          # Extract the changes for the latest version
-          LATEST_CHANGES=$(sed -n "/## ${{ steps.package-version.outputs.version }}/,/## [0-9]/p" CHANGELOG.md | sed '$d' | sed '1d')
-          # Store the changes in a file to preserve newlines
-          echo "$LATEST_CHANGES" > latest_changes.txt
-          echo "changes_file=latest_changes.txt" >> $GITHUB_OUTPUT
+          echo "# Release Summary" > release_notes.md
+          echo "" >> release_notes.md
+
+          PACKAGES="${{ steps.find-packages.outputs.packages }}"
+          if [ "$PACKAGES" = "root" ]; then
+            # Use root package for the release
+            echo "## v${{ steps.find-packages.outputs.root_version }}" >> release_notes.md
+            echo "" >> release_notes.md
+
+            if [ -f "CHANGELOG.md" ]; then
+              # Extract the latest changes from the root CHANGELOG.md
+              LATEST_CHANGES=$(sed -n "/## ${{ steps.find-packages.outputs.root_version }}/,/## [0-9]/p" CHANGELOG.md | sed '$d' | sed '1d')
+              echo "$LATEST_CHANGES" >> release_notes.md
+            else
+              echo "No changelog found for root package" >> release_notes.md
+            fi
+          else
+            # Process each updated package
+            for PKG_PATH in $PACKAGES; do
+              if [ -f "$PKG_PATH/package.json" ]; then
+                PKG_NAME=$(node -p "require('./$PKG_PATH/package.json').name")
+                PKG_VERSION=$(node -p "require('./$PKG_PATH/package.json').version")
+
+                echo "## $PKG_NAME@$PKG_VERSION" >> release_notes.md
+                echo "" >> release_notes.md
+
+                if [ -f "$PKG_PATH/CHANGELOG.md" ]; then
+                  # Extract changes for this version from the package's CHANGELOG.md
+                  PKG_CHANGES=$(sed -n "/## $PKG_VERSION/,/## [0-9]/p" "$PKG_PATH/CHANGELOG.md" | sed '$d' | sed '1d')
+                  echo "$PKG_CHANGES" >> release_notes.md
+                else
+                  echo "No changelog found for $PKG_NAME" >> release_notes.md
+                fi
+
+                echo "" >> release_notes.md
+              fi
+            done
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.package-version.outputs.version }}
-          name: Release v${{ steps.package-version.outputs.version }}
-          body_path: ${{ steps.changelog.outputs.changes_file }}
+          tag_name: v${{ steps.find-packages.outputs.release_version }}
+          name: Release v${{ steps.find-packages.outputs.release_version }}
+          body_path: release_notes.md
           draft: false
           prerelease: false
-          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
