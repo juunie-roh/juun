@@ -47,13 +47,12 @@ export default function Header() {
                   {navigationItems.map((item, index) => (
                     <Fragment key={item.href}>
                       <NavigationMenuItem className="flex items-center gap-1 tracking-tight">
-                        <Link href={item.href} legacyBehavior passHref>
-                          <NavigationMenuLink
-                            className={navigationMenuTriggerStyle()}
-                          >
-                            {item.label}
-                          </NavigationMenuLink>
-                        </Link>
+                        <NavigationMenuLink
+                          href={item.href}
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          {item.label}
+                        </NavigationMenuLink>
                         {index < navigationItems.length - 1 && (
                           <Separator
                             orientation="vertical"
@@ -76,7 +75,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
       <Breadcrumb className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
     </header>
   );

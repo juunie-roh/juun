@@ -43,7 +43,6 @@ export default function NpmPublish() {
           </Suspense>
         </AspectRatio>
       )}
-
       <div className="prose mt-8 max-w-none text-primary">
         <h2 className="tracking-tight">Opening</h2>
         <p>

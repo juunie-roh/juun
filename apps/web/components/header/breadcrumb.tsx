@@ -75,8 +75,7 @@ export default function Breadcrumb({
             <>
               <BreadcrumbLink asChild>
                 <Link href={homeHref}>
-                  <Home className="ml-1 size-4" />
-                  <span className="sr-only">{homeLabel}</span>
+                  <Home className="ml-1 size-4" aria-label={homeLabel} />
                 </Link>
               </BreadcrumbLink>
             </>

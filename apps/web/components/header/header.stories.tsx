@@ -108,7 +108,6 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
           </div>
         </div>
       </div>
-
       {/* Breadcrumb with custom path */}
       <div className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300">
         <BreadcrumbList>

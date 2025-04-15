@@ -35,7 +35,6 @@ export default function YarnBerry() {
           </Suspense>
         </AspectRatio>
       )}
-
       <div className="prose mt-8 max-w-none text-primary">
         <h2 className="tracking-tight">Yarn Berry?</h2>
         <p>
