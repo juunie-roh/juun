@@ -1,6 +1,6 @@
 {
   "name": "@app/nextjs",
-  "version": "3.0.1",
+  "version": "0.0.0",
   "private": true,
   "author": "juun",
   "type": "module",
@@ -28,7 +28,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.1",
-    "@types/react": "^19.1.1",
+    "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/three": "^0.174.0",
     "autoprefixer": "^10.4.21",
@@ -41,7 +41,7 @@
     "postcss-loader": "^8.1.1",
     "storybook": "^8.6.12",
     "tailwindcss": "^3.4.17",
-    "ts-jest": "^29.3.1",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "webpack": "^5.99.5"

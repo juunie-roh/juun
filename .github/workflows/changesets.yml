@@ -1,0 +1,57 @@
+name: Changesets
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CI: true
+  HUSKY: 0
+
+jobs:
+  version:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      has_changes: ${{ steps.changesets.outputs.hasChangesets }}
+      pr_number: ${{ steps.changesets.outputs.pullRequestNumber }}
+    steps:
+      - name: Checkout code repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Disable Git hooks
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Method 1: Replace hooks directory with empty one
+          mkdir -p /tmp/empty-hooks
+          git config --global core.hooksPath /tmp/empty-hooks
+
+      - name: Create and publish versions
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: "ci: Release version update"
+          title: "Release version update"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
