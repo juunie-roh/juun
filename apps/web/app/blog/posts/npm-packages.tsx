@@ -118,7 +118,7 @@ export default function NpmPublish() {
         <h3 className="tracking-tight">TypeScript - Builds</h3>
         <p>
           기본 컴파일러인 <code>tsc</code> 를 사용해도 되지만,{' '}
-          <Link href="https://tsup.egoist.dev/" legacyBehavior>
+          <Link href="https://tsup.egoist.dev/">
             <code>tsup</code>
           </Link>{' '}
           이라는 번들러를 이용했다. (<s>그냥</s>)

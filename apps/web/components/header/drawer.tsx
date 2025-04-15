@@ -58,7 +58,7 @@ export default function HeaderDrawer({ navigationItems }: HeaderDrawerProps) {
                     href={item.href}
                     className="text-center text-xl font-medium transition-colors hover:text-primary"
                     onClick={() => setOpen(false)}
-                    legacyBehavior>
+                  >
                     {item.label}
                   </Link>
                 </Button>
