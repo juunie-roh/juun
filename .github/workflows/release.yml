@@ -1,37 +1,69 @@
 name: Release
+
 on:
-  workflow_run:
-    workflows:
-      - CI
-    types:
-      - completed
+  push:
     branches:
       - main
-permissions:
-  contents: write
-  issues: write
+    paths:
+      - 'CHANGELOG.md'
+      - 'package.json'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Automated release tags'
+
 jobs:
-  release:
-    strategy:
-      matrix:
-        node-version:
-          - 22.x
-    name: Create a new release
+  generate-release-note:
     runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'Release version update')
+    permissions:
+      contents: write
+      id-token: write
     steps:
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/checkout@v4
+      - name: Checkout code repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
-      - run: HUSKY=0 pnpm install --frozen-lockfile
-      - name: Release
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Get package version
+        id: package-version
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get latest changes from CHANGELOG
+        id: changelog
+        run: |
+          # Extract the changes for the latest version
+          LATEST_CHANGES=$(sed -n "/## ${{ steps.package-version.outputs.version }}/,/## [0-9]/p" CHANGELOG.md | sed '$d' | sed '1d')
+          # Store the changes in a file to preserve newlines
+          echo "$LATEST_CHANGES" > latest_changes.txt
+          echo "changes_file=latest_changes.txt" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.package-version.outputs.version }}
+          name: Release v${{ steps.package-version.outputs.version }}
+          body_path: ${{ steps.changelog.outputs.changes_file }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm semantic-release
