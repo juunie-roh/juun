@@ -35,7 +35,6 @@ export default function YarnBerry() {
           </Suspense>
         </AspectRatio>
       )}
-
       <div className="prose mt-8 max-w-none text-primary">
         <h2 className="tracking-tight">Yarn Berry?</h2>
         <p>
@@ -96,7 +95,7 @@ export default function YarnBerry() {
           npm 이 참조하는 <code>.npmrc</code> 파일처럼, Yarn 은{' '}
           <code>.yarnrc.yml</code> 파일을 참조해 환경을 구성한다. 해당 파일이
           다루는 모든 항목들은{' '}
-          <Link href="https://yarnpkg.com/configuration/yarnrc">
+          <Link href="https://yarnpkg.com/configuration/yarnrc" legacyBehavior>
             Yarn Configuration{' '}
           </Link>
           에서 확인할 수 있다.

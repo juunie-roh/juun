@@ -29,7 +29,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
   if (slug === null) return null;
 
   return (
-    <Link href={`/portfolio/${slug}`} className="group block">
+    <Link href={`/portfolio/${slug}`} className="group block" legacyBehavior>
       <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
         {post.metadata.image ? (
           <div className="relative aspect-video w-full overflow-hidden bg-gray-100">

@@ -74,7 +74,7 @@ export default function Breadcrumb({
           {segments.length > 0 ? (
             <>
               <BreadcrumbLink asChild>
-                <Link href={homeHref}>
+                <Link href={homeHref} legacyBehavior>
                   <Home className="ml-1 size-4" />
                   <span className="sr-only">{homeLabel}</span>
                 </Link>
@@ -104,7 +104,7 @@ export default function Breadcrumb({
             <Fragment key={segment.href}>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={segment.href}>{segment.label}</Link>
+                  <Link href={segment.href} legacyBehavior>{segment.label}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

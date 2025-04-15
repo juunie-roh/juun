@@ -15,7 +15,7 @@ export default function BlogItemError() {
           Sorry, the post you're looking for doesn't exist or has been removed.
         </p>
         <Button variant="secondary" asChild>
-          <Link href="/blog">
+          <Link href="/blog" legacyBehavior>
             <ArrowLeft className="mr-2 size-4" />
             Return to Blog
           </Link>

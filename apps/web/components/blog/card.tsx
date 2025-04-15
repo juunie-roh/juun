@@ -52,7 +52,7 @@ export function BlogCard({ post }: BlogCardProps) {
   );
 
   return (
-    <Link href={`/blog/${slug}`} className="group block w-full">
+    <Link href={`/blog/${slug}`} className="group block w-full" legacyBehavior>
       <Card className="h-full overflow-hidden transition-all hover:shadow-lg md:flex md:flex-row">
         {/* Image container - left side on md+ screens, top on mobile */}
         {post.metadata.image ? (

@@ -16,7 +16,7 @@ export default function PortFolioItemError() {
           been removed.
         </p>
         <Button variant="secondary" asChild>
-          <Link href="/portfolio">
+          <Link href="/portfolio" legacyBehavior>
             <ArrowLeft className="mr-2 size-4" />
             Return to Portfolio
           </Link>

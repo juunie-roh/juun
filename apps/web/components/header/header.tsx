@@ -31,7 +31,7 @@ export default function Header() {
     >
       <div>
         <div className="flex items-center justify-between">
-          <Link href="/">
+          <Link href="/" legacyBehavior>
             <h1
               className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tighter lg:text-4xl`}
             >
@@ -76,7 +76,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
       <Breadcrumb className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
     </header>
   );

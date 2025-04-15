@@ -62,7 +62,7 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/50 p-4 backdrop-blur-lg md:px-8">
       <div>
         <div className="flex items-center justify-between">
-          <Link href="/">
+          <Link href="/" legacyBehavior>
             <h1
               className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tighter lg:text-4xl`}
             >
@@ -78,10 +78,7 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
                   {navigationItems.map((item, index) => (
                     <Fragment key={item.href}>
                       <NavigationMenuItem className="flex items-center gap-1">
-                        <Link
-                          href={item.href}
-                          className={navigationMenuTriggerStyle()}
-                        >
+                        <Link href={item.href} className={navigationMenuTriggerStyle()} legacyBehavior>
                           {item.label}
                         </Link>
                         {index < navigationItems.length - 1 && (
@@ -108,7 +105,6 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
           </div>
         </div>
       </div>
-
       {/* Breadcrumb with custom path */}
       <div className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300">
         <BreadcrumbList>
