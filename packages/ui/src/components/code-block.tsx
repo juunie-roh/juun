@@ -40,7 +40,7 @@ const languageMap: Record<string, SupportedLanguage> = {
   gitattributes: 'text',
 };
 
-export interface CodeBlockProps {
+interface CodeBlockProps {
   code: string;
   language?: string;
   showLineNumbers?: boolean;
@@ -49,7 +49,7 @@ export interface CodeBlockProps {
   maxHeight?: string | number;
 }
 
-export const CodeBlock = ({
+const CodeBlock = ({
   code,
   language = 'typescript',
   showLineNumbers = true,
@@ -133,3 +133,5 @@ export const CodeBlock = ({
     </div>
   );
 };
+
+export { CodeBlock, type CodeBlockProps };
