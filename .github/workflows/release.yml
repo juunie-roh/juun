@@ -1,4 +1,4 @@
-name: Monorepo Release
+name: Release from Changeset PR
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - '**/package.json'
+      - '**/CHANGELOG.md'
   workflow_dispatch:
     inputs:
       version:
@@ -13,47 +14,78 @@ on:
         required: false
 
 jobs:
-  create-release:
+  release:
     runs-on: ubuntu-latest
+    # Only run for PRs merged from changesets
+    if: contains(github.event.head_commit.message, 'Release version update')
     permissions:
       contents: write
+      pull-requests: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Get version info
-        id: version
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Get version from package.json
+        id: package-version
         run: |
-          # Use manually provided version or extract from root package.json
-          if [ "${{ github.event.inputs.version }}" != "" ]; then
-            VERSION="${{ github.event.inputs.version }}"
-          else
-            VERSION=$(node -p "require('./package.json').version")
-          fi
+          VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-          # Create a simple release summary
-          echo "# Release v$VERSION" > release_notes.md
-          echo "" >> release_notes.md
-          echo "Updated packages:" >> release_notes.md
+      - name: Find changeset PR
+        id: find-pr
+        run: |
+          # Get the most recent PR that was merged with the changesets title
+          PR_NUMBER=$(gh pr list --search "Release version update" --state merged --json number,title,mergedAt --limit 1 | jq -r '.[0].number')
 
-          # List changed package.json files in the latest commit
-          CHANGED_PKGS=$(git diff-tree --no-commit-id --name-only -r HEAD | grep package.json | grep -v "node_modules" || echo "No package changes detected")
-          echo "\`\`\`" >> release_notes.md
-          echo "$CHANGED_PKGS" >> release_notes.md
-          echo "\`\`\`" >> release_notes.md
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" == "null" ]; then
+            echo "No matching PR found. Using commit message for release notes."
+            echo "found_pr=false" >> $GITHUB_OUTPUT
+            echo "# Release v${{ steps.package-version.outputs.version }}" > release_notes.md
+            echo "" >> release_notes.md
+            echo "Commit: ${{ github.event.head_commit.message }}" >> release_notes.md
+          else
+            echo "Found PR #$PR_NUMBER"
+            echo "found_pr=true" >> $GITHUB_OUTPUT
+            echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
 
-          # Add commit message for context
-          echo "" >> release_notes.md
-          echo "Commit: ${{ github.event.head_commit.message || 'Manual release' }}" >> release_notes.md
+            # Get the PR body and save it to a file
+            gh pr view $PR_NUMBER --json body -q .body > pr_body_raw.md
+
+            # Process PR body to remove the notification text
+            cat pr_body_raw.md | awk '
+              BEGIN { printing = 0; }
+              /This PR was opened by the Changesets/ { printing = 0; }
+              /## Releases/ { printing = 1; }
+              printing == 1 { print; }
+            ' > pr_body_filtered.md
+
+            # If nothing remained after filtering, use the original content
+            if [ ! -s pr_body_filtered.md ]; then
+              cat pr_body_raw.md > pr_body_filtered.md
+              echo "Couldn't filter changelog content, using full PR description"
+            fi
+
+            # Create release notes with filtered PR content
+            echo "# Release v${{ steps.package-version.outputs.version }}" > release_notes.md
+            echo "" >> release_notes.md
+            cat pr_body_filtered.md >> release_notes.md
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: Release v${{ steps.version.outputs.version }}
+          tag_name: v${{ steps.package-version.outputs.version }}
+          name: Release v${{ steps.package-version.outputs.version }}
           body_path: release_notes.md
           draft: false
-          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
