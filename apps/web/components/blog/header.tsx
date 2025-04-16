@@ -1,6 +1,6 @@
 import { Badge, Skeleton } from '@pkg/ui';
 
-import type { BlogMetadata } from '@/types/post.types';
+import { BlogMetadata } from '@/app/blog/blog.types';
 
 export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
   return (

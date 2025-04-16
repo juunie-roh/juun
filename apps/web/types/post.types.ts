@@ -16,8 +16,3 @@ export interface Post<T extends BaseMetadata> {
   metadata: T;
   slug: string;
 }
-
-export type PostMetadata = BaseMetadata;
-export type BlogMetadata = BaseMetadata & {
-  wordCount?: number;
-};

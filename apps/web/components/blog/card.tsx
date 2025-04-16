@@ -13,7 +13,7 @@ import { CalendarIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { BlogMetadata } from '@/types/post.types';
+import { BlogMetadata } from '@/app/blog/blog.types';
 import { formatDateSafe } from '@/utils/date.utils';
 import { safeUrl } from '@/utils/security.utils';
 

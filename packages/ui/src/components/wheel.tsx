@@ -237,7 +237,7 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
 );
 WheelTitle.displayName = 'WheelTitle';
 
-export interface WheelProps
+interface WheelProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'>,
     VariantProps<typeof wheelVariants> {
   /** The Number of Wheel Menus */
@@ -347,4 +347,4 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
 );
 Wheel.displayName = 'Wheel';
 
-export { Wheel };
+export { Wheel, type WheelProps };

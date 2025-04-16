@@ -12,12 +12,15 @@
     "commitizen",
     "commitlint",
     "drei",
+    "Embla",
     "jsdom",
     "libc",
     "lucide",
     "shadcn",
     "softprops",
-    "Turborepo"
+    "sonner",
+    "Turborepo",
+    "vaul"
   ],
   "editor.formatOnSave": false,
   "eslint.enable": true,

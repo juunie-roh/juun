@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { BlogCard, BlogCardSkeleton } from '@/components/blog/card';
 
-import { getPosts } from './utils';
+import { getPosts } from './blog.utils';
 
 export default function Blog() {
   const posts = getPosts();
