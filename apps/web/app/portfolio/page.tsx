@@ -5,7 +5,7 @@ import {
   PortfolioCardSkeleton,
 } from '@/components/portfolio/card';
 
-import { getPosts } from './utils';
+import { getPosts } from './portfolio.utils';
 
 export default function Portfolio() {
   const posts = getPosts();

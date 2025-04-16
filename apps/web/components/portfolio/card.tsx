@@ -10,13 +10,13 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { PostMetadata } from '@/types/post.types';
+import { PortfolioMetadata } from '@/app/portfolio/portfolio.types';
 import { formatDateSafe } from '@/utils/date.utils';
 import { safeUrl } from '@/utils/security.utils';
 
 export interface Post {
   slug: string;
-  metadata: PostMetadata;
+  metadata: PortfolioMetadata;
 }
 
 interface PortfolioCardProps {
