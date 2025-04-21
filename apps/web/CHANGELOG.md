@@ -1,5 +1,19 @@
 # @app/nextjs
 
+## 0.0.4
+
+### Patch Changes
+
+- 3283138: Add About Page
+
+  fix: Add about page for the project
+
+- bbef95c: Fix Theme Switch component
+
+  fix(component): Remove component mount detection
+
+  - Remove mount detection which was causing blinking of component.
+
 ## 0.0.3
 
 ### Patch Changes
