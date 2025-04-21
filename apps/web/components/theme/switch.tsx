@@ -7,23 +7,15 @@ import { useEffect, useState } from 'react';
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   // Local animation state - decoupled from the actual theme
   const [animatingDark, setAnimatingDark] = useState(false);
 
   // Sync animation state with theme on mount
   useEffect(() => {
-    if (mounted && theme) {
+    if (theme) {
       setAnimatingDark(theme === 'dark');
     }
-  }, [mounted, theme]);
-
-  // Avoid hydration mismatch by only rendering after mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
+  }, [theme]);
 
   const isDark = theme === 'dark';
 
