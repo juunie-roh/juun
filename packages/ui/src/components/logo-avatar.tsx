@@ -1,16 +1,18 @@
 import { cn } from '@pkg/ui/lib/utils';
-import { ClassValue } from 'clsx';
 import { FC, SVGProps } from 'react';
 
-interface LogoAvatarProps {
-  color: string;
+interface LogoAvatarProps extends HTMLDivElement {
   logo: FC<SVGProps<SVGSVGElement>>;
-  className?: ClassValue;
+  color?: string;
 }
 
-export function LogoAvatar({ color, logo, className }: LogoAvatarProps) {
+/**
+ * An avatar that has self-blurred background.
+ * @see {@link https://codepen.io/pxco/PoNOLyX Blurred Backgrounds}
+ */
+export function LogoAvatar({ logo, color, className }: LogoAvatarProps) {
   const Logo = logo;
-  const c = color.startsWith('#') ? `[${color}]` : color;
+  const c = color?.startsWith('#') ? `[${color}]` : color;
   return (
     <div
       className={cn(
@@ -21,14 +23,14 @@ export function LogoAvatar({ color, logo, className }: LogoAvatarProps) {
       <Logo
         aria-hidden
         className={cn(
-          'absolute z-[1] size-full scale-[2] fill-primary opacity-20 blur-md',
-          `fill-${c}`,
+          'absolute z-[1] size-full scale-[2] opacity-20 blur-md',
+          c && `fill-${c}`,
         )}
       />
       <Logo
         className={cn(
-          'z-[2] size-[70%] fill-primary drop-shadow-[0_1px_4px_rgba(0,0,0,0.12)]',
-          `fill-${c}`,
+          'z-[2] size-[70%] drop-shadow-[0_1px_4px_rgba(0,0,0,0.12)]',
+          c && `fill-${c}`,
         )}
       />
     </div>
