@@ -1,5 +1,19 @@
 # @app/nextjs
 
+## 0.0.5
+
+### Patch Changes
+
+- ca427d4: New Blog Post
+
+  fix: Add new blog post
+
+  - Post for Docker image optimization
+
+- Updated dependencies [1e0d1a2]
+- Updated dependencies [0b54384]
+  - @pkg/ui@0.0.3
+
 ## 0.0.4
 
 ### Patch Changes
