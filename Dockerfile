@@ -9,23 +9,18 @@ ENV NODE_ENV=production \
     PORT=3000 \
     HOSTNAME=0.0.0.0
 
-# Install only necessary dependencies for building
-RUN apk add --no-cache libc6-compat && \
-    corepack enable && corepack prepare pnpm@latest --activate && \
-    addgroup --system --gid 1001 nodejs && \
+RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Install dependencies only when needed
 FROM base AS deps
 
-# Optimize cache layers and permissions
-RUN mkdir -p /app/node_modules && \
-    chown -R nextjs:nodejs /app
-
-USER nextjs
+# Install only necessary dependencies for building
+RUN apk update && \
+    apk add --no-cache libc6-compat && \
+    corepack enable && corepack prepare pnpm@latest --activate
 
 # Builder stage
-FROM base AS builder
+FROM deps AS builder
 
 # Copy source with appropriate permissions
 COPY --chown=nextjs:nodejs . .

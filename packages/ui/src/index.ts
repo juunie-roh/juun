@@ -93,6 +93,7 @@ import {
 } from './components/form';
 import { Input } from './components/input';
 import { Label } from './components/label';
+import { LogoAvatar } from './components/logo-avatar';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -249,6 +250,7 @@ export {
   FormMessage,
   Input,
   Label,
+  LogoAvatar,
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuIndicator,
