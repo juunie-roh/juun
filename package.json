@@ -21,20 +21,20 @@
     "ui": "pnpm --filter @pkg/ui"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.2",
+    "@changesets/cli": "^2.29.3",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@commitlint/cz-commitlint": "^19.8.0",
     "@commitlint/format": "^19.8.0",
     "@commitlint/types": "^19.8.0",
     "@pkg/config": "workspace:^",
-    "@types/node": "^22.15.3",
+    "@types/node": "^22.15.14",
     "commitizen": "^4.3.1",
-    "eslint": "^9.25.1",
+    "eslint": "^9.26.0",
     "husky": "^9.1.7",
     "inquirer": "^9.3.7",
-    "lint-staged": "^15.5.1",
-    "turbo": "^2.5.2",
+    "lint-staged": "^15.5.2",
+    "turbo": "^2.5.3",
     "typescript": "^5.8.3"
   },
   "config": {
