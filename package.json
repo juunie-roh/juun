@@ -30,7 +30,7 @@
     "@pkg/config": "workspace:^",
     "@types/node": "^22.15.3",
     "commitizen": "^4.3.1",
-    "eslint": "^9.25.1",
+    "eslint": "^9.26.0",
     "husky": "^9.1.7",
     "inquirer": "^9.3.7",
     "lint-staged": "^15.5.1",
