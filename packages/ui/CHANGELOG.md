@@ -1,5 +1,17 @@
 # @pkg/ui
 
+## 0.0.4
+
+### Patch Changes
+
+- bdf08b1: Fix Component
+
+  fix: Update property handling priority
+
+  - Prioritize the `color` property correctly.
+
+  - Isolate stacking context.
+
 ## 0.0.3
 
 ### Patch Changes

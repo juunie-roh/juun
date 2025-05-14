@@ -1,5 +1,34 @@
 # @app/nextjs
 
+## 0.0.6
+
+### Patch Changes
+
+- 2b965a2: Cesium Utils Introduction
+
+  feat: Add portfolio page
+
+  - Create Cesium Utils library introduction page.
+    Demontrate the very default Cesium viewer using resium.
+    Actual demonstration will be present under `/cesium-utils` path.
+
+- be96454: Cesium Integration
+
+  build: Add cesium and fix configurations
+
+  - Fix next configuration:
+    Add plugin settings for cesium.
+    Support source map in development environment.
+
+  - Exclude public directory in tsconfig of next package.
+
+  - Ignore copied Cesium codebase by symlink from gitignore.
+
+  - Add postinstall script for Cesium preparation in package.json.
+
+- Updated dependencies [bdf08b1]
+  - @pkg/ui@0.0.4
+
 ## 0.0.5
 
 ### Patch Changes
