@@ -1,25 +1,15 @@
-import { Viewer as CViewer } from 'cesium';
-import { forwardRef } from 'react';
-import { CesiumComponentRef, Viewer as RViewer, ViewerProps } from 'resium';
+'use client';
 
-const Viewer = forwardRef<CesiumComponentRef<CViewer>, ViewerProps>(
-  ({ ...props }, ref) => {
-    return (
-      <RViewer
-        ref={ref}
-        baseLayerPicker={false}
-        fullscreenButton={false}
-        geocoder={false}
-        infoBox={false}
-        navigationHelpButton={false}
-        scene3DOnly={true}
-        selectionIndicator={false}
-        homeButton={false}
-        className="size-full"
-        {...props}
-      />
-    );
-  },
-);
+import { Skeleton } from '@pkg/ui';
+import { lazy, Suspense } from 'react';
+import type { ViewerProps } from 'resium';
 
-export default Viewer;
+const LazyViewer = lazy(() => import('./lazy-viewer'));
+
+export default function Viewer(props: ViewerProps) {
+  return (
+    <Suspense fallback={<Skeleton className="size-full" />}>
+      <LazyViewer {...props} />
+    </Suspense>
+  );
+}

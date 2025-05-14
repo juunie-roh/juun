@@ -1,8 +1,3 @@
-'use client';
-
-import 'public/cesium/Widgets/widgets.css';
-import 'public/cesium/Widgets/lighter.css';
-
 import {
   AspectRatio,
   Badge,
@@ -14,22 +9,9 @@ import {
   CardHeader,
   CardTitle,
   CodeBlock,
-  Skeleton,
 } from '@pkg/ui';
-import {
-  CameraEventType,
-  Cartesian3,
-  Color,
-  HeightReference,
-  KeyboardEventModifier,
-  Math as CMath,
-  Terrain,
-  Viewer as CViewer,
-} from 'cesium';
 import { ChevronRight, Code, ExternalLink, Package } from 'lucide-react';
 import Link from 'next/link';
-import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
-import { CesiumComponentRef, Entity } from 'resium';
 
 import Viewer from '@/components/cesium/viewer';
 
@@ -46,65 +28,6 @@ export const metadata = {
 const installationCode = `npm install @juun-roh/cesium-utils`;
 
 export default function CesiumUtilsIntro() {
-  const terrain = Terrain.fromWorldTerrain();
-  const initialized = useRef<boolean>(false);
-  const [viewer, setViewer] = useState<CViewer | undefined>(undefined);
-
-  // The callback ref for the Cesium viewer
-  const ref = useCallback((node: CesiumComponentRef<CViewer> | null) => {
-    if (node?.cesiumElement && !initialized.current) {
-      console.log('🚀 ~ :', 'Cesium viewer obtained successfully');
-      setViewer(node.cesiumElement);
-
-      initialized.current = true;
-    }
-  }, []);
-
-  // Effect that runs when viewer is available
-  useEffect(() => {
-    if (!viewer || !initialized.current) return;
-    // Remove the credits area
-    viewer.bottomContainer.remove();
-    // Set tilt event type as RIGHT_DRAG
-    viewer.scene.screenSpaceCameraController.tiltEventTypes = [
-      CameraEventType.RIGHT_DRAG,
-      CameraEventType.PINCH,
-      {
-        eventType: CameraEventType.LEFT_DRAG,
-        modifier: KeyboardEventModifier.CTRL,
-      },
-      {
-        eventType: CameraEventType.RIGHT_DRAG,
-        modifier: KeyboardEventModifier.CTRL,
-      },
-    ];
-    // Set zoom event type as MIDDLE_DRAG
-    viewer.scene.screenSpaceCameraController.zoomEventTypes = [
-      CameraEventType.MIDDLE_DRAG,
-      CameraEventType.WHEEL,
-      CameraEventType.PINCH,
-    ];
-
-    // Fly to Tokyo
-    viewer.camera.flyTo({
-      destination: new Cartesian3(
-        -3964624.632297504,
-        3356819.574895879,
-        3696707.310427818,
-      ),
-      orientation: {
-        heading: CMath.toRadians(0),
-        pitch: CMath.toRadians(-50),
-        roll: 0.0,
-      },
-    });
-  }, [viewer]);
-
-  useEffect(() => {
-    if (!viewer || !initialized.current || !terrain.ready) return;
-    viewer.terrainProvider = terrain.provider;
-  }, [viewer, terrain]);
-
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-8">
@@ -129,20 +52,7 @@ export default function CesiumUtilsIntro() {
             ratio={16 / 9}
             className="overflow-hidden rounded-md border shadow-sm"
           >
-            <Suspense fallback={<Skeleton className="size-full" />}>
-              <Viewer ref={ref}>
-                <Entity
-                  position={Cartesian3.fromDegrees(139.7454, 35.6586, 250)}
-                  box={{
-                    dimensions: new Cartesian3(50.0, 50.0, 333.0),
-                    material: Color.RED.withAlpha(0.8),
-                    outline: true,
-                    outlineColor: Color.WHITE,
-                    heightReference: HeightReference.CLAMP_TO_GROUND,
-                  }}
-                />
-              </Viewer>
-            </Suspense>
+            <Viewer />
           </AspectRatio>
         </div>
 
@@ -171,7 +81,7 @@ export default function CesiumUtilsIntro() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-2">
-              <Button asChild className="w-full" variant="link">
+              <Button asChild className="w-full justify-normal" variant="link">
                 <Link
                   href="/cesium-utils"
                   target="_blank"
@@ -181,7 +91,8 @@ export default function CesiumUtilsIntro() {
                   See Demonstration
                 </Link>
               </Button>
-              <Button asChild className="w-full" variant="link">
+
+              <Button asChild className="w-full justify-normal" variant="link">
                 <Link
                   href="https://www.npmjs.com/package/@juun-roh/cesium-utils"
                   target="_blank"
@@ -191,7 +102,7 @@ export default function CesiumUtilsIntro() {
                   View on NPM
                 </Link>
               </Button>
-              <Button asChild variant="link" className="w-full">
+              <Button asChild variant="link" className="w-full justify-normal">
                 <Link
                   href="https://github.com/juunie-roh/cesium-utils"
                   target="_blank"
