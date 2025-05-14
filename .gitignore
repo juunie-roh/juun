@@ -46,3 +46,4 @@ next-env.d.ts
 .DS_Store
 *.pem
 .eslintcache
+apps/web/public/cesium
