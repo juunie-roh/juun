@@ -11,6 +11,7 @@
     "autoprefixer",
     "commitizen",
     "commitlint",
+    "CZML",
     "drei",
     "Embla",
     "jsdom",
@@ -19,6 +20,7 @@
     "shadcn",
     "softprops",
     "sonner",
+    "topojson",
     "Turborepo",
     "vaul"
   ],
