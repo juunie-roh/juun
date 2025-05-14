@@ -42,7 +42,7 @@ export default function ThemeSwitch() {
 
       {/* Moving thumb */}
       <div
-        className="absolute size-6 rounded-full bg-background shadow-sm transition-all duration-300 ease-in-out"
+        className="absolute size-6 rounded-full bg-background shadow transition-all duration-300 ease-in-out"
         style={{
           transform: animatingDark ? 'translateX(1rem)' : 'translateX(-1rem)',
           left: '50%',

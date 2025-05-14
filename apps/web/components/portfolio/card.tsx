@@ -37,7 +37,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
               src={post.metadata.image}
               alt={post.metadata.title || 'Portfolio image'}
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>

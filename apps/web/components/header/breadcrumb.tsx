@@ -95,7 +95,7 @@ export default function Breadcrumb({
 
           return isLast || segment.isCurrent ? (
             <BreadcrumbItem key={segment.href}>
-              <BreadcrumbPage className="cursor-default rounded-full bg-background px-2">
+              <BreadcrumbPage className="cursor-default rounded-full bg-background px-2 shadow">
                 {segment.label}
               </BreadcrumbPage>
             </BreadcrumbItem>
