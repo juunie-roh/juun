@@ -36,10 +36,16 @@ export function LogoAvatar({
     c = 'primary'; // Default for SVG elements
   }
 
+  // Get the original className from the child element if it exists
+  const originalClassName =
+    (children.props as React.SVGProps<SVGSVGElement>).className || '';
+
   // Create background (blurred) and foreground versions of the logo
+  // Note: Place the color-related classes AFTER the original className to ensure they take precedence
   const backgroundLogo = React.cloneElement(children, {
     'aria-hidden': 'true',
     className: cn(
+      originalClassName,
       'absolute z-[1] size-full scale-[2] opacity-20 blur-md',
       c && (c.startsWith('#') ? 'fill-[var(--logo-color)]' : `fill-${c}`),
     ),
@@ -47,6 +53,7 @@ export function LogoAvatar({
 
   const foregroundLogo = React.cloneElement(children, {
     className: cn(
+      originalClassName,
       'z-[2] size-[70%] drop-shadow-[0_1px_4px_rgba(0,0,0,0.12)]',
       c && (c.startsWith('#') ? 'fill-[var(--logo-color)]' : `fill-${c}`),
     ),
@@ -55,7 +62,7 @@ export function LogoAvatar({
   return (
     <div
       className={cn(
-        'relative flex size-7 items-center justify-center overflow-hidden rounded-md shadow-[inset_0_0_1px_1px_rgba(0,0,0,0.015)]',
+        'relative isolate flex size-7 items-center justify-center overflow-hidden rounded-md shadow-[inset_0_0_1px_1px_rgba(0,0,0,0.015)]',
         className,
       )}
       {...props}

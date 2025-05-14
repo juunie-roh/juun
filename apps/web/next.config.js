@@ -1,13 +1,26 @@
 import NextBundleAnalyzer from '@next/bundle-analyzer';
+import webpack from 'webpack';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack(config) {
+  webpack(config, options) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
     config.resolve.fallback = { fs: false };
+
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        CESIUM_BASE_URL: JSON.stringify('/cesium'),
+      }),
+    );
+
+    if (!options.dev) {
+      config.devtool = options.isServer
+        ? false
+        : 'eval-cheap-module-source-map';
+    }
 
     return config;
   },
