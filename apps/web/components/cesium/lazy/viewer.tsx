@@ -11,43 +11,38 @@ import {
   KeyboardEventModifier,
   Math as CMath,
   Terrain,
-  Viewer as CViewer,
 } from 'cesium';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { CesiumComponentRef, Entity, Viewer as RViewer } from 'resium';
+import { useEffect } from 'react';
+import { Entity, useCesium, Viewer as RViewer } from 'resium';
 
 import type { IViewerProps } from '../cesium.types';
 
-export default function LazyViewer({
+// Separate component that uses the viewer context
+function ViewerContent({
   animation = true,
   bottomContainer = true,
   flyTo,
   timeline = true,
   terrain,
   terrainProvider,
-  ...props
 }: IViewerProps) {
-  const initialized = useRef<boolean>(false);
-  const [viewer, setViewer] = useState<CViewer | undefined>(undefined);
+  const { viewer } = useCesium();
 
-  // Your callback ref and useEffects (copied from your original component)
-  const ref = useCallback((node: CesiumComponentRef<CViewer> | null) => {
-    if (node?.cesiumElement && !initialized.current) {
-      console.log('🚀 ~ :', 'Cesium viewer obtained successfully');
-      setViewer(node.cesiumElement);
-      initialized.current = true;
-    }
-  }, []);
-
-  // Initializing viewer when the viewer is available
   useEffect(() => {
-    if (!viewer || !initialized.current) return;
-    // Remove the credits area
+    if (!viewer) return;
+
+    // Remove the credits area if specified as false
     if (!bottomContainer) viewer.bottomContainer.remove();
-    if (!timeline)
+
+    // Hide timeline if specified as false
+    if (!timeline) {
       (viewer.timeline.container as HTMLElement).style.display = 'none';
-    if (!animation)
+    }
+
+    // Hide animation if specified as false
+    if (!animation) {
       (viewer.animation.container as HTMLElement).style.display = 'none';
+    }
 
     // Set tilt event type as RIGHT_DRAG
     viewer.scene.screenSpaceCameraController.tiltEventTypes = [
@@ -62,6 +57,7 @@ export default function LazyViewer({
         modifier: KeyboardEventModifier.CTRL,
       },
     ];
+
     // Set zoom event type as MIDDLE_DRAG
     viewer.scene.screenSpaceCameraController.zoomEventTypes = [
       CameraEventType.MIDDLE_DRAG,
@@ -69,7 +65,7 @@ export default function LazyViewer({
       CameraEventType.PINCH,
     ];
 
-    // Fly to the initial location
+    // Fly to the initial location (custom or default Tokyo)
     viewer.camera.flyTo(
       flyTo || {
         destination: new Cartesian3(
@@ -85,8 +81,8 @@ export default function LazyViewer({
       },
     );
 
+    // Set up terrain only if no custom terrain options provided
     if (!terrain && !terrainProvider) {
-      // Sets the default terrain if none of the terrain options are specified.
       const t = Terrain.fromWorldTerrain();
       t.readyEvent.addEventListener((provider) => {
         viewer.terrainProvider = provider;
@@ -103,9 +99,31 @@ export default function LazyViewer({
   ]);
 
   return (
+    <Entity
+      position={Cartesian3.fromDegrees(139.7454, 35.6586, 250)}
+      box={{
+        dimensions: new Cartesian3(50.0, 50.0, 333.0),
+        material: Color.RED.withAlpha(0.8),
+        outline: true,
+        outlineColor: Color.WHITE,
+        heightReference: HeightReference.CLAMP_TO_GROUND,
+      }}
+    />
+  );
+}
+
+export default function LazyViewer({
+  animation,
+  bottomContainer,
+  flyTo,
+  timeline,
+  terrain,
+  terrainProvider,
+  ...props
+}: IViewerProps) {
+  return (
     <RViewer
-      ref={ref}
-      baseLayerPicker={true}
+      baseLayerPicker={false}
       fullscreenButton={false}
       geocoder={false}
       infoBox={false}
@@ -114,17 +132,17 @@ export default function LazyViewer({
       selectionIndicator={false}
       homeButton={false}
       className="size-full"
+      terrain={terrain}
+      terrainProvider={terrainProvider}
       {...props}
     >
-      <Entity
-        position={Cartesian3.fromDegrees(139.7454, 35.6586, 250)}
-        box={{
-          dimensions: new Cartesian3(50.0, 50.0, 333.0),
-          material: Color.RED.withAlpha(0.8),
-          outline: true,
-          outlineColor: Color.WHITE,
-          heightReference: HeightReference.CLAMP_TO_GROUND,
-        }}
+      <ViewerContent
+        animation={animation}
+        bottomContainer={bottomContainer}
+        flyTo={flyTo}
+        timeline={timeline}
+        terrain={terrain}
+        terrainProvider={terrainProvider}
       />
     </RViewer>
   );

@@ -52,7 +52,11 @@ export default function CesiumUtilsIntro() {
             ratio={16 / 9}
             className="overflow-hidden rounded-md border shadow-sm"
           >
-            <Viewer />
+            <Viewer
+              animation={false}
+              bottomContainer={false}
+              timeline={false}
+            />
           </AspectRatio>
         </div>
 
