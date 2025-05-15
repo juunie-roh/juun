@@ -15,6 +15,8 @@ import {
 import { useEffect } from 'react';
 import { Entity, useCesium, Viewer as RViewer } from 'resium';
 
+import useViewerStore from '@/stores/slices/viewer';
+
 import type { IViewerProps } from '../cesium.types';
 
 // Separate component that uses the viewer context
@@ -27,10 +29,12 @@ function ViewerContent({
   terrainProvider,
 }: IViewerProps) {
   const { viewer } = useCesium();
+  const setViewer = useViewerStore((state) => state.setViewer);
+  const removeViewer = useViewerStore((state) => state.removeViewer);
 
   useEffect(() => {
     if (!viewer) return;
-
+    setViewer(viewer);
     // Remove the credits area if specified as false
     if (!bottomContainer) viewer.bottomContainer.remove();
 
@@ -88,6 +92,10 @@ function ViewerContent({
         viewer.terrainProvider = provider;
       });
     }
+
+    return () => {
+      if (viewer) removeViewer(viewer);
+    };
   }, [
     animation,
     bottomContainer,
@@ -96,6 +104,8 @@ function ViewerContent({
     terrainProvider,
     timeline,
     viewer,
+    setViewer,
+    removeViewer,
   ]);
 
   return (
