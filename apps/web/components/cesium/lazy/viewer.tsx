@@ -14,14 +14,19 @@ import {
   Viewer as CViewer,
 } from 'cesium';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  CesiumComponentRef,
-  Entity,
-  Viewer as RViewer,
-  ViewerProps,
-} from 'resium';
+import { CesiumComponentRef, Entity, Viewer as RViewer } from 'resium';
 
-export default function LazyViewer({ ...props }: ViewerProps) {
+import type { IViewerProps } from '../cesium.types';
+
+export default function LazyViewer({
+  animation = true,
+  bottomContainer = true,
+  flyTo,
+  timeline = true,
+  terrain,
+  terrainProvider,
+  ...props
+}: IViewerProps) {
   const initialized = useRef<boolean>(false);
   const [viewer, setViewer] = useState<CViewer | undefined>(undefined);
 
@@ -34,13 +39,16 @@ export default function LazyViewer({ ...props }: ViewerProps) {
     }
   }, []);
 
-  // Effect that runs when viewer is available
+  // Initializing viewer when the viewer is available
   useEffect(() => {
     if (!viewer || !initialized.current) return;
     // Remove the credits area
-    viewer.bottomContainer.remove();
-    (viewer.timeline.container as HTMLElement).style.display = 'none';
-    (viewer.animation.container as HTMLElement).style.display = 'none';
+    if (!bottomContainer) viewer.bottomContainer.remove();
+    if (!timeline)
+      (viewer.timeline.container as HTMLElement).style.display = 'none';
+    if (!animation)
+      (viewer.animation.container as HTMLElement).style.display = 'none';
+
     // Set tilt event type as RIGHT_DRAG
     viewer.scene.screenSpaceCameraController.tiltEventTypes = [
       CameraEventType.RIGHT_DRAG,
@@ -61,25 +69,38 @@ export default function LazyViewer({ ...props }: ViewerProps) {
       CameraEventType.PINCH,
     ];
 
-    // Fly to Tokyo
-    viewer.camera.flyTo({
-      destination: new Cartesian3(
-        -3964624.632297504,
-        3356819.574895879,
-        3696707.310427818,
-      ),
-      orientation: {
-        heading: CMath.toRadians(0),
-        pitch: CMath.toRadians(-50),
-        roll: 0.0,
+    // Fly to the initial location
+    viewer.camera.flyTo(
+      flyTo || {
+        destination: new Cartesian3(
+          -3964624.632297504,
+          3356819.574895879,
+          3696707.310427818,
+        ),
+        orientation: {
+          heading: CMath.toRadians(0),
+          pitch: CMath.toRadians(-50),
+          roll: 0.0,
+        },
       },
-    });
+    );
 
-    const terrain = Terrain.fromWorldTerrain();
-    terrain.readyEvent.addEventListener((provider) => {
-      viewer.terrainProvider = provider;
-    });
-  }, [viewer]);
+    if (!terrain && !terrainProvider) {
+      // Sets the default terrain if none of the terrain options are specified.
+      const t = Terrain.fromWorldTerrain();
+      t.readyEvent.addEventListener((provider) => {
+        viewer.terrainProvider = provider;
+      });
+    }
+  }, [
+    animation,
+    bottomContainer,
+    flyTo,
+    terrain,
+    terrainProvider,
+    timeline,
+    viewer,
+  ]);
 
   return (
     <RViewer
