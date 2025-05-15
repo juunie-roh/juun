@@ -13,7 +13,7 @@
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "test": "jest",
-    "postinstall": "node copy-cesium-assets.cjs"
+    "postinstall": "node scripts/copy-cesium-assets.cjs"
   },
   "devDependencies": {
     "@juun-roh/cesium-utils": "^0.0.12",

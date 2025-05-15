@@ -3,9 +3,9 @@ const fs = require('fs-extra');
 const path = require('path');
 
 // Path to node_modules cesium package
-const cesiumPackagePath = path.join(__dirname, 'node_modules', 'cesium');
+const cesiumPackagePath = path.join(__dirname, '..', 'node_modules', 'cesium');
 // Destination in public folder
-const cesiumPublicPath = path.join(__dirname, 'public', 'cesium');
+const cesiumPublicPath = path.join(__dirname, '..', 'public', 'cesium');
 
 async function copyCesiumAssets() {
   console.log('Copying Cesium assets to public directory...');
