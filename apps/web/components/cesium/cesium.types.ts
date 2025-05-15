@@ -1,7 +1,7 @@
 import { Viewer } from 'cesium';
 import { ViewerProps } from 'resium';
 
-interface IViewerProps extends ViewerProps {
+interface IViewerProps extends Omit<ViewerProps, 'className'> {
   /** Whether to show the credit container. @default true */
   bottomContainer?: boolean;
   /** Initial location of the camera */
