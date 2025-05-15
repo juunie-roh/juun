@@ -41,11 +41,7 @@ export default function EntityToggler() {
   }, [entities, on, entity]);
 
   return (
-    <Button
-      onClick={onClick}
-      className="w-full"
-      disabled={entities !== undefined}
-    >
+    <Button onClick={onClick} className="w-full" disabled={!entities}>
       Entity on/off
     </Button>
   );
