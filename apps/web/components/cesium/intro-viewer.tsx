@@ -2,11 +2,12 @@
 
 import { Skeleton } from '@pkg/ui';
 import { lazy, Suspense } from 'react';
-import type { ViewerProps } from 'resium';
 
-const LazyViewer = lazy(() => import('./lazy-viewer'));
+import { IViewerProps } from './cesium.types';
 
-export default function Viewer(props: ViewerProps) {
+const LazyViewer = lazy(() => import('./lazy/viewer'));
+
+export default function IntroViewer(props: IViewerProps) {
   return (
     <Suspense fallback={<Skeleton className="size-full" />}>
       <LazyViewer {...props} />
