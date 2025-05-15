@@ -6,14 +6,12 @@ import 'public/cesium/Widgets/lighter.css';
 import {
   CameraEventType,
   Cartesian3,
-  Color,
-  HeightReference,
   KeyboardEventModifier,
   Math as CMath,
   Terrain,
 } from 'cesium';
-import { useEffect } from 'react';
-import { Entity, useCesium, Viewer as RViewer } from 'resium';
+import { Fragment, useEffect } from 'react';
+import { useCesium, Viewer as RViewer } from 'resium';
 
 import useViewerStore from '@/stores/slices/viewer';
 
@@ -108,18 +106,7 @@ function ViewerContent({
     removeViewer,
   ]);
 
-  return (
-    <Entity
-      position={Cartesian3.fromDegrees(139.7454, 35.6586, 250)}
-      box={{
-        dimensions: new Cartesian3(50.0, 50.0, 333.0),
-        material: Color.RED.withAlpha(0.8),
-        outline: true,
-        outlineColor: Color.WHITE,
-        heightReference: HeightReference.CLAMP_TO_GROUND,
-      }}
-    />
-  );
+  return <Fragment />;
 }
 
 export default function LazyViewer({
