@@ -14,7 +14,7 @@ import { ChevronRight, Code, ExternalLink, Package } from 'lucide-react';
 import Link from 'next/link';
 
 import EntityToggler from '@/components/cesium/entity-toggler';
-import IntroViewer from '@/components/cesium/intro-viewer';
+import Viewer from '@/components/cesium/viewer';
 
 export const metadata = {
   title: 'Cesium Utils',
@@ -53,7 +53,7 @@ export default function CesiumUtilsIntro() {
             ratio={16 / 9}
             className="overflow-hidden rounded-md border shadow-sm"
           >
-            <IntroViewer
+            <Viewer
               animation={false}
               bottomContainer={false}
               timeline={false}
