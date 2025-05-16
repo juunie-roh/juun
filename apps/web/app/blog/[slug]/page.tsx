@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!post) {
     return {
       title: 'Project Not Found',
-      description: 'The requested portfolio project could not be found.',
+      description: 'The requested blog post could not be found.',
     };
   }
 
@@ -29,14 +29,13 @@ export async function generateMetadata({
   return {
     title: post.metadata.title,
     description:
-      post.metadata.description || `Portfolio project: ${post.metadata.title}`,
+      post.metadata.description || `Blog post: ${post.metadata.title}`,
     keywords: post.metadata.tags,
     openGraph: {
       type: 'article',
       title: post.metadata.title,
       description:
-        post.metadata.description ||
-        `Portfolio project: ${post.metadata.title}`,
+        post.metadata.description || `Blog post: ${post.metadata.title}`,
       images: post.metadata.image,
       siteName: post.metadata.title,
       url: `https://juun.vercel.app/blog/${slug}`,
@@ -65,10 +64,7 @@ export default async function BlogItemPage({
   // Dynamically import the post component
   const PostComponent = await import(`../posts/${slug}.tsx`)
     .then((module) => module.default)
-    .catch(() => {
-      // If import fails, we'll return null and handle it in the JSX
-      return null;
-    });
+    .catch(() => null);
 
   if (!PostComponent) {
     notFound();
