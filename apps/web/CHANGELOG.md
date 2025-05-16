@@ -1,5 +1,13 @@
 # @app/nextjs
 
+## 0.0.7
+
+### Patch Changes
+
+- 021c038: Apply Lazy Loading
+
+  perf: Performance update using lazy load with cesium
+
 ## 0.0.6
 
 ### Patch Changes
