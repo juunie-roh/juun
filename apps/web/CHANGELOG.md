@@ -17,7 +17,7 @@
   feat: Add portfolio page
 
   - Create Cesium Utils library introduction page.
-    Demontrate the very default Cesium viewer using resium.
+    Demonstrate the very default Cesium viewer using resium.
     Actual demonstration will be present under `/cesium-utils` path.
 
 - be96454: Cesium Integration
