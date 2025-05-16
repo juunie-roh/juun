@@ -17,9 +17,9 @@ import EntityToggler from '@/components/cesium/entity-toggler';
 import Viewer from '@/components/cesium/viewer';
 
 export const metadata = {
-  title: 'Cesium Utils',
+  title: 'Cesium Utils Intro',
   description:
-    'A utility library for CesiumJS that simplifies working with Cesium instances.',
+    'An Introduction of utility library for CesiumJS that simplifies working with Cesium instances.',
   date: '2025-05-13',
   tags: ['CesiumJS', '3D', 'GIS', 'npm'],
   image: 'https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg',
