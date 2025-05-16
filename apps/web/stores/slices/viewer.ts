@@ -7,7 +7,7 @@ import { logger } from '@/stores/middleware/logger';
 interface ViewerState {
   viewer: Viewer | undefined;
   setViewer: (viewer: Viewer, name?: string) => void;
-  removeViewer: (viewer: Viewer) => void;
+  removeViewer: () => void;
 }
 
 // Create the store with middleware chain

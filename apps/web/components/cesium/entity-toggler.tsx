@@ -3,12 +3,12 @@
 import { Collection } from '@juun-roh/cesium-utils';
 import { Button } from '@pkg/ui';
 import { Cartesian3, Color, Entity, HeightReference } from 'cesium';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import useViewerStore from '@/stores/slices/viewer';
 
 export default function EntityToggler() {
-  const on = useRef(false);
+  const [on, setOn] = useState(false);
   const viewer = useViewerStore((state) => state.viewer);
   const entities = useMemo(() => {
     if (!viewer) return;
@@ -32,17 +32,17 @@ export default function EntityToggler() {
 
   const onClick = useCallback(() => {
     if (!entities) return;
-    if (!on.current) {
+    if (!on) {
       entities.add(entity);
     } else {
       entities.remove(entity);
     }
-    on.current = !on.current;
+    setOn(!on);
   }, [entities, on, entity]);
 
   return (
     <Button onClick={onClick} className="w-full" disabled={!entities}>
-      Entity on/off
+      {on ? 'Remove' : 'Add'} Entity
     </Button>
   );
 }

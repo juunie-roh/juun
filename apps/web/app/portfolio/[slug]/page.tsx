@@ -29,7 +29,17 @@ export async function generateMetadata({
     title: post.metadata.title,
     description:
       post.metadata.description || `Portfolio project: ${post.metadata.title}`,
-    openGraph: {},
+    keywords: post.metadata.tags,
+    openGraph: {
+      type: 'article',
+      title: post.metadata.title,
+      description:
+        post.metadata.description ||
+        `Portfolio project: ${post.metadata.title}`,
+      images: post.metadata.image,
+      siteName: post.metadata.title,
+      url: `https://juun.vercel.app/portfolio/${slug}`,
+    },
   };
 }
 
@@ -54,10 +64,7 @@ export default async function PortfolioItemPage({
   // Dynamically import the post component
   const PostComponent = await import(`../posts/${slug}.tsx`)
     .then((module) => module.default)
-    .catch(() => {
-      // If import fails, we'll return null and handle it in the JSX
-      return null;
-    });
+    .catch(() => null);
 
   if (!PostComponent) {
     notFound();

@@ -92,7 +92,7 @@ function ViewerContent({
     }
 
     return () => {
-      if (viewer) removeViewer(viewer);
+      if (viewer) removeViewer();
     };
   }, [
     animation,

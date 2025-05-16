@@ -14,12 +14,12 @@ import { ChevronRight, Code, ExternalLink, Package } from 'lucide-react';
 import Link from 'next/link';
 
 import EntityToggler from '@/components/cesium/entity-toggler';
-import IntroViewer from '@/components/cesium/intro-viewer';
+import Viewer from '@/components/cesium/viewer';
 
 export const metadata = {
-  title: 'Cesium Utils',
+  title: 'Cesium Utils Intro',
   description:
-    'A utility library for CesiumJS that simplifies working with Cesium instances.',
+    'An Introduction of utility library for CesiumJS that simplifies working with Cesium instances.',
   date: '2025-05-13',
   tags: ['CesiumJS', '3D', 'GIS', 'npm'],
   image: 'https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg',
@@ -53,7 +53,7 @@ export default function CesiumUtilsIntro() {
             ratio={16 / 9}
             className="overflow-hidden rounded-md border shadow-sm"
           >
-            <IntroViewer
+            <Viewer
               animation={false}
               bottomContainer={false}
               timeline={false}
