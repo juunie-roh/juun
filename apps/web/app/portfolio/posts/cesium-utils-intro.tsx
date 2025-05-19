@@ -10,6 +10,7 @@ import {
   CardTitle,
   CodeBlock,
 } from '@pkg/ui';
+import { Cartesian3, Math as CMath } from 'cesium';
 import { ChevronRight, Code, ExternalLink, Package } from 'lucide-react';
 import Link from 'next/link';
 
@@ -57,6 +58,18 @@ export default function CesiumUtilsIntro() {
               animation={false}
               bottomContainer={false}
               timeline={false}
+              flyTo={{
+                destination: new Cartesian3(
+                  -3964624.632297504,
+                  3356819.574895879,
+                  3696707.310427818,
+                ),
+                orientation: {
+                  heading: CMath.toRadians(0),
+                  pitch: CMath.toRadians(-50),
+                  roll: 0.0,
+                },
+              }}
             />
           </AspectRatio>
         </div>
