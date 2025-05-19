@@ -92,6 +92,6 @@
     ".": "./src/index.ts",
     "./*": "./src/components/*.tsx",
     "./lib/*": "./src/lib/*.ts",
-    "./hooks/*": "./src/hooks/*.ts"
+    "./hooks": "./src/hooks/index.ts"
   }
 }

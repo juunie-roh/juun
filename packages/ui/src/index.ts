@@ -198,6 +198,7 @@ import {
   TooltipTrigger,
 } from './components/tooltip';
 import { Wheel, WheelProps } from './components/wheel';
+import { useMediaQuery } from './hooks/use-media-query';
 import { useIsMobile } from './hooks/use-mobile';
 import { cn } from './lib/utils';
 
@@ -379,6 +380,7 @@ export {
   cn,
   useFormField,
   useIsMobile,
+  useMediaQuery,
   useSidebar,
 };
 
