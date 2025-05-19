@@ -58,10 +58,11 @@ export default function ResizableViewerController() {
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
           <Viewer
-            key={option?.feat || 'default'}
+            key={option?.feat || 'default'} // refresh the viewer
             bottomContainer={false}
             animation={false}
             timeline={false}
+            flyTo={option?.flyTo} // extendable viewer option
           />
         </div>
       </ResizablePanel>
