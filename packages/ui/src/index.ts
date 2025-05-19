@@ -139,6 +139,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from './components/popover';
+import { Progress } from './components/progress';
 import {
   ResizableHandle,
   ResizablePanel,
@@ -317,6 +318,7 @@ export {
   PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
+  Progress,
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
