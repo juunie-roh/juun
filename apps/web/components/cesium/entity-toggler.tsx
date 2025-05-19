@@ -12,7 +12,10 @@ export default function EntityToggler() {
   const viewer = useViewerStore((state) => state.viewer);
   const entities = useMemo(() => {
     if (!viewer) return;
-    return new Collection({ collection: viewer.entities, tag: 'toggler' });
+    const c = new Collection({ collection: viewer.entities, tag: 'toggler' });
+    c.addEventListener('add', () => setOn(true));
+    c.addEventListener('remove', () => setOn(false));
+    return c;
   }, [viewer]);
 
   const entity = useMemo(
@@ -37,11 +40,14 @@ export default function EntityToggler() {
     } else {
       entities.remove(entity);
     }
-    setOn(!on);
   }, [entities, on, entity]);
 
   return (
-    <Button onClick={onClick} className="w-full" disabled={!entities}>
+    <Button
+      onClick={onClick}
+      className="w-full"
+      disabled={!viewer || !entities || !entity}
+    >
       {on ? 'Remove' : 'Add'} Entity
     </Button>
   );
