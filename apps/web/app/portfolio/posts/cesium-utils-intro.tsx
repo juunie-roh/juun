@@ -88,11 +88,7 @@ export default function CesiumUtilsIntro() {
             </CardContent>
             <CardFooter className="flex flex-col gap-2">
               <Button asChild className="w-full justify-normal" variant="link">
-                <Link
-                  href="/cesium-utils"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="/cesium-utils">
                   <ExternalLink className="mr-2 size-4" />
                   See Demonstration
                 </Link>
