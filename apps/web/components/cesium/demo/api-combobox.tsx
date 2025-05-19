@@ -45,7 +45,7 @@ function StatusList({
   setStatus,
 }: {
   setOpen: (open: boolean) => void;
-  setStatus: (status: Status | null) => void;
+  setStatus: (status: Status | undefined) => void;
 }) {
   return (
     <Command>
@@ -60,7 +60,7 @@ function StatusList({
               className="hover:cursor-pointer"
               onSelect={(value) => {
                 setStatus(
-                  statuses.find((priority) => priority.value === value) || null,
+                  statuses.find((priority) => priority.value === value),
                 );
                 setOpen(false);
               }}
@@ -74,8 +74,8 @@ function StatusList({
   );
 }
 interface ApiComboboxProps {
-  status: Status | null;
-  setStatus: (status: Status | null) => void;
+  status: Status | undefined;
+  setStatus: (status: Status | undefined) => void;
 }
 export default function ApiCombobox({ status, setStatus }: ApiComboboxProps) {
   const [open, setOpen] = useState<boolean>(false);

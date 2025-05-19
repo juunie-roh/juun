@@ -9,7 +9,7 @@ import Viewer from '@/components/cesium/viewer';
 import ApiCombobox, { Status } from './api-combobox';
 
 export default function ResizableViewerController() {
-  const [status, setStatus] = useState<Status | null>(null);
+  const [status, setStatus] = useState<Status | undefined>(undefined);
   // State to track viewport size
   const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
