@@ -1,7 +1,7 @@
 import { Viewer } from 'cesium';
-import { ViewerProps } from 'resium';
+import { ViewerProps as RViewerProps } from 'resium';
 
-interface IViewerProps extends Omit<ViewerProps, 'className'> {
+export interface ViewerProps extends Omit<RViewerProps, 'className'> {
   /** Whether to show the credit container. @default true */
   bottomContainer?: boolean;
   /** Initial location of the camera */
@@ -12,8 +12,8 @@ interface IViewerProps extends Omit<ViewerProps, 'className'> {
   animation?: boolean;
 }
 
-type ApiFeature = 'collection' | 'terrain' | 'viewer' | 'highlight';
-interface ApiFeatureOption {
+export type ApiFeature = 'collection' | 'terrain' | 'viewer' | 'highlight';
+export interface ApiFeatureOption {
   /** The feature of Api to show */
   feat: ApiFeature;
   /** Display name for the UI */
@@ -21,5 +21,3 @@ interface ApiFeatureOption {
   /** Initial camera location to be set */
   flyTo?: Parameters<Viewer['camera']['flyTo']>[0];
 }
-
-export type { ApiFeatureOption, IViewerProps as ViewerProps };

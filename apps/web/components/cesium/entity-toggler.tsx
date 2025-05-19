@@ -13,8 +13,14 @@ export default function EntityToggler() {
   const entities = useMemo(() => {
     if (!viewer) return;
     const c = new Collection({ collection: viewer.entities, tag: 'toggler' });
-    c.addEventListener('add', () => setOn(true));
-    c.addEventListener('remove', () => setOn(false));
+    c.addEventListener('add', () => {
+      setOn(true);
+      console.log('🚀 ~ entities ~ add:', c.values);
+    });
+    c.addEventListener('remove', () => {
+      setOn(false);
+      console.log('🚀 ~ entities ~ remove:', c.values);
+    });
     return c;
   }, [viewer]);
 
@@ -22,6 +28,7 @@ export default function EntityToggler() {
     () =>
       new Entity({
         position: Cartesian3.fromDegrees(139.7454, 35.6586, 250),
+        id: 'Test Entity',
         box: {
           dimensions: new Cartesian3(50.0, 50.0, 333.0),
           material: Color.RED.withAlpha(0.8),

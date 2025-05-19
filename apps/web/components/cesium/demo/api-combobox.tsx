@@ -19,26 +19,8 @@ import { useMediaQuery } from '@pkg/ui/hooks';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
+import { API_FEATURE_OPTIONS } from '@/constants/cesium.constants';
 import { ApiFeatureOption } from '@/types/cesium.types';
-
-const options: ApiFeatureOption[] = [
-  {
-    feat: 'collection',
-    label: 'Collection',
-  },
-  {
-    feat: 'terrain',
-    label: 'Hybrid Terrain Provider',
-  },
-  {
-    feat: 'viewer',
-    label: 'Viewer',
-  },
-  {
-    feat: 'highlight',
-    label: 'Highlight',
-  },
-];
 
 function StatusList({
   setOpen,
@@ -53,13 +35,15 @@ function StatusList({
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {options.map((option) => (
+          {API_FEATURE_OPTIONS.map((option) => (
             <CommandItem
               key={option.feat}
               value={option.feat}
               className="hover:cursor-pointer"
               onSelect={(value) => {
-                setOption(options.find((priority) => priority.feat === value));
+                setOption(
+                  API_FEATURE_OPTIONS.find((opt) => opt.feat === value),
+                );
                 setOpen(false);
               }}
             >
