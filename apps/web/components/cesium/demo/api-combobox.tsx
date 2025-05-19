@@ -1,5 +1,6 @@
 import {
   Button,
+  cn,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -18,34 +19,33 @@ import { useMediaQuery } from '@pkg/ui/hooks';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
-type ApiFeature = 'collection' | 'terrain' | 'viewer' | 'highlight';
-export type Status = { value: ApiFeature; label: string };
+import { ApiFeatureOption } from '@/types/cesium.types';
 
-const statuses: Status[] = [
+const options: ApiFeatureOption[] = [
   {
-    value: 'collection',
+    feat: 'collection',
     label: 'Collection',
   },
   {
-    value: 'terrain',
+    feat: 'terrain',
     label: 'Hybrid Terrain Provider',
   },
   {
-    value: 'viewer',
+    feat: 'viewer',
     label: 'Viewer',
   },
   {
-    value: 'highlight',
+    feat: 'highlight',
     label: 'Highlight',
   },
 ];
 
 function StatusList({
   setOpen,
-  setStatus,
+  setOption,
 }: {
   setOpen: (open: boolean) => void;
-  setStatus: (status: Status | undefined) => void;
+  setOption: (option: ApiFeatureOption | undefined) => void;
 }) {
   return (
     <Command>
@@ -53,19 +53,17 @@ function StatusList({
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {statuses.map((status) => (
+          {options.map((option) => (
             <CommandItem
-              key={status.value}
-              value={status.value}
+              key={option.feat}
+              value={option.feat}
               className="hover:cursor-pointer"
               onSelect={(value) => {
-                setStatus(
-                  statuses.find((priority) => priority.value === value),
-                );
+                setOption(options.find((priority) => priority.feat === value));
                 setOpen(false);
               }}
             >
-              {status.label}
+              {option.label}
             </CommandItem>
           ))}
         </CommandGroup>
@@ -74,10 +72,16 @@ function StatusList({
   );
 }
 interface ApiComboboxProps {
-  status: Status | undefined;
-  setStatus: (status: Status | undefined) => void;
+  option: ApiFeatureOption | undefined;
+  setOption: (status: ApiFeatureOption | undefined) => void;
+  /** The trigger button class */
+  className?: string;
 }
-export default function ApiCombobox({ status, setStatus }: ApiComboboxProps) {
+export default function ApiCombobox({
+  option,
+  setOption,
+  className,
+}: ApiComboboxProps) {
   const [open, setOpen] = useState<boolean>(false);
   const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
@@ -85,13 +89,16 @@ export default function ApiCombobox({ status, setStatus }: ApiComboboxProps) {
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="w-full justify-between px-4">
-            {status ? status.label : 'Select API'}
+          <Button
+            variant="outline"
+            className={cn('w-full justify-between px-4', className)}
+          >
+            {option ? option.label : 'Select API'}
             <ChevronDown />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[300px]" align="start">
-          <StatusList setOpen={setOpen} setStatus={setStatus} />
+        <PopoverContent className="w-96" align="start">
+          <StatusList setOpen={setOpen} setOption={setOption} />
         </PopoverContent>
       </Popover>
     );
@@ -100,15 +107,18 @@ export default function ApiCombobox({ status, setStatus }: ApiComboboxProps) {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" className="w-full justify-between px-4">
-          {status ? status.label : 'Select API'}
+        <Button
+          variant="outline"
+          className={cn('w-full justify-between px-4', className)}
+        >
+          {option ? option.label : 'Select API'}
           <ChevronDown />
         </Button>
       </DrawerTrigger>
       <DrawerContent className="h-1/2">
         <div className="p-2">
           <DrawerTitle className="sr-only">Cesium Utils API</DrawerTitle>
-          <StatusList setOpen={setOpen} setStatus={setStatus} />
+          <StatusList setOpen={setOpen} setOption={setOption} />
         </div>
       </DrawerContent>
     </Drawer>

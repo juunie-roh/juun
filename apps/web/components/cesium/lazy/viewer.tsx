@@ -14,7 +14,7 @@ import { Fragment, useEffect } from 'react';
 import { useCesium, Viewer as RViewer } from 'resium';
 
 import useViewerStore from '@/stores/slices/viewer';
-import type { IViewerProps } from '@/types/cesium.types';
+import type { ViewerProps } from '@/types/cesium.types';
 
 // Separate component that uses the viewer context
 function ViewerContent({
@@ -24,7 +24,7 @@ function ViewerContent({
   timeline = true,
   terrain,
   terrainProvider,
-}: IViewerProps) {
+}: ViewerProps) {
   const { viewer } = useCesium();
   const setViewer = useViewerStore((state) => state.setViewer);
   const removeViewer = useViewerStore((state) => state.removeViewer);
@@ -116,7 +116,7 @@ export default function LazyViewer({
   terrain,
   terrainProvider,
   ...props
-}: IViewerProps) {
+}: ViewerProps) {
   return (
     <RViewer
       baseLayerPicker={false}

@@ -5,43 +5,45 @@ import { useMediaQuery } from '@pkg/ui/hooks';
 import { useState } from 'react';
 
 import Viewer from '@/components/cesium/viewer';
+import { ApiFeatureOption } from '@/types/cesium.types';
 
-import ApiCombobox, { Status } from './api-combobox';
+import EntityToggler from '../entity-toggler';
+import ApiCombobox from './api-combobox';
 
 export default function ResizableViewerController() {
-  const [status, setStatus] = useState<Status | undefined>(undefined);
+  const [option, setOption] = useState<ApiFeatureOption | undefined>(undefined);
   // State to track viewport size
   const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
   const renderDemo = () => {
-    switch (status?.value) {
+    switch (option?.feat) {
       case 'collection':
         return (
-          <div className="flex size-full items-center justify-center p-4 text-muted-foreground">
-            Collection Demo
+          <div className="size-full">
+            <EntityToggler />
           </div>
         );
       case 'terrain':
         return (
-          <div className="flex size-full items-center justify-center p-4 text-muted-foreground">
+          <div className="flex size-full items-center justify-center text-muted-foreground">
             Terrain Demo
           </div>
         );
       case 'viewer':
         return (
-          <div className="flex size-full items-center justify-center p-4 text-muted-foreground">
+          <div className="flex size-full items-center justify-center text-muted-foreground">
             Viewer Demo
           </div>
         );
       case 'highlight':
         return (
-          <div className="flex size-full items-center justify-center p-4 text-muted-foreground">
+          <div className="flex size-full items-center justify-center text-muted-foreground">
             Highlight Demo
           </div>
         );
       default:
         return (
-          <div className="flex size-full items-center justify-center p-4 text-muted-foreground">
+          <div className="flex size-full items-center justify-center text-muted-foreground">
             Select an API feature to demonstrate
           </div>
         );
@@ -55,7 +57,12 @@ export default function ResizableViewerController() {
     >
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
-          <Viewer bottomContainer={false} animation={false} timeline={false} />
+          <Viewer
+            key={option?.feat || 'default'}
+            bottomContainer={false}
+            animation={false}
+            timeline={false}
+          />
         </div>
       </ResizablePanel>
 
@@ -63,7 +70,7 @@ export default function ResizableViewerController() {
 
       <ResizablePanel defaultSize={30} minSize={20}>
         <div className="relative flex size-full flex-col gap-2 p-2">
-          <ApiCombobox status={status} setStatus={setStatus} />
+          <ApiCombobox option={option} setOption={setOption} />
           {renderDemo()}
         </div>
       </ResizablePanel>
