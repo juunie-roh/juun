@@ -139,6 +139,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from './components/popover';
+import { Progress } from './components/progress';
 import {
   ResizableHandle,
   ResizablePanel,
@@ -198,6 +199,7 @@ import {
   TooltipTrigger,
 } from './components/tooltip';
 import { Wheel, WheelProps } from './components/wheel';
+import { useMediaQuery } from './hooks/use-media-query';
 import { useIsMobile } from './hooks/use-mobile';
 import { cn } from './lib/utils';
 
@@ -316,6 +318,7 @@ export {
   PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
+  Progress,
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
@@ -379,6 +382,7 @@ export {
   cn,
   useFormField,
   useIsMobile,
+  useMediaQuery,
   useSidebar,
 };
 
