@@ -3,7 +3,7 @@
 import { Skeleton } from '@pkg/ui';
 import { lazy, Suspense } from 'react';
 
-import { IViewerProps } from './cesium.types';
+import { IViewerProps } from '@/types/cesium.types';
 
 const LazyViewer = lazy(() => import('./lazy/viewer'));
 
