@@ -14,8 +14,7 @@ import { Fragment, useEffect } from 'react';
 import { useCesium, Viewer as RViewer } from 'resium';
 
 import useViewerStore from '@/stores/slices/viewer';
-
-import type { IViewerProps } from '../cesium.types';
+import type { IViewerProps } from '@/types/cesium.types';
 
 // Separate component that uses the viewer context
 function ViewerContent({
