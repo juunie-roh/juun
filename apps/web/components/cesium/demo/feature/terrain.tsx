@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import useViewerStore from '@/stores/slices/viewer';
 
 export default function TerrainDemo() {
-  const viewer = useViewerStore((state) => state.viewer);
+  const { viewer } = useViewerStore();
   const [visualizer, setVisualizer] = useState<TerrainVisualizer | undefined>();
   const [isShowing, setIsShowing] = useState<boolean | undefined>(false);
 
