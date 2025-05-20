@@ -20,8 +20,7 @@ function ViewerContent({
   terrainProvider,
 }: ViewerProps) {
   const { viewer } = useCesium();
-  const setViewer = useViewerStore((state) => state.setViewer);
-  const removeViewer = useViewerStore((state) => state.removeViewer);
+  const { setViewer, removeViewer, setIsFlying } = useViewerStore();
 
   useEffect(() => {
     if (!viewer) return;
@@ -61,6 +60,18 @@ function ViewerContent({
     ];
 
     // Fly to the initial location
+    const originalFlyTo = viewer.camera.flyTo.bind(viewer.camera);
+    viewer.camera.flyTo = (options) => {
+      setIsFlying(true);
+      originalFlyTo({
+        ...options,
+        complete: () => {
+          if (options.complete) options.complete();
+          setIsFlying(false);
+        },
+      });
+    };
+
     if (flyTo) viewer.camera.flyTo(flyTo);
 
     // Set up terrain only if no custom terrain options provided
@@ -72,7 +83,10 @@ function ViewerContent({
     }
 
     return () => {
-      if (viewer) removeViewer();
+      if (viewer) {
+        viewer.camera.flyTo = originalFlyTo;
+        removeViewer();
+      }
     };
   }, [
     animation,
@@ -84,6 +98,7 @@ function ViewerContent({
     viewer,
     setViewer,
     removeViewer,
+    setIsFlying,
   ]);
 
   return <Fragment />;
