@@ -115,8 +115,7 @@ export default function CloudNativeAppDesign() {
           지연 없이 제공할 수 있다. 이는 서비스의 가용성을 보장하고 개발
           효율성을 높여 전체적인 비용을 절감하는 효과를 가져오며, 어플리케이션의
           사용자 경험 향상에도 주요한 역할을 한다. Cloud Native 는 이렇게 구성된
-          어플리케이션을 효과적으로 운용하기 위해 몇 가지 요소를 추가한 시스템
-          전체를 의미한다.
+          어플리케이션을 효과적으로 운용하기 위한 시스템 전체를 의미한다.
         </p>
 
         <ul>
@@ -229,7 +228,7 @@ export default function CloudNativeAppDesign() {
           또는 지원하고 있다.
         </p>
 
-        <h2 className="tracking-tight">Designing with MSA</h2>
+        <h2 className="tracking-tight">Application Operating System?</h2>
         <p>
           Cloud Native application 의 설계를 찾아보면서 흥미롭게 느껴졌던
           부분들이 있다.
