@@ -109,19 +109,21 @@ export function TableOfContents({
 
   // The TOC content - shared between mobile collapsible and desktop fixed version
   const tocContent = (
-    <ul className="space-y-1 text-muted-foreground">
+    <ul className="space-y-1 border-l text-muted-foreground">
       {headings.map(({ id, text, level }) => (
-        <li key={id} className={cn(level === 3 ? 'pl-4' : '')}>
-          <button
-            type="button"
+        <li key={id}>
+          <Button
+            variant="ghost"
             className={cn(
-              'inline-block w-full rounded-md px-3 py-2 text-left transition-colors hover:text-foreground',
-              activeId === id && 'bg-muted text-foreground',
+              'w-full justify-normal rounded-l-none',
+              level === 3 && 'indent-4',
+              activeId === id &&
+                'text-foreground shadow-[-4px_0_0_0_hsl(var(--primary))]',
             )}
             onClick={() => handleHeadingClick(id)}
           >
             {text}
-          </button>
+          </Button>
         </li>
       ))}
     </ul>
