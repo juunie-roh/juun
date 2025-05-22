@@ -120,13 +120,18 @@ export function TableOfContents({
           />
           <Button
             variant="ghost"
-            className={cn(
-              'w-full justify-normal rounded-l-none py-5 text-base',
-              level === 3 && 'indent-6',
-            )}
+            className="h-auto w-full justify-start rounded-l-none"
             onClick={() => handleHeadingClick(id)}
           >
-            {text}
+            <span
+              className={cn(
+                'text-wrap text-left',
+                level === 3 && 'pl-4',
+                activeId === id && 'text-primary',
+              )}
+            >
+              {text}
+            </span>
           </Button>
         </li>
       ))}
@@ -138,12 +143,11 @@ export function TableOfContents({
       {/* Always visible on xl screens */}
       <div
         className={cn(
-          'hidden xl:block w-full overflow-hidden rounded-lg bg-card py-4 text-sm',
-          bordered && 'border',
+          'hidden xl:block w-full overflow-auto rounded-lg bg-card py-4 text-sm',
         )}
       >
-        <h4 className="mb-4 px-6 font-medium">Index</h4>
-        <nav className="max-h-[calc(100vh-18rem)] overflow-auto px-3">
+        <h4 className="mb-4 px-6 font-medium">JUMP TO SECTION</h4>
+        <nav className="max-h-[calc(100vh-18rem)] overflow-hidden overflow-y-auto px-3">
           {tocContent}
         </nav>
       </div>

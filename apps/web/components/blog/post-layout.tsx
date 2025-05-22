@@ -34,7 +34,7 @@ export function BlogPostLayout({ children, className }: BlogPostLayoutProps) {
       >
         {/* Table of Contents - responsive for all screen sizes */}
         <TableOfContents
-          className="fixed right-5 top-20 z-40 mb-6 mt-2 xl:top-24 xl:my-0 xl:w-64"
+          className="fixed right-5 top-20 z-40 mb-6 mt-2 max-w-64 xl:left-56 xl:top-1/4 xl:my-0"
           contentSelector=".prose"
           headingSelector="h2, h3"
         />
