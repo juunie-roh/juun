@@ -29,7 +29,7 @@
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.19",
+    "@types/node": "^22.15.21",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@types/three": "^0.174.0",
@@ -49,7 +49,7 @@
     "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "webpack": "^5.99.8"
+    "webpack": "^5.99.9"
   },
   "dependencies": {
     "@pkg/ui": "workspace:^",
