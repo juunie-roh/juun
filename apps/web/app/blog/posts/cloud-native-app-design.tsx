@@ -201,7 +201,7 @@ export default function CloudNativeAppDesign() {
 
         <p>
           Cloud Native 의 발전은 현재 진행형이며, Cloud Native 환경 구성을 돕기
-          위한 서드파티 도구들도 활발하게 진행되는 중이다.{' '}
+          위한 서드파티 도구들의 개발도 활발하게 진행되는 중이다.{' '}
           <Link
             href="https://cncf.io"
             target="_blank"
