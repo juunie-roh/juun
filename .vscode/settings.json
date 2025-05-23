@@ -24,7 +24,8 @@
     "sonner",
     "topojson",
     "Turborepo",
-    "vaul"
+    "vaul",
+    "Zipkin"
   ],
   "editor.formatOnSave": false,
   "eslint.enable": true,

@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@pkg/ui';
-import { Quote } from 'lucide-react';
+import { ExternalLink, Quote } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, Suspense } from 'react';
@@ -17,8 +17,9 @@ import { Fragment, Suspense } from 'react';
 import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
 
 export const metadata = {
-  title: 'Cloud Native Application Design',
-  description: 'Considerations of designing cloud native applications',
+  title: 'Cloud Native Application and MSA',
+  description:
+    'Introduction to the Cloud Native, and considerations of designing cloud native applications.',
   date: '2025-05-22',
   tags: ['Cloud Native', 'MSA', 'architecture', 'design'],
   image: 'https://kubernetes.io/_common-resources/images/flower.svg',
@@ -62,7 +63,7 @@ const commons: { role: string; cloud: string; android: string }[] = [
   },
 ];
 
-export default function CloudNativeAppDesign() {
+export default function CloudNative() {
   return (
     <Fragment>
       <Suspense fallback={<BlogHeaderSkeleton />}>
@@ -91,8 +92,18 @@ export default function CloudNativeAppDesign() {
         <p>
           최근 어플리케이션의 구축의 paradigm 은 flexibility, scalability,
           sustainability, retainability 등을 강조하며 서비스의 제공과 기능
-          개발의 영역을 분리하는 쪽으로 변화하는 중이다. 이를 현실화할 수 있게
-          해주는 기술들은 다음과 같다.
+          개발의 영역을 분리하는 쪽으로 변화하고 있다. 이러한 변화는 단순히
+          기술적 트렌드를 따르는 것이 아니라, 급변하는 비즈니스 환경에서
+          생존하기 위한 필수 전략이 되었다.
+        </p>
+        <p>
+          기존의 Monolithic 아키텍처에서는 하나의 거대한 코드베이스에 모든
+          기능이 통합되어 있었다. 이는 초기 개발과 배포가 간단하다는 장점이
+          있었지만, 시간이 지날수록 배포의 위험성, 확장성의 제약, 기술 스택의
+          경직성, 팀 간 협업의 어려움과 같은 한계를 드러냈다. 이러한 문제들을
+          해결하기 위해 등장한 것이 바로 마이크로서비스 아키텍처(MSA)이다.
+          그러나 MSA는 단독으로 존재할 수 없으며, 이를 현실화하기 위한 기반
+          기술들의 발전이 필요했다.
         </p>
 
         <h3 className="tracking-tight">Cloud Computing</h3>
@@ -163,7 +174,7 @@ export default function CloudNativeAppDesign() {
           지연 없이 제공할 수 있다. 이는 서비스의 가용성을 보장하고 개발
           효율성을 높여 전체적인 비용을 절감하는 효과를 가져오며, 어플리케이션의
           사용자 경험 향상에도 주요한 역할을 한다. Cloud Native 는 이렇게 구성된
-          어플리케이션을 효과적으로 운용하기 위한 시스템 전체를 의미한다.
+          어플리케이션을 효과적으로 운용하기 위한 ecosystem 전체를 의미한다.
         </p>
 
         <ul>
@@ -282,33 +293,33 @@ export default function CloudNativeAppDesign() {
           존재하는데, 이들을 살펴보다가 어느 소프트웨어의 구성과 매우 유사하다는
           점을 발견했다. 바로 Android OS 이다.
         </p>
-      </div>
-      <Table className="mt-4">
-        <TableCaption>
-          Common Features between Cloud Native and Android OS
-        </TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Role</TableHead>
-            <TableHead>Cloud Native</TableHead>
-            <TableHead>Android OS</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {commons.map((common) => (
-            <TableRow key={common.role}>
-              <TableCell>{common.role}</TableCell>
-              <TableCell>{common.cloud}</TableCell>
-              <TableCell>{common.android}</TableCell>
+
+        <Table className="mt-4">
+          <TableCaption>
+            Common Features between Cloud Native and Android OS
+          </TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Role</TableHead>
+              <TableHead>Cloud Native</TableHead>
+              <TableHead>Android OS</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className="prose mt-8 max-w-none text-primary">
+          </TableHeader>
+          <TableBody>
+            {commons.map((common) => (
+              <TableRow key={common.role}>
+                <TableCell>{common.role}</TableCell>
+                <TableCell>{common.cloud}</TableCell>
+                <TableCell>{common.android}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
         <p>
           Cloud Native 와 Android OS 는 모두 분산 설계 원칙(
           <Link
-            href="https://en.widipedia.org/wiki/Distributed_design_patterns"
+            href="https://en.wikipedia.org/wiki/Distributed_design_patterns"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -319,7 +330,123 @@ export default function CloudNativeAppDesign() {
           대응', Android OS 는 'Device 최적화'라는 서로 다른 목적성을 가졌음에도
           유사한 방향으로 수렴 진화한 것이다. Cloud Native 는 어플리케이션을
           보다 효율적으로 운영하기 위한 Operating System 으로 분류해도 되지
-          않을까 하는 생각이 들었다.
+          않을까?
+        </p>
+
+        <h2 className="tracking-tight">Core Design Considerations for MSA</h2>
+
+        <AspectRatio
+          ratio={16 / 9}
+          className="mb-8 size-full rounded-lg bg-gray-100"
+        >
+          <Suspense fallback={<Skeleton className="size-full" />}>
+            <Image
+              src="/images/blog/cloud-native-application-development.jpg"
+              alt="Cloud Native Application Development"
+              className="size-full object-contain"
+              fill
+            />
+          </Suspense>
+        </AspectRatio>
+
+        <p className="text-right">
+          <small>
+            <Link
+              href="https://kanini.com/blog/building-cloud-native-applications-and-best-practices"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1"
+            >
+              <ExternalLink size={12} /> Building Cloud Native Applications: Why
+              & How?
+            </Link>
+          </small>
+        </p>
+        <p>
+          MSA 기반의 어플리케이션의 설계는 기존과 다른 측면으로 접근해야 한다.
+          Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는 OS
+          어플리케이션을 위한 자체 OS 의 성격을 띄고 있기 때문에, 어플리케이션이
+          역설적이게도 Cloud Native 시스템 자체에 대한 종속성이 생긴다. Cloud
+          Native 환경에 대한 Compatibility 를 고려해 설계를 진행해야 하는
+          것이다. 이에 따라 고려해야 할 것들은 다음과 같이 나눠진다.
+        </p>
+
+        <h3 className="tracking-tight">1. Infrastructure Architecture</h3>
+        <p>
+          어플리케이션이 운영될 Cloud Native 환경을 정의하는 것이 우선이다.
+          <ul>
+            <li>
+              <b>Centralized Configuration Management</b>: 물리적 리소스, 외부
+              연계 서비스, 클라우드 리소스 등을 관리할 수 있는 중앙 집권화된
+              설정 관리.
+            </li>
+            <li>
+              <b>Observability</b>: 자원 사용량, 서비스 Health 상태 등을 확인할
+              수 있는 모니터링 시스템.
+            </li>
+            <li>
+              <b>Security</b>: 네트워크 정책 및 Ingress & Egress, 방화벽 설정,
+              권한 정의 및 관리 등의 보안 관리.
+            </li>
+            <li>
+              <b>Inter-service Communication</b>: 서비스 간 통신 방식 정의 -
+              동기(synchronous, REST/gRPC) 또는 비동기(asynchronous, message
+              queue/event streaming).
+            </li>
+            <li>
+              <b>Service Discovery & Load Balancing</b>: 동적 환경에서 서비스
+              인스턴스를 찾고 부하를 분산하는 메커니즘.
+            </li>
+          </ul>
+        </p>
+        <h3 className="tracking-tight">2. Microservice Definition</h3>
+        <p>
+          이렇게 정의된 Cloud Native 환경을 바탕으로 단일 microservice 의 구성
+          요소를 식별할 수 있다.
+        </p>
+        <ul>
+          <li>
+            <b>Service Boundary</b>: Domain-Driven Design (DDD)의 Bounded
+            Context를 기반으로 서비스의 경계를 정의.
+          </li>
+          <li>
+            <b>Data Management</b>: 각 서비스에 독립적인 데이터 저장소 할당,
+            데이터 소스 분산에 따른 일관성 유지 정책 수립
+          </li>
+          <li>
+            <b>API Design</b>: 정의된 서비스 통신 방식을 따르는 구체적인 통신
+            방법 설계 및 개별 서비스의 통신 방법에 대한 versioning
+          </li>
+          <li>
+            <b>Resilience Patterns</b>: Timeout, 재시도 및 Error Handling 정책과
+            Circuit Breaker 등을 통한 장애 대응 방침 설계
+          </li>
+        </ul>
+        <h3 className="tracking-tight">3. Others</h3>
+        <p>
+          이외에도 서비스 제공의 중단 없이 서비스 업데이트를 진행하기 위한 CI/CD
+          Pipeline, 개발, 테스트 및 배포 환경 구축, DevOps 도입에 따른 조직 구조
+          및 문화 혁신 등 많은 영역에 걸친 변화를 거쳐야 어플리케이션에 MSA 를
+          적용할 수 있다.
+        </p>
+
+        <blockquote className="text-primary">
+          <Quote /> The best way to implement complex systems is to use a series
+          of simple, loosely coupled components. - Martin Fowler
+        </blockquote>
+        <p>
+          Cloud Native와 MSA는 단순히 기술적 선택이 아니라, 소프트웨어 개발과
+          운영에 대한 철학의 변화를 의미한다. Android OS가 수많은 앱들이
+          독립적으로 실행되면서도 하나의 플랫폼 위에서 조화롭게 동작하는
+          생태계를 만들었듯이, Cloud Native는 마이크로서비스들이 각자의
+          생명주기를 가지면서도 하나의 비즈니스 가치를 전달하는 새로운
+          패러다임을 제시한다.
+        </p>
+        <p>
+          이 여정은 결코 쉽지 않다. 기술적 복잡성은 물론, 조직 문화와 개발
+          프로세스의 근본적인 변화를 요구한다. 하지만 이러한 변화를 성공적으로
+          이끌어낸다면, 급변하는 비즈니스 환경에서 지속 가능한 경쟁력을 확보할
+          수 있을 것이다.
         </p>
       </div>
     </Fragment>
