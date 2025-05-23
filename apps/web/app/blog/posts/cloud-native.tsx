@@ -90,7 +90,7 @@ export default function CloudNative() {
           A Paradigm Shift in Application Development
         </h2>
         <p>
-          최근 어플리케이션의 구축의 paradigm 은 flexibility, scalability,
+          최근 어플리케이션의 구축의 패러다임은 flexibility, scalability,
           sustainability, retainability 등을 강조하며 서비스의 제공과 기능
           개발의 영역을 분리하는 쪽으로 변화하고 있다. 이러한 변화는 단순히
           기술적 트렌드를 따르는 것이 아니라, 급변하는 비즈니스 환경에서
@@ -110,11 +110,10 @@ export default function CloudNative() {
         <p>
           클라우드 컴퓨팅은 하드웨어 수준의 자원을 동적으로 할당하는 것을
           가능하게 하면서, 기존의 예측 사용량을 바탕으로 필요한 모든 자원을
-          확보해 관리하던 On-Premise (Bare Metal) 방식을 보완하며 Infrastructure
-          레벨의 자원 활용 효율을 끌어올렸다. 물리 자원을 더 세분화하여
-          분배함으로써 자원의 가용률을 크게 높일 수 있게 된 것이다. 하지만
-          클라우드 컴퓨팅은 어플리케이션 사용자에게는 크게 체감할 수 없는
-          부분이었다.
+          확보해 관리하던 On-Premise (Bare Metal) 방식을 보완하며 인프라 레벨의
+          자원 활용 효율을 끌어올렸다. 물리 자원을 더 세분화하여 분배함으로써
+          자원의 가용률을 크게 높일 수 있게 된 것이다. 하지만 클라우드 컴퓨팅은
+          어플리케이션 사용자에게는 크게 체감할 수 없는 부분이었다.
         </p>
 
         <h3 className="tracking-tight">Microservices Architecture, MSA</h3>
@@ -254,7 +253,8 @@ export default function CloudNative() {
           </Link>{' '}
           등)이 늘어나 어플리케이션의 복잡도를 높이는 결과를 초래한다. 개발은
           물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서
-          DevOps 라는 새로운 인력 구성 형태가 나타났다.
+          DevOps 라는 새로운 인력 구성 형태가 나타났다. 여기에 보안 관리 인력이
+          추가된 형태를 DevSecOps 라고 한다.
         </p>
 
         <p>
@@ -275,8 +275,8 @@ export default function CloudNative() {
           >
             Linux Foundation
           </Link>{' '}
-          의 일부로, Cloud Native 를 보편화한다는 목표를 가진 open source,
-          vendor-neutral 허브이다. <b>Argo</b>{' '}
+          의 일부로, Cloud Native 를 보편화한다는 목표를 가진 오픈 소스, 벤더
+          중립적 허브이다. <b>Argo</b>{' '}
           <small>(Continuous Integration & Delivery)</small>, <b>Cilium</b>{' '}
           <small>(Cloud Native Network)</small>, <b>Harbor</b>{' '}
           <small>(Container Registry)</small>, <b>Helm</b>{' '}
@@ -367,8 +367,8 @@ export default function CloudNative() {
           Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는 OS
           어플리케이션을 위한 자체 OS 의 성격을 띄고 있기 때문에, 어플리케이션이
           역설적이게도 Cloud Native 시스템 자체에 대한 종속성이 생긴다. Cloud
-          Native 환경에 대한 Compatibility 를 고려해 설계를 진행해야 하는
-          것이다. 이에 따라 고려해야 할 것들은 다음과 같이 나눠진다.
+          Native 환경에 대한 호환성을 고려해 설계를 진행해야 하는 것이다. 이에
+          따라 고려해야 할 것들은 다음과 같이 나눠진다.
         </p>
 
         <h3 className="tracking-tight">1. Infrastructure Architecture</h3>
@@ -427,6 +427,49 @@ export default function CloudNative() {
           및 문화 혁신 등 많은 영역에 걸친 변화를 거쳐야 어플리케이션에 MSA 를
           적용할 수 있다.
         </p>
+
+        <h2 className="tracking-tight">Case Studies</h2>
+        <p>
+          Cloud Native 어플리케이션으로의 Migration 사례는 이미 충분히 많이
+          찾아볼 수 있다. 그 중에서도{' '}
+          <Link
+            href="https://cncf.io/case-studies"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>CNCF Case Studies</b>
+          </Link>{' '}
+          에서는 주로 CNCF 프로젝트들의 사례를 소개하고 있다.
+        </p>
+        <ul>
+          <li>
+            <Link
+              href="https://cncf.io/case-studies/netflix"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <b>Netflix</b>
+            </Link>
+            : Cloud Native 성공 사례로 빠지지 않고 언급되는 Netflix 는 사내 자체
+            개발을 진행하던 RPC <small>Remote Procedure Call</small> 기술을{' '}
+            <b>gRPC</b> 를 확장 적용하여 Inter-Service Communication 을
+            발전시키면서 얻은 효과를 소개한다.
+          </li>
+          <li>
+            <Link
+              href="https://cncf.io/case-studies/kakao"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <b>Kakao</b>
+            </Link>
+            : 한국 기업인 카카오도 찾아볼 수 있다. 카카오는 자사의 Kubernetes
+            플랫폼에 kube-proxy 와 Nginx Ingress 를 추가하면서 네트워크 문제가
+            발생했는데, <b>Cilium</b> 을 CNI{' '}
+            <small>Container Network Interface</small> 로 채택하면서 네트워크
+            비용을 줄이면서 kube-proxy 를 도입할 필요가 없어졌다.
+          </li>
+        </ul>
 
         <h2 className="tracking-tight">Conclusion</h2>
         <blockquote className="text-primary">
