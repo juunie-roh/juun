@@ -1,5 +1,9 @@
+import { ScrollProgressBar } from '@pkg/ui';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Fragment } from 'react';
+
+import { TableOfContents } from '@/components/blog/table-of-contents';
 
 import { getPosts } from '../blog.utils';
 
@@ -68,5 +72,28 @@ export default async function BlogItemPage({
     notFound();
   }
 
-  return <PostComponent />;
+  return (
+    <Fragment>
+      <ScrollProgressBar />
+      <div className="xl:hidden">
+        <TableOfContents
+          className="fixed right-5 top-20 z-40 mb-6 mt-2"
+          contentSelector=".prose"
+          headingSelector="h2, h3"
+        />
+      </div>
+
+      <aside className="hidden xl:block" />
+      <article className="mx-auto w-full max-w-3xl px-4 pb-20 pt-4 md:px-8 xl:w-[48rem]">
+        <PostComponent />
+      </article>
+      <aside className="hidden xl:block">
+        <TableOfContents
+          className="sticky left-0 top-1/4 max-w-64"
+          contentSelector=".prose"
+          headingSelector="h2, h3"
+        />
+      </aside>
+    </Fragment>
+  );
 }
