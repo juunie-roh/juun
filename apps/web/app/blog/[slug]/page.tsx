@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { BlogPostLayout } from '@/components/blog/post-layout';
-
 import { getPosts } from '../blog.utils';
 
 // Generate metadata for each slug
@@ -70,11 +68,5 @@ export default async function BlogItemPage({
     notFound();
   }
 
-  return (
-    <BlogPostLayout>
-      <article className="mx-auto max-w-3xl">
-        <PostComponent />
-      </article>
-    </BlogPostLayout>
-  );
+  return <PostComponent />;
 }

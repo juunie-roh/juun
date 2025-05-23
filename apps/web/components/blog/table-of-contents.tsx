@@ -5,6 +5,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
+  useMediaQuery,
 } from '@pkg/ui';
 import { cn } from '@pkg/ui/lib/utils';
 import { ArrowRight, Bookmark } from 'lucide-react';
@@ -44,13 +45,9 @@ export function TableOfContents({
   contentSelector = '.prose',
   headingSelector = 'h2, h3',
 }: TableOfContentsProps) {
-  // Store the extracted headings
+  const isXL = useMediaQuery('(min-width: 1280px)');
   const [headings, setHeadings] = useState<Heading[]>([]);
-
-  // Track the active heading
   const [activeId, setActiveId] = useState<string>('');
-
-  // Collapsible state
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -120,70 +117,71 @@ export function TableOfContents({
           />
           <Button
             variant="ghost"
-            className={cn(
-              'w-full justify-normal rounded-l-none py-5 text-base',
-              level === 3 && 'indent-6',
-            )}
+            className="h-auto w-full justify-start rounded-l-none"
             onClick={() => handleHeadingClick(id)}
           >
-            {text}
+            <span
+              className={cn(
+                'text-wrap text-left',
+                level === 3 && 'pl-4',
+                activeId === id && 'text-primary',
+              )}
+            >
+              {text}
+            </span>
           </Button>
         </li>
       ))}
     </ul>
   );
 
-  return (
-    <div className={className}>
-      {/* Always visible on xl screens */}
-      <div
-        className={cn(
-          'hidden xl:block w-full overflow-hidden rounded-lg bg-card py-4 text-sm',
-          bordered && 'border',
-        )}
+  return isXL ? (
+    <div
+      className={cn(
+        'hidden xl:block w-full overflow-auto rounded-lg bg-card py-4 text-sm',
+        className,
+      )}
+    >
+      <h4 className="mb-4 px-6 font-medium">JUMP TO SECTION</h4>
+      <nav className="max-h-[calc(100vh-18rem)] overflow-hidden overflow-y-auto px-3">
+        {tocContent}
+      </nav>
+    </div>
+  ) : (
+    <div className={cn('xl:hidden', className)}>
+      <Collapsible
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        className={cn('w-full rounded-md bg-card', bordered && 'border')}
       >
-        <h4 className="mb-4 px-6 font-medium">Index</h4>
-        <nav className="max-h-[calc(100vh-18rem)] overflow-auto px-3">
-          {tocContent}
-        </nav>
-      </div>
+        <CollapsibleTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className={cn(
+              isOpen && 'flex w-full items-center justify-between px-2.5',
+            )}
+          >
+            {isOpen ? (
+              <Fragment>
+                <ArrowRight />
+                <Bookmark className="fill-primary" />
+              </Fragment>
+            ) : (
+              <>
+                <Bookmark />
+              </>
+            )}
+            <span className="sr-only">Toggle table of contents</span>
+          </Button>
+        </CollapsibleTrigger>
 
-      {/* Collapsible on smaller screens */}
-      <div className="xl:hidden">
-        <Collapsible
-          open={isOpen}
-          onOpenChange={setIsOpen}
-          className={cn('w-full rounded-md bg-card', bordered && 'border')}
-        >
-          <CollapsibleTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                isOpen && 'flex w-full items-center justify-between px-2.5',
-              )}
-            >
-              {isOpen ? (
-                <Fragment>
-                  <ArrowRight />
-                  <Bookmark className="fill-primary" />
-                </Fragment>
-              ) : (
-                <>
-                  <Bookmark />
-                </>
-              )}
-              <span className="sr-only">Toggle table of contents</span>
-            </Button>
-          </CollapsibleTrigger>
-
-          <CollapsibleContent>
-            <div className="mt-2 max-h-[50vh] overflow-y-auto px-4 pb-4">
-              {tocContent}
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
-      </div>
+        <CollapsibleContent>
+          <div className="mt-2 max-h-[50vh] overflow-y-auto px-4 pb-4">
+            {tocContent}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 }

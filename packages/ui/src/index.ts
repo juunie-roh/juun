@@ -190,6 +190,16 @@ import { Skeleton } from './components/skeleton';
 import { Slider } from './components/slider';
 import { Toaster } from './components/sonner';
 import { Switch } from './components/switch';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from './components/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/tabs';
 import { Textarea } from './components/textarea';
 import {
@@ -362,6 +372,14 @@ export {
   Skeleton,
   Slider,
   Switch,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
   Tabs,
   TabsContent,
   TabsList,
