@@ -1,4 +1,14 @@
-import { AspectRatio, Skeleton } from '@pkg/ui';
+import {
+  AspectRatio,
+  Skeleton,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@pkg/ui';
 import { Quote } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,11 +18,49 @@ import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
 
 export const metadata = {
   title: 'Cloud Native Application Design',
-  description: 'writing',
+  description: 'Considerations of designing cloud native applications',
   date: '2025-05-22',
   tags: ['Cloud Native', 'MSA', 'architecture', 'design'],
   image: 'https://kubernetes.io/_common-resources/images/flower.svg',
 };
+
+const commons: { role: string; cloud: string; android: string }[] = [
+  {
+    role: 'Messaging',
+    cloud: 'Networking (Cilium)',
+    android: 'Broadcasting',
+  },
+  {
+    role: 'Routing / Gateway',
+    cloud: 'API Gateway',
+    android: 'Intent Filter',
+  },
+  {
+    role: 'Lifecycle Management',
+    cloud: 'Container Orchestration',
+    android: 'Activity Manager',
+  },
+  {
+    role: 'Service Communication',
+    cloud: 'Service Mesh(Istio)',
+    android: 'Binder IPC',
+  },
+  {
+    role: 'Monitoring',
+    cloud: 'Health Checks / Monitoring',
+    android: 'Watchdog / ANR Detection',
+  },
+  {
+    role: 'Failure Isolation',
+    cloud: 'Circuit Breaker',
+    android: 'Process Isolation',
+  },
+  {
+    role: 'Resource Management',
+    cloud: 'Auto Scaling',
+    android: 'Memory Management',
+  },
+];
 
 export default function CloudNativeAppDesign() {
   return (
@@ -230,8 +278,48 @@ export default function CloudNativeAppDesign() {
 
         <h2 className="tracking-tight">Application Operating System?</h2>
         <p>
-          Cloud Native application 의 설계를 찾아보면서 흥미롭게 느껴졌던
-          부분들이 있다.
+          서비스들이 분리됨에 따라 Cloud Native 환경에서 필수가 된 요소들이
+          존재하는데, 이들을 살펴보다가 어느 소프트웨어의 구성과 매우 유사하다는
+          점을 발견했다. 바로 Android OS 이다.
+        </p>
+      </div>
+      <Table className="mt-4">
+        <TableCaption>
+          Common Features between Cloud Native and Android OS
+        </TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Role</TableHead>
+            <TableHead>Cloud Native</TableHead>
+            <TableHead>Android OS</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {commons.map((common) => (
+            <TableRow key={common.role}>
+              <TableCell>{common.role}</TableCell>
+              <TableCell>{common.cloud}</TableCell>
+              <TableCell>{common.android}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <div className="prose mt-8 max-w-none text-primary">
+        <p>
+          Cloud Native 와 Android OS 는 모두 분산 설계 원칙(
+          <Link
+            href="https://en.widipedia.org/wiki/Distributed_design_patterns"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Distributed Design Patterns
+          </Link>
+          )을 따른다는 공통점이 있다. 그렇다보니 언급한 부분 이외에도 상당
+          부분이 유사한 것을 확인할 수 있다. Cloud Native 는 '확장성 및 장애
+          대응', Android OS 는 'Device 최적화'라는 서로 다른 목적성을 가졌음에도
+          유사한 방향으로 수렴 진화한 것이다. Cloud Native 는 어플리케이션을
+          보다 효율적으로 운영하기 위한 Operating System 으로 분류해도 되지
+          않을까 하는 생각이 들었다.
         </p>
       </div>
     </Fragment>
