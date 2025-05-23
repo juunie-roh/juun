@@ -384,7 +384,7 @@ export default function CloudNative() {
             있는 모니터링 시스템.
           </li>
           <li>
-            <b>Security</b>: 네트워크 정책 및 Ingress & Egress, 방화벽 설정,
+            <b>Security</b>: 네트워크 정책 및 Ingress & Engress, 방화벽 설정,
             권한 정의 및 관리 등의 보안 관리.
           </li>
           <li>
