@@ -337,13 +337,13 @@ export default function CloudNative() {
 
         <AspectRatio
           ratio={16 / 9}
-          className="mb-8 size-full rounded-lg bg-gray-100"
+          className="mb-8 size-full overflow-hidden rounded-lg bg-gray-100"
         >
           <Suspense fallback={<Skeleton className="size-full" />}>
             <Image
               src="/images/blog/cloud-native-application-development.jpg"
               alt="Cloud Native Application Development"
-              className="size-full object-contain"
+              className="mt-0 size-full object-contain"
               fill
             />
           </Suspense>
