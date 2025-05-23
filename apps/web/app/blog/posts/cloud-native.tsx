@@ -428,6 +428,7 @@ export default function CloudNative() {
           적용할 수 있다.
         </p>
 
+        <h2 className="tracking-tight">Conclusion</h2>
         <blockquote className="text-primary">
           <Quote /> The best way to implement complex systems is to use a series
           of simple, loosely coupled components. - Martin Fowler
