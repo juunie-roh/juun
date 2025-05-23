@@ -143,7 +143,7 @@ export function TableOfContents({
       )}
     >
       <h4 className="mb-4 px-6 font-medium">JUMP TO SECTION</h4>
-      <nav className="max-h-[calc(100vh-18rem)] overflow-hidden overflow-y-auto px-3">
+      <nav className="max-h-[50vh] overflow-hidden overflow-y-auto px-3">
         {tocContent}
       </nav>
     </div>
@@ -152,7 +152,10 @@ export function TableOfContents({
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
-        className={cn('w-full rounded-md bg-card', bordered && 'border')}
+        className={cn(
+          'w-full max-w-64 rounded-md bg-card',
+          bordered && 'border',
+        )}
       >
         <CollapsibleTrigger asChild>
           <Button
