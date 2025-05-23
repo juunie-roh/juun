@@ -372,33 +372,31 @@ export default function CloudNative() {
         </p>
 
         <h3 className="tracking-tight">1. Infrastructure Architecture</h3>
-        <p>
-          어플리케이션이 운영될 Cloud Native 환경을 정의하는 것이 우선이다.
-          <ul>
-            <li>
-              <b>Centralized Configuration Management</b>: 물리적 리소스, 외부
-              연계 서비스, 클라우드 리소스 등을 관리할 수 있는 중앙 집권화된
-              설정 관리.
-            </li>
-            <li>
-              <b>Observability</b>: 자원 사용량, 서비스 Health 상태 등을 확인할
-              수 있는 모니터링 시스템.
-            </li>
-            <li>
-              <b>Security</b>: 네트워크 정책 및 Ingress & Egress, 방화벽 설정,
-              권한 정의 및 관리 등의 보안 관리.
-            </li>
-            <li>
-              <b>Inter-service Communication</b>: 서비스 간 통신 방식 정의 -
-              동기(synchronous, REST/gRPC) 또는 비동기(asynchronous, message
-              queue/event streaming).
-            </li>
-            <li>
-              <b>Service Discovery & Load Balancing</b>: 동적 환경에서 서비스
-              인스턴스를 찾고 부하를 분산하는 메커니즘.
-            </li>
-          </ul>
-        </p>
+        <p>어플리케이션이 운영될 Cloud Native 환경을 정의하는 것이 우선이다.</p>
+        <ul>
+          <li>
+            <b>Centralized Configuration Management</b>: 물리적 리소스, 외부
+            연계 서비스, 클라우드 리소스 등을 관리할 수 있는 중앙 집권화된 설정
+            관리.
+          </li>
+          <li>
+            <b>Observability</b>: 자원 사용량, 서비스 Health 상태 등을 확인할 수
+            있는 모니터링 시스템.
+          </li>
+          <li>
+            <b>Security</b>: 네트워크 정책 및 Ingress & Egress, 방화벽 설정,
+            권한 정의 및 관리 등의 보안 관리.
+          </li>
+          <li>
+            <b>Inter-service Communication</b>: 서비스 간 통신 방식 정의 -
+            동기(synchronous, REST/gRPC) 또는 비동기(asynchronous, message
+            queue/event streaming).
+          </li>
+          <li>
+            <b>Service Discovery & Load Balancing</b>: 동적 환경에서 서비스
+            인스턴스를 찾고 부하를 분산하는 메커니즘.
+          </li>
+        </ul>
         <h3 className="tracking-tight">2. Microservice Definition</h3>
         <p>
           이렇게 정의된 Cloud Native 환경을 바탕으로 단일 microservice 의 구성
