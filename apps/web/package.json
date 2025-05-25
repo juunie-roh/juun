@@ -30,7 +30,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.21",
-    "@types/react": "^19.1.4",
+    "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@types/three": "^0.174.0",
     "autoprefixer": "^10.4.21",
@@ -63,6 +63,6 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
     "three": "^0.174.0",
-    "zustand": "^5.0.4"
+    "zustand": "^5.0.5"
   }
 }

@@ -32,7 +32,7 @@
     "@types/babel__preset-env": "^7.10.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.21",
-    "@types/react": "^19.1.4",
+    "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@types/react-syntax-highlighter": "^15.5.13",
     "autoprefixer": "^10.4.21",
@@ -87,7 +87,7 @@
     "react-syntax-highlighter": "^15.6.1",
     "sonner": "^2.0.3",
     "vaul": "^1.1.2",
-    "zod": "^3.25.13"
+    "zod": "^3.25.28"
   },
   "exports": {
     ".": "./src/index.ts",
