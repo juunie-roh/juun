@@ -365,7 +365,7 @@ export default function CloudNative() {
         <p>
           MSA 기반의 어플리케이션의 설계는 기존과 다른 측면으로 접근해야 한다.
           Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는 OS
-          어플리케이션을 위한 자체 OS 의 성격을 띄고 있기 때문에, 어플리케이션이
+          어플리케이션을 위한 자체 OS 의 성격을 띠고 있기 때문에, 어플리케이션이
           역설적이게도 Cloud Native 시스템 자체에 대한 종속성이 생긴다. Cloud
           Native 환경에 대한 호환성을 고려해 설계를 진행해야 하는 것이다. 이에
           따라 고려해야 할 것들은 다음과 같이 나눠진다.
@@ -404,11 +404,7 @@ export default function CloudNative() {
         </p>
         <ul>
           <li>
-            <b>Service Boundary</b>: Domain-Driven Design (DDD)의 Bounded
-            Context를 기반으로 서비스의 경계를 정의.
-          </li>
-          <li>
-            <b>Data Management</b>: 각 서비스에 독립적인 데이터 저장소 할당,
+            <b>Data Management</b>: 각 서비스에 독립적인 데이터 저장소 할당 및
             데이터 소스 분산에 따른 일관성 유지 정책 수립
           </li>
           <li>
@@ -417,9 +413,15 @@ export default function CloudNative() {
           </li>
           <li>
             <b>Resilience Patterns</b>: Timeout, 재시도 및 Error Handling 정책과
-            Circuit Breaker 등을 통한 장애 대응 방침 설계
+            Circuit Breaker 등을 통한 장애 대응 방침
           </li>
         </ul>
+        <p>
+          위와 같은 요소들을 바탕으로 하여 단일 microservice 가 구성될 수 있다.
+          각 서비스는 Domain-Driven Design(DDD) 원칙에 따라 구분한 서비스의
+          경계와 Context, 환경에 맞는 통신 포맷, 네트워크 및 방화벽 보안 정책
+          등을 갖추도록 설계한다.
+        </p>
         <h3 className="tracking-tight">3. Others</h3>
         <p>
           이외에도 서비스 제공의 중단 없이 서비스 업데이트를 진행하기 위한 CI/CD
