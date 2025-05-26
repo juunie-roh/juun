@@ -1,3 +1,4 @@
+import { Abbr } from './components/abbr';
 import {
   Accordion,
   AccordionContent,
@@ -215,6 +216,7 @@ import { cn } from './lib/utils';
 
 // Components
 export {
+  Abbr,
   Accordion,
   AccordionContent,
   AccordionItem,
