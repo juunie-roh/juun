@@ -121,8 +121,8 @@ export default function CloudNative() {
         <h3 className="tracking-tight">Microservices Architecture, MSA</h3>
         <p>
           Docker 의 등장과 함께 생겨난 Container 개념은 어플리케이션을 하드웨어,
-          OS 등의 여러 종속성에서 해방시켜주었다. 여기에 더해 Container 화 된
-          서비스의 관리를 보조해줄 Kubernetes 까지 등장하면서 클라우드
+          OS 등의 여러 종속성에서 해방시켜주었다. 여기에 더해, 컨테이너화된
+          서비스를 효과적으로 관리하기 위한 Kubernetes 가 등장하면서 클라우드
           컴퓨팅에서의 동적 자원 할당 개념을 어플리케이션의 서비스 레벨까지
           적용할 수 있게 되자, 어플리케이션이 서비스 도메인을 기준으로 쪼개지기
           시작했다. 이렇게 나눠진 서비스를 microservice, 이를 기준으로 한 설계를
