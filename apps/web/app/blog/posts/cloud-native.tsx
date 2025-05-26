@@ -112,8 +112,10 @@ export default function CloudNative() {
           가능하게 하면서, 기존의 예측 사용량을 바탕으로 필요한 모든 자원을
           확보해 관리하던 On-Premise (Bare Metal) 방식을 보완하며 인프라 레벨의
           자원 활용 효율을 끌어올렸다. 물리 자원을 더 세분화하여 분배함으로써
-          자원의 가용률을 크게 높일 수 있게 된 것이다. 하지만 클라우드 컴퓨팅은
-          어플리케이션 사용자에게는 크게 체감할 수 없는 부분이었다.
+          자원의 가용률을 크게 높일 수 있게 된 것이다. 하지만 기존의 Monolithic
+          어플리케이션으로는 폭주하는 트래픽을 어플리케이션 전체를 새로운
+          인스턴스로 올리는 방식으로 분산시켜야 했기 때문에, 효율성에서 크게
+          이득을 보기 어려웠다.
         </p>
 
         <h3 className="tracking-tight">Microservices Architecture, MSA</h3>
@@ -137,10 +139,42 @@ export default function CloudNative() {
             Service-oriented Architecture, SOA
           </Link>{' '}
           가 그 주인공으로, 어플리케이션을 서비스 도메인으로 나누어 설계한다는
-          점은 동일하지만 설계의 적용 범위에 차이가 있다. MSA 가 어플리케이션
-          범위에서 서비스를 분할한다면, SOA 는 전사적인 범위로 적용하여 동일한
-          서비스의 중복 개발을 피하는 목적으로 사용한다.
+          점은 동일하지만 설계의 적용 범위에 차이가 있다. SOA 가 전사적인 범위로
+          적용하여 동일한 서비스의 중복 개발을 피하기 위해 사용한다면, MSA 는
+          어플리케이션 범위에서의 서비스를 분할한다. ESB{' '}
+          <small>(Enterprise Service Bus)</small> 도입을 통해 공통 서비스를
+          엔터프라이즈 수준에서 관리하는 것을 목적으로 하는 SOA 와 달리, MSA 는
+          어플리케이션의 서비스를 분할 제공하여 가용성 및 확장성 등을 확보를
+          노린다고 할 수 있다.
         </p>
+
+        <Table className="mt-4">
+          <TableCaption>Difference between SOA and MSA</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-1/3">Aspect</TableHead>
+              <TableHead className="w-1/3">SOA</TableHead>
+              <TableHead className="w-1/3">MSA</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>Scope</TableCell>
+              <TableCell>Enterprise</TableCell>
+              <TableCell>Application-level</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Communication</TableCell>
+              <TableCell>ESB</TableCell>
+              <TableCell>Direct (REST, gRPC)</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Governance</TableCell>
+              <TableCell>Centralized</TableCell>
+              <TableCell>Decentralized</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="tracking-tight">Cloud Native</h3>
         <blockquote className="text-primary">
