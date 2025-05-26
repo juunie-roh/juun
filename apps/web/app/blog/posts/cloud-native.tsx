@@ -417,10 +417,10 @@ export default function CloudNative() {
           </li>
         </ul>
         <p>
-          위와 같은 요소들을 바탕으로 하여 단일 microservice 가 구성될 수 있다.
-          각 서비스는 Domain-Driven Design(DDD) 원칙에 따라 구분한 서비스의
-          경계와 Context, 환경에 맞는 통신 포맷, 네트워크 및 방화벽 보안 정책
-          등을 갖추도록 설계한다.
+          위 요소들을 바탕으로 단일 Microservice 는 구성된다. 각 서비스는
+          Domain-Driven Design(DDD) 원칙에 따라 서비스 경계와 Context 를
+          정의하며, 환경에 맞는 통신 포맷, 네트워크 및 방화벽 보안 정책 등을
+          갖추도록 설계한다.
         </p>
         <h3 className="tracking-tight">3. Others</h3>
         <p>
