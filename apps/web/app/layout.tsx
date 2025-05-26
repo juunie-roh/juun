@@ -1,6 +1,6 @@
 import '@pkg/config/tailwind/styles';
 
-import { Toaster } from '@pkg/ui';
+import { Toaster, TooltipProvider } from '@pkg/ui';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
@@ -59,10 +59,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
-          <Toaster />j
-          <Analytics />
+          <TooltipProvider>
+            <Header />
+            {children}
+            <Toaster />
+            <Analytics />
+          </TooltipProvider>
         </ThemeProvider>
         <SpeedInsights />
       </body>
