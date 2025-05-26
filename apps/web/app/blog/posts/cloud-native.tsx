@@ -141,11 +141,11 @@ export default function CloudNative() {
           가 그 주인공으로, 어플리케이션을 서비스 도메인으로 나누어 설계한다는
           점은 동일하지만 설계의 적용 범위에 차이가 있다. SOA 가 전사적인 범위로
           적용하여 동일한 서비스의 중복 개발을 피하기 위해 사용한다면, MSA 는
-          어플리케이션 범위에서의 서비스를 분할한다. ESB{' '}
-          <small>(Enterprise Service Bus)</small> 도입을 통해 공통 서비스를
-          엔터프라이즈 수준에서 관리하는 것을 목적으로 하는 SOA 와 달리, MSA 는
-          어플리케이션의 서비스를 분할 제공하여 가용성 및 확장성 등을 확보를
-          노린다고 할 수 있다.
+          어플리케이션 범위에서의 서비스를 분할한다.{' '}
+          <abbr title="Enterprise Service Bus">ESB</abbr> 도입을 통해 공통
+          서비스를 엔터프라이즈 수준에서 관리하는 것을 목적으로 하는 SOA 와
+          달리, MSA 는 어플리케이션의 서비스를 분할 제공하여 가용성 및 확장성
+          등을 확보를 노린다고 할 수 있다.
         </p>
 
         <Table className="mt-4">
@@ -286,9 +286,11 @@ export default function CloudNative() {
             role
           </Link>{' '}
           등)이 늘어나 어플리케이션의 복잡도를 높이는 결과를 초래한다. 개발은
-          물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서
-          DevOps 라는 새로운 인력 구성 형태가 나타났다. 여기에 보안 관리 인력이
-          추가된 형태를 DevSecOps 라고 한다.
+          물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서{' '}
+          <abbr title="Development Operations">DevOps</abbr> 라는 새로운 인력
+          구성 형태가 나타났다. 여기에 보안 관리 인력이 추가된 형태를{' '}
+          <abbr title="Development Security Operations">DevSecOps</abbr> 라고
+          한다.
         </p>
 
         <p>
@@ -487,9 +489,9 @@ export default function CloudNative() {
               <b>Netflix</b>
             </Link>
             : Cloud Native 성공 사례로 빠지지 않고 언급되는 Netflix 는 사내 자체
-            개발을 진행하던 RPC <small>Remote Procedure Call</small> 기술을{' '}
-            <b>gRPC</b> 를 확장 적용하여 Inter-Service Communication 을
-            발전시키면서 얻은 효과를 소개한다.
+            개발을 진행하던 <abbr title="Remote Procedure Call">RPC</abbr>{' '}
+            기술을 <b>gRPC</b> 로 대체, 확장 적용하여 Inter-Service
+            Communication 을 발전시키면서 얻은 효과를 소개한다.
           </li>
           <li>
             <Link
@@ -501,9 +503,9 @@ export default function CloudNative() {
             </Link>
             : 한국 기업인 카카오도 찾아볼 수 있다. 카카오는 자사의 Kubernetes
             플랫폼에 kube-proxy 와 Nginx Ingress 를 추가하면서 네트워크 문제가
-            발생했는데, <b>Cilium</b> 을 CNI{' '}
-            <small>Container Network Interface</small> 로 채택하면서 네트워크
-            비용을 줄이면서 kube-proxy 를 도입할 필요가 없어졌다.
+            발생했는데, <b>Cilium</b> 을{' '}
+            <abbr title="Container Network Interface">CNI</abbr> 로 채택하면서
+            네트워크 비용을 줄이면서 kube-proxy 를 도입할 필요가 없어졌다.
           </li>
         </ul>
 
