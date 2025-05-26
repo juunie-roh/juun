@@ -364,7 +364,7 @@ export default function CloudNative() {
         </p>
         <p>
           MSA 기반의 어플리케이션의 설계는 기존과 다른 측면으로 접근해야 한다.
-          Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는 OS
+          Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는
           어플리케이션을 위한 자체 OS 의 성격을 띠고 있기 때문에, 어플리케이션이
           역설적이게도 Cloud Native 시스템 자체에 대한 종속성이 생긴다. Cloud
           Native 환경에 대한 호환성을 고려해 설계를 진행해야 하는 것이다. 이에
