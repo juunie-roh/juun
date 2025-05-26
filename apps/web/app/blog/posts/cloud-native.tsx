@@ -112,15 +112,17 @@ export default function CloudNative() {
           가능하게 하면서, 기존의 예측 사용량을 바탕으로 필요한 모든 자원을
           확보해 관리하던 On-Premise (Bare Metal) 방식을 보완하며 인프라 레벨의
           자원 활용 효율을 끌어올렸다. 물리 자원을 더 세분화하여 분배함으로써
-          자원의 가용률을 크게 높일 수 있게 된 것이다. 하지만 클라우드 컴퓨팅은
-          어플리케이션 사용자에게는 크게 체감할 수 없는 부분이었다.
+          자원의 가용률을 크게 높일 수 있게 된 것이다. 하지만 기존의 Monolithic
+          어플리케이션으로는 폭주하는 트래픽을 어플리케이션 전체를 새로운
+          인스턴스로 올리는 방식으로 분산시켜야 했기 때문에, 효율성에서 크게
+          이득을 보기 어려웠다.
         </p>
 
         <h3 className="tracking-tight">Microservices Architecture, MSA</h3>
         <p>
           Docker 의 등장과 함께 생겨난 Container 개념은 어플리케이션을 하드웨어,
-          OS 등의 여러 종속성에서 해방시켜주었다. 여기에 더해 Container 화 된
-          서비스의 관리를 보조해줄 Kubernetes 까지 등장하면서 클라우드
+          OS 등의 여러 종속성에서 해방시켜주었다. 여기에 더해, 컨테이너화된
+          서비스를 효과적으로 관리하기 위한 Kubernetes 가 등장하면서 클라우드
           컴퓨팅에서의 동적 자원 할당 개념을 어플리케이션의 서비스 레벨까지
           적용할 수 있게 되자, 어플리케이션이 서비스 도메인을 기준으로 쪼개지기
           시작했다. 이렇게 나눠진 서비스를 microservice, 이를 기준으로 한 설계를
@@ -137,10 +139,42 @@ export default function CloudNative() {
             Service-oriented Architecture, SOA
           </Link>{' '}
           가 그 주인공으로, 어플리케이션을 서비스 도메인으로 나누어 설계한다는
-          점은 동일하지만 설계의 적용 범위에 차이가 있다. MSA 가 어플리케이션
-          범위에서 서비스를 분할한다면, SOA 는 전사적인 범위로 적용하여 동일한
-          서비스의 중복 개발을 피하는 목적으로 사용한다.
+          점은 동일하지만 설계의 적용 범위에 차이가 있다. SOA 가 전사적인 범위로
+          적용하여 동일한 서비스의 중복 개발을 피하기 위해 사용한다면, MSA 는
+          어플리케이션 범위에서의 서비스를 분할한다.{' '}
+          <abbr title="Enterprise Service Bus">ESB</abbr> 도입을 통해 공통
+          서비스를 엔터프라이즈 수준에서 관리하는 것을 목적으로 하는 SOA 와
+          달리, MSA 는 어플리케이션의 서비스를 분할 제공하여 가용성 및 확장성
+          등을 확보를 노린다고 할 수 있다.
         </p>
+
+        <Table className="mt-4">
+          <TableCaption>Difference between SOA and MSA</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-1/3">Aspect</TableHead>
+              <TableHead className="w-1/3">SOA</TableHead>
+              <TableHead className="w-1/3">MSA</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>Scope</TableCell>
+              <TableCell>Enterprise</TableCell>
+              <TableCell>Application-level</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Communication</TableCell>
+              <TableCell>ESB</TableCell>
+              <TableCell>Direct (REST, gRPC)</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Governance</TableCell>
+              <TableCell>Centralized</TableCell>
+              <TableCell>Decentralized</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
         <h3 className="tracking-tight">Cloud Native</h3>
         <blockquote className="text-primary">
@@ -252,9 +286,11 @@ export default function CloudNative() {
             role
           </Link>{' '}
           등)이 늘어나 어플리케이션의 복잡도를 높이는 결과를 초래한다. 개발은
-          물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서
-          DevOps 라는 새로운 인력 구성 형태가 나타났다. 여기에 보안 관리 인력이
-          추가된 형태를 DevSecOps 라고 한다.
+          물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서{' '}
+          <abbr title="Development Operations">DevOps</abbr> 라는 새로운 인력
+          구성 형태가 나타났다. 여기에 보안 관리 인력이 추가된 형태를{' '}
+          <abbr title="Development Security Operations">DevSecOps</abbr> 라고
+          한다.
         </p>
 
         <p>
@@ -364,7 +400,7 @@ export default function CloudNative() {
         </p>
         <p>
           MSA 기반의 어플리케이션의 설계는 기존과 다른 측면으로 접근해야 한다.
-          Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는 OS
+          Android OS 와의 유사성에서 알 수 있듯이, Cloud Native 는
           어플리케이션을 위한 자체 OS 의 성격을 띠고 있기 때문에, 어플리케이션이
           역설적이게도 Cloud Native 시스템 자체에 대한 종속성이 생긴다. Cloud
           Native 환경에 대한 호환성을 고려해 설계를 진행해야 하는 것이다. 이에
@@ -453,9 +489,9 @@ export default function CloudNative() {
               <b>Netflix</b>
             </Link>
             : Cloud Native 성공 사례로 빠지지 않고 언급되는 Netflix 는 사내 자체
-            개발을 진행하던 RPC <small>Remote Procedure Call</small> 기술을{' '}
-            <b>gRPC</b> 를 확장 적용하여 Inter-Service Communication 을
-            발전시키면서 얻은 효과를 소개한다.
+            개발을 진행하던 <abbr title="Remote Procedure Call">RPC</abbr>{' '}
+            기술을 <b>gRPC</b> 로 대체, 확장 적용하여 Inter-Service
+            Communication 을 발전시키면서 얻은 효과를 소개한다.
           </li>
           <li>
             <Link
@@ -467,9 +503,9 @@ export default function CloudNative() {
             </Link>
             : 한국 기업인 카카오도 찾아볼 수 있다. 카카오는 자사의 Kubernetes
             플랫폼에 kube-proxy 와 Nginx Ingress 를 추가하면서 네트워크 문제가
-            발생했는데, <b>Cilium</b> 을 CNI{' '}
-            <small>Container Network Interface</small> 로 채택하면서 네트워크
-            비용을 줄이면서 kube-proxy 를 도입할 필요가 없어졌다.
+            발생했는데, <b>Cilium</b> 을{' '}
+            <abbr title="Container Network Interface">CNI</abbr> 로 채택하면서
+            네트워크 비용을 줄이면서 kube-proxy 를 도입할 필요가 없어졌다.
           </li>
         </ul>
 
