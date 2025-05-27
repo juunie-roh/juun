@@ -1,8 +1,9 @@
 import { Skeleton } from '@pkg/ui';
+import { Fragment } from 'react';
 
 export default function BlogItemLoading() {
   return (
-    <div className="relative grid min-h-screen w-full grid-cols-1 xl:grid-cols-[1fr_min-content_1fr]">
+    <Fragment>
       {/* Mobile table of contents skeleton */}
       <div className="xl:hidden">
         <div className="fixed right-5 top-20 z-40 mb-6 mt-2">
@@ -86,6 +87,6 @@ export default function BlogItemLoading() {
           </div>
         </div>
       </aside>
-    </div>
+    </Fragment>
   );
 }
