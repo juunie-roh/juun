@@ -146,7 +146,7 @@ export default function CloudNative() {
           <Abbr title="Enterprise Service Bus">ESB</Abbr> 도입을 통해 공통
           서비스를 엔터프라이즈 수준에서 관리하는 것을 목적으로 하는 SOA 와
           달리, MSA 는 어플리케이션의 서비스를 분할 제공하여 가용성 및 확장성
-          등을 확보를 노린다고 할 수 있다.
+          등의 확보를 노린다고 할 수 있다.
         </p>
 
         <Table className="mt-4">
