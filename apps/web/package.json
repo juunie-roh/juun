@@ -16,7 +16,7 @@
     "postinstall": "node scripts/copy-cesium-assets.cjs"
   },
   "devDependencies": {
-    "@juun-roh/cesium-utils": "^0.0.16",
+    "@juun-roh/cesium-utils": "^0.0.18",
     "@next/bundle-analyzer": "^15.3.3",
     "@pkg/config": "workspace:^",
     "@storybook/addon-a11y": "^8.6.14",
