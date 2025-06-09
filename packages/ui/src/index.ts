@@ -148,6 +148,18 @@ import {
 } from './components/resizable';
 import { ScrollArea, ScrollBar } from './components/scroll-area';
 import { ScrollProgressBar } from './components/scroll-progress-bar';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from './components/select';
 import { Separator } from './components/separator';
 import {
   Sheet,
@@ -337,6 +349,16 @@ export {
   ScrollArea,
   ScrollBar,
   ScrollProgressBar,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
   Separator,
   Sheet,
   SheetClose,
