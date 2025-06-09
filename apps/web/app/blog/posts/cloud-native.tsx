@@ -29,7 +29,7 @@ export const metadata = {
 const commons: { role: string; cloud: string; android: string }[] = [
   {
     role: 'Messaging',
-    cloud: 'Networking (Cilium)',
+    cloud: 'Message Broker(e.g. Kafka)',
     android: 'Broadcasting',
   },
   {
@@ -44,7 +44,7 @@ const commons: { role: string; cloud: string; android: string }[] = [
   },
   {
     role: 'Service Communication',
-    cloud: 'Service Mesh(Istio)',
+    cloud: 'Service Mesh(e.g. Istio)',
     android: 'Binder IPC',
   },
   {
@@ -53,7 +53,7 @@ const commons: { role: string; cloud: string; android: string }[] = [
     android: 'Watchdog / ANR Detection',
   },
   {
-    role: 'Failure Isolation',
+    role: 'Fault Tolerance',
     cloud: 'Circuit Breaker',
     android: 'Process Isolation',
   },
@@ -333,7 +333,8 @@ export default function CloudNative() {
 
         <Table className="mt-4">
           <TableCaption>
-            Common Features between Cloud Native and Android OS
+            Conceptual Mapping of Responsibilities between Cloud Native and
+            Android OS
           </TableCaption>
           <TableHeader>
             <TableRow>

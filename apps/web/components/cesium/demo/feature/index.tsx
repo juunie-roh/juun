@@ -1,4 +1,3 @@
-// components/cesium/demo/feature/index.tsx
 import { ApiFeature } from '@/types/cesium.types';
 
 import CollectionDemo from './collection';
