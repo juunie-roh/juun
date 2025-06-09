@@ -1,0 +1,142 @@
+'use client';
+
+import { Highlight } from '@juun-roh/cesium-utils';
+import {
+  Button,
+  Checkbox,
+  Label,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Separator,
+  Slider,
+} from '@pkg/ui';
+import { Cartesian3, Color, Entity } from 'cesium';
+import { useEffect, useMemo, useState } from 'react';
+
+import useViewerStore from '@/stores/slices/viewer';
+
+export default function Polygon() {
+  const { viewer } = useViewerStore();
+  const [isShowing, setIsShowing] = useState<boolean>(false);
+  const [outline, setOutline] = useState<boolean>(false);
+  const [width, setWidth] = useState<number>(2);
+  const [color, setColor] = useState<string>(Color.RED.toCssColorString());
+
+  const highlight = useMemo(
+    () => (viewer ? Highlight.getInstance(viewer) : undefined),
+    [viewer],
+  );
+
+  const e = useMemo(
+    () =>
+      new Entity({
+        polygon: {
+          hierarchy: [
+            new Cartesian3(
+              -2358138.847340281,
+              -3744072.459541374,
+              4581158.5714175375,
+            ),
+            new Cartesian3(
+              -2357231.4925370603,
+              -3745103.7886602185,
+              4580702.9757762635,
+            ),
+            new Cartesian3(
+              -2355912.902205431,
+              -3744249.029778454,
+              4582402.154378103,
+            ),
+            new Cartesian3(
+              -2357208.0209552636,
+              -3743553.4420488174,
+              4581961.863286629,
+            ),
+          ],
+          material: Color.BLUE.withAlpha(0.5),
+        },
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    if (!viewer) return;
+    viewer.entities.add(e);
+
+    viewer.zoomTo(e);
+
+    return () => {
+      viewer.entities.removeAll();
+    };
+  }, [viewer, e]);
+
+  useEffect(() => {
+    if (!highlight) return;
+    if (!isShowing) return highlight.hide();
+    highlight.show(e, {
+      color: Color.fromCssColorString(color),
+      outline,
+      width,
+    });
+  }, [highlight, e, isShowing, color, outline, width]);
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-2">
+        <Select onValueChange={(value) => setColor(value)} defaultValue={color}>
+          <SelectTrigger className="w-36">
+            <SelectValue placeholder="Select a color" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value={Color.RED.toCssColorString()}>RED</SelectItem>
+              <SelectItem value={Color.BLUE.toCssColorString()}>
+                BLUE
+              </SelectItem>
+              <SelectItem value={Color.LIME.toCssColorString()}>
+                LIME
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Button
+          className="grow"
+          disabled={!highlight}
+          onClick={() => setIsShowing(!isShowing)}
+        >
+          {isShowing ? 'hide' : 'show'}
+        </Button>
+      </div>
+      <div className="flex w-full items-center gap-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor="outline">outline</Label>
+          <Checkbox
+            id="outline"
+            checked={outline}
+            onCheckedChange={(checked) => {
+              return checked ? setOutline(true) : setOutline(false);
+            }}
+          />
+        </div>
+        <Separator orientation="vertical" className="h-5" />
+        <div className="flex w-full items-center gap-2">
+          <Label htmlFor="width">width</Label>
+          <Slider
+            id="width"
+            defaultValue={[2]}
+            max={20}
+            min={1}
+            step={1}
+            onValueChange={(v) => setWidth(v[0]!)}
+            disabled={!outline}
+            className={outline ? 'opacity-100' : 'opacity-50'}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
