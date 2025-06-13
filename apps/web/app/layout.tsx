@@ -48,10 +48,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} font-sans antialiased`}
-        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
