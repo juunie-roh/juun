@@ -10,6 +10,9 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      codePanel: true,
+    },
     options: {
       storySort: {
         method: 'alphabetical',
