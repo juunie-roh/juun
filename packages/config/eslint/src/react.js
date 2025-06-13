@@ -1,5 +1,4 @@
 import react from 'eslint-plugin-react';
-// @ts-ignore
 import reactHooks from 'eslint-plugin-react-hooks';
 
 /** @type {import('eslint').Linter.Config[]} */

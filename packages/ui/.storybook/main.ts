@@ -19,16 +19,12 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-interactions'),
     getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-docs'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-webpack5'),
     options: {},
-  },
-  docs: {
-    autodocs: 'tag',
   },
   typescript: {
     check: false,
@@ -45,10 +41,6 @@ const config: StorybookConfig = {
   },
   webpackFinal: async (config) => {
     config.resolve = config.resolve || {};
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@storybook/test': getAbsolutePath('@storybook/test'),
-    };
     if (config.module?.rules) {
       config.module.rules.push(
         // Add SVGR loader for SVG files
