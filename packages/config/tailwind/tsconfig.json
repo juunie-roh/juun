@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@config/typescript/nextjs.json",
+  "extends": "@config/typescript/base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
@@ -9,13 +9,8 @@
     }
   },
   "include": [
-    "./next-env.d.ts",
     "./**/*.ts",
-    "./**/*.tsx",
-    ".next/types/**/*.ts",
-    "./.storybook/**/*",
     "./**/*.js",
-    "./**/*.jsx"
   ],
-  "exclude": ["node_modules", "out", "coverage", "public"]
+  "exclude": ["node_modules"]
 }

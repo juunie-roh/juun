@@ -18,7 +18,9 @@
   "devDependencies": {
     "@juun-roh/cesium-utils": "^0.0.18",
     "@next/bundle-analyzer": "^15.3.3",
-    "@pkg/config": "workspace:^",
+    "@config/eslint": "workspace:^",
+    "@config/tailwind": "workspace:^",
+    "@config/typescript": "workspace:^",
     "@storybook/addon-a11y": "^9.0.9",
     "@storybook/addon-docs": "^9.0.9",
     "@storybook/addon-links": "^9.0.9",

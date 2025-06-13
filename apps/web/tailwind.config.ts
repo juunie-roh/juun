@@ -1,4 +1,4 @@
-import config from '@pkg/config/tailwind';
+import config from '@config/tailwind';
 import type { Config } from 'tailwindcss';
 const extendedConfig: Config = {
   ...config,
@@ -26,9 +26,9 @@ const extendedConfig: Config = {
     },
   },
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/ui/src/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{jsx,tsx,mdx}',
+    './components/**/*.{jsx,tsx,mdx}',
+    '../../packages/ui/src/**/*.{jsx,tsx,mdx}',
   ],
 };
 export default extendedConfig;

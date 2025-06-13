@@ -1,4 +1,4 @@
-import config from '@pkg/config/eslint';
+import config from '@config/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 const extendedConfig = [

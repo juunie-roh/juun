@@ -1,6 +1,5 @@
 import jest from 'eslint-plugin-jest';
 import jestDom from 'eslint-plugin-jest-dom';
-// @ts-ignore
 import jestFormatting from 'eslint-plugin-jest-formatting';
 import testingLibrary from 'eslint-plugin-testing-library';
 import { baseRules } from './base.js';

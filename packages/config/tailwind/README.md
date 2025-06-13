@@ -1,4 +1,4 @@
-# @pkg/config/tailwind
+# config/tailwind
 
 Shared Tailwind CSS configuration with predefined themes, plugins, and utilities.
 
@@ -8,7 +8,7 @@ Extend this configuration in your Tailwind CSS config file:
 
 ```js
 // tailwind.config.ts
-import config from '@pkg/config/tailwind';
+import config from 'config/tailwind';
 import type { Config } from 'tailwindcss';
 
 const extendedConfig: Config = {
@@ -39,7 +39,7 @@ To use the global styles:
 
 ```js
 // In your layout or global CSS file
-import '@pkg/config/tailwind/styles';
+import 'config/tailwind/styles';
 ```
 
 ## CSS Variables

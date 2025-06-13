@@ -1,6 +1,6 @@
 import tailwindcss from 'eslint-plugin-tailwindcss';
 
-import config from '@pkg/config/tailwind';
+import config from '@config/tailwind';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
