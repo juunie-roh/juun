@@ -1,4 +1,4 @@
-# @pkg/config/eslint
+# config/eslint
 
 Collection of internal ESLint configurations for different environments and technologies.
 
@@ -12,7 +12,7 @@ For a standard setup with all rules:
 
 ```js
 // eslint.config.js
-import config from '@pkg/config/eslint';
+import config from 'config/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default config;
@@ -30,7 +30,7 @@ import {
   react,
   typescript,
   prettier,
-} from '@pkg/config/eslint';
+} from 'config/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [

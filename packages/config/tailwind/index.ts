@@ -1,8 +1,8 @@
+import type { Config } from "tailwindcss";
 import tailwindcssTypography from '@tailwindcss/typography';
 import tailwindcssAnimate from 'tailwindcss-animate';
 
-/** @type {import('tailwindcss').Config} */
-const config = {
+const config: Omit<Config, 'content'> = {
   darkMode: ['class'],
   theme: {
     extend: {
