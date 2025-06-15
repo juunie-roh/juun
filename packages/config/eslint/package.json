@@ -13,11 +13,11 @@
   "devDependencies": {
     "@config/tailwind": "workspace:^",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.28.0",
+    "@eslint/js": "^9.29.0",
     "@next/eslint-plugin-next": "^15.3.3",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
-    "eslint": "^9.28.0",
+    "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-jest": "^28.13.5",
     "eslint-plugin-jest-dom": "^5.5.0",
@@ -30,7 +30,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^9.0.9",
     "eslint-plugin-tailwindcss": "3.18.0",
-    "eslint-plugin-testing-library": "^7.5.2",
+    "eslint-plugin-testing-library": "^7.5.3",
     "eslint-plugin-turbo": "^2.5.4",
     "eslint-plugin-unused-imports": "^4.1.4"
   }
