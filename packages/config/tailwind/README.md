@@ -6,13 +6,13 @@ Shared Tailwind CSS configuration with predefined themes, plugins, and utilities
 
 Extend this configuration in your Tailwind CSS config file:
 
-```js
-// tailwind.config.ts
+```ts
 import config from 'config/tailwind';
 import type { Config } from 'tailwindcss';
 
 const extendedConfig: Config = {
   ...config,
+  // The content value is required
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -37,7 +37,7 @@ export default extendedConfig;
 
 To use the global styles:
 
-```js
+```tsx
 // In your layout or global CSS file
 import 'config/tailwind/styles';
 ```

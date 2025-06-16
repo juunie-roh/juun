@@ -7,8 +7,8 @@
     "access": "public"
   },
   "exports": {
-    ".": "./index.ts",
-    "./style": "./styles/globals.css"
+    ".": "./tailwind.config.ts",
+    "./styles": "./globals.css"
   },
   "devDependencies": {
     "@config/typescript": "workspace:^",

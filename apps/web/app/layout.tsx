@@ -1,4 +1,4 @@
-import '@pkg/config/tailwind/styles';
+import '@config/tailwind/styles';
 
 import { Toaster, TooltipProvider } from '@pkg/ui';
 import { Analytics } from '@vercel/analytics/next';
