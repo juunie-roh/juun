@@ -7,7 +7,7 @@
     "access": "public"
   },
   "exports": {
-    ".": "./tailwind.config.ts",
+    ".": "./tailwind.config.js",
     "./styles": "./globals.css"
   },
   "devDependencies": {
