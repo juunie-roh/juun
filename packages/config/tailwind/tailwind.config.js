@@ -1,8 +1,8 @@
-import type { Config } from "tailwindcss";
 import tailwindcssTypography from '@tailwindcss/typography';
 import tailwindcssAnimate from 'tailwindcss-animate';
 
-const config: Omit<Config, 'content'> = {
+/** @type {Omit<import('tailwindcss').Config, 'content'>} */
+const config = {
   darkMode: ['class'],
   theme: {
     extend: {
@@ -67,4 +67,5 @@ const config: Omit<Config, 'content'> = {
   },
   plugins: [tailwindcssAnimate, tailwindcssTypography],
 };
+
 export default config;
