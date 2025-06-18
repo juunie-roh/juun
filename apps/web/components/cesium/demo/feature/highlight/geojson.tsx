@@ -2,16 +2,23 @@
 
 import { Highlight } from '@juun-roh/cesium-utils';
 import { Button, Checkbox, Label, Separator, Slider } from '@pkg/ui';
-import { Cartesian3, Color, Entity } from 'cesium';
-import { useEffect, useMemo, useState } from 'react';
+import {
+  Cartesian3,
+  Color,
+  defined,
+  GeoJsonDataSource,
+  Matrix4,
+  ScreenSpaceEventType,
+} from 'cesium';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useViewerStore from '@/stores/slices/viewer';
 
 import ColorSelector from './color-selector';
 
-export default function PolygonHighlight() {
+export default function GeojsonHighlight() {
   const { viewer } = useViewerStore();
-  const [isShowing, setIsShowing] = useState<boolean>(false);
+  const [isPicking, setIsPicking] = useState<boolean>(false);
   const [outline, setOutline] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(2);
   const [color, setColor] = useState<string>(Color.RED.toCssColorString());
@@ -21,58 +28,53 @@ export default function PolygonHighlight() {
     [viewer],
   );
 
-  const e = useMemo(
-    () =>
-      new Entity({
-        polygon: {
-          hierarchy: [
-            new Cartesian3(
-              -2358138.847340281,
-              -3744072.459541374,
-              4581158.5714175375,
-            ),
-            new Cartesian3(
-              -2357231.4925370603,
-              -3745103.7886602185,
-              4580702.9757762635,
-            ),
-            new Cartesian3(
-              -2355912.902205431,
-              -3744249.029778454,
-              4582402.154378103,
-            ),
-            new Cartesian3(
-              -2357208.0209552636,
-              -3743553.4420488174,
-              4581961.863286629,
-            ),
-          ],
-          material: Color.YELLOW.withAlpha(0.5),
-        },
-      }),
-    [],
+  const onMouseMove = useCallback(
+    (movement: any) => {
+      if (!viewer || !highlight || !isPicking) return;
+      const picked = viewer.scene.pick(movement.endPosition);
+      if (!defined(picked)) return highlight.hide();
+      highlight.show(picked, {
+        outline,
+        width,
+        color: Color.fromCssColorString(color),
+      });
+    },
+    [isPicking, viewer, highlight, outline, width, color],
   );
 
   useEffect(() => {
     if (!viewer) return;
-    viewer.entities.add(e);
-
-    viewer.zoomTo(e);
+    // Set GeoJsonDataSource to the viewer on mount
+    viewer.dataSources.add(
+      GeoJsonDataSource.load('/data/ne_10m_us_states.topojson'),
+    );
+    // Set camera
+    viewer.camera.lookAt(
+      Cartesian3.fromDegrees(-98.0, 40.0),
+      new Cartesian3(0.0, -4790000.0, 3930000.0),
+    );
+    viewer.camera.lookAtTransform(Matrix4.IDENTITY);
 
     return () => {
-      viewer.entities.remove(e);
+      // Remove data source from the viewer on unmount
+      viewer.dataSources.removeAll();
     };
-  }, [viewer, e]);
+  }, [viewer]);
 
   useEffect(() => {
-    if (!highlight) return;
-    if (!isShowing) return highlight.hide();
-    highlight.show(e, {
-      color: Color.fromCssColorString(color),
-      outline,
-      width,
-    });
-  }, [highlight, e, isShowing, color, outline, width]);
+    if (isPicking) {
+      viewer?.screenSpaceEventHandler.setInputAction(
+        onMouseMove,
+        ScreenSpaceEventType.MOUSE_MOVE,
+      );
+    }
+
+    return () => {
+      viewer?.screenSpaceEventHandler.removeInputAction(
+        ScreenSpaceEventType.MOUSE_MOVE,
+      );
+    };
+  }, [viewer, isPicking, onMouseMove]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
@@ -81,9 +83,9 @@ export default function PolygonHighlight() {
         <Button
           className="grow"
           disabled={!highlight}
-          onClick={() => setIsShowing(!isShowing)}
+          onClick={() => setIsPicking(!isPicking)}
         >
-          {isShowing ? 'hide' : 'show'} highlight
+          Mouse Event {isPicking ? 'off' : 'on'}
         </Button>
       </div>
       <div className="flex w-full items-center gap-2">

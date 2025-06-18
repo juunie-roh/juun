@@ -14,7 +14,7 @@ export const FeatureDemos: Record<ApiFeature, React.ComponentType> = {
 };
 
 // Default component when no feature is selected
-export function DefaultDemo() {
+function DefaultDemo() {
   return (
     <div className="flex size-full items-center justify-center text-muted-foreground">
       Select an API feature to demonstrate
@@ -27,7 +27,7 @@ interface FeatureDemoProps {
   feat: ApiFeature | undefined;
 }
 
-export function FeatureDemo({ feat }: FeatureDemoProps) {
+export default function FeatureDemo({ feat }: FeatureDemoProps) {
   if (!feat) {
     return <DefaultDemo />;
   }
