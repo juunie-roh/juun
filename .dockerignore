@@ -4,12 +4,12 @@ Dockerfile
 node_modules
 
 # testing
-/__mocks__
-/.swc
-/coverage
+__mocks__
+.swc
+coverage
 
 # next.js
-/out/
+out/
 src/.next/
 
 # debug
