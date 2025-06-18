@@ -8,7 +8,7 @@ import Viewer from '@/components/cesium/viewer';
 import { ApiFeatureOption } from '@/types/cesium.types';
 
 import ApiCombobox from './api-combobox';
-import { FeatureDemo } from './feature';
+import FeatureDemo from './feature';
 
 export default function ResizableViewerController() {
   const [option, setOption] = useState<ApiFeatureOption | undefined>(undefined);
@@ -37,7 +37,9 @@ export default function ResizableViewerController() {
       <ResizablePanel defaultSize={30} minSize={20}>
         <div className="relative flex size-full flex-col gap-2 p-2">
           <ApiCombobox option={option} setOption={setOption} />
-          <FeatureDemo feat={option?.feat} />
+          <div className="size-full overflow-y-auto px-2">
+            <FeatureDemo feat={option?.feat} />
+          </div>
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
