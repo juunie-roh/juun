@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from '@pkg/ui';
 
-import GeojsonHighlight from './geojson';
+import MouseEventHighlight from './mouse-event';
 import PolygonHighlight from './polygon';
 
 export default function HighlightDemo() {
@@ -23,9 +23,9 @@ export default function HighlightDemo() {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>GeoJSON</AccordionTrigger>
+        <AccordionTrigger>Mouse Event</AccordionTrigger>
         <AccordionContent>
-          <GeojsonHighlight />
+          <MouseEventHighlight />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
