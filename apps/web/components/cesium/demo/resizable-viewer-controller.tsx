@@ -13,7 +13,7 @@ import FeatureDemo from './feature';
 export default function ResizableViewerController() {
   const [option, setOption] = useState<ApiFeatureOption | undefined>(undefined);
   // State to track viewport size
-  const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+  const isLargeScreen = useMediaQuery('min-width: 1024px');
 
   return (
     <ResizablePanelGroup
