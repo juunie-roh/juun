@@ -3,12 +3,12 @@
 import { Skeleton } from '@pkg/ui';
 import { lazy, Suspense } from 'react';
 
-const LazyViewerDemo = lazy(() => import('./lazy/viewer'));
+const LazyHighlightDemo = lazy(() => import('./lazy/highlight'));
 
-export default function ViewerDemo() {
+export default function HighlightDemo() {
   return (
     <Suspense fallback={<Skeleton className="size-full" />}>
-      <LazyViewerDemo />
+      <LazyHighlightDemo />
     </Suspense>
   );
 }
