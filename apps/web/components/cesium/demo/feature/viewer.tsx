@@ -1,8 +1,14 @@
-// components/cesium/demo/feature/viewer.tsx
+'use client';
+
+import { Skeleton } from '@pkg/ui';
+import { lazy, Suspense } from 'react';
+
+const LazyViewerDemo = lazy(() => import('./lazy/viewer'));
+
 export default function ViewerDemo() {
   return (
-    <div className="flex size-full items-center justify-center text-muted-foreground">
-      Viewer Demo
-    </div>
+    <Suspense fallback={<Skeleton className="size-full" />}>
+      <LazyViewerDemo />
+    </Suspense>
   );
 }

@@ -16,7 +16,7 @@ import useViewerStore from '@/stores/slices/viewer';
 
 import ColorSelector from './color-selector';
 
-export default function GeojsonHighlight() {
+export default function MouseEventHighlight() {
   const { viewer } = useViewerStore();
   const [isPicking, setIsPicking] = useState<boolean>(false);
   const [outline, setOutline] = useState<boolean>(false);

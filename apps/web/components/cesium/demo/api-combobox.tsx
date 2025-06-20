@@ -67,7 +67,7 @@ export default function ApiCombobox({
   className,
 }: ApiComboboxProps) {
   const [open, setOpen] = useState<boolean>(false);
-  const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+  const isLargeScreen = useMediaQuery('min-width: 1024px');
 
   if (isLargeScreen) {
     return (

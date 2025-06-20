@@ -45,7 +45,7 @@ export function TableOfContents({
   contentSelector = '.prose',
   headingSelector = 'h2, h3',
 }: TableOfContentsProps) {
-  const isXL = useMediaQuery('(min-width: 1280px)');
+  const isXL = useMediaQuery('min-width: 1280px');
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);

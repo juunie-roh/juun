@@ -5,10 +5,7 @@ import {
   AccordionTrigger,
 } from '@pkg/ui';
 
-import GeojsonHighlight from './geojson';
-import PolygonHighlight from './polygon';
-
-export default function HighlightDemo() {
+export default function ViewerDemo() {
   return (
     <Accordion
       type="single"
@@ -17,16 +14,16 @@ export default function HighlightDemo() {
       defaultValue="item-1"
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger>Polygon Entity</AccordionTrigger>
+        <AccordionTrigger>Clone Viewer</AccordionTrigger>
         <AccordionContent>
-          <PolygonHighlight />
+          <div className="flex size-full items-center justify-center text-muted-foreground">
+            Viewer Demo
+          </div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>GeoJSON</AccordionTrigger>
-        <AccordionContent>
-          <GeojsonHighlight />
-        </AccordionContent>
+        <AccordionTrigger>Mouse Event</AccordionTrigger>
+        <AccordionContent></AccordionContent>
       </AccordionItem>
     </Accordion>
   );
