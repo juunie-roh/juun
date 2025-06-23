@@ -53,6 +53,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@juun-roh/cesium-utils':
+        specifier: ^0.0.18
+        version: 0.0.18(cesium@1.130.0)
       '@pkg/ui':
         specifier: workspace:^
         version: link:../../packages/ui
@@ -71,6 +74,9 @@ importers:
       '@vercel/speed-insights':
         specifier: ^1.2.0
         version: 1.2.0(next@15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+      cesium:
+        specifier: ^1.130.0
+        version: 1.130.0
       next:
         specifier: ^15.3.4
         version: 15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -86,6 +92,9 @@ importers:
       react-hook-form:
         specifier: ^7.58.1
         version: 7.58.1(react@19.1.0)
+      resium:
+        specifier: 1.19.0-beta.1
+        version: 1.19.0-beta.1(cesium@1.130.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       three:
         specifier: ^0.177.0
         version: 0.177.0
@@ -157,8 +166,8 @@ importers:
         specifier: ^30.0.2
         version: 30.0.2
       lucide-react:
-        specifier: ^0.517.0
-        version: 0.517.0(react@19.1.0)
+        specifier: ^0.522.0
+        version: 0.522.0(react@19.1.0)
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
@@ -186,16 +195,6 @@ importers:
       webpack:
         specifier: ^5.99.9
         version: 5.99.9(esbuild@0.25.5)
-    optionalDependencies:
-      '@juun-roh/cesium-utils':
-        specifier: ^0.0.18
-        version: 0.0.18(cesium@1.130.0)
-      cesium:
-        specifier: ^1.130.0
-        version: 1.130.0
-      resium:
-        specifier: 1.19.0-beta.1
-        version: 1.19.0-beta.1(cesium@1.130.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   packages/config/eslint:
     devDependencies:
@@ -233,8 +232,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0(eslint@9.29.0(jiti@2.4.2))
       eslint-plugin-jsdoc:
-        specifier: ^51.1.1
-        version: 51.1.1(eslint@9.29.0(jiti@2.4.2))
+        specifier: ^51.2.1
+        version: 51.2.1(eslint@9.29.0(jiti@2.4.2))
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.29.0(jiti@2.4.2))
@@ -361,8 +360,8 @@ importers:
         specifier: ^8.6.0
         version: 8.6.0(react@19.1.0)
       lucide-react:
-        specifier: ^0.517.0
-        version: 0.517.0(react@19.1.0)
+        specifier: ^0.522.0
+        version: 0.522.0(react@19.1.0)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1298,9 +1297,9 @@ packages:
   '@emnapi/wasi-threads@1.0.2':
     resolution: {integrity: sha512-5n3nTJblwRi8LlXkJ9eBzu+kZR8Yxcc7ubakyQTFzPMtIhFpUBRbsnc2Dv88IZDIbCDlBiWrknhB4Lsz7mg6BA==}
 
-  '@es-joy/jsdoccomment@0.51.1':
-    resolution: {integrity: sha512-fPn7AW/unCg3JRLt8Wg44HLRVkAEfkFIXiGRJbeOIrd7Hgl4iOFwVHpvVR8I5hJYpn5mNFWwIXR6A16ZRA/M9w==}
-    engines: {node: '>=18'}
+  '@es-joy/jsdoccomment@0.52.0':
+    resolution: {integrity: sha512-BXuN7BII+8AyNtn57euU2Yxo9yA/KUDNzrpXyi3pfqKmBhhysR6ZWOebFh3vyPoqA3/j1SOvGgucElMGwlXing==}
+    engines: {node: '>=20.11.0'}
 
   '@esbuild/aix-ppc64@0.25.5':
     resolution: {integrity: sha512-9o3TMmpmftaCMepOdA5k/yDw8SfInyzWWTjYTFCX3kPSDJMROQTb8jg+h9Cnwnmm1vOzvxN7gIfB5V2ewpjtGA==}
@@ -2501,8 +2500,8 @@ packages:
       react-native:
         optional: true
 
-  '@sinclair/typebox@0.34.35':
-    resolution: {integrity: sha512-C6ypdODf2VZkgRT6sFM8E1F8vR+HcffniX0Kp8MsU8PIfrlXbNCBz0jzj17GjdmjTx1OtZzdH8+iALL21UjF5A==}
+  '@sinclair/typebox@0.34.36':
+    resolution: {integrity: sha512-JFHFhF6MqqRE49JDAGX/EPlHwxIukrKMhNwlMoB/wIJBkvu3+ciO335yDYPP3soI01FkhVXWnyNPKEl+EsC4Zw==}
 
   '@sinonjs/commons@3.0.1':
     resolution: {integrity: sha512-K3mCHKQ9sVh8o1C9cxkwxaOmXoAMlDxC1mYyHrjqOWEcBjYr76t96zL2zlj5dUGZ3HSw240X1qgH3Mjf1yJWpQ==}
@@ -4304,8 +4303,8 @@ packages:
       jest:
         optional: true
 
-  eslint-plugin-jsdoc@51.1.1:
-    resolution: {integrity: sha512-MU+7rYK2r4frl6Rb/5ebchjBN/jk6iXRMMOd/n3RyAHfaRL+jDfrvXi7b776p5qGaW7dAo8Fxc/s3pwNab9SEw==}
+  eslint-plugin-jsdoc@51.2.1:
+    resolution: {integrity: sha512-iE2qpG/kaA9xXfEcTNSsxNvH5O8+o38VBGLwl2oZisQaM1JRGftTLJAGQrj7YZjSkp3n9VCrNTjOpo3ONhTApQ==}
     engines: {node: '>=20.11.0'}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -5532,8 +5531,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucide-react@0.517.0:
-    resolution: {integrity: sha512-TQCwwbwIuVG6SSutUC2Ol6PRXcuZndqoVAnDa7S7xb/RWPaiKTvLwX7byUKeh0pUgvtFh0NZZwFIDuMSeB7Iwg==}
+  lucide-react@0.522.0:
+    resolution: {integrity: sha512-jnJbw974yZ7rQHHEFKJOlWAefG3ATSCZHANZxIdx8Rk/16siuwjgA4fBULpXEAWx/RlTs3FzmKW/udWUuO0aRw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -8301,13 +8300,11 @@ snapshots:
       rbush: 4.0.1
       topojson-client: 3.1.0
       urijs: 1.19.11
-    optional: true
 
   '@cesium/widgets@12.1.0':
     dependencies:
       '@cesium/engine': 18.0.0
       nosleep.js: 0.12.0
-    optional: true
 
   '@commitlint/cli@19.8.1(@types/node@24.0.3)(typescript@5.8.3)':
     dependencies:
@@ -8479,7 +8476,7 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@es-joy/jsdoccomment@0.51.1':
+  '@es-joy/jsdoccomment@0.52.0':
     dependencies:
       '@types/estree': 1.0.8
       '@typescript-eslint/types': 8.34.1
@@ -8878,7 +8875,7 @@ snapshots:
 
   '@jest/schemas@30.0.1':
     dependencies:
-      '@sinclair/typebox': 0.34.35
+      '@sinclair/typebox': 0.34.36
 
   '@jest/snapshot-utils@30.0.1':
     dependencies:
@@ -8967,7 +8964,6 @@ snapshots:
   '@juun-roh/cesium-utils@0.0.18(cesium@1.130.0)':
     dependencies:
       cesium: 1.130.0
-    optional: true
 
   '@mdx-js/react@3.1.0(@types/react@19.1.8)(react@19.1.0)':
     dependencies:
@@ -9064,38 +9060,28 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@protobufjs/aspromise@1.1.2':
-    optional: true
+  '@protobufjs/aspromise@1.1.2': {}
 
-  '@protobufjs/base64@1.1.2':
-    optional: true
+  '@protobufjs/base64@1.1.2': {}
 
-  '@protobufjs/codegen@2.0.4':
-    optional: true
+  '@protobufjs/codegen@2.0.4': {}
 
-  '@protobufjs/eventemitter@1.1.0':
-    optional: true
+  '@protobufjs/eventemitter@1.1.0': {}
 
   '@protobufjs/fetch@1.1.0':
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/inquire': 1.1.0
-    optional: true
 
-  '@protobufjs/float@1.0.2':
-    optional: true
+  '@protobufjs/float@1.0.2': {}
 
-  '@protobufjs/inquire@1.1.0':
-    optional: true
+  '@protobufjs/inquire@1.1.0': {}
 
-  '@protobufjs/path@1.1.2':
-    optional: true
+  '@protobufjs/path@1.1.2': {}
 
-  '@protobufjs/pool@1.1.0':
-    optional: true
+  '@protobufjs/pool@1.1.0': {}
 
-  '@protobufjs/utf8@1.1.0':
-    optional: true
+  '@protobufjs/utf8@1.1.0': {}
 
   '@radix-ui/number@1.1.1': {}
 
@@ -9703,7 +9689,7 @@ snapshots:
       - '@types/react'
       - immer
 
-  '@sinclair/typebox@0.34.35': {}
+  '@sinclair/typebox@0.34.36': {}
 
   '@sinonjs/commons@3.0.1':
     dependencies:
@@ -10071,8 +10057,7 @@ snapshots:
 
   '@tweenjs/tween.js@23.1.3': {}
 
-  '@tweenjs/tween.js@25.0.0':
-    optional: true
+  '@tweenjs/tween.js@25.0.0': {}
 
   '@tybys/wasm-util@0.9.0':
     dependencies:
@@ -10485,8 +10470,7 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  '@zip.js/zip.js@2.7.62':
-    optional: true
+  '@zip.js/zip.js@2.7.62': {}
 
   JSONStream@1.3.5:
     dependencies:
@@ -10688,7 +10672,6 @@ snapshots:
   autolinker@4.1.5:
     dependencies:
       tslib: 2.8.1
-    optional: true
 
   autoprefixer@10.4.21(postcss@8.5.6):
     dependencies:
@@ -10815,8 +10798,7 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
-  bitmap-sdf@1.0.4:
-    optional: true
+  bitmap-sdf@1.0.4: {}
 
   bl@4.1.0:
     dependencies:
@@ -10978,7 +10960,6 @@ snapshots:
     dependencies:
       '@cesium/engine': 18.0.0
       '@cesium/widgets': 12.1.0
-    optional: true
 
   chai@5.2.0:
     dependencies:
@@ -11244,7 +11225,7 @@ snapshots:
     dependencies:
       cipher-base: 1.0.6
       inherits: 2.0.4
-      ripemd160: 2.0.2
+      ripemd160: 2.0.1
       sha.js: 2.4.11
 
   create-hash@1.2.0:
@@ -11505,7 +11486,6 @@ snapshots:
   dompurify@3.2.6:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
-    optional: true
 
   domutils@2.8.0:
     dependencies:
@@ -11540,8 +11520,7 @@ snapshots:
 
   duplexer@0.1.2: {}
 
-  earcut@3.0.1:
-    optional: true
+  earcut@3.0.1: {}
 
   eastasianwidth@0.2.0: {}
 
@@ -11785,9 +11764,9 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-jsdoc@51.1.1(eslint@9.29.0(jiti@2.4.2)):
+  eslint-plugin-jsdoc@51.2.1(eslint@9.29.0(jiti@2.4.2)):
     dependencies:
-      '@es-joy/jsdoccomment': 0.51.1
+      '@es-joy/jsdoccomment': 0.52.0
       are-docs-informative: 0.0.2
       comment-parser: 1.4.1
       debug: 4.4.1
@@ -12311,8 +12290,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  grapheme-splitter@1.0.4:
-    optional: true
+  grapheme-splitter@1.0.4: {}
 
   graphemer@1.4.0: {}
 
@@ -13145,8 +13123,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  jsep@1.4.0:
-    optional: true
+  jsep@1.4.0: {}
 
   jsesc@3.0.2: {}
 
@@ -13179,15 +13156,13 @@ snapshots:
       object.assign: 4.1.7
       object.values: 1.2.1
 
-  kdbush@4.0.2:
-    optional: true
+  kdbush@4.0.2: {}
 
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
 
-  ktx-parse@1.0.1:
-    optional: true
+  ktx-parse@1.0.1: {}
 
   language-subtag-registry@0.3.23: {}
 
@@ -13195,8 +13170,7 @@ snapshots:
     dependencies:
       language-subtag-registry: 0.3.23
 
-  lerc@2.0.0:
-    optional: true
+  lerc@2.0.0: {}
 
   leven@3.1.0: {}
 
@@ -13300,8 +13274,7 @@ snapshots:
       strip-ansi: 7.1.0
       wrap-ansi: 9.0.0
 
-  long@5.3.2:
-    optional: true
+  long@5.3.2: {}
 
   longest@2.0.1: {}
 
@@ -13326,7 +13299,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-react@0.517.0(react@19.1.0):
+  lucide-react@0.522.0(react@19.1.0):
     dependencies:
       react: 19.1.0
 
@@ -13379,8 +13352,7 @@ snapshots:
 
   merge@2.1.1: {}
 
-  mersenne-twister@1.1.0:
-    optional: true
+  mersenne-twister@1.1.0: {}
 
   meshline@3.3.1(three@0.177.0):
     dependencies:
@@ -13388,8 +13360,7 @@ snapshots:
 
   meshoptimizer@0.18.1: {}
 
-  meshoptimizer@0.23.0:
-    optional: true
+  meshoptimizer@0.23.0: {}
 
   micromatch@4.0.8:
     dependencies:
@@ -13533,8 +13504,7 @@ snapshots:
 
   normalize-range@0.1.2: {}
 
-  nosleep.js@0.12.0:
-    optional: true
+  nosleep.js@0.12.0: {}
 
   npm-run-path@4.0.1:
     dependencies:
@@ -13672,8 +13642,7 @@ snapshots:
 
   pako@1.0.11: {}
 
-  pako@2.1.0:
-    optional: true
+  pako@2.1.0: {}
 
   param-case@3.0.4:
     dependencies:
@@ -13936,7 +13905,6 @@ snapshots:
       '@protobufjs/utf8': 1.1.0
       '@types/node': 24.0.3
       long: 5.3.2
-    optional: true
 
   public-encrypt@4.0.3:
     dependencies:
@@ -13961,8 +13929,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  quickselect@3.0.0:
-    optional: true
+  quickselect@3.0.0: {}
 
   randombytes@2.1.0:
     dependencies:
@@ -13978,7 +13945,6 @@ snapshots:
   rbush@4.0.1:
     dependencies:
       quickselect: 3.0.0
-    optional: true
 
   react-day-picker@9.7.0(react@19.1.0):
     dependencies:
@@ -14193,7 +14159,6 @@ snapshots:
       cesium: 1.130.0
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-    optional: true
 
   resolve-cwd@3.0.0:
     dependencies:
@@ -14838,7 +14803,6 @@ snapshots:
   topojson-client@3.1.0:
     dependencies:
       commander: 2.20.3
-    optional: true
 
   totalist@3.0.1: {}
 
@@ -15073,8 +15037,7 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  urijs@1.19.11:
-    optional: true
+  urijs@1.19.11: {}
 
   url@0.11.4:
     dependencies:
