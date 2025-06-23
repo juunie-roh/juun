@@ -2,31 +2,55 @@
 
 import { cn } from '@pkg/ui/lib/utils';
 import { Copy } from 'lucide-react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import docker from 'react-syntax-highlighter/dist/esm/languages/prism/docker';
+import ignore from 'react-syntax-highlighter/dist/esm/languages/prism/ignore';
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import pure from 'react-syntax-highlighter/dist/esm/languages/prism/pure';
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
+import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
+import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { toast } from 'sonner';
 
 import { Button } from './button';
 import { ScrollArea, ScrollBar } from './scroll-area';
 
+SyntaxHighlighter.registerLanguage('typescript', typescript);
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('docker', docker);
+SyntaxHighlighter.registerLanguage('yaml', yaml);
+SyntaxHighlighter.registerLanguage('ignore', ignore);
+SyntaxHighlighter.registerLanguage('pure', pure);
+
 /**
  * @see {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD AVAILABLE_LANGUAGES_PRISM}
  */
 type SupportedLanguage =
   | 'typescript'
+  | 'tsx'
   | 'javascript'
+  | 'jsx'
   | 'json'
   | 'bash'
   | 'docker'
   | 'yaml'
   | 'ignore'
-  | 'text'; // monospaced plain text
+  | 'pure'; // monospaced plain text
 
 const languageMap: Record<string, SupportedLanguage> = {
   ts: 'typescript',
-  tsx: 'typescript',
+  tsx: 'tsx',
+  typescript: 'typescript',
   js: 'javascript',
-  jsx: 'javascript',
+  jsx: 'jsx',
   json: 'json',
   bash: 'bash',
   sh: 'bash',
@@ -37,7 +61,8 @@ const languageMap: Record<string, SupportedLanguage> = {
   yml: 'yaml',
   yaml: 'yaml',
   gitignore: 'ignore',
-  gitattributes: 'text',
+  gitattributes: 'pure',
+  text: 'pure',
 };
 
 interface CodeBlockProps {
