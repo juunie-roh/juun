@@ -6,8 +6,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-  Separator,
-} from '@pkg/ui';
+} from '@pkg/ui/navigation-menu';
+import { Separator } from '@pkg/ui/separator';
 import Link from 'next/link';
 import { Fragment } from 'react';
 

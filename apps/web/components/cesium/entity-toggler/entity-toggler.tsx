@@ -1,7 +1,7 @@
 'use client';
 
 import { Collection } from '@juun-roh/cesium-utils';
-import { Button } from '@pkg/ui';
+import { Button } from '@pkg/ui/button';
 import {
   Cartesian3,
   Color,

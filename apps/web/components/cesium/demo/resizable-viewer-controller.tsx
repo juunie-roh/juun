@@ -1,7 +1,11 @@
 'use client';
 
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@pkg/ui';
 import { useMediaQuery } from '@pkg/ui/hooks';
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@pkg/ui/resizable';
 import { useState } from 'react';
 
 import Viewer from '@/components/cesium/viewer';

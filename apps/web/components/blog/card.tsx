@@ -1,14 +1,13 @@
+import { Badge } from '@pkg/ui/badge';
 import {
-  Badge,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-  ScrollArea,
-  ScrollBar,
-  Skeleton,
-} from '@pkg/ui';
+} from '@pkg/ui/card';
+import { ScrollArea, ScrollBar } from '@pkg/ui/scroll-area';
+import { Skeleton } from '@pkg/ui/skeleton';
 import { CalendarIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

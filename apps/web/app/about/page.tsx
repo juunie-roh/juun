@@ -1,15 +1,15 @@
+import { Badge } from '@pkg/ui/badge';
+import { Button } from '@pkg/ui/button';
 import {
-  Badge,
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  LogoAvatar,
-  Separator,
-} from '@pkg/ui';
+} from '@pkg/ui/card';
+import { LogoAvatar } from '@pkg/ui/logo-avatar';
+import { Separator } from '@pkg/ui/separator';
 import { Hexagon, Package, Zap } from 'lucide-react';
 import Link from 'next/link';
 

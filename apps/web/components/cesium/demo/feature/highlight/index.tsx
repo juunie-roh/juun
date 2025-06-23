@@ -3,8 +3,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@pkg/ui';
-import { Skeleton } from '@pkg/ui';
+} from '@pkg/ui/accordion';
+import { Skeleton } from '@pkg/ui/skeleton';
 import { lazy, Suspense } from 'react';
 
 const MouseEventHighlight = lazy(() => import('./mouse-event'));

@@ -3,7 +3,7 @@ import { useCylinder } from '@react-three/cannon';
 import type { Ref } from 'react';
 import type { Mesh } from 'three';
 
-export function Cylinder(props: CylinderProps) {
+export default function Cylinder(props: CylinderProps) {
   const args: CylinderArgs = [0.7, 0.7, 5, 16];
   const [ref] = useCylinder(() => ({
     args,

@@ -1,15 +1,15 @@
+import { AspectRatio } from '@pkg/ui/aspect-ratio';
+import { Badge } from '@pkg/ui/badge';
+import { Button } from '@pkg/ui/button';
 import {
-  AspectRatio,
-  Badge,
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  CodeBlock,
-} from '@pkg/ui';
+} from '@pkg/ui/card';
+import { CodeBlock } from '@pkg/ui/code-block';
 import { ChevronRight, Code, ExternalLink, Package } from 'lucide-react';
 import Link from 'next/link';
 

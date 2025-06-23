@@ -1,4 +1,6 @@
-import { AspectRatio, CodeBlock, Skeleton } from '@pkg/ui';
+import { AspectRatio } from '@pkg/ui/aspect-ratio';
+import { CodeBlock } from '@pkg/ui/code-block';
+import { Skeleton } from '@pkg/ui/skeleton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, Suspense } from 'react';

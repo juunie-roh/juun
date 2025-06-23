@@ -1,4 +1,4 @@
-import { Skeleton } from '@pkg/ui';
+import { Skeleton } from '@pkg/ui/skeleton';
 import { lazy, Suspense } from 'react';
 
 import type { ViewerProps } from './viewer';
