@@ -1,7 +1,11 @@
 'use client';
 
 import { Highlight } from '@juun-roh/cesium-utils';
-import { Button, Checkbox, Label, Separator, Slider } from '@pkg/ui';
+import { Button } from '@pkg/ui/button';
+import { Checkbox } from '@pkg/ui/checkbox';
+import { Label } from '@pkg/ui/label';
+import { Separator } from '@pkg/ui/separator';
+import { Slider } from '@pkg/ui/slider';
 import { Cartesian3, Color, Entity } from 'cesium';
 import { useEffect, useMemo, useState } from 'react';
 

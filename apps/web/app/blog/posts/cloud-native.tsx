@@ -1,7 +1,7 @@
+import { Abbr } from '@pkg/ui/abbr';
+import { AspectRatio } from '@pkg/ui/aspect-ratio';
+import { Skeleton } from '@pkg/ui/skeleton';
 import {
-  Abbr,
-  AspectRatio,
-  Skeleton,
   Table,
   TableBody,
   TableCaption,
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@pkg/ui';
+} from '@pkg/ui/table';
 import { ExternalLink, Quote } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -1,11 +1,9 @@
-'use client';
-
-import { Skeleton } from '@pkg/ui';
+import { Skeleton } from '@pkg/ui/skeleton';
 import { lazy, Suspense } from 'react';
 
-import { ViewerProps } from '@/types/cesium.types';
+import type { ViewerProps } from './viewer';
 
-const LazyViewer = lazy(() => import('./lazy/viewer'));
+const LazyViewer = lazy(() => import('./viewer'));
 
 export default function Viewer(props: ViewerProps) {
   return (
@@ -14,3 +12,5 @@ export default function Viewer(props: ViewerProps) {
     </Suspense>
   );
 }
+
+export type { ViewerProps };

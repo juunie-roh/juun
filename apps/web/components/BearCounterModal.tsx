@@ -1,7 +1,7 @@
 'use client';
 
+import { Button } from '@pkg/ui/button';
 import {
-  Button,
   Dialog,
   DialogClose,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from '@pkg/ui';
+} from '@pkg/ui/dialog';
 
 import BearCounter from './BearCounter';
 

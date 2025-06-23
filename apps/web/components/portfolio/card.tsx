@@ -1,12 +1,12 @@
+import { Badge } from '@pkg/ui/badge';
 import {
-  Badge,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-  Skeleton,
-} from '@pkg/ui';
+} from '@pkg/ui/card';
+import { Skeleton } from '@pkg/ui/skeleton';
 import Image from 'next/image';
 import Link from 'next/link';
 

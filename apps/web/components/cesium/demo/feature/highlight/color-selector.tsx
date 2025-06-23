@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@pkg/ui';
+} from '@pkg/ui/select';
 import { Color } from 'cesium';
 import { SetStateAction } from 'react';
 

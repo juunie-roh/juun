@@ -1,4 +1,5 @@
-import { Badge, Skeleton } from '@pkg/ui';
+import { Badge } from '@pkg/ui/badge';
+import { Skeleton } from '@pkg/ui/skeleton';
 
 import { BlogMetadata } from '@/app/blog/blog.types';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Wheel } from '@pkg/ui';
+import { Wheel } from '@pkg/ui/wheel';
 import { Copy, Delete, Info, Move, RotateCw } from 'lucide-react';
 
 function FiveWheel() {

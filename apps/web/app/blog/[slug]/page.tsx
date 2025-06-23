@@ -1,4 +1,4 @@
-import { ScrollProgressBar } from '@pkg/ui';
+import { ScrollProgressBar } from '@pkg/ui/scroll-progress-bar';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';

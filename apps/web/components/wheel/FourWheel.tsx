@@ -1,6 +1,6 @@
 'use client';
 
-import { Wheel } from '@pkg/ui';
+import { Wheel } from '@pkg/ui/wheel';
 import { Home, Menu, MessageCircle, Settings } from 'lucide-react';
 
 function FourWheel() {

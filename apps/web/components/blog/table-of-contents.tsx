@@ -1,12 +1,12 @@
 'use client';
 
+import { Button } from '@pkg/ui/button';
 import {
-  Button,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-  useMediaQuery,
-} from '@pkg/ui';
+} from '@pkg/ui/collapsible';
+import { useMediaQuery } from '@pkg/ui/hooks';
 import { cn } from '@pkg/ui/lib/utils';
 import { ArrowRight, Bookmark } from 'lucide-react';
 import { Fragment, useEffect, useState } from 'react';

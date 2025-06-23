@@ -3,7 +3,7 @@ import { usePlane } from '@react-three/cannon';
 import type { Ref } from 'react';
 import type { Group } from 'three';
 
-export function Plane(props: PlaneProps) {
+export default function Plane(props: PlaneProps) {
   const [ref] = usePlane(() => ({
     material: 'ground',
     type: 'Static',

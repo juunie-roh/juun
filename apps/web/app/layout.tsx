@@ -1,6 +1,7 @@
 import '@config/tailwind/styles';
 
-import { Toaster, TooltipProvider } from '@pkg/ui';
+import { Toaster } from '@pkg/ui/sonner';
+import { TooltipProvider } from '@pkg/ui/tooltip';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
