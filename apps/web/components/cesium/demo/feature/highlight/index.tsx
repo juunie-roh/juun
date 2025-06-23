@@ -4,9 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@pkg/ui';
+import { Skeleton } from '@pkg/ui';
+import { lazy, Suspense } from 'react';
 
-import MouseEventHighlight from './mouse-event';
-import PolygonHighlight from './polygon';
+const MouseEventHighlight = lazy(() => import('./mouse-event'));
+const PolygonHighlight = lazy(() => import('./polygon'));
 
 export default function HighlightDemo() {
   return (
@@ -19,13 +21,17 @@ export default function HighlightDemo() {
       <AccordionItem value="item-1">
         <AccordionTrigger>Polygon Entity</AccordionTrigger>
         <AccordionContent>
-          <PolygonHighlight />
+          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+            <PolygonHighlight />
+          </Suspense>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Mouse Event</AccordionTrigger>
         <AccordionContent>
-          <MouseEventHighlight />
+          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+            <MouseEventHighlight />
+          </Suspense>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
