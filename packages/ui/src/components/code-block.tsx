@@ -48,7 +48,6 @@ type SupportedLanguage =
 const languageMap: Record<string, SupportedLanguage> = {
   ts: 'typescript',
   tsx: 'tsx',
-  typescript: 'typescript',
   js: 'javascript',
   jsx: 'jsx',
   json: 'json',
@@ -67,7 +66,7 @@ const languageMap: Record<string, SupportedLanguage> = {
 
 interface CodeBlockProps {
   code: string;
-  language?: string;
+  fileName?: string;
   showLineNumbers?: boolean;
   wrapLongLines?: boolean;
   className?: string;
@@ -76,13 +75,24 @@ interface CodeBlockProps {
 
 const CodeBlock = ({
   code,
-  language = 'typescript',
+  fileName = 'file.ts',
   showLineNumbers = true,
   wrapLongLines = false,
   className,
 }: CodeBlockProps) => {
   // Map language aliases to their primary type
-  const normalizedLanguage = languageMap[language.toLowerCase()] || language;
+  // Extract file extension from the last dot (.) in the filename
+  const getLanguageFromFileName = (fileName: string): string => {
+    const lastDotIndex = fileName.lastIndexOf('.');
+    if (lastDotIndex === -1) {
+      return fileName; // Default to text if no extension found
+    }
+    return fileName.substring(lastDotIndex + 1).toLowerCase();
+  };
+
+  // Get the file extension and normalize it to a supported language
+  const fileExtension = getLanguageFromFileName(fileName);
+  const normalizedLanguage = languageMap[fileExtension] || fileExtension;
 
   const copyToClipboard = async () => {
     try {
@@ -116,7 +126,7 @@ const CodeBlock = ({
     >
       <div className="flex items-center justify-between rounded-t-md border-b bg-muted px-4 py-2">
         <div className="text-sm font-medium text-muted-foreground">
-          {normalizedLanguage}
+          {fileName}
         </div>
         <Button
           variant="outline"

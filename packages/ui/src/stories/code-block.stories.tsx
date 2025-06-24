@@ -118,9 +118,8 @@ const meta: Meta<typeof CodeBlock> = {
       control: 'text',
       description: 'The source code to display',
     },
-    language: {
-      control: 'select',
-      options: ['typescript', 'javascript', 'json', 'bash', 'dockerfile'],
+    fileName: {
+      control: 'text',
       description: 'The programming language for syntax highlighting',
     },
     showLineNumbers: {
@@ -142,7 +141,7 @@ const meta: Meta<typeof CodeBlock> = {
   },
   args: {
     code: typescriptExample,
-    language: 'typescript',
+    fileName: 'file.ts',
     showLineNumbers: true,
     wrapLongLines: false,
   },
@@ -163,35 +162,35 @@ type Story = StoryObj<typeof CodeBlock>;
 export const TypeScript: Story = {
   args: {
     code: typescriptExample,
-    language: 'typescript',
+    fileName: 'typescript-example.ts',
   },
 };
 
 export const JavaScript: Story = {
   args: {
     code: javascriptExample,
-    language: 'javascript',
+    fileName: 'javascript-example.js',
   },
 };
 
 export const JSON: Story = {
   args: {
     code: jsonExample,
-    language: 'json',
+    fileName: 'example.json',
   },
 };
 
 export const Bash: Story = {
   args: {
     code: bashExample,
-    language: 'bash',
+    fileName: 'bash',
   },
 };
 
 export const Dockerfile: Story = {
   args: {
     code: dockerExample,
-    language: 'dockerfile',
+    fileName: 'dockerfile',
   },
 };
 
@@ -199,7 +198,6 @@ export const Dockerfile: Story = {
 export const WithoutLineNumbers: Story = {
   args: {
     code: typescriptExample,
-    language: 'typescript',
     showLineNumbers: false,
   },
 };
@@ -207,7 +205,6 @@ export const WithoutLineNumbers: Story = {
 export const WithLineWrapping: Story = {
   args: {
     code: typescriptExample,
-    language: 'typescript',
     wrapLongLines: true,
   },
 };
@@ -215,7 +212,6 @@ export const WithLineWrapping: Story = {
 export const CustomHeight: Story = {
   args: {
     code: longCodeExample,
-    language: 'typescript',
     maxHeight: '300px',
   },
   parameters: {
@@ -234,23 +230,23 @@ export const AllLanguages: Story = {
     <div className="flex flex-col gap-8">
       <div>
         <h3 className="text-lg font-semibold mb-2">TypeScript</h3>
-        <CodeBlock code={typescriptExample} language="typescript" />
+        <CodeBlock code={typescriptExample} fileName="typescript-example.ts" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-2">JavaScript</h3>
-        <CodeBlock code={javascriptExample} language="javascript" />
+        <CodeBlock code={javascriptExample} fileName="javascript-example.js" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-2">JSON</h3>
-        <CodeBlock code={jsonExample} language="json" />
+        <CodeBlock code={jsonExample} fileName="example.json" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-2">Bash</h3>
-        <CodeBlock code={bashExample} language="bash" />
+        <CodeBlock code={bashExample} fileName="bash" />
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-2">Dockerfile</h3>
-        <CodeBlock code={dockerExample} language="dockerfile" />
+        <CodeBlock code={dockerExample} fileName="dockerfile" />
       </div>
     </div>
   ),

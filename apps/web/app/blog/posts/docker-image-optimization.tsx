@@ -70,7 +70,7 @@ export default function DockerImageOptimization() {
           multi-stage build 가 되는 것이다.
         </p>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`# syntax=docker/dockerfile:1
 FROM golang:1.23
 WORKDIR /src
@@ -136,7 +136,7 @@ CMD ["/bin/hello"]`}
         </p>
         <h4>Base Stage</h4>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`# syntax=docker.io/docker/dockerfile:1
 FROM node:22-alpine AS base
 WORKDIR /app
@@ -157,7 +157,7 @@ RUN apk add --no-cache libc6-compat && \\
         </p>
         <h4>Builder Stage</h4>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`FROM base AS builder
 
 COPY --chown=nextjs:nodejs . .
@@ -183,7 +183,7 @@ RUN pnpm install --frozen-lockfile && \\
         </p>
         <h4>Runner Stage</h4>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`FROM base AS runner
 
 # Copy only the necessary Next.js output
@@ -225,7 +225,7 @@ CMD ["node", "apps/web/server.js"]
           254MB로 더 감소했다.
         </p>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`# syntax=docker.io/docker/dockerfile:1
 
 FROM node:22-alpine AS base
@@ -294,7 +294,7 @@ CMD ["node", "apps/web/server.js"]
           저장한다.
         </p>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`# inefficient example
 FROM debian:latest
 WORKDIR /app
@@ -312,7 +312,7 @@ RUN cd .. && rm --rf project`}
           작업을 처리해야 한다.
         </p>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`# alternative
 FROM debian:latest
 WORKDIR /app
@@ -364,7 +364,7 @@ RUN git clone https://some.project.git && \\
             (How the build cache works)
           </Link>
         </p>
-        <CodeBlock language="bash" code={`docker system df`} />
+        <CodeBlock fileName="bash" code={`docker system df`} />
         <p>
           image build 를 진행해보고 위 명령으로 Docker 가 차지하고 있는 storage
           정보를 보면 <code>Build Cache</code> 항목이 꽤나 큰 것을 확인할 수
@@ -398,7 +398,7 @@ RUN git clone https://some.project.git && \\
           Dockerfile 을 남겨본다.
         </p>
         <CodeBlock
-          language="dockerfile"
+          fileName="dockerfile"
           code={`# syntax=docker.io/docker/dockerfile:1
 
 FROM node:22-alpine AS base
