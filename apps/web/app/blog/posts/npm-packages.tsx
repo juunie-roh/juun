@@ -155,6 +155,7 @@ export default defineConfig({
           명시해주어야 한다.
         </p>
         <CodeBlock
+          id="package-json-structure"
           fileName="package.json"
           code={`{
 // ...
