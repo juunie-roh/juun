@@ -65,26 +65,26 @@ export default function YarnBerry() {
         </p>
 
         <h3 className="tracking-tight">1. Corepack</h3>
-        <CodeBlock language="bash" code={`npm install -g corepack`} />
+        <CodeBlock fileName="bash" code={`npm install -g corepack`} />
         <p>
           <code>corepack</code> 이 설치되어있지 않은 경우, 설치를 진행한다.
         </p>
 
         <h3 className="tracking-tight">2. Yarn Init</h3>
-        <CodeBlock language="bash" code={`yarn init -2`} />
+        <CodeBlock fileName="bash" code={`yarn init -2`} />
         <p>
           <code>npm init</code> 명령과 같이, Yarn Berry 버전으로 패키지 매니저
           초기 설정을 진행하는 명령어이다.
         </p>
 
         <h3 className="tracking-tight">3. Set Version</h3>
-        <CodeBlock language="bash" code={`yarn set version stable`} />
+        <CodeBlock fileName="bash" code={`yarn set version stable`} />
         <p>
           Yarn Berry 는 지속적인 업데이트를 진행하고 있고, 자체 버전을{' '}
           <code>.yarn/releases</code> 에서 별도로 관리한다. 위 명령을 실행하면
           버전이 명시된 파일이 해당 경로에 생성된다.
         </p>
-        <CodeBlock language="bash" code={`yarn exec env`} />
+        <CodeBlock fileName="bash" code={`yarn exec env`} />
         <p>
           위 명령을 실행했을 때 환경변수 설정이 정상적으로 출력된다면 설정이
           완료된 것이고, <code>corepack</code> 이 에러를 던진다면{' '}
@@ -106,7 +106,7 @@ export default function YarnBerry() {
           1. <code>.yarnrc.yml</code>
         </h3>
         <CodeBlock
-          language="yml"
+          fileName=".yarnrc.yml"
           code={`nodeLinker: pnp
 enableGlobalCache: false
 yarnPath: [path to your yarn release]`}
@@ -144,9 +144,8 @@ yarnPath: [path to your yarn release]`}
           파일도 자동으로 생성된다.
         </p>
         <CodeBlock
-          language="gitignore"
-          code={`# .gitignore
-.yarn/*
+          fileName=".gitignore"
+          code={`.yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
@@ -186,15 +185,14 @@ node_modules
           <code>node_modules</code> 를 참조하기 때문이다. (typescript, eslint,
           prettier 등)
         </p>
-        <CodeBlock language="bash" code={`yarn dlx @yarnpkg/sdks vscode`} />
+        <CodeBlock fileName="bash" code={`yarn dlx @yarnpkg/sdks vscode`} />
         <p>
           위 명령은 VSCode 에서 필요로 하는 모듈들을 인식할 수 있도록 해주는
           작업을 진행한다.
         </p>
         <CodeBlock
-          language="json"
-          code={`// .vscode/settings.json
-{
+          fileName=".vscode/settings.json"
+          code={`{
 // ...
   "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",

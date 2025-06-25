@@ -69,7 +69,7 @@ export default function NpmPublish() {
           에서 모든 항목을 확인할 수 있다.
         </p>
         <CodeBlock
-          language="json"
+          fileName="package.json"
           code={`{
   "name": "@(scope)/(package-name)",
   "version": "0.0.2",
@@ -126,7 +126,7 @@ export default function NpmPublish() {
           이라는 번들러를 이용했다. (<s>그냥</s>)
         </p>
         <CodeBlock
-          language="js"
+          fileName="tsup.config.js"
           code={`import { defineConfig } from 'tsup';
 
 export default defineConfig({
@@ -155,7 +155,8 @@ export default defineConfig({
           명시해주어야 한다.
         </p>
         <CodeBlock
-          language="json"
+          id="package-json-structure"
+          fileName="package.json"
           code={`{
 // ...
   "type": "module",
@@ -206,7 +207,7 @@ export default defineConfig({
           에서도 동일한 양식을 사용한다.
         </p>
         <CodeBlock
-          language="typescript"
+          fileName="tsdoc.ts"
           code={`// TypeScript Documentation Example
 /**
  * Abstract class that enhances Cesium collection objects with tagging functionality.
@@ -244,7 +245,7 @@ abstract class Collection<C, I>{
           대해 안내하고 있다.
         </p>
         <CodeBlock
-          language="json"
+          fileName="typedoc.json"
           code={`{
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["src/index.ts"],
@@ -336,9 +337,8 @@ abstract class Collection<C, I>{
         </p>
 
         <CodeBlock
-          language="yaml"
-          code={`# changesets.yml
-name: Changesets
+          fileName="changesets.yml"
+          code={`name: Changesets
 
 on:
   push:
@@ -438,9 +438,8 @@ jobs:
         </p>
 
         <CodeBlock
-          language="yaml"
-          code={`# release-and-publish.yml
-name: Release and Publish
+          fileName="release-and-publish.yml"
+          code={`name: Release and Publish
 
 on:
   push:

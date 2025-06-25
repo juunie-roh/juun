@@ -323,7 +323,7 @@ export default function CesiumUtilsIntro() {
         <div className="space-y-6">
           <div>
             <h3 className="mb-3 text-xl font-semibold">Installation</h3>
-            <CodeBlock language="bash" code={installationCode} />
+            <CodeBlock fileName="bash" code={installationCode} />
           </div>
 
           <div>
@@ -332,7 +332,7 @@ export default function CesiumUtilsIntro() {
               The library requires CesiumJS as a peer dependency. Make sure you
               have it properly installed in your project:
             </p>
-            <CodeBlock language="bash" code="npm install cesium" />
+            <CodeBlock fileName="bash" code="npm install cesium" />
             <p className="mt-4 text-muted-foreground">
               You'll also need to ensure that CesiumJS assets are properly
               loaded in your application. Follow the{' '}
