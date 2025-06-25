@@ -65,6 +65,7 @@ const languageMap: Record<string, SupportedLanguage> = {
 };
 
 interface CodeBlockProps {
+  id?: HTMLDivElement['id'];
   code: string;
   fileName?: string;
   showLineNumbers?: boolean;
@@ -74,6 +75,7 @@ interface CodeBlockProps {
 }
 
 const CodeBlock = ({
+  id,
   code,
   fileName = 'file.ts',
   showLineNumbers = true,
@@ -119,6 +121,7 @@ const CodeBlock = ({
 
   return (
     <div
+      id={id}
       className={cn(
         'relative rounded-md border bg-background shadow overflow-hidden',
         className,
