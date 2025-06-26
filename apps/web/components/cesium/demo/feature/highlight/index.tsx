@@ -9,6 +9,7 @@ import { lazy, Suspense } from 'react';
 
 const MouseEventHighlight = lazy(() => import('./mouse-event'));
 const PolygonHighlight = lazy(() => import('./polygon'));
+const SilhouetteHighlight = lazy(() => import('./silhouette'));
 
 export default function HighlightDemo() {
   return (
@@ -31,6 +32,14 @@ export default function HighlightDemo() {
         <AccordionContent>
           <Suspense fallback={<Skeleton className="h-10 w-full" />}>
             <MouseEventHighlight />
+          </Suspense>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>3D Tileset</AccordionTrigger>
+        <AccordionContent>
+          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+            <SilhouetteHighlight />
           </Suspense>
         </AccordionContent>
       </AccordionItem>

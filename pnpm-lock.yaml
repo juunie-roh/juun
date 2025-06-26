@@ -54,8 +54,8 @@ importers:
   apps/web:
     dependencies:
       '@juun-roh/cesium-utils':
-        specifier: ^0.0.19
-        version: 0.0.19(cesium@1.130.1)
+        specifier: ^0.0.20
+        version: 0.0.20(cesium@1.130.1)
       '@pkg/ui':
         specifier: workspace:^
         version: link:../../packages/ui
@@ -1784,8 +1784,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@juun-roh/cesium-utils@0.0.19':
-    resolution: {integrity: sha512-Q/Xrj8SR+WHaJ42c4qDvOGFpae5NwXRZbf0wpPcrU6OkeGWe5CIyROM1NjTcKGN9e32mOqPf5G2DBq0gNW8o6w==}
+  '@juun-roh/cesium-utils@0.0.20':
+    resolution: {integrity: sha512-VKzkFIJWHV2iYGuNlrfZM7RWWL+0Y6J/KuJKcD+8E6mtAm8ntFXJUJ0N44YD1fAF8qg1wETlRjholNMkGAEliQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       cesium: ^1
@@ -8972,7 +8972,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@juun-roh/cesium-utils@0.0.19(cesium@1.130.1)':
+  '@juun-roh/cesium-utils@0.0.20(cesium@1.130.1)':
     dependencies:
       cesium: 1.130.1
 
