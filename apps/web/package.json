@@ -16,7 +16,7 @@
     "postinstall": "node scripts/copy-cesium-assets.cjs"
   },
   "dependencies": {
-    "@juun-roh/cesium-utils": "^0.0.18",
+    "@juun-roh/cesium-utils": "^0.0.19",
     "@pkg/ui": "workspace:^",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.3.0",
