@@ -1,5 +1,5 @@
-import { Viewer } from 'cesium';
-import { ViewerProps as RViewerProps } from 'resium';
+import type { Viewer } from 'cesium';
+import type { ViewerProps as RViewerProps } from 'resium';
 
 export interface ViewerProps extends Omit<RViewerProps, 'className'> {
   /** Whether to show the credit container. @default true */

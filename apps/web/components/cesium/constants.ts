@@ -1,6 +1,6 @@
 import { Cartesian3, Math as CMath } from 'cesium';
 
-import { ApiFeatureOption } from '@/types/cesium.types';
+import { ApiFeatureOption } from '@/components/cesium/types';
 
 export const API_FEATURE_OPTIONS: ApiFeatureOption[] = [
   {

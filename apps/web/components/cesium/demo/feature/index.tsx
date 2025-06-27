@@ -1,4 +1,4 @@
-import { ApiFeature } from '@/types/cesium.types';
+import { ApiFeature } from '@/components/cesium/types';
 
 import CollectionDemo from './collection';
 import HighlightDemo from './highlight';
