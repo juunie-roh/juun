@@ -17,10 +17,9 @@ import { useMediaQuery } from '@pkg/ui/hooks';
 import { cn } from '@pkg/ui/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '@pkg/ui/popover';
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { API_FEATURE_OPTIONS } from '@/constants/cesium.constants';
-import { ApiFeatureOption } from '@/types/cesium.types';
+import type { ApiFeatureOption } from '@/components/cesium/types';
 
 function StatusList({
   setOpen,
@@ -29,21 +28,47 @@ function StatusList({
   setOpen: (open: boolean) => void;
   setOption: (option: ApiFeatureOption | undefined) => void;
 }) {
+  const [options, setOptions] = useState<ApiFeatureOption[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadOptions = async () => {
+      try {
+        const { API_FEATURE_OPTIONS } = await import(
+          '@/components/cesium/constants'
+        );
+        setOptions(API_FEATURE_OPTIONS);
+      } catch (error) {
+        console.error('Failed to load API options:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadOptions();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-4">
+        <div className="text-sm text-muted-foreground">Loading options...</div>
+      </div>
+    );
+  }
+
   return (
     <Command>
       <CommandInput placeholder="Select API ..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {API_FEATURE_OPTIONS.map((option) => (
+          {options.map((option) => (
             <CommandItem
               key={option.feat}
               value={option.feat}
               className="hover:cursor-pointer"
               onSelect={(value) => {
-                setOption(
-                  API_FEATURE_OPTIONS.find((opt) => opt.feat === value),
-                );
+                setOption(options.find((opt) => opt.feat === value));
                 setOpen(false);
               }}
             >

@@ -8,9 +8,8 @@ import {
 } from '@pkg/ui/resizable';
 import { useState } from 'react';
 
-import Viewer from '@/components/cesium/viewer';
-import { ApiFeatureOption } from '@/types/cesium.types';
-
+import type { ApiFeatureOption } from '../types';
+import Viewer from '../viewer';
 import ApiCombobox from './api-combobox';
 import FeatureDemo from './feature';
 
