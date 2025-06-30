@@ -6,7 +6,7 @@ import {
   storybook,
   unitTest,
   prettier,
-} from '@config/eslint';
+} from "@config/eslint";
 
 export default [
   ...base,

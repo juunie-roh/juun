@@ -1,10 +1,10 @@
-import '@pkg/config/tailwind/styles';
+import "@pkg/config/tailwind/styles";
 
-import type { Preview } from '@storybook/react';
+import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -16,8 +16,8 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        method: 'alphabetical',
-        locales: '',
+        method: "alphabetical",
+        locales: "",
       },
     },
   },

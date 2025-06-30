@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { cn } from '@pkg/ui/lib/utils';
-import type { VariantProps } from 'class-variance-authority';
-import { cva } from 'class-variance-authority';
-import type { createLucideIcon } from 'lucide-react';
-import { TriangleAlert } from 'lucide-react';
-import type { HTMLAttributes, SVGAttributes } from 'react';
-import { forwardRef, useState } from 'react';
+import { cn } from "@pkg/ui/lib/utils";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
+import type { createLucideIcon } from "lucide-react";
+import { TriangleAlert } from "lucide-react";
+import type { HTMLAttributes, SVGAttributes } from "react";
+import { forwardRef, useState } from "react";
 
 // Internal Types
 type Angle = { start: number; end: number };
@@ -31,80 +31,80 @@ interface WheelSectorProps
 interface WheelTitleProps extends HTMLAttributes<HTMLDivElement> {}
 
 // Variants:
-const wheelVariants = cva('relative size-[200px]', {
+const wheelVariants = cva("relative size-[200px]", {
   variants: {
     variant: {
-      primary: 'bg-primary text-primary-foreground',
-      secondary: 'bg-secondary text-secondary-foreground',
-      destructive: 'bg-destructive text-destructive-foreground',
-      outline: 'bg-background border',
+      primary: "bg-primary text-primary-foreground",
+      secondary: "bg-secondary text-secondary-foreground",
+      destructive: "bg-destructive text-destructive-foreground",
+      outline: "bg-background border",
     },
   },
 });
 
-const pathVariants = cva('cursor-pointer', {
+const pathVariants = cva("cursor-pointer", {
   variants: {
     variant: {
-      primary: 'fill-primary',
-      secondary: 'fill-secondary',
-      destructive: 'fill-destructive',
-      outline: 'fill-background stroke-input',
+      primary: "fill-primary",
+      secondary: "fill-secondary",
+      destructive: "fill-destructive",
+      outline: "fill-background stroke-input",
     },
     isHovered: {
-      true: '',
-      false: '',
+      true: "",
+      false: "",
     },
   },
   compoundVariants: [
     {
-      variant: 'primary',
+      variant: "primary",
       isHovered: true,
-      className: 'fill-primary/90 stroke-primary',
+      className: "fill-primary/90 stroke-primary",
     },
     {
-      variant: 'secondary',
+      variant: "secondary",
       isHovered: true,
-      className: 'fill-secondary/80',
+      className: "fill-secondary/80",
     },
     {
-      variant: 'destructive',
+      variant: "destructive",
       isHovered: true,
-      className: 'fill-destructive/90',
+      className: "fill-destructive/90",
     },
     {
-      variant: 'outline',
+      variant: "outline",
       isHovered: true,
-      className: 'fill-accent stroke-accent',
+      className: "fill-accent stroke-accent",
     },
   ],
   defaultVariants: {
-    variant: 'primary',
+    variant: "primary",
     isHovered: false,
   },
 });
 
-const iconVariants = cva('pointer-events-none', {
+const iconVariants = cva("pointer-events-none", {
   variants: {
     variant: {
-      primary: 'stroke-primary-foreground',
-      secondary: 'stroke-secondary-foreground',
-      destructive: 'stroke-destructive-foreground',
-      outline: '',
+      primary: "stroke-primary-foreground",
+      secondary: "stroke-secondary-foreground",
+      destructive: "stroke-destructive-foreground",
+      outline: "",
     },
     isHovered: {
-      true: '',
-      false: '',
+      true: "",
+      false: "",
     },
   },
   compoundVariants: [
     {
-      variant: 'outline',
+      variant: "outline",
       isHovered: true,
-      className: 'stroke-accent-foreground',
+      className: "stroke-accent-foreground",
     },
   ],
   defaultVariants: {
-    variant: 'primary',
+    variant: "primary",
     isHovered: false,
   },
 });
@@ -136,7 +136,7 @@ const getSectorPath = ({
   endAngle: number;
   radius: number;
   innerRadius: number;
-}): SVGAttributes<SVGPathElement>['d'] => {
+}): SVGAttributes<SVGPathElement>["d"] => {
   const start = calculatePoint(startAngle, innerRadius);
   const end = calculatePoint(startAngle, radius);
   const start2 = calculatePoint(endAngle, radius);
@@ -162,13 +162,13 @@ const WheelRoot = forwardRef<HTMLDivElement, WheelRootProps>(
       className={cn(
         `relative size-[${size}px]`,
         className,
-        'bg-transparent border-none',
+        "bg-transparent border-none",
       )}
       {...props}
     />
   ),
 );
-WheelRoot.displayName = 'WheelRoot';
+WheelRoot.displayName = "WheelRoot";
 
 const WheelSector = ({
   index,
@@ -179,9 +179,9 @@ const WheelSector = ({
   icon: Icon,
   isHovered,
   onHoverChange,
-  onSelect = (index) => console.log('Wheel Menu Selected:', index),
+  onSelect = (index) => console.log("Wheel Menu Selected:", index),
   iconSize = 24,
-  variant = 'primary',
+  variant = "primary",
 }: WheelSectorProps) => {
   const midRadius = (radius + innerRadius) / 2;
   const angleInRadians = (rotation * Math.PI) / 180;
@@ -191,8 +191,8 @@ const WheelSector = ({
   return (
     <g
       className={cn(
-        'origin-center transition-all duration-300',
-        isHovered && 'scale-110',
+        "origin-center transition-all duration-300",
+        isHovered && "scale-110",
       )}
     >
       <path
@@ -221,24 +221,24 @@ const WheelSector = ({
     </g>
   );
 };
-WheelSector.displayName = 'WheelSector';
+WheelSector.displayName = "WheelSector";
 
 const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-secondary text-secondary-foreground px-2 py-1 rounded-sm pointer-events-none whitespace-nowrap text-sm',
+        "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-secondary text-secondary-foreground px-2 py-1 rounded-sm pointer-events-none whitespace-nowrap text-sm",
         className,
       )}
       {...props}
     />
   ),
 );
-WheelTitle.displayName = 'WheelTitle';
+WheelTitle.displayName = "WheelTitle";
 
 interface WheelProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'>,
+  extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect">,
     VariantProps<typeof wheelVariants> {
   /** The Number of Wheel Menus */
   num: number;
@@ -270,14 +270,14 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
     },
     ref,
   ) => {
-    if (num < 2) throw new Error('Invalid Wheel Menu number (lower than 2)');
+    if (num < 2) throw new Error("Invalid Wheel Menu number (lower than 2)");
     if (icons && icons.length !== num)
       throw new Error(
-        'The number of wheel menu and the length of icons array does not match.',
+        "The number of wheel menu and the length of icons array does not match.",
       );
     if (titles && titles.length !== num) {
       throw new Error(
-        'The number of wheel menu and the length of titles array does not match.',
+        "The number of wheel menu and the length of titles array does not match.",
       );
     }
     const [hovered, setHovered] = useState<number | null>(null);
@@ -345,6 +345,6 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
     );
   },
 );
-Wheel.displayName = 'Wheel';
+Wheel.displayName = "Wheel";
 
 export { Wheel, type WheelProps };

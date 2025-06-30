@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Toaster } from 'sonner';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Toaster } from "sonner";
 
-import { CodeBlock } from '../components/code-block';
+import { CodeBlock } from "../components/code-block";
 
 // Sample code for different languages
 const typescriptExample = `interface User {
@@ -98,50 +98,50 @@ EXPOSE 3000
 CMD ["yarn", "start"]`;
 
 const longCodeExample = `// This is a long code example to demonstrate scrolling
-${Array(25).fill(typescriptExample).join('\n\n')}`;
+${Array(25).fill(typescriptExample).join("\n\n")}`;
 
 const meta: Meta<typeof CodeBlock> = {
-  title: 'Shadcn/CodeBlock',
+  title: "Shadcn/CodeBlock",
   component: CodeBlock,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A syntax highlighting code block component with copy-to-clipboard functionality.',
+          "A syntax highlighting code block component with copy-to-clipboard functionality.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     code: {
-      control: 'text',
-      description: 'The source code to display',
+      control: "text",
+      description: "The source code to display",
     },
     fileName: {
-      control: 'text',
-      description: 'The programming language for syntax highlighting',
+      control: "text",
+      description: "The programming language for syntax highlighting",
     },
     showLineNumbers: {
-      control: 'boolean',
-      description: 'Whether to display line numbers',
+      control: "boolean",
+      description: "Whether to display line numbers",
     },
     wrapLongLines: {
-      control: 'boolean',
-      description: 'Whether to wrap long lines',
+      control: "boolean",
+      description: "Whether to wrap long lines",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
     maxHeight: {
-      control: 'text',
-      description: 'Maximum height of the code block before scrolling',
+      control: "text",
+      description: "Maximum height of the code block before scrolling",
     },
   },
   args: {
     code: typescriptExample,
-    fileName: 'file.ts',
+    fileName: "file.ts",
     showLineNumbers: true,
     wrapLongLines: false,
   },
@@ -162,35 +162,35 @@ type Story = StoryObj<typeof CodeBlock>;
 export const TypeScript: Story = {
   args: {
     code: typescriptExample,
-    fileName: 'typescript-example.ts',
+    fileName: "typescript-example.ts",
   },
 };
 
 export const JavaScript: Story = {
   args: {
     code: javascriptExample,
-    fileName: 'javascript-example.js',
+    fileName: "javascript-example.js",
   },
 };
 
 export const JSON: Story = {
   args: {
     code: jsonExample,
-    fileName: 'example.json',
+    fileName: "example.json",
   },
 };
 
 export const Bash: Story = {
   args: {
     code: bashExample,
-    fileName: 'bash',
+    fileName: "bash",
   },
 };
 
 export const Dockerfile: Story = {
   args: {
     code: dockerExample,
-    fileName: 'dockerfile',
+    fileName: "dockerfile",
   },
 };
 
@@ -212,13 +212,13 @@ export const WithLineWrapping: Story = {
 export const CustomHeight: Story = {
   args: {
     code: longCodeExample,
-    maxHeight: '300px',
+    maxHeight: "300px",
   },
   parameters: {
     docs: {
       description: {
         story:
-          'CodeBlock with a fixed maximum height that activates scrolling for long content.',
+          "CodeBlock with a fixed maximum height that activates scrolling for long content.",
       },
     },
   },
