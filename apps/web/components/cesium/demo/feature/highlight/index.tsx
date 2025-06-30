@@ -3,13 +3,13 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@pkg/ui/accordion';
-import { Skeleton } from '@pkg/ui/skeleton';
-import { lazy, Suspense } from 'react';
+} from "@pkg/ui/accordion";
+import { Skeleton } from "@pkg/ui/skeleton";
+import { lazy, Suspense } from "react";
 
-const MouseEventHighlight = lazy(() => import('./mouse-event'));
-const PolygonHighlight = lazy(() => import('./polygon'));
-const SilhouetteHighlight = lazy(() => import('./silhouette'));
+const MouseEventHighlight = lazy(() => import("./mouse-event"));
+const PolygonHighlight = lazy(() => import("./polygon"));
+const SilhouetteHighlight = lazy(() => import("./silhouette"));
 
 export default function HighlightDemo() {
   return (

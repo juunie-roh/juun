@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import { useMediaQuery } from '@pkg/ui/hooks';
+import { useMediaQuery } from "@pkg/ui/hooks";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from '@pkg/ui/resizable';
-import { useState } from 'react';
+} from "@pkg/ui/resizable";
+import { useState } from "react";
 
-import type { ApiFeatureOption } from '../types';
-import Viewer from '../viewer';
-import ApiCombobox from './api-combobox';
-import FeatureDemo from './feature';
+import type { ApiFeatureOption } from "../types";
+import Viewer from "../viewer";
+import ApiCombobox from "./api-combobox";
+import FeatureDemo from "./feature";
 
 export default function ResizableViewerController() {
   const [option, setOption] = useState<ApiFeatureOption | undefined>(undefined);
   // State to track viewport size
-  const isLargeScreen = useMediaQuery('min-width: 1024px');
+  const isLargeScreen = useMediaQuery("min-width: 1024px");
 
   return (
     <ResizablePanelGroup
-      direction={isLargeScreen ? 'horizontal' : 'vertical'}
+      direction={isLargeScreen ? "horizontal" : "vertical"}
       className="size-full overflow-hidden rounded-lg border"
     >
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
           <Viewer
-            key={option?.feat || 'default'} // refresh the viewer
+            key={option?.feat || "default"} // refresh the viewer
             bottomContainer={false}
             animation={false}
             timeline={false}

@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Collection } from '@juun-roh/cesium-utils';
-import { Button } from '@pkg/ui/button';
+import { Collection } from "@juun-roh/cesium-utils";
+import { Button } from "@pkg/ui/button";
 import {
   Cartesian3,
   Color,
   Entity,
   HeightReference,
   Math as CMath,
-} from 'cesium';
-import { useCallback, useMemo, useState } from 'react';
+} from "cesium";
+import { useCallback, useMemo, useState } from "react";
 
-import useViewerStore from '@/stores/slices/viewer';
+import useViewerStore from "@/stores/slices/viewer";
 
 const DEST = {
   destination: new Cartesian3(
@@ -29,7 +29,7 @@ const DEST = {
 
 const ENTITY = new Entity({
   position: Cartesian3.fromDegrees(139.7454, 35.6586, 250),
-  id: 'Test Entity',
+  id: "Test Entity",
   box: {
     dimensions: new Cartesian3(50.0, 50.0, 333.0),
     material: Color.RED.withAlpha(0.8),
@@ -44,14 +44,14 @@ export default function EntityToggler() {
   const { viewer, isFlying } = useViewerStore();
   const entities = useMemo(() => {
     if (!viewer) return;
-    const c = new Collection({ collection: viewer.entities, tag: 'toggler' });
-    c.addEventListener('add', () => {
+    const c = new Collection({ collection: viewer.entities, tag: "toggler" });
+    c.addEventListener("add", () => {
       setOn(true);
-      console.log('🚀 ~ entities ~ add:', c.values);
+      console.log("🚀 ~ entities ~ add:", c.values);
     });
-    c.addEventListener('remove', () => {
+    c.addEventListener("remove", () => {
       setOn(false);
-      console.log('🚀 ~ entities ~ remove:', c.values);
+      console.log("🚀 ~ entities ~ remove:", c.values);
     });
     return c;
   }, [viewer]);
@@ -79,7 +79,7 @@ export default function EntityToggler() {
         className="w-full"
         disabled={!viewer || !entities || isFlying}
       >
-        {on ? 'Remove' : 'Add'} Entity
+        {on ? "Remove" : "Add"} Entity
       </Button>
     </div>
   );

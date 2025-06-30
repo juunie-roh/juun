@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Button } from '@pkg/ui/button';
-import { Minus, Plus } from 'lucide-react';
+import { Button } from "@pkg/ui/button";
+import { Minus, Plus } from "lucide-react";
 
-import { useBearStore } from '@/stores/slices/bear';
+import { useBearStore } from "@/stores/slices/bear";
 
 const BearCounter = () => {
   const { bears, increase, decrease } = useBearStore();

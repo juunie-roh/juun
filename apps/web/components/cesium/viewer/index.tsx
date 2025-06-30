@@ -1,9 +1,9 @@
-import { Skeleton } from '@pkg/ui/skeleton';
-import { lazy, Suspense } from 'react';
+import { Skeleton } from "@pkg/ui/skeleton";
+import { lazy, Suspense } from "react";
 
-import type { ViewerProps } from '../types';
+import type { ViewerProps } from "../types";
 
-const LazyViewer = lazy(() => import('./viewer'));
+const LazyViewer = lazy(() => import("./viewer"));
 
 export default function Viewer(props: ViewerProps) {
   return (

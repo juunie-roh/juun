@@ -1,7 +1,7 @@
-import type { CylinderArgs, CylinderProps } from '@react-three/cannon';
-import { useCylinder } from '@react-three/cannon';
-import type { Ref } from 'react';
-import type { Mesh } from 'three';
+import type { CylinderArgs, CylinderProps } from "@react-three/cannon";
+import { useCylinder } from "@react-three/cannon";
+import type { Ref } from "react";
+import type { Mesh } from "three";
 
 export default function Cylinder(props: CylinderProps) {
   const args: CylinderArgs = [0.7, 0.7, 5, 16];

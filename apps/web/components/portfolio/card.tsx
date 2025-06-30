@@ -1,18 +1,18 @@
-import { Badge } from '@pkg/ui/badge';
+import { Badge } from "@pkg/ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@pkg/ui/card';
-import { Skeleton } from '@pkg/ui/skeleton';
-import Image from 'next/image';
-import Link from 'next/link';
+} from "@pkg/ui/card";
+import { Skeleton } from "@pkg/ui/skeleton";
+import Image from "next/image";
+import Link from "next/link";
 
-import { PortfolioMetadata } from '@/app/portfolio/portfolio.types';
-import { formatDateSafe } from '@/utils/date.utils';
-import { safeUrl } from '@/utils/security.utils';
+import { PortfolioMetadata } from "@/app/portfolio/portfolio.types";
+import { formatDateSafe } from "@/utils/date.utils";
+import { safeUrl } from "@/utils/security.utils";
 
 export interface Post {
   slug: string;
@@ -35,7 +35,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
           <div className="relative aspect-video w-full overflow-hidden bg-gray-100">
             <Image
               src={post.metadata.image}
-              alt={post.metadata.title || 'Portfolio image'}
+              alt={post.metadata.title || "Portfolio image"}
               fill
               className="object-contain"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

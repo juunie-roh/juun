@@ -5,24 +5,24 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@pkg/ui/breadcrumb';
+} from "@pkg/ui/breadcrumb";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from '@pkg/ui/navigation-menu';
-import { Separator } from '@pkg/ui/separator';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Home } from 'lucide-react';
-import Link from 'next/link';
-import { Fragment } from 'react';
+} from "@pkg/ui/navigation-menu";
+import { Separator } from "@pkg/ui/separator";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Home } from "lucide-react";
+import Link from "next/link";
+import { Fragment } from "react";
 
-import { antonio } from '@/assets/fonts';
+import { antonio } from "@/assets/fonts";
 
-import ThemeProvider from '../theme/provider';
-import ThemeSwitch from '../theme/switch';
-import HeaderSheet from './drawer';
+import ThemeProvider from "../theme/provider";
+import ThemeSwitch from "../theme/switch";
+import HeaderSheet from "./drawer";
 
 // For the demo, we'll create a custom Header component that accepts a custom path
 // This mirrors your actual Header component but allows us to control breadcrumbs
@@ -43,18 +43,18 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
 
   // Navigation items
   const navigationItems = [
-    { href: '/about', label: 'About' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/blog', label: 'Blog' },
+    { href: "/about", label: "About" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/blog", label: "Blog" },
   ];
 
   // Generate breadcrumb items
   const breadcrumbItems = [
-    { href: '/', label: 'Home', isCurrent: segments.length === 0 },
+    { href: "/", label: "Home", isCurrent: segments.length === 0 },
     ...segments.map((segment, index) => ({
-      href: `/${segments.slice(0, index + 1).join('/')}`,
+      href: `/${segments.slice(0, index + 1).join("/")}`,
       label: segment
-        .replace(/-|_/g, ' ')
+        .replace(/-|_/g, " ")
         .replace(/\b\w/g, (char) => char.toUpperCase()),
       isCurrent: index === segments.length - 1,
     })),
@@ -164,24 +164,24 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
 
 // Meta information for Storybook
 const meta: Meta<typeof Header> = {
-  title: 'Layout/Header',
+  title: "Layout/Header",
   component: Header,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     viewport: {
-      defaultViewport: 'desktop',
+      defaultViewport: "desktop",
     },
     docs: {
       subtitle:
-        'Main navigation header with breadcrumbs showing different path states.',
+        "Main navigation header with breadcrumbs showing different path states.",
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     segments: {
       control: false,
       description:
-        'Path segments to display in the breadcrumb. This is auto geterated with `usePathname()` in Next.',
+        "Path segments to display in the breadcrumb. This is auto geterated with `usePathname()` in Next.",
       defaultValue: [],
     },
   },
@@ -214,7 +214,7 @@ export const HomePath: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Header with home path breadcrumb.',
+        story: "Header with home path breadcrumb.",
       },
     },
   },
@@ -222,12 +222,12 @@ export const HomePath: Story = {
 
 export const PortfolioPath: Story = {
   args: {
-    segments: ['portfolio'],
+    segments: ["portfolio"],
   },
   parameters: {
     docs: {
       description: {
-        story: 'Header with portfolio path breadcrumb.',
+        story: "Header with portfolio path breadcrumb.",
       },
     },
   },
@@ -235,12 +235,12 @@ export const PortfolioPath: Story = {
 
 export const NestedPath: Story = {
   args: {
-    segments: ['portfolio', 'project-name'],
+    segments: ["portfolio", "project-name"],
   },
   parameters: {
     docs: {
       description: {
-        story: 'Header with a nested path breadcrumb.',
+        story: "Header with a nested path breadcrumb.",
       },
     },
   },
@@ -248,12 +248,12 @@ export const NestedPath: Story = {
 
 export const DeepPath: Story = {
   args: {
-    segments: ['blog', 'category', 'post-title', 'comments'],
+    segments: ["blog", "category", "post-title", "comments"],
   },
   parameters: {
     docs: {
       description: {
-        story: 'Header with a deeply nested path breadcrumb.',
+        story: "Header with a deeply nested path breadcrumb.",
       },
     },
   },
@@ -262,15 +262,15 @@ export const DeepPath: Story = {
 // Responsive viewport examples
 export const Mobile: Story = {
   args: {
-    segments: ['portfolio'],
+    segments: ["portfolio"],
   },
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1',
+      defaultViewport: "mobile1",
     },
     docs: {
       description: {
-        story: 'Header as displayed on mobile devices with hamburger menu.',
+        story: "Header as displayed on mobile devices with hamburger menu.",
       },
     },
   },
@@ -278,15 +278,15 @@ export const Mobile: Story = {
 
 export const Tablet: Story = {
   args: {
-    segments: ['portfolio', 'project-name'],
+    segments: ["portfolio", "project-name"],
   },
   parameters: {
     viewport: {
-      defaultViewport: 'tablet',
+      defaultViewport: "tablet",
     },
     docs: {
       description: {
-        story: 'Header as displayed on tablet devices.',
+        story: "Header as displayed on tablet devices.",
       },
     },
   },
@@ -294,15 +294,15 @@ export const Tablet: Story = {
 
 export const Desktop: Story = {
   args: {
-    segments: ['portfolio', 'project-name', 'details'],
+    segments: ["portfolio", "project-name", "details"],
   },
   parameters: {
     viewport: {
-      defaultViewport: 'desktop',
+      defaultViewport: "desktop",
     },
     docs: {
       description: {
-        story: 'Header as displayed on desktop with full navigation.',
+        story: "Header as displayed on desktop with full navigation.",
       },
     },
   },

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Highlight } from '@juun-roh/cesium-utils';
-import { Button } from '@pkg/ui/button';
-import { Checkbox } from '@pkg/ui/checkbox';
-import { Label } from '@pkg/ui/label';
-import { Separator } from '@pkg/ui/separator';
-import { Slider } from '@pkg/ui/slider';
+import { Highlight } from "@juun-roh/cesium-utils";
+import { Button } from "@pkg/ui/button";
+import { Checkbox } from "@pkg/ui/checkbox";
+import { Label } from "@pkg/ui/label";
+import { Separator } from "@pkg/ui/separator";
+import { Slider } from "@pkg/ui/slider";
 import {
   Cartesian3,
   Color,
@@ -13,12 +13,12 @@ import {
   GeoJsonDataSource,
   Matrix4,
   ScreenSpaceEventType,
-} from 'cesium';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+} from "cesium";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import useViewerStore from '@/stores/slices/viewer';
+import useViewerStore from "@/stores/slices/viewer";
 
-import ColorSelector from './color-selector';
+import ColorSelector from "./color-selector";
 
 export default function MouseEventHighlight() {
   const { viewer } = useViewerStore();
@@ -50,7 +50,7 @@ export default function MouseEventHighlight() {
     if (!viewer) return;
     // Set GeoJsonDataSource to the viewer on mount
     viewer.dataSources.add(
-      GeoJsonDataSource.load('/data/ne_10m_us_states.topojson'),
+      GeoJsonDataSource.load("/data/ne_10m_us_states.topojson"),
     );
     // Set camera
     viewer.camera.lookAt(
@@ -89,7 +89,7 @@ export default function MouseEventHighlight() {
           disabled={!highlight}
           onClick={() => setIsPicking(!isPicking)}
         >
-          Mouse Event {isPicking ? 'off' : 'on'}
+          Mouse Event {isPicking ? "off" : "on"}
         </Button>
       </div>
       <div className="flex w-full items-center gap-2">
@@ -114,7 +114,7 @@ export default function MouseEventHighlight() {
             step={1}
             onValueChange={(v) => setWidth(v[0]!)}
             disabled={!outline}
-            className={outline ? 'opacity-100' : 'opacity-30'}
+            className={outline ? "opacity-100" : "opacity-30"}
           />
         </div>
       </div>

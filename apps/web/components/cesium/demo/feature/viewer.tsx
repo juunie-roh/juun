@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Skeleton } from '@pkg/ui/skeleton';
-import { lazy, Suspense } from 'react';
+import { Skeleton } from "@pkg/ui/skeleton";
+import { lazy, Suspense } from "react";
 
-const LazyViewerDemo = lazy(() => import('./lazy/viewer'));
+const LazyViewerDemo = lazy(() => import("./lazy/viewer"));
 
 export default function ViewerDemo() {
   return (

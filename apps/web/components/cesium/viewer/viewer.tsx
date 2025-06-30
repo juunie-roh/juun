@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import 'public/cesium/Widgets/widgets.css';
-import 'public/cesium/Widgets/lighter.css';
+import "public/cesium/Widgets/widgets.css";
+import "public/cesium/Widgets/lighter.css";
 
-import { CameraEventType, KeyboardEventModifier, Terrain } from 'cesium';
-import { Fragment, useEffect } from 'react';
-import { useCesium, Viewer as RViewer } from 'resium';
+import { CameraEventType, KeyboardEventModifier, Terrain } from "cesium";
+import { Fragment, useEffect } from "react";
+import { useCesium, Viewer as RViewer } from "resium";
 
-import useViewerStore from '@/stores/slices/viewer';
+import useViewerStore from "@/stores/slices/viewer";
 
-import type { ViewerProps } from '../types';
+import type { ViewerProps } from "../types";
 
 // Separate component that uses the viewer context
 function ViewerContent({
@@ -31,12 +31,12 @@ function ViewerContent({
 
     // Hide timeline if specified as false
     if (!timeline) {
-      (viewer.timeline.container as HTMLElement).style.display = 'none';
+      (viewer.timeline.container as HTMLElement).style.display = "none";
     }
 
     // Hide animation if specified as false
     if (!animation) {
-      (viewer.animation.container as HTMLElement).style.display = 'none';
+      (viewer.animation.container as HTMLElement).style.display = "none";
     }
 
     // Set tilt event type as RIGHT_DRAG

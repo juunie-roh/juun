@@ -5,12 +5,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@pkg/ui/select';
-import { Color } from 'cesium';
-import { SetStateAction } from 'react';
+} from "@pkg/ui/select";
+import { Color } from "cesium";
+import { SetStateAction } from "react";
 
 interface ColorSelectorProps {
-  color: ReturnType<Color['toCssColorString']>;
+  color: ReturnType<Color["toCssColorString"]>;
   setColor: (value: SetStateAction<string>) => void;
 }
 

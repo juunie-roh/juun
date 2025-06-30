@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   NavigationMenu,
@@ -6,21 +6,21 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from '@pkg/ui/navigation-menu';
-import { Separator } from '@pkg/ui/separator';
-import Link from 'next/link';
-import { Fragment } from 'react';
+} from "@pkg/ui/navigation-menu";
+import { Separator } from "@pkg/ui/separator";
+import Link from "next/link";
+import { Fragment } from "react";
 
-import { antonio } from '@/assets/fonts';
+import { antonio } from "@/assets/fonts";
 
-import ThemeSwitch from '../theme/switch';
-import Breadcrumb from './breadcrumb';
-import HeaderDrawer from './drawer';
+import ThemeSwitch from "../theme/switch";
+import Breadcrumb from "./breadcrumb";
+import HeaderDrawer from "./drawer";
 
 const navigationItems = [
-  { href: '/about', label: 'About' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Blog' },
+  { href: "/about", label: "About" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function Header() {
