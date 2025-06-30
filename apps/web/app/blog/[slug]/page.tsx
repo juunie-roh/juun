@@ -84,7 +84,7 @@ export default async function BlogItemPage({
       </div>
 
       <aside className="hidden xl:block" />
-      <article className="mx-auto w-full max-w-3xl px-4 pb-20 pt-4 md:px-8 xl:w-[48rem]">
+      <article className="mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8 xl:w-[48rem]">
         <PostComponent />
       </article>
       <aside className="hidden xl:block">
