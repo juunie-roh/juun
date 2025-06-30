@@ -1,4 +1,5 @@
 import type { Viewer } from "cesium";
+import type { ReactNode } from "react";
 import type { ViewerProps as RViewerProps } from "resium";
 
 export interface ViewerProps extends Omit<RViewerProps, "className"> {
@@ -20,4 +21,10 @@ export interface ApiFeatureOption {
   label: string;
   /** Initial camera location to be set */
   flyTo?: Parameters<Viewer["camera"]["flyTo"]>[0];
+}
+
+export interface Feature {
+  value: string;
+  label: string;
+  node: ReactNode;
 }

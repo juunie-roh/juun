@@ -20,7 +20,7 @@ import useViewerStore from "@/stores/slices/viewer";
 
 import ColorSelector from "./color-selector";
 
-export default function MouseEventHighlight() {
+export default function DataSourceEntity() {
   const { viewer } = useViewerStore();
   const [isPicking, setIsPicking] = useState<boolean>(false);
   const [outline, setOutline] = useState<boolean>(false);

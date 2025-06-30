@@ -7,11 +7,37 @@ import {
 import { Skeleton } from "@pkg/ui/skeleton";
 import { lazy, Suspense } from "react";
 
-import ModelEntity from "./model-entity";
+import { Feature } from "@/components/cesium/types";
 
-const MouseEventHighlight = lazy(() => import("./mouse-event"));
-const PolygonHighlight = lazy(() => import("./polygon"));
-const SilhouetteHighlight = lazy(() => import("./silhouette"));
+import HighlightDescription from "./description";
+
+const Polygon = lazy(() => import("./polygon"));
+const Model = lazy(() => import("./model-entity"));
+const DataSource = lazy(() => import("./datasource-entity"));
+const Silhouette = lazy(() => import("./silhouette"));
+
+const features: Feature[] = [
+  {
+    value: "item-1",
+    label: "Polygon Entity",
+    node: <Polygon />,
+  },
+  {
+    value: "item-2",
+    label: "Model Entity",
+    node: <Model />,
+  },
+  {
+    value: "item-3",
+    label: "Datasource Entity",
+    node: <DataSource />,
+  },
+  {
+    value: "item-4",
+    label: "Cesium3DTileFeature",
+    node: <Silhouette />,
+  },
+];
 
 export default function HighlightDemo() {
   return (
@@ -19,40 +45,26 @@ export default function HighlightDemo() {
       type="single"
       collapsible
       className="size-full"
-      defaultValue="item-1"
+      defaultValue="description"
     >
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Polygon Entity</AccordionTrigger>
+      <AccordionItem value="description">
+        <AccordionTrigger>Description</AccordionTrigger>
         <AccordionContent>
           <Suspense fallback={<Skeleton className="h-10 w-full" />}>
-            <PolygonHighlight />
+            <HighlightDescription />
           </Suspense>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Model Entity</AccordionTrigger>
-        <AccordionContent>
-          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
-            <ModelEntity />
-          </Suspense>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Mouse Event</AccordionTrigger>
-        <AccordionContent>
-          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
-            <MouseEventHighlight />
-          </Suspense>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-4">
-        <AccordionTrigger>3D Tile Feature</AccordionTrigger>
-        <AccordionContent>
-          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
-            <SilhouetteHighlight />
-          </Suspense>
-        </AccordionContent>
-      </AccordionItem>
+      {features.map((feat) => (
+        <AccordionItem key={feat.value} value={feat.value}>
+          <AccordionTrigger>{feat.label}</AccordionTrigger>
+          <AccordionContent>
+            <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+              {feat.node}
+            </Suspense>
+          </AccordionContent>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 }
