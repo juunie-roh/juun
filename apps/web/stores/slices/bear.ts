@@ -1,6 +1,6 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-import { logger } from '@/stores/middleware/logger';
+import { logger } from "@/stores/middleware/logger";
 
 interface BearState {
   bears: number;
@@ -15,6 +15,6 @@ export const useBearStore = create<BearState>()(
       increase: (by) => set((state) => ({ bears: state.bears + by })),
       decrease: (by) => set((state) => ({ bears: state.bears - by })),
     }),
-    'bear-store',
+    "bear-store",
   ),
 );

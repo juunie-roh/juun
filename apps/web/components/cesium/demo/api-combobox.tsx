@@ -1,4 +1,4 @@
-import { Button } from '@pkg/ui/button';
+import { Button } from "@pkg/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -6,20 +6,20 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@pkg/ui/command';
+} from "@pkg/ui/command";
 import {
   Drawer,
   DrawerContent,
   DrawerTitle,
   DrawerTrigger,
-} from '@pkg/ui/drawer';
-import { useMediaQuery } from '@pkg/ui/hooks';
-import { cn } from '@pkg/ui/lib/utils';
-import { Popover, PopoverContent, PopoverTrigger } from '@pkg/ui/popover';
-import { ChevronDown } from 'lucide-react';
-import { useEffect, useState } from 'react';
+} from "@pkg/ui/drawer";
+import { useMediaQuery } from "@pkg/ui/hooks";
+import { cn } from "@pkg/ui/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@pkg/ui/popover";
+import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import type { ApiFeatureOption } from '@/components/cesium/types';
+import type { ApiFeatureOption } from "@/components/cesium/types";
 
 function StatusList({
   setOpen,
@@ -35,11 +35,11 @@ function StatusList({
     const loadOptions = async () => {
       try {
         const { API_FEATURE_OPTIONS } = await import(
-          '@/components/cesium/constants'
+          "@/components/cesium/constants"
         );
         setOptions(API_FEATURE_OPTIONS);
       } catch (error) {
-        console.error('Failed to load API options:', error);
+        console.error("Failed to load API options:", error);
       } finally {
         setLoading(false);
       }
@@ -92,7 +92,7 @@ export default function ApiCombobox({
   className,
 }: ApiComboboxProps) {
   const [open, setOpen] = useState<boolean>(false);
-  const isLargeScreen = useMediaQuery('min-width: 1024px');
+  const isLargeScreen = useMediaQuery("min-width: 1024px");
 
   if (isLargeScreen) {
     return (
@@ -100,9 +100,9 @@ export default function ApiCombobox({
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className={cn('w-full justify-between px-4', className)}
+            className={cn("w-full justify-between px-4", className)}
           >
-            {option ? option.label : 'Select API'}
+            {option ? option.label : "Select API"}
             <ChevronDown />
           </Button>
         </PopoverTrigger>
@@ -118,9 +118,9 @@ export default function ApiCombobox({
       <DrawerTrigger asChild>
         <Button
           variant="outline"
-          className={cn('w-full justify-between px-4', className)}
+          className={cn("w-full justify-between px-4", className)}
         >
-          {option ? option.label : 'Select API'}
+          {option ? option.label : "Select API"}
           <ChevronDown />
         </Button>
       </DrawerTrigger>

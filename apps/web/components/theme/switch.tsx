@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Button } from '@pkg/ui/button';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { Button } from "@pkg/ui/button";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
@@ -13,11 +13,11 @@ export default function ThemeSwitch() {
   // Sync animation state with theme on mount
   useEffect(() => {
     if (theme) {
-      setAnimatingDark(theme === 'dark');
+      setAnimatingDark(theme === "dark");
     }
   }, [theme]);
 
-  const isDark = theme === 'dark';
+  const isDark = theme === "dark";
 
   const toggleTheme = () => {
     // First update our animation state
@@ -25,7 +25,7 @@ export default function ThemeSwitch() {
 
     // Then update the actual theme after a small delay to let animation complete
     setTimeout(() => {
-      setTheme(isDark ? 'light' : 'dark');
+      setTheme(isDark ? "light" : "dark");
     }, 150); // Half the animation duration to feel responsive but let animation start
   };
 
@@ -44,9 +44,9 @@ export default function ThemeSwitch() {
       <div
         className="absolute size-6 rounded-full bg-background shadow transition-all duration-300 ease-in-out"
         style={{
-          transform: animatingDark ? 'translateX(1rem)' : 'translateX(-1rem)',
-          left: '50%',
-          marginLeft: '-12px', // Half of the width of the thumb
+          transform: animatingDark ? "translateX(1rem)" : "translateX(-1rem)",
+          left: "50%",
+          marginLeft: "-12px", // Half of the width of the thumb
         }}
       />
 

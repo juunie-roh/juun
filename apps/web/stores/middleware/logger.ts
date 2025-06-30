@@ -1,4 +1,4 @@
-import type { StateCreator, StoreMutatorIdentifier } from 'zustand';
+import type { StateCreator, StoreMutatorIdentifier } from "zustand";
 
 type Logger = <
   T,
@@ -18,7 +18,7 @@ const loggerImpl: LoggerImpl = (f, name) => (set, get, store) => {
   const loggedSet: typeof set = (...a) => {
     set(...(a as Parameters<typeof set>));
     console.log(
-      '🚀 ~ State Logger ~ set:',
+      "🚀 ~ State Logger ~ set:",
       ...(name ? [`${name}:`] : []),
       get(),
     );
@@ -27,7 +27,7 @@ const loggerImpl: LoggerImpl = (f, name) => (set, get, store) => {
   store.setState = (...a) => {
     setState(...(a as Parameters<typeof setState>));
     console.log(
-      '🚀 ~ State Logger ~ store.setState:',
+      "🚀 ~ State Logger ~ store.setState:",
       ...(name ? [`${name}:`] : []),
       store.getState(),
     );

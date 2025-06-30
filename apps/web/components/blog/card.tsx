@@ -1,20 +1,20 @@
-import { Badge } from '@pkg/ui/badge';
+import { Badge } from "@pkg/ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@pkg/ui/card';
-import { ScrollArea, ScrollBar } from '@pkg/ui/scroll-area';
-import { Skeleton } from '@pkg/ui/skeleton';
-import { CalendarIcon, Clock } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+} from "@pkg/ui/card";
+import { ScrollArea, ScrollBar } from "@pkg/ui/scroll-area";
+import { Skeleton } from "@pkg/ui/skeleton";
+import { CalendarIcon, Clock } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { BlogMetadata } from '@/app/blog/blog.types';
-import { formatDateSafe } from '@/utils/date.utils';
-import { safeUrl } from '@/utils/security.utils';
+import { BlogMetadata } from "@/app/blog/blog.types";
+import { formatDateSafe } from "@/utils/date.utils";
+import { safeUrl } from "@/utils/security.utils";
 
 export interface Post {
   slug: string;
@@ -59,7 +59,7 @@ export function BlogCard({ post }: BlogCardProps) {
             <div className="aspect-video size-full bg-gray-300 md:aspect-auto">
               <Image
                 src={post.metadata.image}
-                alt={post.metadata.title || 'Blog post image'}
+                alt={post.metadata.title || "Blog post image"}
                 width={256}
                 height={256}
                 className="size-full object-contain p-8 transition-transform duration-300 group-hover:scale-105 md:h-56"

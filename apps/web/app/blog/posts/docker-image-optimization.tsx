@@ -1,26 +1,26 @@
-import { AspectRatio } from '@pkg/ui/aspect-ratio';
-import { CodeBlock } from '@pkg/ui/code-block';
-import { Skeleton } from '@pkg/ui/skeleton';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Fragment, Suspense } from 'react';
+import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { CodeBlock } from "@pkg/ui/code-block";
+import { Skeleton } from "@pkg/ui/skeleton";
+import Image from "next/image";
+import Link from "next/link";
+import { Fragment, Suspense } from "react";
 
-import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
+import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
 
 export const metadata = {
-  title: 'Docker Image Optimization',
-  description: 'NextJS monorepo 프로젝트의 Docker image 크기 최적화',
-  date: '2025-04-16',
+  title: "Docker Image Optimization",
+  description: "NextJS monorepo 프로젝트의 Docker image 크기 최적화",
+  date: "2025-04-16",
   tags: [
-    'Docker',
-    'CI',
-    'container',
-    'image',
-    'NextJS',
-    'standalone',
-    'monorepo',
+    "Docker",
+    "CI",
+    "container",
+    "image",
+    "NextJS",
+    "standalone",
+    "monorepo",
   ],
-  image: '/images/logo/docker-logo-blue.svg',
+  image: "/images/logo/docker-logo-blue.svg",
 };
 
 export default function DockerImageOptimization() {
@@ -50,21 +50,21 @@ export default function DockerImageOptimization() {
         <p>
           <Link href="https://docs.docker.com/build/concepts/overview">
             Docker Build
-          </Link>{' '}
+          </Link>{" "}
           는 client-server 아키텍쳐를 취하고 있다. 클라이언트(Buildx)가
           Dockerfile 의 내용을 interpret 해서 서버에 전달하면 서버(BuildKit)가
-          build 한 후 build output 을 클라이언트에게 넘기거나{' '}
+          build 한 후 build output 을 클라이언트에게 넘기거나{" "}
           <Link href="https://hub.docker.com">Docker Hub</Link> 같은 registry 에
-          등록하는 방식이다. 여기서 주목해야 할 점은{' '}
+          등록하는 방식이다. 여기서 주목해야 할 점은{" "}
           <Link href="https://docs.docker.com/build/building/multi-stage">
             Multi-stage
-          </Link>{' '}
+          </Link>{" "}
           이다.
         </p>
 
         <h2 className="tracking-tight">Multi-stage</h2>
         <p>
-          Dockerfile 은 일반적으로 base image 를 선택하는 명령어인{' '}
+          Dockerfile 은 일반적으로 base image 를 선택하는 명령어인{" "}
           <code>FROM</code> 으로 시작하게 되는데, 이는 곧 새로운 stage 가
           시작됨을 의미한다. <code>FROM</code> 명령어가 두 번 이상 있으면
           multi-stage build 가 되는 것이다.
@@ -93,7 +93,7 @@ CMD ["/bin/hello"]`}
           Multi-stage 를 활용할 수 있게 해주는 것은 다른 stage 에 있는 파일을
           가져올 수 있는 <code>COPY</code> 의 <code>--from</code> 옵션이다.
           <code>--from=</code> 은 stage 에 대한 접근자의 역할을 하며, integer
-          index 또는 string 을 받을 수 있다. <code>FROM ... AS ...</code>{' '}
+          index 또는 string 을 받을 수 있다. <code>FROM ... AS ...</code>{" "}
           명령으로 stage 에 이름을 지정하여 접근할 수도 있고, 해당 stage 가
           선언된 순서에 따라 integer index 로 접근할 수 있다.
           <code>COPY --from</code> 은 image 에도 접근 가능하다!
@@ -108,7 +108,7 @@ CMD ["/bin/hello"]`}
         <p>
           <Link href="https://docs.docker.com/build/building/best-practices">
             Docker Build Best Practices
-          </Link>{' '}
+          </Link>{" "}
           공식 문서에서는 Build Cache 관리, 어플리케이션 Decoupling 등 Docker 의
           전반적인 사용에 대한 모범 사례와 Dockerfile 명령어들을 확인할 수 있다.
           여기서는 그 중에서도 final output image 의 크기를 줄이기 위한 방법을
@@ -117,19 +117,19 @@ CMD ["/bin/hello"]`}
         <h3 className="tracking-tight">1. Base Image</h3>
         <p>
           Multi-stage 활용에 앞서, base image 를 잘 선택하는 것이 중요하다. 공식
-          문서에서는{' '}
+          문서에서는{" "}
           <Link href="https://hub.docker.com/_/alpine">Alpine Image</Link> 를
           추천한다. Linux OS 로써 완벽하게 동작하면서도 용량은 6MB 정도 밖에
           되지 않는 경량화된 image 이다. 대부분의 공식 image 들은 alpine 태그를
           제공하기 때문에 여기서 image 크기를 크게 줄일 수 있다. alpine 외에도
-          busybox, bullseye 등 다양한 경량 OS 를 선택할 수 있다. 여기서 사용할{' '}
+          busybox, bullseye 등 다양한 경량 OS 를 선택할 수 있다. 여기서 사용할{" "}
           <Link href="https://hub.docker.com/_/node">Node Image</Link> 도 alpine
           태그를 지원한다.
         </p>
         <h3 className="tracking-tight">2. Multi-stage</h3>
         <p>
           적절한 Base Image 를 선택했다면, 이제는 build stage 를 나눠줄
-          차례이다. 각 stage 는 일종의 세이브 포인트처럼 작동해서,{' '}
+          차례이다. 각 stage 는 일종의 세이브 포인트처럼 작동해서,{" "}
           <code>FROM (stage)</code> 명령으로 다른 stage 로부터 새로운 stage 를
           만들면 기존 stage 에서 작업한 내용들을 그대로 물려받는다. 이런 특성을
           활용해 모든 stage 의 바탕이 될 stage 를 하나 만든다.
@@ -170,14 +170,14 @@ RUN pnpm install --frozen-lockfile && \\
         />
         <p>
           Local 소스 파일을 모두 복사하고, module 을 다운로드 한 다음 build 를
-          진행한다. <code>COPY . .</code> 명령은 프로젝트의{' '}
+          진행한다. <code>COPY . .</code> 명령은 프로젝트의{" "}
           <i>
             <b>모든 파일을 복사</b>
-          </i>{' '}
+          </i>{" "}
           하는 것을 뜻한다. 물론 이렇게 지정하면 node_modules 까지 복사하기
           때문에 시간이 매우 오래 걸릴 수 밖에 없다. build 에 필요한 파일을 직접
           지정해서 복사할 수도 있고, <code>.dockerignore</code> 에서 제외할
-          파일들을 지정할 수도 있다. <code>.dockerignore</code> 는{' '}
+          파일들을 지정할 수도 있다. <code>.dockerignore</code> 는{" "}
           <code>.gitignore</code> 와 비슷하게 가져가면 된다. 이 단계를 거치면
           Builder Stage 의 Working Directory 에 build output 이 생긴다.
         </p>
@@ -211,7 +211,7 @@ CMD ["node", "apps/web/server.js"]
         <h4>standalone?</h4>
         <p>
           <code>next.config.js</code> 에서 설정할 수 있는 output 옵션이다. 이를
-          활성화하고 build 하게 되면 생기는 <code>.next/standalone</code> 하위의{' '}
+          활성화하고 build 하게 되면 생기는 <code>.next/standalone</code> 하위의{" "}
           <code>server.js</code> 를 node 로 실행시켜주기만 하면 build output 을
           다른 서버를 거치지 않고 serve 할 수 있다. 하지만 위의 예시처럼 몇몇
           자원을 직접 복사해주어야 한다.
@@ -343,7 +343,7 @@ RUN git clone https://some.project.git && \\
           </Suspense>
         </AspectRatio>
         <p>
-          Docker image layer 분석 툴인{' '}
+          Docker image layer 분석 툴인{" "}
           <Link href="https://github.com/wagoodman/dive">dive</Link> 는 image 를
           layer 단위로 탐색할 수 있어 어느 부분에서 size 를 더 줄일 수 있는지
           확인하기 쉽도록 도와준다. Image Details 항목을 살펴보면, 86KB 의
@@ -359,7 +359,7 @@ RUN git clone https://some.project.git && \\
         <p>
           앞서 살펴봤듯이 Docker image build 과정은 서버(BuildKit)에서 diff
           layer 를 추가하는 방식으로 진행된다. 이 과정에서 만들어진 layer 를
-          build cache 로 사용한다.{' '}
+          build cache 로 사용한다.{" "}
           <Link href="https://docs.docker.com/build/cache">
             (How the build cache works)
           </Link>
@@ -371,16 +371,16 @@ RUN git clone https://some.project.git && \\
           있다. 마지막 build stage 만 export 하는 image 와는 달리, build cache
           는 build 과정에서 만들어지는 모든 layer 를 저장하기 때문이다. build
           cache 는 그 크기 때문에 local storage 에 계속 쌓는 것은 부담스러울 수
-          있는데,{' '}
+          있는데,{" "}
           <Link href="https://docs.docker.com/build/cache/backends">
             Cache Storage Backends
-          </Link>{' '}
+          </Link>{" "}
           에서는 build cache 를 사용하거나 저장할 때 접근할 수 있는 외부
           저장소를 지정하는 방법을 안내한다.
         </p>
         <p>
           <code>RUN</code> 명령어 안에 포함된 Command 가 변경되면 layer 를 새로
-          만들어야 하기에, 앞서 Image size optimization 에서 <code>RUN</code>{' '}
+          만들어야 하기에, 앞서 Image size optimization 에서 <code>RUN</code>{" "}
           명령어의 호출을 최소화했던 반면, build cache 측면에서는 layer 를
           나누는 것이 더 효율적이다. 이런 특징들로 미루어보아, build stage 가
           자주 변경될 수 있는 개발 환경에서는 layer 를 많이 생성하도록 두어
@@ -392,7 +392,7 @@ RUN git clone https://some.project.git && \\
         <h3 className="tracking-tight">Yarn Berry PnP</h3>
         <p>
           예시로 사용한 NextJS 프로젝트는 처음에는 Yarn Berry 를 패키지 매니저로
-          사용하고 있었다. NextJS 의 <code>output: 'standalone'</code> 옵션과{' '}
+          사용하고 있었다. NextJS 의 <code>output: 'standalone'</code> 옵션과{" "}
           <code>vercel</code> 의 monorepo 빌드가 PnP 를 지원하지 않아 결국
           패키지 매니저를 PNPM 로 바꿨지만, Yarn Berry PnP 환경으로 작성했던
           Dockerfile 을 남겨본다.
@@ -481,7 +481,7 @@ CMD ["node", "apps/web/.next/standalone/apps/web/server.js"]`}
         <p>
           NextJS standalone 은 node_modules 디렉토리에서 필요한 모듈을
           복사하는데, Yarn Berry PnP 로 설치한 모듈은 인식하지 못해 결국 필요한
-          모듈을 따로 설치해줘야 하는 불상사가 발생한다. 위의 예시는{' '}
+          모듈을 따로 설치해줘야 하는 불상사가 발생한다. 위의 예시는{" "}
           <code>package.json</code> 에서 <code>devDependency</code> 로 분류된
           모듈만 제외하고 모두 설치해버린 결과, image 크기가 681MB 가
           되어버렸다. <small>next 는 pnpm 쓰자...</small>

@@ -5,7 +5,7 @@
 export function safeUrl(
   uriComponent: string | number | boolean,
 ): string | null {
-  return typeof uriComponent === 'string'
+  return typeof uriComponent === "string"
     ? encodeURIComponent(uriComponent)
     : null;
 }

@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Highlight } from '@juun-roh/cesium-utils';
-import { Button } from '@pkg/ui/button';
-import { Checkbox } from '@pkg/ui/checkbox';
-import { Label } from '@pkg/ui/label';
-import { Separator } from '@pkg/ui/separator';
-import { Slider } from '@pkg/ui/slider';
-import { Cartesian3, Color, Entity } from 'cesium';
-import { useEffect, useMemo, useState } from 'react';
+import { Highlight } from "@juun-roh/cesium-utils";
+import { Button } from "@pkg/ui/button";
+import { Checkbox } from "@pkg/ui/checkbox";
+import { Label } from "@pkg/ui/label";
+import { Separator } from "@pkg/ui/separator";
+import { Slider } from "@pkg/ui/slider";
+import { Cartesian3, Color, Entity } from "cesium";
+import { useEffect, useMemo, useState } from "react";
 
-import useViewerStore from '@/stores/slices/viewer';
+import useViewerStore from "@/stores/slices/viewer";
 
-import ColorSelector from './color-selector';
+import ColorSelector from "./color-selector";
 
 export default function PolygonHighlight() {
   const { viewer } = useViewerStore();
@@ -87,7 +87,7 @@ export default function PolygonHighlight() {
           disabled={!highlight}
           onClick={() => setIsShowing(!isShowing)}
         >
-          {isShowing ? 'hide' : 'show'} highlight
+          {isShowing ? "hide" : "show"} highlight
         </Button>
       </div>
       <div className="flex w-full items-center gap-2">
@@ -112,7 +112,7 @@ export default function PolygonHighlight() {
             step={1}
             onValueChange={(v) => setWidth(v[0]!)}
             disabled={!outline}
-            className={outline ? 'opacity-100' : 'opacity-30'}
+            className={outline ? "opacity-100" : "opacity-30"}
           />
         </div>
       </div>

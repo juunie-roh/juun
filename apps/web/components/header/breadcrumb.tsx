@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Breadcrumb as BreadcrumbRoot,
@@ -7,11 +7,11 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@pkg/ui/breadcrumb';
-import { Home } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Fragment, useMemo } from 'react';
+} from "@pkg/ui/breadcrumb";
+import { Home } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Fragment, useMemo } from "react";
 
 interface BreadcrumbSegment {
   href: string;
@@ -30,17 +30,17 @@ interface BreadcrumbProps {
 const generateBreadcrumbs = (pathname: string): BreadcrumbSegment[] => {
   // Skip empty segments and filter out any dynamic route parameters (segments that start with "[" and end with "]")
   const pathSegments = pathname
-    .split('/')
-    .filter((segment) => segment !== '' && !segment.match(/^\[.*\]$/));
+    .split("/")
+    .filter((segment) => segment !== "" && !segment.match(/^\[.*\]$/));
 
   // Generate breadcrumb segments
   return pathSegments.map((segment, index) => {
     // Create the href up to current segment
-    const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
+    const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
 
     // Format the label: convert kebab-case or snake_case to Title Case
     const label = segment
-      .replace(/-|_/g, ' ')
+      .replace(/-|_/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
     // Check if this is the current (last) segment
@@ -51,8 +51,8 @@ const generateBreadcrumbs = (pathname: string): BreadcrumbSegment[] => {
 };
 
 export default function Breadcrumb({
-  homeHref = '/',
-  homeLabel = 'Home',
+  homeHref = "/",
+  homeLabel = "Home",
   segments: customSegments,
   className,
 }: BreadcrumbProps) {

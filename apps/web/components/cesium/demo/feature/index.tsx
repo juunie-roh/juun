@@ -1,9 +1,9 @@
-import { ApiFeature } from '@/components/cesium/types';
+import { ApiFeature } from "@/components/cesium/types";
 
-import CollectionDemo from './collection';
-import HighlightDemo from './highlight';
-import TerrainDemo from './terrain';
-import ViewerDemo from './viewer';
+import CollectionDemo from "./collection";
+import HighlightDemo from "./highlight";
+import TerrainDemo from "./terrain";
+import ViewerDemo from "./viewer";
 
 // Map each API feature to its corresponding demo component
 export const FeatureDemos: Record<ApiFeature, React.ComponentType> = {

@@ -1,15 +1,15 @@
-import { createLucideIcon } from 'lucide-react';
-import type { FC, ReactElement, ReactNode } from 'react';
+import { createLucideIcon } from "lucide-react";
+import type { FC, ReactElement, ReactNode } from "react";
 
 type SVGElementType =
-  | 'circle'
-  | 'ellipse'
-  | 'g'
-  | 'line'
-  | 'path'
-  | 'polygon'
-  | 'polyline'
-  | 'rect';
+  | "circle"
+  | "ellipse"
+  | "g"
+  | "line"
+  | "path"
+  | "polygon"
+  | "polyline"
+  | "rect";
 type IconNode = [elementName: SVGElementType, attrs: Record<string, string>][];
 
 export const createIconNode = (Svg: FC): IconNode => {

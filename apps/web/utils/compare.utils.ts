@@ -19,7 +19,7 @@ export const compare = <T>(a: T, b: T): number => {
   }
 
   // Handle numbers
-  if (typeof a === 'number' && typeof b === 'number') {
+  if (typeof a === "number" && typeof b === "number") {
     return a - b;
   }
 
@@ -29,7 +29,7 @@ export const compare = <T>(a: T, b: T): number => {
   }
 
   // Handle strings
-  if (typeof a === 'string' && typeof b === 'string') {
+  if (typeof a === "string" && typeof b === "string") {
     return a.localeCompare(b);
   }
 
@@ -46,7 +46,7 @@ export const compare = <T>(a: T, b: T): number => {
   }
 
   // Handle objects
-  if (typeof a === 'object' && typeof b === 'object') {
+  if (typeof a === "object" && typeof b === "object") {
     const aKeys = Object.keys(a).sort();
     const bKeys = Object.keys(b).sort();
 
@@ -73,7 +73,7 @@ export const compare = <T>(a: T, b: T): number => {
   }
 
   // Handle booleans
-  if (typeof a === 'boolean' && typeof b === 'boolean') {
+  if (typeof a === "boolean" && typeof b === "boolean") {
     return a === b ? 0 : a ? 1 : -1;
   }
 
@@ -101,7 +101,7 @@ function getTimestamp(date: Date | string | null | undefined): number | null {
     return date.getTime();
   }
 
-  if (typeof date === 'string') {
+  if (typeof date === "string") {
     const parsed = new Date(date);
     return isNaN(parsed.getTime()) ? null : parsed.getTime();
   }

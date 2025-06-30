@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Highlight } from '@juun-roh/cesium-utils';
+import { Highlight } from "@juun-roh/cesium-utils";
 import {
   Cartesian3,
   Cesium3DTileset,
@@ -9,12 +9,12 @@ import {
   HeadingPitchRoll,
   Matrix4,
   ScreenSpaceEventType,
-} from 'cesium';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+} from "cesium";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import useViewerStore from '@/stores/slices/viewer';
+import useViewerStore from "@/stores/slices/viewer";
 
-import ColorSelector from './color-selector';
+import ColorSelector from "./color-selector";
 
 export default function Silhouette() {
   const { viewer } = useViewerStore();
@@ -66,7 +66,7 @@ export default function Silhouette() {
         viewer.scene.primitives.add(tileset);
       })
       .catch((error: any) => {
-        console.log('🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:', error);
+        console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
       });
 
     viewer.screenSpaceEventHandler.setInputAction(
@@ -83,7 +83,7 @@ export default function Silhouette() {
           tileset.show = false;
         })
         .catch((error: any) => {
-          console.log('🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:', error);
+          console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
         });
     };
   }, [viewer, highlight, onMouseMove, tilesetPromise]);

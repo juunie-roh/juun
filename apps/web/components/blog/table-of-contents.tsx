@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Button } from '@pkg/ui/button';
+import { Button } from "@pkg/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@pkg/ui/collapsible';
-import { useMediaQuery } from '@pkg/ui/hooks';
-import { cn } from '@pkg/ui/lib/utils';
-import { ArrowRight, Bookmark } from 'lucide-react';
-import { Fragment, useEffect, useState } from 'react';
+} from "@pkg/ui/collapsible";
+import { useMediaQuery } from "@pkg/ui/hooks";
+import { cn } from "@pkg/ui/lib/utils";
+import { ArrowRight, Bookmark } from "lucide-react";
+import { Fragment, useEffect, useState } from "react";
 
-import { getHeadings, Heading } from '@/app/blog/blog.utils';
+import { getHeadings, Heading } from "@/app/blog/blog.utils";
 
 interface TableOfContentsProps {
   /**
@@ -42,12 +42,12 @@ interface TableOfContentsProps {
 export function TableOfContents({
   className,
   bordered = true,
-  contentSelector = '.prose',
-  headingSelector = 'h2, h3',
+  contentSelector = ".prose",
+  headingSelector = "h2, h3",
 }: TableOfContentsProps) {
-  const isXL = useMediaQuery('min-width: 1280px');
+  const isXL = useMediaQuery("min-width: 1280px");
   const [headings, setHeadings] = useState<Heading[]>([]);
-  const [activeId, setActiveId] = useState<string>('');
+  const [activeId, setActiveId] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export function TableOfContents({
         });
       },
       {
-        rootMargin: '0px 0px -80% 0px', // Consider heading visible when in the top 20% of viewport
+        rootMargin: "0px 0px -80% 0px", // Consider heading visible when in the top 20% of viewport
       },
     );
 
@@ -99,7 +99,7 @@ export function TableOfContents({
 
       window.scrollTo({
         top: y,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -111,8 +111,8 @@ export function TableOfContents({
         <li key={id} className="relative">
           <div
             className={cn(
-              'absolute left-0 top-0 w-1 h-full',
-              activeId === id && 'bg-primary',
+              "absolute left-0 top-0 w-1 h-full",
+              activeId === id && "bg-primary",
             )}
           />
           <Button
@@ -122,9 +122,9 @@ export function TableOfContents({
           >
             <span
               className={cn(
-                'text-wrap text-left',
-                level === 3 && 'pl-4',
-                activeId === id && 'text-primary',
+                "text-wrap text-left",
+                level === 3 && "pl-4",
+                activeId === id && "text-primary",
               )}
             >
               {text}
@@ -138,7 +138,7 @@ export function TableOfContents({
   return isXL ? (
     <div
       className={cn(
-        'hidden xl:block w-full overflow-auto rounded-lg bg-card py-4 text-sm',
+        "hidden xl:block w-full overflow-auto rounded-lg bg-card py-4 text-sm",
         className,
       )}
     >
@@ -148,13 +148,13 @@ export function TableOfContents({
       </nav>
     </div>
   ) : (
-    <div className={cn('xl:hidden', className)}>
+    <div className={cn("xl:hidden", className)}>
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
         className={cn(
-          'w-full max-w-64 rounded-md bg-card',
-          bordered && 'border',
+          "w-full max-w-64 rounded-md bg-card",
+          bordered && "border",
         )}
       >
         <CollapsibleTrigger asChild>
@@ -162,7 +162,7 @@ export function TableOfContents({
             variant="ghost"
             size="icon"
             className={cn(
-              isOpen && 'flex w-full items-center justify-between px-2.5',
+              isOpen && "flex w-full items-center justify-between px-2.5",
             )}
           >
             {isOpen ? (

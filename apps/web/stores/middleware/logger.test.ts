@@ -1,10 +1,10 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-import { logger } from './logger'; // Adjust the import path as needed
+import { logger } from "./logger"; // Adjust the import path as needed
 
 // Mock console.log
 const mockedConsoleLog = jest
-  .spyOn(console, 'log')
+  .spyOn(console, "log")
   .mockImplementation(() => {});
 
 // Type definitions for our test store
@@ -14,7 +14,7 @@ interface TestState {
   decrement: () => void;
 }
 
-describe('Zustand Logger Middleware', () => {
+describe("Zustand Logger Middleware", () => {
   beforeEach(() => {
     // Clear mock before each test
     mockedConsoleLog.mockClear();
@@ -25,7 +25,7 @@ describe('Zustand Logger Middleware', () => {
     mockedConsoleLog.mockRestore();
   });
 
-  it('should log state changes when using set', () => {
+  it("should log state changes when using set", () => {
     // Create store with logger
     const useStore = create<TestState>()(
       logger(
@@ -34,7 +34,7 @@ describe('Zustand Logger Middleware', () => {
           increment: () => set((state) => ({ count: state.count + 1 })),
           decrement: () => set((state) => ({ count: state.count - 1 })),
         }),
-        'testStore',
+        "testStore",
       ),
     );
 
@@ -44,8 +44,8 @@ describe('Zustand Logger Middleware', () => {
     // Test increment
     increment();
     expect(mockedConsoleLog).toHaveBeenCalledWith(
-      '🚀 ~ State Logger ~ set:',
-      'testStore:',
+      "🚀 ~ State Logger ~ set:",
+      "testStore:",
       {
         count: 1,
         increment: expect.any(Function),
@@ -56,8 +56,8 @@ describe('Zustand Logger Middleware', () => {
     // Test decrement
     decrement();
     expect(mockedConsoleLog).toHaveBeenCalledWith(
-      '🚀 ~ State Logger ~ set:',
-      'testStore:',
+      "🚀 ~ State Logger ~ set:",
+      "testStore:",
       {
         count: 0,
         increment: expect.any(Function),
@@ -66,7 +66,7 @@ describe('Zustand Logger Middleware', () => {
     );
   });
 
-  it('should log state changes when using setState', () => {
+  it("should log state changes when using setState", () => {
     // Create store with logger
     const useStore = create<TestState>()(
       logger(
@@ -75,15 +75,15 @@ describe('Zustand Logger Middleware', () => {
           increment: () => set((state) => ({ count: state.count + 1 })),
           decrement: () => set((state) => ({ count: state.count - 1 })),
         }),
-        'testStore',
+        "testStore",
       ),
     );
 
     // Test direct setState
     useStore.setState({ count: 5 });
     expect(mockedConsoleLog).toHaveBeenCalledWith(
-      '🚀 ~ State Logger ~ store.setState:',
-      'testStore:',
+      "🚀 ~ State Logger ~ store.setState:",
+      "testStore:",
       {
         count: 5,
         increment: expect.any(Function),
@@ -92,7 +92,7 @@ describe('Zustand Logger Middleware', () => {
     );
   });
 
-  it('should work without a store name', () => {
+  it("should work without a store name", () => {
     // Create store with logger but no name
     const useStore = create<TestState>()(
       logger((set) => ({
@@ -104,14 +104,14 @@ describe('Zustand Logger Middleware', () => {
 
     // Test increment
     useStore.getState().increment();
-    expect(mockedConsoleLog).toHaveBeenCalledWith('🚀 ~ State Logger ~ set:', {
+    expect(mockedConsoleLog).toHaveBeenCalledWith("🚀 ~ State Logger ~ set:", {
       count: 1,
       increment: expect.any(Function),
       decrement: expect.any(Function),
     });
   });
 
-  it('should maintain correct state after multiple updates', () => {
+  it("should maintain correct state after multiple updates", () => {
     // Create store with logger
     const useStore = create<TestState>()(
       logger(
@@ -120,7 +120,7 @@ describe('Zustand Logger Middleware', () => {
           increment: () => set((state) => ({ count: state.count + 1 })),
           decrement: () => set((state) => ({ count: state.count - 1 })),
         }),
-        'testStore',
+        "testStore",
       ),
     );
 
@@ -135,7 +135,7 @@ describe('Zustand Logger Middleware', () => {
     expect(mockedConsoleLog).toHaveBeenCalledTimes(3);
   });
 
-  it('should log correctly when using setState without a store name', () => {
+  it("should log correctly when using setState without a store name", () => {
     // Create store with logger but no name
     const useStore = create<TestState>()(
       logger((set) => ({
@@ -148,7 +148,7 @@ describe('Zustand Logger Middleware', () => {
     // Test setState without a name
     useStore.setState({ count: 10 });
     expect(mockedConsoleLog).toHaveBeenCalledWith(
-      '🚀 ~ State Logger ~ store.setState:',
+      "🚀 ~ State Logger ~ store.setState:",
       {
         count: 10,
         increment: expect.any(Function),
@@ -157,7 +157,7 @@ describe('Zustand Logger Middleware', () => {
     );
   });
 
-  it('should handle partial state updates', () => {
+  it("should handle partial state updates", () => {
     interface ExtendedState extends TestState {
       name: string;
     }
@@ -166,11 +166,11 @@ describe('Zustand Logger Middleware', () => {
       logger(
         (set) => ({
           count: 0,
-          name: 'test',
+          name: "test",
           increment: () => set((state) => ({ count: state.count + 1 })),
           decrement: () => set((state) => ({ count: state.count - 1 })),
         }),
-        'testStore',
+        "testStore",
       ),
     );
 
@@ -181,7 +181,7 @@ describe('Zustand Logger Middleware', () => {
     const state = useStore.getState();
     expect(state).toEqual({
       count: 5,
-      name: 'test',
+      name: "test",
       increment: expect.any(Function),
       decrement: expect.any(Function),
     });

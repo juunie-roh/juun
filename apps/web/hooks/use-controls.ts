@@ -1,17 +1,17 @@
-import type { RefObject } from 'react';
-import { useEffect, useRef } from 'react';
+import type { RefObject } from "react";
+import { useEffect, useRef } from "react";
 
 const keyControlMap = {
-  ' ': 'brake',
-  ArrowDown: 'backward',
-  ArrowLeft: 'left',
-  ArrowRight: 'right',
-  ArrowUp: 'forward',
-  a: 'left',
-  d: 'right',
-  r: 'reset',
-  s: 'backward',
-  w: 'forward',
+  " ": "brake",
+  ArrowDown: "backward",
+  ArrowLeft: "left",
+  ArrowRight: "right",
+  ArrowUp: "forward",
+  a: "left",
+  d: "right",
+  r: "reset",
+  s: "backward",
+  w: "forward",
 } as const;
 
 type KeyCode = keyof typeof keyControlMap;
@@ -30,18 +30,18 @@ const useKeyControls = (
 
       current[map[key]] = true;
     };
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     const handleKeyUp = ({ key }: KeyboardEvent) => {
       if (!isKeyCode(key)) return;
 
       current[map[key]] = false;
     };
-    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
   }, [current, map]);
 };

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Button } from '@pkg/ui/button';
+import { Button } from "@pkg/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -9,16 +9,16 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@pkg/ui/drawer';
-import { ScrollArea } from '@pkg/ui/scroll-area';
-import { Separator } from '@pkg/ui/separator';
-import { Menu, X } from 'lucide-react';
-import Link from 'next/link';
-import { Fragment, useState } from 'react';
+} from "@pkg/ui/drawer";
+import { ScrollArea } from "@pkg/ui/scroll-area";
+import { Separator } from "@pkg/ui/separator";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { Fragment, useState } from "react";
 
-import { antonio } from '@/assets/fonts';
+import { antonio } from "@/assets/fonts";
 
-import ThemeSwitch from '../theme/switch';
+import ThemeSwitch from "../theme/switch";
 
 interface HeaderDrawerProps {
   navigationItems: { href: string; label: string }[];

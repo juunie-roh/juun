@@ -1,6 +1,6 @@
-import '@pkg/config/tailwind/styles';
+import "@pkg/config/tailwind/styles";
 
-import type { Preview } from '@storybook/react';
+import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
   parameters: {
@@ -15,9 +15,9 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        method: 'alphabetical',
-        order: ['Components'],
-        locales: '',
+        method: "alphabetical",
+        order: ["Components"],
+        locales: "",
       },
     },
   },

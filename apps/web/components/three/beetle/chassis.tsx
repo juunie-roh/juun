@@ -1,46 +1,46 @@
-import { useGLTF } from '@react-three/drei';
-import type { Ref } from 'react';
-import { forwardRef } from 'react';
-import type { Material, Mesh, Object3D } from 'three';
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { useGLTF } from "@react-three/drei";
+import type { Ref } from "react";
+import { forwardRef } from "react";
+import type { Material, Mesh, Object3D } from "three";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-useGLTF.preload('/models/Beetle.glb');
+useGLTF.preload("/models/Beetle.glb");
 
 type BeetleMaterial =
-  | 'Black paint'
-  | 'Black plastic'
-  | 'Chrom'
-  | 'Glass'
-  | 'Headlight'
-  | 'Interior (dark)'
-  | 'Interior (light)'
-  | 'License Plate'
-  | 'Orange plastic'
-  | 'Paint'
-  | 'Reflector'
-  | 'Reverse lights'
-  | 'Rubber'
-  | 'Steel'
-  | 'Tail lights'
-  | 'Underbody';
+  | "Black paint"
+  | "Black plastic"
+  | "Chrom"
+  | "Glass"
+  | "Headlight"
+  | "Interior (dark)"
+  | "Interior (light)"
+  | "License Plate"
+  | "Orange plastic"
+  | "Paint"
+  | "Reflector"
+  | "Reverse lights"
+  | "Rubber"
+  | "Steel"
+  | "Tail lights"
+  | "Underbody";
 
 type BeetleNode =
-  | 'chassis_1'
-  | 'chassis_2'
-  | 'chassis_3'
-  | 'chassis_4'
-  | 'chassis_5'
-  | 'chassis_6'
-  | 'chassis_7'
-  | 'chassis_8'
-  | 'chassis_9'
-  | 'chassis_10'
-  | 'chassis_11'
-  | 'chassis_12'
-  | 'chassis_13'
-  | 'chassis_14'
-  | 'chassis_15'
-  | 'chassis_16';
+  | "chassis_1"
+  | "chassis_2"
+  | "chassis_3"
+  | "chassis_4"
+  | "chassis_5"
+  | "chassis_6"
+  | "chassis_7"
+  | "chassis_8"
+  | "chassis_9"
+  | "chassis_10"
+  | "chassis_11"
+  | "chassis_12"
+  | "chassis_13"
+  | "chassis_14"
+  | "chassis_15"
+  | "chassis_16";
 
 type BeetleGLTF = GLTF & {
   materials: Record<BeetleMaterial, Material>;
@@ -49,7 +49,7 @@ type BeetleGLTF = GLTF & {
 
 export const Chassis = forwardRef<Object3D>((_, ref) => {
   const { nodes, materials } = useGLTF(
-    '/models/Beetle.glb',
+    "/models/Beetle.glb",
   ) as unknown as BeetleGLTF;
 
   return (
@@ -57,7 +57,7 @@ export const Chassis = forwardRef<Object3D>((_, ref) => {
       <group position={[0, -0.6, 0]}>
         <mesh
           castShadow
-          material={materials['Black paint']}
+          material={materials["Black paint"]}
           geometry={nodes.chassis_1.geometry}
         />
         <mesh
@@ -82,12 +82,12 @@ export const Chassis = forwardRef<Object3D>((_, ref) => {
         />
         <mesh
           castShadow
-          material={materials['Interior (dark)']}
+          material={materials["Interior (dark)"]}
           geometry={nodes.chassis_6.geometry}
         />
         <mesh
           castShadow
-          material={materials['Interior (light)']}
+          material={materials["Interior (light)"]}
           geometry={nodes.chassis_7.geometry}
         />
         <mesh
@@ -104,7 +104,7 @@ export const Chassis = forwardRef<Object3D>((_, ref) => {
         />
         <mesh
           castShadow
-          material={materials['Black plastic']}
+          material={materials["Black plastic"]}
           geometry={nodes.chassis_11.geometry}
         />
         <mesh
@@ -113,22 +113,22 @@ export const Chassis = forwardRef<Object3D>((_, ref) => {
         />
         <mesh
           castShadow
-          material={materials['Reverse lights']}
+          material={materials["Reverse lights"]}
           geometry={nodes.chassis_13.geometry}
         />
         <mesh
           castShadow
-          material={materials['Orange plastic']}
+          material={materials["Orange plastic"]}
           geometry={nodes.chassis_14.geometry}
         />
         <mesh
           castShadow
-          material={materials['Tail lights']}
+          material={materials["Tail lights"]}
           geometry={nodes.chassis_15.geometry}
         />
         <mesh
           castShadow
-          material={materials['License Plate']}
+          material={materials["License Plate"]}
           geometry={nodes.chassis_16.geometry}
         />
       </group>

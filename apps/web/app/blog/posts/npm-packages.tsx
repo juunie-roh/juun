@@ -1,30 +1,30 @@
-import { AspectRatio } from '@pkg/ui/aspect-ratio';
-import { CodeBlock } from '@pkg/ui/code-block';
-import { Skeleton } from '@pkg/ui/skeleton';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Fragment, Suspense } from 'react';
+import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { CodeBlock } from "@pkg/ui/code-block";
+import { Skeleton } from "@pkg/ui/skeleton";
+import Image from "next/image";
+import Link from "next/link";
+import { Fragment, Suspense } from "react";
 
-import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
+import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
 
 export const metadata = {
-  title: 'Publishing NPM Package with ChangeSet',
+  title: "Publishing NPM Package with ChangeSet",
   description:
-    'GitHub Actions, ChangeSet, TypeDoc 으로 자동화된 개발 환경 구축하기',
-  date: '2025-04-10',
+    "GitHub Actions, ChangeSet, TypeDoc 으로 자동화된 개발 환경 구축하기",
+  date: "2025-04-10",
   tags: [
-    'npm',
-    'Changesets',
-    'CI/CD',
-    'GitHub Actions',
-    'GitHub Pages',
-    'release',
-    'publish',
-    'TypeScript',
-    'TypeDoc',
+    "npm",
+    "Changesets",
+    "CI/CD",
+    "GitHub Actions",
+    "GitHub Pages",
+    "release",
+    "publish",
+    "TypeScript",
+    "TypeDoc",
   ],
   image:
-    'https://raw.githubusercontent.com/npm/logos/cc343d8c50139f645d165aedfe4d375240599fd1/npm%20logo/npm-logo-red.svg',
+    "https://raw.githubusercontent.com/npm/logos/cc343d8c50139f645d165aedfe4d375240599fd1/npm%20logo/npm-logo-red.svg",
 };
 
 export default function NpmPublish() {
@@ -62,10 +62,10 @@ export default function NpmPublish() {
           배포하지 않기 때문에 <code>package.json</code> 에 명시되는 metadata 를
           신경 쓸 일이 없다. 하지만 npm 패키지 형태로 관리 및 사용하려는 경우는
           패키지의 이름부터 버전, exports 등 구체적으로 명시해줘야 하는 metadata
-          가 많다.{' '}
+          가 많다.{" "}
           <Link href="https://docs.npmjs.com/cli/v11/configuring-npm/package-json">
             Configuring npm
-          </Link>{' '}
+          </Link>{" "}
           에서 모든 항목을 확인할 수 있다.
         </p>
         <CodeBlock
@@ -97,19 +97,19 @@ export default function NpmPublish() {
         <ul>
           <li>
             name: 패키지의 이름으로, npm 에 publish 하기 위해서는 사용할 npm
-            계정에 publish 권한이 있는{' '}
+            계정에 publish 권한이 있는{" "}
             <Link href="https://docs.npmjs.com/cli/v11/using-npm/scope">
               scope
-            </Link>{' '}
+            </Link>{" "}
             를 지정해주어야 한다. 개인 계정의 경우, username 과 같은 scope 는
             기본으로 권한이 주어진다.
           </li>
           <li>
-            version: npm 은{' '}
+            version: npm 은{" "}
             <Link href="https://www.npmjs.com/package/semver?activeTab=readme">
               semver
-            </Link>{' '}
-            모듈로 패키지의 버전을 판단하기 때문에 형식을 맞춰주어야 한다. 이는{' '}
+            </Link>{" "}
+            모듈로 패키지의 버전을 판단하기 때문에 형식을 맞춰주어야 한다. 이는{" "}
             <Link href="https://semver.org/">Semantic Versioning</Link> 규칙을
             따르는 것으로, 이 프로젝트에서는 후술할 Changesets versioning 툴을
             사용했다.
@@ -119,10 +119,10 @@ export default function NpmPublish() {
         <h2 className="tracking-tight">Project Configurations</h2>
         <h3 className="tracking-tight">TypeScript - Builds</h3>
         <p>
-          기본 컴파일러인 <code>tsc</code> 를 사용해도 되지만,{' '}
+          기본 컴파일러인 <code>tsc</code> 를 사용해도 되지만,{" "}
           <Link href="https://tsup.egoist.dev/">
             <code>tsup</code>
-          </Link>{' '}
+          </Link>{" "}
           이라는 번들러를 이용했다. (<s>그냥</s>)
         </p>
         <CodeBlock
@@ -227,7 +227,7 @@ abstract class Collection<C, I>{
         <p>
           <Link href="https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html">
             TypeScript JSDoc
-          </Link>{' '}
+          </Link>{" "}
           에서 지원 및 미지원 태그를 확인할 수 있다. TypeScript 는 JSDoc 의 타입
           표시를 생략한다. JSDoc 을 잘 작성하면 IDE 내에서 설명을 제공할 수 있을
           뿐만 아니라, API 문서까지도 자동화해서 제공할 수 있다.
@@ -236,11 +236,11 @@ abstract class Collection<C, I>{
           <Link href="https://typedoc.org/index.html">TypeDoc</Link> 은 대표적인
           Documentation Tool 중 하나이다. JSDoc 형태의 Comment 들을 정적으로
           serve 할 수 있는 <code>html</code> 로 작성해준다. MarkDown(MD) 형식도
-          지원하기에 API 문서를 어떻게 제공할 지에 따라 선택할 수 있다.{' '}
-          <code>typedoc.json</code> 로 Configuration 을 설정할 수 있으며{' '}
+          지원하기에 API 문서를 어떻게 제공할 지에 따라 선택할 수 있다.{" "}
+          <code>typedoc.json</code> 로 Configuration 을 설정할 수 있으며{" "}
           <Link href="https://typedoc.org/documents/Themes.html">
             Typedoc Themes
-          </Link>{' '}
+          </Link>{" "}
           에서는 사용할 수 있는 스타일 테마 플러그인과 커스텀 테마 작성 방법에
           대해 안내하고 있다.
         </p>
@@ -265,17 +265,17 @@ abstract class Collection<C, I>{
 }`}
         />
         <p>
-          위 설정대로 local 환경에서 <code>typedoc</code> 을 실행하면{' '}
+          위 설정대로 local 환경에서 <code>typedoc</code> 을 실행하면{" "}
           <code>src/index.ts</code> 파일이 포함하고 있는 코드의 JSDoc 에 대한
-          API Document 가 <code>docs</code> 디렉토리 하위에 생성된다. 그 중{' '}
-          <code>index.html</code> 을{' '}
+          API Document 가 <code>docs</code> 디렉토리 하위에 생성된다. 그 중{" "}
+          <code>index.html</code> 을{" "}
           <Link href="https://marketplace.visualstudio.com/items/?itemName=ritwickdey.LiveServer">
             라이브 서버
-          </Link>{' '}
-          로 실행해보면{' '}
+          </Link>{" "}
+          로 실행해보면{" "}
           <Link href="https://juunie-roh.github.io/cesium-utils/">
             Cesium Utils
-          </Link>{' '}
+          </Link>{" "}
           와 같이 API Document 가 구성되는 것을 확인해볼 수 있다.
         </p>
 
@@ -294,19 +294,19 @@ abstract class Collection<C, I>{
             버전으로는 다시 publish 할 수 없다.
           </li>
           <li>
-            Changeset 은{' '}
+            Changeset 은{" "}
             <Link href="https://github.com/changesets/action">
               Changeset Actions
-            </Link>{' '}
+            </Link>{" "}
             를 통해 <code>CHANGELOG.md</code> 의 내용을 수정할 수 있는데,
             Changeset 의 타입
-            <small>(patch/minor/major)</small> 에 따라 <code>package.json</code>{' '}
+            <small>(patch/minor/major)</small> 에 따라 <code>package.json</code>{" "}
             의 version 을 함께 업데이트 하는 Pull Request 를 생성하도록 설정할
             수 있다.
           </li>
           <li>
             <code>typedoc</code> 으로 생성한 API Documentation 에는 패키지의
-            version 을 표시할 수 있는데, 이는 TypeDoc 실행 시점의{' '}
+            version 을 표시할 수 있는데, 이는 TypeDoc 실행 시점의{" "}
             <code>package.json</code> version 을 기준으로 한다.
           </li>
         </ul>
@@ -555,7 +555,7 @@ jobs:
         </p>
         <ol>
           <li>
-            {' '}
+            {" "}
             <code>CHANGELOG.md</code> 에 반영된 이번 업데이트 버전에 대한 변경
             사항을 포함한 GitHub Release 를 생성하고, npm publish 를 진행한다.
           </li>
@@ -566,7 +566,7 @@ jobs:
         </ol>
         <p>
           <i>
-            <b>NOTE</b>: 이 프로젝트는 <code>husky</code> 와{' '}
+            <b>NOTE</b>: 이 프로젝트는 <code>husky</code> 와{" "}
             <code>commitlint</code> 로 commit 메시지의 형식을 제한하고 있어
             "Release version update" 라는 메시지가 겹칠 일이 없지만, 같은 환경이
             아니라면 조건 설정에 유의해야 한다.

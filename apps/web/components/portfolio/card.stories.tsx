@@ -1,20 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 // Mock Next.js components
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { PortfolioCard, PortfolioCardSkeleton } from '../portfolio/card';
-import ThemeProvider from '../theme/provider';
+import { PortfolioCard, PortfolioCardSkeleton } from "../portfolio/card";
+import ThemeProvider from "../theme/provider";
 
 // Sample data for stories
 const samplePortfolioPost = {
-  slug: 'portfolio-demo',
+  slug: "portfolio-demo",
   metadata: {
-    title: 'E-commerce Redesign Project',
+    title: "E-commerce Redesign Project",
     description:
-      'Complete redesign of an e-commerce platform with Next.js and Tailwind CSS, focusing on performance and conversion optimization.',
-    image: 'https://placehold.co/600x400/e6f7ff/0099cc?text=Portfolio+Image',
-    tags: ['Next.js', 'Tailwind CSS', 'E-commerce'],
-    date: 'January 2024',
+      "Complete redesign of an e-commerce platform with Next.js and Tailwind CSS, focusing on performance and conversion optimization.",
+    image: "https://placehold.co/600x400/e6f7ff/0099cc?text=Portfolio+Image",
+    tags: ["Next.js", "Tailwind CSS", "E-commerce"],
+    date: "January 2024",
   },
 };
 
@@ -45,13 +45,13 @@ const LoadingCardWithTransition = ({ Component, post, delay = 1500 }: any) => {
 };
 
 const meta: Meta<typeof PortfolioCard> = {
-  title: 'Components/Portfolio/Card',
+  title: "Components/Portfolio/Card",
   component: PortfolioCard,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       subtitle:
-        'Card components for displaying blog posts and portfolio items with consistent styling.',
+        "Card components for displaying blog posts and portfolio items with consistent styling.",
     },
   },
   decorators: [
@@ -65,7 +65,7 @@ const meta: Meta<typeof PortfolioCard> = {
       );
     },
   ],
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export default meta;
@@ -82,7 +82,7 @@ export const Default: Story = {
     docs: {
       description: {
         story:
-          'Card component for displaying portfolio projects. Shows title, description, tags, and thumbnail image.',
+          "Card component for displaying portfolio projects. Shows title, description, tags, and thumbnail image.",
       },
     },
   },
@@ -98,7 +98,7 @@ export const Skeleton: Story = {
     docs: {
       description: {
         story:
-          'Loading skeleton for card components, used while content is being fetched.',
+          "Loading skeleton for card components, used while content is being fetched.",
       },
     },
   },
@@ -118,7 +118,7 @@ export const LoadingTransitionExample: Story = {
     docs: {
       description: {
         story:
-          'Cards demonstrating the transition from loading state to loaded content.',
+          "Cards demonstrating the transition from loading state to loaded content.",
       },
     },
   },

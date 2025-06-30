@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
 import {
   HybridTerrainProvider,
   TerrainArea,
   TerrainVisualizer,
-} from '@juun-roh/cesium-utils';
-import { Button } from '@pkg/ui/button';
-import { EllipsoidTerrainProvider, Terrain } from 'cesium';
-import { useEffect, useState } from 'react';
+} from "@juun-roh/cesium-utils";
+import { Button } from "@pkg/ui/button";
+import { EllipsoidTerrainProvider, Terrain } from "cesium";
+import { useEffect, useState } from "react";
 
-import useViewerStore from '@/stores/slices/viewer';
+import useViewerStore from "@/stores/slices/viewer";
 
 export default function TerrainDemo() {
   const { viewer } = useViewerStore();
@@ -48,7 +48,7 @@ export default function TerrainDemo() {
           );
         });
       } catch (error) {
-        console.error('Error setting up terrain:', error);
+        console.error("Error setting up terrain:", error);
       }
     };
 
@@ -72,7 +72,7 @@ export default function TerrainDemo() {
           setIsShowing(visualizer?.visible);
         }}
       >
-        {isShowing ? 'Hide' : 'Show'} Terrain Tiles
+        {isShowing ? "Hide" : "Show"} Terrain Tiles
       </Button>
     </div>
   );

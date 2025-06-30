@@ -1,11 +1,11 @@
-import { Suspense } from 'react';
+import { Suspense } from "react";
 
 import {
   PortfolioCard,
   PortfolioCardSkeleton,
-} from '@/components/portfolio/card';
+} from "@/components/portfolio/card";
 
-import { getPosts } from './portfolio.utils';
+import { getPosts } from "./portfolio.utils";
 
 export default function Portfolio() {
   const posts = getPosts();

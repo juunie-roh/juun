@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Portfolio',
-  description: 'What I have made',
+  title: "Portfolio",
+  description: "What I have made",
 };
 
 export default function PortfolioLayout({

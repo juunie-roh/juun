@@ -1,6 +1,6 @@
-import { Abbr } from '@pkg/ui/abbr';
-import { AspectRatio } from '@pkg/ui/aspect-ratio';
-import { Skeleton } from '@pkg/ui/skeleton';
+import { Abbr } from "@pkg/ui/abbr";
+import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { Skeleton } from "@pkg/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -9,58 +9,58 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@pkg/ui/table';
-import { ExternalLink, Quote } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Fragment, Suspense } from 'react';
+} from "@pkg/ui/table";
+import { ExternalLink, Quote } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Fragment, Suspense } from "react";
 
-import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
+import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
 
 export const metadata = {
-  title: 'Cloud Native Application and MSA',
+  title: "Cloud Native Application and MSA",
   description:
-    'Introduction to the Cloud Native, and considerations of designing cloud native applications.',
-  date: '2025-05-22',
-  tags: ['Cloud Native', 'MSA', 'architecture', 'design'],
-  image: 'https://kubernetes.io/_common-resources/images/flower.svg',
+    "Introduction to the Cloud Native, and considerations of designing cloud native applications.",
+  date: "2025-05-22",
+  tags: ["Cloud Native", "MSA", "architecture", "design"],
+  image: "https://kubernetes.io/_common-resources/images/flower.svg",
 };
 
 const commons: { role: string; cloud: string; android: string }[] = [
   {
-    role: 'Messaging',
-    cloud: 'Message Broker(e.g. Kafka)',
-    android: 'Broadcasting',
+    role: "Messaging",
+    cloud: "Message Broker(e.g. Kafka)",
+    android: "Broadcasting",
   },
   {
-    role: 'Routing / Gateway',
-    cloud: 'API Gateway',
-    android: 'Intent Filter',
+    role: "Routing / Gateway",
+    cloud: "API Gateway",
+    android: "Intent Filter",
   },
   {
-    role: 'Lifecycle Management',
-    cloud: 'Container Orchestration',
-    android: 'Activity Manager',
+    role: "Lifecycle Management",
+    cloud: "Container Orchestration",
+    android: "Activity Manager",
   },
   {
-    role: 'Service Communication',
-    cloud: 'Service Mesh(e.g. Istio)',
-    android: 'Binder IPC',
+    role: "Service Communication",
+    cloud: "Service Mesh(e.g. Istio)",
+    android: "Binder IPC",
   },
   {
-    role: 'Monitoring',
-    cloud: 'Health Checks / Monitoring',
-    android: 'Watchdog / ANR Detection',
+    role: "Monitoring",
+    cloud: "Health Checks / Monitoring",
+    android: "Watchdog / ANR Detection",
   },
   {
-    role: 'Fault Tolerance',
-    cloud: 'Circuit Breaker',
-    android: 'Process Isolation',
+    role: "Fault Tolerance",
+    cloud: "Circuit Breaker",
+    android: "Process Isolation",
   },
   {
-    role: 'Resource Management',
-    cloud: 'Auto Scaling',
-    android: 'Memory Management',
+    role: "Resource Management",
+    cloud: "Auto Scaling",
+    android: "Memory Management",
   },
 ];
 
@@ -131,18 +131,18 @@ export default function CloudNative() {
         </p>
 
         <p>
-          MSA 이전에도 서비스 중심의 설계 방식은 존재했다.{' '}
+          MSA 이전에도 서비스 중심의 설계 방식은 존재했다.{" "}
           <Link
             href="https://redhat.com/en/topics/cloud-native-apps/what-is-service-oriented-architecture"
             target="_blank"
             rel="noopener noreferrer"
           >
             Service-oriented Architecture, SOA
-          </Link>{' '}
+          </Link>{" "}
           가 그 주인공으로, 어플리케이션을 서비스 도메인으로 나누어 설계한다는
           점은 동일하지만 설계의 적용 범위에 차이가 있다. SOA 가 전사적인 범위로
           적용하여 동일한 서비스의 중복 개발을 피하기 위해 사용한다면, MSA 는
-          어플리케이션 범위에서의 서비스를 분할한다.{' '}
+          어플리케이션 범위에서의 서비스를 분할한다.{" "}
           <Abbr title="Enterprise Service Bus">ESB</Abbr> 도입을 통해 공통
           서비스를 엔터프라이즈 수준에서 관리하는 것을 목적으로 하는 SOA 와
           달리, MSA 는 어플리케이션의 서비스를 분할 제공하여 가용성 및 확장성
@@ -184,7 +184,7 @@ export default function CloudNative() {
           recursively breaking down a problem into two or more sub-problems of
           the same or related type until these become simple enough to be solved
           directly. The solutions to the sub-problems are then combined to give
-          a solution to the original problem. -{' '}
+          a solution to the original problem. -{" "}
           <Link
             href="https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm"
             target="_blank"
@@ -200,7 +200,7 @@ export default function CloudNative() {
             rel="noopener noreferrer"
           >
             Red Hat Blog
-          </Link>{' '}
+          </Link>{" "}
           에서는 Cloud Native 가 <i>divide-and-conquer</i> 알고리즘을 원칙으로
           삼는다고 소개한다. 이에 따라 하나의 어플리케이션에 통합되어있던
           서비스들을 나누면서 어플리케이션 업데이트와 서비스 제공을 분리할 수
@@ -230,7 +230,7 @@ export default function CloudNative() {
           >
             pod
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment"
             target="_blank"
@@ -238,7 +238,7 @@ export default function CloudNative() {
           >
             deployment
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset"
             target="_blank"
@@ -246,7 +246,7 @@ export default function CloudNative() {
           >
             replicaset
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/concepts/services-networking/service"
             target="_blank"
@@ -254,7 +254,7 @@ export default function CloudNative() {
           >
             service
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/concepts/services-networking/ingress"
             target="_blank"
@@ -262,7 +262,7 @@ export default function CloudNative() {
           >
             ingress
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/concepts/workloads/controllers/job"
             target="_blank"
@@ -270,7 +270,7 @@ export default function CloudNative() {
           >
             job
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account"
             target="_blank"
@@ -278,48 +278,48 @@ export default function CloudNative() {
           >
             service account
           </Link>
-          ,{' '}
+          ,{" "}
           <Link
             href="https://kubernetes.io/docs/reference/access-authn-authz/rbac"
             target="_blank"
             rel="noopener noreferrer"
           >
             role
-          </Link>{' '}
+          </Link>{" "}
           등)이 늘어나 어플리케이션의 복잡도를 높이는 결과를 초래한다. 개발은
-          물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서{' '}
+          물론 운영 인력에게도 전체 시스템에 대한 높은 이해도가 요구되면서{" "}
           <Abbr title="Development Operations">DevOps</Abbr> 라는 새로운 인력
-          구성 형태가 나타났다. 여기에 보안 관리 인력이 추가된 형태를{' '}
+          구성 형태가 나타났다. 여기에 보안 관리 인력이 추가된 형태를{" "}
           <Abbr title="Development Security Operations">DevSecOps</Abbr> 라고
           한다.
         </p>
 
         <p>
           Cloud Native 의 발전은 현재 진행형이며, Cloud Native 환경 구성을 돕기
-          위한 서드파티 도구들의 개발도 활발하게 진행되는 중이다.{' '}
+          위한 서드파티 도구들의 개발도 활발하게 진행되는 중이다.{" "}
           <Link
             href="https://cncf.io"
             target="_blank"
             rel="noopener noreferrer"
           >
             CNCF <small>(Cloud Native Computing Foundation)</small>
-          </Link>{' '}
-          는 비영리단체인{' '}
+          </Link>{" "}
+          는 비영리단체인{" "}
           <Link
             href="https://linuxfoundation.org"
             target="_blank"
             rel="noopener noreferrer"
           >
             Linux Foundation
-          </Link>{' '}
+          </Link>{" "}
           의 일부로, Cloud Native 를 보편화한다는 목표를 가진 오픈 소스, 벤더
-          중립적 허브이다. <b>Argo</b>{' '}
-          <small>(Continuous Integration & Delivery)</small>, <b>Cilium</b>{' '}
-          <small>(Cloud Native Network)</small>, <b>Harbor</b>{' '}
-          <small>(Container Registry)</small>, <b>Helm</b>{' '}
-          <small>(Application Definition & Image Build)</small>, <b>Istio</b>{' '}
-          <small>(Service Mesh)</small>, <b>Prometheus</b>{' '}
-          <small>(Observability)</small>, <b>Kubernetes</b>{' '}
+          중립적 허브이다. <b>Argo</b>{" "}
+          <small>(Continuous Integration & Delivery)</small>, <b>Cilium</b>{" "}
+          <small>(Cloud Native Network)</small>, <b>Harbor</b>{" "}
+          <small>(Container Registry)</small>, <b>Helm</b>{" "}
+          <small>(Application Definition & Image Build)</small>, <b>Istio</b>{" "}
+          <small>(Service Mesh)</small>, <b>Prometheus</b>{" "}
+          <small>(Observability)</small>, <b>Kubernetes</b>{" "}
           <small>(Scheduling & Orchestration)</small> 등 많은 프로젝트들을 주관
           또는 지원하고 있다.
         </p>
@@ -471,14 +471,14 @@ export default function CloudNative() {
         <h2 className="tracking-tight">Case Studies</h2>
         <p>
           Cloud Native 어플리케이션으로의 Migration 사례는 이미 충분히 많이
-          찾아볼 수 있다. 그 중에서도{' '}
+          찾아볼 수 있다. 그 중에서도{" "}
           <Link
             href="https://cncf.io/case-studies"
             target="_blank"
             rel="noopener noreferrer"
           >
             <b>CNCF Case Studies</b>
-          </Link>{' '}
+          </Link>{" "}
           에서는 주로 CNCF 프로젝트들의 사례를 소개하고 있다.
         </p>
         <ul>
@@ -491,7 +491,7 @@ export default function CloudNative() {
               <b>Netflix</b>
             </Link>
             : Cloud Native 성공 사례로 빠지지 않고 언급되는 Netflix 는 사내 자체
-            개발을 진행하던 <Abbr title="Remote Procedure Call">RPC</Abbr>{' '}
+            개발을 진행하던 <Abbr title="Remote Procedure Call">RPC</Abbr>{" "}
             기술을 <b>gRPC</b> 로 대체, 확장 적용하여 Inter-Service
             Communication 을 발전시키면서 얻은 효과를 소개한다.
           </li>
@@ -505,7 +505,7 @@ export default function CloudNative() {
             </Link>
             : 한국 기업인 카카오도 찾아볼 수 있다. 카카오는 자사의 Kubernetes
             플랫폼에 kube-proxy 와 Nginx Ingress 를 추가하면서 네트워크 문제가
-            발생했는데, <b>Cilium</b> 을{' '}
+            발생했는데, <b>Cilium</b> 을{" "}
             <Abbr title="Container Network Interface">CNI</Abbr> 로 채택하면서
             네트워크 비용을 줄이면서 kube-proxy 를 도입할 필요가 없어졌다.
           </li>

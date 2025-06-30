@@ -1,11 +1,11 @@
-import { ScrollProgressBar } from '@pkg/ui/scroll-progress-bar';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Fragment } from 'react';
+import { ScrollProgressBar } from "@pkg/ui/scroll-progress-bar";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Fragment } from "react";
 
-import { TableOfContents } from '@/components/blog/table-of-contents';
+import { TableOfContents } from "@/components/blog/table-of-contents";
 
-import { getPosts } from '../blog.utils';
+import { getPosts } from "../blog.utils";
 
 // Generate metadata for each slug
 export async function generateMetadata({
@@ -22,8 +22,8 @@ export async function generateMetadata({
   // If post not found, return basic metadata
   if (!post) {
     return {
-      title: 'Project Not Found',
-      description: 'The requested blog post could not be found.',
+      title: "Project Not Found",
+      description: "The requested blog post could not be found.",
     };
   }
 
@@ -34,7 +34,7 @@ export async function generateMetadata({
       post.metadata.description || `Blog post: ${post.metadata.title}`,
     keywords: post.metadata.tags,
     openGraph: {
-      type: 'article',
+      type: "article",
       title: post.metadata.title,
       description:
         post.metadata.description || `Blog post: ${post.metadata.title}`,

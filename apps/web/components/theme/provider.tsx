@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { ThemeProvider as NextThemeProvider } from 'next-themes';
-import { type ComponentProps, useEffect, useState } from 'react';
+import { ThemeProvider as NextThemeProvider } from "next-themes";
+import { type ComponentProps, useEffect, useState } from "react";
 
 export default function Providers({
   children,
@@ -16,7 +16,7 @@ export default function Providers({
   if (!mounted) {
     // Return a div with the same structure but no theme-specific styling
     // This ensures the initial render matches between server and client
-    return <div style={{ visibility: 'hidden' }}>{children}</div>;
+    return <div style={{ visibility: "hidden" }}>{children}</div>;
   }
 
   return (

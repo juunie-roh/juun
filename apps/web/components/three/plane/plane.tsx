@@ -1,12 +1,12 @@
-import type { PlaneProps } from '@react-three/cannon';
-import { usePlane } from '@react-three/cannon';
-import type { Ref } from 'react';
-import type { Group } from 'three';
+import type { PlaneProps } from "@react-three/cannon";
+import { usePlane } from "@react-three/cannon";
+import type { Ref } from "react";
+import type { Group } from "three";
 
 export default function Plane(props: PlaneProps) {
   const [ref] = usePlane(() => ({
-    material: 'ground',
-    type: 'Static',
+    material: "ground",
+    type: "Static",
     ...props,
   }));
   return (

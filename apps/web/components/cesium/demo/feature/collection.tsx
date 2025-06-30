@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import EntityToggler from '@/components/cesium/entity-toggler';
-import useViewerStore from '@/stores/slices/viewer';
+import EntityToggler from "@/components/cesium/entity-toggler";
+import useViewerStore from "@/stores/slices/viewer";
 
 export default function CollectionDemo() {
   const { viewer } = useViewerStore();

@@ -1,9 +1,9 @@
-import { AspectRatio } from '@pkg/ui/aspect-ratio';
-import { Skeleton } from '@pkg/ui/skeleton';
-import type { CanvasProps } from '@react-three/fiber';
-import { lazy, Suspense } from 'react';
+import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { Skeleton } from "@pkg/ui/skeleton";
+import type { CanvasProps } from "@react-three/fiber";
+import { lazy, Suspense } from "react";
 
-const LazyCanvas = lazy(() => import('./canvas'));
+const LazyCanvas = lazy(() => import("./canvas"));
 
 export default function Canvas({ children, ...props }: CanvasProps) {
   return (

@@ -1,5 +1,5 @@
-import { Skeleton } from '@pkg/ui/skeleton';
-import { Fragment } from 'react';
+import { Skeleton } from "@pkg/ui/skeleton";
+import { Fragment } from "react";
 
 export default function BlogItemLoading() {
   return (
@@ -72,7 +72,7 @@ export default function BlogItemLoading() {
         <div className="sticky left-0 top-1/4 max-w-64">
           <div className="w-full overflow-auto rounded-lg bg-card py-4 text-sm">
             <div className="mb-4 px-6">
-              <Skeleton className="h-4 w-32" />{' '}
+              <Skeleton className="h-4 w-32" />{" "}
             </div>
             <nav className="max-h-[50vh] overflow-hidden overflow-y-auto px-3">
               <div className="space-y-2">

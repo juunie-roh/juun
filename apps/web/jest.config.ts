@@ -3,9 +3,9 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type { Config } from 'jest';
-import nextJest from 'next/jest.js';
-import type { JestConfigWithTsJest } from 'ts-jest';
+import type { Config } from "jest";
+import nextJest from "next/jest.js";
+import type { JestConfigWithTsJest } from "ts-jest";
 
 /**
  * This creates Jest configuration for next automatically including:
@@ -19,32 +19,32 @@ import type { JestConfigWithTsJest } from 'ts-jest';
  */
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
+  dir: "./",
 });
 
 const customConfig: JestConfigWithTsJest = {
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
-    '^@/public/(.*)$': '<rootDir>/public/$1',
-    '^__mocks__/(.*)$': '<rootDir>/../../__mocks__/$1',
-    '.+\\.(svg)$': '<rootDir>/__mocks__/fileMock.js',
-    '^lucide-react%': '<rootDir>/__mocks__/lucide-react.jsx',
+    "^@/(.*)$": "<rootDir>/$1",
+    "^@/public/(.*)$": "<rootDir>/public/$1",
+    "^__mocks__/(.*)$": "<rootDir>/../../__mocks__/$1",
+    ".+\\.(svg)$": "<rootDir>/__mocks__/fileMock.js",
+    "^lucide-react%": "<rootDir>/__mocks__/lucide-react.jsx",
   },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   clearMocks: true,
   collectCoverage: true,
   collectCoverageFrom: [
-    './**/*.{js,jsx,ts,tsx}',
-    '!/**/_*.{js,jsx,ts,tsx}',
-    '!**/.next/**',
-    '!**/coverage/**',
-    '!.storybook/*',
-    '!**/*.stories.{js,jsx,ts,tsx}',
-    '!**/*.config.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
+    "./**/*.{js,jsx,ts,tsx}",
+    "!/**/_*.{js,jsx,ts,tsx}",
+    "!**/.next/**",
+    "!**/coverage/**",
+    "!.storybook/*",
+    "!**/*.stories.{js,jsx,ts,tsx}",
+    "!**/*.config.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
   ],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: "jest-environment-jsdom",
 };
 
 export default createJestConfig(customConfig as Config);

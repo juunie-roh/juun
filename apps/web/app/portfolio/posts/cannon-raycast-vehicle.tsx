@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Label } from '@pkg/ui/label';
-import { Switch } from '@pkg/ui/switch';
-import { Fragment, lazy, useState } from 'react';
+import { Label } from "@pkg/ui/label";
+import { Switch } from "@pkg/ui/switch";
+import { Fragment, lazy, useState } from "react";
 
-const CannonVehicle = lazy(() => import('@/components/three/cannon-vehicle'));
+const CannonVehicle = lazy(() => import("@/components/three/cannon-vehicle"));
 
 export const metadata = {
-  title: 'Three Cannon Raycast Vehicle Example',
-  description: 'Three js Vehicle Demonstration with Cannon physics applied',
-  date: '2024-04-20',
-  tags: ['Next.js', 'Three.js', '3D', 'Cannon'],
-  image: '/images/cannon-raycast-vehicle.png',
+  title: "Three Cannon Raycast Vehicle Example",
+  description: "Three js Vehicle Demonstration with Cannon physics applied",
+  date: "2024-04-20",
+  tags: ["Next.js", "Three.js", "3D", "Cannon"],
+  image: "/images/cannon-raycast-vehicle.png",
 };
 
 export default function CannonRaycastVehicle() {

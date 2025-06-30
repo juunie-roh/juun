@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
 import {
   type BoxProps,
   useBox,
   useRaycastVehicle,
   type WheelInfoOptions,
-} from '@react-three/cannon';
-import { useFrame } from '@react-three/fiber';
-import { type Ref, useRef } from 'react';
-import type { Group, Object3D } from 'three';
+} from "@react-three/cannon";
+import { useFrame } from "@react-three/fiber";
+import { type Ref, useRef } from "react";
+import type { Group, Object3D } from "three";
 
-import { useControls } from '@/hooks/use-controls';
+import { useControls } from "@/hooks/use-controls";
 
-import { Chassis } from './chassis';
-import { Wheel } from './wheel';
+import { Chassis } from "./chassis";
+import { Wheel } from "./wheel";
 
 export type VehicleProps = Required<
-  Pick<BoxProps, 'angularVelocity' | 'position' | 'rotation'>
+  Pick<BoxProps, "angularVelocity" | "position" | "rotation">
 > & {
   back?: number;
   force?: number;
@@ -93,7 +93,7 @@ function Vehicle({
       angularVelocity,
       args: [1.7, 1, 4],
       mass: 500,
-      onCollide: (e) => console.log('bonk', e.body.userData),
+      onCollide: (e) => console.log("bonk", e.body.userData),
       position,
       rotation,
     }),

@@ -1,11 +1,11 @@
-import { Cartesian3, Math as CMath } from 'cesium';
+import { Cartesian3, Math as CMath } from "cesium";
 
-import { ApiFeatureOption } from '@/components/cesium/types';
+import { ApiFeatureOption } from "@/components/cesium/types";
 
 export const API_FEATURE_OPTIONS: ApiFeatureOption[] = [
   {
-    feat: 'collection',
-    label: 'Collection',
+    feat: "collection",
+    label: "Collection",
     flyTo: {
       destination: new Cartesian3(
         -3964624.632297504,
@@ -20,8 +20,8 @@ export const API_FEATURE_OPTIONS: ApiFeatureOption[] = [
     },
   },
   {
-    feat: 'terrain',
-    label: 'Terrain',
+    feat: "terrain",
+    label: "Terrain",
     flyTo: {
       destination: new Cartesian3(
         -3046596.558550092,
@@ -36,11 +36,11 @@ export const API_FEATURE_OPTIONS: ApiFeatureOption[] = [
     },
   },
   {
-    feat: 'viewer',
-    label: 'Viewer',
+    feat: "viewer",
+    label: "Viewer",
   },
   {
-    feat: 'highlight',
-    label: 'Highlight',
+    feat: "highlight",
+    label: "Highlight",
   },
 ];

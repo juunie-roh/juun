@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { cn } from '@pkg/ui/lib/utils';
-import { useEffect, useRef } from 'react';
+import { cn } from "@pkg/ui/lib/utils";
+import { useEffect, useRef } from "react";
 
 interface ScrollProgressBarProps {
   /**
@@ -43,7 +43,7 @@ export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
 
       // Update ARIA attributes for accessibility
       progressBar.setAttribute(
-        'aria-valuenow',
+        "aria-valuenow",
         Math.round(progress).toString(),
       );
     };
@@ -64,16 +64,16 @@ export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
     updateProgress();
 
     // Add event listeners
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', updateProgress, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateProgress, { passive: true });
 
     // Clean up
     return () => {
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', updateProgress);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateProgress);
     };
   }, []);
 
@@ -81,8 +81,8 @@ export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
     <div className="fixed inset-x-0 top-0 z-50 h-1 bg-transparent">
       <div
         ref={progressBarRef}
-        className={cn('h-full bg-primary', className)}
-        style={{ width: '0%' }}
+        className={cn("h-full bg-primary", className)}
+        style={{ width: "0%" }}
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={100}

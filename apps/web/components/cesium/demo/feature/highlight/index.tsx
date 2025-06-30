@@ -3,13 +3,15 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@pkg/ui/accordion';
-import { Skeleton } from '@pkg/ui/skeleton';
-import { lazy, Suspense } from 'react';
+} from "@pkg/ui/accordion";
+import { Skeleton } from "@pkg/ui/skeleton";
+import { lazy, Suspense } from "react";
 
-const MouseEventHighlight = lazy(() => import('./mouse-event'));
-const PolygonHighlight = lazy(() => import('./polygon'));
-const SilhouetteHighlight = lazy(() => import('./silhouette'));
+import ModelEntity from "./model-entity";
+
+const MouseEventHighlight = lazy(() => import("./mouse-event"));
+const PolygonHighlight = lazy(() => import("./polygon"));
+const SilhouetteHighlight = lazy(() => import("./silhouette"));
 
 export default function HighlightDemo() {
   return (
@@ -28,6 +30,14 @@ export default function HighlightDemo() {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
+        <AccordionTrigger>Model Entity</AccordionTrigger>
+        <AccordionContent>
+          <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+            <ModelEntity />
+          </Suspense>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
         <AccordionTrigger>Mouse Event</AccordionTrigger>
         <AccordionContent>
           <Suspense fallback={<Skeleton className="h-10 w-full" />}>
@@ -35,8 +45,8 @@ export default function HighlightDemo() {
           </Suspense>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>3D Tileset</AccordionTrigger>
+      <AccordionItem value="item-4">
+        <AccordionTrigger>3D Tile Feature</AccordionTrigger>
         <AccordionContent>
           <Suspense fallback={<Skeleton className="h-10 w-full" />}>
             <SilhouetteHighlight />
