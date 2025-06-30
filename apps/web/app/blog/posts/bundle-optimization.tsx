@@ -1,7 +1,7 @@
-import { Abbr } from '@pkg/ui/abbr';
-import { AspectRatio } from '@pkg/ui/aspect-ratio';
-import { CodeBlock } from '@pkg/ui/code-block';
-import { Skeleton } from '@pkg/ui/skeleton';
+import { Abbr } from "@pkg/ui/abbr";
+import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { CodeBlock } from "@pkg/ui/code-block";
+import { Skeleton } from "@pkg/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -10,33 +10,33 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@pkg/ui/table';
-import { ExternalLink, Quote } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Fragment, Suspense } from 'react';
+} from "@pkg/ui/table";
+import { ExternalLink, Quote } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Fragment, Suspense } from "react";
 
-import { BlogHeader, BlogHeaderSkeleton } from '@/components/blog/header';
+import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
 
 export const metadata = {
-  title: 'Bundle Optimization',
+  title: "Bundle Optimization",
   description:
-    'Module bundle optimization using various methods. Such as Next bundle analyzer, React lazy, dynamic import, lightweight library variant, and separate module imports.',
-  date: '2025-06-23',
+    "Module bundle optimization using various methods. Such as Next bundle analyzer, React lazy, dynamic import, lightweight library variant, and separate module imports.",
+  date: "2025-06-23",
   tags: [
-    'bundle',
-    'optimization',
-    'npm',
-    'performance',
-    'analyzer',
-    'NextJS',
-    'module',
-    'bundler',
-    'webpack',
-    'vite',
-    'tree-shaking',
+    "bundle",
+    "optimization",
+    "npm",
+    "performance",
+    "analyzer",
+    "NextJS",
+    "module",
+    "bundler",
+    "webpack",
+    "vite",
+    "tree-shaking",
   ],
-  image: '/images/logo/webpack-light.svg',
+  image: "/images/logo/webpack-light.svg",
 };
 
 export default function BundleOptimization() {
@@ -70,14 +70,14 @@ export default function BundleOptimization() {
           바꿔 불러오는 시점을 조절할 수는 있지만, module 자체를 경량화하는
           것과는 거리가 멀다. 이는 module 의 불필요한 모든 부분까지
           전송/다운로드 과정을 거쳐야 하는 문제를 발생시키며, 사용자 경험의
-          척도가 되는{' '}
+          척도가 되는{" "}
           <Link href="https://web.dev/articles/fcp?hl=ko">
             First Contentful Paint (FCP)
-          </Link>{' '}
+          </Link>{" "}
           시간이 늘어나는 결과를 초래한다.
         </p>
         <p>
-          <Link href="https://webpack.kr">webpack</Link> 과{' '}
+          <Link href="https://webpack.kr">webpack</Link> 과{" "}
           <Link href="https://ko.vite.dev">vite</Link> 로 대표되는 module
           bundler 는 몇 가지 방법을 통해 이 문제를 해결해준다.
         </p>
@@ -157,7 +157,7 @@ export { Button, Card, Calendar, CodeBlock, ... };
           <Link href="https://npmjs.com/package/webpack-bundle-analyzer">
             webpack-bundle-analyzer
           </Link>
-          {', '}
+          {", "}
           <Link href="https://npmjs.com/package/vite-bundle-visualizer">
             vite-bundle-visualizer
           </Link>
@@ -185,10 +185,10 @@ export { Button, Card, Calendar, CodeBlock, ... };
 
         <h3 className="tracking-tight">Next Bundle Analyzer</h3>
         <p>
-          이 프로젝트에서 사용하고 있는{' '}
+          이 프로젝트에서 사용하고 있는{" "}
           <Link href="https://www.npmjs.com/package/@next/bundle-analyzer">
             @next/bundle-analyzer
-          </Link>{' '}
+          </Link>{" "}
           는 큰 설정 변화 없이 추가 가능하다.
         </p>
         <CodeBlock
@@ -230,7 +230,7 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
 }`}
         />
         <p>
-          마지막으로, 걸어둔 조건에 맞춰 실행시키는 스크립트를{' '}
+          마지막으로, 걸어둔 조건에 맞춰 실행시키는 스크립트를{" "}
           <code>package.json</code> 에 추가해주면 번들을 확인하고자 할 때만
           선택적으로 bundle analyzer 를 포함시켜 build 하는 프로세스를 만들 수
           있다. 지정한 스크립트를 실행하면, <code>.next/analyze/</code> 디렉토리
@@ -273,10 +273,10 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
         <p>
           Module Bundler 는 앞서 언급했듯 자체적으로 스크립트의 크기를
           줄여주지만, 그럼에도 스크립트 크기가 크거나 여전히 불필요한 스크립트가
-          남아있을 수 있다. 이 글을 호스트하는{' '}
+          남아있을 수 있다. 이 글을 호스트하는{" "}
           <Link href="https://github.com/juunie-roh/juun">웹 프로젝트</Link>는
           웹 3D 데모(
-          <Link href="/cesium-utils">Cesium Utils</Link>,{' '}
+          <Link href="/cesium-utils">Cesium Utils</Link>,{" "}
           <Link href="/portfolio/cannon-raycast-vehicle">Three.js</Link>) 를
           겸하고 있는데, 해당 페이지를 방문하지 않는 사용자도 관련 코드 번들을
           다운받게 되는 등의 문제가 발생했다. 이런 추가적인 문제들을 해결하는
@@ -285,19 +285,19 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
 
         <h3 className="tracking-tight">1. React.lazy & Dynamic Import</h3>
         <p>
-          그 첫 번째 방법으로는{' '}
+          그 첫 번째 방법으로는{" "}
           <Link href="https://ko.react.dev/reference/react/lazy">
             React.lazy
-          </Link>{' '}
-          와{' '}
+          </Link>{" "}
+          와{" "}
           <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import">
             Dynamic Import
-          </Link>{' '}
+          </Link>{" "}
           가 있다. React.lazy 는 parameter 로 받은 코드의 실행을 컴포넌트 로드
-          전까지 지연시키는,{' '}
+          전까지 지연시키는,{" "}
           <Link href="https://ko.react.dev/reference/react/Suspense">
             Suspense
-          </Link>{' '}
+          </Link>{" "}
           와 함께 사용되는 React API 이다. Dynamic Import 는 파일 최상단에
           선언하는 import 와 달리, module 을 비동기 및 동적으로 로드할 수 있도록
           하는 문법이다.
@@ -309,7 +309,7 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
           mdn web docs
         </blockquote>
         <p>
-          설명으로 짐작할 수 있는데, 이 둘의 조합은{' '}
+          설명으로 짐작할 수 있는데, 이 둘의 조합은{" "}
           <b>
             <i>컴포넌트 로드 전까지 module import 를 지연</i>
           </b>
@@ -390,7 +390,7 @@ export type { ViewerProps };`}
         </p>
         <p>
           <b>주의</b>: 특정 module 을 분리하려면 모든 static page 에서 direct
-          import 가 없어야 한다. 즉, 해당 module 을 사용하는{' '}
+          import 가 없어야 한다. 즉, 해당 module 을 사용하는{" "}
           <b>
             <i>모든 컴포넌트</i>
           </b>
@@ -401,7 +401,7 @@ export type { ViewerProps };`}
         <p>
           다음은 <Link href="#barrel">위</Link>
           에서 잠깐 언급했던 barrel exports 이다. 먼저 barrel exports 란, 여러
-          파일에 흩어져있는 export 를 <code>{'index'}</code> 라는 이름을 갖는
+          파일에 흩어져있는 export 를 <code>{"index"}</code> 라는 이름을 갖는
           entry point 에 모아 한 번에 관리하는 것을 말한다. Barrel exports 를
           사용하면 코드 가독성을 높일 수 있는 장점이 있지만 번들 크기 측면에서는
           치명적일 수 있다. 번들은 entry point 에서 import 하는 모든 module 을
@@ -431,8 +431,8 @@ export {
         />
         <p>
           이 프로젝트에서는 monorepo 구조로 기본 ui 컴포넌트를 분리해놓았는데,
-          모든 컴포넌트를 Barrel Exports 로 정리했더니 모든 페이지의{' '}
-          <Abbr title="최초 로드에 필요한 JavaScript">First Load JS</Abbr>{' '}
+          모든 컴포넌트를 Barrel Exports 로 정리했더니 모든 페이지의{" "}
+          <Abbr title="최초 로드에 필요한 JavaScript">First Load JS</Abbr>{" "}
           용량이 2MB 를 넘어가는 상황이 발생했다. 실제로 entry point 를 거치지
           않고 컴포넌트를 개별로 import 했더니 홈페이지(<code>/</code>)의 First
           Load JS 크기가 2.53MB → 853kB, 66% 감소한 것을 확인할 수 있었다.
@@ -442,10 +442,10 @@ export {
           3. Using Lightweight Library Variants
         </h3>
         <p>
-          프로젝트의 ui 컴포넌트 중 <code>CodeBlock</code> 에서 사용한{' '}
+          프로젝트의 ui 컴포넌트 중 <code>CodeBlock</code> 에서 사용한{" "}
           <Link href="https://www.npmjs.com/package/react-syntax-highlighter">
             <code>react-syntax-highlighter</code>
-          </Link>{' '}
+          </Link>{" "}
           는 지원하는 프로그래밍 언어가 약 200 개를 넘어가며 First Load JS 에서
           큰 부분을 차지하고 있었다. 10 개 남짓을 사용하고 있는 본
           프로젝트에서는 그렇게 많은 언어를 모두 포함할 필요는 없다. 마침 해당
@@ -609,15 +609,15 @@ SyntaxHighlighter.registerLanguage('tsx', tsx);
             >
               <ExternalLink size={12} />
               @juun-roh/cesium-utils
-            </Link>{' '}
+            </Link>{" "}
             package.json: exports
           </small>
         </p>
         <p className="mt-2">
-          기능에 필요한 module 만 import 하게끔 entry point 를 생성하고,{' '}
+          기능에 필요한 module 만 import 하게끔 entry point 를 생성하고,{" "}
           <Link href="/blog/npm-packages#package-json-structure">
             package.json 구조
-          </Link>{' '}
+          </Link>{" "}
           중에서 exports 의 경로를 구체적으로 명시하는 것으로 modular export 를
           달성할 수 있다.
         </p>

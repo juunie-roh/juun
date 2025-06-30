@@ -11,7 +11,7 @@ export const baseRules = {
   'prettier/prettier': [
     'error',
     {
-      singleQuote: true,
+      singleQuote: false,
       endOfLine: 'auto',
     },
   ],

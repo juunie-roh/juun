@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Blog',
-  description: 'Records of used technologies',
+  title: "Blog",
+  description: "Records of used technologies",
 };
 
 export default function BlogLayout({

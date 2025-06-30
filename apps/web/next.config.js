@@ -1,25 +1,25 @@
-import NextBundleAnalyzer from '@next/bundle-analyzer';
-import webpack from 'webpack';
+import NextBundleAnalyzer from "@next/bundle-analyzer";
+import webpack from "webpack";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config, options) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: ["@svgr/webpack"],
     });
     config.resolve.fallback = { fs: false };
 
     config.plugins.push(
       new webpack.DefinePlugin({
-        CESIUM_BASE_URL: JSON.stringify('/cesium'),
+        CESIUM_BASE_URL: JSON.stringify("/cesium"),
       }),
     );
 
     if (!options.dev) {
       config.devtool = options.isServer
         ? false
-        : 'eval-cheap-module-source-map';
+        : "eval-cheap-module-source-map";
     }
 
     return config;
@@ -27,19 +27,19 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  output: 'standalone',
+  output: "standalone",
   experimental: {
     // externalDir: true,
     // The serverActions value needs to be an object, not a boolean
     serverActions: {
-      allowedOrigins: ['*'],
+      allowedOrigins: ["*"],
     },
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ["lucide-react"],
   },
-  transpilePackages: ['@pkg/ui', '@pkg/config'],
+  transpilePackages: ["@pkg/ui", "@pkg/config"],
 };
 
-const analyze = process.env.ANALYZE === 'true';
+const analyze = process.env.ANALYZE === "true";
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: analyze,
 });

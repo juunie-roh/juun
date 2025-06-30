@@ -1,6 +1,6 @@
-import { AspectRatio } from '@pkg/ui/aspect-ratio';
-import { Badge } from '@pkg/ui/badge';
-import { Button } from '@pkg/ui/button';
+import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { Badge } from "@pkg/ui/badge";
+import { Button } from "@pkg/ui/button";
 import {
   Card,
   CardContent,
@@ -8,21 +8,21 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@pkg/ui/card';
-import { CodeBlock } from '@pkg/ui/code-block';
-import { ChevronRight, Code, ExternalLink, Package } from 'lucide-react';
-import Link from 'next/link';
+} from "@pkg/ui/card";
+import { CodeBlock } from "@pkg/ui/code-block";
+import { ChevronRight, Code, ExternalLink, Package } from "lucide-react";
+import Link from "next/link";
 
-import EntityToggler from '@/components/cesium/entity-toggler';
-import Viewer from '@/components/cesium/viewer';
+import EntityToggler from "@/components/cesium/entity-toggler";
+import Viewer from "@/components/cesium/viewer";
 
 export const metadata = {
-  title: 'Cesium Utils Intro',
+  title: "Cesium Utils Intro",
   description:
-    'An Introduction of utility library for CesiumJS that simplifies working with Cesium instances.',
-  date: '2025-05-13',
-  tags: ['CesiumJS', '3D', 'GIS', 'npm'],
-  image: 'https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg',
+    "An Introduction of utility library for CesiumJS that simplifies working with Cesium instances.",
+  date: "2025-05-13",
+  tags: ["CesiumJS", "3D", "GIS", "npm"],
+  image: "https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg",
 };
 
 // Example code snippets for usage demonstration
@@ -131,7 +131,7 @@ export default function CesiumUtilsIntro() {
           What is Cesium Utils?
         </h2>
         <p>
-          <code>@juun-roh/cesium-utils</code> is a utility library that extends{' '}
+          <code>@juun-roh/cesium-utils</code> is a utility library that extends{" "}
           <Link href="https://cesium.com">CesiumJS</Link> with abstractions and
           helper functions. It simplifies common tasks when building 3D
           geo-spatial applications, addressing pain points that I've encountered
@@ -315,7 +315,7 @@ export default function CesiumUtilsIntro() {
         <div className="prose max-w-none text-primary">
           <h2 className="text-2xl font-bold tracking-tight">Getting Started</h2>
           <p>
-            Follow these steps to integrate <code>@juun-roh/cesium-utils</code>{' '}
+            Follow these steps to integrate <code>@juun-roh/cesium-utils</code>{" "}
             into your project and start using its features.
           </p>
         </div>
@@ -335,13 +335,13 @@ export default function CesiumUtilsIntro() {
             <CodeBlock fileName="bash" code="npm install cesium" />
             <p className="mt-4 text-muted-foreground">
               You'll also need to ensure that CesiumJS assets are properly
-              loaded in your application. Follow the{' '}
+              loaded in your application. Follow the{" "}
               <Link
                 href="https://cesium.com/learn/cesiumjs-learn/cesiumjs-quickstart/"
                 className="text-primary hover:underline"
               >
                 official CesiumJS setup guide
-              </Link>{' '}
+              </Link>{" "}
               if you haven't already set up CesiumJS.
             </p>
           </div>

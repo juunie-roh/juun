@@ -1,17 +1,17 @@
-import { createIcon } from '@/utils/svg.utils';
+import { createIcon } from "@/utils/svg.utils";
 
-import SvgBuildingLibrary from './building-library.svg';
-import SvgCityPlan from './city-plan.svg';
-import SvgInfoCircleOutlined from './info-circle-outlined.svg';
+import SvgBuildingLibrary from "./building-library.svg";
+import SvgCityPlan from "./city-plan.svg";
+import SvgInfoCircleOutlined from "./info-circle-outlined.svg";
 
 export const InfoCircleOutlined = createIcon(
-  'InfoCircleOutlined',
+  "InfoCircleOutlined",
   SvgInfoCircleOutlined,
 );
 
-export const CityPlan = createIcon('CityPlan', SvgCityPlan);
+export const CityPlan = createIcon("CityPlan", SvgCityPlan);
 
 export const BuildingLibrary = createIcon(
-  'BuildingLibrary',
+  "BuildingLibrary",
   SvgBuildingLibrary,
 );

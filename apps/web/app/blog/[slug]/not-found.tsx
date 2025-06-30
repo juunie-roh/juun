@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Button } from '@pkg/ui/button';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { Button } from "@pkg/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function BlogItemError() {
   return (

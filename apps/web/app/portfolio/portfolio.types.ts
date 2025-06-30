@@ -1,3 +1,3 @@
-import { BaseMetadata } from '@/types/post.types';
+import { BaseMetadata } from "@/types/post.types";
 
 export type PortfolioMetadata = BaseMetadata;

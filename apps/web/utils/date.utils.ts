@@ -6,12 +6,12 @@
  */
 export function formatDateSafe(
   date: Date | string | undefined | null,
-  locale: string = 'en-US',
+  locale: string = "en-US",
 ): string {
-  if (!date) return '';
+  if (!date) return "";
 
   // If it's already a string, try to parse it first
-  if (typeof date === 'string') {
+  if (typeof date === "string") {
     const parsedDate = parseDate(date);
     // If parsing fails, return the original string
     if (!parsedDate) return date;
@@ -27,14 +27,14 @@ export function formatDateSafe(
  * @param locale The locale to use for formatting (default: 'en-US')
  * @returns A string in the format "Month YYYY"
  */
-export function formatDate(date: Date, locale: string = 'en-US'): string {
+export function formatDate(date: Date, locale: string = "en-US"): string {
   if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
-    return '';
+    return "";
   }
 
   const options: Intl.DateTimeFormatOptions = {
-    month: 'long',
-    year: 'numeric',
+    month: "long",
+    year: "numeric",
   };
   return date.toLocaleDateString(locale, options);
 }
@@ -71,18 +71,18 @@ export function parseDate(dateString: string): Date | null {
 
     // Map month names to month numbers
     const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
 
     const monthIndex = months.findIndex((m) => m === month);

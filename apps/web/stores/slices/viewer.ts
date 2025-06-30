@@ -1,8 +1,8 @@
-import type { Viewer } from 'cesium';
-import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import type { Viewer } from "cesium";
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
-import { logger } from '@/stores/middleware/logger';
+import { logger } from "@/stores/middleware/logger";
 
 interface ViewerState {
   viewer: Viewer | undefined;
@@ -18,16 +18,16 @@ const useViewerStore = create<ViewerState>()(
     logger(
       (set, _get) => ({
         viewer: undefined,
-        setViewer: (viewer) => set({ viewer }, false, { type: 'viewer/set' }),
+        setViewer: (viewer) => set({ viewer }, false, { type: "viewer/set" }),
         removeViewer: () =>
-          set({ viewer: undefined }, false, { type: 'viewer/remove' }),
+          set({ viewer: undefined }, false, { type: "viewer/remove" }),
         isFlying: undefined,
         setIsFlying: (isFlying) =>
-          set({ isFlying }, false, { type: 'viewer/isFlying' }),
+          set({ isFlying }, false, { type: "viewer/isFlying" }),
       }),
-      'viewer-store',
+      "viewer-store",
     ),
-    { name: 'Cesium Viewer Store' },
+    { name: "Cesium Viewer Store" },
   ),
 );
 

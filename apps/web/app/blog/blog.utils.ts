@@ -1,9 +1,9 @@
-import path from 'path';
+import path from "path";
 
-import type { Post } from '@/types/post.types';
-import { extractBaseMetadata, getPostsFromDirectory } from '@/utils/post.utils';
+import type { Post } from "@/types/post.types";
+import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post.utils";
 
-import { BlogMetadata } from './blog.types';
+import { BlogMetadata } from "./blog.types";
 
 /**
  * Extract blog-specific metadata including word count
@@ -22,10 +22,10 @@ function extractBlogMetadata(filePath: string): BlogMetadata {
 
     // Clean up the content to remove JSX/HTML tags and code blocks
     const cleanedContent = postContent
-      .replace(/<[^>]*>/g, ' ') // Remove HTML/JSX tags
-      .replace(/\{\/\*[\s\S]*?\*\/\}/g, ' ') // Remove JS comments
-      .replace(/```[\s\S]*?```/g, ' ') // Remove code blocks
-      .replace(/import.*?from.*?;/g, ' '); // Remove import statements
+      .replace(/<[^>]*>/g, " ") // Remove HTML/JSX tags
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, " ") // Remove JS comments
+      .replace(/```[\s\S]*?```/g, " ") // Remove code blocks
+      .replace(/import.*?from.*?;/g, " "); // Remove import statements
 
     // Count words (split by whitespace)
     const words = cleanedContent.split(/\s+/).filter(Boolean);
@@ -39,7 +39,7 @@ function extractBlogMetadata(filePath: string): BlogMetadata {
  * @returns Array of posts
  */
 export function getPosts(sortDescending = true): Post<BlogMetadata>[] {
-  const postsDir = path.join(process.cwd(), 'app', 'blog', 'posts');
+  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
   return getPostsFromDirectory<BlogMetadata>(
     postsDir,
     extractBlogMetadata,
@@ -61,15 +61,15 @@ export function getIdFromHeading(heading: Element): string {
   // Otherwise, generate an id from the heading text
   const id = heading.textContent
     ?.toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
   // Set the id on the heading element
   if (id) {
     heading.id = id;
   }
 
-  return id || '';
+  return id || "";
 }
 
 export type Heading = {
@@ -99,7 +99,7 @@ export function getHeadings(
 
     return {
       id,
-      text: element.textContent || '',
+      text: element.textContent || "",
       level,
       element,
     };

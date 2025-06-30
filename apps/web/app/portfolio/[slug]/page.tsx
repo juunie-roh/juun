@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { getPosts } from '../portfolio.utils';
+import { getPosts } from "../portfolio.utils";
 
 // Generate metadata for each slug
 export async function generateMetadata({
@@ -19,8 +19,8 @@ export async function generateMetadata({
   // If post not found, return basic metadata
   if (!post) {
     return {
-      title: 'Project Not Found',
-      description: 'The requested portfolio project could not be found.',
+      title: "Project Not Found",
+      description: "The requested portfolio project could not be found.",
     };
   }
 
@@ -31,7 +31,7 @@ export async function generateMetadata({
       post.metadata.description || `Portfolio project: ${post.metadata.title}`,
     keywords: post.metadata.tags,
     openGraph: {
-      type: 'article',
+      type: "article",
       title: post.metadata.title,
       description:
         post.metadata.description ||

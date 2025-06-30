@@ -1,9 +1,9 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-import type { BaseMetadata, Post } from '@/types/post.types';
-import { sortPostsByDate } from '@/utils/compare.utils';
-import { parseDate } from '@/utils/date.utils';
+import type { BaseMetadata, Post } from "@/types/post.types";
+import { sortPostsByDate } from "@/utils/compare.utils";
+import { parseDate } from "@/utils/date.utils";
 
 /**
  * Extract common metadata properties from a file
@@ -17,14 +17,14 @@ export function extractBaseMetadata<T extends BaseMetadata>(
   additionalExtractors?: (content: string, metadata: T) => void,
 ): T {
   try {
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
 
     // Default metadata with filename-based title as fallback
     const fileName = path.basename(filePath, path.extname(filePath));
     const defaultTitle = fileName
-      .split('-')
+      .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(" ");
 
     const metadata = { title: defaultTitle } as T;
 
@@ -64,7 +64,7 @@ export function extractBaseMetadata<T extends BaseMetadata>(
     if (tagsMatch && tagsMatch[1]) {
       const tagsString = tagsMatch[1];
       const tags = tagsString
-        .split(',')
+        .split(",")
         .map((tag) => {
           // Extract just the text between quotes
           const match = tag.match(/['"`](.+?)['"`]/);
@@ -112,7 +112,7 @@ export function getPostsFromDirectory<T extends BaseMetadata>(
 
     const files = fs
       .readdirSync(postsDir)
-      .filter((file) => path.extname(file) === '.tsx');
+      .filter((file) => path.extname(file) === ".tsx");
 
     // Convert files to posts
     const posts = files.map((file) => {

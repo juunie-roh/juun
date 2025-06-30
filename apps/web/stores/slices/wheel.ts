@@ -1,8 +1,8 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-import { logger } from '@/stores/middleware/logger';
+import { logger } from "@/stores/middleware/logger";
 
-export type WheelType = 'four' | 'five' | 'confirm';
+export type WheelType = "four" | "five" | "confirm";
 
 interface WheelState {
   type: WheelType;
@@ -22,7 +22,7 @@ interface WheelState {
 export const useWheelStore = create<WheelState>()(
   logger(
     (set) => ({
-      type: 'confirm',
+      type: "confirm",
       active: false,
       isShowing: false,
       x: 0,
@@ -35,6 +35,6 @@ export const useWheelStore = create<WheelState>()(
       position: ({ x, y }) => set(() => ({ x, y })),
       select: (menu) => set(() => ({ selected: menu })),
     }),
-    'wheel-store',
+    "wheel-store",
   ),
 );

@@ -1,10 +1,10 @@
-import config from '@config/eslint';
+import config from "@config/eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 const extendedConfig = [
   ...config,
   {
-    ignores: ['apps/*', 'packages/*'],
+    ignores: ["apps/*", "packages/*"],
   },
 ];
 

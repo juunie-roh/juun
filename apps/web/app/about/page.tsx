@@ -1,5 +1,5 @@
-import { Badge } from '@pkg/ui/badge';
-import { Button } from '@pkg/ui/button';
+import { Badge } from "@pkg/ui/badge";
+import { Button } from "@pkg/ui/button";
 import {
   Card,
   CardContent,
@@ -7,15 +7,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@pkg/ui/card';
-import { LogoAvatar } from '@pkg/ui/logo-avatar';
-import { Separator } from '@pkg/ui/separator';
-import { Hexagon, Package, Zap } from 'lucide-react';
-import Link from 'next/link';
+} from "@pkg/ui/card";
+import { LogoAvatar } from "@pkg/ui/logo-avatar";
+import { Separator } from "@pkg/ui/separator";
+import { Hexagon, Package, Zap } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
-  title: 'About',
-  description: 'About this project and its technologies',
+  title: "About",
+  description: "About this project and its technologies",
 };
 
 export default function AboutPage() {
@@ -72,8 +72,8 @@ export default function AboutPage() {
                     ├── <span className="text-blue-500">apps/</span>
                   </p>
                   <p>
-                    │&nbsp;&nbsp; └──{' '}
-                    <span className="text-blue-500">web/</span>{' '}
+                    │&nbsp;&nbsp; └──{" "}
+                    <span className="text-blue-500">web/</span>{" "}
                     <span className="text-muted-foreground">
                       # Next.js application
                     </span>
@@ -82,15 +82,15 @@ export default function AboutPage() {
                     └── <span className="text-blue-500">packages/</span>
                   </p>
                   <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp; ├──{' '}
-                    <span className="text-blue-500">config/</span>{' '}
+                    &nbsp;&nbsp;&nbsp;&nbsp; ├──{" "}
+                    <span className="text-blue-500">config/</span>{" "}
                     <span className="text-muted-foreground">
                       # Shared configuration
                     </span>
                   </p>
                   <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp; └──{' '}
-                    <span className="text-blue-500">ui/</span>{' '}
+                    &nbsp;&nbsp;&nbsp;&nbsp; └──{" "}
+                    <span className="text-blue-500">ui/</span>{" "}
                     <span className="text-muted-foreground">
                       # Component library
                     </span>

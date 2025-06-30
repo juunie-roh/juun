@@ -1,16 +1,16 @@
 export const metadata = {
-  title: 'Cesium Utils',
+  title: "Cesium Utils",
   description:
-    'A utility library for CesiumJS that simplifies working with Cesium instances.',
-  keywords: ['Cesium', 'CesiumJS', 'npm', 'library', 'utility', 'GIS', '3D'],
+    "A utility library for CesiumJS that simplifies working with Cesium instances.",
+  keywords: ["Cesium", "CesiumJS", "npm", "library", "utility", "GIS", "3D"],
   openGraph: {
-    type: 'website',
-    title: 'Cesium Utils',
+    type: "website",
+    title: "Cesium Utils",
     description:
-      'A utility library for CesiumJS that simplifies working with Cesium instances.',
-    images: 'https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg',
-    siteName: 'Cesium Utils Demonstration',
-    url: 'https://juun.vercel.app/cesium-utils',
+      "A utility library for CesiumJS that simplifies working with Cesium instances.",
+    images: "https://cesium.com/logo-kit/cesium/Cesium_dark_color.svg",
+    siteName: "Cesium Utils Demonstration",
+    url: "https://juun.vercel.app/cesium-utils",
   },
 };
 
