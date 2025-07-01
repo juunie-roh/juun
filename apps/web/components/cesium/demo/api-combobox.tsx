@@ -19,16 +19,16 @@ import { Popover, PopoverContent, PopoverTrigger } from "@pkg/ui/popover";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import type { ApiFeatureOption } from "@/components/cesium/types";
+import type { ApiOption } from "@/components/cesium/types";
 
 function StatusList({
   setOpen,
   setOption,
 }: {
   setOpen: (open: boolean) => void;
-  setOption: (option: ApiFeatureOption | undefined) => void;
+  setOption: (option: ApiOption | undefined) => void;
 }) {
-  const [options, setOptions] = useState<ApiFeatureOption[]>([]);
+  const [options, setOptions] = useState<ApiOption[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -81,8 +81,8 @@ function StatusList({
   );
 }
 interface ApiComboboxProps {
-  option: ApiFeatureOption | undefined;
-  setOption: (status: ApiFeatureOption | undefined) => void;
+  option: ApiOption | undefined;
+  setOption: (status: ApiOption | undefined) => void;
   /** The trigger button class */
   className?: string;
 }
