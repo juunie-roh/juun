@@ -18,7 +18,7 @@ export default function CesiumUtilsDemoLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main className="h-[calc(100vh-4.5rem)] w-full p-8 xl:h-[calc(100vh-5rem)]">
+    <main className="h-[calc(100vh-4.5rem)] w-full px-4 py-8 md:px-8 xl:h-[calc(100vh-5rem)]">
       {children}
     </main>
   );
