@@ -1,4 +1,4 @@
-import { ApiFeature } from "@/components/cesium/types";
+import { Api } from "@/components/cesium/types";
 
 import CollectionDemo from "./collection";
 import HighlightDemo from "./highlight";
@@ -6,7 +6,7 @@ import TerrainDemo from "./terrain";
 import ViewerDemo from "./viewer";
 
 // Map each API feature to its corresponding demo component
-export const FeatureDemos: Record<ApiFeature, React.ComponentType> = {
+export const FeatureDemos: Record<Api, React.ComponentType> = {
   collection: CollectionDemo,
   terrain: TerrainDemo,
   viewer: ViewerDemo,
@@ -24,7 +24,7 @@ function DefaultDemo() {
 
 // Feature demo renderer component
 interface FeatureDemoProps {
-  feat: ApiFeature | undefined;
+  feat: Api | undefined;
 }
 
 export default function FeatureDemo({ feat }: FeatureDemoProps) {

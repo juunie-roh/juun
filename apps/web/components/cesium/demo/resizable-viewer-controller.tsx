@@ -8,13 +8,13 @@ import {
 } from "@pkg/ui/resizable";
 import { useState } from "react";
 
-import type { ApiFeatureOption } from "../types";
+import type { ApiOption } from "../types";
 import Viewer from "../viewer";
+import FeatureDemo from "./api";
 import ApiCombobox from "./api-combobox";
-import FeatureDemo from "./feature";
 
 export default function ResizableViewerController() {
-  const [option, setOption] = useState<ApiFeatureOption | undefined>(undefined);
+  const [option, setOption] = useState<ApiOption | undefined>(undefined);
   // State to track viewport size
   const isLargeScreen = useMediaQuery("min-width: 1024px");
 
