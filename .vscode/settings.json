@@ -33,6 +33,11 @@
   "editor.formatOnSave": false,
   "eslint.enable": true,
   "eslint.format.enable": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.codeLens": true,
+  "tailwindCSS.experimental.configFile": "packages/config/tailwind/globals.css",
   "prettier.singleQuote": true,
   "prettier.quoteProps": "preserve",
   "search.exclude": {

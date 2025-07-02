@@ -6,7 +6,7 @@ export default function BlogItemLoading() {
     <Fragment>
       {/* Mobile table of contents skeleton */}
       <div className="xl:hidden">
-        <div className="fixed right-5 top-20 z-40 mb-6 mt-2">
+        <div className="fixed top-20 right-5 z-40 mt-2 mb-6">
           <Skeleton className="size-10 rounded-md" />
         </div>
       </div>
@@ -15,7 +15,7 @@ export default function BlogItemLoading() {
       <aside className="hidden xl:block" />
 
       {/* Main article content */}
-      <article className="mx-auto w-full max-w-3xl px-4 pb-20 pt-4 md:px-8 xl:w-[48rem]">
+      <article className="mx-auto w-full max-w-3xl px-4 pt-4 pb-20 md:px-8 xl:w-3xl">
         {/* Header */}
         <div className="mb-8 space-y-4">
           <Skeleton className="h-10 w-3/4" />
@@ -69,7 +69,7 @@ export default function BlogItemLoading() {
 
       {/* Right aside - Table of Contents skeleton for desktop */}
       <aside className="hidden xl:block">
-        <div className="sticky left-0 top-1/4 max-w-64">
+        <div className="sticky top-1/4 left-0 max-w-64">
           <div className="w-full overflow-auto rounded-lg bg-card py-4 text-sm">
             <div className="mb-4 px-6">
               <Skeleton className="h-4 w-32" />{" "}

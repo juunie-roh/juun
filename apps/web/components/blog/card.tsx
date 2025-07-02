@@ -68,7 +68,7 @@ export function BlogCard({ post }: BlogCardProps) {
             </div>
           </div>
         ) : (
-          <div className="aspect-video w-full bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 md:aspect-auto md:w-1/3 lg:w-2/5" />
+          <div className="aspect-video w-full bg-linear-to-r from-blue-50 to-indigo-50 md:aspect-auto md:w-1/3 lg:w-2/5 dark:from-blue-950 dark:to-indigo-950" />
         )}
 
         {/* Content container - right side on md+ screens, below image on mobile */}
@@ -103,7 +103,7 @@ export function BlogCard({ post }: BlogCardProps) {
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="text-nowrap text-xs"
+                      className="text-xs text-nowrap"
                     >
                       {tag}
                     </Badge>

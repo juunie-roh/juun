@@ -38,11 +38,11 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left">
+        <ol className="list-inside list-decimal text-center font-(family-name:--font-geist-mono) text-sm sm:text-left">
           <li className="mb-2">
             Get started by editing{" "}
             <code
-              className={`${geistMono.className} rounded bg-black/[.05] px-1 py-0.5 font-semibold dark:bg-white/[.06]`}
+              className={`${geistMono.className} rounded bg-black/5 px-1 py-0.5 font-semibold dark:bg-white/6`}
             >
               src/app/page.tsx
             </code>

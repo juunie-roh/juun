@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "../../packages/config/tailwind/globals.css",
+  "tailwindFunctions": ["clsx", "cn", "cva"]
+}

@@ -81,7 +81,7 @@ export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
     <div className="fixed inset-x-0 top-0 z-50 h-1 bg-transparent">
       <div
         ref={progressBarRef}
-        className={cn("h-full bg-primary", className)}
+        className={cn("bg-primary h-full", className)}
         style={{ width: "0%" }}
         role="progressbar"
         aria-valuemin={0}

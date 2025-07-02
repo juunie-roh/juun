@@ -42,7 +42,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
             />
           </div>
         ) : (
-          <div className="aspect-video w-full bg-gradient-to-r from-blue-100 to-indigo-100" />
+          <div className="aspect-video w-full bg-linear-to-r from-blue-100 to-indigo-100" />
         )}
         <CardHeader>
           <CardTitle className="line-clamp-1 leading-normal group-hover:text-blue-600">

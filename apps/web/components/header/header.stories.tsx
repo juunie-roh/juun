@@ -117,7 +117,7 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
             {breadcrumbItems[0]?.isCurrent ? (
               <BreadcrumbPage className="m-0 cursor-default rounded-full bg-background px-2">
                 <span className="flex items-center">
-                  <Home className="-ml-1 mr-2 size-4" />
+                  <Home className="mr-2 -ml-1 size-4" />
                   {breadcrumbItems[0]?.label}
                 </span>
               </BreadcrumbPage>

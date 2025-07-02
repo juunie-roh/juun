@@ -42,7 +42,7 @@ export default function ThemeSwitch() {
 
       {/* Moving thumb */}
       <div
-        className="absolute size-6 rounded-full bg-background shadow transition-all duration-300 ease-in-out"
+        className="absolute size-6 rounded-full bg-background shadow-sm transition-all duration-300 ease-in-out"
         style={{
           transform: animatingDark ? "translateX(1rem)" : "translateX(-1rem)",
           left: "50%",
@@ -52,7 +52,7 @@ export default function ThemeSwitch() {
 
       {/* Sun icon - left side */}
       <div
-        className="absolute left-[7px] top-1/2 -translate-y-1/2 transition-opacity duration-300"
+        className="absolute top-1/2 left-[7px] -translate-y-1/2 transition-opacity duration-300"
         style={{ opacity: animatingDark ? 0.4 : 1 }}
       >
         <Sun className="size-4" />
@@ -60,7 +60,7 @@ export default function ThemeSwitch() {
 
       {/* Moon icon - right side */}
       <div
-        className="absolute right-[7px] top-1/2 -translate-y-1/2 transition-opacity duration-300"
+        className="absolute top-1/2 right-[7px] -translate-y-1/2 transition-opacity duration-300"
         style={{ opacity: animatingDark ? 1 : 0.4 }}
       >
         <Moon className="size-4" />
