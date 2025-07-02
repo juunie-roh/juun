@@ -123,7 +123,7 @@ const CodeBlock = ({
     <div
       id={id}
       className={cn(
-        "relative rounded-md border bg-background shadow overflow-hidden",
+        "relative overflow-hidden rounded-md border bg-background shadow",
         className,
       )}
     >

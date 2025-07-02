@@ -229,23 +229,23 @@ export const AllLanguages: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
       <div>
-        <h3 className="text-lg font-semibold mb-2">TypeScript</h3>
+        <h3 className="mb-2 text-lg font-semibold">TypeScript</h3>
         <CodeBlock code={typescriptExample} fileName="typescript-example.ts" />
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-2">JavaScript</h3>
+        <h3 className="mb-2 text-lg font-semibold">JavaScript</h3>
         <CodeBlock code={javascriptExample} fileName="javascript-example.js" />
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-2">JSON</h3>
+        <h3 className="mb-2 text-lg font-semibold">JSON</h3>
         <CodeBlock code={jsonExample} fileName="example.json" />
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-2">Bash</h3>
+        <h3 className="mb-2 text-lg font-semibold">Bash</h3>
         <CodeBlock code={bashExample} fileName="bash" />
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-2">Dockerfile</h3>
+        <h3 className="mb-2 text-lg font-semibold">Dockerfile</h3>
         <CodeBlock code={dockerExample} fileName="dockerfile" />
       </div>
     </div>

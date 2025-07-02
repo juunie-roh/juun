@@ -111,7 +111,7 @@ export function TableOfContents({
         <li key={id} className="relative">
           <div
             className={cn(
-              "absolute left-0 top-0 w-1 h-full",
+              "absolute left-0 top-0 h-full w-1",
               activeId === id && "bg-primary",
             )}
           />
@@ -138,7 +138,7 @@ export function TableOfContents({
   return isXL ? (
     <div
       className={cn(
-        "hidden xl:block w-full overflow-auto rounded-lg bg-card py-4 text-sm",
+        "hidden w-full overflow-auto rounded-lg bg-card py-4 text-sm xl:block",
         className,
       )}
     >

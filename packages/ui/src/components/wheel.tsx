@@ -162,7 +162,7 @@ const WheelRoot = forwardRef<HTMLDivElement, WheelRootProps>(
       className={cn(
         `relative size-[${size}px]`,
         className,
-        "bg-transparent border-none",
+        "border-none bg-transparent",
       )}
       {...props}
     />
@@ -228,7 +228,7 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
     <div
       ref={ref}
       className={cn(
-        "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-secondary text-secondary-foreground px-2 py-1 rounded-sm pointer-events-none whitespace-nowrap text-sm",
+        "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-secondary px-2 py-1 text-center text-sm text-secondary-foreground",
         className,
       )}
       {...props}
