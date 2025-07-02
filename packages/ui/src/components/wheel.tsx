@@ -36,7 +36,7 @@ const wheelVariants = cva("relative size-[200px]", {
     variant: {
       primary: "bg-primary text-primary-foreground",
       secondary: "bg-secondary text-secondary-foreground",
-      destructive: "bg-destructive text-destructive-foreground",
+      destructive: "bg-destructive text-accent",
       outline: "bg-background border",
     },
   },
@@ -88,7 +88,7 @@ const iconVariants = cva("pointer-events-none", {
     variant: {
       primary: "stroke-primary-foreground",
       secondary: "stroke-secondary-foreground",
-      destructive: "stroke-destructive-foreground",
+      destructive: "stroke-accent",
       outline: "",
     },
     isHovered: {
@@ -228,7 +228,7 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
     <div
       ref={ref}
       className={cn(
-        "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm bg-secondary px-2 py-1 text-center text-sm text-secondary-foreground",
+        "bg-secondary text-secondary-foreground pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm px-2 py-1 text-center text-sm",
         className,
       )}
       {...props}

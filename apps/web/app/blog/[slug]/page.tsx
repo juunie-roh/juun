@@ -77,19 +77,19 @@ export default async function BlogItemPage({
       <ScrollProgressBar />
       <div className="xl:hidden">
         <TableOfContents
-          className="fixed right-5 top-20 z-40 mb-6 mt-2"
+          className="fixed top-20 right-5 z-40 mt-2 mb-6"
           contentSelector=".prose"
           headingSelector="h2, h3"
         />
       </div>
 
       <aside className="hidden xl:block" />
-      <article className="mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8 xl:w-[48rem]">
+      <article className="mx-auto w-full max-w-3xl px-2 pt-4 pb-20 md:px-8 xl:w-3xl">
         <PostComponent />
       </article>
       <aside className="hidden xl:block">
         <TableOfContents
-          className="sticky left-0 top-1/4 max-w-64"
+          className="sticky top-1/4 left-0 max-w-64"
           contentSelector=".prose"
           headingSelector="h2, h3"
         />

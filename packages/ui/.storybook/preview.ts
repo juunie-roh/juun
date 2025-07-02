@@ -1,4 +1,4 @@
-import "@pkg/config/tailwind/styles";
+import "@pkg/config/tailwind";
 
 import type { Preview } from "@storybook/react";
 

@@ -1,4 +1,4 @@
-import "@config/tailwind/styles";
+import "@config/tailwind/globals.css";
 
 import { Toaster } from "@pkg/ui/sonner";
 import { TooltipProvider } from "@pkg/ui/tooltip";
