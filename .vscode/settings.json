@@ -33,6 +33,9 @@
   "editor.formatOnSave": false,
   "eslint.enable": true,
   "eslint.format.enable": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   "prettier.singleQuote": true,
   "prettier.quoteProps": "preserve",
   "search.exclude": {
