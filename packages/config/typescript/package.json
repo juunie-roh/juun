@@ -5,5 +5,8 @@
   "type": "module",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }
