@@ -68,13 +68,13 @@ export function BlogCard({ post }: BlogCardProps) {
             </div>
           </div>
         ) : (
-          <div className="aspect-video w-full bg-linear-to-r from-blue-50 to-indigo-50 md:aspect-auto md:w-1/3 lg:w-2/5 dark:from-blue-950 dark:to-indigo-950" />
+          <div className="bg-linear-to-r aspect-video w-full from-blue-50 to-indigo-50 md:aspect-auto md:w-1/3 lg:w-2/5 dark:from-blue-950 dark:to-indigo-950" />
         )}
 
         {/* Content container - right side on md+ screens, below image on mobile */}
         <div className="flex flex-col md:w-2/3 lg:w-3/5">
           <CardHeader>
-            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex items-center gap-3 text-xs">
               {post.metadata.date && (
                 <div className="flex items-center gap-1">
                   <CalendarIcon className="size-3" />
@@ -86,13 +86,13 @@ export function BlogCard({ post }: BlogCardProps) {
                 <span>{readingTime} min read</span>
               </div>
             </div>
-            <CardTitle className="line-clamp-2 leading-normal transition-colors group-hover:text-primary">
+            <CardTitle className="group-hover:text-primary line-clamp-2 leading-normal transition-colors">
               {post.metadata.title}
             </CardTitle>
           </CardHeader>
 
           <CardContent>
-            <p className="mb-4 line-clamp-2 text-secondary-foreground">
+            <p className="text-secondary-foreground mb-4 line-clamp-2">
               {post.metadata.description}
             </p>
 
@@ -103,7 +103,7 @@ export function BlogCard({ post }: BlogCardProps) {
                     <Badge
                       key={tag}
                       variant="outline"
-                      className="text-xs text-nowrap"
+                      className="text-nowrap text-xs"
                     >
                       {tag}
                     </Badge>
@@ -115,7 +115,7 @@ export function BlogCard({ post }: BlogCardProps) {
           </CardContent>
 
           <CardFooter className="mt-auto pt-0">
-            <span className="text-sm font-medium text-primary">Read more</span>
+            <span className="text-primary text-sm font-medium">Read more</span>
           </CardFooter>
         </div>
       </Card>

@@ -26,7 +26,7 @@ const navigationItems = [
 export default function Header() {
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b bg-background/50 p-4 backdrop-blur-lg md:px-8"
+      className="bg-background/50 sticky top-0 z-50 w-full border-b p-4 backdrop-blur-lg md:px-8"
       tabIndex={-1}
     >
       <div>
@@ -75,7 +75,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <Breadcrumb className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+      <Breadcrumb className="bg-border absolute -bottom-4 w-fit overflow-hidden rounded-full p-1 transition-all duration-300" />
     </header>
   );
 }

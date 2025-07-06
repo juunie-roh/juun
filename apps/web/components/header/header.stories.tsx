@@ -61,7 +61,7 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/50 p-4 backdrop-blur-lg md:px-8">
+    <header className="bg-background/50 sticky top-0 z-50 w-full border-b p-4 backdrop-blur-lg md:px-8">
       <div>
         <div className="flex items-center justify-between">
           <Link href="/">
@@ -111,13 +111,13 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
         </div>
       </div>
       {/* Breadcrumb with custom path */}
-      <div className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300">
+      <div className="bg-border absolute -bottom-4 w-fit overflow-hidden rounded-full p-1 transition-all duration-300">
         <BreadcrumbList>
           <BreadcrumbItem>
             {breadcrumbItems[0]?.isCurrent ? (
-              <BreadcrumbPage className="m-0 cursor-default rounded-full bg-background px-2">
+              <BreadcrumbPage className="bg-background m-0 cursor-default rounded-full px-2">
                 <span className="flex items-center">
-                  <Home className="mr-2 -ml-1 size-4" />
+                  <Home className="-ml-1 mr-2 size-4" />
                   {breadcrumbItems[0]?.label}
                 </span>
               </BreadcrumbPage>
@@ -141,7 +141,7 @@ const Header = ({ segments = [] }: HeaderWithBreadcrumbProps) => {
 
             return isLast || item?.isCurrent ? (
               <BreadcrumbItem key={item?.href}>
-                <BreadcrumbPage className="cursor-default rounded-full bg-background px-2">
+                <BreadcrumbPage className="bg-background cursor-default rounded-full px-2">
                   {item?.label}
                 </BreadcrumbPage>
               </BreadcrumbItem>

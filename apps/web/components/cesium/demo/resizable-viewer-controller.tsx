@@ -1,6 +1,6 @@
 "use client";
 
-import { useMediaQuery } from "@pkg/ui/hooks";
+import { useMediaQuery } from "@pkg/ui/hooks/use-media-query";
 import {
   ResizableHandle,
   ResizablePanel,

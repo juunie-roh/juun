@@ -6,7 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@pkg/ui/collapsible";
-import { useMediaQuery } from "@pkg/ui/hooks";
+import { useMediaQuery } from "@pkg/ui/hooks/use-media-query";
 import { cn } from "@pkg/ui/lib/utils";
 import { ArrowRight, Bookmark } from "lucide-react";
 import { Fragment, useEffect, useState } from "react";
@@ -106,12 +106,12 @@ export function TableOfContents({
 
   // The TOC content - shared between mobile collapsible and desktop fixed version
   const tocContent = (
-    <ul className="border-l text-muted-foreground">
+    <ul className="text-muted-foreground border-l">
       {headings.map(({ id, text, level }) => (
         <li key={id} className="relative">
           <div
             className={cn(
-              "absolute top-0 left-0 h-full w-1",
+              "absolute left-0 top-0 h-full w-1",
               activeId === id && "bg-primary",
             )}
           />
@@ -122,7 +122,7 @@ export function TableOfContents({
           >
             <span
               className={cn(
-                "text-left text-wrap",
+                "text-wrap text-left",
                 level === 3 && "pl-4",
                 activeId === id && "text-primary",
               )}
@@ -138,7 +138,7 @@ export function TableOfContents({
   return isXL ? (
     <div
       className={cn(
-        "hidden w-full overflow-auto rounded-lg bg-card py-4 text-sm xl:block",
+        "bg-card hidden w-full overflow-auto rounded-lg py-4 text-sm xl:block",
         className,
       )}
     >
@@ -153,7 +153,7 @@ export function TableOfContents({
         open={isOpen}
         onOpenChange={setIsOpen}
         className={cn(
-          "w-full max-w-64 rounded-md bg-card",
+          "bg-card w-full max-w-64 rounded-md",
           bordered && "border",
         )}
       >

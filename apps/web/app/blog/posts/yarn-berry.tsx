@@ -37,7 +37,7 @@ export default function YarnBerry() {
           </Suspense>
         </AspectRatio>
       )}
-      <div className="prose mt-8 max-w-none text-primary">
+      <div className="prose text-primary mt-8 max-w-none">
         <h2 className="tracking-tight">Yarn Berry?</h2>
         <p>
           npm(Node Package Manager)의 의존성 관리를 개선하기 위해 나온 오픈 소스

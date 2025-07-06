@@ -56,10 +56,7 @@ const config: StorybookConfig = {
               loader: getAbsolutePath("postcss-loader"),
               options: {
                 postcssOptions: {
-                  plugins: [
-                    getAbsolutePath("tailwindcss"),
-                    getAbsolutePath("autoprefixer"),
-                  ],
+                  plugins: [getAbsolutePath("@tailwindcss/postcss")],
                 },
               },
             },
