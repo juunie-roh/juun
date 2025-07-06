@@ -16,7 +16,7 @@ export default function ViewerDemo() {
       <AccordionItem value="item-1">
         <AccordionTrigger>Clone Viewer</AccordionTrigger>
         <AccordionContent>
-          <div className="flex size-full items-center justify-center text-muted-foreground">
+          <div className="text-muted-foreground flex size-full items-center justify-center">
             Viewer Demo
           </div>
         </AccordionContent>
