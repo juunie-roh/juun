@@ -61,7 +61,7 @@ export default function BundleOptimization() {
         </AspectRatio>
       )}
 
-      <div className="prose mt-8 max-w-none text-primary">
+      <div className="prose text-primary mt-8 max-w-none">
         <h2 className="tracking-tight">What is Module Bundler?</h2>
         <p>
           <code>html</code> 에서 기능 구현에 필요한 JavaScript 파일을 직접

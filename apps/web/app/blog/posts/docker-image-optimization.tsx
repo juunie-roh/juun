@@ -45,7 +45,7 @@ export default function DockerImageOptimization() {
         </AspectRatio>
       )}
 
-      <div className="prose mt-8 max-w-none text-primary">
+      <div className="prose text-primary mt-8 max-w-none">
         <h2 className="tracking-tight">Docker Build</h2>
         <p>
           <Link href="https://docs.docker.com/build/concepts/overview">

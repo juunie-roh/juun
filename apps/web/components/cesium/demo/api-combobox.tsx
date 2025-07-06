@@ -13,7 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@pkg/ui/drawer";
-import { useMediaQuery } from "@pkg/ui/hooks";
+import { useMediaQuery } from "@pkg/ui/hooks/use-media-query";
 import { cn } from "@pkg/ui/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@pkg/ui/popover";
 import { ChevronDown } from "lucide-react";
@@ -51,7 +51,7 @@ function StatusList({
   if (loading) {
     return (
       <div className="flex items-center justify-center p-4">
-        <div className="text-sm text-muted-foreground">Loading options...</div>
+        <div className="text-muted-foreground text-sm">Loading options...</div>
       </div>
     );
   }

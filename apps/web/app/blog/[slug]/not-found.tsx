@@ -11,7 +11,7 @@ export default function BlogItemError() {
         <h2 className="mb-4 text-3xl font-bold tracking-tighter">
           Post Not Found
         </h2>
-        <p className="mb-8 text-secondary-foreground">
+        <p className="text-secondary-foreground mb-8">
           Sorry, the post you're looking for doesn't exist or has been removed.
         </p>
         <Button variant="secondary" asChild>

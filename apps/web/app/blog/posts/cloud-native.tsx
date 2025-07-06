@@ -86,7 +86,7 @@ export default function CloudNative() {
         </AspectRatio>
       )}
 
-      <div className="prose mt-8 max-w-none text-primary">
+      <div className="prose text-primary mt-8 max-w-none">
         <h2 className="tracking-tight">
           A Paradigm Shift in Application Development
         </h2>

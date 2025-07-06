@@ -16,7 +16,7 @@ export const FeatureDemos: Record<Api, React.ComponentType> = {
 // Default component when no feature is selected
 function DefaultDemo() {
   return (
-    <div className="flex size-full items-center justify-center text-muted-foreground">
+    <div className="text-muted-foreground flex size-full items-center justify-center">
       Select an API feature to demonstrate
     </div>
   );
