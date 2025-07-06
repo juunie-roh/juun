@@ -1,6 +1,6 @@
 # Juun
 
-A modern [Next.js](https://nextjs.org) monorepo template powered by Turborepo with a complete UI system, state management, and developer tooling.
+A modern [Next.js](https://nextjs.org) monorepo application powered by Turborepo with a complete UI system, state management, and developer tooling.
 
 ## 📋 Project Overview
 
@@ -10,7 +10,7 @@ This Turborepo-powered monorepo structure includes:
 - **UI Library**: Component library with Tailwind & shadcn (`/packages/ui`)
 - [**Config Package**](./packages/config/README.md): Shared configuration for TypeScript, ESLint, and Tailwind (`/packages/config`)
 
-The project uses Turborepo to optimize the development workflow and build processes across all workspaces, enabling faster builds through intelligent caching and parallel task execution.
+The project uses Turborepo to optimize the development workflow and build processes across all workspaces, enabling faster builds through remote caching and parallel task execution.
 
 ## 🚀 Features
 
@@ -128,14 +128,6 @@ docker build -t juun .
 docker run -p 3000:3000 juun
 ```
 
-## 📦 Deployment Strategy
-
-### Branch Structure
-
-This repository uses a specific branch structure for deployment:
-
-- `main`: Main development branch - all feature development and PRs should target this branch
-
 ## ⚡ Turborepo Integration
 
 ### Key Benefits
@@ -147,7 +139,3 @@ Turborepo provides several advantages for this monorepo setup:
 3. **Remote Caching**: Shares build artifacts across the team (when configured with a remote cache)
 4. **Parallel Execution**: Runs tasks in parallel to maximize efficiency
 5. **Workspace Awareness**: Understands dependencies between packages in the monorepo
-
-### Usage with Vercel
-
-The project is optimized for deployment on Vercel, with specific configuration to handle the monorepo structure. The `vercel` branch contains the necessary adjustments for Vercel to correctly build and deploy the application.
