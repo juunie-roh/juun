@@ -12,8 +12,7 @@
     "lint": "next lint",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
-    "test": "jest",
-    "postinstall": "node scripts/copy-cesium-assets.cjs"
+    "test": "jest"
   },
   "dependencies": {
     "@juun-roh/cesium-utils": "^0.1.2",

@@ -1,5 +1,8 @@
 import NextBundleAnalyzer from "@next/bundle-analyzer";
 import webpack from "webpack";
+import packageJson from "./package.json";
+
+const cesiumVersion = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -12,7 +15,9 @@ const nextConfig = {
 
     config.plugins.push(
       new webpack.DefinePlugin({
-        CESIUM_BASE_URL: JSON.stringify("/cesium"),
+        CESIUM_BASE_URL: JSON.stringify(
+          `https://cdn.jsdelivr.net/npm/cesium@${cesiumVersion}/Build/Cesium/`,
+        ),
       }),
     );
 
