@@ -1,6 +1,6 @@
 import NextBundleAnalyzer from "@next/bundle-analyzer";
 import webpack from "webpack";
-import packageJson from "./package.json";
+import packageJson from "./package.json" with { type: "json" };
 
 const cesiumVersion = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
 
