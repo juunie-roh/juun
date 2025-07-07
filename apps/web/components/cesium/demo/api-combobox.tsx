@@ -22,9 +22,11 @@ import { useEffect, useState } from "react";
 import type { ApiOption } from "@/components/cesium/types";
 
 function StatusList({
+  open,
   setOpen,
   setOption,
 }: {
+  open: boolean;
   setOpen: (open: boolean) => void;
   setOption: (option: ApiOption | undefined) => void;
 }) {
@@ -34,10 +36,8 @@ function StatusList({
   useEffect(() => {
     const loadOptions = async () => {
       try {
-        const { API_FEATURE_OPTIONS } = await import(
-          "@/components/cesium/constants"
-        );
-        setOptions(API_FEATURE_OPTIONS);
+        const { loadApiOptions } = await import("@/components/cesium/utils");
+        setOptions(await loadApiOptions());
       } catch (error) {
         console.error("Failed to load API options:", error);
       } finally {
@@ -46,7 +46,7 @@ function StatusList({
     };
 
     loadOptions();
-  }, []);
+  }, [open]);
 
   if (loading) {
     return (
@@ -58,7 +58,7 @@ function StatusList({
 
   return (
     <Command>
-      <CommandInput placeholder="Select API ..." />
+      <CommandInput placeholder="Search API ..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
@@ -106,8 +106,8 @@ export default function ApiCombobox({
             <ChevronDown />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-96" align="start">
-          <StatusList setOpen={setOpen} setOption={setOption} />
+        <PopoverContent className="w-96 p-0" align="start">
+          <StatusList open={open} setOpen={setOpen} setOption={setOption} />
         </PopoverContent>
       </Popover>
     );
@@ -127,7 +127,7 @@ export default function ApiCombobox({
       <DrawerContent className="h-1/2">
         <div className="p-2">
           <DrawerTitle className="sr-only">Cesium Utils API</DrawerTitle>
-          <StatusList setOpen={setOpen} setOption={setOption} />
+          <StatusList open={open} setOpen={setOpen} setOption={setOption} />
         </div>
       </DrawerContent>
     </Drawer>
