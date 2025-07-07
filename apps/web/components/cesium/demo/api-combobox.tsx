@@ -100,7 +100,7 @@ export default function ApiCombobox({
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className={cn("w-full justify-between px-4", className)}
+            className={cn("w-full justify-between p-4", className)}
           >
             {option ? option.label : "Select API"}
             <ChevronDown />
