@@ -1,7 +1,7 @@
 "use client";
 
-import "public/cesium/Widgets/widgets.css";
-import "public/cesium/Widgets/lighter.css";
+import "cesium/Build/Cesium/Widgets/widgets.css";
+import "cesium/Build/Cesium/Widgets/lighter.css";
 
 import { CameraEventType, KeyboardEventModifier, Terrain } from "cesium";
 import { Fragment, useEffect } from "react";
