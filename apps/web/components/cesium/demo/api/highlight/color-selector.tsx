@@ -6,16 +6,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@pkg/ui/select";
-import { Color } from "cesium";
+import * as Cesium from "cesium";
 import { SetStateAction } from "react";
 
 interface ColorSelectorProps {
-  color: ReturnType<Color["toCssColorString"]>;
+  color: ReturnType<Cesium.Color["toCssColorString"]>;
   setColor: (value: SetStateAction<string>) => void;
 }
 
 export default function ColorSelector({
-  color = Color.RED.toCssColorString(),
+  color = Cesium.Color.RED.toCssColorString(),
   setColor: setColorAction,
 }: ColorSelectorProps) {
   return (
@@ -28,9 +28,15 @@ export default function ColorSelector({
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value={Color.RED.toCssColorString()}>RED</SelectItem>
-          <SelectItem value={Color.BLUE.toCssColorString()}>BLUE</SelectItem>
-          <SelectItem value={Color.LIME.toCssColorString()}>LIME</SelectItem>
+          <SelectItem value={Cesium.Color.RED.toCssColorString()}>
+            RED
+          </SelectItem>
+          <SelectItem value={Cesium.Color.BLUE.toCssColorString()}>
+            BLUE
+          </SelectItem>
+          <SelectItem value={Cesium.Color.LIME.toCssColorString()}>
+            LIME
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

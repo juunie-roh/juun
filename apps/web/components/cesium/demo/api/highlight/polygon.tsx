@@ -6,7 +6,7 @@ import { Checkbox } from "@pkg/ui/checkbox";
 import { Label } from "@pkg/ui/label";
 import { Separator } from "@pkg/ui/separator";
 import { Slider } from "@pkg/ui/slider";
-import { Cartesian3, Color, Entity } from "cesium";
+import * as Cesium from "cesium";
 import { useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";
@@ -18,7 +18,9 @@ export default function PolygonHighlight() {
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [outline, setOutline] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(2);
-  const [color, setColor] = useState<string>(Color.RED.toCssColorString());
+  const [color, setColor] = useState<string>(
+    Cesium.Color.RED.toCssColorString(),
+  );
 
   const highlight = useMemo(
     () => (viewer ? Highlight.getInstance(viewer) : undefined),
@@ -27,31 +29,31 @@ export default function PolygonHighlight() {
 
   const e = useMemo(
     () =>
-      new Entity({
+      new Cesium.Entity({
         polygon: {
           hierarchy: [
-            new Cartesian3(
+            new Cesium.Cartesian3(
               -2358138.847340281,
               -3744072.459541374,
               4581158.5714175375,
             ),
-            new Cartesian3(
+            new Cesium.Cartesian3(
               -2357231.4925370603,
               -3745103.7886602185,
               4580702.9757762635,
             ),
-            new Cartesian3(
+            new Cesium.Cartesian3(
               -2355912.902205431,
               -3744249.029778454,
               4582402.154378103,
             ),
-            new Cartesian3(
+            new Cesium.Cartesian3(
               -2357208.0209552636,
               -3743553.4420488174,
               4581961.863286629,
             ),
           ],
-          material: Color.YELLOW.withAlpha(0.5),
+          material: Cesium.Color.YELLOW.withAlpha(0.5),
         },
       }),
     [],
@@ -72,7 +74,7 @@ export default function PolygonHighlight() {
     if (!highlight) return;
     if (!isShowing) return highlight.hide();
     highlight.show(e, {
-      color: Color.fromCssColorString(color),
+      color: Cesium.Color.fromCssColorString(color),
       outline,
       width,
     });

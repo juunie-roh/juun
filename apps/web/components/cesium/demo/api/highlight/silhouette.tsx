@@ -1,15 +1,7 @@
 "use client";
 
 import { Highlight } from "@juun-roh/cesium-utils";
-import {
-  Cartesian3,
-  Cesium3DTileset,
-  Color,
-  defined,
-  HeadingPitchRoll,
-  Matrix4,
-  ScreenSpaceEventType,
-} from "cesium";
+import * as Cesium from "cesium";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";
@@ -18,23 +10,25 @@ import ColorSelector from "./color-selector";
 
 export default function Silhouette() {
   const { viewer } = useViewerStore();
-  const [color, setColor] = useState<string>(Color.RED.toCssColorString());
+  const [color, setColor] = useState<string>(
+    Cesium.Color.RED.toCssColorString(),
+  );
   const highlight = useMemo(
     () => (viewer ? Highlight.getInstance(viewer) : undefined),
     [viewer],
   );
   const tilesetPromise = useMemo(
-    () => Cesium3DTileset.fromIonAssetId(75343),
+    () => Cesium.Cesium3DTileset.fromIonAssetId(75343),
     [],
   );
 
   const onMouseMove = useCallback(
-    (movement: any) => {
+    (movement: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
       if (!viewer || !highlight) return;
       const picked = viewer.scene.pick(movement.endPosition);
-      if (!defined(picked)) return highlight.hide();
+      if (!Cesium.defined(picked)) return highlight.hide();
       highlight.show(picked, {
-        color: Color.fromCssColorString(color),
+        color: Cesium.Color.fromCssColorString(color),
       });
     },
     [viewer, highlight, color],
@@ -43,17 +37,17 @@ export default function Silhouette() {
   useEffect(() => {
     if (!viewer) return;
     viewer.camera.setView({
-      destination: Cartesian3.fromDegrees(
+      destination: Cesium.Cartesian3.fromDegrees(
         -74.01881302800248,
         40.69114333714821,
         753,
       ),
-      orientation: HeadingPitchRoll.fromDegrees(
+      orientation: Cesium.HeadingPitchRoll.fromDegrees(
         21.27879878293835,
         -21.34390550872462,
         0.0716951918898415,
       ),
-      endTransform: Matrix4.IDENTITY,
+      endTransform: Cesium.Matrix4.IDENTITY,
     });
 
     tilesetPromise
@@ -71,12 +65,12 @@ export default function Silhouette() {
 
     viewer.screenSpaceEventHandler.setInputAction(
       onMouseMove,
-      ScreenSpaceEventType.MOUSE_MOVE,
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
     );
 
     return () => {
       viewer?.screenSpaceEventHandler.removeInputAction(
-        ScreenSpaceEventType.MOUSE_MOVE,
+        Cesium.ScreenSpaceEventType.MOUSE_MOVE,
       );
       tilesetPromise
         .then((tileset) => {
