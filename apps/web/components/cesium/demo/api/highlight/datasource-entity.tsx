@@ -69,11 +69,12 @@ export default function DataSourceEntity() {
     }
 
     return () => {
+      highlight?.hide();
       viewer?.screenSpaceEventHandler.removeInputAction(
         Cesium.ScreenSpaceEventType.MOUSE_MOVE,
       );
     };
-  }, [viewer, isPicking, onMouseMove]);
+  }, [highlight, viewer, isPicking, onMouseMove]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
