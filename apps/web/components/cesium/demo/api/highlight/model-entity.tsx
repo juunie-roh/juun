@@ -4,14 +4,7 @@ import { Highlight } from "@juun-roh/cesium-utils";
 import { Checkbox } from "@pkg/ui/checkbox";
 import { Label } from "@pkg/ui/label";
 import { Slider } from "@pkg/ui/slider";
-import {
-  Cartesian3,
-  Color,
-  Entity,
-  HeadingPitchRoll,
-  Math as CesiumMath,
-  Transforms,
-} from "cesium";
+import * as Cesium from "cesium";
 import { useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";
@@ -20,7 +13,9 @@ import ColorSelector from "./color-selector";
 
 export default function ModelEntity() {
   const { viewer } = useViewerStore();
-  const [color, setColor] = useState<string>(Color.RED.toCssColorString());
+  const [color, setColor] = useState<string>(
+    Cesium.Color.RED.toCssColorString(),
+  );
   const [width, setWidth] = useState<number>(2);
   const [show, setShow] = useState<boolean>(false);
 
@@ -29,14 +24,21 @@ export default function ModelEntity() {
     [viewer],
   );
   const entity = useMemo(() => {
-    const position = Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000);
-    const heading = CesiumMath.toRadians(135);
+    const position = Cesium.Cartesian3.fromDegrees(
+      -123.0744619,
+      44.0503706,
+      5000,
+    );
+    const heading = Cesium.Math.toRadians(135);
     const pitch = 0;
     const roll = 0;
-    const hpr = new HeadingPitchRoll(heading, pitch, roll);
-    const orientation = Transforms.headingPitchRollQuaternion(position, hpr);
+    const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+    const orientation = Cesium.Transforms.headingPitchRollQuaternion(
+      position,
+      hpr,
+    );
 
-    return new Entity({
+    return new Cesium.Entity({
       name: "cesium air",
       position: position,
       orientation: orientation,
@@ -64,7 +66,7 @@ export default function ModelEntity() {
     if (!viewer || !highlight) return;
     if (!show) return highlight.hide();
     highlight.show(entity, {
-      color: Color.fromCssColorString(color),
+      color: Cesium.Color.fromCssColorString(color),
       width,
     });
   }, [show, viewer, highlight, color, entity, width]);
