@@ -1,7 +1,7 @@
 "use client";
 
 import { Highlight } from "@juun-roh/cesium-utils";
-import * as Cesium from "cesium";
+import Cesium from "cesium";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";

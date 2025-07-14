@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@pkg/ui/select";
-import * as Cesium from "cesium";
+import Cesium from "cesium";
 import { SetStateAction } from "react";
 
 interface ColorSelectorProps {

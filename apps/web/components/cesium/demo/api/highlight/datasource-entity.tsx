@@ -6,7 +6,7 @@ import { Checkbox } from "@pkg/ui/checkbox";
 import { Label } from "@pkg/ui/label";
 import { Separator } from "@pkg/ui/separator";
 import { Slider } from "@pkg/ui/slider";
-import * as Cesium from "cesium";
+import Cesium from "cesium";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";
