@@ -1,4 +1,3 @@
-// components/cesium/demo/api-features.ts
 import { lazy } from "react";
 
 import { Api, Feature } from "@/components/cesium/types";
@@ -6,12 +5,8 @@ import { Api, Feature } from "@/components/cesium/types";
 import EntityToggler from "../../entity-toggler";
 import CollectionDescription from "./collection/description";
 import HighlightDescription from "./highlight/description";
-
-// Lazy load other feature components
-const Polygon = lazy(() => import("./highlight/polygon"));
-const Model = lazy(() => import("./highlight/model-entity"));
-const DataSource = lazy(() => import("./highlight/datasource-entity"));
-const Silhouette = lazy(() => import("./highlight/silhouette"));
+import TerrainDescription from "./terrain/description";
+import ViewerDescription from "./viewer/description";
 
 // Define features for each API
 export const API_FEATURES: Record<Api, Feature[]> = {
@@ -19,12 +14,12 @@ export const API_FEATURES: Record<Api, Feature[]> = {
     {
       value: "description",
       label: "Description",
-      node: <CollectionDescription />,
+      render: CollectionDescription,
     },
     {
       value: "item-1",
       label: "Add / Remove Item",
-      node: <EntityToggler />,
+      render: EntityToggler,
     },
   ],
 
@@ -32,7 +27,7 @@ export const API_FEATURES: Record<Api, Feature[]> = {
     {
       value: "description",
       label: "Description",
-      node: <div>Terrain description coming soon...</div>,
+      render: TerrainDescription,
     },
   ],
 
@@ -40,7 +35,7 @@ export const API_FEATURES: Record<Api, Feature[]> = {
     {
       value: "description",
       label: "Description",
-      node: <div>Viewer description coming soon...</div>,
+      render: ViewerDescription,
     },
   ],
 
@@ -48,27 +43,27 @@ export const API_FEATURES: Record<Api, Feature[]> = {
     {
       value: "description",
       label: "Description",
-      node: <HighlightDescription />,
+      render: HighlightDescription,
     },
     {
       value: "item-1",
       label: "Polygon Entity",
-      node: <Polygon />,
+      render: lazy(() => import("./highlight/polygon")),
     },
     {
       value: "item-2",
       label: "Model Entity",
-      node: <Model />,
+      render: lazy(() => import("./highlight/model-entity")),
     },
     {
       value: "item-3",
       label: "Datasource Entity",
-      node: <DataSource />,
+      render: lazy(() => import("./highlight/datasource-entity")),
     },
     {
       value: "item-4",
       label: "Cesium3DTileFeature",
-      node: <Silhouette />,
+      render: lazy(() => import("./highlight/silhouette")),
     },
   ],
 };

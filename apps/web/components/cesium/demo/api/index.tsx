@@ -165,17 +165,19 @@ export default function FeatureDemo() {
       );
     }
 
+    const Comp = defaultFeature.render;
+
     return (
       <Suspense fallback={<Skeleton className="h-32 w-full" />}>
-        {defaultFeature.node}
+        <Comp />
       </Suspense>
     );
   }
 
-  // Both API and feature selected - show selected feature
+  const Comp = feature.render;
   return (
     <Suspense fallback={<Skeleton className="h-32 w-full" />}>
-      {feature.node}
+      <Comp />
     </Suspense>
   );
 }
