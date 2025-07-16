@@ -52,7 +52,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} font-sans antialiased [--header-height:calc(--spacing(18))]`}
       >
         <ThemeProvider
           attribute="class"

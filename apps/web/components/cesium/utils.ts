@@ -4,7 +4,7 @@ export const loadApiOptions = async (): Promise<ApiOption[]> => {
   const Cesium = await import("cesium");
   return [
     {
-      feat: "collection",
+      api: "collection",
       label: "Collection",
       flyTo: {
         destination: new Cesium.Cartesian3(
@@ -20,7 +20,7 @@ export const loadApiOptions = async (): Promise<ApiOption[]> => {
       },
     },
     {
-      feat: "terrain",
+      api: "terrain",
       label: "Terrain",
       flyTo: {
         destination: new Cesium.Cartesian3(
@@ -36,11 +36,11 @@ export const loadApiOptions = async (): Promise<ApiOption[]> => {
       },
     },
     {
-      feat: "viewer",
+      api: "viewer",
       label: "Viewer",
     },
     {
-      feat: "highlight",
+      api: "highlight",
       label: "Highlight",
     },
   ];

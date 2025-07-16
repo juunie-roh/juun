@@ -4,7 +4,7 @@ import { Highlight } from "@juun-roh/cesium-utils";
 import { Checkbox } from "@pkg/ui/checkbox";
 import { Label } from "@pkg/ui/label";
 import { Slider } from "@pkg/ui/slider";
-import Cesium from "cesium";
+import * as Cesium from "cesium";
 import { useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";
