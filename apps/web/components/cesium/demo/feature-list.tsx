@@ -15,17 +15,20 @@ import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
 import { getApiFeatures } from "./api/utils";
 
 export default function FeatureList() {
-  const { apiOption, feature, setFeature } = useCesiumUtilsApiStore();
-  const features = useMemo(() => {
-    if (!apiOption) return;
-    return getApiFeatures(apiOption.api);
-  }, [apiOption]);
+  const { option, feature, setFeature, clear } = useCesiumUtilsApiStore();
+
+  const features = useMemo(
+    () => (option ? getApiFeatures(option.api) : undefined),
+    [option],
+  );
 
   // Set initial active item as description (first item of features)
   useEffect(() => {
     if (!features) return;
     setFeature(features[0]);
-  }, [features, setFeature]);
+
+    return () => clear();
+  }, [features, setFeature, clear]);
 
   if (!features) return null;
 

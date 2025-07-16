@@ -4,9 +4,9 @@ import { ApiOption, Feature } from "@/components/cesium/types";
 import { logger } from "@/stores/middleware/logger";
 
 interface CesiumUtilsApiState {
-  apiOption?: ApiOption;
-  setApiOption: (apiOption?: ApiOption) => void;
-  removeApiOption: () => void;
+  option?: ApiOption;
+  setOption: (apiOption?: ApiOption) => void;
+  removeOption: () => void;
 
   feature?: Feature;
   setFeature: (feature?: Feature) => void;
@@ -18,15 +18,15 @@ interface CesiumUtilsApiState {
 const useCesiumUtilsApiStore = create<CesiumUtilsApiState>()(
   logger(
     (set, _get) => ({
-      apiOption: undefined,
-      setApiOption: (apiOption) => set({ apiOption }),
-      removeApiOption: () => set({ apiOption: undefined }),
+      option: undefined,
+      setOption: (apiOption) => set({ option: apiOption }),
+      removeOption: () => set({ option: undefined }),
 
       feature: undefined,
       setFeature: (feature) => set({ feature }),
       removeFeature: () => set({ feature: undefined }),
 
-      clear: () => set({ apiOption: undefined, feature: undefined }),
+      clear: () => set({ option: undefined, feature: undefined }),
     }),
     "cesium-utils-api-store",
   ),

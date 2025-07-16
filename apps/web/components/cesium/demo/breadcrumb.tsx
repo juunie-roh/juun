@@ -21,7 +21,7 @@ interface CesiumUtilsBreadcrumbProps {
 export default function CesiumUtilsBreadcrumb({
   className,
 }: CesiumUtilsBreadcrumbProps) {
-  const { apiOption, feature, clear } = useCesiumUtilsApiStore();
+  const { option, feature, clear } = useCesiumUtilsApiStore();
 
   const segments = [];
 
@@ -37,10 +37,10 @@ export default function CesiumUtilsBreadcrumb({
   }
 
   // Add API segment if selected
-  if (apiOption) {
+  if (option) {
     segments.push({
       type: "api" as const,
-      label: apiOption.label,
+      label: option.label,
       isLast: !feature,
     });
   }
@@ -49,7 +49,7 @@ export default function CesiumUtilsBreadcrumb({
   segments.push({
     type: "root" as const,
     label: "Cesium Utils",
-    isLast: !apiOption && !feature,
+    isLast: !option && !feature,
   });
 
   return (

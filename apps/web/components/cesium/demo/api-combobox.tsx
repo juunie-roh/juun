@@ -24,7 +24,7 @@ function StatusList({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const { setApiOption } = useCesiumUtilsApiStore();
+  const { setOption } = useCesiumUtilsApiStore();
   const [options, setOptions] = useState<ApiOption[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -63,7 +63,7 @@ function StatusList({
               value={option.api}
               className="hover:cursor-pointer"
               onSelect={(value) => {
-                setApiOption(options.find((opt) => opt.api === value));
+                setOption(options.find((opt) => opt.api === value));
                 setOpen(false);
               }}
             >
@@ -80,7 +80,7 @@ interface ApiComboboxProps {
   className?: string;
 }
 export default function ApiCombobox({ className }: ApiComboboxProps) {
-  const { apiOption } = useCesiumUtilsApiStore();
+  const { option } = useCesiumUtilsApiStore();
   const [open, setOpen] = useState<boolean>(false);
   // const isLargeScreen = useMediaQuery("min-width: 1024px");
 
@@ -92,7 +92,7 @@ export default function ApiCombobox({ className }: ApiComboboxProps) {
           variant="outline"
           className={cn("w-full justify-between p-4", className)}
         >
-          {apiOption ? apiOption.label : "Select API"}
+          {option ? option.label : "Select API"}
           <ChevronDown />
         </Button>
       </PopoverTrigger>
