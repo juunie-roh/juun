@@ -16,7 +16,7 @@ export interface ViewerProps extends Omit<RViewerProps, "className"> {
 export type Api = "collection" | "terrain" | "viewer" | "highlight";
 export interface ApiOption {
   /** The feature of Api to show */
-  feat: Api;
+  api: Api;
   /** Display name for the UI */
   label: string;
   /** Initial camera location to be set */

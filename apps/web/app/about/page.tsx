@@ -11,9 +11,10 @@ import {
 import { LogoAvatar } from "@pkg/ui/logo-avatar";
 import { Separator } from "@pkg/ui/separator";
 import { Hexagon, Package, Zap } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About",
   description: "About this project and its technologies",
 };

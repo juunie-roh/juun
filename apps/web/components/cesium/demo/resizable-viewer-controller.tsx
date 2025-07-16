@@ -6,15 +6,15 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@pkg/ui/resizable";
-import { useState } from "react";
 
-import type { ApiOption } from "../types";
+import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
+
 import Viewer from "../viewer";
 import FeatureDemo from "./api";
 import ApiCombobox from "./api-combobox";
 
 export default function ResizableViewerController() {
-  const [option, setOption] = useState<ApiOption | undefined>(undefined);
+  const { apiOption } = useCesiumUtilsApiStore();
   // State to track viewport size
   const isLargeScreen = useMediaQuery("min-width: 1024px");
 
@@ -26,11 +26,11 @@ export default function ResizableViewerController() {
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
           <Viewer
-            key={option?.feat || "default"} // refresh the viewer
+            key={apiOption?.api || "default"} // refresh the viewer
             bottomContainer={false}
             animation={false}
             timeline={false}
-            flyTo={option?.flyTo} // extendable viewer option
+            flyTo={apiOption?.flyTo} // extendable viewer option
           />
         </div>
       </ResizablePanel>
@@ -39,9 +39,9 @@ export default function ResizableViewerController() {
 
       <ResizablePanel defaultSize={30} minSize={20}>
         <div className="relative flex size-full flex-col gap-2 p-2">
-          <ApiCombobox option={option} setOption={setOption} />
+          <ApiCombobox />
           <div className="size-full overflow-y-auto px-2">
-            <FeatureDemo feat={option?.feat} />
+            <FeatureDemo feat={apiOption?.api} />
           </div>
         </div>
       </ResizablePanel>

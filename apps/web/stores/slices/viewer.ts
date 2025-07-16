@@ -8,6 +8,7 @@ interface ViewerState {
   viewer: Viewer | undefined;
   setViewer: (viewer: Viewer, name?: string) => void;
   removeViewer: () => void;
+
   isFlying: boolean | undefined;
   setIsFlying: (isFlying: boolean) => void;
 }

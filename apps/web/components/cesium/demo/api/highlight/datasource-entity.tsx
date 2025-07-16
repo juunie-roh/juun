@@ -6,7 +6,15 @@ import { Checkbox } from "@pkg/ui/checkbox";
 import { Label } from "@pkg/ui/label";
 import { Separator } from "@pkg/ui/separator";
 import { Slider } from "@pkg/ui/slider";
-import * as Cesium from "cesium";
+import {
+  Cartesian3,
+  Color,
+  defined,
+  GeoJsonDataSource,
+  Matrix4,
+  ScreenSpaceEventHandler,
+  ScreenSpaceEventType,
+} from "cesium";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import useViewerStore from "@/stores/slices/viewer";
@@ -18,9 +26,7 @@ export default function DataSourceEntity() {
   const [isPicking, setIsPicking] = useState<boolean>(false);
   const [outline, setOutline] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(2);
-  const [color, setColor] = useState<string>(
-    Cesium.Color.RED.toCssColorString(),
-  );
+  const [color, setColor] = useState<string>(Color.RED.toCssColorString());
 
   const highlight = useMemo(
     () => (viewer ? Highlight.getInstance(viewer) : undefined),
@@ -28,14 +34,14 @@ export default function DataSourceEntity() {
   );
 
   const onMouseMove = useCallback(
-    (movement: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
+    (movement: ScreenSpaceEventHandler.MotionEvent) => {
       if (!viewer || !highlight || !isPicking) return;
       const picked = viewer.scene.pick(movement.endPosition);
-      if (!Cesium.defined(picked)) return highlight.hide();
+      if (!defined(picked)) return highlight.hide();
       highlight.show(picked, {
         outline,
         width,
-        color: Cesium.Color.fromCssColorString(color),
+        color: Color.fromCssColorString(color),
       });
     },
     [isPicking, viewer, highlight, outline, width, color],
@@ -45,14 +51,14 @@ export default function DataSourceEntity() {
     if (!viewer) return;
     // Set GeoJsonDataSource to the viewer on mount
     viewer.dataSources.add(
-      Cesium.GeoJsonDataSource.load("/data/ne_10m_us_states.topojson"),
+      GeoJsonDataSource.load("/data/ne_10m_us_states.topojson"),
     );
     // Set camera
     viewer.camera.lookAt(
-      Cesium.Cartesian3.fromDegrees(-98.0, 40.0),
-      new Cesium.Cartesian3(0.0, -4790000.0, 3930000.0),
+      Cartesian3.fromDegrees(-98.0, 40.0),
+      new Cartesian3(0.0, -4790000.0, 3930000.0),
     );
-    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    viewer.camera.lookAtTransform(Matrix4.IDENTITY);
 
     return () => {
       // Remove data source from the viewer on unmount
@@ -64,16 +70,17 @@ export default function DataSourceEntity() {
     if (isPicking) {
       viewer?.screenSpaceEventHandler.setInputAction(
         onMouseMove,
-        Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+        ScreenSpaceEventType.MOUSE_MOVE,
       );
     }
 
     return () => {
+      highlight?.hide();
       viewer?.screenSpaceEventHandler.removeInputAction(
-        Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+        ScreenSpaceEventType.MOUSE_MOVE,
       );
     };
-  }, [viewer, isPicking, onMouseMove]);
+  }, [highlight, viewer, isPicking, onMouseMove]);
 
   return (
     <div className="flex flex-col gap-2 p-2">

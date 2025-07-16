@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@pkg/ui/button";
 import {
   Command,
@@ -7,29 +9,22 @@ import {
   CommandItem,
   CommandList,
 } from "@pkg/ui/command";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@pkg/ui/drawer";
-import { useMediaQuery } from "@pkg/ui/hooks/use-media-query";
 import { cn } from "@pkg/ui/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@pkg/ui/popover";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import type { ApiOption } from "@/components/cesium/types";
+import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
 
 function StatusList({
   open,
   setOpen,
-  setOption,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  setOption: (option: ApiOption | undefined) => void;
 }) {
+  const { setApiOption } = useCesiumUtilsApiStore();
   const [options, setOptions] = useState<ApiOption[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -64,11 +59,11 @@ function StatusList({
         <CommandGroup>
           {options.map((option) => (
             <CommandItem
-              key={option.feat}
-              value={option.feat}
+              key={option.api}
+              value={option.api}
               className="hover:cursor-pointer"
               onSelect={(value) => {
-                setOption(options.find((opt) => opt.feat === value));
+                setApiOption(options.find((opt) => opt.api === value));
                 setOpen(false);
               }}
             >
@@ -81,55 +76,50 @@ function StatusList({
   );
 }
 interface ApiComboboxProps {
-  option: ApiOption | undefined;
-  setOption: (status: ApiOption | undefined) => void;
   /** The trigger button class */
   className?: string;
 }
-export default function ApiCombobox({
-  option,
-  setOption,
-  className,
-}: ApiComboboxProps) {
+export default function ApiCombobox({ className }: ApiComboboxProps) {
+  const { apiOption } = useCesiumUtilsApiStore();
   const [open, setOpen] = useState<boolean>(false);
-  const isLargeScreen = useMediaQuery("min-width: 1024px");
+  // const isLargeScreen = useMediaQuery("min-width: 1024px");
 
-  if (isLargeScreen) {
-    return (
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className={cn("w-full justify-between p-4", className)}
-          >
-            {option ? option.label : "Select API"}
-            <ChevronDown />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-96 p-0" align="start">
-          <StatusList open={open} setOpen={setOpen} setOption={setOption} />
-        </PopoverContent>
-      </Popover>
-    );
-  }
-
+  // if (isLargeScreen) {
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className={cn("w-full justify-between px-4", className)}
+          className={cn("w-full justify-between p-4", className)}
         >
-          {option ? option.label : "Select API"}
+          {apiOption ? apiOption.label : "Select API"}
           <ChevronDown />
         </Button>
-      </DrawerTrigger>
-      <DrawerContent className="h-1/2">
-        <div className="p-2">
-          <DrawerTitle className="sr-only">Cesium Utils API</DrawerTitle>
-          <StatusList open={open} setOpen={setOpen} setOption={setOption} />
-        </div>
-      </DrawerContent>
-    </Drawer>
+      </PopoverTrigger>
+      <PopoverContent className="w-96 p-0" align="start">
+        <StatusList open={open} setOpen={setOpen} />
+      </PopoverContent>
+    </Popover>
   );
+  // }
+
+  // return (
+  //   <Drawer open={open} onOpenChange={setOpen}>
+  //     <DrawerTrigger asChild>
+  //       <Button
+  //         variant="outline"
+  //         className={cn("w-full justify-between px-4", className)}
+  //       >
+  //         {option ? option.label : "Select API"}
+  //         <ChevronDown />
+  //       </Button>
+  //     </DrawerTrigger>
+  //     <DrawerContent className="h-1/2">
+  //       <div className="p-2">
+  //         <DrawerTitle className="sr-only">Cesium Utils API</DrawerTitle>
+  //         <StatusList open={open} setOpen={setOpen} setOption={setOption} />
+  //       </div>
+  //     </DrawerContent>
+  //   </Drawer>
+  // );
 }
