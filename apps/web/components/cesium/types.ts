@@ -1,5 +1,5 @@
 import type { Viewer } from "cesium";
-import type { ReactNode } from "react";
+import type { ComponentType, LazyExoticComponent } from "react";
 import type { ViewerProps as RViewerProps } from "resium";
 
 export interface ViewerProps extends Omit<RViewerProps, "className"> {
@@ -26,5 +26,5 @@ export interface ApiOption {
 export interface Feature {
   value: string;
   label: string;
-  node: ReactNode;
+  render: ComponentType<any> | LazyExoticComponent<ComponentType<any>>;
 }
