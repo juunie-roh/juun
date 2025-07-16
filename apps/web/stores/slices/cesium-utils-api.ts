@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
 
 import { ApiOption, Feature } from "@/components/cesium/types";
 import { logger } from "@/stores/middleware/logger";
@@ -17,33 +16,19 @@ interface CesiumUtilsApiState {
 }
 
 const useCesiumUtilsApiStore = create<CesiumUtilsApiState>()(
-  devtools(
-    logger(
-      (set, _get) => ({
-        apiOption: undefined,
-        setApiOption: (apiOption) =>
-          set({ apiOption }, false, { type: "cesium-utils-api-option/set" }),
-        removeApiOption: () =>
-          set({ apiOption: undefined }, false, {
-            type: "cesium-utils-api-option/remove",
-          }),
+  logger(
+    (set, _get) => ({
+      apiOption: undefined,
+      setApiOption: (apiOption) => set({ apiOption }),
+      removeApiOption: () => set({ apiOption: undefined }),
 
-        feature: undefined,
-        setFeature: (feature) =>
-          set({ feature }, false, "cesium-utils-api-feature/set"),
-        removeFeature: () =>
-          set({ feature: undefined }, false, "cesium-utils-api-feature/remove"),
+      feature: undefined,
+      setFeature: (feature) => set({ feature }),
+      removeFeature: () => set({ feature: undefined }),
 
-        clear: () =>
-          set(
-            { apiOption: undefined, feature: undefined },
-            false,
-            "cesium-utils-api/clear",
-          ),
-      }),
-      "cesium-utils-api-store",
-    ),
-    { name: "Cesium Utils API Store" },
+      clear: () => set({ apiOption: undefined, feature: undefined }),
+    }),
+    "cesium-utils-api-store",
   ),
 );
 

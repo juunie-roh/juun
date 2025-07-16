@@ -2,21 +2,23 @@ import { CodeBlock } from "@pkg/ui/code-block";
 
 export default function HighlightDescription() {
   return (
-    <div className="prose max-w-none">
-      <h2 className="mb-2 tracking-tight">Highlight</h2>
+    <div className="prose text-primary max-w-none">
+      <h2 className="text-primary mb-2 tracking-tight">Highlight</h2>
       <p>
         A lightweight multiton highlight manager for Cesium using flyweight
         pattern that provides unified highlighting for both 2D surface and 3D
         objects.
       </p>
 
-      <h3 className="mb-2 tracking-tight">About</h3>
+      <h3 className="text-primary mb-2 tracking-tight">About</h3>
       <ul>
         <li>
-          <b>Supports</b>: Ground-clamped <code>Entity</code> instances,
-          (polygon, polyline, rectangle), <code>GroundPrimitive</code>{" "}
-          instances, <code>Cesium3DTileFeature</code>, <code>Entity</code> with
-          model graphics
+          <b>Supports</b>: Ground-clamped{" "}
+          <code className="text-primary">Entity</code> instances, (polygon,
+          polyline, rectangle),{" "}
+          <code className="text-primary">GroundPrimitive</code> instances,{" "}
+          <code className="text-primary">Cesium3DTileFeature</code>,{" "}
+          <code className="text-primary">Entity</code> with model graphics
         </li>
         <li>
           <b>Highlighting modes</b>: Fill mode (default) and outline mode for
@@ -37,12 +39,13 @@ export default function HighlightDescription() {
         </li>
       </ul>
 
-      <h3 className="mb-2 tracking-tight">Usage</h3>
+      <h3 className="text-primary mb-2 tracking-tight">Usage</h3>
       <p>
-        You can either use the unified highlight manager <code>Highlight</code>{" "}
-        which automatically handles object type detection and routing, or
-        implement separate control with <code>SurfaceHighlight</code> and{" "}
-        <code>SilhouetteHighlight</code>
+        You can either use the unified highlight manager{" "}
+        <code className="text-primary">Highlight</code> which automatically
+        handles object type detection and routing, or implement separate control
+        with <code className="text-primary">SurfaceHighlight</code> and{" "}
+        <code className="text-primary">SilhouetteHighlight</code>
         for more granular control.
       </p>
 

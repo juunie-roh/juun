@@ -1,4 +1,11 @@
-export const metadata = {
+import { Separator } from "@pkg/ui/separator";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@pkg/ui/sidebar";
+import { Metadata } from "next";
+
+import CesiumUtilsBreadcrumb from "@/components/cesium/demo/breadcrumb";
+import CesiumUtilsSidebar from "@/components/cesium/demo/sidebar";
+
+export const metadata: Metadata = {
   title: "Cesium Utils",
   description:
     "A utility library for CesiumJS that simplifies working with Cesium instances.",
@@ -18,8 +25,18 @@ export default function CesiumUtilsDemoLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main className="h-[calc(100vh-4.5rem)] w-full px-4 py-8 md:px-8 xl:h-[calc(100vh-5rem)]">
-      {children}
-    </main>
+    <SidebarProvider className="h-[calc(100vh-var(--header-height))] min-h-0">
+      <SidebarInset className="flex min-w-0 flex-col overflow-hidden">
+        <header className="bg-background flex h-14 shrink-0 items-center gap-2 border-b">
+          <div className="flex h-full flex-1 items-center justify-end gap-2 p-4">
+            <CesiumUtilsBreadcrumb />
+            <Separator orientation="vertical" />
+            <SidebarTrigger />
+          </div>
+        </header>
+        <div className="min-h-0 flex-1 p-4">{children}</div>
+      </SidebarInset>
+      <CesiumUtilsSidebar />
+    </SidebarProvider>
   );
 }

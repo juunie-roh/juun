@@ -1,49 +1,50 @@
+"use client";
+
 import { CodeBlock } from "@pkg/ui/code-block";
+import { Skeleton } from "@pkg/ui/skeleton";
 import Link from "next/link";
+import { Suspense } from "react";
 
-import { Api } from "@/components/cesium/types";
+import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
 
-import CollectionDemo from "./collection";
-import HighlightDemo from "./highlight";
-import TerrainDemo from "./terrain";
-import ViewerDemo from "./viewer";
-
-// Map each API feature to its corresponding demo component
-export const FeatureDemos: Record<Api, React.ComponentType> = {
-  collection: CollectionDemo,
-  terrain: TerrainDemo,
-  viewer: ViewerDemo,
-  highlight: HighlightDemo,
-};
+import { getApiFeatures } from "./utils";
 
 // Default component when no feature is selected
 function DefaultDemo() {
   return (
     <div className="prose text-primary max-w-none">
-      <h2 className="mb-2 tracking-tight">Cesium Utils Demo</h2>
+      <h2 className="text-primary mb-2 tracking-tight">Cesium Utils Demo</h2>
       <p className="mb-4">
         This page demonstrates the capabilities of the{" "}
-        <code>@juun-roh/cesium-utils</code> library, a utility package.
+        <code className="text-primary">@juun-roh/cesium-utils</code> library, a
+        utility package.
       </p>
 
-      <h3 className="mb-2 text-lg font-semibold">Environment</h3>
+      <h3 className="text-primary mb-2 text-lg font-semibold">Environment</h3>
       <p className="mb-4">
         This demonstration is built using{" "}
-        <Link href="https://nextjs.org">Next.js</Link>, the React framework, and
-        leverages <Link href="https://resium.reearth.io/">Resium</Link>, a React
-        wrapper for Cesium that provides declarative components for 3D
+        <Link href="https://nextjs.org" className="text-primary">
+          Next.js
+        </Link>
+        , the React framework, and leverages{" "}
+        <Link href="https://resium.reearth.io/" className="text-primary">
+          Resium
+        </Link>
+        , a React wrapper for Cesium that provides declarative components for 3D
         geospatial applications.
       </p>
 
-      <h3 className="mb-2 text-lg font-semibold">Usage</h3>
+      <h3 className="text-primary mb-2 text-lg font-semibold">Usage</h3>
       <p className="mb-4">
-        The <code>@juun-roh/cesium-utils</code> package maintains vanilla
-        CesiumJS compatibility, meaning you can use it in any Cesium project
-        regardless of framework choice. The utilities work directly with
-        standard Cesium objects and APIs.
+        The <code className="text-primary">@juun-roh/cesium-utils</code> package
+        maintains vanilla CesiumJS compatibility, meaning you can use it in any
+        Cesium project regardless of framework choice. The utilities work
+        directly with standard Cesium objects and APIs.
       </p>
 
-      <h4 className="mb-2 text-base font-medium">Traditional CesiumJS</h4>
+      <h4 className="text-primary mb-2 text-base font-medium">
+        Traditional CesiumJS
+      </h4>
       <p className="mb-4">
         For traditional CesiumJS projects, import the utilities directly and use
         them with your existing viewer setup:
@@ -80,7 +81,9 @@ async function main() {
 main();`}
       />
 
-      <h4 className="mb-2 text-base font-medium">React/Resium Integration</h4>
+      <h4 className="text-primary mb-2 text-base font-medium">
+        React/Resium Integration
+      </h4>
       <p className="mb-4">
         When using Resium, the utilities integrate seamlessly within React
         components. Access the viewer through Resium's hooks and apply the same
@@ -142,16 +145,37 @@ export default function Viewer(props: any) {
   );
 }
 
-// Feature demo renderer component
-interface FeatureDemoProps {
-  feat: Api | undefined;
-}
-
-export default function FeatureDemo({ feat }: FeatureDemoProps) {
-  if (!feat) {
+export default function FeatureDemo() {
+  const { apiOption, feature } = useCesiumUtilsApiStore();
+  if (!apiOption) {
     return <DefaultDemo />;
   }
 
-  const DemoComponent = FeatureDemos[feat];
-  return <DemoComponent />;
+  if (!feature) {
+    const features = getApiFeatures(apiOption.api);
+    const defaultFeature =
+      features.find((f) => f.value === "description") || features[0];
+
+    if (!defaultFeature) {
+      return (
+        <div className="prose max-w-none">
+          <h2 className="mb-2 tracking-tight">{apiOption.label}</h2>
+          <p>No features available for this API.</p>
+        </div>
+      );
+    }
+
+    return (
+      <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+        {defaultFeature.node}
+      </Suspense>
+    );
+  }
+
+  // Both API and feature selected - show selected feature
+  return (
+    <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+      {feature.node}
+    </Suspense>
+  );
 }
