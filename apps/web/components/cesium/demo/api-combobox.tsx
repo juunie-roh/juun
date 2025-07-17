@@ -34,7 +34,7 @@ function StatusList({
         const { loadApiOptions } = await import("@/components/cesium/utils");
         setOptions(await loadApiOptions());
       } catch (error) {
-        console.error("Failed to load API options:", error);
+        console.error("Failed to load APIs:", error);
       } finally {
         setLoading(false);
       }
@@ -46,14 +46,14 @@ function StatusList({
   if (loading) {
     return (
       <div className="flex items-center justify-center p-4">
-        <div className="text-muted-foreground text-sm">Loading options...</div>
+        <div className="text-muted-foreground text-sm">Loading APIs ...</div>
       </div>
     );
   }
 
   return (
     <Command>
-      <CommandInput placeholder="Search API ..." />
+      <CommandInput placeholder="Search ..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
@@ -75,24 +75,16 @@ function StatusList({
     </Command>
   );
 }
-interface ApiComboboxProps {
-  /** The trigger button class */
-  className?: string;
-}
-export default function ApiCombobox({ className }: ApiComboboxProps) {
+
+export default function ApiCombobox() {
   const { option } = useCesiumUtilsApiStore();
   const [open, setOpen] = useState<boolean>(false);
-  // const isLargeScreen = useMediaQuery("min-width: 1024px");
 
-  // if (isLargeScreen) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn("w-full justify-between p-4", className)}
-        >
-          {option ? option.label : "Select API"}
+        <Button variant="outline" className={cn("w-full justify-between p-4")}>
+          {option ? option.label : "Select ..."}
           <ChevronDown />
         </Button>
       </PopoverTrigger>
@@ -101,25 +93,4 @@ export default function ApiCombobox({ className }: ApiComboboxProps) {
       </PopoverContent>
     </Popover>
   );
-  // }
-
-  // return (
-  //   <Drawer open={open} onOpenChange={setOpen}>
-  //     <DrawerTrigger asChild>
-  //       <Button
-  //         variant="outline"
-  //         className={cn("w-full justify-between px-4", className)}
-  //       >
-  //         {option ? option.label : "Select API"}
-  //         <ChevronDown />
-  //       </Button>
-  //     </DrawerTrigger>
-  //     <DrawerContent className="h-1/2">
-  //       <div className="p-2">
-  //         <DrawerTitle className="sr-only">Cesium Utils API</DrawerTitle>
-  //         <StatusList open={open} setOpen={setOpen} setOption={setOption} />
-  //       </div>
-  //     </DrawerContent>
-  //   </Drawer>
-  // );
 }
