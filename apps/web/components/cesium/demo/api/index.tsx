@@ -146,20 +146,20 @@ export default function Viewer(props: any) {
 }
 
 export default function FeatureDemo() {
-  const { apiOption, feature } = useCesiumUtilsApiStore();
-  if (!apiOption) {
+  const { option, feature } = useCesiumUtilsApiStore();
+  if (!option) {
     return <DefaultDemo />;
   }
 
   if (!feature) {
-    const features = getApiFeatures(apiOption.api);
+    const features = getApiFeatures(option.api);
     const defaultFeature =
       features.find((f) => f.value === "description") || features[0];
 
     if (!defaultFeature) {
       return (
         <div className="prose max-w-none">
-          <h2 className="mb-2 tracking-tight">{apiOption.label}</h2>
+          <h2 className="mb-2 tracking-tight">{option.label}</h2>
           <p>No features available for this API.</p>
         </div>
       );

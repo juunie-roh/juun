@@ -13,7 +13,7 @@ import Viewer from "../viewer";
 import FeatureDemo from "./api";
 
 export default function ResizableViewerController() {
-  const { apiOption } = useCesiumUtilsApiStore();
+  const { option } = useCesiumUtilsApiStore();
   // State to track viewport size
   const isLargeScreen = useMediaQuery("min-width: 1024px");
 
@@ -25,11 +25,11 @@ export default function ResizableViewerController() {
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
           <Viewer
-            key={apiOption?.api || "default"} // refresh the viewer
+            key={option?.api || "default"} // refresh the viewer
             bottomContainer={false}
             animation={false}
             timeline={false}
-            flyTo={apiOption?.flyTo} // extendable viewer option
+            flyTo={option?.flyTo} // extendable viewer option
           />
         </div>
       </ResizablePanel>

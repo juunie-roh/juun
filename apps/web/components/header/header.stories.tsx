@@ -181,7 +181,7 @@ const meta: Meta<typeof Header> = {
     segments: {
       control: false,
       description:
-        "Path segments to display in the breadcrumb. This is auto geterated with `usePathname()` in Next.",
+        "Path segments to display in the breadcrumb. This is auto generated with `usePathname()` in Next.",
       defaultValue: [],
     },
   },

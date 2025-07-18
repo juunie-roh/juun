@@ -3,6 +3,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@pkg/ui/select";
@@ -28,6 +29,7 @@ export default function ColorSelector({
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
+          <SelectLabel>Color</SelectLabel>
           <SelectItem value={Color.RED.toCssColorString()}>RED</SelectItem>
           <SelectItem value={Color.BLUE.toCssColorString()}>BLUE</SelectItem>
           <SelectItem value={Color.LIME.toCssColorString()}>LIME</SelectItem>
