@@ -13,7 +13,7 @@ import FeatureList from "./feature-list";
 export default function CesiumUtilsSidebar() {
   return (
     <Sidebar
-      className="mt-[var(--header-height)]"
+      className="mt-[var(--header-height)] h-[calc(100svh-var(--header-height))]"
       collapsible="offcanvas"
       side="right"
       variant="floating"
