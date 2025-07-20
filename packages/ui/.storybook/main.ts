@@ -1,89 +1,27 @@
-import type { StorybookConfig } from "@storybook/react-webpack5";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import type { StorybookConfig } from '@storybook/react-vite';
+
+import { join, dirname } from "path"
 
 /**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
- */
+* This function is used to resolve the absolute path of a package.
+* It is needed in projects that use Yarn PnP or are set up within a monorepo.
+*/
 function getAbsolutePath(value: string): any {
-  const pkgPath = join(value, "package.json");
-  const pkgURL =
-    typeof import.meta.resolve === "function"
-      ? import.meta.resolve(pkgPath)
-      : new URL(pkgPath, import.meta.url).href;
-  return dirname(fileURLToPath(pkgURL));
+  return dirname(require.resolve(join(value, 'package.json')))
 }
-
 const config: StorybookConfig = {
-  stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: [
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-docs"),
+  "stories": [
+    "../src/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
-  framework: {
-    name: getAbsolutePath("@storybook/react-webpack5"),
-    options: {},
-  },
-  typescript: {
-    check: false,
-    reactDocgen: "react-docgen-typescript",
-    reactDocgenTypescriptOptions: {
-      compilerOptions: {
-        allowSyntheticDefaultImports: true,
-        esModuleInterop: true,
-      },
-      propFilter: {
-        skipPropsWithoutDoc: false,
-      },
-    },
-  },
-  webpackFinal: async (config) => {
-    config.resolve = config.resolve || {};
-    if (config.module?.rules) {
-      config.module.rules.push(
-        // Add SVGR loader for SVG files
-        {
-          test: /\.svg$/,
-          use: ["@svgr/webpack"],
-        },
-        // Tailwind css loader
-        {
-          test: /\.css$/,
-          use: [
-            {
-              loader: getAbsolutePath("postcss-loader"),
-              options: {
-                postcssOptions: {
-                  plugins: [getAbsolutePath("@tailwindcss/postcss")],
-                },
-              },
-            },
-          ],
-        },
-        {
-          test: /\.(ts|tsx)$/,
-          loader: getAbsolutePath("babel-loader"),
-          options: {
-            presets: [
-              ["@babel/preset-env", { targets: "defaults" }],
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
-            plugins: [
-              // Add React automatic JSX transform
-              ["@babel/plugin-transform-react-jsx", { runtime: "automatic" }],
-            ],
-          },
-          exclude: "/node_modules/",
-        },
-      );
-    }
-
-    // Return the modified config
-    return config;
-  },
+  "addons": [
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-links'),
+  ],
+  "framework": {
+    "name": getAbsolutePath('@storybook/react-vite'),
+    "options": {}
+  }
 };
-
 export default config;
