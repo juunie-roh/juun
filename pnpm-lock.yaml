@@ -51,8 +51,8 @@ importers:
   apps/web:
     dependencies:
       '@juun-roh/cesium-utils':
-        specifier: ^0.2.0
-        version: 0.2.0(cesium@1.131.0)
+        specifier: ^0.2.1
+        version: 0.2.1(cesium@1.131.0)
       '@pkg/ui':
         specifier: workspace:^
         version: link:../../packages/ui
@@ -1630,8 +1630,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inquirer/figures@1.0.12':
-    resolution: {integrity: sha512-MJttijd8rMFcKJC8NYmprWr6hD3r9Gd9qUC0XwPNwoEPWSMVJwA2MlXxF+nhZZNMY+HXsWa+o7KY2emWYIn0jQ==}
+  '@inquirer/figures@1.0.13':
+    resolution: {integrity: sha512-lGPVU3yO9ZNqA7vTYz26jny41lE7yoQansmqdMLBEfqaGsmdg7V3W9mK9Pvb5IL4EVZ9GnSDGMO/cJXud5dMaw==}
     engines: {node: '>=18'}
 
   '@isaacs/cliui@8.0.2':
@@ -1770,11 +1770,11 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@juun-roh/cesium-utils@0.2.0':
-    resolution: {integrity: sha512-9EB0ZpcMV4Qfc42noGE9ZptC4p7TElbPMPnNQwXMyzamLYrJPHNV2XQV+Rxth7/oSWWwgU3Ud0xIK/8FOgi46A==}
+  '@juun-roh/cesium-utils@0.2.1':
+    resolution: {integrity: sha512-NwnBfHYMGPCBpu7dau0ewvJHXgEioWTpUIg6KlWu/Qfc4qdB/LRLYbzAfvQ8HbhE21eY5CkmC70VhZe09KqmTw==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
-      cesium: ^1
+      cesium: ^1.131.0
 
   '@mdx-js/react@3.1.0':
     resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
@@ -9093,7 +9093,7 @@ snapshots:
   '@img/sharp-win32-x64@0.34.3':
     optional: true
 
-  '@inquirer/figures@1.0.12': {}
+  '@inquirer/figures@1.0.13': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -9341,7 +9341,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
 
-  '@juun-roh/cesium-utils@0.2.0(cesium@1.131.0)':
+  '@juun-roh/cesium-utils@0.2.1(cesium@1.131.0)':
     dependencies:
       cesium: 1.131.0
 
@@ -13050,7 +13050,7 @@ snapshots:
 
   inquirer@9.3.7:
     dependencies:
-      '@inquirer/figures': 1.0.12
+      '@inquirer/figures': 1.0.13
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
       external-editor: 3.1.0
