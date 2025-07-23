@@ -1,16 +1,18 @@
 "use client";
 
-import { Wheel } from "@pkg/ui/wheel";
+import { Wheel, WheelContent } from "@pkg/ui/wheel";
 import { Check, X } from "lucide-react";
 
 function ConfirmWheel() {
   return (
-    <Wheel
-      num={2}
-      icons={[Check, X]}
-      titles={["Confirm", "Cancel"]}
-      variant="destructive"
-    />
+    <Wheel variant="destructive">
+      <WheelContent title="Confirm">
+        <Check />
+      </WheelContent>
+      <WheelContent title="Cancel">
+        <X />
+      </WheelContent>
+    </Wheel>
   );
 }
 
