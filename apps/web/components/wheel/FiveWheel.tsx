@@ -1,15 +1,27 @@
 "use client";
 
-import { Wheel } from "@pkg/ui/wheel";
+import { Wheel, WheelContent } from "@pkg/ui/wheel";
 import { Copy, Delete, Info, Move, RotateCw } from "lucide-react";
 
 function FiveWheel() {
   return (
-    <Wheel
-      num={5}
-      icons={[Move, Delete, Copy, Info, RotateCw]}
-      titles={["Move", "Delete", "Copy", "Info", "Rotate"]}
-    />
+    <Wheel variant="primary">
+      <WheelContent title="Move">
+        <Move />
+      </WheelContent>
+      <WheelContent title="Delete">
+        <Delete />
+      </WheelContent>
+      <WheelContent title="Copy">
+        <Copy />
+      </WheelContent>
+      <WheelContent title="Info">
+        <Info />
+      </WheelContent>
+      <WheelContent title="Rotate">
+        <RotateCw />
+      </WheelContent>
+    </Wheel>
   );
 }
 

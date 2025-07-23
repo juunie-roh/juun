@@ -3,16 +3,20 @@
 import { cn } from "@pkg/ui/lib/utils";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
-import type { createLucideIcon } from "lucide-react";
 import { TriangleAlert } from "lucide-react";
-import type { HTMLAttributes, SVGAttributes } from "react";
-import { forwardRef, useState } from "react";
+import type { HTMLAttributes, ReactElement, SVGAttributes } from "react";
+import { Children, forwardRef, isValidElement, useState } from "react";
 
 // Internal Types
 type Angle = { start: number; end: number };
 type Point = { x: number; y: number };
 interface WheelRootProps extends HTMLAttributes<HTMLDivElement> {
   size?: number;
+}
+interface WheelContentProps extends HTMLAttributes<HTMLDivElement> {
+  title?: string;
+  disabled?: boolean;
+  children: ReactElement;
 }
 interface WheelSectorProps
   extends VariantProps<typeof pathVariants>,
@@ -22,11 +26,13 @@ interface WheelSectorProps
   radius: number;
   innerRadius: number;
   rotation: number;
-  icon: ReturnType<typeof createLucideIcon>;
+  icon: ReactElement;
+  title?: string;
   isHovered: boolean;
+  isDisabled: boolean;
   onHoverChange: (index: number | null) => void;
   onSelect?: (index: number) => void;
-  iconSize?: number; // Size of the icon (defaults to 24)
+  iconSize?: number;
 }
 interface WheelTitleProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -42,7 +48,7 @@ const wheelVariants = cva("relative size-[200px]", {
   },
 });
 
-const pathVariants = cva("cursor-pointer", {
+const pathVariants = cva("", {
   variants: {
     variant: {
       primary: "fill-primary",
@@ -54,32 +60,41 @@ const pathVariants = cva("cursor-pointer", {
       true: "",
       false: "",
     },
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
+      false: "cursor-pointer",
+    },
   },
   compoundVariants: [
     {
       variant: "primary",
       isHovered: true,
+      isDisabled: false,
       className: "fill-primary/90 stroke-primary",
     },
     {
       variant: "secondary",
       isHovered: true,
+      isDisabled: false,
       className: "fill-secondary/80",
     },
     {
       variant: "destructive",
       isHovered: true,
+      isDisabled: false,
       className: "fill-destructive/90",
     },
     {
       variant: "outline",
       isHovered: true,
+      isDisabled: false,
       className: "fill-accent stroke-accent",
     },
   ],
   defaultVariants: {
     variant: "primary",
     isHovered: false,
+    isDisabled: false,
   },
 });
 
@@ -95,17 +110,23 @@ const iconVariants = cva("pointer-events-none", {
       true: "",
       false: "",
     },
+    isDisabled: {
+      true: "opacity-60",
+      false: "",
+    },
   },
   compoundVariants: [
     {
       variant: "outline",
       isHovered: true,
+      isDisabled: false,
       className: "stroke-accent-foreground",
     },
   ],
   defaultVariants: {
     variant: "primary",
     isHovered: false,
+    isDisabled: false,
   },
 });
 
@@ -170,14 +191,34 @@ const WheelRoot = forwardRef<HTMLDivElement, WheelRootProps>(
 );
 WheelRoot.displayName = "WheelRoot";
 
+const WheelContent = ({
+  children,
+  title,
+  disabled = false,
+  ...props
+}: WheelContentProps) => {
+  return (
+    <div
+      data-wheel-content
+      data-title={title}
+      data-disabled={disabled}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+WheelContent.displayName = "WheelContent";
+
 const WheelSector = ({
   index,
   angle,
   radius,
   innerRadius,
   rotation,
-  icon: Icon,
+  icon,
   isHovered,
+  isDisabled,
   onHoverChange,
   onSelect = (index) => console.log("Wheel Menu Selected:", index),
   iconSize = 24,
@@ -188,11 +229,61 @@ const WheelSector = ({
   const x = 100 + midRadius * Math.cos(angleInRadians);
   const y = 100 + midRadius * Math.sin(angleInRadians);
 
+  const handleMouseEnter = () => {
+    if (!isDisabled) {
+      onHoverChange(index);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isDisabled) {
+      onHoverChange(null);
+    }
+  };
+
+  const handleClick = () => {
+    if (!isDisabled) {
+      onSelect?.(index);
+    }
+  };
+
+  // Handle icon rendering within SVG context
+  const iconElement = isValidElement(icon) ? (
+    <g
+      transform={`translate(${x - iconSize / 2}, ${y - iconSize / 2})`}
+      style={{ pointerEvents: "none" }}
+    >
+      <foreignObject
+        width={iconSize}
+        height={iconSize}
+        style={{ pointerEvents: "none" }}
+      >
+        <div
+          className={cn(
+            iconVariants({ variant, isHovered, isDisabled }),
+            "flex h-full w-full items-center justify-center",
+          )}
+          style={{ pointerEvents: "none" }}
+        >
+          {icon}
+        </div>
+      </foreignObject>
+    </g>
+  ) : (
+    <TriangleAlert
+      x={x - iconSize / 2}
+      y={y - iconSize / 2}
+      width={iconSize}
+      height={iconSize}
+      className={cn(iconVariants({ variant, isHovered, isDisabled }))}
+    />
+  );
+
   return (
     <g
       className={cn(
         "origin-center transition-all duration-300",
-        isHovered && "scale-110",
+        isHovered && !isDisabled && "scale-110",
       )}
     >
       <path
@@ -202,22 +293,14 @@ const WheelSector = ({
           radius,
           innerRadius,
         })}
-        strokeWidth="1"
-        className={cn(pathVariants({ variant, isHovered }))}
-        onMouseEnter={() => onHoverChange(index)}
-        onMouseLeave={() => onHoverChange(null)}
-        onClick={() => onSelect?.(index)}
+        strokeWidth={!isDisabled ? "2" : "1"}
+        className={cn(pathVariants({ variant, isHovered, isDisabled }))}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        style={{ pointerEvents: isDisabled ? "none" : "auto" }}
       />
-      <Icon
-        x={x - iconSize / 2}
-        y={y - iconSize / 2}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        className={cn(
-          iconVariants({ variant, isHovered }),
-          `text-[${iconSize}px]`,
-        )}
-      />
+      {iconElement}
     </g>
   );
 };
@@ -238,16 +321,12 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
 WheelTitle.displayName = "WheelTitle";
 
 interface WheelProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect">,
+  extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect" | "children">,
     VariantProps<typeof wheelVariants> {
-  /** The Number of Wheel Menus */
-  num: number;
   /** Callback to execute on menu selected */
-  onSelect?: (index: number) => void;
-  /** Icons for each menu */
-  icons?: ReturnType<typeof createLucideIcon>[];
-  /** Titles for each menu */
-  titles?: string[];
+  onSelect?: (index: number, title?: string) => void;
+  /** WheelContent components */
+  children: React.ReactNode;
   size?: number;
   radius?: number;
   innerRadius?: number;
@@ -257,10 +336,8 @@ interface WheelProps
 const Wheel = forwardRef<HTMLDivElement, WheelProps>(
   (
     {
-      num,
+      children,
       onSelect,
-      icons,
-      titles,
       size = 200,
       radius = 80,
       innerRadius = 35,
@@ -270,19 +347,29 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
     },
     ref,
   ) => {
-    if (num < 2) throw new Error("Invalid Wheel Menu number (lower than 2)");
-    if (icons && icons.length !== num)
-      throw new Error(
-        "The number of wheel menu and the length of icons array does not match.",
-      );
-    if (titles && titles.length !== num) {
-      throw new Error(
-        "The number of wheel menu and the length of titles array does not match.",
-      );
-    }
+    // Parse children to extract WheelContent data
+    const wheelItems = Children.toArray(children)
+      .filter(
+        (child): child is ReactElement =>
+          isValidElement(child) &&
+          typeof child.type === "function" &&
+          (child.type as any).displayName === "WheelContent",
+      )
+      .map((child) => {
+        const props = child.props as WheelContentProps;
+        return {
+          icon: props.children,
+          title: props.title,
+          disabled: props.disabled || false,
+        };
+      });
+
+    const num = wheelItems.length;
+
+    if (num < 2)
+      throw new Error("Wheel requires at least 2 WheelContent children");
+
     const [hovered, setHovered] = useState<number | null>(null);
-    const wheelTitles =
-      titles || Array.from({ length: num }, (_, i) => `Menu ${i}`);
 
     const getAngles = () => {
       // Specify the shape for wheel with 2 menus.
@@ -306,6 +393,10 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
     const viewBoxOrigin = size / 2 - viewBoxSize / 2;
     const viewBox = `${viewBoxOrigin} ${viewBoxOrigin} ${viewBoxSize} ${viewBoxSize}`;
 
+    const handleSelect = (index: number) => {
+      onSelect?.(index, wheelItems[index]?.title);
+    };
+
     return (
       <WheelRoot
         ref={ref}
@@ -317,7 +408,8 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
           <g>
             {angles.map((angle, i) => {
               const rotation = (angle.start + angle.end) / 2;
-              const Comp = icons ? icons[i]! : TriangleAlert;
+              const item = wheelItems[i];
+              const icon = item?.icon || <TriangleAlert />;
 
               return (
                 <WheelSector
@@ -327,10 +419,12 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
                   radius={radius}
                   innerRadius={innerRadius}
                   rotation={rotation}
-                  icon={Comp}
+                  icon={icon}
+                  title={item?.title}
                   isHovered={hovered === i}
+                  isDisabled={item?.disabled || false}
                   onHoverChange={setHovered}
-                  onSelect={onSelect}
+                  onSelect={handleSelect}
                   variant={variant}
                 />
               );
@@ -338,8 +432,8 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
           </g>
         </svg>
 
-        {hovered !== null && wheelTitles[hovered] && (
-          <WheelTitle>{wheelTitles[hovered]}</WheelTitle>
+        {hovered !== null && (
+          <WheelTitle>{wheelItems[hovered]?.title || ""}</WheelTitle>
         )}
       </WheelRoot>
     );
@@ -347,4 +441,4 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
 );
 Wheel.displayName = "Wheel";
 
-export { Wheel, type WheelProps };
+export { Wheel, WheelContent, type WheelContentProps, type WheelProps };

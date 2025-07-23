@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   ArrowDown,
   ArrowLeft,
@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { Wheel } from "../components/wheel";
+import { Wheel, WheelContent } from "../components/wheel";
 
 const meta: Meta<typeof Wheel> = {
   title: "shadcn/Wheel",
@@ -27,10 +27,6 @@ const meta: Meta<typeof Wheel> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    num: {
-      control: { type: "range", min: 2, max: 10, step: 1 },
-      description: "The number of wheel menus",
-    },
     variant: {
       control: "select",
       options: ["primary", "secondary", "destructive", "outline"],
@@ -44,6 +40,10 @@ const meta: Meta<typeof Wheel> = {
       control: { type: "range", min: 0, max: 60, step: 1 },
       description: "Inner radius of the wheel",
     },
+    size: {
+      control: { type: "range", min: 150, max: 300, step: 10 },
+      description: "Size of the wheel container",
+    },
     onSelect: { action: "selected" },
   },
 };
@@ -54,97 +54,282 @@ type Story = StoryObj<typeof Wheel>;
 // Basic examples
 export const Default: Story = {
   args: {
-    num: 5,
     variant: "primary",
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 export const ConfirmType: Story = {
   args: {
-    num: 2,
     variant: "primary",
-    icons: [Check, X],
-    titles: ["Confirm", "Cancel"],
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Confirm">
+        <Check />
+      </WheelContent>
+      <WheelContent title="Cancel">
+        <X />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 export const FourType: Story = {
   args: {
-    num: 4,
     variant: "primary",
-    icons: [ArrowUp, ArrowRight, ArrowDown, ArrowLeft],
-    titles: ["Up", "Right", "Down", "Left"],
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Up">
+        <ArrowUp />
+      </WheelContent>
+      <WheelContent title="Right">
+        <ArrowRight />
+      </WheelContent>
+      <WheelContent title="Down">
+        <ArrowDown />
+      </WheelContent>
+      <WheelContent title="Left">
+        <ArrowLeft />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 export const FiveType: Story = {
   args: {
-    num: 5,
     variant: "primary",
-    icons: [Home, Search, Bell, Settings, User],
-    titles: ["Home", "Search", "Notifications", "Settings", "Profile"],
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 // Variant examples
 export const PrimaryVariant: Story = {
   args: {
-    num: 5,
     variant: "primary",
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 export const SecondaryVariant: Story = {
   args: {
-    num: 5,
     variant: "secondary",
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 export const DestructiveVariant: Story = {
   args: {
-    num: 5,
     variant: "destructive",
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 export const OutlineVariant: Story = {
   args: {
-    num: 5,
     variant: "outline",
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
+};
+
+// Disabled items example
+export const WithDisabledItems: Story = {
+  args: {
+    variant: "primary",
+  },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Available">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Disabled" disabled>
+        <Search />
+      </WheelContent>
+      <WheelContent title="Available">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Disabled" disabled>
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Available">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 // Customized examples
 export const CustomSized: Story = {
   args: {
-    num: 5,
     variant: "primary",
-    radius: 100,
+    radius: 85,
     innerRadius: 50,
+    size: 200,
   },
+  render: (args) => (
+    <Wheel {...args}>
+      <WheelContent title="Home">
+        <Home />
+      </WheelContent>
+      <WheelContent title="Search">
+        <Search />
+      </WheelContent>
+      <WheelContent title="Notifications">
+        <Bell />
+      </WheelContent>
+      <WheelContent title="Settings">
+        <Settings />
+      </WheelContent>
+      <WheelContent title="Profile">
+        <User />
+      </WheelContent>
+    </Wheel>
+  ),
 };
 
 const RenderInteractive = () => {
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [selectedOption, setSelectedOption] = useState<{
+    index: number;
+    title?: string;
+  } | null>(null);
 
-  const handleSelect = (index: number) => {
-    setSelectedOption(index);
+  const handleSelect = (index: number, title?: string) => {
+    setSelectedOption({ index, title });
     setTimeout(() => setSelectedOption(null), 1000);
   };
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <Wheel
-        num={5}
-        variant="primary"
-        icons={[Home, Search, Bell, Settings, User]}
-        titles={["Home", "Search", "Notifications", "Settings", "Profile"]}
-        onSelect={handleSelect}
-      />
+      <Wheel variant="primary" onSelect={handleSelect}>
+        <WheelContent title="Home">
+          <Home />
+        </WheelContent>
+        <WheelContent title="Search">
+          <Search />
+        </WheelContent>
+        <WheelContent title="Notifications">
+          <Bell />
+        </WheelContent>
+        <WheelContent title="Settings">
+          <Settings />
+        </WheelContent>
+        <WheelContent title="Profile">
+          <User />
+        </WheelContent>
+      </Wheel>
       {selectedOption !== null && (
         <div className="bg-primary text-primary-foreground mt-4 rounded p-2">
-          Selected option: {selectedOption}
+          Selected:{" "}
+          {selectedOption.title || `Option ${selectedOption.index + 1}`}
         </div>
       )}
     </div>
@@ -163,34 +348,71 @@ export const WheelShowcase: Story = {
       <div className="grid grid-cols-2 gap-8">
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Confirm Wheel</h3>
-          <Wheel
-            num={2}
-            variant="primary"
-            icons={[Check, X]}
-            titles={["Confirm", "Cancel"]}
-          />
+          <Wheel variant="primary">
+            <WheelContent title="Confirm">
+              <Check />
+            </WheelContent>
+            <WheelContent title="Cancel">
+              <X />
+            </WheelContent>
+          </Wheel>
         </div>
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Four-Option Wheel</h3>
-          <Wheel
-            num={4}
-            variant="secondary"
-            icons={[ArrowUp, ArrowRight, ArrowDown, ArrowLeft]}
-            titles={["Up", "Right", "Down", "Left"]}
-          />
+          <Wheel variant="secondary">
+            <WheelContent title="Up">
+              <ArrowUp />
+            </WheelContent>
+            <WheelContent title="Right">
+              <ArrowRight />
+            </WheelContent>
+            <WheelContent title="Down">
+              <ArrowDown />
+            </WheelContent>
+            <WheelContent title="Left">
+              <ArrowLeft />
+            </WheelContent>
+          </Wheel>
         </div>
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Five-Option Wheel</h3>
-          <Wheel
-            num={5}
-            variant="outline"
-            icons={[Home, Search, Bell, Settings, User]}
-            titles={["Home", "Search", "Notifications", "Settings", "Profile"]}
-          />
+          <Wheel variant="outline">
+            <WheelContent title="Home">
+              <Home />
+            </WheelContent>
+            <WheelContent title="Search">
+              <Search />
+            </WheelContent>
+            <WheelContent title="Notifications">
+              <Bell />
+            </WheelContent>
+            <WheelContent title="Settings">
+              <Settings />
+            </WheelContent>
+            <WheelContent title="Profile">
+              <User />
+            </WheelContent>
+          </Wheel>
         </div>
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Destructive Wheel</h3>
-          <Wheel num={5} variant="destructive" radius={90} innerRadius={40} />
+          <Wheel variant="destructive" radius={90} innerRadius={40}>
+            <WheelContent title="Delete">
+              <X />
+            </WheelContent>
+            <WheelContent title="Archive">
+              <Settings />
+            </WheelContent>
+            <WheelContent title="Move">
+              <ArrowRight />
+            </WheelContent>
+            <WheelContent title="Copy">
+              <Bell />
+            </WheelContent>
+            <WheelContent title="Share">
+              <User />
+            </WheelContent>
+          </Wheel>
         </div>
       </div>
     );

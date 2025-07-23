@@ -2,7 +2,6 @@
 
 import {
   HybridTerrainProvider,
-  TerrainArea,
   TerrainVisualizer,
 } from "@juun-roh/cesium-utils";
 import { Button } from "@pkg/ui/button";
@@ -26,20 +25,20 @@ export default function TerrainDemo() {
         });
 
         terrain.readyEvent.addEventListener((provider) => {
-          const tileRanges = new Map();
-          tileRanges.set(13, {
-            start: { x: 13963, y: 2389 },
-            end: { x: 13967, y: 2393 },
+          const tiles: HybridTerrainProvider.TerrainRegion["tiles"] = new Map();
+          tiles.set(13, {
+            x: [13963, 13967],
+            y: [2389, 2393],
           });
 
-          const area = new TerrainArea({
-            terrainProvider: provider,
-            tileRanges,
-          });
+          const region: HybridTerrainProvider.TerrainRegion = {
+            provider,
+            tiles,
+          };
 
           const hybrid = new HybridTerrainProvider({
-            terrainAreas: [area],
-            terrainProvider: new EllipsoidTerrainProvider(),
+            regions: [region],
+            defaultProvider: new EllipsoidTerrainProvider(),
           });
 
           viewer.terrainProvider = hybrid;
