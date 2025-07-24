@@ -15,8 +15,6 @@
     "./**/*.tsx",
     ".next/types/**/*.ts",
     "./.storybook/**/*",
-    "./**/*.js",
-    "./**/*.jsx"
   ],
   "exclude": ["node_modules", "out", "coverage", "public"]
 }
