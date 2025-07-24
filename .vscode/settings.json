@@ -20,6 +20,10 @@
     "Kakao",
     "libc",
     "lucide",
+    "PGDATABASE",
+    "PGHOST",
+    "PGPASSWORD",
+    "PGUSER",
     "replicaset",
     "shadcn",
     "softprops",
@@ -27,6 +31,7 @@
     "Tileset",
     "topojson",
     "Turborepo",
+    "UNPOOLED",
     "vaul",
     "Zipkin"
   ],

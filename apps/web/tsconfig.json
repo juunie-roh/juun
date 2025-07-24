@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
+    "allowImportingTsExtensions": true,
     "paths": {
       "@/*": ["./*"]
     }
@@ -14,8 +15,6 @@
     "./**/*.tsx",
     ".next/types/**/*.ts",
     "./.storybook/**/*",
-    "./**/*.js",
-    "./**/*.jsx"
   ],
   "exclude": ["node_modules", "out", "coverage", "public"]
 }

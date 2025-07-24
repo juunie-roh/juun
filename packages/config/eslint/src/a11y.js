@@ -1,7 +1,6 @@
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import { compat } from './util.js';
 
-/** @type {import('eslint').Linter.Config[]} */
 export default [
   ...compat.config(jsxA11y.configs.recommended),
   {

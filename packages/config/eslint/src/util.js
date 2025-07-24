@@ -9,7 +9,6 @@ export const compat = new FlatCompat({
   baseDirectory: _dirname,
 });
 
-/** @param {import('eslint').Linter.LegacyConfig} pluginConfig */
 export function convertPluginConfig(pluginConfig) {
   const flatConfig = compat.config(pluginConfig);
 

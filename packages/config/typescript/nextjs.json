@@ -11,7 +11,7 @@
     "noImplicitReturns": true,
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
-    "target": "ES6",
+    "target": "esnext",
     "outDir": "out",
     "allowJs": true,
     "checkJs": true,

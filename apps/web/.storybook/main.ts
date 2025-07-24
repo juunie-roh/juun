@@ -33,20 +33,6 @@ const config: StorybookConfig = {
         test: /\.svg$/,
         use: ["@svgr/webpack"],
       },
-      // postcss loader
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: getAbsolutePath("postcss-loader"),
-            options: {
-              postcssOptions: {
-                plugins: [getAbsolutePath("@tailwindcss/postcss")],
-              },
-            },
-          },
-        ],
-      },
     );
 
     return config;

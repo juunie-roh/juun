@@ -16,10 +16,21 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 22.x
+          - 24.x
     name: Build with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
+
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
     steps:
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
       - uses: pnpm/action-setup@v4
         with:
           version: 10
@@ -47,5 +58,3 @@ jobs:
         run: pnpm lint
       - name: Type Checking
         run: pnpm check-types
-      # - name: Unit Tests through jest
-      #   run: yarn test

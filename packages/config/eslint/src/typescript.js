@@ -1,10 +1,9 @@
 import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
+import tsParser from '@typescript-eslint/parser';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unusedImports from 'eslint-plugin-unused-imports';
 import { baseRules } from './base.js';
 
-/** @type {import('eslint').Linter.RulesRecord} */
 export const tsRules = {
   ...baseRules,
   'react/function-component-definition': 'off',
@@ -47,8 +46,7 @@ export const tsRules = {
   'consistent-return': 'off',
 };
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+const config = [
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
@@ -57,7 +55,7 @@ export default [
       'simple-import-sort': simpleImportSort,
     },
     languageOptions: {
-      parser: tsparser,
+      parser: tsParser,
       parserOptions: {
         project: './tsconfig.json',
         ecmaVersion: 'latest',
@@ -67,3 +65,5 @@ export default [
     rules: tsRules,
   },
 ];
+
+export default config;
