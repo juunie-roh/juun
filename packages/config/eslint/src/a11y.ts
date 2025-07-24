@@ -1,7 +1,7 @@
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import { compat } from './util.js';
+import { compat } from './util.ts';
+import { Linter } from 'eslint';
 
-/** @type {import('eslint').Linter.Config[]} */
 export default [
   ...compat.config(jsxA11y.configs.recommended),
   {
@@ -17,4 +17,4 @@ export default [
       ],
     },
   },
-];
+] as Linter.Config[];
