@@ -16,9 +16,13 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 22.x
+          - 24.x
     name: Build with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
+
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
     steps:
       - uses: pnpm/action-setup@v4
         with:
