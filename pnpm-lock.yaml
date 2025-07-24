@@ -180,9 +180,6 @@ importers:
 
   packages/config/eslint:
     devDependencies:
-      '@config/typescript':
-        specifier: workspace:^
-        version: link:../typescript
       '@eslint/eslintrc':
         specifier: ^3.3.1
         version: 3.3.1
@@ -11694,7 +11691,7 @@ snapshots:
     dependencies:
       cipher-base: 1.0.6
       inherits: 2.0.4
-      ripemd160: 2.0.1
+      ripemd160: 2.0.2
       sha.js: 2.4.12
 
   create-hash@1.2.0:
