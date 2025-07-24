@@ -1,10 +1,9 @@
 import eslint from '@eslint/js';
-import type { Linter } from 'eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
 import prettier from 'eslint-plugin-prettier';
 import turbo from 'eslint-plugin-turbo';
 
-export const baseRules: Linter.RulesRecord = {
+export const baseRules = {
   'import/extensions': 'off',
   'no-param-reassign': 'off',
   'no-underscore-dangle': 'off',
@@ -28,4 +27,4 @@ export default [
     },
     rules: baseRules,
   },
-] as Linter.Config[]
+];

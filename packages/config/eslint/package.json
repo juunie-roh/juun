@@ -2,16 +2,14 @@
   "name": "@config/eslint",
   "private": true,
   "version": "0.0.1",
-  "type": "module",
   "publishConfig": {
     "access": "public"
   },
   "exports": {
-    ".": "./index.ts",
+    ".": "./index.js",
     "./*": "./src/*"
   },
   "devDependencies": {
-    "@config/typescript": "workspace:^",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.31.0",
     "@next/eslint-plugin-next": "^15.4.3",

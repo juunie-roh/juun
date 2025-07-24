@@ -1,6 +1,5 @@
 import storybook from 'eslint-plugin-storybook';
-import { compat } from './util.ts';
-import type { Linter } from 'eslint';
+import { compat } from './util.js';
 
 export default [
   ...compat.config(storybook.configs.recommended),
@@ -15,4 +14,4 @@ export default [
       ],
     },
   },
-] as Linter.Config[];
+];
