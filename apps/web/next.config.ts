@@ -7,8 +7,7 @@ import packageJson from "./package.json" with { type: "json" };
 const cesiumVersion = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
 const cesiumZoneURL =
   process.env.NODE_ENV === "production"
-    ? process.env.CESIUM_ZONE_URL ||
-      "https://@juun-roh__cesium-utils.vercel.app"
+    ? process.env.CESIUM_ZONE_URL || "https://juun-cesium-utils.vercel.app"
     : "http://localhost:3001";
 
 const nextConfig: NextConfig = {

@@ -39,6 +39,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMultiZone =
+    process.env.NODE_ENV === "production" &&
+    process.env.MULTI_ZONE_ENABLED === "true";
+
+  if (isMultiZone) return <>{children}</>;
+
   return (
     <html lang="en">
       <body
