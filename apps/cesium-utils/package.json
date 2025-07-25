@@ -1,0 +1,30 @@
+{
+  "name": "@app/cesium-utils",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@config/tailwind": "workspace:^",
+    "@pkg/ui": "workspace:^",
+    "cesium": "^1.131.0",
+    "next": "15.4.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "webpack": "^5.100.2"
+  },
+  "devDependencies": {
+    "@config/eslint": "workspace:^",
+    "@config/typescript": "workspace:^",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prettier-plugin-tailwindcss": "^0.6.14"
+  }
+}
