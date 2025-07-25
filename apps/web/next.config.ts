@@ -5,6 +5,11 @@ import webpack from "webpack";
 import packageJson from "./package.json" with { type: "json" };
 
 const cesiumVersion = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
+const cesiumZoneURL =
+  process.env.NODE_ENV === "production"
+    ? process.env.CESIUM_ZONE_URL ||
+      "https://@juun-roh__cesium-utils.vercel.app"
+    : "http://localhost:3001";
 
 const nextConfig: NextConfig = {
   // turbopack configuration (unused)
@@ -61,11 +66,11 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/multi-zone",
-        destination: "http://localhost:3001/multi-zone",
+        destination: `${cesiumZoneURL}/multi-zone`,
       },
       {
         source: "/multi-zone/:path*",
-        destination: "http://localhost:3001/multi-zone/:path*",
+        destination: `${cesiumZoneURL}/multi-zone/:path*`,
       },
     ];
   },
