@@ -25,8 +25,7 @@
         "PGUSER",
         "POSTGRES_URL_NO_SSL",
         "POSTGRES_HOST",
-        "NEON_PROJECT_ID",
-        "MULTI_ZONE_ENABLED"
+        "NEON_PROJECT_ID"
       ],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "out/**"]
