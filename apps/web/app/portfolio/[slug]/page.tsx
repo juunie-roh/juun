@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getPosts } from "../portfolio.utils";
+import { getPosts } from "../utils";
 
 // Generate metadata for each slug
 export async function generateMetadata({

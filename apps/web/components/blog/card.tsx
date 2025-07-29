@@ -12,9 +12,9 @@ import { CalendarIcon, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { BlogMetadata } from "@/app/blog/blog.types";
-import { formatDateSafe } from "@/utils/date.utils";
-import { safeUrl } from "@/utils/security.utils";
+import { BlogMetadata } from "@/app/blog/types";
+import { formatDateSafe } from "@/utils/date";
+import { safeUrl } from "@/utils/security";
 
 export interface Post {
   slug: string;

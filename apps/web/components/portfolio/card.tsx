@@ -10,9 +10,9 @@ import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
 
-import { PortfolioMetadata } from "@/app/portfolio/portfolio.types";
-import { formatDateSafe } from "@/utils/date.utils";
-import { safeUrl } from "@/utils/security.utils";
+import { PortfolioMetadata } from "@/app/portfolio/types";
+import { formatDateSafe } from "@/utils/date";
+import { safeUrl } from "@/utils/security";
 
 export interface Post {
   slug: string;

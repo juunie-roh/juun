@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 
 import type { BaseMetadata, Post } from "@/types/post.types";
-import { sortPostsByDate } from "@/utils/compare.utils";
-import { parseDate } from "@/utils/date.utils";
+import { sortPostsByDate } from "@/utils/compare";
+import { parseDate } from "@/utils/date";
 
 /**
  * Extract common metadata properties from a file
