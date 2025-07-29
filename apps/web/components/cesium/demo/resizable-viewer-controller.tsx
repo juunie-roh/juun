@@ -1,11 +1,11 @@
 "use client";
 
-import { useMediaQuery } from "@pkg/ui/hooks/use-media-query";
+import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@pkg/ui/resizable";
+} from "@juun/ui/resizable";
 
 import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
 

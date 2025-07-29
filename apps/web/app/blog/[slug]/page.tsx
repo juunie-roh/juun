@@ -1,11 +1,11 @@
-import { ScrollProgressBar } from "@pkg/ui/scroll-progress-bar";
+import { ScrollProgressBar } from "@juun/ui/scroll-progress-bar";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
 import { TableOfContents } from "@/components/blog/table-of-contents";
 
-import { getPosts } from "../blog.utils";
+import { getPosts } from "../utils";
 
 // Generate metadata for each slug
 export async function generateMetadata({

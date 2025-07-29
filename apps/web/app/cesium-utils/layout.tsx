@@ -1,5 +1,9 @@
-import { Separator } from "@pkg/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@pkg/ui/sidebar";
+import { Separator } from "@juun/ui/separator";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
 import CesiumUtilsBreadcrumb from "@/components/cesium/demo/breadcrumb";

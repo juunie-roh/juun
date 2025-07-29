@@ -1,18 +1,18 @@
-import { Badge } from "@pkg/ui/badge";
+import { Badge } from "@juun/ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@pkg/ui/card";
-import { Skeleton } from "@pkg/ui/skeleton";
+} from "@juun/ui/card";
+import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
 
-import { PortfolioMetadata } from "@/app/portfolio/portfolio.types";
-import { formatDateSafe } from "@/utils/date.utils";
-import { safeUrl } from "@/utils/security.utils";
+import { PortfolioMetadata } from "@/app/portfolio/types";
+import { formatDateSafe } from "@/utils/date";
+import { safeUrl } from "@/utils/security";
 
 export interface Post {
   slug: string;

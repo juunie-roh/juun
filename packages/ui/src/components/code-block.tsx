@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@pkg/ui/lib/utils";
+import { cn } from "@juun/ui/lib/utils";
 import { Copy } from "lucide-react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";

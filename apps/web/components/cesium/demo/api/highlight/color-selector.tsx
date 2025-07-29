@@ -6,7 +6,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@pkg/ui/select";
+} from "@juun/ui/select";
 import { Color } from "cesium";
 import { SetStateAction } from "react";
 

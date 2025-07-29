@@ -1,4 +1,4 @@
-import { Separator } from "@pkg/ui/separator";
+import { Separator } from "@juun/ui/separator";
 import Image from "next/image";
 
 export const metadata = {

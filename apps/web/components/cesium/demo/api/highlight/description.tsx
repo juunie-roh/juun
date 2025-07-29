@@ -1,4 +1,4 @@
-import { CodeBlock } from "@pkg/ui/code-block";
+import { CodeBlock } from "@juun/ui/code-block";
 
 export default function HighlightDescription() {
   return (

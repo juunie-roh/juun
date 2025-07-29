@@ -1,4 +1,4 @@
-import { createIcon } from "@pkg/ui/lib/utils";
+import { createIcon } from "@juun/ui/lib/utils";
 
 import SvgBuildingLibrary from "./building-library.svg";
 import SvgCityPlan from "./city-plan.svg";

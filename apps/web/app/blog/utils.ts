@@ -1,9 +1,9 @@
 import path from "path";
 
 import type { Post } from "@/types/post.types";
-import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post.utils";
+import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post";
 
-import { BlogMetadata } from "./blog.types";
+import { BlogMetadata } from "./types";
 
 /**
  * Extract blog-specific metadata including word count

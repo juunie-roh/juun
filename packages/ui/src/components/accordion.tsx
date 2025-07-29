@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@pkg/ui/lib/utils";
+import { cn } from "@juun/ui/lib/utils";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "lucide-react";
 import * as React from "react";

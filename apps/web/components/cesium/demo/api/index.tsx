@@ -1,7 +1,7 @@
 "use client";
 
-import { CodeBlock } from "@pkg/ui/code-block";
-import { Skeleton } from "@pkg/ui/skeleton";
+import { CodeBlock } from "@juun/ui/code-block";
+import { Skeleton } from "@juun/ui/skeleton";
 import Link from "next/link";
 import { Suspense } from "react";
 

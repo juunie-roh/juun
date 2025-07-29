@@ -1,6 +1,6 @@
-import { Abbr } from "@pkg/ui/abbr";
-import { AspectRatio } from "@pkg/ui/aspect-ratio";
-import { Skeleton } from "@pkg/ui/skeleton";
+import { Abbr } from "@juun/ui/abbr";
+import { AspectRatio } from "@juun/ui/aspect-ratio";
+import { Skeleton } from "@juun/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@pkg/ui/table";
+} from "@juun/ui/table";
 import { ExternalLink, Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

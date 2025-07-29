@@ -1,4 +1,4 @@
-import { Skeleton } from "@pkg/ui/skeleton";
+import { Skeleton } from "@juun/ui/skeleton";
 import { Fragment } from "react";
 
 export default function BlogItemLoading() {

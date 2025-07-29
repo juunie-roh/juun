@@ -8,8 +8,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@pkg/ui/breadcrumb";
-import { cn } from "@pkg/ui/lib/utils";
+} from "@juun/ui/breadcrumb";
+import { cn } from "@juun/ui/lib/utils";
 import { Fragment } from "react";
 
 import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";

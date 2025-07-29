@@ -1,9 +1,9 @@
 import path from "path";
 
 import type { Post } from "@/types/post.types";
-import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post.utils";
+import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post";
 
-import { PortfolioMetadata } from "./portfolio.types";
+import { PortfolioMetadata } from "./types";
 
 /**
  * Extract portfolio-specific metadata
