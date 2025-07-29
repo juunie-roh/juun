@@ -38,5 +38,10 @@
     "commitizen": {
       "path": "@commitlint/cz-commitlint"
     }
+  },
+  "pnpm": {
+    "overrides": {
+      "refractor>prismjs": "^1.30.0"
+    }
   }
 }
