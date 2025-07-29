@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@pkg/ui/button";
+import { Button } from "@juun/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

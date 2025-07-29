@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@pkg/ui/button";
+import { Button } from "@juun/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -11,7 +11,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from "@pkg/ui/dialog";
+} from "@juun/ui/dialog";
 
 import BearCounter from "./BearCounter";
 

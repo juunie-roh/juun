@@ -1,7 +1,7 @@
 "use client";
 
-import { Label } from "@pkg/ui/label";
-import { Switch } from "@pkg/ui/switch";
+import { Label } from "@juun/ui/label";
+import { Switch } from "@juun/ui/switch";
 import { Fragment, lazy, useState } from "react";
 
 const CannonVehicle = lazy(() => import("@/components/three/cannon-vehicle"));

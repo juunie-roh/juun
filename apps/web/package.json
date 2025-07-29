@@ -17,7 +17,7 @@
   "dependencies": {
     "@config/tailwind": "workspace:^",
     "@juun-roh/cesium-utils": "^0.2.1",
-    "@pkg/ui": "workspace:^",
+    "@juun/ui": "workspace:^",
     "@radix-ui/react-slot": "^1.2.3",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.6.0",

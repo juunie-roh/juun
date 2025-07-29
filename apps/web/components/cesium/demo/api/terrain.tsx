@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@pkg/ui/skeleton";
+import { Skeleton } from "@juun/ui/skeleton";
 import { lazy, Suspense } from "react";
 
 const LazyTerrainDemo = lazy(() => import("./lazy/terrain"));

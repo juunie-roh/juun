@@ -1,11 +1,11 @@
 "use client";
 
 import { Highlight } from "@juun-roh/cesium-utils";
-import { Button } from "@pkg/ui/button";
-import { Checkbox } from "@pkg/ui/checkbox";
-import { Label } from "@pkg/ui/label";
-import { Separator } from "@pkg/ui/separator";
-import { Slider } from "@pkg/ui/slider";
+import { Button } from "@juun/ui/button";
+import { Checkbox } from "@juun/ui/checkbox";
+import { Label } from "@juun/ui/label";
+import { Separator } from "@juun/ui/separator";
+import { Slider } from "@juun/ui/slider";
 import {
   Cartesian3,
   Color,

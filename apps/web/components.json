@@ -14,7 +14,7 @@
     "components": "@/components",
     "hooks": "@/hooks",
     "lib": "@/lib",
-    "utils": "@pkg/ui/lib/utils",
-    "ui": "@pkg/ui"
+    "utils": "@juun/ui/lib/utils",
+    "ui": "@juun/ui"
   }
 }

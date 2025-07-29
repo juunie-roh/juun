@@ -1,4 +1,4 @@
-import { AspectRatio } from "@pkg/ui/aspect-ratio";
+import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { Canvas as ThreeCanvas, type CanvasProps } from "@react-three/fiber";
 
 export default function Canvas({ children, ...props }: CanvasProps) {

@@ -1,5 +1,5 @@
-import { AspectRatio } from "@pkg/ui/aspect-ratio";
-import { Skeleton } from "@pkg/ui/skeleton";
+import { AspectRatio } from "@juun/ui/aspect-ratio";
+import { Skeleton } from "@juun/ui/skeleton";
 import type { CanvasProps } from "@react-three/fiber";
 import { lazy, Suspense } from "react";
 

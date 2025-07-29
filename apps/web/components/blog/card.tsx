@@ -1,13 +1,13 @@
-import { Badge } from "@pkg/ui/badge";
+import { Badge } from "@juun/ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@pkg/ui/card";
-import { ScrollArea, ScrollBar } from "@pkg/ui/scroll-area";
-import { Skeleton } from "@pkg/ui/skeleton";
+} from "@juun/ui/card";
+import { ScrollArea, ScrollBar } from "@juun/ui/scroll-area";
+import { Skeleton } from "@juun/ui/skeleton";
 import { CalendarIcon, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,7 +1,7 @@
-import { Abbr } from "@pkg/ui/abbr";
-import { AspectRatio } from "@pkg/ui/aspect-ratio";
-import { CodeBlock } from "@pkg/ui/code-block";
-import { Skeleton } from "@pkg/ui/skeleton";
+import { Abbr } from "@juun/ui/abbr";
+import { AspectRatio } from "@juun/ui/aspect-ratio";
+import { CodeBlock } from "@juun/ui/code-block";
+import { Skeleton } from "@juun/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@pkg/ui/table";
+} from "@juun/ui/table";
 import { ExternalLink, Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -86,7 +86,7 @@ export default function BundleOptimization() {
         <CodeBlock
           code={`// Starts from the entry point
 import { Button } from './components/button'  // -> finds button.tsx
-import { Card } from '@pkg/ui';               // -> finds ui/index.ts
+import { Card } from '@juun/ui';               // -> finds ui/index.ts
 import { useState } from 'react';             // -> finds react in node_modules`}
         />
         <p>
@@ -98,9 +98,9 @@ import { useState } from 'react';             // -> finds react in node_modules`
         </h3>
         <CodeBlock
           code={`// You import this:
-import { Button } from '@pkg/ui';
+import { Button } from '@juun/ui';
 
-// but @pkg/ui exports a lot of components:
+// but @juun/ui exports a lot of components:
 export { Button, Card, Calendar, CodeBlock, ... };
 
 // Tree shaking should eliminate unused exports

@@ -7,7 +7,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@pkg/ui/sidebar";
+} from "@juun/ui/sidebar";
 import { useEffect, useMemo } from "react";
 
 import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";

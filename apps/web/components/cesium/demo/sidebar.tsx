@@ -5,7 +5,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-} from "@pkg/ui/sidebar";
+} from "@juun/ui/sidebar";
 
 import ApiCombobox from "./api-combobox";
 import FeatureList from "./feature-list";

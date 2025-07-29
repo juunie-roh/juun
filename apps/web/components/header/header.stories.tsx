@@ -5,14 +5,14 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@pkg/ui/breadcrumb";
+} from "@juun/ui/breadcrumb";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@pkg/ui/navigation-menu";
-import { Separator } from "@pkg/ui/separator";
+} from "@juun/ui/navigation-menu";
+import { Separator } from "@juun/ui/separator";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Home } from "lucide-react";
 import Link from "next/link";

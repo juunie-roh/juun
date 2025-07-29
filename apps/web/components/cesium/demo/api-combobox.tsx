@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@pkg/ui/button";
+import { Button } from "@juun/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -8,9 +8,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@pkg/ui/command";
-import { cn } from "@pkg/ui/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@pkg/ui/popover";
+} from "@juun/ui/command";
+import { cn } from "@juun/ui/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@juun/ui/popover";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
-import { Badge } from "@pkg/ui/badge";
-import { Button } from "@pkg/ui/button";
+import { Badge } from "@juun/ui/badge";
+import { Button } from "@juun/ui/button";
 import {
   Card,
   CardContent,
@@ -7,9 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@pkg/ui/card";
-import { LogoAvatar } from "@pkg/ui/logo-avatar";
-import { Separator } from "@pkg/ui/separator";
+} from "@juun/ui/card";
+import { LogoAvatar } from "@juun/ui/logo-avatar";
+import { Separator } from "@juun/ui/separator";
 import { Hexagon, Package, Zap } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";

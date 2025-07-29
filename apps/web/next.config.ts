@@ -56,7 +56,12 @@ const nextConfig: NextConfig = {
     },
     optimizePackageImports: ["lucide-react"],
   },
-  transpilePackages: ["@pkg/ui", "@pkg/config"],
+  transpilePackages: [
+    "@juun/ui",
+    "@config/eslint",
+    "@config/tailwind",
+    "@config/typescript",
+  ],
 };
 
 const analyze = process.env.ANALYZE === "true";

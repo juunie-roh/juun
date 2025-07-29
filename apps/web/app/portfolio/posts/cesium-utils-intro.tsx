@@ -1,14 +1,14 @@
-import { Badge } from "@pkg/ui/badge";
-import { Button } from "@pkg/ui/button";
+import { Badge } from "@juun/ui/badge";
+import { Button } from "@juun/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@pkg/ui/card";
-import { CodeBlock } from "@pkg/ui/code-block";
-import { LogoAvatar } from "@pkg/ui/logo-avatar";
+} from "@juun/ui/card";
+import { CodeBlock } from "@juun/ui/code-block";
+import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { ChevronRight, Code, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

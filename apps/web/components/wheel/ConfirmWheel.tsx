@@ -1,6 +1,6 @@
 "use client";
 
-import { Wheel, WheelContent } from "@pkg/ui/wheel";
+import { Wheel, WheelContent } from "@juun/ui/wheel";
 import { Check, X } from "lucide-react";
 
 function ConfirmWheel() {

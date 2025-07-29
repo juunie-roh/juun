@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@pkg/ui/accordion";
+} from "@juun/ui/accordion";
 
 export default function ViewerDemo() {
   return (

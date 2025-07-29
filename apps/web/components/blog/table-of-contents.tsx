@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@pkg/ui/button";
+import { Button } from "@juun/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@pkg/ui/collapsible";
-import { useMediaQuery } from "@pkg/ui/hooks/use-media-query";
-import { cn } from "@pkg/ui/lib/utils";
+} from "@juun/ui/collapsible";
+import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
+import { cn } from "@juun/ui/lib/utils";
 import { ArrowRight, Bookmark } from "lucide-react";
 import { Fragment, useEffect, useState } from "react";
 

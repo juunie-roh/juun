@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@pkg/ui/button";
+import { Button } from "@juun/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -9,9 +9,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@pkg/ui/drawer";
-import { ScrollArea } from "@pkg/ui/scroll-area";
-import { Separator } from "@pkg/ui/separator";
+} from "@juun/ui/drawer";
+import { ScrollArea } from "@juun/ui/scroll-area";
+import { Separator } from "@juun/ui/separator";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useState } from "react";
