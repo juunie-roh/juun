@@ -266,8 +266,11 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
-  packages/mdx:
+  packages/next-mdx:
     devDependencies:
+      '@config/eslint':
+        specifier: workspace:^
+        version: link:../config/eslint
       '@config/typescript':
         specifier: workspace:^
         version: link:../config/typescript
