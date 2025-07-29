@@ -1,0 +1,12 @@
+{
+  "name": "@juun/mdx",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "author": "juun",
+  "scripts": {},
+  "devDependencies": {
+    "@config/eslint": "workspace:^",
+    "@config/typescript": "workspace:^"
+  }
+}
