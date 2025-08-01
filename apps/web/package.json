@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@config/tailwind": "workspace:^",
-    "@juun-roh/cesium-utils": "^0.2.2",
+    "@juun-roh/cesium-utils": "^0.2.3",
     "@juun/ui": "workspace:^",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.6.1",
@@ -35,7 +35,7 @@
     "resium": "1.19.0-beta.1",
     "three": "^0.178.0",
     "webpack": "^5.101.0",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
