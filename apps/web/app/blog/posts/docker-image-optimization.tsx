@@ -45,8 +45,8 @@ export default function DockerImageOptimization() {
         </AspectRatio>
       )}
 
-      <div className="prose text-primary mt-8 max-w-none">
-        <h2 className="tracking-tight">Docker Build</h2>
+      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+        <h2>Docker Build</h2>
         <p>
           <Link href="https://docs.docker.com/build/concepts/overview">
             Docker Build
@@ -62,7 +62,7 @@ export default function DockerImageOptimization() {
           이다.
         </p>
 
-        <h2 className="tracking-tight">Multi-stage</h2>
+        <h2>Multi-stage</h2>
         <p>
           Dockerfile 은 일반적으로 base image 를 선택하는 명령어인{" "}
           <code>FROM</code> 으로 시작하게 되는데, 이는 곧 새로운 stage 가
@@ -104,7 +104,7 @@ CMD ["/bin/hello"]`}
           저장되지만 image 에는 포함되지 않는다.
         </p>
 
-        <h2 className="tracking-tight">Image Optimization</h2>
+        <h2>Image Optimization</h2>
         <p>
           <Link href="https://docs.docker.com/build/building/best-practices">
             Docker Build Best Practices
@@ -114,7 +114,7 @@ CMD ["/bin/hello"]`}
           여기서는 그 중에서도 final output image 의 크기를 줄이기 위한 방법을
           몇 가지 소개한다. NextJS monorepo 프로젝트를 build 한다.
         </p>
-        <h3 className="tracking-tight">1. Base Image</h3>
+        <h3>1. Base Image</h3>
         <p>
           Multi-stage 활용에 앞서, base image 를 잘 선택하는 것이 중요하다. 공식
           문서에서는{" "}
@@ -126,7 +126,7 @@ CMD ["/bin/hello"]`}
           <Link href="https://hub.docker.com/_/node">Node Image</Link> 도 alpine
           태그를 지원한다.
         </p>
-        <h3 className="tracking-tight">2. Multi-stage</h3>
+        <h3>2. Multi-stage</h3>
         <p>
           적절한 Base Image 를 선택했다면, 이제는 build stage 를 나눠줄
           차례이다. 각 stage 는 일종의 세이브 포인트처럼 작동해서,{" "}
@@ -283,7 +283,7 @@ CMD ["node", "apps/web/server.js"]
           있다.
         </p>
 
-        <h3 className="tracking-tight">
+        <h3>
           4. Consolidate <code>RUN</code> Commands
         </h3>
         <p>
@@ -328,7 +328,7 @@ RUN git clone https://some.project.git && \\
           넣어줄 수도 있다.
         </p>
 
-        <h3 className="tracking-tight">5. Further</h3>
+        <h3>5. Further</h3>
         <AspectRatio
           ratio={16 / 9}
           className="mb-8 size-full overflow-hidden rounded-lg bg-gray-100"
@@ -355,7 +355,7 @@ RUN git clone https://some.project.git && \\
           실행에는 시간이 더 걸릴 수도 있다.
         </p>
 
-        <h2 className="tracking-tight">Build Cache</h2>
+        <h2>Build Cache</h2>
         <p>
           앞서 살펴봤듯이 Docker image build 과정은 서버(BuildKit)에서 diff
           layer 를 추가하는 방식으로 진행된다. 이 과정에서 만들어진 layer 를
@@ -388,8 +388,8 @@ RUN git clone https://some.project.git && \\
           optimization 을 진행하는 것이 맞는 순서로 보인다.
         </p>
 
-        <h2 className="tracking-tight">Others</h2>
-        <h3 className="tracking-tight">Yarn Berry PnP</h3>
+        <h2>Others</h2>
+        <h3>Yarn Berry PnP</h3>
         <p>
           예시로 사용한 NextJS 프로젝트는 처음에는 Yarn Berry 를 패키지 매니저로
           사용하고 있었다. NextJS 의 <code>output: 'standalone'</code> 옵션과{" "}
@@ -487,7 +487,7 @@ CMD ["node", "apps/web/.next/standalone/apps/web/server.js"]`}
           되어버렸다. <small>next 는 pnpm 쓰자...</small>
         </p>
 
-        <h2 className="tracking-tight">Closing</h2>
+        <h2>Closing</h2>
         <p>
           글 작성 시작 시점에는 layer 의 수 조절을 통해 image 의 크기를 줄이는
           것에만 집중했는데, 빌드 테스트를 자주 실행해야 하는 단계에서는 오히려

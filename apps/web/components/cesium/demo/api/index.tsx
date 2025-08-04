@@ -12,39 +12,31 @@ import { getApiFeatures } from "./utils";
 // Default component when no feature is selected
 function DefaultDemo() {
   return (
-    <div className="prose text-primary max-w-none">
-      <h2 className="text-primary mb-2 tracking-tight">Cesium Utils Demo</h2>
+    <div className="prose prose-zinc dark:prose-invert max-w-none">
+      <h2 className="mb-2 tracking-tight">Cesium Utils Demo</h2>
       <p className="mb-4">
         This page demonstrates the capabilities of the{" "}
-        <code className="text-primary">@juun-roh/cesium-utils</code> library, a
-        utility package.
+        <code>@juun-roh/cesium-utils</code> library, a utility package.
       </p>
 
-      <h3 className="text-primary mb-2 text-lg font-semibold">Environment</h3>
+      <h3 className="mb-2 text-lg font-semibold">Environment</h3>
       <p className="mb-4">
         This demonstration is built using{" "}
-        <Link href="https://nextjs.org" className="text-primary">
-          Next.js
-        </Link>
-        , the React framework, and leverages{" "}
-        <Link href="https://resium.reearth.io/" className="text-primary">
-          Resium
-        </Link>
-        , a React wrapper for Cesium that provides declarative components for 3D
+        <Link href="https://nextjs.org">Next.js</Link>, the React framework, and
+        leverages <Link href="https://resium.reearth.io/">Resium</Link>, a React
+        wrapper for Cesium that provides declarative components for 3D
         geospatial applications.
       </p>
 
-      <h3 className="text-primary mb-2 text-lg font-semibold">Usage</h3>
+      <h3 className="mb-2 text-lg font-semibold">Usage</h3>
       <p className="mb-4">
-        The <code className="text-primary">@juun-roh/cesium-utils</code> package
-        maintains vanilla CesiumJS compatibility, meaning you can use it in any
-        Cesium project regardless of framework choice. The utilities work
-        directly with standard Cesium objects and APIs.
+        The <code>@juun-roh/cesium-utils</code> package maintains vanilla
+        CesiumJS compatibility, meaning you can use it in any Cesium project
+        regardless of framework choice. The utilities work directly with
+        standard Cesium objects and APIs.
       </p>
 
-      <h4 className="text-primary mb-2 text-base font-medium">
-        Traditional CesiumJS
-      </h4>
+      <h4 className="mb-2 text-base font-medium">Traditional CesiumJS</h4>
       <p className="mb-4">
         For traditional CesiumJS projects, import the utilities directly and use
         them with your existing viewer setup:
@@ -81,9 +73,7 @@ async function main() {
 main();`}
       />
 
-      <h4 className="text-primary mb-2 text-base font-medium">
-        React/Resium Integration
-      </h4>
+      <h4 className="mb-2 text-base font-medium">React/Resium Integration</h4>
       <p className="mb-4">
         When using Resium, the utilities integrate seamlessly within React
         components. Access the viewer through Resium's hooks and apply the same

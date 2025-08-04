@@ -37,8 +37,8 @@ export default function YarnBerry() {
           </Suspense>
         </AspectRatio>
       )}
-      <div className="prose text-primary mt-8 max-w-none">
-        <h2 className="tracking-tight">Yarn Berry?</h2>
+      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+        <h2>Yarn Berry?</h2>
         <p>
           npm(Node Package Manager)의 의존성 관리를 개선하기 위해 나온 오픈 소스
           패키지 매니저로, <code>node_modules</code> 디렉토리 하위에 패키지를
@@ -54,7 +54,7 @@ export default function YarnBerry() {
           바꿔주어야 하는 경우가 자주 생긴다.
         </p>
 
-        <h2 className="tracking-tight">Start Up</h2>
+        <h2>Start Up</h2>
         <p>
           Node.js 는 14.19 / 16.9 버전 이후부터 프로젝트 별로 패키지 매니저를
           지정할 수 있는 <code>corepack</code> 을 포함하고 있다. 따라서{" "}
@@ -64,20 +64,20 @@ export default function YarnBerry() {
           에서는 이를 사용하는 방법을 안내한다.
         </p>
 
-        <h3 className="tracking-tight">1. Corepack</h3>
+        <h3>1. Corepack</h3>
         <CodeBlock fileName="bash" code={`npm install -g corepack`} />
         <p>
           <code>corepack</code> 이 설치되어있지 않은 경우, 설치를 진행한다.
         </p>
 
-        <h3 className="tracking-tight">2. Yarn Init</h3>
+        <h3>2. Yarn Init</h3>
         <CodeBlock fileName="bash" code={`yarn init -2`} />
         <p>
           <code>npm init</code> 명령과 같이, Yarn Berry 버전으로 패키지 매니저
           초기 설정을 진행하는 명령어이다.
         </p>
 
-        <h3 className="tracking-tight">3. Set Version</h3>
+        <h3>3. Set Version</h3>
         <CodeBlock fileName="bash" code={`yarn set version stable`} />
         <p>
           Yarn Berry 는 지속적인 업데이트를 진행하고 있고, 자체 버전을{" "}
@@ -92,7 +92,7 @@ export default function YarnBerry() {
           실행해보자.
         </p>
 
-        <h2 className="tracking-tight">Configuration</h2>
+        <h2>Configuration</h2>
         <p>
           npm 이 참조하는 <code>.npmrc</code> 파일처럼, Yarn 은{" "}
           <code>.yarnrc.yml</code> 파일을 참조해 환경을 구성한다. 해당 파일이
@@ -136,7 +136,7 @@ yarnPath: [path to your yarn release]`}
           </li>
         </ul>
 
-        <h3 className="tracking-tight">
+        <h3>
           2. <code>.gitignore</code>
         </h3>
         <p>
@@ -178,7 +178,7 @@ node_modules
           (git-lfs)로 관리하도록 설정하면 용량 제한을 우회해서 업로드할 수 있다.
         </p>
 
-        <h2 className="tracking-tight">Editor Settings (VSCode)</h2>
+        <h2>Editor Settings (VSCode)</h2>
         <p>
           VSCode 를 기준으로, PnP 는 ZipFS 를 사용하기 때문에 추가적인 설정이
           필요하다. VSCode 의 다양한 extension 들은 기본적으로{" "}
@@ -210,7 +210,7 @@ node_modules
           압축을 해제하지 않고 코드를 확인할 수 있도록 지원해준다.
         </p>
 
-        <h2 className="tracking-tight">Closing</h2>
+        <h2>Closing</h2>
         <p>
           Yarn Berry 는 독자적인 파일 시스템을 사용하므로써 발생하는 치명적인
           단점이 존재한다. VSCode extension 을 위한 설정이 별도로 존재하는
