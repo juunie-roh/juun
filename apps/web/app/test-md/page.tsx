@@ -1,4 +1,3 @@
-// apps/web/app/test-mdx/page.tsx
 import { MarkdownRenderer } from "@/components/md/renderer";
 import { processMDX } from "@/lib/md";
 
@@ -27,6 +26,15 @@ const simple = "and reliable"
 console.log(simple)
 \`\`\`
 
+### Table Example
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Basic Markdown | ✅ Working | Simple and reliable |
+| Code Blocks | ✅ Working | Uses custom CodeBlock component |
+| Tables | ✅ Working | Standard markdown tables |
+| Links | ✅ Working | Standard markdown links |
+
 > This should work without any React conflicts.
 
 [Link test](https://example.com)
@@ -35,13 +43,15 @@ console.log(simple)
   const { html, frontmatter } = await processMDX(markdownSource);
 
   return (
-    <div className="container mx-auto py-8">
+    <article className="xl:w-3xl mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8">
       <header className="mb-8">
-        <h1 className="text-2xl font-bold">{frontmatter.title}</h1>
-        <p className="text-gray-600">{frontmatter.description}</p>
+        <h1 className="mb-4 text-3xl font-bold tracking-tighter">
+          {frontmatter.title}
+        </h1>
+        <p className="text-lg">{frontmatter.description}</p>
       </header>
 
       <MarkdownRenderer html={html} />
-    </div>
+    </article>
   );
 }

@@ -1,10 +1,8 @@
 "use client";
 
 import { Button } from "@juun/ui/button";
-import {
-  HybridTerrainProvider,
-  TerrainVisualizer,
-} from "@juun-roh/cesium-utils";
+import { HybridTerrainProvider } from "@juun-roh/cesium-utils";
+import { TerrainVisualizer } from "@juun-roh/cesium-utils/dev";
 import { EllipsoidTerrainProvider, Terrain } from "cesium";
 import { useEffect, useState } from "react";
 
