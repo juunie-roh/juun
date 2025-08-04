@@ -28,13 +28,13 @@ export function MarkdownRenderer({ html }: MarkdownRendererProps) {
 
     if (!encodedCode || !fileName) continue;
 
-    // Unescape the code
+    // Unescape the code (unescape &amp; last to avoid double-unescaping)
     const code = encodedCode
-      .replace(/&amp;/g, "&")
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">")
       .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'");
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, "&");
 
     codeBlocks.push({ code, fileName, index });
 
