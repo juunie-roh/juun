@@ -29,6 +29,11 @@ export const API_FEATURES: Record<Api, Feature[]> = {
       label: "Description",
       render: TerrainDescription,
     },
+    {
+      value: "item-1",
+      label: "Hybrid Example",
+      render: lazy(() => import("./terrain")),
+    },
   ],
 
   viewer: [
