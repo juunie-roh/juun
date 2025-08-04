@@ -61,8 +61,8 @@ export default function BundleOptimization() {
         </AspectRatio>
       )}
 
-      <div className="prose text-primary mt-8 max-w-none">
-        <h2 className="tracking-tight">What is Module Bundler?</h2>
+      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+        <h2>What is Module Bundler?</h2>
         <p>
           <code>html</code> 에서 기능 구현에 필요한 JavaScript 파일을 직접
           불러와 사용하는 방식은 <code>defer</code>, <code>async</code> 와 같은
@@ -82,7 +82,7 @@ export default function BundleOptimization() {
           bundler 는 몇 가지 방법을 통해 이 문제를 해결해준다.
         </p>
 
-        <h3 className="tracking-tight">1. Dependency Graph Construction</h3>
+        <h3>1. Dependency Graph Construction</h3>
         <CodeBlock
           code={`// Starts from the entry point
 import { Button } from './components/button'  // -> finds button.tsx
@@ -93,9 +93,7 @@ import { useState } from 'react';             // -> finds react in node_modules`
           모든 <code>import</code> 를 확인해 dependency map 을 생성한다.
         </p>
 
-        <h3 className="tracking-tight" id="barrel">
-          2. Tree Shaking & Dead Code Elimination
-        </h3>
+        <h3 id="barrel">2. Tree Shaking & Dead Code Elimination</h3>
         <CodeBlock
           code={`// You import this:
 import { Button } from '@juun/ui';
@@ -111,7 +109,7 @@ export { Button, Card, Calendar, CodeBlock, ... };
           제거한다.
         </p>
 
-        <h3 className="tracking-tight">3. Code Splitting & Chunking</h3>
+        <h3>3. Code Splitting & Chunking</h3>
         <p>
           Tree Shaking 된 코드를 나누어 스크립트를 생성한다. 나누어진 스크립트를
           실제 html 에서 불러오게 되며, 이를 chunk 단위로 구분한다.
@@ -131,7 +129,7 @@ export { Button, Card, Calendar, CodeBlock, ... };
           </li>
         </ul>
 
-        <h3 className="tracking-tight">4. Bundle Generation</h3>
+        <h3>4. Bundle Generation</h3>
         <p>
           위의 과정을 거친 JavaScript 파일들에 다음과 같은 처리를 하여 최종
           번들을 생성한다:
@@ -149,7 +147,7 @@ export { Button, Card, Calendar, CodeBlock, ... };
           할 부분이 있다.
         </p>
 
-        <h2 className="tracking-tight">Bundle Analyzer</h2>
+        <h2>Bundle Analyzer</h2>
         <p>
           module bundler 가 생성한 번들은 minify 등의 경량화 처리 때문에 직접 그
           구성을 확인하기가 어렵다. 때문에 각 bundler 에는 번들을 시각화해주는
@@ -183,7 +181,7 @@ export { Button, Card, Calendar, CodeBlock, ... };
           위와 같이 생성된 번들의 구성과 크기 등을 확인해볼 수 있다.
         </p>
 
-        <h3 className="tracking-tight">Next Bundle Analyzer</h3>
+        <h3>Next Bundle Analyzer</h3>
         <p>
           이 프로젝트에서 사용하고 있는{" "}
           <Link href="https://www.npmjs.com/package/@next/bundle-analyzer">
@@ -269,7 +267,7 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
           route 에 따라 나눠 확인할 수 있다.
         </p>
 
-        <h2 className="tracking-tight">Optimization Methods</h2>
+        <h2>Optimization Methods</h2>
         <p>
           Module Bundler 는 앞서 언급했듯 자체적으로 스크립트의 크기를
           줄여주지만, 그럼에도 스크립트 크기가 크거나 여전히 불필요한 스크립트가
@@ -283,7 +281,7 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
           방법에는 크게 세 종류가 존재한다.
         </p>
 
-        <h3 className="tracking-tight">1. React.lazy & Dynamic Import</h3>
+        <h3>1. React.lazy & Dynamic Import</h3>
         <p>
           그 첫 번째 방법으로는{" "}
           <Link href="https://ko.react.dev/reference/react/lazy">
@@ -397,7 +395,7 @@ export type { ViewerProps };`}
           를 lazy import 형식으로 만들어야 한다.
         </p>
 
-        <h3 className="tracking-tight">2. Barrel Exports</h3>
+        <h3>2. Barrel Exports</h3>
         <p>
           다음은 <Link href="#barrel">위</Link>
           에서 잠깐 언급했던 barrel exports 이다. 먼저 barrel exports 란, 여러
@@ -438,9 +436,7 @@ export {
           Load JS 크기가 2.53MB → 853kB, 66% 감소한 것을 확인할 수 있었다.
         </p>
 
-        <h3 className="tracking-tight">
-          3. Using Lightweight Library Variants
-        </h3>
+        <h3>3. Using Lightweight Library Variants</h3>
         <p>
           프로젝트의 ui 컴포넌트 중 <code>CodeBlock</code> 에서 사용한{" "}
           <Link href="https://www.npmjs.com/package/react-syntax-highlighter">
@@ -478,7 +474,7 @@ SyntaxHighlighter.registerLanguage('tsx', tsx);
           줄일 수 있다.
         </p>
 
-        <h3 className="tracking-tight">Results</h3>
+        <h3>Results</h3>
         <p>나열한 방법들을 통해 본 프로젝트에서 얻은 결과는 다음과 같다.</p>
         <div className="flex gap-2">
           <AspectRatio
@@ -551,7 +547,7 @@ SyntaxHighlighter.registerLanguage('tsx', tsx);
           있다.
         </p>
 
-        <h2 className="tracking-tight">cf. Modular Exports</h2>
+        <h2>cf. Modular Exports</h2>
         <p>
           Module bundle optimization 에는 프로젝트 수준의 최적화 기법도 물론
           영향을 미치지만, 그에 못지 않게 사용한 패키지가 최적화를 고려하고
@@ -622,7 +618,7 @@ SyntaxHighlighter.registerLanguage('tsx', tsx);
           달성할 수 있다.
         </p>
 
-        <h2 className="tracking-tight">Closing</h2>
+        <h2>Closing</h2>
         <p>
           Cesium 컴포넌트를 lazy import 로 변경하면서 실제로 효과가 있는지
           확인해보려고 시작한 여정이 예상보다 길어졌다. 본 프로젝트에서 Bundle

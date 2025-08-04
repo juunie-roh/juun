@@ -45,7 +45,7 @@ export default function NpmPublish() {
           </Suspense>
         </AspectRatio>
       )}
-      <div className="prose text-primary mt-8 max-w-none">
+      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
         <h2 className="tracking-tight">Opening</h2>
         <p>
           사내 프로젝트에서 <Link href="https://cesium.com/">CesiumJS</Link> 를

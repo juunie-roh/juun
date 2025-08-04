@@ -1,7 +1,7 @@
 export default function CollectionDescription() {
   return (
-    <div className="prose text-primary max-w-none">
-      <h2 className="text-primary mb-2 tracking-tight">Collection</h2>
+    <div className="prose prose-zinc dark:prose-invert max-w-none">
+      <h2 className="mb-2">Collection</h2>
       <p>
         A wrapper class that enhances Cesium collection objects with tagging
         functionality. This class provides a consistent API for working with

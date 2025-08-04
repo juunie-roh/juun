@@ -86,10 +86,8 @@ export default function CloudNative() {
         </AspectRatio>
       )}
 
-      <div className="prose text-primary mt-8 max-w-none">
-        <h2 className="tracking-tight">
-          A Paradigm Shift in Application Development
-        </h2>
+      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+        <h2>A Paradigm Shift in Application Development</h2>
         <p>
           최근 어플리케이션의 구축의 패러다임은 flexibility, scalability,
           sustainability, retainability 등을 강조하며 서비스의 제공과 기능
@@ -107,7 +105,7 @@ export default function CloudNative() {
           기술들의 발전이 필요했다.
         </p>
 
-        <h3 className="tracking-tight">Cloud Computing</h3>
+        <h3>Cloud Computing</h3>
         <p>
           클라우드 컴퓨팅은 하드웨어 수준의 자원을 동적으로 할당하는 것을
           가능하게 하면서, 기존의 예측 사용량을 바탕으로 필요한 모든 자원을
@@ -119,7 +117,7 @@ export default function CloudNative() {
           이득을 보기 어려웠다.
         </p>
 
-        <h3 className="tracking-tight">Microservices Architecture, MSA</h3>
+        <h3>Microservices Architecture, MSA</h3>
         <p>
           Docker 의 등장과 함께 생겨난 Container 개념은 어플리케이션을 하드웨어,
           OS 등의 여러 종속성에서 해방시켜주었다. 여기에 더해, 컨테이너화된
@@ -177,7 +175,7 @@ export default function CloudNative() {
           </TableBody>
         </Table>
 
-        <h3 className="tracking-tight">Cloud Native</h3>
+        <h3>Cloud Native</h3>
         <blockquote className="text-primary">
           <Quote /> Divide and conquer is an algorithm design paradigm based on
           multi-branched recursion. A divide-and-conquer algorithm works by
@@ -324,7 +322,7 @@ export default function CloudNative() {
           또는 지원하고 있다.
         </p>
 
-        <h2 className="tracking-tight">Application Operating System?</h2>
+        <h2>Application Operating System?</h2>
         <p>
           서비스들이 분리됨에 따라 Cloud Native 환경에서 필수가 된 요소들이
           존재하는데, 이들을 살펴보다가 어느 소프트웨어의 구성과 매우 유사하다는
@@ -371,7 +369,7 @@ export default function CloudNative() {
           않을까?
         </p>
 
-        <h2 className="tracking-tight">Core Design Considerations for MSA</h2>
+        <h2>Core Design Considerations for MSA</h2>
 
         <AspectRatio
           ratio={16 / 9}
@@ -409,7 +407,7 @@ export default function CloudNative() {
           따라 고려해야 할 것들은 다음과 같이 나눠진다.
         </p>
 
-        <h3 className="tracking-tight">1. Infrastructure Architecture</h3>
+        <h3>1. Infrastructure Architecture</h3>
         <p>어플리케이션이 운영될 Cloud Native 환경을 정의하는 것이 우선이다.</p>
         <ul>
           <li>
@@ -435,7 +433,7 @@ export default function CloudNative() {
             인스턴스를 찾고 부하를 분산하는 메커니즘.
           </li>
         </ul>
-        <h3 className="tracking-tight">2. Microservice Definition</h3>
+        <h3>2. Microservice Definition</h3>
         <p>
           이렇게 정의된 Cloud Native 환경을 바탕으로 단일 microservice 의 구성
           요소를 식별할 수 있다.
@@ -460,7 +458,7 @@ export default function CloudNative() {
           정의하며, 환경에 맞는 통신 포맷, 네트워크 및 방화벽 보안 정책 등을
           갖추도록 설계한다.
         </p>
-        <h3 className="tracking-tight">3. Others</h3>
+        <h3>3. Others</h3>
         <p>
           이외에도 서비스 제공의 중단 없이 서비스 업데이트를 진행하기 위한 CI/CD
           Pipeline, 개발, 테스트 및 배포 환경 구축, DevOps 도입에 따른 조직 구조
@@ -468,7 +466,7 @@ export default function CloudNative() {
           적용할 수 있다.
         </p>
 
-        <h2 className="tracking-tight">Case Studies</h2>
+        <h2>Case Studies</h2>
         <p>
           Cloud Native 어플리케이션으로의 Migration 사례는 이미 충분히 많이
           찾아볼 수 있다. 그 중에서도{" "}
@@ -511,7 +509,7 @@ export default function CloudNative() {
           </li>
         </ul>
 
-        <h2 className="tracking-tight">Conclusion</h2>
+        <h2>Conclusion</h2>
         <blockquote className="text-primary">
           <Quote /> The best way to implement complex systems is to use a series
           of simple, loosely coupled components. - Martin Fowler
