@@ -1,5 +1,6 @@
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,7 +46,7 @@ export default function DockerImageOptimization() {
         </AspectRatio>
       )}
 
-      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+      <Prose className="mt-8">
         <h2>Docker Build</h2>
         <p>
           <Link href="https://docs.docker.com/build/concepts/overview">
@@ -497,7 +498,7 @@ CMD ["node", "apps/web/.next/standalone/apps/web/server.js"]`}
           아직 적용해보지 못한 부분들이 많다. 기회가 된다면 다른 부분들에 대한
           최적화도 진행해보고 싶다.
         </p>
-      </div>
+      </Prose>
     </Fragment>
   );
 }

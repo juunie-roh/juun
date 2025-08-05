@@ -1,6 +1,6 @@
 export default function TerrainDescription() {
   return (
-    <div className="prose prose-zinc dark:prose-invert max-w-none">
+    <div className="prose prose-zinc dark:prose-invert prose-headings:tracking-tight max-w-none">
       <h2 className="mb-2">HybridTerrainProvider</h2>
       <p>
         Provides terrain by delegating requests to different terrain providers

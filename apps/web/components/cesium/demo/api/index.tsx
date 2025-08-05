@@ -1,6 +1,7 @@
 "use client";
 
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -12,7 +13,7 @@ import { getApiFeatures } from "./utils";
 // Default component when no feature is selected
 function DefaultDemo() {
   return (
-    <div className="prose prose-zinc dark:prose-invert max-w-none">
+    <Prose>
       <h2 className="mb-2 tracking-tight">Cesium Utils Demo</h2>
       <p className="mb-4">
         This page demonstrates the capabilities of the{" "}
@@ -131,7 +132,7 @@ export default function Viewer(props: any) {
   );
 }`}
       />
-    </div>
+    </Prose>
   );
 }
 
