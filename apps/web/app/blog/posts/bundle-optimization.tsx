@@ -1,6 +1,7 @@
 import { Abbr } from "@juun/ui/abbr";
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import {
   Table,
@@ -61,7 +62,7 @@ export default function BundleOptimization() {
         </AspectRatio>
       )}
 
-      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+      <Prose className="mt-8">
         <h2>What is Module Bundler?</h2>
         <p>
           <code>html</code> 에서 기능 구현에 필요한 JavaScript 파일을 직접
@@ -633,7 +634,7 @@ SyntaxHighlighter.registerLanguage('tsx', tsx);
           추천을 따라 진행했을 뿐인 modular exports 도 그 중요성을 알게 됐다는
           점에서 큰 의미가 있는 작업이었다.
         </p>
-      </div>
+      </Prose>
     </Fragment>
   );
 }

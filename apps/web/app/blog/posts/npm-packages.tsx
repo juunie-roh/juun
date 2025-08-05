@@ -1,5 +1,6 @@
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,7 +46,7 @@ export default function NpmPublish() {
           </Suspense>
         </AspectRatio>
       )}
-      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+      <Prose className="mt-8">
         <h2 className="tracking-tight">Opening</h2>
         <p>
           사내 프로젝트에서 <Link href="https://cesium.com/">CesiumJS</Link> 를
@@ -581,7 +582,7 @@ jobs:
           protection rules 등 협업을 고려한 프로세스도 기회가 되면 설계해보고
           싶다.
         </p>
-      </div>
+      </Prose>
     </Fragment>
   );
 }

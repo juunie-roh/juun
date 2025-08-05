@@ -1,5 +1,6 @@
 import { Abbr } from "@juun/ui/abbr";
 import { AspectRatio } from "@juun/ui/aspect-ratio";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import {
   Table,
@@ -86,7 +87,7 @@ export default function CloudNative() {
         </AspectRatio>
       )}
 
-      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+      <Prose className="mt-8">
         <h2>A Paradigm Shift in Application Development</h2>
         <p>
           최근 어플리케이션의 구축의 패러다임은 flexibility, scalability,
@@ -510,7 +511,7 @@ export default function CloudNative() {
         </ul>
 
         <h2>Conclusion</h2>
-        <blockquote className="text-primary">
+        <blockquote>
           <Quote /> The best way to implement complex systems is to use a series
           of simple, loosely coupled components. - Martin Fowler
         </blockquote>
@@ -528,7 +529,7 @@ export default function CloudNative() {
           이끌어낸다면, 급변하는 비즈니스 환경에서 지속 가능한 경쟁력을 확보할
           수 있을 것이다.
         </p>
-      </div>
+      </Prose>
     </Fragment>
   );
 }

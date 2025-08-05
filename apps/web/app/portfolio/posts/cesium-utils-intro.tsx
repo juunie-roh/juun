@@ -176,7 +176,7 @@ export default function CesiumUtilsIntro() {
         </CardContent>
       </Card>
 
-      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+      <div className="prose prose-zinc dark:prose-invert prose-headings:tracking-tight mt-8 max-w-none">
         <h2 className="text-2xl font-bold tracking-tight">
           What is Cesium Utils?
         </h2>

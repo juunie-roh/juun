@@ -2,7 +2,7 @@ import { CodeBlock } from "@juun/ui/code-block";
 
 export default function HighlightDescription() {
   return (
-    <div className="prose prose-zinc dark:prose-invert max-w-none">
+    <div className="prose prose-zinc dark:prose-invert prose-headings:tracking-tight max-w-none">
       <h2 className="mb-2">Highlight</h2>
       <p>
         A lightweight multiton highlight manager for Cesium using flyweight

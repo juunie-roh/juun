@@ -1,5 +1,6 @@
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default function YarnBerry() {
           </Suspense>
         </AspectRatio>
       )}
-      <div className="prose prose-zinc dark:prose-invert mt-8 max-w-none">
+      <Prose className="mt-8">
         <h2>Yarn Berry?</h2>
         <p>
           npm(Node Package Manager)의 의존성 관리를 개선하기 위해 나온 오픈 소스
@@ -235,7 +236,7 @@ node_modules
           관련 설정들을 잘 다룰 수 있다면, Yarn Berry 를 패키지 매니저로 선택할
           이유는 충분하다.
         </p>
-      </div>
+      </Prose>
     </Fragment>
   );
 }

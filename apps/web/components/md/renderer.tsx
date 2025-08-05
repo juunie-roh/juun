@@ -1,6 +1,7 @@
 "use client";
 
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 
 interface MarkdownRendererProps {
   html: string;
@@ -47,7 +48,7 @@ export function MarkdownRenderer({ html }: MarkdownRendererProps) {
   const parts = processedHtml.split(/__CODE_BLOCK_(\d+)__/);
 
   return (
-    <div className="prose prose-zinc dark:prose-invert max-w-none">
+    <Prose>
       {parts.map((part, i) => {
         if (i % 2 === 0) {
           // Regular HTML content
@@ -69,6 +70,6 @@ export function MarkdownRenderer({ html }: MarkdownRendererProps) {
           return null;
         }
       })}
-    </div>
+    </Prose>
   );
 }
