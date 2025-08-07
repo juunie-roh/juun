@@ -32,7 +32,7 @@ export const API_FEATURES: Record<Api, Feature[]> = {
     {
       value: "item-1",
       label: "Hybrid Example",
-      render: lazy(() => import("./terrain")),
+      render: lazy(() => import("./terrain/hybrid-example")),
     },
   ],
 
