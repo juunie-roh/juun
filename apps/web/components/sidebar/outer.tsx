@@ -53,7 +53,7 @@ const data = {
       ],
     },
   ],
-};
+} as const;
 
 export default function OuterSidebar({
   ...props

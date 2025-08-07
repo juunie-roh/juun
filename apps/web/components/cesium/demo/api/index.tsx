@@ -3,12 +3,101 @@
 import { CodeBlock } from "@juun/ui/code-block";
 import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
+import type { Viewer } from "cesium";
 import Link from "next/link";
-import { Suspense } from "react";
+import type { ComponentType, LazyExoticComponent } from "react";
+import { lazy, Suspense } from "react";
 
 import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
 
-import { getApiFeatures } from "./utils";
+import EntityToggler from "../../entity-toggler";
+import CollectionDescription from "./collection/description";
+import HighlightDescription from "./highlight/description";
+import TerrainDescription from "./terrain/description";
+import ViewerDescription from "./viewer/description";
+
+export type Feature = {
+  value: string;
+  label: string;
+  render: ComponentType<any> | LazyExoticComponent<ComponentType<any>>;
+};
+
+export interface Option {
+  /** The feature of Api to show */
+  api: "collection" | "terrain" | "viewer" | "highlight";
+  /** Display name for the UI */
+  label: string;
+  /** Initial camera location to be set */
+  flyTo?: Parameters<Viewer["camera"]["flyTo"]>[0];
+}
+
+const API_FEATURES: Record<Option["api"], Feature[]> = {
+  collection: [
+    {
+      value: "description",
+      label: "Description",
+      render: CollectionDescription,
+    },
+    {
+      value: "item-1",
+      label: "Add / Remove Item",
+      render: EntityToggler,
+    },
+  ],
+
+  terrain: [
+    {
+      value: "description",
+      label: "Description",
+      render: TerrainDescription,
+    },
+    {
+      value: "item-1",
+      label: "Hybrid Example",
+      render: lazy(() => import("./terrain/hybrid-example")),
+    },
+  ],
+
+  viewer: [
+    {
+      value: "description",
+      label: "Description",
+      render: ViewerDescription,
+    },
+  ],
+
+  highlight: [
+    {
+      value: "description",
+      label: "Description",
+      render: HighlightDescription,
+    },
+    {
+      value: "item-1",
+      label: "Polygon Entity",
+      render: lazy(() => import("./highlight/polygon")),
+    },
+    {
+      value: "item-2",
+      label: "Model Entity",
+      render: lazy(() => import("./highlight/model-entity")),
+    },
+    {
+      value: "item-3",
+      label: "Datasource Entity",
+      render: lazy(() => import("./highlight/datasource-entity")),
+    },
+    {
+      value: "item-4",
+      label: "Cesium3DTileFeature",
+      render: lazy(() => import("./highlight/silhouette")),
+    },
+  ],
+};
+
+export function getFeatures(api: Option["api"]): Feature[] {
+  return API_FEATURES[api];
+}
 
 // Default component when no feature is selected
 function DefaultDemo() {
@@ -143,7 +232,7 @@ export default function FeatureDemo() {
   }
 
   if (!feature) {
-    const features = getApiFeatures(option.api);
+    const features = getFeatures(option.api);
     const defaultFeature =
       features.find((f) => f.value === "description") || features[0];
 

@@ -14,22 +14,22 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@juun/ui/sidebar";
-import * as Lucide from "lucide-react";
+import { BookOpen, Bot, ChevronRight, SquareTerminal } from "lucide-react";
 
 import { useAppSidebar } from "@/contexts/app-sidebar";
 
 export interface NavMainItem {
   id: string;
   title: string;
-  icon: keyof typeof Lucide | string;
-  items?: {
+  icon: "SquareTerminal" | "Bot" | "BookOpen";
+  items?: readonly {
     id: string;
     title: string;
     content?: string;
   }[];
 }
 
-export default function NavMain({ items }: { items: NavMainItem[] }) {
+export default function NavMain({ items }: { items: readonly NavMainItem[] }) {
   const { active, setActive, outer, innerOpen, setInnerOpen, setContent } =
     useAppSidebar();
 
@@ -37,9 +37,13 @@ export default function NavMain({ items }: { items: NavMainItem[] }) {
     <SidebarGroup>
       <SidebarMenu>
         {items.map((item) => {
-          const Icon = Lucide[
-            item.icon as keyof typeof Lucide
-          ] as Lucide.LucideIcon;
+          const iconMap = {
+            SquareTerminal,
+            Bot,
+            BookOpen,
+          } as const;
+
+          const Icon = iconMap[item.icon as keyof typeof iconMap];
 
           return (
             <Collapsible
@@ -60,7 +64,7 @@ export default function NavMain({ items }: { items: NavMainItem[] }) {
                   >
                     <Icon />
                     <span>{item.title}</span>
-                    <Lucide.ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
                 <CollapsibleContent>

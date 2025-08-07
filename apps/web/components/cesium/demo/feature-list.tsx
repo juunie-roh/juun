@@ -12,13 +12,13 @@ import { useEffect, useMemo } from "react";
 
 import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
 
-import { getApiFeatures } from "./api/utils";
+import { getFeatures } from "./api";
 
 export default function FeatureList() {
   const { option, feature, setFeature } = useCesiumUtilsApiStore();
 
   const features = useMemo(
-    () => (option ? getApiFeatures(option.api) : undefined),
+    () => (option ? getFeatures(option.api) : undefined),
     [option],
   );
 
