@@ -3,13 +3,24 @@
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "cesium/Build/Cesium/Widgets/lighter.css";
 
+import type { Viewer } from "cesium";
 import { CameraEventType, KeyboardEventModifier, Terrain } from "cesium";
 import { Fragment, useEffect } from "react";
+import type { ViewerProps as RViewerProps } from "resium";
 import { useCesium, Viewer as RViewer } from "resium";
 
 import useViewerStore from "@/stores/slices/viewer";
 
-import type { ViewerProps } from "../types";
+export interface ViewerProps extends Omit<RViewerProps, "className"> {
+  /** Whether to show the credit container. @default true */
+  bottomContainer?: boolean;
+  /** Initial location of the camera */
+  flyTo?: Parameters<Viewer["camera"]["flyTo"]>[0];
+  /** Whether to show the timeline CesiumWidget. @default true */
+  timeline?: boolean;
+  /** Whether to show the animation CesiumWidget. @default true */
+  animation?: boolean;
+}
 
 // Separate component that uses the viewer context
 function ViewerContent({

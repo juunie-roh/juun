@@ -1,7 +1,7 @@
 import { Skeleton } from "@juun/ui/skeleton";
 import { lazy, Suspense } from "react";
 
-import type { ViewerProps } from "../types";
+import type { ViewerProps } from "./viewer";
 
 const LazyViewer = lazy(() => import("./viewer"));
 

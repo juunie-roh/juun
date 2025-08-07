@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-import { ApiOption, Feature } from "@/components/cesium/types";
+import type { Feature, Option } from "@/components/cesium/demo/api";
 import { logger } from "@/stores/middleware/logger";
 
 interface CesiumUtilsApiState {
-  option?: ApiOption;
-  setOption: (apiOption?: ApiOption) => void;
+  option?: Option;
+  setOption: (apiOption?: Option) => void;
   removeOption: () => void;
 
   feature?: Feature;
