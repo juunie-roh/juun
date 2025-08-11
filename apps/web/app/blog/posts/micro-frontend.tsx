@@ -263,7 +263,9 @@ export default function MicroFrontend() {
           점이다. 각 서비스가 독립된 서버에서 실행되기 때문에 route 이동 시
           브라우저는 완전히 새로운 페이지를 로드하게 되고, 이는 SPA 의 핵심
           장점인 빠른 네비게이션을 포기하는 것을 의미한다. 또한 이 방법은
-          Component 단위로의 서비스 분리가 불가능하다.
+          Component 단위로의 서비스 분리가 불가능하다. 하지만 각 application 이
+          분리된 dependency 및 life cycle 을 가짐으로써 완전한 독립성을 확보할
+          수 있다.
         </p>
 
         <h3>2. Module Federation</h3>
@@ -335,12 +337,34 @@ module.exports = {
             기하급수적으로 증가한다.
           </li>
         </ul>
+        <p>
+          또한, Multi-zones 와 다르게 dependency 종속성이 생기며, 일부 모듈의
+          업데이트를 동기화하여 진행하게 되어 완전한 독립성을 갖추지 못한다는
+          점도 문제가 될 수 있다.
+        </p>
 
         <p>
           두 방법 모두 JavaScript Bundle 크기의 증가를 초래하며, 상당 기간을
           세밀한 Optimization 에 할애하지 않으면 서비스의 성능이 심각하게
           저하되는 결과를 맞게 된다.
         </p>
+
+        <p>
+          두 가지 방식의 특징들을 바탕으로, 다음과 같은 형태에 MFE 를 적용하는
+          것이 가장 적합하다고 판단할 수 있다:
+        </p>
+
+        <ul>
+          <li>서비스 제공에 필요한 main dependency 가 명확하게 구분된 경우</li>
+          <li>
+            서비스 사이의 연결성을 최소화할 수 있는 경우 (serialize 가능한
+            context, 납득 가능한 design transition 등)
+          </li>
+          <li>
+            개별 서비스 또는 컴포넌트의 로드 지연이 사용자에게 큰 영향을 미치지
+            않는 경우
+          </li>
+        </ul>
 
         <h3>Shell Application</h3>
         <p>
