@@ -1,47 +1,30 @@
 import matter from "gray-matter";
 import { marked } from "marked";
 
-export interface ProcessedMDX {
-  html: string;
-  frontmatter: Record<string, any>;
+namespace md {
+  type Data = Record<string, any>;
+  type WithData<T> = T & Data;
+
+  export function decode(html: string): string {
+    return html
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, "&");
+  }
+
+  export async function parse(md: string): Promise<WithData<{ html: string }>> {
+    const { data, content } = matter(md);
+
+    // Convert markdown to HTML with custom renderer
+    const html = await marked(content);
+
+    return {
+      html,
+      data,
+    };
+  }
 }
 
-// Custom renderer for code blocks
-const renderer = new marked.Renderer();
-renderer.code = function ({
-  text,
-  lang,
-  escaped,
-}: {
-  text: string;
-  lang?: string;
-  escaped?: boolean;
-}) {
-  const safeCode = escaped ? text : escape(text);
-  const language = lang || "text";
-  const fileName = `code.${language === "javascript" ? "js" : language === "typescript" ? "ts" : language}`;
-
-  // Return a custom div that can be processed by React
-  return `<div class="custom-code-block" data-code="${escape(safeCode)}" data-filename="${fileName}"></div>`;
-};
-
-function escape(html: string): string {
-  return html
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-export async function processMDX(source: string): Promise<ProcessedMDX> {
-  const { data: frontmatter, content } = matter(source);
-
-  // Convert markdown to HTML with custom renderer
-  const html = await marked(content, { renderer });
-
-  return {
-    html,
-    frontmatter,
-  };
-}
+export default md;

@@ -1,5 +1,5 @@
 import { MarkdownRenderer } from "@/components/md/renderer";
-import { processMDX } from "@/lib/md";
+import md from "@/lib/md";
 
 export default async function TestMDX() {
   const markdownSource = `
@@ -40,7 +40,7 @@ console.log(simple)
 [Link test](https://example.com)
   `;
 
-  const { html, frontmatter } = await processMDX(markdownSource);
+  const { html, frontmatter } = await md.parse(markdownSource);
 
   return (
     <article className="xl:w-3xl mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8">
