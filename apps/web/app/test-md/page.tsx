@@ -38,17 +38,17 @@ console.log(simple)
 > This should work without any React conflicts.
 
 [Link test](https://example.com)
-  `;
+`;
 
-  const { html, frontmatter } = await md.parse(markdownSource);
+  const { html, data } = await md.parse(markdownSource);
 
   return (
     <article className="xl:w-3xl mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8">
       <header className="mb-8">
         <h1 className="mb-4 text-3xl font-bold tracking-tighter">
-          {frontmatter.title}
+          {data.title}
         </h1>
-        <p className="text-lg">{frontmatter.description}</p>
+        <p className="text-lg">{data.description}</p>
       </header>
 
       <MarkdownRenderer html={html} />

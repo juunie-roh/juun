@@ -2,9 +2,6 @@ import matter from "gray-matter";
 import { marked } from "marked";
 
 namespace md {
-  type Data = Record<string, any>;
-  type WithData<T> = T & Data;
-
   export function decode(html: string): string {
     return html
       .replace(/&lt;/g, "<")
@@ -14,7 +11,9 @@ namespace md {
       .replace(/&amp;/g, "&");
   }
 
-  export async function parse(md: string): Promise<WithData<{ html: string }>> {
+  export async function parse(
+    md: string,
+  ): Promise<{ html: string; data: { [key: string]: any } }> {
     const { data, content } = matter(md);
 
     // Convert markdown to HTML with custom renderer
