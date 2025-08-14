@@ -11,7 +11,7 @@ import { Fragment, Suspense } from "react";
 import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
 
 export const metadata = {
-  title: "Micro Frontend",
+  title: "Micro Frontend: with common misconceptions",
   description:
     "Introduction to the Micro Frontend, with common misconceptions.",
   date: "2025-08-05",
@@ -49,6 +49,9 @@ export default function MicroFrontend() {
         </AspectRatio>
       )}
       <Prose className="mt-8">
+        <Link href="https://www.linkedin.com/pulse/micro-frontend-common-misconceptions-hyungjuun-roh-x2quc/">
+          English Version
+        </Link>
         <h2>MFE - Micro Frontend?</h2>
         <p>
           Cloud Native 와 microservice 가 주목 받음에 따라 Frontend 에서도

@@ -19,7 +19,7 @@ import { Fragment, Suspense } from "react";
 import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
 
 export const metadata = {
-  title: "Cloud Native Application and MSA",
+  title: "Cloud Native Application and MSA: compared to Android OS",
   description:
     "Introduction to the Cloud Native, and considerations of designing cloud native applications.",
   date: "2025-05-22",
@@ -88,6 +88,9 @@ export default function CloudNative() {
       )}
 
       <Prose className="mt-8">
+        <Link href="https://www.linkedin.com/pulse/cloud-native-application-msa-%ED%98%95%EC%A4%80-%EB%85%B8-80wic/">
+          English Version
+        </Link>
         <h2>A Paradigm Shift in Application Development</h2>
         <p>
           최근 어플리케이션의 구축의 패러다임은 flexibility, scalability,
