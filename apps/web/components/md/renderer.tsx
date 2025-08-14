@@ -2,44 +2,33 @@
 
 import { CodeBlock } from "@juun/ui/code-block";
 import { Prose } from "@juun/ui/prose";
+import { ComponentProps } from "react";
 
-interface MarkdownRendererProps {
-  html: string;
-}
+import md from "@/lib/md";
 
-interface CodeBlockData {
-  code: string;
-  fileName: string;
-  index: number;
-}
-
-export function MarkdownRenderer({ html }: MarkdownRendererProps) {
-  // Extract code blocks from HTML and prepare data
-  const codeBlocks: CodeBlockData[] = [];
+export function MarkdownRenderer({ html }: { html: string }) {
+  // Extract code blocks from <pre><code class="language-*"> pattern
+  const codeBlocks: ComponentProps<typeof CodeBlock>[] = [];
   let processedHtml = html;
 
-  // Find all custom code blocks and extract their data
+  // Find all <pre><code class="language-*"> blocks
   const codeBlockRegex =
-    /<div class="custom-code-block" data-code="([^"]*)" data-filename="([^"]*)"><\/div>/g;
+    /<pre><code class="language-([^"]*)">([\s\S]*?)<\/code><\/pre>/g;
   let match;
   let index = 0;
 
   while ((match = codeBlockRegex.exec(html)) !== null) {
-    const [fullMatch, encodedCode, fileName] = match;
+    const [fullMatch, language, code] = match;
+    const fileName = language || "text";
 
-    if (!encodedCode || !fileName) continue;
+    if (!code) return;
 
-    // Unescape the code (unescape &amp; last to avoid double-unescaping)
-    const code = encodedCode
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">")
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
-      .replace(/&amp;/g, "&");
+    // Decode HTML entities for CodeBlock component
+    const decodedCode = md.decode(code).replace(/\n$/, "");
 
-    codeBlocks.push({ code, fileName, index });
+    codeBlocks.push({ code: decodedCode, fileName });
 
-    // Replace with a placeholder
+    // Replace with placeholder
     processedHtml = processedHtml.replace(fullMatch, `__CODE_BLOCK_${index}__`);
     index++;
   }
@@ -58,14 +47,7 @@ export function MarkdownRenderer({ html }: MarkdownRendererProps) {
           const blockIndex = parseInt(part, 10);
           const codeBlock = codeBlocks[blockIndex];
           if (codeBlock) {
-            return (
-              <div key={i} className="not-prose my-6">
-                <CodeBlock
-                  code={codeBlock.code}
-                  fileName={codeBlock.fileName}
-                />
-              </div>
-            );
+            return <CodeBlock {...codeBlock} key={i} />;
           }
           return null;
         }

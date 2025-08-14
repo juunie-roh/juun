@@ -63,6 +63,9 @@ export default function BundleOptimization() {
       )}
 
       <Prose className="mt-8">
+        <Link href="https://www.linkedin.com/pulse/bundle-optimization-%ED%98%95%EC%A4%80-%EB%85%B8-x2n3c/">
+          English Version
+        </Link>
         <h2>What is Module Bundler?</h2>
         <p>
           <code>html</code> 에서 기능 구현에 필요한 JavaScript 파일을 직접
