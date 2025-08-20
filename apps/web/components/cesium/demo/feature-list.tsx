@@ -8,19 +8,31 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@juun/ui/sidebar";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
-import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
+import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
 
 import { getFeatures } from "./api";
 
 export default function FeatureList() {
-  const { option, feature, setFeature } = useCesiumUtilsApiStore();
+  const { feature, setFeature } = useCesiumUtilsFeatureStore();
+  const pathname = usePathname();
 
-  const features = useMemo(
-    () => (option ? getFeatures(option.api) : undefined),
-    [option],
-  );
+  // Get current API from URL
+  const currentApi = pathname.split("/").pop();
+
+  const features = useMemo(() => {
+    if (
+      currentApi &&
+      ["terrain", "collection", "highlight", "viewer"].includes(currentApi)
+    ) {
+      return getFeatures(
+        currentApi as "terrain" | "collection" | "highlight" | "viewer",
+      );
+    }
+    return undefined;
+  }, [currentApi]);
 
   // Set initial active item as description (first item of features)
   useEffect(() => {

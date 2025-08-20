@@ -1,4 +1,3 @@
-import { Separator } from "@juun/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
@@ -6,7 +5,6 @@ import {
 } from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
-import CesiumUtilsBreadcrumb from "@/components/cesium/demo/breadcrumb";
 import CesiumUtilsSidebar from "@/components/cesium/demo/sidebar";
 
 export const metadata: Metadata = {
@@ -33,8 +31,6 @@ export default function CesiumUtilsDemoLayout({
       <SidebarInset className="flex min-w-0 flex-col overflow-hidden">
         <header className="bg-background flex h-14 shrink-0 items-center gap-2 border-b">
           <div className="flex h-full flex-1 items-center justify-end gap-2 p-4">
-            <CesiumUtilsBreadcrumb />
-            <Separator orientation="vertical" />
             <SidebarTrigger />
           </div>
         </header>

@@ -6,16 +6,90 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@juun/ui/resizable";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
+import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
 
 import Viewer from "../viewer";
 import FeatureDemo from "./api";
 
-export default function ResizableViewerController() {
-  const { option } = useCesiumUtilsApiStore();
+interface ResizableViewerControllerProps {
+  showDefaultDemo?: boolean;
+}
+
+export default function ResizableViewerController({
+  showDefaultDemo = false,
+}: ResizableViewerControllerProps) {
+  const { removeFeature } = useCesiumUtilsFeatureStore();
+  const pathname = usePathname();
   // State to track viewport size
   const isLargeScreen = useMediaQuery("min-width: 1024px");
+
+  // Clear feature selection when showing default demo or changing APIs
+  useEffect(() => {
+    if (showDefaultDemo) {
+      removeFeature();
+    }
+  }, [showDefaultDemo, pathname, removeFeature]);
+
+  const [flyToOption, setFlyToOption] = useState<any>(undefined);
+
+  useEffect(() => {
+    if (showDefaultDemo) {
+      setFlyToOption(undefined);
+      return;
+    }
+
+    // Get flyTo option based on current API
+    const getFlyToOption = async () => {
+      const currentApi = pathname.split("/").pop();
+      if (
+        !currentApi ||
+        !["terrain", "collection", "highlight", "viewer"].includes(currentApi)
+      ) {
+        return undefined;
+      }
+
+      try {
+        const { Cartesian3, Math: CesiumMath } = await import("cesium");
+
+        const flyToOptions: Record<string, any> = {
+          collection: {
+            destination: new Cartesian3(
+              -3964624.632297504,
+              3356819.574895879,
+              3696707.310427818,
+            ),
+            orientation: {
+              heading: CesiumMath.toRadians(0),
+              pitch: CesiumMath.toRadians(-50),
+              roll: 0.0,
+            },
+          },
+          terrain: {
+            destination: new Cartesian3(
+              -3046596.558550092,
+              4065701.630895504,
+              3854536.407434127,
+            ),
+            orientation: {
+              heading: CesiumMath.toRadians(0),
+              pitch: CesiumMath.toRadians(-45),
+              roll: 0.0,
+            },
+          },
+        };
+
+        return flyToOptions[currentApi];
+      } catch (error) {
+        console.error("Failed to load flyTo option:", error);
+        return undefined;
+      }
+    };
+
+    getFlyToOption().then(setFlyToOption);
+  }, [pathname, showDefaultDemo]);
 
   return (
     <ResizablePanelGroup
@@ -25,11 +99,11 @@ export default function ResizableViewerController() {
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
           <Viewer
-            key={option?.api || "default"} // refresh the viewer
+            key={pathname} // refresh the viewer when API changes
             bottomContainer={false}
             animation={false}
             timeline={false}
-            flyTo={option?.flyTo} // extendable viewer option
+            flyTo={flyToOption} // extendable viewer option
           />
         </div>
       </ResizablePanel>

@@ -12,86 +12,23 @@ import {
 import { cn } from "@juun/ui/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@juun/ui/popover";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
-import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
-
-import type { Option } from "./api";
+const API_OPTIONS = [
+  { api: "collection", label: "Collection" },
+  { api: "terrain", label: "Terrain" },
+  { api: "viewer", label: "Viewer" },
+  { api: "highlight", label: "Highlight" },
+] as const;
 
 function StatusList({
-  open,
   setOpen,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const { setOption } = useCesiumUtilsApiStore();
-  const [options, setOptions] = useState<Option[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadOptions = async () => {
-      try {
-        const { Cartesian3, Math: CesiumMath } = await import("cesium");
-        setOptions([
-          {
-            api: "collection",
-            label: "Collection",
-            flyTo: {
-              destination: new Cartesian3(
-                -3964624.632297504,
-                3356819.574895879,
-                3696707.310427818,
-              ),
-              orientation: {
-                heading: CesiumMath.toRadians(0),
-                pitch: CesiumMath.toRadians(-50),
-                roll: 0.0,
-              },
-            },
-          },
-          {
-            api: "terrain",
-            label: "Terrain",
-            flyTo: {
-              destination: new Cartesian3(
-                -3046596.558550092,
-                4065701.630895504,
-                3854536.407434127,
-              ),
-              orientation: {
-                heading: CesiumMath.toRadians(0),
-                pitch: CesiumMath.toRadians(-45),
-                roll: 0.0,
-              },
-            },
-          },
-          {
-            api: "viewer",
-            label: "Viewer",
-          },
-          {
-            api: "highlight",
-            label: "Highlight",
-          },
-        ]);
-      } catch (error) {
-        console.error("Failed to load APIs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadOptions();
-  }, [open]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center p-4">
-        <div className="text-muted-foreground text-sm">Loading APIs ...</div>
-      </div>
-    );
-  }
+  const router = useRouter();
 
   return (
     <Command>
@@ -99,13 +36,13 @@ function StatusList({
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {options.map((option) => (
+          {API_OPTIONS.map((option) => (
             <CommandItem
               key={option.api}
               value={option.api}
               className="hover:cursor-pointer"
               onSelect={(value) => {
-                setOption(options.find((opt) => opt.api === value));
+                router.push(`/cesium-utils/${value}`);
                 setOpen(false);
               }}
             >
@@ -119,14 +56,25 @@ function StatusList({
 }
 
 export default function ApiCombobox() {
-  const { option } = useCesiumUtilsApiStore();
+  const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
+
+  // Get current API from URL
+  const currentApi = pathname.split("/").pop();
+  const apiLabels: Record<string, string> = {
+    collection: "Collection",
+    terrain: "Terrain",
+    viewer: "Viewer",
+    highlight: "Highlight",
+  };
+  const currentApiLabel =
+    currentApi && apiLabels[currentApi] ? apiLabels[currentApi] : "Select ...";
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className={cn("w-full justify-between p-4")}>
-          {option ? option.label : "Select ..."}
+          {currentApiLabel}
           <ChevronDown />
         </Button>
       </PopoverTrigger>
