@@ -3,12 +3,11 @@
 import { CodeBlock } from "@juun/ui/code-block";
 import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
-import type { Viewer } from "cesium";
 import Link from "next/link";
 import type { ComponentType, LazyExoticComponent } from "react";
 import { lazy, Suspense } from "react";
 
-import useCesiumUtilsApiStore from "@/stores/slices/cesium-utils-api";
+import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
 
 import EntityToggler from "../../entity-toggler";
 import CollectionDescription from "./collection/description";
@@ -22,16 +21,9 @@ export type Feature = {
   render: ComponentType<any> | LazyExoticComponent<ComponentType<any>>;
 };
 
-export interface Option {
-  /** The feature of Api to show */
-  api: "collection" | "terrain" | "viewer" | "highlight";
-  /** Display name for the UI */
-  label: string;
-  /** Initial camera location to be set */
-  flyTo?: Parameters<Viewer["camera"]["flyTo"]>[0];
-}
+type ApiType = "collection" | "terrain" | "viewer" | "highlight";
 
-const API_FEATURES: Record<Option["api"], Feature[]> = {
+const API_FEATURES: Record<ApiType, Feature[]> = {
   collection: [
     {
       value: "description",
@@ -95,7 +87,7 @@ const API_FEATURES: Record<Option["api"], Feature[]> = {
   ],
 };
 
-export function getFeatures(api: Option["api"]): Feature[] {
+export function getFeatures(api: ApiType): Feature[] {
   return API_FEATURES[api];
 }
 
@@ -226,32 +218,58 @@ export default function Viewer(props: any) {
 }
 
 export default function FeatureDemo() {
-  const { option, feature } = useCesiumUtilsApiStore();
-  if (!option) {
-    return <DefaultDemo />;
+  const { feature } = useCesiumUtilsFeatureStore();
+
+  // For the base /cesium-utils route, show the default demo
+  if (typeof window !== "undefined") {
+    const pathname = window.location.pathname;
+    if (pathname === "/cesium-utils") {
+      return <DefaultDemo />;
+    }
+
+    const currentApi = pathname.split("/").pop();
+    if (
+      !currentApi ||
+      !["terrain", "collection", "highlight", "viewer"].includes(currentApi)
+    ) {
+      return <DefaultDemo />;
+    }
+
+    if (!feature) {
+      const features = getFeatures(
+        currentApi as "terrain" | "collection" | "highlight" | "viewer",
+      );
+      const defaultFeature =
+        features.find((f) => f.value === "description") || features[0];
+
+      if (!defaultFeature) {
+        const apiLabels: Record<string, string> = {
+          collection: "Collection",
+          terrain: "Terrain",
+          viewer: "Viewer",
+          highlight: "Highlight",
+        };
+
+        return (
+          <div className="prose max-w-none">
+            <h2 className="mb-2 tracking-tight">{apiLabels[currentApi]}</h2>
+            <p>No features available for this API.</p>
+          </div>
+        );
+      }
+
+      const Comp = defaultFeature.render;
+
+      return (
+        <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+          <Comp />
+        </Suspense>
+      );
+    }
   }
 
   if (!feature) {
-    const features = getFeatures(option.api);
-    const defaultFeature =
-      features.find((f) => f.value === "description") || features[0];
-
-    if (!defaultFeature) {
-      return (
-        <div className="prose max-w-none">
-          <h2 className="mb-2 tracking-tight">{option.label}</h2>
-          <p>No features available for this API.</p>
-        </div>
-      );
-    }
-
-    const Comp = defaultFeature.render;
-
-    return (
-      <Suspense fallback={<Skeleton className="h-32 w-full" />}>
-        <Comp />
-      </Suspense>
-    );
+    return <DefaultDemo />;
   }
 
   const Comp = feature.render;
