@@ -7,11 +7,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/postcss": "^4.1.12",
     "@tailwindcss/typography": "^0.5.16",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11",
-    "tw-animate-css": "^1.3.6"
+    "tailwindcss": "^4.1.12",
+    "tw-animate-css": "^1.3.7"
   },
   "devDependencies": {
     "@config/typescript": "workspace:^",
