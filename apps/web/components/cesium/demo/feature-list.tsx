@@ -25,10 +25,17 @@ export default function FeatureList() {
   const features = useMemo(() => {
     if (
       currentApi &&
-      ["terrain", "collection", "highlight", "viewer"].includes(currentApi)
+      ["terrain", "collection", "highlight", "viewer", "sunlight"].includes(
+        currentApi,
+      )
     ) {
       return getFeatures(
-        currentApi as "terrain" | "collection" | "highlight" | "viewer",
+        currentApi as
+          | "terrain"
+          | "collection"
+          | "highlight"
+          | "viewer"
+          | "sunlight",
       );
     }
     return undefined;

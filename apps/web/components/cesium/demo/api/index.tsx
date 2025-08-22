@@ -12,6 +12,7 @@ import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
 import EntityToggler from "../../entity-toggler";
 import CollectionDescription from "./collection/description";
 import HighlightDescription from "./highlight/description";
+import SunlightDescription from "./sunlight/description";
 import TerrainDescription from "./terrain/description";
 import ViewerDescription from "./viewer/description";
 
@@ -21,7 +22,7 @@ export type Feature = {
   render: ComponentType<any> | LazyExoticComponent<ComponentType<any>>;
 };
 
-type ApiType = "collection" | "terrain" | "viewer" | "highlight";
+type ApiType = "collection" | "terrain" | "viewer" | "highlight" | "sunlight";
 
 const API_FEATURES: Record<ApiType, Feature[]> = {
   collection: [
@@ -83,6 +84,13 @@ const API_FEATURES: Record<ApiType, Feature[]> = {
       value: "item-4",
       label: "Cesium3DTileFeature",
       render: lazy(() => import("./highlight/silhouette")),
+    },
+  ],
+  sunlight: [
+    {
+      value: "description",
+      label: "Description",
+      render: SunlightDescription,
     },
   ],
 };
