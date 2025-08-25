@@ -1,18 +1,14 @@
 # Juun
 
-A modern [Next.js](https://nextjs.org) monorepo application powered by Turborepo with a complete UI system, state management, and developer tooling.
+Next.js monorepo application powered by Turborepo.
 
-## 📋 Project Overview
-
-This Turborepo-powered monorepo structure includes:
+## Project Overview
 
 - **Web App**: Next.js application with App Router (`/apps/web`)
 - **UI Library**: Component library with Tailwind & shadcn (`/packages/ui`)
-- [**Config Package**](./packages/config/README.md): Shared configuration for TypeScript, ESLint, and Tailwind (`/packages/config`)
+- **Config Package**: Shared configuration for TypeScript, ESLint, and Tailwind (`/packages/config`)
 
-The project uses Turborepo to optimize the development workflow and build processes across all workspaces, enabling faster builds through remote caching and parallel task execution.
-
-## 🚀 Features
+## Features
 
 ### Core Technologies
 
@@ -25,32 +21,25 @@ The project uses Turborepo to optimize the development workflow and build proces
 
 ### Developer Experience
 
-- [PNPM](https://pnpm.io) for fast, disk space efficient package management
-- Monorepo structure with workspace dependencies powered by Turborepo
-- [ESLint](https://eslint.org) configuration for Next.js, React, TypeScript, and more
-- [Prettier](https://prettier.io) for code formatting
-- [Husky](https://typicode.github.io/husky) for Git hooks
-- [Commitlint](https://commitlint.js.org) and [Commitizen](https://commitizen-tools.github.io/commitizen/) for standardized commits
-- [Jest](https://jestjs.io) and [React Testing Library](https://testing-library.com) for testing
-- [Storybook](https://storybook.js.org) for component development and documentation
+- PNPM package management
+- ESLint, Prettier, Husky, Commitlint
+- Jest and React Testing Library
+- Storybook for component documentation
 
 ### State Management & UI
 
-- [Zustand](https://zustand.docs.pmnd.rs) with middleware support (logger)
-- Customized [shadcn/ui](https://ui.shadcn.com) components
-- Dark mode with [next-themes](https://github.com/pacocoursey/next-themes)
-- Custom UI components:
-  - Wheel component for circular menus
-  - Portfolio system with dynamic routing
+- Zustand with middleware support
+- Customized shadcn/ui components
+- Dark mode with next-themes
+- Custom UI components (wheel, portfolio system)
 
 ### Deployment & CI/CD
 
-- [GitHub Actions](https://github.com/features/actions) for CI/CD
-- Automated testing, linting, and type checking
-- Docker support with multi-stage builds
-- Vercel deployment with GitHub Actions sync
+- GitHub Actions for CI/CD
+- Docker support
+- Vercel deployment
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 juun/
@@ -61,7 +50,7 @@ juun/
 │       ├── components/     # React components
 │       ├── stores/         # Zustand state management
 │       │   ├── middleware/ # Store middleware (logger)
-│       │   └── slices/     # Store slices (bear, wheel)
+│       │   └── slices/     # Store slices (bear, wheel, viewer, cesium-utils-feature)
 │       └── utils/          # Utility functions
 ├── packages/
 │   ├── config/             # Shared configuration
@@ -75,7 +64,7 @@ juun/
 └── turbo.json              # Turborepo configuration
 ```
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -116,9 +105,7 @@ pnpm test
 pnpm build
 ```
 
-## 🐳 Docker Support
-
-The project includes Docker support for containerization:
+## Docker Support
 
 ```bash
 # Build the Docker image
@@ -128,14 +115,8 @@ docker build -t juun .
 docker run -p 3000:3000 juun
 ```
 
-## ⚡ Turborepo Integration
+## Turborepo Integration
 
-### Key Benefits
-
-Turborepo provides several advantages for this monorepo setup:
-
-1. **Incremental Builds**: Only rebuilds what changed, saving significant time during development
-2. **Task Pipelines**: Defines dependencies between tasks across packages
-3. **Remote Caching**: Shares build artifacts across the team (when configured with a remote cache)
-4. **Parallel Execution**: Runs tasks in parallel to maximize efficiency
-5. **Workspace Awareness**: Understands dependencies between packages in the monorepo
+- Incremental builds and task pipelines
+- Remote caching and parallel execution
+- Workspace dependency management
