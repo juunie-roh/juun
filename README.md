@@ -68,7 +68,7 @@ juun/
 
 ### Prerequisites
 
-- Node.js 18+ (recommended: 22.x)
+- Node.js 22+ (used 24.x here)
 - PNPM (latest)
 
 ### Installation
