@@ -1,10 +1,16 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import ResizableViewerController from "@/components/cesium/demo/resizable-viewer-controller";
+import ResizableViewerController from "../_components/resizable-viewer-controller";
 
 // Define the available API routes
-const VALID_SLUGS = ["terrain", "collection", "highlight", "viewer"] as const;
+const VALID_SLUGS = [
+  "terrain",
+  "collection",
+  "highlight",
+  "viewer",
+  "sunlight",
+] as const;
 
 type ValidSlug = (typeof VALID_SLUGS)[number];
 
@@ -39,6 +45,7 @@ export async function generateMetadata({
     collection: "Collection API",
     highlight: "Highlight API",
     viewer: "Viewer API",
+    sunlight: "Sunlight API",
   };
 
   const apiDescriptions: Record<ValidSlug, string> = {
@@ -48,6 +55,8 @@ export async function generateMetadata({
     highlight: "Demonstration of Cesium entity highlighting and visual effects",
     viewer:
       "Demonstration of Cesium viewer configuration and management utilities",
+    sunlight:
+      "Demonstration of experimental Cesium sunlight analysis using internal APIs",
   };
 
   if (!VALID_SLUGS.includes(slug as ValidSlug)) {

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { Feature } from "@/components/cesium/demo/api";
+import type { Feature } from "@/app/cesium-utils/_components/api";
 import { logger } from "@/stores/middleware/logger";
 
 interface CesiumUtilsFeatureState {

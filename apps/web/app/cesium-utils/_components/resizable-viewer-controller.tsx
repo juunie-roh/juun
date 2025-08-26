@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 
 import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
 
-import Viewer from "../viewer";
 import FeatureDemo from "./api";
+import Viewer from "./viewer";
 
 interface ResizableViewerControllerProps {
   showDefaultDemo?: boolean;

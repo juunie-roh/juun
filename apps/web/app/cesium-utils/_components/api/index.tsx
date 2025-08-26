@@ -9,7 +9,7 @@ import { lazy, Suspense } from "react";
 
 import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
 
-import EntityToggler from "../../entity-toggler";
+import EntityToggler from "../entity-toggler";
 import CollectionDescription from "./collection/description";
 import HighlightDescription from "./highlight/description";
 import SunlightDescription from "./sunlight/description";

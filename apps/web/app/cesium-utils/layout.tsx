@@ -5,7 +5,7 @@ import {
 } from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
-import CesiumUtilsSidebar from "@/components/cesium/demo/sidebar";
+import CesiumUtilsSidebar from "./_components/sidebar";
 
 export const metadata: Metadata = {
   title: "Cesium Utils",
