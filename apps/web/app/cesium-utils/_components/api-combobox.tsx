@@ -15,12 +15,9 @@ import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-const API_OPTIONS = [
-  { api: "collection", label: "Collection" },
-  { api: "terrain", label: "Terrain" },
-  { api: "viewer", label: "Viewer" },
-  { api: "highlight", label: "Highlight" },
-] as const;
+import { API_LABELS, getApiOptions } from "../_utils/api";
+
+const API_OPTIONS = getApiOptions();
 
 function StatusList({
   setOpen,
@@ -61,14 +58,10 @@ export default function ApiCombobox() {
 
   // Get current API from URL
   const currentApi = pathname.split("/").pop();
-  const apiLabels: Record<string, string> = {
-    collection: "Collection",
-    terrain: "Terrain",
-    viewer: "Viewer",
-    highlight: "Highlight",
-  };
   const currentApiLabel =
-    currentApi && apiLabels[currentApi] ? apiLabels[currentApi] : "Select ...";
+    currentApi && API_LABELS[currentApi]
+      ? API_LABELS[currentApi]
+      : "Select ...";
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

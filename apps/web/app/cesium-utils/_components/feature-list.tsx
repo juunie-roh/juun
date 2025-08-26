@@ -11,32 +11,19 @@ import {
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
-import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
-
-import { getFeatures } from "./api";
+import { useCesiumUtils } from "../_contexts/cesium-utils";
+import { getFeatures, isValidApi } from "../_utils/api";
 
 export default function FeatureList() {
-  const { feature, setFeature } = useCesiumUtilsFeatureStore();
+  const { feature, setFeature } = useCesiumUtils();
   const pathname = usePathname();
 
   // Get current API from URL
   const currentApi = pathname.split("/").pop();
 
   const features = useMemo(() => {
-    if (
-      currentApi &&
-      ["terrain", "collection", "highlight", "viewer", "sunlight"].includes(
-        currentApi,
-      )
-    ) {
-      return getFeatures(
-        currentApi as
-          | "terrain"
-          | "collection"
-          | "highlight"
-          | "viewer"
-          | "sunlight",
-      );
+    if (currentApi && isValidApi(currentApi)) {
+      return getFeatures(currentApi);
     }
     return undefined;
   }, [currentApi]);

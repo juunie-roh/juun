@@ -4,100 +4,13 @@ import { CodeBlock } from "@juun/ui/code-block";
 import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import Link from "next/link";
-import type { ComponentType, LazyExoticComponent } from "react";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 
-import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
+import { useCesiumUtils } from "../../_contexts/cesium-utils";
+import { API_LABELS, getFeatures, isValidApi } from "../../_utils/api";
 
-import EntityToggler from "../../entity-toggler";
-import CollectionDescription from "./collection/description";
-import HighlightDescription from "./highlight/description";
-import SunlightDescription from "./sunlight/description";
-import TerrainDescription from "./terrain/description";
-import ViewerDescription from "./viewer/description";
-
-export type Feature = {
-  value: string;
-  label: string;
-  render: ComponentType<any> | LazyExoticComponent<ComponentType<any>>;
-};
-
-type ApiType = "collection" | "terrain" | "viewer" | "highlight" | "sunlight";
-
-const API_FEATURES: Record<ApiType, Feature[]> = {
-  collection: [
-    {
-      value: "description",
-      label: "Description",
-      render: CollectionDescription,
-    },
-    {
-      value: "item-1",
-      label: "Add / Remove Item",
-      render: EntityToggler,
-    },
-  ],
-
-  terrain: [
-    {
-      value: "description",
-      label: "Description",
-      render: TerrainDescription,
-    },
-    {
-      value: "item-1",
-      label: "Hybrid Example",
-      render: lazy(() => import("./terrain/hybrid-example")),
-    },
-  ],
-
-  viewer: [
-    {
-      value: "description",
-      label: "Description",
-      render: ViewerDescription,
-    },
-  ],
-
-  highlight: [
-    {
-      value: "description",
-      label: "Description",
-      render: HighlightDescription,
-    },
-    {
-      value: "item-1",
-      label: "Polygon Entity",
-      render: lazy(() => import("./highlight/polygon")),
-    },
-    {
-      value: "item-2",
-      label: "Model Entity",
-      render: lazy(() => import("./highlight/model-entity")),
-    },
-    {
-      value: "item-3",
-      label: "Datasource Entity",
-      render: lazy(() => import("./highlight/datasource-entity")),
-    },
-    {
-      value: "item-4",
-      label: "Cesium3DTileFeature",
-      render: lazy(() => import("./highlight/silhouette")),
-    },
-  ],
-  sunlight: [
-    {
-      value: "description",
-      label: "Description",
-      render: SunlightDescription,
-    },
-  ],
-};
-
-export function getFeatures(api: ApiType): Feature[] {
-  return API_FEATURES[api];
-}
+// Re-export Feature type for backward compatibility
+export type { Feature } from "../../_utils/api";
 
 // Default component when no feature is selected
 function DefaultDemo() {
@@ -226,7 +139,7 @@ export default function Viewer(props: any) {
 }
 
 export default function FeatureDemo() {
-  const { feature } = useCesiumUtilsFeatureStore();
+  const { feature } = useCesiumUtils();
 
   // For the base /cesium-utils route, show the default demo
   if (typeof window !== "undefined") {
@@ -236,31 +149,19 @@ export default function FeatureDemo() {
     }
 
     const currentApi = pathname.split("/").pop();
-    if (
-      !currentApi ||
-      !["terrain", "collection", "highlight", "viewer"].includes(currentApi)
-    ) {
+    if (!currentApi || !isValidApi(currentApi)) {
       return <DefaultDemo />;
     }
 
     if (!feature) {
-      const features = getFeatures(
-        currentApi as "terrain" | "collection" | "highlight" | "viewer",
-      );
+      const features = getFeatures(currentApi);
       const defaultFeature =
         features.find((f) => f.value === "description") || features[0];
 
       if (!defaultFeature) {
-        const apiLabels: Record<string, string> = {
-          collection: "Collection",
-          terrain: "Terrain",
-          viewer: "Viewer",
-          highlight: "Highlight",
-        };
-
         return (
           <div className="prose max-w-none">
-            <h2 className="mb-2 tracking-tight">{apiLabels[currentApi]}</h2>
+            <h2 className="mb-2 tracking-tight">{API_LABELS[currentApi]}</h2>
             <p>No features available for this API.</p>
           </div>
         );

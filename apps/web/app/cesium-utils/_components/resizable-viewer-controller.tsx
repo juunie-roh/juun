@@ -9,10 +9,9 @@ import {
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import useCesiumUtilsFeatureStore from "@/stores/slices/cesium-utils-feature";
-
-import Viewer from "../viewer";
+import { useCesiumUtils } from "../_contexts/cesium-utils";
 import FeatureDemo from "./api";
+import Viewer from "./viewer";
 
 interface ResizableViewerControllerProps {
   showDefaultDemo?: boolean;
@@ -21,7 +20,7 @@ interface ResizableViewerControllerProps {
 export default function ResizableViewerController({
   showDefaultDemo = false,
 }: ResizableViewerControllerProps) {
-  const { removeFeature } = useCesiumUtilsFeatureStore();
+  const { removeFeature } = useCesiumUtils();
   const pathname = usePathname();
   // State to track viewport size
   const isLargeScreen = useMediaQuery("min-width: 1024px");
@@ -46,7 +45,9 @@ export default function ResizableViewerController({
       const currentApi = pathname.split("/").pop();
       if (
         !currentApi ||
-        !["terrain", "collection", "highlight", "viewer"].includes(currentApi)
+        !["terrain", "collection", "highlight", "viewer", "sunlight"].includes(
+          currentApi,
+        )
       ) {
         return undefined;
       }
