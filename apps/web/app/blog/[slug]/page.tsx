@@ -74,7 +74,7 @@ export default async function BlogItemPage({
   }
 
   // Dynamically import the post component
-  const PostComponent = await import(`../posts/${slug}.tsx`)
+  const PostComponent = await import(`../_data/${slug}.tsx`)
     .then((module) => module.default)
     .catch(() => null);
 
