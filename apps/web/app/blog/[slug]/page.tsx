@@ -7,6 +7,9 @@ import { TableOfContents } from "@/components/blog/table-of-contents";
 
 import { getPosts } from "../utils";
 
+// ISR: Revalidate every hour (3600 seconds)
+export const revalidate = 3600;
+
 // Generate metadata for each slug
 export async function generateMetadata({
   params,
@@ -43,6 +46,14 @@ export async function generateMetadata({
       url: `https://juun.vercel.app/blog/${slug}`,
     },
   };
+}
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const posts = getPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export default async function BlogItemPage({
