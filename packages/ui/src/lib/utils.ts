@@ -3,10 +3,6 @@ import { createLucideIcon } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
 type SVGElementType =
   | "circle"
   | "ellipse"
@@ -18,7 +14,18 @@ type SVGElementType =
   | "rect";
 type IconNode = [elementName: SVGElementType, attrs: Record<string, string>][];
 
-export const createIconNode = (svg: FC): IconNode => {
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function createIcon(
+  iconName: string,
+  Svg: FC,
+): ReturnType<typeof createLucideIcon> {
+  return createLucideIcon(iconName, createIconNode(Svg));
+}
+
+const createIconNode = (svg: FC): IconNode => {
   const node: IconNode = [];
   const element = svg({});
 
@@ -58,10 +65,3 @@ export const createIconNode = (svg: FC): IconNode => {
 
   return node;
 };
-
-export function createIcon(
-  iconName: string,
-  Svg: FC,
-): ReturnType<typeof createLucideIcon> {
-  return createLucideIcon(iconName, createIconNode(Svg));
-}

@@ -5,34 +5,12 @@ import { BaseMetadata } from "@/types/post.types";
 import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post";
 
 export type BlogMetadata = BaseMetadata & { wordCount?: number };
-
-/**
- * Extract blog-specific metadata including word count
- */
-function extractBlogMetadata(filePath: string): BlogMetadata {
-  return extractBaseMetadata<BlogMetadata>(filePath, (content, metadata) => {
-    // Calculate word count from the entire post content
-    // This is an approximation - we're trying to exclude the metadata section
-
-    const contentStartMatch = content.match(/export\s+default\s+function/);
-    let postContent = content;
-    if (contentStartMatch && contentStartMatch.index) {
-      // Get content after the export default
-      postContent = content.substring(contentStartMatch.index);
-    }
-
-    // Clean up the content to remove JSX/HTML tags and code blocks
-    const cleanedContent = postContent
-      .replace(/<[^>]*>/g, " ") // Remove HTML/JSX tags
-      .replace(/\{\/\*[\s\S]*?\*\/\}/g, " ") // Remove JS comments
-      .replace(/```[\s\S]*?```/g, " ") // Remove code blocks
-      .replace(/import.*?from.*?;/g, " "); // Remove import statements
-
-    // Count words (split by whitespace)
-    const words = cleanedContent.split(/\s+/).filter(Boolean);
-    metadata.wordCount = words.length;
-  });
-}
+export type Heading = {
+  id: string;
+  text: string;
+  level: number;
+  element: Element;
+};
 
 /**
  * Gets all blog posts, sorted by date (newest first by default)
@@ -73,13 +51,6 @@ export function getIdFromHeading(heading: Element): string {
   return id || "";
 }
 
-export type Heading = {
-  id: string;
-  text: string;
-  level: number;
-  element: Element;
-};
-
 export function getHeadings(
   contentSelector: string,
   headingSelector: string,
@@ -107,4 +78,32 @@ export function getHeadings(
   });
 
   return headingElements;
+}
+
+/**
+ * Extract blog-specific metadata including word count
+ */
+function extractBlogMetadata(filePath: string): BlogMetadata {
+  return extractBaseMetadata<BlogMetadata>(filePath, (content, metadata) => {
+    // Calculate word count from the entire post content
+    // This is an approximation - we're trying to exclude the metadata section
+
+    const contentStartMatch = content.match(/export\s+default\s+function/);
+    let postContent = content;
+    if (contentStartMatch && contentStartMatch.index) {
+      // Get content after the export default
+      postContent = content.substring(contentStartMatch.index);
+    }
+
+    // Clean up the content to remove JSX/HTML tags and code blocks
+    const cleanedContent = postContent
+      .replace(/<[^>]*>/g, " ") // Remove HTML/JSX tags
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, " ") // Remove JS comments
+      .replace(/```[\s\S]*?```/g, " ") // Remove code blocks
+      .replace(/import.*?from.*?;/g, " "); // Remove import statements
+
+    // Count words (split by whitespace)
+    const words = cleanedContent.split(/\s+/).filter(Boolean);
+    metadata.wordCount = words.length;
+  });
 }

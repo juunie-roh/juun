@@ -121,7 +121,6 @@ export const CESIUM_APIS: ApiConfig[] = [
 
 // Derived utilities
 export const API_KEYS = CESIUM_APIS.map((api) => api.key);
-export type ApiKey = string;
 
 export const API_LABELS = CESIUM_APIS.reduce(
   (acc, api) => {
