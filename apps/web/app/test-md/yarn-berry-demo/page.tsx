@@ -5,8 +5,8 @@ import Image from "next/image";
 import { join } from "path";
 import { Suspense } from "react";
 
-import { BlogMetadata } from "@/app/blog/types";
-import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
+import { BlogHeader, BlogHeaderSkeleton } from "@/app/blog/_components/header";
+import { BlogMetadata } from "@/app/blog/_utils/post";
 import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
 

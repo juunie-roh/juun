@@ -50,7 +50,7 @@ juun/
 │       ├── components/     # React components
 │       ├── stores/         # Zustand state management
 │       │   ├── middleware/ # Store middleware (logger)
-│       │   └── slices/     # Store slices (bear, wheel, viewer, cesium-utils-feature)
+│       │   └── slices/     # Store slices (bear, wheel, viewer)
 │       └── utils/          # Utility functions
 ├── packages/
 │   ├── config/             # Shared configuration
@@ -68,7 +68,7 @@ juun/
 
 ### Prerequisites
 
-- Node.js 22+ (used 24.x here)
+- Node.js 22+
 - PNPM (latest)
 
 ### Installation

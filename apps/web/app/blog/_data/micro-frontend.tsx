@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";
 
-import { BlogHeader, BlogHeaderSkeleton } from "@/components/blog/header";
+import { BlogHeader, BlogHeaderSkeleton } from "@/app/blog/_components/header";
 
 export const metadata = {
   title: "Micro Frontend: with common misconceptions",

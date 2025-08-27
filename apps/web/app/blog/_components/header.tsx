@@ -1,7 +1,7 @@
 import { Badge } from "@juun/ui/badge";
 import { Skeleton } from "@juun/ui/skeleton";
 
-import { BlogMetadata } from "@/app/blog/types";
+import { BlogMetadata } from "../_utils/post";
 
 export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
   return (

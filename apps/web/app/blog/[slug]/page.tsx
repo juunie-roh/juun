@@ -3,9 +3,19 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
-import { TableOfContents } from "@/components/blog/table-of-contents";
+import { TableOfContents } from "../_components/table-of-contents";
+import { getPosts } from "../_utils/post";
 
-import { getPosts } from "../utils";
+// ISR: Revalidate every hour (3600 seconds)
+export const revalidate = 3600;
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const posts = getPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 // Generate metadata for each slug
 export async function generateMetadata({
@@ -64,7 +74,7 @@ export default async function BlogItemPage({
   }
 
   // Dynamically import the post component
-  const PostComponent = await import(`../posts/${slug}.tsx`)
+  const PostComponent = await import(`../_data/${slug}.tsx`)
     .then((module) => module.default)
     .catch(() => null);
 

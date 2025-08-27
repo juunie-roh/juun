@@ -1,9 +1,10 @@
 import path from "path";
 
 import type { Post } from "@/types/post.types";
+import { BaseMetadata } from "@/types/post.types";
 import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post";
 
-import { BlogMetadata } from "./types";
+export type BlogMetadata = BaseMetadata & { wordCount?: number };
 
 /**
  * Extract blog-specific metadata including word count
@@ -39,7 +40,7 @@ function extractBlogMetadata(filePath: string): BlogMetadata {
  * @returns Array of posts
  */
 export function getPosts(sortDescending = true): Post<BlogMetadata>[] {
-  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
+  const postsDir = path.join(process.cwd(), "app", "blog", "_data");
   return getPostsFromDirectory<BlogMetadata>(
     postsDir,
     extractBlogMetadata,
