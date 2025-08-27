@@ -3,12 +3,19 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
-import { TableOfContents } from "@/components/blog/table-of-contents";
-
-import { getPosts } from "../utils";
+import { TableOfContents } from "../_components/table-of-contents";
+import { getPosts } from "../_utils/post";
 
 // ISR: Revalidate every hour (3600 seconds)
 export const revalidate = 3600;
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const posts = getPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 // Generate metadata for each slug
 export async function generateMetadata({
@@ -46,14 +53,6 @@ export async function generateMetadata({
       url: `https://juun.vercel.app/blog/${slug}`,
     },
   };
-}
-
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  const posts = getPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
 }
 
 export default async function BlogItemPage({
