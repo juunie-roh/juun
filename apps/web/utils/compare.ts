@@ -90,26 +90,6 @@ export const compareBy = <T>(key: keyof T, descending = false) => {
 };
 
 /**
- * Helper to get timestamp from various date formats
- * @param date Date object, string date, or null/undefined
- * @returns timestamp number or null
- */
-function getTimestamp(date: Date | string | null | undefined): number | null {
-  if (!date) return null;
-
-  if (date instanceof Date) {
-    return date.getTime();
-  }
-
-  if (typeof date === "string") {
-    const parsed = new Date(date);
-    return isNaN(parsed.getTime()) ? null : parsed.getTime();
-  }
-
-  return null;
-}
-
-/**
  * Sorts a collection of posts by date
  *
  * @param posts Array of posts to sort
@@ -137,4 +117,24 @@ export function sortPostsByDate<
     // If neither has a date, maintain original order
     return 0;
   });
+}
+
+/**
+ * Helper to get timestamp from various date formats
+ * @param date Date object, string date, or null/undefined
+ * @returns timestamp number or null
+ */
+function getTimestamp(date: Date | string | null | undefined): number | null {
+  if (!date) return null;
+
+  if (date instanceof Date) {
+    return date.getTime();
+  }
+
+  if (typeof date === "string") {
+    const parsed = new Date(date);
+    return isNaN(parsed.getTime()) ? null : parsed.getTime();
+  }
+
+  return null;
 }

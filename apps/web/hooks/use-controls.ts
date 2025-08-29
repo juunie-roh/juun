@@ -1,6 +1,9 @@
 import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
+type KeyCode = keyof typeof keyControlMap;
+type GameControl = (typeof keyControlMap)[KeyCode];
+
 const keyControlMap = {
   " ": "brake",
   ArrowDown: "backward",
@@ -13,11 +16,23 @@ const keyControlMap = {
   s: "backward",
   w: "forward",
 } as const;
-
-type KeyCode = keyof typeof keyControlMap;
-type GameControl = (typeof keyControlMap)[KeyCode];
-
 const keyCodes = Object.keys(keyControlMap) as KeyCode[];
+
+export const useControls = () => {
+  const controls = useRef<Record<GameControl, boolean>>({
+    backward: false,
+    brake: false,
+    forward: false,
+    left: false,
+    reset: false,
+    right: false,
+  });
+
+  useKeyControls(controls, keyControlMap);
+
+  return controls;
+};
+
 const isKeyCode = (v: unknown): v is KeyCode => keyCodes.includes(v as KeyCode);
 
 const useKeyControls = (
@@ -44,19 +59,4 @@ const useKeyControls = (
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, [current, map]);
-};
-
-export const useControls = () => {
-  const controls = useRef<Record<GameControl, boolean>>({
-    backward: false,
-    brake: false,
-    forward: false,
-    left: false,
-    reset: false,
-    right: false,
-  });
-
-  useKeyControls(controls, keyControlMap);
-
-  return controls;
 };

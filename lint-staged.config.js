@@ -1,11 +1,14 @@
 /** @type {import('lint-staged').Configuration} */
 export default {
-  "apps/web/**/*.+(ts|tsx)": [
-    () => "pnpm tsc -p apps/web/tsconfig.json --noEmit",
+  "apps/web/**/*.+(js|jsx|ts|tsx)": [
+    // type check & lint
+    (filenames) =>
+      `pnpm --filter @app/nextjs eslint --fix --cache ${filenames.join(" ")}`,
   ],
-  "packages/ui/**/*.+(ts|tsx)": [
-    () => "pnpm tsc -p packages/ui/tsconfig.json --noEmit",
+  "packages/ui/**/*.+(js|jsx|ts|tsx)": [
+    // type check & lint
+    (filenames) =>
+      `pnpm --filter @juun/ui eslint --fix --cache ${filenames.join(" ")}`,
   ],
-  "**/*.+(ts|tsx|js|jsx)": ["eslint --fix --cache"],
   "**/*.+(yml|yaml)": ["yamllint"],
 };
