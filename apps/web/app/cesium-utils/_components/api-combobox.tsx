@@ -57,11 +57,9 @@ export default function ApiCombobox() {
   const [open, setOpen] = useState<boolean>(false);
 
   // Get current API from URL
-  const currentApi = pathname.split("/").pop();
+  const api = pathname.split("/").pop();
   const currentApiLabel =
-    currentApi && API_LABELS[currentApi]
-      ? API_LABELS[currentApi]
-      : "Select ...";
+    api && API_LABELS[api] ? API_LABELS[api] : "Select ...";
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

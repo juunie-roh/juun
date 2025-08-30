@@ -19,20 +19,20 @@ export default function FeatureDemo() {
       return <DefaultDemo />;
     }
 
-    const currentApi = pathname.split("/").pop();
-    if (!currentApi || !isValidApi(currentApi)) {
+    const api = pathname.split("/").pop();
+    if (!api || !isValidApi(api)) {
       return <DefaultDemo />;
     }
 
     if (!feature) {
-      const features = getFeatures(currentApi);
+      const features = getFeatures(api);
       const defaultFeature =
         features.find((f) => f.value === "description") || features[0];
 
       if (!defaultFeature) {
         return (
           <div className="prose max-w-none">
-            <h2 className="mb-2 tracking-tight">{API_LABELS[currentApi]}</h2>
+            <h2 className="mb-2 tracking-tight">{API_LABELS[api]}</h2>
             <p>No features available for this API.</p>
           </div>
         );

@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useCesiumUtils } from "../_contexts/cesium-utils";
+import { isValidApi } from "../_utils/api";
 import FeatureDemo from "./api";
 import Viewer from "./viewer";
 
@@ -42,13 +43,8 @@ export default function ResizableViewerController({
 
     // Get flyTo option based on current API
     const getFlyToOption = async () => {
-      const currentApi = pathname.split("/").pop();
-      if (
-        !currentApi ||
-        !["terrain", "collection", "highlight", "viewer", "sunlight"].includes(
-          currentApi,
-        )
-      ) {
+      const api = pathname.split("/").pop();
+      if (!api || !isValidApi(api)) {
         return undefined;
       }
 
@@ -82,7 +78,7 @@ export default function ResizableViewerController({
           },
         };
 
-        return flyToOptions[currentApi];
+        return flyToOptions[api];
       } catch (error) {
         console.error("Failed to load flyTo option:", error);
         return undefined;

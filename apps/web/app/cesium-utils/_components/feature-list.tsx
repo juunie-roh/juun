@@ -19,14 +19,14 @@ export default function FeatureList() {
   const pathname = usePathname();
 
   // Get current API from URL
-  const currentApi = pathname.split("/").pop();
+  const api = pathname.split("/").pop();
 
   const features = useMemo(() => {
-    if (currentApi && isValidApi(currentApi)) {
-      return getFeatures(currentApi);
+    if (api && isValidApi(api)) {
+      return getFeatures(api);
     }
     return undefined;
-  }, [currentApi]);
+  }, [api]);
 
   // Set initial active item as description (first item of features)
   useEffect(() => {
