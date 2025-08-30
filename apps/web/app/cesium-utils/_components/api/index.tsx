@@ -9,8 +9,56 @@ import { Suspense } from "react";
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
 import { API_LABELS, getFeatures, isValidApi } from "../../_utils/api";
 
-// Re-export Feature type for backward compatibility
-export type { Feature } from "../../_utils/api";
+export default function FeatureDemo() {
+  const { feature } = useCesiumUtils();
+
+  // For the base /cesium-utils route, show the default demo
+  if (typeof window !== "undefined") {
+    const pathname = window.location.pathname;
+    if (pathname === "/cesium-utils") {
+      return <DefaultDemo />;
+    }
+
+    const api = pathname.split("/").pop();
+    if (!api || !isValidApi(api)) {
+      return <DefaultDemo />;
+    }
+
+    if (!feature) {
+      const features = getFeatures(api);
+      const defaultFeature =
+        features.find((f) => f.value === "description") || features[0];
+
+      if (!defaultFeature) {
+        return (
+          <div className="prose max-w-none">
+            <h2 className="mb-2 tracking-tight">{API_LABELS[api]}</h2>
+            <p>No features available for this API.</p>
+          </div>
+        );
+      }
+
+      const Comp = defaultFeature.render;
+
+      return (
+        <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+          <Comp />
+        </Suspense>
+      );
+    }
+  }
+
+  if (!feature) {
+    return <DefaultDemo />;
+  }
+
+  const Comp = feature.render;
+  return (
+    <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+      <Comp />
+    </Suspense>
+  );
+}
 
 // Default component when no feature is selected
 function DefaultDemo() {
@@ -135,56 +183,5 @@ export default function Viewer(props: any) {
 }`}
       />
     </Prose>
-  );
-}
-
-export default function FeatureDemo() {
-  const { feature } = useCesiumUtils();
-
-  // For the base /cesium-utils route, show the default demo
-  if (typeof window !== "undefined") {
-    const pathname = window.location.pathname;
-    if (pathname === "/cesium-utils") {
-      return <DefaultDemo />;
-    }
-
-    const currentApi = pathname.split("/").pop();
-    if (!currentApi || !isValidApi(currentApi)) {
-      return <DefaultDemo />;
-    }
-
-    if (!feature) {
-      const features = getFeatures(currentApi);
-      const defaultFeature =
-        features.find((f) => f.value === "description") || features[0];
-
-      if (!defaultFeature) {
-        return (
-          <div className="prose max-w-none">
-            <h2 className="mb-2 tracking-tight">{API_LABELS[currentApi]}</h2>
-            <p>No features available for this API.</p>
-          </div>
-        );
-      }
-
-      const Comp = defaultFeature.render;
-
-      return (
-        <Suspense fallback={<Skeleton className="h-32 w-full" />}>
-          <Comp />
-        </Suspense>
-      );
-    }
-  }
-
-  if (!feature) {
-    return <DefaultDemo />;
-  }
-
-  const Comp = feature.render;
-  return (
-    <Suspense fallback={<Skeleton className="h-32 w-full" />}>
-      <Comp />
-    </Suspense>
   );
 }
