@@ -17,6 +17,8 @@ export type Feature = {
 export type ApiConfig = {
   key: string;
   label: string;
+  title?: string;
+  description?: string;
   features: Feature[];
 };
 
@@ -25,6 +27,8 @@ export const CESIUM_APIS: ApiConfig[] = [
   {
     key: "collection",
     label: "Collection",
+    title: "Collection API",
+    description: "Demonstration of Cesium collection management utilities",
     features: [
       {
         value: "description",
@@ -41,6 +45,9 @@ export const CESIUM_APIS: ApiConfig[] = [
   {
     key: "terrain",
     label: "Terrain",
+    title: "Terrain API",
+    description:
+      "Demonstration of Cesium terrain utilities and hybrid terrain functionality",
     features: [
       {
         value: "description",
@@ -59,6 +66,9 @@ export const CESIUM_APIS: ApiConfig[] = [
   {
     key: "viewer",
     label: "Viewer",
+    title: "Viewer API",
+    description:
+      "Demonstration of Cesium viewer configuration and management utilities",
     features: [
       {
         value: "description",
@@ -70,6 +80,9 @@ export const CESIUM_APIS: ApiConfig[] = [
   {
     key: "highlight",
     label: "Highlight",
+    title: "Highlight API",
+    description:
+      "Demonstration of Cesium entity highlighting and visual effects",
     features: [
       {
         value: "description",
@@ -109,6 +122,9 @@ export const CESIUM_APIS: ApiConfig[] = [
   {
     key: "sunlight",
     label: "Sunlight",
+    title: "Sunlight API",
+    description:
+      "Demonstration of experimental Cesium sunlight analysis using internal APIs",
     features: [
       {
         value: "description",
@@ -148,4 +164,16 @@ export function getApiOptions() {
     api: api.key,
     label: api.label,
   }));
+}
+
+export function getApiMetadata(apiKey: string) {
+  const config = getApiConfig(apiKey);
+  return config
+    ? {
+        title: config.title || `${config.label} API`,
+        description:
+          config.description ||
+          `Demonstration of Cesium ${config.label.toLowerCase()} utilities`,
+      }
+    : null;
 }
