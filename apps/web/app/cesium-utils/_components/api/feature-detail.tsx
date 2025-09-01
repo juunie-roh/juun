@@ -7,21 +7,21 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
-import { API_LABELS, getFeatures, isValidApi } from "../../_utils/api";
+import { API_LABELS, getFeatures, isValidApi } from "../../_utils";
 
-export default function FeatureDemo() {
+export default function ApiFeatureDetail() {
   const { feature } = useCesiumUtils();
 
   // For the base /cesium-utils route, show the default demo
   if (typeof window !== "undefined") {
     const pathname = window.location.pathname;
     if (pathname === "/cesium-utils") {
-      return <DefaultDemo />;
+      return <Default />;
     }
 
     const api = pathname.split("/").pop();
     if (!api || !isValidApi(api)) {
-      return <DefaultDemo />;
+      return <Default />;
     }
 
     if (!feature) {
@@ -49,7 +49,7 @@ export default function FeatureDemo() {
   }
 
   if (!feature) {
-    return <DefaultDemo />;
+    return <Default />;
   }
 
   const Comp = feature.render;
@@ -61,7 +61,7 @@ export default function FeatureDemo() {
 }
 
 // Default component when no feature is selected
-function DefaultDemo() {
+function Default() {
   return (
     <Prose>
       <h2 className="mb-2 tracking-tight">Cesium Utils Demo</h2>

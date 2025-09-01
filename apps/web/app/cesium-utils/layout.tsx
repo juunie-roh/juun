@@ -5,8 +5,8 @@ import {
 } from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
-import CesiumUtilsSidebar from "./_components/sidebar";
-import { CesiumUtilsProvider } from "./_contexts/cesium-utils";
+import { CesiumUtilsSidebar } from "./_components";
+import { CesiumUtilsProvider } from "./_contexts";
 
 export const metadata: Metadata = {
   title: "Cesium Utils",

@@ -15,11 +15,11 @@ import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { API_LABELS, getApiOptions } from "../_utils/api";
+import { API_LABELS, getApiOptions } from "../../_utils";
 
 const API_OPTIONS = getApiOptions();
 
-function StatusList({
+function ApiCommand({
   setOpen,
 }: {
   open: boolean;
@@ -70,7 +70,7 @@ export default function ApiCombobox() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-96 p-0" align="start">
-        <StatusList open={open} setOpen={setOpen} />
+        <ApiCommand open={open} setOpen={setOpen} />
       </PopoverContent>
     </Popover>
   );
