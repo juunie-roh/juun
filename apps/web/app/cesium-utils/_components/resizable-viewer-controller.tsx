@@ -10,8 +10,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useCesiumUtils } from "../_contexts/cesium-utils";
-import { isValidApi } from "../_utils/api";
-import FeatureDemo from "./api";
+import { isValidApi } from "../_utils";
+import ApiFeatureDetail from "./api/feature-detail";
 import Viewer from "./viewer";
 
 interface ResizableViewerControllerProps {
@@ -110,7 +110,7 @@ export default function ResizableViewerController({
       <ResizablePanel defaultSize={30} minSize={20}>
         <div className="relative flex size-full flex-col gap-2 p-2">
           <div className="size-full overflow-y-auto">
-            <FeatureDemo />
+            <ApiFeatureDetail />
           </div>
         </div>
       </ResizablePanel>

@@ -17,12 +17,11 @@ import {
 } from "cesium";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import useViewerStore from "@/stores/slices/viewer";
-
+import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";
 
 export default function DataSourceEntity() {
-  const { viewer } = useViewerStore();
+  const { viewer } = useViewer();
   const [isPicking, setIsPicking] = useState<boolean>(false);
   const [outline, setOutline] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(2);

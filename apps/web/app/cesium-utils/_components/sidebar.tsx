@@ -7,8 +7,8 @@ import {
   SidebarHeader,
 } from "@juun/ui/sidebar";
 
-import ApiCombobox from "./api-combobox";
-import FeatureList from "./feature-list";
+import ApiCombobox from "./api/combobox";
+import ApiFeatureList from "./api/feature-list";
 
 export default function CesiumUtilsSidebar() {
   return (
@@ -31,7 +31,7 @@ export default function CesiumUtilsSidebar() {
             <ApiCombobox />
           </SidebarGroupContent>
         </SidebarGroup>
-        <FeatureList />
+        <ApiFeatureList />
       </SidebarContent>
     </Sidebar>
   );

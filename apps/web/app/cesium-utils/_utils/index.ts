@@ -131,6 +131,13 @@ export const CESIUM_APIS: ApiConfig[] = [
         label: "Description",
         render: SunlightDescription,
       },
+      {
+        value: "item-1",
+        label: "Sunlight Analysis",
+        render: React.lazy(
+          () => import("../_components/api/sunlight/analysis"),
+        ),
+      },
     ],
   },
 ];
