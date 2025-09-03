@@ -39,6 +39,7 @@
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",
     "resium": "1.19.0-beta.1",
+    "sonner": "^2.0.7",
     "three": "^0.179.1",
     "webpack": "^5.101.3",
     "zustand": "^5.0.8"

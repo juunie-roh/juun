@@ -7,10 +7,10 @@ import type { TerrainRegion } from "@juun-roh/cesium-utils/terrain";
 import { EllipsoidTerrainProvider, Terrain } from "cesium";
 import { useEffect, useState } from "react";
 
-import useViewerStore from "@/stores/slices/viewer";
+import { useViewer } from "../../../_contexts";
 
 export default function HybridExample() {
-  const { viewer } = useViewerStore();
+  const { viewer } = useViewer();
   const [visualizer, setVisualizer] = useState<TerrainVisualizer | undefined>();
   const [isShowing, setIsShowing] = useState<boolean | undefined>(false);
 

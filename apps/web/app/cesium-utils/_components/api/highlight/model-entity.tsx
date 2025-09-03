@@ -7,12 +7,11 @@ import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
 import { useEffect, useMemo, useState } from "react";
 
-import useViewerStore from "@/stores/slices/viewer";
-
+import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";
 
 export default function ModelEntity() {
-  const { viewer } = useViewerStore();
+  const { viewer } = useViewer();
   const [color, setColor] = useState<string>(
     Cesium.Color.RED.toCssColorString(),
   );

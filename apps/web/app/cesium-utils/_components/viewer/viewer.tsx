@@ -9,7 +9,7 @@ import { Fragment, useEffect } from "react";
 import type { ViewerProps as RViewerProps } from "resium";
 import { useCesium, Viewer as RViewer } from "resium";
 
-import useViewerStore from "@/stores/slices/viewer";
+import { useViewer } from "../../_contexts";
 
 export interface ViewerProps extends Omit<RViewerProps, "className"> {
   /** Whether to show the credit container. @default true */
@@ -32,7 +32,7 @@ function ViewerContent({
   terrainProvider,
 }: ViewerProps) {
   const { viewer } = useCesium();
-  const { setViewer, removeViewer, setIsFlying } = useViewerStore();
+  const { setViewer } = useViewer();
 
   useEffect(() => {
     if (!viewer) return;
@@ -71,19 +71,6 @@ function ViewerContent({
       CameraEventType.PINCH,
     ];
 
-    // Fly to the initial location
-    const originalFlyTo = viewer.camera.flyTo.bind(viewer.camera);
-    viewer.camera.flyTo = (options) => {
-      setIsFlying(true);
-      originalFlyTo({
-        ...options,
-        complete: () => {
-          if (options.complete) options.complete();
-          setIsFlying(false);
-        },
-      });
-    };
-
     if (flyTo) viewer.camera.flyTo(flyTo);
 
     // Set up terrain only if no custom terrain options provided
@@ -96,8 +83,7 @@ function ViewerContent({
 
     return () => {
       if (viewer) {
-        viewer.camera.flyTo = originalFlyTo;
-        removeViewer();
+        setViewer(undefined);
       }
     };
   }, [
@@ -109,8 +95,6 @@ function ViewerContent({
     timeline,
     viewer,
     setViewer,
-    removeViewer,
-    setIsFlying,
   ]);
 
   return <Fragment />;

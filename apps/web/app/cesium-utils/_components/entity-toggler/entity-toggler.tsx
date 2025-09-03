@@ -11,7 +11,7 @@ import {
 } from "cesium";
 import { useCallback, useMemo, useState } from "react";
 
-import useViewerStore from "@/stores/slices/viewer";
+import { useViewer } from "../../_contexts";
 
 const DEST = {
   destination: new Cartesian3(
@@ -41,7 +41,7 @@ const ENTITY = new Entity({
 
 export default function EntityToggler() {
   const [on, setOn] = useState(false);
-  const { viewer, isFlying } = useViewerStore();
+  const { viewer } = useViewer();
   const entities = useMemo(() => {
     if (!viewer) return;
     const c = new Collection({ collection: viewer.entities, tag: "toggler" });
@@ -70,14 +70,14 @@ export default function EntityToggler() {
       <Button
         onClick={() => viewer?.camera.flyTo(DEST)}
         className="w-full"
-        disabled={!viewer || !entities || isFlying}
+        disabled={!viewer || !entities}
       >
         Fly To Destination
       </Button>
       <Button
         onClick={onClick}
         className="w-full"
-        disabled={!viewer || !entities || isFlying}
+        disabled={!viewer || !entities}
       >
         {on ? "Remove" : "Add"} Entity
       </Button>
