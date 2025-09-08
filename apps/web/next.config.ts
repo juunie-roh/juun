@@ -1,5 +1,6 @@
 import NextBundleAnalyzer from "@next/bundle-analyzer";
 import { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 import webpack from "webpack";
 
 import packageJson from "./package.json" with { type: "json" };
@@ -69,4 +70,10 @@ const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: analyze,
 });
 
-export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;
+const withNextIntl = createNextIntlPlugin({
+  experimental: {
+    createMessagesDeclaration: "./messages/ko.json",
+  },
+});
+
+export default withBundleAnalyzer(withNextIntl(nextConfig));
