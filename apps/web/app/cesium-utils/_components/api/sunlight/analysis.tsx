@@ -47,10 +47,7 @@ export default function SunlightAnalysis() {
           onSubmit={form.handleSubmit((data) => {
             toast.success(
               `Options set as { errorBoundary: ${data.errorBoundary}, debugShowRays: ${data.debugShowRays}, debugShowPoints: ${data.debugShowPoints} }`,
-              {
-                id: "analyze-options-set",
-                duration: 2000,
-              },
+              { id: "set-analyze-option" },
             );
             setOptions(data);
           })}
