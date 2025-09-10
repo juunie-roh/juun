@@ -15,23 +15,24 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { ComponentProps } from "react";
 
-export interface ViewTableProps {
-  columns: ColumnDef<any, any>[];
-  data: any[];
+export interface ViewTableProps<TData, TValue>
+  extends ComponentProps<typeof Table> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
   pinHeader?: boolean;
-  className?: string;
 }
 
 /**
  * a simple table for viewing data.
  */
-export default function ViewTable({
+export default function ViewTable<TData, TValue>({
   columns,
   data,
   pinHeader,
   className,
-}: ViewTableProps) {
+}: ViewTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
