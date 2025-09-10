@@ -32,6 +32,7 @@ export default function ViewTable<TData, TValue>({
   data,
   pinHeader,
   className,
+  ...props
 }: ViewTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -40,7 +41,10 @@ export default function ViewTable<TData, TValue>({
   });
 
   return (
-    <Table className={cn("w-full overflow-hidden overflow-y-auto", className)}>
+    <Table
+      className={cn("w-full overflow-hidden overflow-y-auto", className)}
+      {...props}
+    >
       <TableHeader
         className={cn(pinHeader && "bg-background sticky top-0 z-10")}
       >
