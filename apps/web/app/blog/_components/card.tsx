@@ -1,14 +1,7 @@
-import { Badge } from "@juun/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@juun/ui/card";
-import { ScrollArea, ScrollBar } from "@juun/ui/scroll-area";
+import { AspectRatio } from "@juun/ui/aspect-ratio";
+import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Skeleton } from "@juun/ui/skeleton";
-import { CalendarIcon, Clock } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -52,117 +45,88 @@ export function BlogCard({ post }: BlogCardProps) {
   );
 
   return (
-    <Link href={`/blog/${slug}`} className="group block w-full">
-      <Card className="h-full overflow-hidden transition-all hover:shadow-lg md:flex md:flex-row">
-        {/* Image container - left side on md+ screens, top on mobile */}
-        {post.metadata.image ? (
-          <div className="overflow-hidden md:w-1/3 lg:w-2/5">
-            <div className="aspect-video size-full bg-gray-300 md:aspect-auto">
-              <Image
-                src={post.metadata.image}
-                alt={post.metadata.title || "Blog post image"}
-                width={256}
-                height={256}
-                className="size-full object-contain p-8 transition-transform duration-300 group-hover:scale-105 md:h-56"
-                sizes="(max-width: 768px) 100vw, 350px"
-              />
+    <Link href={`/blog/${slug}`} className="group block size-full">
+      <div className="relative w-full">
+        <div className="grid w-full grid-cols-1 gap-4">
+          <AspectRatio
+            ratio={16 / 9}
+            className="bg-muted size-full overflow-hidden"
+          >
+            {post.metadata.image && (
+              <LogoAvatar className="size-full rounded-none">
+                <Image
+                  src={post.metadata.image}
+                  alt={post.metadata.title || "Blog post image"}
+                  fill
+                  className="size-full object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </LogoAvatar>
+            )}
+          </AspectRatio>
+
+          <div className="text-muted-foreground flex items-center gap-3 text-xs">
+            {post.metadata.date && (
+              <div className="flex items-center gap-1">
+                <Calendar className="size-3" />
+                <span>{formatDateSafe(post.metadata.date)}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-1">
+              <Clock className="size-3" />
+              <span>{readingTime} min read</span>
             </div>
           </div>
-        ) : (
-          <div className="bg-linear-to-r aspect-video w-full from-blue-50 to-indigo-50 md:aspect-auto md:w-1/3 lg:w-2/5 dark:from-blue-950 dark:to-indigo-950" />
-        )}
 
-        {/* Content container - right side on md+ screens, below image on mobile */}
-        <div className="flex flex-col md:w-2/3 lg:w-3/5">
-          <CardHeader>
-            <div className="text-muted-foreground flex items-center gap-3 text-xs">
-              {post.metadata.date && (
-                <div className="flex items-center gap-1">
-                  <CalendarIcon className="size-3" />
-                  <span>{formatDateSafe(post.metadata.date)}</span>
-                </div>
-              )}
-              <div className="flex items-center gap-1">
-                <Clock className="size-3" />
-                <span>{readingTime} min read</span>
-              </div>
-            </div>
-            <CardTitle className="group-hover:text-primary line-clamp-2 leading-normal transition-colors">
-              {post.metadata.title}
-            </CardTitle>
-          </CardHeader>
+          <div className="w-full max-w-fit text-lg font-bold leading-snug tracking-tight">
+            {post.metadata.title}
+          </div>
 
-          <CardContent>
-            <p className="text-secondary-foreground mb-4 line-clamp-2">
-              {post.metadata.description}
-            </p>
-
-            {post.metadata.tags && post.metadata.tags.length > 0 && (
-              <ScrollArea>
-                <div className="flex flex-nowrap gap-2">
-                  {post.metadata.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="outline"
-                      className="text-nowrap text-xs"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            )}
-          </CardContent>
-
-          <CardFooter className="mt-auto pt-0">
-            <span className="text-primary text-sm font-medium">Read more</span>
-          </CardFooter>
+          <div className="mt-auto line-clamp-2 w-full max-w-fit">
+            {post.metadata.description}
+          </div>
         </div>
-      </Card>
+      </div>
     </Link>
   );
 }
 
 export function BlogCardSkeleton() {
   return (
-    <Card className="h-full overflow-hidden md:flex md:flex-row">
-      {/* Image skeleton - left side on md+ screens, top on mobile */}
-      <div className="md:w-1/3 lg:w-2/5">
-        <Skeleton className="aspect-video size-full md:aspect-auto md:h-full" />
-      </div>
+    <div className="group block size-full">
+      <div className="relative w-full">
+        <div className="grid w-full grid-cols-1 gap-4">
+          {/* Image skeleton */}
+          <AspectRatio
+            ratio={16 / 9}
+            className="bg-muted size-full overflow-hidden"
+          >
+            <Skeleton className="size-full" />
+          </AspectRatio>
 
-      {/* Content skeleton - right side on md+ screens, below image on mobile */}
-      <div className="flex flex-col md:w-2/3 lg:w-3/5">
-        {/* Title and metadata skeleton */}
-        <CardHeader className="space-y-3">
-          <div className="flex items-center gap-3">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="h-4 w-20" />
+          {/* Metadata skeleton */}
+          <div className="text-muted-foreground flex items-center gap-3 text-xs">
+            <div className="flex items-center gap-1">
+              <Skeleton className="size-3" />
+              <Skeleton className="h-3 w-16" />
+            </div>
+            <div className="flex items-center gap-1">
+              <Skeleton className="size-3" />
+              <Skeleton className="h-3 w-16" />
+            </div>
           </div>
-          <Skeleton className="h-6 w-3/4" />
-        </CardHeader>
 
-        {/* Description skeleton */}
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
+          {/* Title skeleton */}
+          <div className="w-full max-w-fit">
+            <Skeleton className="h-6 w-3/4" />
+          </div>
+
+          {/* Description skeleton */}
+          <div className="mt-auto w-full max-w-fit space-y-2">
             <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-2/3" />
           </div>
-
-          {/* Tags skeleton */}
-          <div className="flex flex-wrap gap-2">
-            <Skeleton className="h-5 w-16 rounded-full" />
-            <Skeleton className="h-5 w-20 rounded-full" />
-            <Skeleton className="h-5 w-14 rounded-full" />
-          </div>
-        </CardContent>
-
-        {/* Footer skeleton */}
-        <CardFooter className="mt-auto">
-          <Skeleton className="h-4 w-20" />
-        </CardFooter>
+        </div>
       </div>
-    </Card>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ export default function Blog() {
   const posts = getPosts();
 
   return (
-    <div className="mx-auto max-w-4xl space-y-12">
+    <div className="mx-auto">
       {posts.length === 0 ? (
         <div className="rounded-lg border border-dashed border-gray-300 p-12 text-center">
           <h3 className="mb-2 text-lg font-medium">No blog posts yet</h3>
@@ -17,7 +17,7 @@ export default function Blog() {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col space-y-6">
+        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4">
           {posts.map((post) => (
             <Suspense fallback={<BlogCardSkeleton />} key={post.slug}>
               <BlogCard post={post} />
