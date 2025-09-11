@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 import ViewTable from "../components/view-table";
 
@@ -92,25 +92,21 @@ const sampleProducts: Product[] = [
 ];
 
 // Column definitions
-const peopleColumns: ColumnDef<Person>[] = [
-  {
-    accessorKey: "firstName",
+const person = createColumnHelper<Person>();
+const peopleColumns = [
+  person.accessor("firstName", {
     header: "First Name",
-  },
-  {
-    accessorKey: "lastName",
+  }),
+  person.accessor("lastName", {
     header: "Last Name",
-  },
-  {
-    accessorKey: "age",
+  }),
+  person.accessor("age", {
     header: "Age",
-  },
-  {
-    accessorKey: "email",
+  }),
+  person.accessor("email", {
     header: "Email",
-  },
-  {
-    accessorKey: "status",
+  }),
+  person.accessor("status", {
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
@@ -126,20 +122,18 @@ const peopleColumns: ColumnDef<Person>[] = [
         </span>
       );
     },
-  },
+  }),
 ];
 
-const productColumns: ColumnDef<Product>[] = [
-  {
-    accessorKey: "name",
+const product = createColumnHelper<Product>();
+const productColumns = [
+  product.accessor("name", {
     header: "Product Name",
-  },
-  {
-    accessorKey: "category",
+  }),
+  product.accessor("category", {
     header: "Category",
-  },
-  {
-    accessorKey: "price",
+  }),
+  product.accessor("price", {
     header: "Price",
     cell: ({ row }) => {
       const price = parseFloat(row.getValue("price"));
@@ -149,9 +143,8 @@ const productColumns: ColumnDef<Product>[] = [
       }).format(price);
       return formatted;
     },
-  },
-  {
-    accessorKey: "stock",
+  }),
+  product.accessor("stock", {
     header: "Stock",
     cell: ({ row }) => {
       const stock = row.getValue("stock") as number;
@@ -169,10 +162,10 @@ const productColumns: ColumnDef<Product>[] = [
         </span>
       );
     },
-  },
+  }),
 ];
 
-const meta: Meta<typeof ViewTable> = {
+const meta: Meta<typeof ViewTable<any, any>> = {
   title: "shadcn/ViewTable",
   component: ViewTable,
   parameters: {
@@ -201,7 +194,7 @@ const meta: Meta<typeof ViewTable> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof ViewTable>;
+type Story = StoryObj<typeof meta>;
 
 // Basic examples
 export const Default: Story = {
@@ -334,12 +327,15 @@ export const TableShowcase: Story = {
       <div className="space-y-8">
         <div>
           <h3 className="mb-4 text-lg font-semibold">People Table</h3>
-          <ViewTable columns={peopleColumns} data={samplePeople.slice(0, 3)} />
+          <ViewTable<Person, any>
+            columns={peopleColumns}
+            data={samplePeople.slice(0, 3)}
+          />
         </div>
 
         <div>
           <h3 className="mb-4 text-lg font-semibold">Product Inventory</h3>
-          <ViewTable
+          <ViewTable<Product, any>
             columns={productColumns}
             data={sampleProducts.slice(0, 3)}
             pinHeader
@@ -348,7 +344,10 @@ export const TableShowcase: Story = {
 
         <div>
           <h3 className="mb-4 text-lg font-semibold">Empty State</h3>
-          <ViewTable columns={simpleColumns} data={[]} />
+          <ViewTable<{ name: string; value: string }, any>
+            columns={simpleColumns}
+            data={[]}
+          />
         </div>
       </div>
     );
