@@ -401,7 +401,10 @@ const Wheel = forwardRef<HTMLDivElement, WheelProps>(
       <WheelRoot
         ref={ref}
         size={viewBoxSize}
-        className={cn(wheelVariants({ variant, className }))}
+        className={cn(
+          wheelVariants({ variant, className }),
+          size && `size-[${size}px]`,
+        )}
         {...props}
       >
         <svg viewBox={viewBox}>
