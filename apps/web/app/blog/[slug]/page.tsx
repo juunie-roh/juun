@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
-import { TableOfContents } from "../_components/table-of-contents";
+import BlogContent from "../_components/content";
+import { BlogHeader } from "../_components/header";
 import { getPosts } from "../_utils/post";
 
 // ISR: Revalidate every hour (3600 seconds)
@@ -85,25 +86,10 @@ export default async function BlogItemPage({
   return (
     <Fragment>
       <ScrollProgressBar />
-      <div className="xl:hidden">
-        <TableOfContents
-          className="fixed right-5 top-20 z-40 mb-6 mt-2"
-          contentSelector=".prose"
-          headingSelector="h2, h3"
-        />
-      </div>
-
-      <aside className="hidden xl:block" />
-      <article className="xl:w-3xl mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8">
+      <BlogHeader metadata={post.metadata} />
+      <BlogContent>
         <PostComponent />
-      </article>
-      <aside className="hidden xl:block">
-        <TableOfContents
-          className="sticky left-0 top-1/4 max-w-64"
-          contentSelector=".prose"
-          headingSelector="h2, h3"
-        />
-      </aside>
+      </BlogContent>
     </Fragment>
   );
 }

@@ -7,7 +7,7 @@ export default function Blog() {
   const posts = getPosts();
 
   return (
-    <div className="mx-auto">
+    <main className="mx-auto px-4">
       {posts.length === 0 ? (
         <div className="rounded-lg border border-dashed border-gray-300 p-12 text-center">
           <h3 className="mb-2 text-lg font-medium">No blog posts yet</h3>
@@ -25,6 +25,6 @@ export default function Blog() {
           ))}
         </div>
       )}
-    </div>
+    </main>
   );
 }

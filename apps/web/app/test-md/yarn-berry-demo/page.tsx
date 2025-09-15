@@ -5,7 +5,7 @@ import Image from "next/image";
 import { join } from "path";
 import { Suspense } from "react";
 
-import { BlogHeader, BlogHeaderSkeleton } from "@/app/blog/_components/header";
+import { BlogHeader } from "@/app/blog/_components/header";
 import { BlogMetadata } from "@/app/blog/_utils/post";
 import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
@@ -18,9 +18,7 @@ export default async function YarnBerryMarkdownDemo() {
 
   return (
     <article className="xl:w-3xl mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8">
-      <Suspense fallback={<BlogHeaderSkeleton />}>
-        <BlogHeader metadata={data as BlogMetadata} />
-      </Suspense>
+      <BlogHeader metadata={data as BlogMetadata} />
       {data.image && (
         <AspectRatio
           ratio={16 / 9}

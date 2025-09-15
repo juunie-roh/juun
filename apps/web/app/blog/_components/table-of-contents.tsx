@@ -45,7 +45,7 @@ export function TableOfContents({
   contentSelector = ".prose",
   headingSelector = "h2, h3",
 }: TableOfContentsProps) {
-  const isXL = useMediaQuery("min-width: 1280px");
+  const isLg = useMediaQuery("width > 64rem");
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
@@ -135,10 +135,10 @@ export function TableOfContents({
     </ul>
   );
 
-  return isXL ? (
+  return isLg ? (
     <div
       className={cn(
-        "bg-card hidden w-full overflow-auto rounded-lg py-4 text-sm xl:block",
+        "bg-card hidden w-full overflow-auto rounded-lg py-4 text-sm lg:block",
         className,
       )}
     >
