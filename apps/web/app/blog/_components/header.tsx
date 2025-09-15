@@ -1,40 +1,37 @@
-import { Badge } from "@juun/ui/badge";
+import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { Skeleton } from "@juun/ui/skeleton";
+import Image from "next/image";
+import { Suspense } from "react";
 
 import { BlogMetadata } from "../_utils/post";
 
 export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
   return (
-    <div className="mb-8">
-      <h1 className="mb-4 text-3xl font-bold tracking-tighter">
-        {metadata.title}
-      </h1>
-      <p className="text-lg">{metadata.description}</p>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {metadata.tags &&
-          metadata.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
-            </Badge>
-          ))}
+    <section>
+      <div className="grid-cols-16 mx-auto grid place-items-center gap-8 px-4 pt-8">
+        <div className="pt-18 col-span-full pb-10 lg:col-span-12 lg:col-start-3">
+          <div className="flex flex-col gap-2 text-center">
+            <h1 className="text-4xl font-bold tracking-tighter lg:col-span-8">
+              {metadata.title}
+            </h1>
+            <p className="text-sm lg:col-span-full">{metadata.description}</p>
+          </div>
+        </div>
+        {metadata.image && (
+          <div className="col-span-full w-full lg:col-span-12 lg:col-start-3">
+            <AspectRatio ratio={16 / 9} className="w-full">
+              <Suspense fallback={<Skeleton className="size-full" />}>
+                <Image
+                  src={metadata.image}
+                  alt={metadata.title}
+                  className="size-full object-fill"
+                  fill
+                />
+              </Suspense>
+            </AspectRatio>
+          </div>
+        )}
       </div>
-    </div>
-  );
-}
-
-export function BlogHeaderSkeleton() {
-  return (
-    <div className="mb-8 space-y-4">
-      <Skeleton className="h-10 w-3/4" />
-      <Skeleton className="h-5 w-1/2" />
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 pt-2">
-        <Skeleton className="h-5 w-16 rounded-full" />
-        <Skeleton className="h-5 w-20 rounded-full" />
-        <Skeleton className="h-5 w-14 rounded-full" />
-      </div>
-    </div>
+    </section>
   );
 }
