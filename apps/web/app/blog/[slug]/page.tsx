@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
 import BlogContent from "../_components/content";
+import BlogFooter from "../_components/footer";
 import { BlogHeader } from "../_components/header";
 import { getPosts } from "../_utils/post";
 
@@ -90,6 +91,7 @@ export default async function BlogItemPage({
       <BlogContent>
         <PostComponent />
       </BlogContent>
+      <BlogFooter metadata={post.metadata} />
     </Fragment>
   );
 }
