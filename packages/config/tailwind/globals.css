@@ -42,6 +42,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --grid-cols-responsive: repeat(16, minmax(0, 1fr));
+  --grid-gap-responsive: 32px;
+
+  @media (max-width: 1024px) {
+    --grid-cols-responsive: repeat(12, minmax(0, 1fr));
+    --grid-gap-responsive: 16px;
+  }
 }
 
 .dark {
@@ -116,6 +123,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --grid-template-columns-responsive: var(--grid-cols-responsive);
+  --gap-responsive: var(--grid-gap-responsive);
 }
 
 @layer base {
