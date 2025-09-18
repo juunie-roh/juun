@@ -8,7 +8,7 @@ import { BlogMetadata } from "../_utils/post";
 export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
   return (
     <section>
-      <div className="md:grid-cols-16 mx-auto grid grid-cols-12 place-items-center gap-4 px-4 pt-8 md:gap-8">
+      <div className="grid-cols-responsive gap-x-responsive mx-auto grid place-items-center px-4 pt-8">
         <div className="pt-18 col-span-full pb-10 lg:col-span-12 lg:col-start-3">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-4xl font-bold tracking-tighter lg:col-span-8">
