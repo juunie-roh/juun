@@ -3,135 +3,121 @@
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "cesium/Build/Cesium/Widgets/lighter.css";
 
-import type { Viewer } from "cesium";
-import { CameraEventType, KeyboardEventModifier, Terrain } from "cesium";
-import { Fragment, useEffect } from "react";
-import type { ViewerProps as RViewerProps } from "resium";
-import { useCesium, Viewer as RViewer } from "resium";
+import { cn } from "@juun/ui/lib/utils";
+import {
+  CameraEventType,
+  KeyboardEventModifier,
+  Viewer as CesiumViewer,
+} from "cesium";
+import { forwardRef, useEffect, useRef } from "react";
 
 import { useViewer } from "../../_contexts";
 
-export interface ViewerProps extends Omit<RViewerProps, "className"> {
+export interface ViewerProps extends CesiumViewer.ConstructorOptions {
   /** Whether to show the credit container. @default true */
   bottomContainer?: boolean;
   /** Initial location of the camera */
-  flyTo?: Parameters<Viewer["camera"]["flyTo"]>[0];
-  /** Whether to show the timeline CesiumWidget. @default true */
-  timeline?: boolean;
-  /** Whether to show the animation CesiumWidget. @default true */
-  animation?: boolean;
+  flyTo?: Parameters<CesiumViewer["camera"]["flyTo"]>[0];
+  /** Additional CSS classes */
+  className?: string;
+  /** It is applied in order from the top to Viewer as `viewer.extend(XXX);` after the viewer is mounted. Nothing happens even it is updated by itself. */
+  extend?: CesiumViewer.ViewerMixin[] | CesiumViewer.ViewerMixin;
 }
 
-// Separate component that uses the viewer context
-function ViewerContent({
-  animation = true,
-  bottomContainer = true,
-  flyTo,
-  timeline = true,
-  terrain,
-  terrainProvider,
-}: ViewerProps) {
-  const { viewer } = useCesium();
-  const { setViewer } = useViewer();
+const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
+  ({ bottomContainer = true, flyTo, className, extend, ...props }, ref) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const viewerRef = useRef<CesiumViewer | undefined>(undefined);
+    const { setViewer } = useViewer();
 
-  useEffect(() => {
-    if (!viewer) return;
-    setViewer(viewer);
-    // Remove the credits area if specified as false
-    if (!bottomContainer) viewer.bottomContainer.remove();
+    useEffect(() => {
+      if (!containerRef.current) return;
 
-    // Hide timeline if specified as false
-    if (!timeline) {
-      (viewer.timeline.container as HTMLElement).style.display = "none";
-    }
-
-    // Hide animation if specified as false
-    if (!animation) {
-      (viewer.animation.container as HTMLElement).style.display = "none";
-    }
-
-    // Set tilt event type as RIGHT_DRAG
-    viewer.scene.screenSpaceCameraController.tiltEventTypes = [
-      CameraEventType.RIGHT_DRAG,
-      CameraEventType.PINCH,
-      {
-        eventType: CameraEventType.LEFT_DRAG,
-        modifier: KeyboardEventModifier.CTRL,
-      },
-      {
-        eventType: CameraEventType.RIGHT_DRAG,
-        modifier: KeyboardEventModifier.CTRL,
-      },
-    ];
-
-    // Set zoom event type as MIDDLE_DRAG
-    viewer.scene.screenSpaceCameraController.zoomEventTypes = [
-      CameraEventType.MIDDLE_DRAG,
-      CameraEventType.WHEEL,
-      CameraEventType.PINCH,
-    ];
-
-    if (flyTo) viewer.camera.flyTo(flyTo);
-
-    // Set up terrain only if no custom terrain options provided
-    if (!terrain && !terrainProvider) {
-      const t = Terrain.fromWorldTerrain();
-      t.readyEvent.addEventListener((provider) => {
-        viewer.terrainProvider = provider;
+      // Create Cesium viewer with minimal UI
+      const viewer = new CesiumViewer(containerRef.current, {
+        baseLayerPicker: false,
+        fullscreenButton: false,
+        geocoder: false,
+        infoBox: false,
+        navigationHelpButton: false,
+        scene3DOnly: true,
+        selectionIndicator: false,
+        homeButton: false,
+        ...props,
       });
-    }
 
-    return () => {
-      if (viewer) {
-        setViewer(undefined);
+      viewerRef.current = viewer;
+      setViewer(viewer);
+
+      // Configure UI elements
+      if (!bottomContainer) {
+        viewer.bottomContainer.remove();
       }
-    };
-  }, [
-    animation,
-    bottomContainer,
-    flyTo,
-    terrain,
-    terrainProvider,
-    timeline,
-    viewer,
-    setViewer,
-  ]);
 
-  return <Fragment />;
-}
+      if (!props.timeline) {
+        (viewer.timeline.container as HTMLElement).style.display = "none";
+      }
 
-export default function LazyViewer({
-  animation,
-  bottomContainer,
-  flyTo,
-  timeline,
-  terrain,
-  terrainProvider,
-  ...props
-}: ViewerProps) {
-  return (
-    <RViewer
-      baseLayerPicker={false}
-      fullscreenButton={false}
-      geocoder={false}
-      infoBox={false}
-      navigationHelpButton={false}
-      scene3DOnly={true}
-      selectionIndicator={false}
-      homeButton={false}
-      className="size-full"
-      terrain={terrain}
-      terrainProvider={terrainProvider}
-      {...props}
-    >
-      <ViewerContent
-        animation={animation}
-        bottomContainer={bottomContainer}
-        flyTo={flyTo}
-        timeline={timeline}
-        terrain={terrain}
-        terrainProvider={terrainProvider}
+      if (!props.animation) {
+        (viewer.animation.container as HTMLElement).style.display = "none";
+      }
+
+      // Configure camera controls
+      viewer.scene.screenSpaceCameraController.tiltEventTypes = [
+        CameraEventType.RIGHT_DRAG,
+        CameraEventType.PINCH,
+        {
+          eventType: CameraEventType.LEFT_DRAG,
+          modifier: KeyboardEventModifier.CTRL,
+        },
+        {
+          eventType: CameraEventType.RIGHT_DRAG,
+          modifier: KeyboardEventModifier.CTRL,
+        },
+      ];
+
+      viewer.scene.screenSpaceCameraController.zoomEventTypes = [
+        CameraEventType.MIDDLE_DRAG,
+        CameraEventType.WHEEL,
+        CameraEventType.PINCH,
+      ];
+
+      if (extend) {
+        if (Array.isArray(extend)) {
+          extend.forEach((e) => viewer.extend(e, {}));
+        } else {
+          viewer.extend(extend);
+        }
+      }
+
+      // Set initial camera position
+      if (flyTo) {
+        viewer.camera.flyTo(flyTo);
+      }
+
+      // Cleanup function
+      return () => {
+        if (viewerRef.current && !viewerRef.current.isDestroyed()) {
+          viewerRef.current.destroy();
+        }
+        setViewer(undefined);
+      };
+    }, [bottomContainer, flyTo, setViewer, extend, props]);
+
+    return (
+      <div
+        ref={(node) => {
+          containerRef.current = node;
+          if (typeof ref === "function") {
+            ref(node);
+          } else if (ref) {
+            ref.current = node;
+          }
+        }}
+        className={cn("size-full", className)}
       />
-    </RViewer>
-  );
-}
+    );
+  },
+);
+
+export default Viewer;
