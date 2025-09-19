@@ -142,9 +142,6 @@ importers:
       next-intl:
         specifier: ^4.3.9
         version: 4.3.9(next@15.5.3(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
-      resium:
-        specifier: 1.19.0-beta.1
-        version: 1.19.0-beta.1(cesium@1.133.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       three:
         specifier: ^0.180.0
         version: 0.180.0
@@ -6840,14 +6837,6 @@ packages:
   require-in-the-middle@7.5.2:
     resolution: {integrity: sha512-gAZ+kLqBdHarXB64XpAe2VCjB7rIRv+mU8tfRWziHRJ5umKsIHN2tLLv6EtMw7WCdP19S0ERVMldNvxYCHnhSQ==}
     engines: {node: '>=8.6.0'}
-
-  resium@1.19.0-beta.1:
-    resolution: {integrity: sha512-0LRb4z2/tkjs0Pe8gD7X59S0E6OPC98yo6ayM13pY/XCz2T5OJyA+hR7q3hH2vmPPzgOtQBrkGd9IBAW9a8uNQ==}
-    engines: {node: '>=20.11.0'}
-    peerDependencies:
-      cesium: 1.x
-      react: '>=18.2.0 <20'
-      react-dom: '>=18.2.0 <20'
 
   resolve-cwd@3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}
@@ -15191,12 +15180,6 @@ snapshots:
       resolve: 1.22.10
     transitivePeerDependencies:
       - supports-color
-
-  resium@1.19.0-beta.1(cesium@1.133.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
-    dependencies:
-      cesium: 1.133.1
-      react: 19.1.1
-      react-dom: 19.1.1(react@19.1.1)
 
   resolve-cwd@3.0.0:
     dependencies:
