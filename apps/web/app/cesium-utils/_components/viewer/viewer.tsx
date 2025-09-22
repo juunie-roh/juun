@@ -54,13 +54,13 @@ const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
         viewer.bottomContainer.remove();
       }
 
-      if (!props.timeline) {
-        (viewer.timeline.container as HTMLElement).style.display = "none";
-      }
+      // if (!props.timeline) {
+      //   (viewer.timeline.container as HTMLElement).style.display = "none";
+      // }
 
-      if (!props.animation) {
-        (viewer.animation.container as HTMLElement).style.display = "none";
-      }
+      // if (!props.animation) {
+      //   (viewer.animation.container as HTMLElement).style.display = "none";
+      // }
 
       // Configure camera controls
       viewer.scene.screenSpaceCameraController.tiltEventTypes = [
