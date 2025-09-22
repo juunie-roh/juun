@@ -1,5 +1,6 @@
 /** @type {import('lint-staged').Configuration} */
 export default {
+  "**/*.+(ts|tsx)": [() => "pnpm check-types"],
   "apps/web/**/*.+(js|jsx|ts|tsx)": [
     // type check & lint
     (filenames) =>

@@ -102,7 +102,8 @@ const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
         }
         setViewer(undefined);
       };
-    }, [bottomContainer, flyTo, setViewer, extend, props]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- props object causes infinite re-renders
+    }, [bottomContainer, flyTo, setViewer, extend]);
 
     return (
       <div
