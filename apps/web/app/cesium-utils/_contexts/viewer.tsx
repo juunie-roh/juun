@@ -23,7 +23,7 @@ export function ViewerProvider({ children }: { children: React.ReactNode }) {
       viewer,
       setViewer,
     }),
-    [viewer, setViewer],
+    [viewer],
   );
 
   return (
