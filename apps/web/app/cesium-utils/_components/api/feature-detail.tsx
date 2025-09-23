@@ -159,8 +159,6 @@ export default function CesiumViewer() {
 
     // Configure viewer UI
     viewer.bottomContainer.remove();
-    (viewer.timeline.container as HTMLElement).style.display = "none";
-    (viewer.animation.container as HTMLElement).style.display = "none";
 
     // Initialize utility collections
     const buildingCollection = new Collection({
