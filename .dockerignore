@@ -1,42 +1,102 @@
-Dockerfile
-.dockerignore
+# Build files
+Dockerfile*
+.dockerignore*
+docker-compose*.yml
 
+# Dependencies
 node_modules
+**/node_modules
+.pnpm-store
 
-# testing
-__mocks__
-.swc
-coverage
-
-# next.js
+# Build outputs
+.next
+**/.next
+.turbo
+**/.turbo
 out/
-src/.next/
+**/out/
+dist/
+**/dist/
+build/
+**/build/
 
-# debug
+# Testing
+__mocks__
+**/__mocks__
+.swc
+**/.swc
+coverage
+**/coverage
+.nyc_output
+**/.nyc_output
+**/*.test.*
+**/*.spec.*
+**/jest.config.*
+**/__tests__
+
+# Storybook
+.storybook
+**/*.stories.*
+**/stories/*
+**/storybook-static
+*storybook.log
+
+# Development
+.env*.local
+.env.development
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# git
+# IDE and editors
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
 .git
 .gitignore
 .gitattributes
+.github
 
-# misc
-.DS_Store
-*.pem
+# Documentation
 README.md
+**/README.md
+CHANGELOG.md
+**/CHANGELOG.md
+LICENSE
+docs/
+**/docs/
 
-# local env files
-.env*.local
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.cache/
 
-# yarn berry
+# Package manager
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.pnp.*
 
-# storybook
-*storybook.log
-.storybook
+# Misc
+*.pem
+*.key
+*.crt
+.eslintcache
