@@ -71,7 +71,7 @@ export function BlogCard({ post }: BlogCardProps) {
                 <span>{formatDateSafe(post.metadata.date)}</span>
               </div>
             )}
-            <div className="flex items-center gap-1">
+            <div className="ml-auto flex items-center gap-1">
               <Clock className="size-3" />
               <span>{readingTime} min read</span>
             </div>
