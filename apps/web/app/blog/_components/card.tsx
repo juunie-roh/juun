@@ -58,7 +58,7 @@ export function BlogCard({ post }: BlogCardProps) {
                   src={post.metadata.image}
                   alt={post.metadata.title || "Blog post image"}
                   fill
-                  className="size-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"
                 />
               </LogoAvatar>
             )}
