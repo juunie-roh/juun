@@ -19,12 +19,12 @@ export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
         </div>
         {metadata.image && (
           <div className="col-span-full w-full lg:col-span-12 lg:col-start-3">
-            <AspectRatio ratio={16 / 9} className="w-full">
+            <AspectRatio ratio={16 / 9} className="bg-muted w-full">
               <Suspense fallback={<Skeleton className="size-full" />}>
                 <Image
                   src={metadata.image}
                   alt={metadata.title}
-                  className="size-full object-fill"
+                  className="size-full object-contain"
                   fill
                 />
               </Suspense>

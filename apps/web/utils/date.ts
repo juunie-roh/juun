@@ -33,7 +33,7 @@ export function formatDate(date: Date, locale: string = "en-US"): string {
   }
 
   const options: Intl.DateTimeFormatOptions = {
-    month: "long",
+    month: "short",
     year: "numeric",
   };
   return date.toLocaleDateString(locale, options);
