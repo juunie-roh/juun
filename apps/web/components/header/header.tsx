@@ -45,7 +45,7 @@ export default function Header() {
                     <NavigationMenuItem className="flex items-center gap-1 tracking-tight">
                       <NavigationMenuLink
                         href={item.href}
-                        className={navigationMenuTriggerStyle()}
+                        className={`${navigationMenuTriggerStyle()} bg-transparent`}
                       >
                         {item.label}
                       </NavigationMenuLink>

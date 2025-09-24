@@ -22,19 +22,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="container mx-auto max-w-5xl space-y-16 px-4 py-12 md:px-8">
-      {/* Hero section */}
-      <section className="flex flex-col items-center justify-center gap-6 text-center">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-            About Juun
-          </h1>
-          <p className="text-muted-foreground mx-auto max-w-[700px] md:text-xl">
-            A modern Next.js monorepo template with complete UI system, state
-            management, and developer tooling.
-          </p>
-        </div>
-      </section>
-
       {/* Project overview */}
       <section className="space-y-8">
         <div className="flex flex-col gap-4 md:flex-row md:gap-8">
