@@ -6,7 +6,14 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 
-import { geistMono, geistSans, rix } from "@/assets/fonts";
+import {
+  antonio,
+  geistMono,
+  geistSans,
+  rix,
+  stabilGroteskTrial,
+  victorSerifTrial,
+} from "@/assets/fonts";
 import { Header } from "@/components/header";
 import ThemeProvider from "@/components/theme/provider";
 
@@ -52,7 +59,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} font-sans antialiased [--header-height:calc(--spacing(18))]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased [--header-height:calc(--spacing(18))]`}
       >
         <ThemeProvider
           attribute="class"

@@ -11,10 +11,12 @@ export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
       <div className="grid-cols-responsive gap-x-responsive mx-auto grid place-items-center px-4 pt-8">
         <div className="pt-18 col-span-full pb-10 lg:col-span-12 lg:col-start-3">
           <div className="flex flex-col gap-2 text-center">
-            <h1 className="text-4xl font-bold tracking-tighter lg:col-span-8">
+            <h1 className="font-(family-name:--font-stabil-grotesk-trial,--font-rix) text-4xl font-bold tracking-tight lg:col-span-8">
               {metadata.title}
             </h1>
-            <p className="text-sm lg:col-span-full">{metadata.description}</p>
+            <p className="font-(family-name:--font-geist-sans) text-sm lg:col-span-full">
+              {metadata.description}
+            </p>
           </div>
         </div>
         {metadata.image && (
