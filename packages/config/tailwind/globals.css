@@ -8,6 +8,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes marquee-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes marquee-left-2 {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes marquee-right-2 {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -126,6 +146,11 @@
   /* custom grid layout declaratives */
   --grid-template-columns-responsive: var(--grid-cols-responsive);
   --gap-responsive: var(--grid-gap-responsive);
+  /* custom animation for marquee */
+  --animate-marquee: marquee-left 25s linear infinite;
+  --animate-marquee-reverse: marquee-right 25s linear infinite;
+  --animate-marquee2: marquee-left-2 25s linear infinite;
+  --animate-marquee2-reverse: marquee-right-2 25s linear infinite;
 }
 
 @layer base {
