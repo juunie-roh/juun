@@ -11,8 +11,6 @@ import { Separator } from "@juun/ui/separator";
 import Link from "next/link";
 import { Fragment } from "react";
 
-import { antonio } from "@/assets/fonts";
-
 import ThemeSwitch from "../theme/switch";
 import Breadcrumb from "./breadcrumb";
 import HeaderDrawer from "./drawer";
@@ -28,9 +26,7 @@ export default function Header() {
     <header className="bg-background/50 sticky top-0 z-50 flex w-full items-center border-b px-4 backdrop-blur-lg">
       <div className="h-(--header-height) flex w-full items-center justify-between">
         <Link href="/">
-          <h1
-            className={`${antonio.className} scroll-m-20 text-3xl font-bold tracking-tighter lg:text-4xl`}
-          >
+          <h1 className="font-(family-name:--font-antonio) scroll-m-20 text-3xl font-bold tracking-tighter lg:text-4xl">
             Juun
           </h1>
         </Link>
