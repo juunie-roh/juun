@@ -40,20 +40,20 @@ export default function AboutLayout({
           </div>
         </div>
         <div className="bg-background relative w-full px-4">
-          <div className="relative mx-auto size-full max-w-7xl overflow-hidden">
+          <div className="relative mx-auto size-full max-w-7xl overflow-hidden border-b">
             <p
               className="text-primary absolute right-0 top-0 -translate-y-1/2 text-[20vw] tracking-tighter"
               aria-hidden="true"
             >
               Juun
             </p>
-            <h2 className="font-(family-name:--font-victor-serif-trial) text-muted-foreground max-w-1/2 mt-4 min-h-[10vw] text-sm md:text-xl lg:text-3xl">
+            <h2 className="font-(family-name:--font-victor-serif-trial) text-muted-foreground max-w-1/2 my-4 min-h-[10vw] text-sm md:text-xl lg:text-3xl">
               Where modern web development meets real-world solutions
             </h2>
           </div>
         </div>
       </header>
-      <main className="max-w-7xl px-4">{children}</main>
+      <main className="mx-auto max-w-7xl p-4">{children}</main>
     </Fragment>
   );
 }
