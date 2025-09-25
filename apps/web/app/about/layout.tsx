@@ -6,12 +6,12 @@ import { stabilGroteskTrial, victorSerifTrial } from "@/assets/fonts";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Technology-agnostic developer's full-stack architecture playground where modern web development meets real-world solutions",
+    "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
   openGraph: {
     type: "website",
     title: "About",
     description:
-      "Technology-agnostic developer's full-stack architecture playground where modern web development meets real-world solutions",
+      "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
     siteName: `Juun - About`,
     images: ["/images/open-graph-template.png"],
     url: "https://juun.vercel.app/about",
@@ -33,7 +33,7 @@ export default function AboutLayout({
               className={`${victorSerifTrial.className} text-muted-foreground absolute right-0 top-4 text-right text-sm italic md:text-xl lg:text-3xl`}
             >
               <p>Technology-Agnostic Developer's</p>
-              <p>Full-stack Architecture Playground</p>
+              <p>Architecture Playground</p>
             </div>
             <p
               className="text-background absolute bottom-0 right-0 translate-y-1/2 text-[20vw] tracking-tighter"
