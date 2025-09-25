@@ -20,22 +20,65 @@ export const antonio = localFont({
 
 export const rix = localFont({
   src: [
+    { path: "./RixL.ttf", weight: "300", style: "normal" },
+    { path: "./RixM.ttf", weight: "500", style: "normal" },
+    { path: "./RixB.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-rix",
+  weight: "300 500 700",
+});
+
+export const victorSerifTrial = localFont({
+  src: "VictorSerifTrial-45RegularItalic.otf",
+  weight: "400",
+  style: "italic",
+  variable: "--font-victor-serif-trial",
+});
+
+export const stabilGroteskTrial = localFont({
+  src: [
     {
-      path: "./RixL.ttf",
-      weight: "300",
+      path: "./StabilGroteskTrial-Hairline.otf",
+      weight: "100",
       style: "normal",
     },
     {
-      path: "./RixM.ttf",
+      path: "./StabilGroteskTrial-HairlineItalic.otf",
+      weight: "100",
+      style: "italic",
+    },
+    {
+      path: "./StabilGroteskTrial-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./StabilGroteskTrial-RegularItalic.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./StabilGroteskTrial-Medium.otf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./RixB.ttf",
+      path: "./StabilGroteskTrial-MediumItalic.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./StabilGroteskTrial-Bold.otf",
       weight: "700",
       style: "normal",
     },
+    {
+      path: "./StabilGroteskTrial-BoldItalic.otf",
+      weight: "700",
+      style: "italic",
+    },
   ],
-  variable: "--font-rix",
-  weight: "300 500 700",
+  variable: "--font-stabil-grotesk-trial",
+  weight: "100 400 500 700",
+  style: "normal italic",
 });
