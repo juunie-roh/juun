@@ -45,7 +45,10 @@ export function BlogCard({ post }: BlogCardProps) {
   );
 
   return (
-    <Link href={`/blog/${slug}`} className="group block size-full">
+    <Link
+      href={`/blog/${slug}`}
+      className="font-(family-name:--font-geist-sans,--font-rix) group block size-full"
+    >
       <div className="relative w-full">
         <div className="grid w-full grid-cols-1 gap-4">
           <AspectRatio
@@ -77,7 +80,7 @@ export function BlogCard({ post }: BlogCardProps) {
             </div>
           </div>
 
-          <div className="w-full max-w-fit text-lg font-bold leading-snug tracking-tight">
+          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-lg font-bold leading-snug tracking-tight">
             {post.metadata.title}
           </div>
 
