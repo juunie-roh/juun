@@ -11,9 +11,9 @@ import { Separator } from "@juun/ui/separator";
 import Link from "next/link";
 import { Fragment } from "react";
 
-import ThemeSwitch from "../theme/switch";
 import Breadcrumb from "./breadcrumb";
 import HeaderDrawer from "./drawer";
+import ThemeSwitch from "./switch";
 
 const navigationItems = [
   { href: "/about", label: "About" },

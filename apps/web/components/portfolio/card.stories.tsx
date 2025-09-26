@@ -1,9 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
-// Mock Next.js components
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useEffect, useState } from "react";
 
 import { PortfolioCard, PortfolioCardSkeleton } from "../portfolio/card";
-import ThemeProvider from "../theme/provider";
 
 // Sample data for stories
 const samplePortfolioPost = {
@@ -48,23 +46,12 @@ const meta: Meta<typeof PortfolioCard> = {
   title: "Components/Portfolio/Card",
   component: PortfolioCard,
   parameters: {
-    layout: "padded",
+    layout: "centered",
     docs: {
       subtitle:
         "Card components for displaying blog posts and portfolio items with consistent styling.",
     },
   },
-  decorators: [
-    (Story) => {
-      return (
-        <ThemeProvider>
-          <div className="p-8">
-            <Story />
-          </div>
-        </ThemeProvider>
-      );
-    },
-  ],
   tags: ["autodocs"],
 };
 

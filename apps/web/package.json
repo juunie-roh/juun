@@ -43,7 +43,6 @@
     "@config/typescript": "workspace:^",
     "@next/bundle-analyzer": "^15.5.4",
     "@storybook/nextjs": "^9.1.8",
-    "@storybook/react": "^9.1.8",
     "@svgr/webpack": "^8.1.0",
     "@testing-library/jest-dom": "^6.8.0",
     "@types/jest": "^30.0.0",
