@@ -2,7 +2,7 @@
 
 import { Sidebar, SidebarHeader, SidebarRail } from "@juun/ui/sidebar";
 
-import { useAppSidebar } from "@/contexts/app-sidebar";
+import { useAppSidebar } from "@/app/test/sidebar/_contexts/app-sidebar";
 
 export default function InnerSidebar() {
   const { content } = useAppSidebar();

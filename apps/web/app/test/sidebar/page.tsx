@@ -1,11 +1,10 @@
 import { SidebarInset, SidebarProvider } from "@juun/ui/sidebar";
 
-import InnerSidebar from "@/components/sidebar/inner";
-import OuterSidebar from "@/components/sidebar/outer";
+import { InnerSidebar, OuterSidebar } from "./_components";
 import {
   AppSidebarProvider,
   InnerSidebarProvider,
-} from "@/contexts/app-sidebar";
+} from "./_contexts/app-sidebar";
 
 export default function SidebarPage() {
   return (

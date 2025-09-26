@@ -16,9 +16,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 
-import { antonio } from "@/assets/fonts";
-
-import ThemeSwitch from "../theme/switch";
+import ThemeSwitch from "./switch";
 
 interface HeaderDrawerProps {
   navigationItems: { href: string; label: string }[];
@@ -37,7 +35,7 @@ export default function HeaderDrawer({ navigationItems }: HeaderDrawerProps) {
       <DrawerContent className="max-h-[85vh]">
         <DrawerHeader className="relative">
           <DrawerTitle
-            className={`${antonio.className} text-left text-2xl font-bold tracking-tighter`}
+            className={`font-(family-name:--font-antonio) text-left text-2xl font-bold tracking-tighter`}
           >
             <ThemeSwitch />
           </DrawerTitle>

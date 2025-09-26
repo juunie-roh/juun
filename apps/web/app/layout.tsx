@@ -14,16 +14,18 @@ import {
   stabilGroteskTrial,
   victorSerifTrial,
 } from "@/assets/fonts";
-import { Header } from "@/components/header";
-import ThemeProvider from "@/components/theme/provider";
+
+import { Header } from "./_components/header";
+import ThemeProvider from "./_contexts/theme-provider";
 
 export const metadata: Metadata = {
   title: {
     template: "Juun | %s",
     default: "Juun",
   },
-  description: "NextJS Application with Tailwind CSS and shadcn/ui",
-  applicationName: `Juun's App`,
+  description:
+    "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
+  applicationName: `Juun's Playground`,
   authors: [{ name: "Juun", url: "https://github.com/juunie-roh/juun" }],
   generator: "Next.js",
   keywords: [
@@ -43,9 +45,10 @@ export const metadata: Metadata = {
       template: "Juun | %s",
       default: "Juun",
     },
-    description: "NextJS Application with Tailwind CSS and shadcn/ui",
-    siteName: `Juun's App`,
-    images: ["/images/open-graph-template.png"],
+    description:
+      "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
+    siteName: `Juun's Playground`,
+    images: ["/images/juun.png"],
     url: "https://juun.vercel.app",
   },
 };
@@ -61,12 +64,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased [--header-height:calc(--spacing(18))]`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           <TooltipProvider>
             <Header />
             {children}
