@@ -106,7 +106,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store,uid=1001,gid=1001 \\
 
 # Turborepo cache mount
 RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \\
-    pnpm build --filter=@app/nextjs`}
+    pnpm build --filter=@juun/web`}
       />
 
       <h3>2. Multi-Stage Separation</h3>
@@ -159,7 +159,7 @@ USER nextjs
 
 # Build with Turborepo cache mount
 RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \\
-    pnpm build --filter=@app/nextjs`}
+    pnpm build --filter=@juun/web`}
       />
 
       <h3>4. Complete Isolation of Production Stage</h3>
@@ -279,7 +279,7 @@ RUN mkdir -p /app/.yarn/cache && \\
 
 USER nextjs
 # Install the required packages needed only to run
-RUN yarn workspaces focus @app/nextjs --production
+RUN yarn workspaces focus @juun/web --production
 
 # Builder stage
 FROM base AS builder

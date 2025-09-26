@@ -51,3 +51,10 @@ apps/web/public/cesium
 storybook-static
 CLAUDE.md
 .claude
+
+# Playwright
+**/test-results/
+**/playwright-report/
+**/blob-report/
+**/playwright/.cache/
+**/playwright/.auth/
