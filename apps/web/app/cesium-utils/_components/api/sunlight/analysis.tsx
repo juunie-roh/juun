@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@juun/ui/button";
 import { Calendar } from "@juun/ui/calendar";
 import {
