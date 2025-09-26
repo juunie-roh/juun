@@ -7,7 +7,7 @@ import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
 
 export default async function YarnBerryMarkdownDemo() {
-  const markdownPath = join(process.cwd(), "app/test-md/yarn-berry.md");
+  const markdownPath = join(process.cwd(), "app/test/test-md/yarn-berry.md");
   const markdownSource = await readFile(markdownPath, "utf-8");
 
   const { html, data } = await md.parse(markdownSource);
