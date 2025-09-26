@@ -21,7 +21,7 @@ export default function Home() {
             <h1 className="text-background absolute bottom-0 right-0 translate-y-1/2 text-[20vw] tracking-tighter">
               Juun
             </h1>
-            <div className="font-(family-name:--font-victor-serif-trial) text-background absolute bottom-4 left-0 text-right text-sm italic md:text-xl lg:text-2xl">
+            <div className="font-(family-name:--font-victor-serif-trial) text-background max-w-1/2 absolute bottom-4 left-0 text-right text-sm italic md:text-xl lg:text-2xl">
               <p>Technology-Agnostic Developer's Architecture Playground</p>
             </div>
           </div>
@@ -34,7 +34,7 @@ export default function Home() {
             >
               Juun
             </p>
-            <p className="font-(family-name:--font-victor-serif-trial) text-muted-foreground max-w-1/2 my-4 min-h-[10vw] text-sm md:text-xl lg:text-2xl">
+            <p className="font-(family-name:--font-victor-serif-trial) text-muted-foreground max-w-1/2 my-4 min-h-[10vw] text-sm italic md:text-xl lg:text-2xl">
               Where modern web development meets real-world solutions
             </p>
           </div>
