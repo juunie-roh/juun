@@ -16,7 +16,7 @@ import {
 } from "@juun/ui/sidebar";
 import { BookOpen, Bot, ChevronRight, SquareTerminal } from "lucide-react";
 
-import { useAppSidebar } from "@/contexts/app-sidebar";
+import { useAppSidebar } from "@/app/test/sidebar/_contexts/app-sidebar";
 
 export interface NavMainItem {
   id: string;
