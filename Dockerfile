@@ -54,7 +54,7 @@ USER nextjs
 
 # Build only with Turborepo cache mount
 RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \
-    pnpm build --filter=@app/nextjs
+    pnpm build --filter=@juun/web
 
 # Production image
 FROM node:24-alpine AS runner

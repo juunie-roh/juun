@@ -16,7 +16,7 @@
     "test": "turbo test",
     "lint-staged": "lint-staged",
     "check-types": "turbo check-types",
-    "web": "pnpm --filter @app/nextjs",
+    "web": "pnpm --filter @juun/web",
     "ui": "pnpm --filter @juun/ui"
   },
   "dependencies": {

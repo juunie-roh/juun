@@ -37,6 +37,7 @@
     "Turborepo",
     "UNPOOLED",
     "vaul",
+    "viewports",
     "Zipkin"
   ],
   "editor.formatOnSave": false,
