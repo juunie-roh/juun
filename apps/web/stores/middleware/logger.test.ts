@@ -1,11 +1,10 @@
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { create } from "zustand";
 
 import { logger } from "./logger"; // Adjust the import path as needed
 
 // Mock console.log
-const mockedConsoleLog = jest
-  .spyOn(console, "log")
-  .mockImplementation(() => {});
+const mockedConsoleLog = vi.spyOn(console, "log").mockImplementation(() => {});
 
 // Type definitions for our test store
 interface TestState {
