@@ -14,7 +14,6 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test",
-    "test:ci": "turbo test:ci",
     "lint-staged": "lint-staged",
     "check-types": "turbo check-types",
     "web": "pnpm --filter @juun/web",
