@@ -165,7 +165,7 @@ const productColumns = [
   }),
 ];
 
-const meta: Meta<typeof ViewTable<any, any>> = {
+const meta: Meta<typeof ViewTable<any>> = {
   title: "shadcn/ViewTable",
   component: ViewTable,
   parameters: {
@@ -327,7 +327,7 @@ export const TableShowcase: Story = {
       <div className="space-y-8">
         <div>
           <h3 className="mb-4 text-lg font-semibold">People Table</h3>
-          <ViewTable<Person, any>
+          <ViewTable<Person>
             columns={peopleColumns}
             data={samplePeople.slice(0, 3)}
           />
@@ -335,7 +335,7 @@ export const TableShowcase: Story = {
 
         <div>
           <h3 className="mb-4 text-lg font-semibold">Product Inventory</h3>
-          <ViewTable<Product, any>
+          <ViewTable<Product>
             columns={productColumns}
             data={sampleProducts.slice(0, 3)}
             pinHeader
@@ -344,7 +344,7 @@ export const TableShowcase: Story = {
 
         <div>
           <h3 className="mb-4 text-lg font-semibold">Empty State</h3>
-          <ViewTable<{ name: string; value: string }, any>
+          <ViewTable<{ name: string; value: string }>
             columns={simpleColumns}
             data={[]}
           />
