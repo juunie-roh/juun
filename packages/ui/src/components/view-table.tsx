@@ -17,9 +17,8 @@ import {
 } from "@tanstack/react-table";
 import { ComponentProps } from "react";
 
-export interface ViewTableProps<TData, TValue>
-  extends ComponentProps<typeof Table> {
-  columns: ColumnDef<TData, TValue>[];
+export interface ViewTableProps<TData> extends ComponentProps<typeof Table> {
+  columns: ColumnDef<TData, any>[];
   data: TData[];
   pinHeader?: boolean;
 }
@@ -27,13 +26,13 @@ export interface ViewTableProps<TData, TValue>
 /**
  * a simple table for viewing data.
  */
-export default function ViewTable<TData, TValue>({
+export default function ViewTable<TData>({
   columns,
   data,
   pinHeader,
   className,
   ...props
-}: ViewTableProps<TData, TValue>) {
+}: ViewTableProps<TData>) {
   const table = useReactTable({
     data,
     columns,
