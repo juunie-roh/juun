@@ -5,6 +5,7 @@ import { BaseMetadata } from "@/types/post.types";
 import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post";
 
 export type BlogMetadata = BaseMetadata & { wordCount?: number };
+
 export type Heading = {
   id: string;
   text: string;

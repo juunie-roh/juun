@@ -6,8 +6,9 @@ import Link from "next/link";
 import { Fragment, Suspense } from "react";
 
 export const metadata = {
-  title: "Docker Image Optimization",
-  description: "NextJS monorepo 프로젝트의 Docker image 크기 최적화",
+  title: "Case Study: Docker Image Optimization for NextJS Monorepo",
+  description:
+    "NextJS monorepo 프로젝트의 Docker 이미지 크기와 빌드 성능을 최적화한 사례 연구",
   date: "2025-04-16",
   tags: [
     "Docker",

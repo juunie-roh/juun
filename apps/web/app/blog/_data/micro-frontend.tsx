@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Fragment } from "react";
 
 export const metadata = {
-  title: "Micro Frontend: with common misconceptions",
+  title: "Micro Frontend (MFE): Common Misconceptions and Case Studies",
   description:
-    "Introduction to the Micro Frontend, with common misconceptions.",
+    "Exploring the concept of Micro Frontend (MFE), its promises, misconceptions, implementation methods, and case studies including Spotify and Facebook's BigPipe.",
   date: "2025-08-05",
   tags: [
     "Cloud Native",

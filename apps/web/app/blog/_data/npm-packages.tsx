@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Fragment } from "react";
 
 export const metadata = {
-  title: "Publishing NPM Package with ChangeSet",
+  title: "Case Study: Publishing npm Packages with CI/CD",
   description:
-    "GitHub Actions, ChangeSet, TypeDoc 으로 자동화된 개발 환경 구축하기",
+    "CesiumJS 기반 유틸리티 라이브러리를 npm 패키지로 배포하며 경험한 TypeScript, TypeDoc, Changesets, GitHub Actions, GitHub Pages를 활용한 CI/CD 구축기",
   date: "2025-04-10",
   tags: [
     "npm",

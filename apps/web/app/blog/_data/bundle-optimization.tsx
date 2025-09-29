@@ -17,9 +17,9 @@ import Link from "next/link";
 import { Fragment, Suspense } from "react";
 
 export const metadata = {
-  title: "Bundle Optimization",
+  title: "Case Study: Module Bundle Optimization in NextJS",
   description:
-    "Module bundle optimization using various methods. Such as Next bundle analyzer, React lazy, dynamic import, lightweight library variant, and separate module imports.",
+    "Module bundler 의 동작 방식과 번들 분석 도구를 활용한 NextJS 프로젝트의 번들 최적화 방법",
   date: "2025-06-23",
   tags: [
     "bundle",
