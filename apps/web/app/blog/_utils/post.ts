@@ -4,7 +4,11 @@ import type { Post } from "@/types/post.types";
 import { BaseMetadata } from "@/types/post.types";
 import { extractBaseMetadata, getPostsFromDirectory } from "@/utils/post";
 
-export type BlogMetadata = BaseMetadata & { wordCount?: number };
+export type BlogMetadata = BaseMetadata & {
+  category?: "case" | "analysis";
+  wordCount?: number;
+};
+
 export type Heading = {
   id: string;
   text: string;
@@ -87,6 +91,15 @@ function extractBlogMetadata(filePath: string): BlogMetadata {
   return extractBaseMetadata<BlogMetadata>(filePath, (content, metadata) => {
     // Calculate word count from the entire post content
     // This is an approximation - we're trying to exclude the metadata section
+
+    // Look for category in the file content
+    const categoryMatch = content.match(/category:\s*['"`]([^'"`]*)['"`]/);
+    if (categoryMatch && categoryMatch[1]) {
+      const categoryValue = categoryMatch[1];
+      if (categoryValue === "case" || categoryValue === "analysis") {
+        metadata.category = categoryValue;
+      }
+    }
 
     const contentStartMatch = content.match(/export\s+default\s+function/);
     let postContent = content;

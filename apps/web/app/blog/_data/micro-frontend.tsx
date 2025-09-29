@@ -6,9 +6,10 @@ import Link from "next/link";
 import { Fragment } from "react";
 
 export const metadata = {
-  title: "Micro Frontend: with common misconceptions",
+  title: "Micro Frontend (MFE): Common Misconceptions and Case Studies",
   description:
-    "Introduction to the Micro Frontend, with common misconceptions.",
+    "Exploring the concept of Micro Frontend (MFE), its promises, misconceptions, implementation methods, and case studies including Spotify and Facebook's BigPipe.",
+  category: "analysis",
   date: "2025-08-05",
   tags: [
     "Cloud Native",
@@ -22,7 +23,7 @@ export const metadata = {
   image: "/images/blog/micro-frontend.png",
 };
 
-export default function MicroFrontend() {
+export default function Data() {
   return (
     <Fragment>
       <Link href="https://www.linkedin.com/pulse/micro-frontend-common-misconceptions-hyungjuun-roh-x2quc/">

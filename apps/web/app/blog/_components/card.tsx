@@ -1,9 +1,11 @@
 import { AspectRatio } from "@juun/ui/aspect-ratio";
+import { Badge } from "@juun/ui/badge";
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Skeleton } from "@juun/ui/skeleton";
 import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { formatDateSafe } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
@@ -20,6 +22,7 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post }: BlogCardProps) {
+  const t = useTranslations("blog");
   // Prevent XSS (Cross-site scripting)
   const slug = safeUrl(post.slug);
   if (slug === null) return null;
@@ -67,17 +70,26 @@ export function BlogCard({ post }: BlogCardProps) {
             )}
           </AspectRatio>
 
-          <div className="text-muted-foreground flex items-center gap-3 text-xs">
+          <div className="text-muted-foreground flex items-center justify-between gap-3 text-xs">
+            <div className="flex gap-2">
+              {post.metadata.category && (
+                <div className="flex flex-wrap justify-self-start">
+                  <Badge variant="default">
+                    {t(`category.${post.metadata.category}`)}
+                  </Badge>
+                </div>
+              )}
+              <div className="flex items-center gap-1">
+                <Clock className="size-3" />
+                <span>{readingTime} min read</span>
+              </div>
+            </div>
             {post.metadata.date && (
               <div className="flex items-center gap-1">
                 <Calendar className="size-3" />
                 <span>{formatDateSafe(post.metadata.date)}</span>
               </div>
             )}
-            <div className="ml-auto flex items-center gap-1">
-              <Clock className="size-3" />
-              <span>{readingTime} min read</span>
-            </div>
           </div>
 
           <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-lg font-bold leading-snug tracking-tight">

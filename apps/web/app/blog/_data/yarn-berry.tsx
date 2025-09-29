@@ -4,13 +4,21 @@ import { Fragment } from "react";
 
 export const metadata = {
   title: "Yarn Berry PnP Configuration",
-  description: "Node package manager 로 Yarn Berry PnP 사용 및 설정하기",
+  description: `Yarn Berry (Yarn 2+) 의 PnP(Plug n Play) 설정 및 개발 환경 구성하기`,
+  category: "case",
   date: "2025-03-25",
-  tags: ["Yarn Berry", "npm", "Package Manager", "PnP", "Zero-install"],
+  tags: [
+    "Case Study",
+    "Yarn Berry",
+    "npm",
+    "Package Manager",
+    "PnP",
+    "Zero-install",
+  ],
   image: "/images/blog/yarn-kitten-full.png",
 };
 
-export default function YarnBerry() {
+export default function Data() {
   return (
     <Fragment>
       <h2>Yarn Berry?</h2>

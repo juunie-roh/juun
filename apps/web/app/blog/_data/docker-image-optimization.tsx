@@ -6,10 +6,13 @@ import Link from "next/link";
 import { Fragment, Suspense } from "react";
 
 export const metadata = {
-  title: "Docker Image Optimization",
-  description: "NextJS monorepo 프로젝트의 Docker image 크기 최적화",
+  title: "Docker Image Optimization for NextJS Monorepo",
+  description:
+    "NextJS monorepo 프로젝트의 Docker 이미지 크기와 빌드 성능을 최적화한 사례 연구",
+  category: "case",
   date: "2025-04-16",
   tags: [
+    "Case Study",
     "Docker",
     "CI",
     "container",
@@ -21,7 +24,7 @@ export const metadata = {
   image: "/images/logo/docker-logo-blue.svg",
 };
 
-export default function DockerImageOptimization() {
+export default function Data() {
   return (
     <Fragment>
       <h2>Docker Build</h2>

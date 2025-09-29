@@ -18,7 +18,8 @@ import { Fragment, Suspense } from "react";
 export const metadata = {
   title: "Cloud Native Application and MSA: compared to Android OS",
   description:
-    "Introduction to the Cloud Native, and considerations of designing cloud native applications.",
+    "Analyzing Cloud Native applications and Microservices Architecture (MSA) by comparing them to Android OS, and discussing core design considerations for MSA.",
+  category: "analysis",
   date: "2025-05-22",
   tags: ["Cloud Native", "MSA", "architecture", "design"],
   image: "https://kubernetes.io/_common-resources/images/flower.svg",
@@ -62,7 +63,7 @@ const commons: { role: string; cloud: string; android: string }[] = [
   },
 ];
 
-export default function CloudNative() {
+export default function Data() {
   return (
     <Fragment>
       <Link href="https://www.linkedin.com/pulse/cloud-native-application-msa-%ED%98%95%EC%A4%80-%EB%85%B8-80wic/">
