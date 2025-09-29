@@ -17,9 +17,10 @@ import Link from "next/link";
 import { Fragment, Suspense } from "react";
 
 export const metadata = {
-  title: "Case Study: Module Bundle Optimization in NextJS",
+  title: "Module Bundle Optimization in NextJS",
   description:
     "Module bundler 의 동작 방식과 번들 분석 도구를 활용한 NextJS 프로젝트의 번들 최적화 방법",
+  category: "case",
   date: "2025-06-23",
   tags: [
     "bundle",
@@ -37,7 +38,7 @@ export const metadata = {
   image: "/images/logo/webpack-light.svg",
 };
 
-export default function BundleOptimization() {
+export default function Data() {
   return (
     <Fragment>
       <Link href="https://www.linkedin.com/pulse/bundle-optimization-%ED%98%95%EC%A4%80-%EB%85%B8-x2n3c/">

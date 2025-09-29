@@ -3,15 +3,22 @@ import Link from "next/link";
 import { Fragment } from "react";
 
 export const metadata = {
-  title: "Case Study: Yarn Berry PnP Configuration",
-  description:
-    "Yarn Berry (Yarn 2+) 의 PnP(Plug'n'Play) 설정 및 개발 환경 구성하기",
+  title: "Yarn Berry PnP Configuration",
+  description: `Yarn Berry (Yarn 2+) 의 PnP(Plug n Play) 설정 및 개발 환경 구성하기`,
+  category: "case",
   date: "2025-03-25",
-  tags: ["Yarn Berry", "npm", "Package Manager", "PnP", "Zero-install"],
+  tags: [
+    "Case Study",
+    "Yarn Berry",
+    "npm",
+    "Package Manager",
+    "PnP",
+    "Zero-install",
+  ],
   image: "/images/blog/yarn-kitten-full.png",
 };
 
-export default function YarnBerry() {
+export default function Data() {
   return (
     <Fragment>
       <h2>Yarn Berry?</h2>

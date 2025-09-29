@@ -3,5 +3,11 @@
     "confirm": "확인",
     "close": "닫기",
     "cancel": "취소"
+  },
+  "blog": {
+    "category": {
+      "analysis": "Analysis",
+      "case": "Case Study"
+    }
   }
 }
