@@ -8,17 +8,27 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.17.1
       - uses: actions/setup-node@v5
         with:
           node-version: 24.x
           cache: 'pnpm'
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Build web app
         run: pnpm build --filter @juun/web
       - name: Install Playwright Browsers
