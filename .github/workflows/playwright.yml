@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
     steps:
       - uses: actions/checkout@v5
@@ -29,10 +30,10 @@ jobs:
             ${{ runner.os }}-turbo-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build web app
-        run: pnpm build --filter @juun/web
       - name: Install Playwright Browsers
         run: pnpm --filter @juun/web exec playwright install --with-deps
+      - name: Build web app
+        run: pnpm build --filter @juun/web
       - name: Run Playwright tests
         run: pnpm --filter @juun/web exec playwright test
       - uses: actions/upload-artifact@v4
