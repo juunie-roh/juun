@@ -22,6 +22,7 @@ jobs:
 
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
     steps:
       - name: Cache turbo build setup
@@ -54,9 +55,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Turbo Login
-        if: ${{ env.TURBO_TOKEN }}
-        run: npx turbo login --token $TURBO_TOKEN
       - name: esLinter
         run: pnpm lint
       - name: Type Checking

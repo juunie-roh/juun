@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
     steps:
       - uses: actions/checkout@v5
@@ -29,9 +30,6 @@ jobs:
             ${{ runner.os }}-turbo-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Turbo Login
-        if: ${{ env.TURBO_TOKEN }}
-        run: npx turbo login --token $TURBO_TOKEN
       - name: Get Playwright version
         id: playwright-version
         run: echo "version=$(pnpm --filter @juun/web list @playwright/test --depth=0 --json | jq -r '.[0].version')" >> $GITHUB_OUTPUT
