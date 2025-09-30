@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 import { BlogMetadata } from "../_utils/post";
 
-export function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
+export default function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
   return (
     <section>
       <div className="grid-cols-responsive gap-x-responsive mx-auto grid place-items-center px-4 pt-8">

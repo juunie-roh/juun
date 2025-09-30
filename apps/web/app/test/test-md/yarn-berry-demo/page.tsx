@@ -1,7 +1,9 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-import { BlogHeader } from "@/app/blog/_components/header";
+import BlogContent from "@/app/blog/_components/content";
+import BlogFooter from "@/app/blog/_components/footer";
+import BlogHeader from "@/app/blog/_components/header";
 import { BlogMetadata } from "@/app/blog/_utils/post";
 import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
@@ -13,9 +15,12 @@ export default async function YarnBerryMarkdownDemo() {
   const { html, data } = await md.parse(markdownSource);
 
   return (
-    <article className="xl:w-3xl mx-auto w-full max-w-3xl px-2 pb-20 pt-4 md:px-8">
+    <main className="relative">
       <BlogHeader metadata={data as BlogMetadata} />
-      <MarkdownRenderer html={html} />
-    </article>
+      <BlogContent>
+        <MarkdownRenderer html={html} />
+      </BlogContent>
+      <BlogFooter metadata={data as BlogMetadata} />
+    </main>
   );
 }

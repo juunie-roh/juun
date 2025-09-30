@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 import BlogContent from "../_components/content";
 import BlogFooter from "../_components/footer";
-import { BlogHeader } from "../_components/header";
+import BlogHeader from "../_components/header";
 import { getPosts } from "../_utils/post";
 
 // ISR: Revalidate every hour (3600 seconds)
