@@ -14,6 +14,7 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test",
+    "test:e2e": "pnpm --filter @juun/web exec playwright test",
     "lint-staged": "lint-staged",
     "check-types": "turbo check-types",
     "web": "pnpm --filter @juun/web",
