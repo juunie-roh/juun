@@ -29,10 +29,23 @@ jobs:
             ${{ runner.os }}-turbo-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Turbo Login
+        if: ${{ env.TURBO_TOKEN }}
+        run: npx turbo login --token $TURBO_TOKEN
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm --filter @juun/web list @playwright/test --depth=0 --json | jq -r '.[0].version')" >> $GITHUB_OUTPUT
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm --filter @juun/web exec playwright install --with-deps
       - name: Build web app
         run: pnpm build --filter @juun/web
-      - name: Install Playwright Browsers
-        run: pnpm --filter @juun/web exec playwright install --with-deps
       - name: Run Playwright tests
         run: pnpm --filter @juun/web exec playwright test
       - uses: actions/upload-artifact@v4
