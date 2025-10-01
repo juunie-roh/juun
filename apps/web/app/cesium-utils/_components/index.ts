@@ -1,5 +1,6 @@
+import ApiCombobox from "./api/combobox";
+import ApiFeatureList from "./api/feature-list";
 import ResizableViewerController from "./resizable-viewer-controller";
-import CesiumUtilsSidebar from "./sidebar";
 import Viewer from "./viewer";
 
-export { CesiumUtilsSidebar, ResizableViewerController, Viewer };
+export { ApiCombobox, ApiFeatureList, ResizableViewerController, Viewer };
