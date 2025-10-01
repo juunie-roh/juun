@@ -6,6 +6,7 @@
  */
 export function formatDateSafe(
   date: Date | string | undefined | null,
+  full?: boolean,
   locale: string = "en-US",
 ): string {
   if (!date) return "";
@@ -15,10 +16,10 @@ export function formatDateSafe(
     const parsedDate = parseDate(date);
     // If parsing fails, return the original string
     if (!parsedDate) return date;
-    return formatDate(parsedDate, locale);
+    return formatDate(parsedDate, full, locale);
   }
 
-  return formatDate(date, locale);
+  return formatDate(date, full, locale);
 }
 
 /**
@@ -27,13 +28,18 @@ export function formatDateSafe(
  * @param locale The locale to use for formatting (default: 'en-US')
  * @returns A string in the format "Month YYYY"
  */
-export function formatDate(date: Date, locale: string = "en-US"): string {
+export function formatDate(
+  date: Date,
+  full: boolean = false,
+  locale: string = "en-US",
+): string {
   if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
     return "";
   }
 
   const options: Intl.DateTimeFormatOptions = {
-    month: "short",
+    day: full ? "numeric" : undefined,
+    month: full ? "long" : "short",
     year: "numeric",
   };
   return date.toLocaleDateString(locale, options);

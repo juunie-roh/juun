@@ -1,12 +1,16 @@
 import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
-import { CesiumUtilsSidebar } from "./_components";
+import { ApiCombobox, ApiFeatureList } from "./_components";
 import { CesiumUtilsProvider, ViewerProvider } from "./_contexts";
+import { CesiumUtilsSidebar } from "./_layouts";
 
 export const metadata: Metadata = {
   title: "Cesium Utils",
@@ -39,7 +43,15 @@ export default function CesiumUtilsDemoLayout({
             </header>
             <div className="min-h-0 flex-1 p-4">{children}</div>
           </SidebarInset>
-          <CesiumUtilsSidebar />
+          <CesiumUtilsSidebar>
+            <SidebarGroup>
+              <SidebarGroupLabel>Select API</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <ApiCombobox />
+              </SidebarGroupContent>
+            </SidebarGroup>
+            <ApiFeatureList />
+          </CesiumUtilsSidebar>
         </SidebarProvider>
       </CesiumUtilsProvider>
     </ViewerProvider>

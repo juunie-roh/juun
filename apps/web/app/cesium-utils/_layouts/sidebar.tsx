@@ -1,0 +1,25 @@
+import { Sidebar, SidebarContent, SidebarHeader } from "@juun/ui/sidebar";
+import { ReactNode } from "react";
+
+export default function CesiumUtilsSidebar({
+  children,
+}: {
+  children?: ReactNode;
+}) {
+  return (
+    <Sidebar
+      className="mt-[var(--header-height)] h-[calc(100svh-var(--header-height))]"
+      collapsible="offcanvas"
+      side="right"
+      variant="floating"
+    >
+      <SidebarHeader className="border-b p-4">
+        <div>
+          <h2 className="text-lg font-semibold">Cesium Utils</h2>
+          <p className="text-muted-foreground text-sm">API Demonstration</p>
+        </div>
+      </SidebarHeader>
+      <SidebarContent>{children}</SidebarContent>
+    </Sidebar>
+  );
+}

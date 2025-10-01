@@ -1,4 +1,5 @@
 import { Prose } from "@juun/ui/prose";
+import { Separator } from "@juun/ui/separator";
 import React from "react";
 
 import { TableOfContents } from "./table-of-contents";
@@ -11,7 +12,10 @@ export default function BlogContent({
   return (
     <section className="bg-background relative">
       <div className="grid-cols-responsive gap-x-responsive m-auto grid px-4">
-        <hr className="mt-18 col-span-full col-start-1 border-t pt-5 md:col-span-8 md:col-start-3 lg:col-span-full" />
+        <Separator
+          orientation="horizontal"
+          className="mt-18 col-span-full col-start-1 mb-5 md:col-span-8 md:col-start-3 lg:col-span-full"
+        />
       </div>
       <div
         id="text-content"
