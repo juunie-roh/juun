@@ -19,7 +19,7 @@ export default function BlogFooter({ metadata }: { metadata: BlogMetadata }) {
           <div className="flex flex-col gap-3">
             <Separator orientation="horizontal" />
             <p className="pt-3 text-lg">Date</p>
-            <p className="text-sm">{formatDateSafe(metadata.date)}</p>
+            <p className="text-sm">{formatDateSafe(metadata.date, true)}</p>
           </div>
           {metadata.tags && (
             <div className="flex flex-col gap-3">
