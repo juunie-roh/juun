@@ -93,9 +93,11 @@ export default function Data() {
         의 토글 상태, Modal 의 열림/닫힘 상태 등과 같은 UI 상태는 css class,
         또는 data attribute 를 통해 관리되었다. 그러나 React 와 같은
         component-based framework 는 UI 의 상태를 함께 관리하게 되면서, 분리
-        되어있던 layout concern 이 결합된 양상을 띠게 되었다. 이는 frontend
-        구성에 영향을 주는 influence factor 로 작용하여, layout concern 에 대한
-        고려가 추가로 필요해졌다.
+        되어있던 layout concern 이 결합된 양상을 띠게 되었다. Headless UI 와
+        같이 로직과 스타일을 분리하려는 시도가 있지만, 컴포넌트의 구조적
+        계층이나 상태의 시각적 표현 방식 등은 여전히 개발자가 결정해야 하는
+        영역으로 남으며, 이는 frontend 구성에 영향을 주는 influence factor 로
+        작용하여 layout concern 에 대한 고려가 추가로 필요해졌다.
       </p>
 
       <h3>State Concerns</h3>
