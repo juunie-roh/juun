@@ -335,6 +335,72 @@ export default function Data() {
         구성은 SoC 와 동시에, SRP 도 함께 달성했다고도 볼 수 있다.
       </p>
 
+      <h3>Real-World Implementation</h3>
+      <p>
+        하지만 위의 diagram 은 실제 구현 이전에 그려진 스케치에 불과하다. 실제
+        구현에는 더 정교한 SoC 가 적용됐다.
+      </p>
+      <CodeBlock
+        fileName="data-table.tsx"
+        code={`export default DataTable({
+// Immutable initial parameters
+...props
+}) {
+  // Mutable UI state
+  const [pageNo, setPageNo] = React.useState(props.pageNo);
+  const [numOfRows, setNumOfRows] = React.useState(props.numOfRows);
+
+  // API integration with react-query
+  const { data } = useQuery({
+    queryFn: () => api.fetch({
+      ...props, // spread immutable
+      pageNo, // override with mutable
+    })
+  });
+
+  // Derived state from data
+  const columns = React.useMemo(() => createColumns(data), [data]);
+
+  // Orchestrated state updates
+  const handleRowsChange = (rows) => {
+    setNumOfRows(rows);
+    setPageNo(1); // Side effect coordination
+  };
+
+  return (
+    <React.Fragment>
+      {/* Rendering Component */}
+      <ViewTable data={data?.result.resultList} columns={columns} />
+      {/* Rendering Component */}
+      <Pagination
+        pageInfo={data?.result.pageInfo}
+        onPageNoChange={setPageNo}
+        onNumOfRowsChange={handleRowsChange}
+      />
+    </React.Fragment>
+  )
+}`}
+      />
+      <p>
+        실제 구현에서는 다음과 같은 SoC 가 추가로 발생한 것을 확인할 수 있다.
+      </p>
+      <ul>
+        <li>
+          <b>Data Fetching</b>: <code>useQuery</code> 가 담당
+        </li>
+        <li>
+          <b>UI(Mutable) State</b>: local state 로 관리
+        </li>
+        <li>
+          <b>Data Transformation</b>: <code>useMemo</code>를 통해{" "}
+          <code>react-table</code> 에 호환 가능한 형태로 변환 및 memoization
+        </li>
+        <li>
+          <b>State Coordination</b>: Immutable / Mutable Parameters 의 merge 및
+          override 처리를 wrapper 에서 담당
+        </li>
+      </ul>
+
       <h2>Conclusion</h2>
       <p>
         여기까지, SoC 의 기준이 되는 concern 과 적용 사례를 소개해봤다. 계속
