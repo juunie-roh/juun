@@ -25,6 +25,9 @@ export const metadata = {
 export default function Data() {
   return (
     <Fragment>
+      <Link href="https://www.linkedin.com/pulse/separation-concerns-frontend-development-hyungjuun-roh-acrkc/">
+        English Version
+      </Link>
       <h2>The Concern</h2>
       <blockquote>
         <Quote />
