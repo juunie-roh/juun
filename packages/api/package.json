@@ -1,0 +1,19 @@
+{
+  "name": "@juun/api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "author": "juun",
+  "exports": {
+    ".": "./src/index.ts",
+    "./fetcher": "./src/fetcher/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@config/eslint": "workspace:^",
+    "@config/typescript": "workspace:^"
+  }
+}
