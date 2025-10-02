@@ -10,7 +10,9 @@
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
-    "check-types": "tsc -p ./tsconfig.json --noEmit"
+    "check-types": "tsc -p ./tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest watch --ui --coverage"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
