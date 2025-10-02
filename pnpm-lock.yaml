@@ -198,6 +198,15 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.5.2)(typescript@5.9.2)
 
+  packages/api:
+    devDependencies:
+      '@config/eslint':
+        specifier: workspace:^
+        version: link:../config/eslint
+      '@config/typescript':
+        specifier: workspace:^
+        version: link:../config/typescript
+
   packages/config/eslint:
     devDependencies:
       '@eslint/eslintrc':
