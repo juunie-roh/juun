@@ -4,17 +4,14 @@ import SvgBuildingLibrary from "./building-library.svg";
 import SvgCityPlan from "./city-plan.svg";
 import SvgInfoCircleOutlined from "./info-circle-outlined.svg";
 
-export const InfoCircleOutlined: ReturnType<typeof createIcon> = createIcon(
+export const InfoCircleOutlined = createIcon(
   "InfoCircleOutlined",
   SvgInfoCircleOutlined,
 );
 
-export const CityPlan: ReturnType<typeof createIcon> = createIcon(
-  "CityPlan",
-  SvgCityPlan,
-);
+export const CityPlan = createIcon("CityPlan", SvgCityPlan);
 
-export const BuildingLibrary: ReturnType<typeof createIcon> = createIcon(
+export const BuildingLibrary = createIcon(
   "BuildingLibrary",
   SvgBuildingLibrary,
 );
