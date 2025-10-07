@@ -28,6 +28,7 @@
     "PGPASSWORD",
     "PGUSER",
     "replicaset",
+    "retryable",
     "shadcn",
     "softprops",
     "sonner",

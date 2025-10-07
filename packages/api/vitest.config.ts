@@ -7,7 +7,12 @@ export default defineConfig({
     environment: "jsdom",
     coverage: {
       include: ["src/**"],
-      exclude: ["**/index.*", "src/__tests__/**", "**/__mocks__/**"],
+      exclude: [
+        "**/index.*",
+        "src/__tests__/**",
+        "**/__mocks__/**",
+        "**/*.test.*",
+      ],
     },
   },
 });
