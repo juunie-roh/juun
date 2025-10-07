@@ -198,7 +198,13 @@ export default class FetcherBuilder {
    */
   static from(config: FetcherConfig): FetcherBuilder {
     const builder = new FetcherBuilder();
-    builder._config = { ...config };
+    builder._config = {
+      ...config,
+      headers: config.headers ? { ...config.headers } : undefined,
+      queryParams: config.queryParams ? { ...config.queryParams } : undefined,
+      transformers: config.transformers ? [...config.transformers] : undefined,
+      retry: config.retry ? { ...config.retry } : undefined,
+    };
     return builder;
   }
 

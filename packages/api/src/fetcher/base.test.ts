@@ -393,4 +393,472 @@ describe("Fetcher", () => {
       );
     });
   });
+
+  describe("transformers", () => {
+    it("should apply single transformer to response", async () => {
+      mockFetch.mockResolvedValueOnce(
+        new Response(JSON.stringify({ data: { value: 42 } }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        transformers: [(data: any) => data.data],
+      });
+
+      const result = await fetcher.execute<{ value: number }>();
+
+      expect(result).toEqual({ value: 42 });
+    });
+
+    it("should apply multiple transformers in order", async () => {
+      mockFetch.mockResolvedValueOnce(
+        new Response(JSON.stringify({ data: { items: [1, 2, 3, 4, 5] } }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        transformers: [
+          (data: any) => data.data,
+          (data: any) => data.items,
+          (items: any) => items.slice(0, 3),
+        ],
+      });
+
+      const result = await fetcher.execute<number[]>();
+
+      expect(result).toEqual([1, 2, 3]);
+    });
+
+    it("should pass response object to transformers", async () => {
+      const mockResponse = new Response(JSON.stringify({ value: 100 }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+
+      mockFetch.mockResolvedValueOnce(mockResponse);
+
+      let capturedResponse: Response | undefined;
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        transformers: [
+          (data: any, response: Response) => {
+            capturedResponse = response;
+            return data;
+          },
+        ],
+      });
+
+      await fetcher.execute();
+
+      expect(capturedResponse).toBeDefined();
+      expect(capturedResponse?.status).toBe(200);
+    });
+
+    it("should support async transformers", async () => {
+      vi.useRealTimers();
+
+      mockFetch.mockResolvedValueOnce(
+        new Response(JSON.stringify({ id: 1 }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        transformers: [
+          async (data: any) => {
+            await new Promise((resolve) => setTimeout(resolve, 10));
+            return { ...data, transformed: true };
+          },
+        ],
+      });
+
+      const result = await fetcher.execute<{
+        id: number;
+        transformed: boolean;
+      }>();
+
+      expect(result).toEqual({ id: 1, transformed: true });
+    });
+
+    it("should work without transformers", async () => {
+      mockFetch.mockResolvedValueOnce(
+        new Response(JSON.stringify({ value: 42 }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+      });
+
+      const result = await fetcher.execute<{ value: number }>();
+
+      expect(result).toEqual({ value: 42 });
+    });
+  });
+
+  describe("retry", () => {
+    beforeEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("should retry on retryable status codes", async () => {
+      // First two attempts fail with 503, third succeeds
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: { maxRetries: 3, initialDelay: 10 },
+      });
+
+      const result = await fetcher.execute<{ success: boolean }>();
+
+      expect(result).toEqual({ success: true });
+      expect(mockFetch).toHaveBeenCalledTimes(3);
+    });
+
+    it("should retry on network errors", async () => {
+      mockFetch
+        .mockRejectedValueOnce(new Error("Network error"))
+        .mockRejectedValueOnce(new Error("Network error"))
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: { maxRetries: 3, initialDelay: 10 },
+      });
+
+      const result = await fetcher.execute();
+
+      expect(result).toEqual({ success: true });
+      expect(mockFetch).toHaveBeenCalledTimes(3);
+    });
+
+    it("should not retry non-retryable status codes", async () => {
+      mockFetch.mockResolvedValueOnce(
+        new Response(null, { status: 400, statusText: "Bad Request" }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: { maxRetries: 3 },
+      });
+
+      await expect(fetcher.execute()).rejects.toThrow("HTTP 400: Bad Request");
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+    });
+
+    it("should respect maxRetries limit", async () => {
+      mockFetch.mockResolvedValue(
+        new Response(null, { status: 503, statusText: "Service Unavailable" }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: { maxRetries: 2, initialDelay: 10 },
+      });
+
+      await expect(fetcher.execute()).rejects.toThrow(FetcherError);
+      expect(mockFetch).toHaveBeenCalledTimes(3); // Initial + 2 retries
+    });
+
+    it("should call onRetry callback on each retry", async () => {
+      const onRetry = vi.fn();
+
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), { status: 200 }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: { maxRetries: 3, initialDelay: 10, onRetry },
+      });
+
+      await fetcher.execute();
+
+      expect(onRetry).toHaveBeenCalledTimes(2);
+      expect(onRetry).toHaveBeenNthCalledWith(
+        1,
+        1,
+        expect.any(FetcherError),
+        expect.any(Number),
+      );
+      expect(onRetry).toHaveBeenNthCalledWith(
+        2,
+        2,
+        expect.any(FetcherError),
+        expect.any(Number),
+      );
+    });
+
+    it("should use exponential backoff when enabled", async () => {
+      const onRetry = vi.fn();
+
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), { status: 200 }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: {
+          maxRetries: 3,
+          initialDelay: 100,
+          exponential: true,
+          onRetry,
+        },
+      });
+
+      await fetcher.execute();
+
+      // First retry delay should be around 100ms (±30% jitter)
+      const firstDelay = onRetry.mock.calls[0][2];
+      expect(firstDelay).toBeGreaterThanOrEqual(70);
+      expect(firstDelay).toBeLessThanOrEqual(130);
+
+      // Second retry delay should be around 200ms (±30% jitter)
+      const secondDelay = onRetry.mock.calls[1][2];
+      expect(secondDelay).toBeGreaterThanOrEqual(140);
+      expect(secondDelay).toBeLessThanOrEqual(260);
+    });
+
+    it("should use constant delay when exponential is false", async () => {
+      const onRetry = vi.fn();
+
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), { status: 200 }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: {
+          maxRetries: 3,
+          initialDelay: 100,
+          exponential: false,
+          onRetry,
+        },
+      });
+
+      await fetcher.execute();
+
+      // Both delays should be around 100ms (±30% jitter)
+      const firstDelay = onRetry.mock.calls[0][2];
+      const secondDelay = onRetry.mock.calls[1][2];
+
+      expect(firstDelay).toBeGreaterThanOrEqual(70);
+      expect(firstDelay).toBeLessThanOrEqual(130);
+      expect(secondDelay).toBeGreaterThanOrEqual(70);
+      expect(secondDelay).toBeLessThanOrEqual(130);
+    });
+
+    it("should respect maxDelay cap", async () => {
+      const onRetry = vi.fn();
+
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), { status: 200 }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: {
+          maxRetries: 3,
+          initialDelay: 10000,
+          maxDelay: 1000,
+          exponential: true,
+          onRetry,
+        },
+      });
+
+      await fetcher.execute();
+
+      // All delays should be capped at maxDelay (±30% jitter)
+      onRetry.mock.calls.forEach((call) => {
+        const delay = call[2];
+        expect(delay).toBeLessThanOrEqual(1300); // 1000 + 30% jitter
+      });
+    });
+
+    it("should only retry idempotent methods by default", async () => {
+      mockFetch.mockResolvedValue(
+        new Response(null, { status: 503, statusText: "Service Unavailable" }),
+      );
+
+      // POST is not idempotent
+      const postFetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        method: "POST",
+        retry: { maxRetries: 3 },
+      });
+
+      await expect(postFetcher.execute()).rejects.toThrow(FetcherError);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+
+      mockFetch.mockClear();
+
+      // GET is idempotent
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), { status: 200 }),
+        );
+
+      const getFetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        method: "GET",
+        retry: { maxRetries: 3, initialDelay: 10 },
+      });
+
+      await getFetcher.execute();
+      expect(mockFetch).toHaveBeenCalledTimes(2);
+    });
+
+    it("should retry non-idempotent methods when onlyIdempotent is false", async () => {
+      mockFetch
+        .mockResolvedValueOnce(
+          new Response(null, {
+            status: 503,
+            statusText: "Service Unavailable",
+          }),
+        )
+        .mockResolvedValueOnce(
+          new Response(JSON.stringify({ success: true }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }),
+        );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        method: "POST",
+        retry: { maxRetries: 3, initialDelay: 10, onlyIdempotent: false },
+      });
+
+      const result = await fetcher.execute();
+
+      expect(result).toEqual({ success: true });
+      expect(mockFetch).toHaveBeenCalledTimes(2);
+    });
+
+    it("should support custom retryableStatuses", async () => {
+      mockFetch.mockResolvedValue(
+        new Response(null, { status: 418, statusText: "I'm a teapot" }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+        retry: { maxRetries: 3, initialDelay: 10, retryableStatuses: [418] },
+      });
+
+      await expect(fetcher.execute()).rejects.toThrow(FetcherError);
+      // Should retry on 418
+      expect(mockFetch).toHaveBeenCalledTimes(4); // Initial + 3 retries
+    });
+
+    it("should work without retry config", async () => {
+      mockFetch.mockResolvedValueOnce(
+        new Response(JSON.stringify({ success: true }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+
+      const fetcher = new Fetcher({
+        baseUrl: "https://api.example.com",
+      });
+
+      const result = await fetcher.execute();
+
+      expect(result).toEqual({ success: true });
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+    });
+  });
 });
