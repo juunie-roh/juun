@@ -23,7 +23,7 @@ describe("Fetcher", () => {
       const fetcher = new Fetcher(config);
 
       expect(fetcher).toBeInstanceOf(Fetcher);
-      expect(fetcher.getConfig()).toEqual(config);
+      expect(fetcher.config).toEqual(config);
     });
 
     it("should create a copy of the config", () => {
@@ -32,7 +32,7 @@ describe("Fetcher", () => {
 
       config.baseUrl = "https://different.com";
 
-      expect(fetcher.getConfig().baseUrl).toBe("https://api.example.com");
+      expect(fetcher.config.baseUrl).toBe("https://api.example.com");
     });
   });
 
@@ -43,7 +43,7 @@ describe("Fetcher", () => {
         method: "GET" as const,
       };
       const fetcher = new Fetcher(config);
-      const returnedConfig = fetcher.getConfig();
+      const returnedConfig = fetcher.config;
 
       expect(returnedConfig).toEqual(config);
       expect(returnedConfig).not.toBe(config);

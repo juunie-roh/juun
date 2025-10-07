@@ -6,16 +6,14 @@ import FetcherBuilder from "./builder";
 describe("FetcherBuilder", () => {
   describe("setBaseUrl", () => {
     it("should set base URL", () => {
-      const builder = new FetcherBuilder().setBaseUrl(
-        "https://api.example.com",
-      );
+      const builder = new FetcherBuilder().baseUrl("https://api.example.com");
 
-      expect(builder.getConfig().baseUrl).toBe("https://api.example.com");
+      expect(builder.config.baseUrl).toBe("https://api.example.com");
     });
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setBaseUrl("https://api.example.com");
+      const result = builder.baseUrl("https://api.example.com");
 
       expect(result).toBe(builder);
     });
@@ -23,14 +21,14 @@ describe("FetcherBuilder", () => {
 
   describe("setPath", () => {
     it("should set path", () => {
-      const builder = new FetcherBuilder().setPath("/users");
+      const builder = new FetcherBuilder().path("/users");
 
-      expect(builder.getConfig().path).toBe("/users");
+      expect(builder.config.path).toBe("/users");
     });
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setPath("/users");
+      const result = builder.path("/users");
 
       expect(result).toBe(builder);
     });
@@ -38,23 +36,23 @@ describe("FetcherBuilder", () => {
 
   describe("setMethod", () => {
     it("should set HTTP method", () => {
-      const builder = new FetcherBuilder().setMethod("POST");
+      const builder = new FetcherBuilder().method("POST");
 
-      expect(builder.getConfig().method).toBe("POST");
+      expect(builder.config.method).toBe("POST");
     });
 
     it("should support all HTTP methods", () => {
       const methods = ["GET", "POST", "PUT", "PATCH", "DELETE"] as const;
 
       methods.forEach((method) => {
-        const builder = new FetcherBuilder().setMethod(method);
-        expect(builder.getConfig().method).toBe(method);
+        const builder = new FetcherBuilder().method(method);
+        expect(builder.config.method).toBe(method);
       });
     });
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setMethod("POST");
+      const result = builder.method("POST");
 
       expect(result).toBe(builder);
     });
@@ -62,20 +60,20 @@ describe("FetcherBuilder", () => {
 
   describe("setTimeout", () => {
     it("should set timeout", () => {
-      const builder = new FetcherBuilder().setTimeout(5000);
+      const builder = new FetcherBuilder().timeout(5000);
 
-      expect(builder.getConfig().timeout).toBe(5000);
+      expect(builder.config.timeout).toBe(5000);
     });
 
     it("should have default timeout of 30000ms", () => {
       const builder = new FetcherBuilder();
 
-      expect(builder.getConfig().timeout).toBe(30000);
+      expect(builder.config.timeout).toBe(30000);
     });
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setTimeout(5000);
+      const result = builder.timeout(5000);
 
       expect(result).toBe(builder);
     });
@@ -84,17 +82,17 @@ describe("FetcherBuilder", () => {
   describe("setHeaders", () => {
     it("should set headers", () => {
       const headers = { "Content-Type": "application/json" };
-      const builder = new FetcherBuilder().setHeaders(headers);
+      const builder = new FetcherBuilder().header(headers);
 
-      expect(builder.getConfig().headers).toEqual(headers);
+      expect(builder.config.headers).toEqual(headers);
     });
 
     it("should merge with existing headers", () => {
       const builder = new FetcherBuilder()
-        .setHeaders({ "Content-Type": "application/json" })
-        .setHeaders({ Authorization: "Bearer token" });
+        .header({ "Content-Type": "application/json" })
+        .header({ Authorization: "Bearer token" });
 
-      expect(builder.getConfig().headers).toEqual({
+      expect(builder.config.headers).toEqual({
         "Content-Type": "application/json",
         Authorization: "Bearer token",
       });
@@ -102,7 +100,7 @@ describe("FetcherBuilder", () => {
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setHeaders({ "Content-Type": "application/json" });
+      const result = builder.header({ "Content-Type": "application/json" });
 
       expect(result).toBe(builder);
     });
@@ -110,22 +108,22 @@ describe("FetcherBuilder", () => {
 
   describe("setHeader", () => {
     it("should set single header", () => {
-      const builder = new FetcherBuilder().setHeader(
+      const builder = new FetcherBuilder().header(
         "Content-Type",
         "application/json",
       );
 
-      expect(builder.getConfig().headers).toEqual({
+      expect(builder.config.headers).toEqual({
         "Content-Type": "application/json",
       });
     });
 
     it("should merge with existing headers", () => {
       const builder = new FetcherBuilder()
-        .setHeader("Content-Type", "application/json")
-        .setHeader("Authorization", "Bearer token");
+        .header("Content-Type", "application/json")
+        .header("Authorization", "Bearer token");
 
-      expect(builder.getConfig().headers).toEqual({
+      expect(builder.config.headers).toEqual({
         "Content-Type": "application/json",
         Authorization: "Bearer token",
       });
@@ -133,7 +131,7 @@ describe("FetcherBuilder", () => {
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setHeader("Content-Type", "application/json");
+      const result = builder.header("Content-Type", "application/json");
 
       expect(result).toBe(builder);
     });
@@ -142,29 +140,29 @@ describe("FetcherBuilder", () => {
   describe("setQueryParams", () => {
     it("should set query parameters", () => {
       const params = { page: 1, limit: 10 };
-      const builder = new FetcherBuilder().setQueryParams(params);
+      const builder = new FetcherBuilder().queryParams(params);
 
-      expect(builder.getConfig().queryParams).toEqual(params);
+      expect(builder.config.queryParams).toEqual(params);
     });
 
     it("should merge with existing query parameters", () => {
       const builder = new FetcherBuilder()
-        .setQueryParams({ page: 1 })
-        .setQueryParams({ limit: 10 });
+        .queryParams({ page: 1 })
+        .queryParams({ limit: 10 });
 
-      expect(builder.getConfig().queryParams).toEqual({ page: 1, limit: 10 });
+      expect(builder.config.queryParams).toEqual({ page: 1, limit: 10 });
     });
 
     it("should support string, number, and boolean values", () => {
       const params = { search: "test", page: 1, active: true };
-      const builder = new FetcherBuilder().setQueryParams(params);
+      const builder = new FetcherBuilder().queryParams(params);
 
-      expect(builder.getConfig().queryParams).toEqual(params);
+      expect(builder.config.queryParams).toEqual(params);
     });
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setQueryParams({ page: 1 });
+      const result = builder.queryParams({ page: 1 });
 
       expect(result).toBe(builder);
     });
@@ -173,9 +171,9 @@ describe("FetcherBuilder", () => {
   describe("setBody", () => {
     it("should set request body", () => {
       const body = { name: "John Doe" };
-      const builder = new FetcherBuilder().setBody(body);
+      const builder = new FetcherBuilder().body(body);
 
-      expect(builder.getConfig().body).toEqual(body);
+      expect(builder.config.body).toEqual(body);
     });
 
     it("should support various body types", () => {
@@ -188,14 +186,14 @@ describe("FetcherBuilder", () => {
       ];
 
       bodies.forEach((body) => {
-        const builder = new FetcherBuilder().setBody(body);
-        expect(builder.getConfig().body).toEqual(body);
+        const builder = new FetcherBuilder().body(body);
+        expect(builder.config.body).toEqual(body);
       });
     });
 
     it("should return this for chaining", () => {
       const builder = new FetcherBuilder();
-      const result = builder.setBody({ name: "John" });
+      const result = builder.body({ name: "John" });
 
       expect(result).toBe(builder);
     });
@@ -203,9 +201,7 @@ describe("FetcherBuilder", () => {
 
   describe("build", () => {
     it("should build and return a Fetcher instance", () => {
-      const builder = new FetcherBuilder().setBaseUrl(
-        "https://api.example.com",
-      );
+      const builder = new FetcherBuilder().baseUrl("https://api.example.com");
       const fetcher = builder.build();
 
       expect(fetcher).toBeInstanceOf(Fetcher);
@@ -213,12 +209,12 @@ describe("FetcherBuilder", () => {
 
     it("should pass configuration to Fetcher", () => {
       const builder = new FetcherBuilder()
-        .setBaseUrl("https://api.example.com")
-        .setPath("/users")
-        .setMethod("POST");
+        .baseUrl("https://api.example.com")
+        .path("/users")
+        .method("POST");
 
       const fetcher = builder.build();
-      const config = fetcher.getConfig();
+      const config = fetcher.config;
 
       expect(config.baseUrl).toBe("https://api.example.com");
       expect(config.path).toBe("/users");
@@ -229,10 +225,10 @@ describe("FetcherBuilder", () => {
   describe("getConfig", () => {
     it("should return readonly copy of configuration", () => {
       const builder = new FetcherBuilder()
-        .setBaseUrl("https://api.example.com")
-        .setPath("/users");
+        .baseUrl("https://api.example.com")
+        .path("/users");
 
-      const config = builder.getConfig();
+      const config = builder.config;
 
       expect(config.baseUrl).toBe("https://api.example.com");
       expect(config.path).toBe("/users");
@@ -240,7 +236,7 @@ describe("FetcherBuilder", () => {
 
     it("should have default values", () => {
       const builder = new FetcherBuilder();
-      const config = builder.getConfig();
+      const config = builder.config;
 
       expect(config.method).toBe("GET");
       expect(config.headers).toEqual({});
@@ -251,18 +247,18 @@ describe("FetcherBuilder", () => {
   describe("method chaining", () => {
     it("should support full method chaining", () => {
       const fetcher = new FetcherBuilder()
-        .setBaseUrl("https://api.example.com")
-        .setPath("/users")
-        .setMethod("POST")
-        .setTimeout(5000)
-        .setHeader("Authorization", "Bearer token")
-        .setQueryParams({ page: 1 })
-        .setBody({ name: "John" })
+        .baseUrl("https://api.example.com")
+        .path("/users")
+        .method("POST")
+        .timeout(5000)
+        .header("Authorization", "Bearer token")
+        .queryParams({ page: 1 })
+        .body({ name: "John" })
         .build();
 
       expect(fetcher).toBeInstanceOf(Fetcher);
 
-      const config = fetcher.getConfig();
+      const config = fetcher.config;
       expect(config.baseUrl).toBe("https://api.example.com");
       expect(config.path).toBe("/users");
       expect(config.method).toBe("POST");
