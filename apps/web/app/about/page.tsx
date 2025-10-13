@@ -1,11 +1,14 @@
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Fragment } from "react";
 
+import Timeline from "./_components/timeline";
+import { TIMELINE_ITEMS } from "./_data";
+
 export default function AboutPage() {
   return (
     <Fragment>
       {/* Technologies */}
-      <section>
+      <section className="mx-auto max-w-7xl p-4">
         <h2 className="mb-4 text-3xl font-bold tracking-tight">Technologies</h2>
         <div className="space-y-4">
           <h3 className="mb-4 text-xl font-semibold">Core Technologies</h3>
@@ -173,6 +176,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <Timeline items={TIMELINE_ITEMS} />
     </Fragment>
   );
 }

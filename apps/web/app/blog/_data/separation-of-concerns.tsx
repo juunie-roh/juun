@@ -1,7 +1,6 @@
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
 import { Skeleton } from "@juun/ui/skeleton";
-import { Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";
@@ -30,7 +29,6 @@ export default function Data() {
       </Link>
       <h2>The Concern</h2>
       <blockquote>
-        <Quote />
         <p>
           In computer science, separation of concerns (SoC) is the design
           principle of organizing a codebase into distinct sections - each

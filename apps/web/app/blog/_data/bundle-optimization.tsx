@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@juun/ui/table";
-import { ExternalLink, Quote } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";
@@ -280,7 +280,6 @@ export default analyze ? withBundleAnalyzer(nextConfig) : nextConfig;`}
         하는 문법이다.
       </p>
       <blockquote className="text-primary">
-        <Quote />
         Dynamic imports allow one to circumvent the syntactic rigidity of import
         declarations and load a module conditionally or on demand. - mdn web
         docs

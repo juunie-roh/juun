@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@juun/ui/table";
-import { ExternalLink, Quote } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";
@@ -157,7 +157,7 @@ export default function Data() {
 
       <h3>Cloud Native</h3>
       <blockquote className="text-primary">
-        <Quote /> Divide and conquer is an algorithm design paradigm based on
+        Divide and conquer is an algorithm design paradigm based on
         multi-branched recursion. A divide-and-conquer algorithm works by
         recursively breaking down a problem into two or more sub-problems of the
         same or related type until these become simple enough to be solved
@@ -485,8 +485,8 @@ export default function Data() {
 
       <h2>Conclusion</h2>
       <blockquote>
-        <Quote /> The best way to implement complex systems is to use a series
-        of simple, loosely coupled components. - Martin Fowler
+        The best way to implement complex systems is to use a series of simple,
+        loosely coupled components. - Martin Fowler
       </blockquote>
       <p>
         Cloud Native와 MSA는 단순히 기술적 선택이 아니라, 소프트웨어 개발과
