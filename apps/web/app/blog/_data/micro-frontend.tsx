@@ -1,6 +1,5 @@
 import { Abbr } from "@juun/ui/abbr";
 import { CodeBlock } from "@juun/ui/code-block";
-import { MessageCircleWarning, Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -38,16 +37,16 @@ export default function Data() {
       </p>
 
       <blockquote>
-        <MessageCircleWarning /> 이 글은{" "}
+        이 글은{" "}
         <Link href="/blog/cloud-native">Cloud Native Application and MSA</Link>{" "}
         에 대한 배경지식을 바탕으로 한다.
       </blockquote>
 
       <h3>Definition</h3>
       <blockquote>
-        <Quote /> A <b>micro frontend</b> is an architectural pattern for web
-        development, where independently developed frontends are composed into a
-        greater whole. - wikipedia
+        A <b>micro frontend</b> is an architectural pattern for web development,
+        where independently developed frontends are composed into a greater
+        whole. - wikipedia
       </blockquote>
       <p>
         MFE 는{" "}
@@ -387,7 +386,6 @@ module.exports = {
         </Link>
       </h3>
       <blockquote>
-        <Quote />
         "It was very slow to iterate upon and experiment, especially when it
         came to making changes across multiple views like updating the visual
         style."
