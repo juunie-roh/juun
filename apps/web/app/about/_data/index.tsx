@@ -5,16 +5,12 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
     title: "Project Inception",
     description:
       "Initial commit with standard single Next.js application, with various development tools and Yarn Berry PnP.",
-    detail: (
-      <>
-        <h3>The Initial Commit</h3>
-        <p>
-          The foundation of the project. A single Next.js application with Yarn
-          Berry PnP. Trial of modern tool chains, which I found useful at that
-          time.
-        </p>
-      </>
-    ),
+    detail: `
+### The Initial Commit
+
+The foundation of the project. A single Next.js application with Yarn
+Berry PnP. Trial of modern tool chains, which I found useful at that
+time.`,
     date: "2024-09-27",
     category: "Foundation",
     tags: ["Next.js", "TypeScript", "Yarn Berry", "PnP"],
@@ -34,11 +30,9 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
     date: "2025-10-14",
     category: "Architecture",
     tags: ["ADR", "Component", "Timeline", "Design"],
-    detail: (
-      <>
-        <h3>The Timeline Component</h3>
-        <p>Inspired by monolith from 2001: A Space Odyssey</p>
-      </>
-    ),
+    detail: `
+### The Timeline Component
+
+Inspired by monolith from 2001: A Space Odyssey.`,
   },
 ];
