@@ -67,7 +67,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                   )}
                 >
                   <p>{item.category}</p>
-                  <p>{formatDateSafe(item.date, true)}</p>
+                  <p>{formatDateSafe(item.date)}</p>
                 </div>
               </div>
             </div>
