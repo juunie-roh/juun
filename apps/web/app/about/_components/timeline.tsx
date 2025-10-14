@@ -1,12 +1,20 @@
+import { Badge } from "@juun/ui/badge";
+import { Button } from "@juun/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@juun/ui/collapsible";
 import {
   Item,
+  ItemActions,
   ItemContent,
+  ItemDescription,
   ItemFooter,
   ItemHeader,
   ItemTitle,
 } from "@juun/ui/item";
 import { cn } from "@juun/ui/lib/utils";
-import { Calendar } from "lucide-react";
 import { ReactNode } from "react";
 
 import { formatDateSafe } from "@/utils/date";
@@ -15,7 +23,8 @@ type TimelineItem = {
   id: string;
   date: string;
   title: string;
-  description: ReactNode;
+  description: string;
+  detail?: ReactNode;
   category: string;
   tags?: string[];
 };
@@ -35,46 +44,69 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
               index % 2 === 0 && "flex-row",
             )}
           >
-            <div className="w-1/3 px-2 py-4">
-              <h3
+            <div className="w-1/3 p-4">
+              <div
                 className={cn(
-                  "text-background font-(family-name:--font-stabil-grotesk-trial) sticky top-[calc(var(--header-height)+var(--spacing)*4)] text-left text-[11vw] font-bold tracking-tighter",
-                  index % 2 === 0 && "text-right",
+                  "sticky top-[calc(var(--header-height)+var(--spacing)*4)] flex flex-col items-start",
+                  index % 2 === 0 && "items-end",
                 )}
               >
-                {item.id}
-              </h3>
+                <h3 className="text-background font-(family-name:--font-stabil-grotesk-trial) text-[11vw] font-bold tracking-tighter underline underline-offset-[1.8vw]">
+                  {item.id}
+                </h3>
+                <div
+                  className={cn(
+                    "font-(family-name:--font-victor-serif-trial) text-muted text-left text-sm md:text-base lg:text-lg",
+                    index % 2 === 0 && "text-right",
+                  )}
+                >
+                  <p>{item.category}</p>
+                  <p>{formatDateSafe(item.date, true)}</p>
+                </div>
+              </div>
             </div>
-            <Item className="bg-background w-2/3 rounded-none p-4">
-              <ItemHeader className="justify-start">
-                <Calendar size={16} className="inline" />
-                {formatDateSafe(item.date, true)}
-              </ItemHeader>
-              <ItemContent>
+            <Item
+              className={cn(
+                "bg-background rounded-4xl mb-4 w-2/3",
+                index % 2 === 0 && "rounded-r-none",
+                index % 2 === 1 && "rounded-l-none",
+                index === 0 && "rounded-t-none",
+                index === items.length - 1 && "mb-0 rounded-b-none",
+              )}
+            >
+              <ItemHeader className="flex-col items-start justify-start">
                 <ItemTitle className="font-(family-name:--font-stabil-grotesk-trial) text-2xl font-bold tracking-tight">
                   {item.title}
                 </ItemTitle>
-                <div data-slot="item-description" className="prose prose-zinc">
-                  {item.description}
-                </div>
-              </ItemContent>
-              <ItemFooter className="flex-col items-start">
-                <span className="text-lg font-semibold tracking-tight">
-                  {item.category}
-                </span>
                 {item.tags && item.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex w-full flex-wrap gap-2">
                     {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-secondary text-secondary-foreground rounded-md px-2 py-1 text-xs"
-                      >
+                      <Badge key={tag} variant="secondary">
                         {tag}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
                 )}
-              </ItemFooter>
+              </ItemHeader>
+              <ItemContent>
+                <ItemDescription className="text-wrap md:text-base">
+                  {item.description}
+                </ItemDescription>
+              </ItemContent>
+              {item.detail && (
+                <ItemFooter>
+                  <ItemActions>
+                    <Collapsible>
+                      <CollapsibleTrigger asChild>
+                        <Button variant="link">Details</Button>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="prose prose-zinc w-full max-w-none">
+                        {item.detail}
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </ItemActions>
+                </ItemFooter>
+              )}
             </Item>
           </li>
         ))}

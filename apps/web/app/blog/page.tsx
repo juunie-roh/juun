@@ -17,7 +17,7 @@ export default function Blog() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-4">
           {posts.map((post) => (
             <Suspense fallback={<BlogCardSkeleton />} key={post.slug}>
               <BlogCard post={post} />

@@ -29,9 +29,20 @@ export const rix = localFont({
 });
 
 export const victorSerifTrial = localFont({
-  src: "VictorSerifTrial-45RegularItalic.otf",
+  src: [
+    {
+      path: "VictorSerifTrial-40Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "VictorSerifTrial-45RegularItalic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
   weight: "400",
-  style: "italic",
+  style: "normal italic",
   variable: "--font-victor-serif-trial",
 });
 
