@@ -2,7 +2,6 @@ import { TimelineItem } from "../_components/timeline";
 
 export const TIMELINE_ITEMS: TimelineItem[] = [
   {
-    id: "001",
     title: "Project Inception",
     description:
       "Initial commit with Next.js, TypeScript, Yarn Berry PnP, Jest, ESLint, Husky, and Commitlint",
@@ -16,7 +15,6 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
     tags: ["Next.js", "TypeScript", "Yarn Berry"],
   },
   {
-    id: "002",
     title: "UI System Setup",
     description:
       "Established component library with Tailwind CSS, DaisyUI, and Storybook for documentation",
