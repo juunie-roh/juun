@@ -1,6 +1,15 @@
+import { Badge } from "@juun/ui/badge";
+import { Button } from "@juun/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@juun/ui/collapsible";
 import {
   Item,
+  ItemActions,
   ItemContent,
+  ItemDescription,
   ItemFooter,
   ItemHeader,
   ItemTitle,
@@ -14,7 +23,8 @@ type TimelineItem = {
   id: string;
   date: string;
   title: string;
-  description: ReactNode;
+  description: string;
+  detail?: ReactNode;
   category: string;
   tags?: string[];
 };
@@ -46,7 +56,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                 </h3>
                 <div
                   className={cn(
-                    "font-(family-name:--font-victor-serif-trial) text-muted text-left text-sm md:text-lg",
+                    "font-(family-name:--font-victor-serif-trial) text-muted text-left text-sm md:text-base lg:text-lg",
                     index % 2 === 0 && "text-right",
                   )}
                 >
@@ -64,31 +74,37 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                 index === items.length - 1 && "mb-0 rounded-b-none",
               )}
             >
-              <ItemHeader>
+              <ItemHeader className="flex-col items-start justify-start">
                 <ItemTitle className="font-(family-name:--font-stabil-grotesk-trial) text-2xl font-bold tracking-tight">
                   {item.title}
                 </ItemTitle>
-              </ItemHeader>
-              <ItemContent>
-                <div
-                  data-slot="item-description"
-                  className="prose prose-zinc max-w-none"
-                >
-                  {item.description}
-                </div>
-              </ItemContent>
-              {item.tags && item.tags.length > 0 && (
-                <ItemFooter>
+                {item.tags && item.tags.length > 0 && (
                   <div className="flex w-full flex-wrap gap-2">
                     {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-secondary text-secondary-foreground rounded-md px-2 py-1 text-xs"
-                      >
+                      <Badge key={tag} variant="secondary">
                         {tag}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
+                )}
+              </ItemHeader>
+              <ItemContent>
+                <ItemDescription className="text-wrap md:text-base">
+                  {item.description}
+                </ItemDescription>
+              </ItemContent>
+              {item.detail && (
+                <ItemFooter>
+                  <ItemActions>
+                    <Collapsible>
+                      <CollapsibleTrigger asChild>
+                        <Button variant="link">Details</Button>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="prose prose-zinc w-full max-w-none">
+                        {item.detail}
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </ItemActions>
                 </ItemFooter>
               )}
             </Item>
