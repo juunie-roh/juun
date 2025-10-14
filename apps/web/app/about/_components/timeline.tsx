@@ -16,8 +16,9 @@ import {
 } from "@juun/ui/item";
 import { cn } from "@juun/ui/lib/utils";
 import { ChevronRight } from "lucide-react";
-import { ReactNode } from "react";
 
+import { MarkdownRenderer } from "@/components/md/renderer";
+import md from "@/lib/md";
 import { formatDateSafe } from "@/utils/date";
 
 type TimelineItem = {
@@ -26,7 +27,7 @@ type TimelineItem = {
   description: string;
   category: string;
   tags: string[];
-  detail?: ReactNode;
+  detail?: string;
 };
 
 export default function Timeline({ items }: { items: TimelineItem[] }) {
@@ -41,7 +42,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
         Project Timeline
       </h2>
       <ol>
-        {sortedItems.map((item, index) => (
+        {sortedItems.map(async (item, index) => (
           <li
             key={`timeline-${index}`}
             className={cn(
@@ -66,7 +67,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                   )}
                 >
                   <p>{item.category}</p>
-                  <p>{formatDateSafe(item.date, true)}</p>
+                  <p>{formatDateSafe(item.date)}</p>
                 </div>
               </div>
             </div>
@@ -106,15 +107,14 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                           variant="link"
                           className="[&[data-state=open]>svg]:rotate-90"
                         >
-                          <ChevronRight
-                            size={16}
-                            className="transition-transform"
-                          />
+                          <ChevronRight className="transition-transform" />
                           Details
                         </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="prose prose-zinc data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up w-full max-w-none pt-4">
-                        {item.detail}
+                      <CollapsibleContent className="data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up -mt-4">
+                        <MarkdownRenderer
+                          html={(await md.parse(item.detail)).html}
+                        />
                       </CollapsibleContent>
                     </Collapsible>
                   </ItemActions>
