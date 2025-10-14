@@ -8,9 +8,8 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
     detail: `
 ### The Initial Commit
 
-The foundation of the project. A single Next.js application with Yarn
-Berry PnP. Trial of modern tool chains, which I found useful at that
-time.`,
+The foundation of the project. A single Next.js application with Yarn Berry PnP. 
+Trial of modern tool chains, which I found useful at that time.`,
     date: "2024-09-27",
     category: "Foundation",
     tags: ["Next.js", "TypeScript", "Yarn Berry", "PnP"],
