@@ -15,6 +15,7 @@ import {
   ItemTitle,
 } from "@juun/ui/item";
 import { cn } from "@juun/ui/lib/utils";
+import { ChevronRight } from "lucide-react";
 import { ReactNode } from "react";
 
 import { formatDateSafe } from "@/utils/date";
@@ -98,9 +99,18 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                   <ItemActions>
                     <Collapsible>
                       <CollapsibleTrigger asChild>
-                        <Button variant="link">Details</Button>
+                        <Button
+                          variant="link"
+                          className="[&[data-state=open]>svg]:rotate-90"
+                        >
+                          <ChevronRight
+                            size={16}
+                            className="transition-transform"
+                          />
+                          Details
+                        </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="prose prose-zinc w-full max-w-none">
+                      <CollapsibleContent className="prose prose-zinc data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up w-full max-w-none">
                         {item.detail}
                       </CollapsibleContent>
                     </Collapsible>
