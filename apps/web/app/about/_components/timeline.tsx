@@ -21,25 +21,29 @@ import { ReactNode } from "react";
 import { formatDateSafe } from "@/utils/date";
 
 type TimelineItem = {
-  id: string;
   date: string;
   title: string;
   description: string;
-  detail?: ReactNode;
   category: string;
-  tags?: string[];
+  tags: string[];
+  detail?: ReactNode;
 };
 
 export default function Timeline({ items }: { items: TimelineItem[] }) {
+  // sort items by oldest date
+  const sortedItems = [...items].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  );
+
   return (
     <section className="relative w-full">
       <h2 className="p-4 text-3xl font-bold tracking-tight">
         Project Timeline
       </h2>
       <ol>
-        {items.map((item, index) => (
+        {sortedItems.map((item, index) => (
           <li
-            key={item.id}
+            key={`timeline-${index}`}
             className={cn(
               "bg-accent-foreground relative flex flex-row-reverse",
               index % 2 === 0 && "flex-row",
@@ -53,7 +57,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                 )}
               >
                 <h3 className="text-background font-(family-name:--font-stabil-grotesk-trial) text-[11vw] font-bold tracking-tighter underline underline-offset-[1.8vw]">
-                  {item.id}
+                  {String(index + 1).padStart(3, "0")}
                 </h3>
                 <div
                   className={cn(
@@ -79,18 +83,17 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                 <ItemTitle className="font-(family-name:--font-stabil-grotesk-trial) text-2xl font-bold tracking-tight">
                   {item.title}
                 </ItemTitle>
-                {item.tags && item.tags.length > 0 && (
-                  <div className="flex w-full flex-wrap gap-2">
-                    {item.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
+
+                <div className="flex w-full flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </ItemHeader>
               <ItemContent>
-                <ItemDescription className="text-wrap md:text-base">
+                <ItemDescription className="line-clamp-none text-wrap md:text-base">
                   {item.description}
                 </ItemDescription>
               </ItemContent>
@@ -110,7 +113,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                           Details
                         </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="prose prose-zinc data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up w-full max-w-none">
+                      <CollapsibleContent className="prose prose-zinc data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up w-full max-w-none pt-4">
                         {item.detail}
                       </CollapsibleContent>
                     </Collapsible>
