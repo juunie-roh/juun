@@ -113,7 +113,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                           Details
                         </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="prose prose-zinc data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up w-full max-w-none">
+                      <CollapsibleContent className="prose prose-zinc data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up w-full max-w-none pt-4">
                         {item.detail}
                       </CollapsibleContent>
                     </Collapsible>

@@ -4,15 +4,20 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
   {
     title: "Project Inception",
     description:
-      "Initial commit with Next.js, TypeScript, Yarn Berry PnP, Jest, ESLint, Husky, and Commitlint",
+      "Initial commit with standard single Next.js application, with various development tools and Yarn Berry PnP.",
     detail: (
       <>
-        <p>hi</p>
+        <h3>The Initial Commit</h3>
+        <p>
+          The foundation of the project. A single Next.js application with Yarn
+          Berry PnP. Trial of modern tool chains, which I found useful at that
+          time.
+        </p>
       </>
     ),
     date: "2024-09-27",
     category: "Foundation",
-    tags: ["Next.js", "TypeScript", "Yarn Berry"],
+    tags: ["Next.js", "TypeScript", "Yarn Berry", "PnP"],
   },
   {
     title: "UI System Setup",
