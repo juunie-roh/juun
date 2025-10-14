@@ -30,6 +30,7 @@ type TimelineItem = {
 };
 
 export default function Timeline({ items }: { items: TimelineItem[] }) {
+  // sort items by oldest date
   const sortedItems = [...items].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
@@ -92,7 +93,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                 </div>
               </ItemHeader>
               <ItemContent>
-                <ItemDescription className="text-wrap md:text-base">
+                <ItemDescription className="line-clamp-none text-wrap md:text-base">
                   {item.description}
                 </ItemDescription>
               </ItemContent>
