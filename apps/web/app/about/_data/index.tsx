@@ -15,14 +15,6 @@ Trial of modern tool chains, which I found useful at that time.`,
     tags: ["Next.js", "TypeScript", "Yarn Berry", "PnP"],
   },
   {
-    title: "UI System Setup",
-    description:
-      "Established component library with Tailwind CSS v3, DaisyUI, and Storybook for documentation",
-    date: "2024-11-22",
-    category: "Architecture",
-    tags: ["Tailwind", "Storybook", "DaisyUI"],
-  },
-  {
     title: "Monorepo Architecture",
     description:
       "Restructured from single Next.js app to Turborepo-powered monorepo with shared packages",
@@ -61,7 +53,7 @@ Transform to monorepo with Turborepo
       "Migrated from Yarn Berry PnP to PNPM due to Next.js standalone and Vercel monorepo incompatibility",
     date: "2025-03-20",
     category: "Infrastructure",
-    tags: ["Yarn Berry", "PNPM", "Package Manager", "Monorepo"],
+    tags: ["Article", "Yarn Berry", "PNPM", "Package Manager", "Monorepo"],
     detail: `
 ### The Problem
 Yarn Berry PnP caused critical issues:
@@ -84,6 +76,9 @@ Migrate to PNPM
 - Docker image reduced to 346MB (50% reduction)
 - Deployment reliability improved
 - Build process simplified
+
+### Related Article
+["Yarn Berry PnP Configuration"](/blog/yarn-berry)
 `,
   },
   {
@@ -92,7 +87,7 @@ Migrate to PNPM
       "Achieved 66-72% bundle size reduction through strategic lazy loading and dependency analysis",
     date: "2025-06-20",
     category: "Performance",
-    tags: ["Performance", "Bundle", "Optimization", "Lazy Loading"],
+    tags: ["Article", "Performance", "Bundle", "Optimization", "Lazy Loading"],
     detail: `
 ### Initial State
 - Bundle size: 2.53MB
@@ -126,7 +121,7 @@ Migrate to PNPM
       "Reduced Docker image from 526MB to 346MB (34% reduction) with 99% layer efficiency",
     date: "2025-09-23",
     category: "Infrastructure",
-    tags: ["Docker", "Optimization", "DevOps", "CI/CD"],
+    tags: ["Article", "Docker", "Optimization", "DevOps", "CI/CD"],
     detail: `
 ### Initial Problems
 - Image size: 526MB
@@ -161,7 +156,7 @@ Migrate to PNPM
       "Implemented Next.js multi-zone architecture, then removed it after discovering 77% performance degradation",
     date: "2025-07-25",
     category: "Architecture",
-    tags: ["MFE", "Multi-Zone", "Performance", "Reversal"],
+    tags: ["Article", "MFE", "Multi-Zone", "Performance", "Reversal"],
     detail: `
 ### Context
 Researching micro-frontend patterns for blog article and 
@@ -223,7 +218,14 @@ Remove Resium, implement native Cesium with custom React wrapper
       "Complete refactoring for portability, high cohesion, and separation of concerns using private folders and route-scoped context",
     date: "2025-09-26",
     category: "Architecture",
-    tags: ["Refactor", "SoC", "Architecture", "Context", "Portability"],
+    tags: [
+      "Article",
+      "Refactor",
+      "SoC",
+      "Architecture",
+      "Context",
+      "Portability",
+    ],
     detail: `
 ### The Problem
 Original structure scattered components across global folders:

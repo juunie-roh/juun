@@ -151,6 +151,8 @@
   --animate-marquee-reverse: marquee-right 25s linear infinite;
   --animate-marquee2: marquee-left-2 25s linear infinite;
   --animate-marquee2-reverse: marquee-right-2 25s linear infinite;
+  /* Application header height */
+  --spacing-header: --spacing(18);
 }
 
 @layer base {
@@ -159,5 +161,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans), var(--font-rix), var(--font-sans);
+  }
+
+  code, pre {
+    font-family: var(--font-geist-mono), var(--font-mono);
   }
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
     siteName: `Juun - About`,
-    images: ["/images/open-graph-template.png"],
+    images: ["/images/juun.png"],
     url: "https://juun.vercel.app/about",
   },
 };
