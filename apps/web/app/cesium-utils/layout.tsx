@@ -34,7 +34,7 @@ export default function CesiumUtilsDemoLayout({
   return (
     <ViewerProvider>
       <CesiumUtilsProvider>
-        <SidebarProvider className="h-[calc(100vh-var(--header-height))] min-h-0">
+        <SidebarProvider className="h-[calc(100vh-var(--spacing-header))] min-h-0">
           <SidebarInset className="flex min-w-0 flex-col overflow-hidden">
             <header className="bg-background flex h-14 shrink-0 items-center gap-2 border-b">
               <div className="flex h-full flex-1 items-center justify-end gap-2 p-4">

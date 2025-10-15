@@ -151,6 +151,8 @@
   --animate-marquee-reverse: marquee-right 25s linear infinite;
   --animate-marquee2: marquee-left-2 25s linear infinite;
   --animate-marquee2-reverse: marquee-right-2 25s linear infinite;
+
+  --spacing-header: --spacing(18);
 }
 
 @layer base {

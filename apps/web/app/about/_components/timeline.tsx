@@ -53,7 +53,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
             <div className="w-1/3 p-4">
               <div
                 className={cn(
-                  "sticky top-[calc(var(--header-height)+var(--spacing)*4)] flex flex-col items-start",
+                  "sticky top-[calc(var(--spacing-header)+--spacing(4))] flex flex-col items-start",
                   index % 2 === 0 && "items-end",
                 )}
               >

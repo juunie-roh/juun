@@ -24,7 +24,7 @@ const navigationItems = [
 export default function Header() {
   return (
     <header className="bg-background/50 sticky top-0 z-50 flex w-full items-center border-b px-4 backdrop-blur-lg">
-      <div className="h-(--header-height) flex w-full items-center justify-between">
+      <div className="h-header flex w-full items-center justify-between">
         <Link href="/">
           <h1 className="font-(family-name:--font-antonio) scroll-m-20 text-3xl font-bold tracking-tighter lg:text-4xl">
             Juun
