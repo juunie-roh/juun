@@ -32,8 +32,8 @@
     "@vercel/speed-insights": "^1.2.0",
     "cesium": "^1.134.1",
     "gray-matter": "^4.0.3",
-    "marked": "^16.4.0",
-    "next": "^15.5.5",
+    "marked": "^16.4.1",
+    "next": "^15.5.6",
     "next-intl": "^4.3.12",
     "three": "^0.180.0",
     "webpack": "^5.102.1",
@@ -42,11 +42,11 @@
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@next/bundle-analyzer": "^15.5.5",
-    "@playwright/test": "^1.56.0",
-    "@storybook/nextjs": "^9.1.10",
+    "@next/bundle-analyzer": "^15.5.6",
+    "@playwright/test": "^1.56.1",
+    "@storybook/nextjs": "^9.1.13",
     "@svgr/webpack": "^8.1.0",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.8.1",
     "@types/three": "^0.180.0",
     "ts-node": "^10.9.2"
   }
