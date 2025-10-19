@@ -2,7 +2,7 @@ import { registerOTel } from "@vercel/otel";
 
 export function register() {
   console.log("🔍 OpenTelemetry instrumentation starting...");
-  registerOTel("next-app");
+  registerOTel({ serviceName: "next-app" });
   console.log("✅ OpenTelemetry registered successfully");
 
   // Log environment variables to verify config
