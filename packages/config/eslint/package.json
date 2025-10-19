@@ -2,6 +2,7 @@
   "name": "@config/eslint",
   "private": true,
   "version": "0.0.1",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
