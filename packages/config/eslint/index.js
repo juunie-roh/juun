@@ -1,3 +1,4 @@
+import { defineConfig } from 'eslint/config';
 import a11y from './src/a11y.js';
 import base from './src/base.js';
 import next from './src/next.js';
@@ -6,7 +7,7 @@ import react from './src/react.js';
 import storybook from './src/storybook.js';
 import typescript from './src/typescript.js';
 
-export default [
+export default defineConfig([
   ...base,
   ...typescript,
   ...react,
@@ -14,6 +15,6 @@ export default [
   ...next,
   ...storybook,
   ...prettier,
-];
+]);
 
 export { a11y, base, next, prettier, react, storybook, typescript };

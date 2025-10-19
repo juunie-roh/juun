@@ -1,7 +1,8 @@
+import { defineConfig } from "eslint/config";
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import { compat } from './util.js';
 
-export default [
+export default defineConfig([
   ...compat.config(jsxA11y.configs.recommended),
   {
     plugins: { 'jsx-a11y': jsxA11y },
@@ -16,4 +17,4 @@ export default [
       ],
     },
   },
-];
+]);
