@@ -16,7 +16,7 @@ export default function CesiumUtilsSidebar({
       <SidebarHeader className="border-b p-4">
         <div>
           <h2 className="text-lg font-semibold">Cesium Utils</h2>
-          <p className="text-muted-foreground text-sm">API Demonstration</p>
+          <p className="text-sm text-muted-foreground">API Demonstration</p>
         </div>
       </SidebarHeader>
       <SidebarContent>{children}</SidebarContent>

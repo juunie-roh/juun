@@ -13,7 +13,7 @@ import { BlogMetadata } from "../_utils/post";
 
 export default function BlogFooter({ metadata }: { metadata: BlogMetadata }) {
   return (
-    <section className="grid-cols-responsive gap-x-responsive m-auto grid px-4">
+    <section className="m-auto grid grid-cols-responsive gap-x-responsive px-4">
       <div className="col-span-full grid w-full grid-cols-subgrid px-4 pt-8">
         <div className="col-span-full col-start-1 flex flex-col gap-8 md:col-span-8 md:col-start-3 lg:col-start-5">
           <div className="flex flex-col gap-3">

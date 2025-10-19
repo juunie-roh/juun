@@ -112,7 +112,7 @@ const peopleColumns = [
       const status = row.getValue("status") as string;
       return (
         <span
-          className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
+          className={`inline-flex rounded-full px-2 text-xs leading-5 font-semibold ${
             status === "active"
               ? "bg-green-100 text-green-800"
               : "bg-red-100 text-red-800"

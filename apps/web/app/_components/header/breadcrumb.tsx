@@ -80,9 +80,9 @@ export default function Breadcrumb({
               </BreadcrumbLink>
             </>
           ) : (
-            <BreadcrumbPage className="bg-background m-0 cursor-default rounded-full px-2">
+            <BreadcrumbPage className="m-0 cursor-default rounded-full bg-background px-2">
               <span className="flex items-center">
-                <Home className="-ml-1 mr-2 size-4" />
+                <Home className="mr-2 -ml-1 size-4" />
                 {homeLabel}
               </span>
             </BreadcrumbPage>
@@ -95,7 +95,7 @@ export default function Breadcrumb({
 
           return isLast || segment.isCurrent ? (
             <BreadcrumbItem key={segment.href}>
-              <BreadcrumbPage className="bg-background cursor-default rounded-full px-2 shadow-sm">
+              <BreadcrumbPage className="cursor-default rounded-full bg-background px-2 shadow-sm">
                 {segment.label}
               </BreadcrumbPage>
             </BreadcrumbItem>

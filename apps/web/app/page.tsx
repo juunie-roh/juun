@@ -19,7 +19,7 @@ export default function Home() {
       <HeroHome />
       <main className="w-full p-4">
         <section className="relative mx-auto w-full max-w-7xl">
-          <h2 className="font-(family-name:--font-stabil-grotesk-trial) mb-4 text-3xl font-bold tracking-tight">
+          <h2 className="mb-4 font-(family-name:--font-stabil-grotesk-trial) text-3xl font-bold tracking-tight">
             Articles
           </h2>
           <Carousel opts={{ align: "start" }} className="w-full px-12">

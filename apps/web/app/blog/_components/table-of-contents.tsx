@@ -106,12 +106,12 @@ export function TableOfContents({
 
   // The TOC content - shared between mobile collapsible and desktop fixed version
   const tocContent = (
-    <ul className="text-muted-foreground border-l">
+    <ul className="border-l text-muted-foreground">
       {headings.map(({ id, text, level }) => (
         <li key={id} className="relative">
           <div
             className={cn(
-              "absolute left-0 top-0 h-full w-1",
+              "absolute top-0 left-0 h-full w-1",
               activeId === id && "bg-primary",
             )}
           />
@@ -122,7 +122,7 @@ export function TableOfContents({
           >
             <span
               className={cn(
-                "text-wrap text-left",
+                "text-left text-wrap",
                 level === 3 && "pl-4",
                 activeId === id && "text-primary",
               )}
@@ -138,7 +138,7 @@ export function TableOfContents({
   return isLg ? (
     <div
       className={cn(
-        "bg-card hidden w-full overflow-auto rounded-lg py-4 text-sm lg:block",
+        "hidden w-full overflow-auto rounded-lg bg-card py-4 text-sm lg:block",
         className,
       )}
     >
@@ -153,7 +153,7 @@ export function TableOfContents({
         open={isOpen}
         onOpenChange={setIsOpen}
         className={cn(
-          "bg-card w-full max-w-64 rounded-md",
+          "w-full max-w-64 rounded-md bg-card",
           bordered && "border",
         )}
       >

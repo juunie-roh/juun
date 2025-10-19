@@ -42,13 +42,13 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
             />
           </div>
         ) : (
-          <div className="bg-linear-to-r aspect-video w-full from-blue-100 to-indigo-100" />
+          <div className="aspect-video w-full bg-linear-to-r from-blue-100 to-indigo-100" />
         )}
         <CardHeader>
           <CardTitle className="line-clamp-1 leading-normal group-hover:text-blue-600">
             {post.metadata.title}
           </CardTitle>
-          <p className="text-secondary-foreground line-clamp-3 min-h-[72px]">
+          <p className="line-clamp-3 min-h-[72px] text-secondary-foreground">
             {post.metadata.description}
           </p>
         </CardHeader>
@@ -70,7 +70,7 @@ export function PortfolioCard({ post }: PortfolioCardProps) {
             View project
           </span>
           {post.metadata.date && (
-            <span className="text-muted-foreground text-xs">
+            <span className="text-xs text-muted-foreground">
               {formatDateSafe(post.metadata.date)}
             </span>
           )}

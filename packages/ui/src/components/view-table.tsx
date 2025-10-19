@@ -45,7 +45,7 @@ export default function ViewTable<TData>({
       {...props}
     >
       <TableHeader
-        className={cn(pinHeader && "bg-background sticky top-0 z-10")}
+        className={cn(pinHeader && "sticky top-0 z-10 bg-background")}
       >
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>

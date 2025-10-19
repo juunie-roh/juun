@@ -30,7 +30,7 @@ export default function CesiumUtilsIntro() {
     <div className="mx-auto max-w-4xl">
       <div className="mb-8">
         <h1 className="text-4xl font-bold tracking-tighter">Cesium Utils</h1>
-        <p className="text-muted-foreground mt-2 text-xl">
+        <p className="mt-2 text-xl text-muted-foreground">
           A comprehensive utility library for CesiumJS that simplifies working
           with 3D geo-spatial visualizations
         </p>
@@ -62,7 +62,7 @@ export default function CesiumUtilsIntro() {
               <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div>
                   <h4 className="font-medium">Demonstration</h4>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-sm text-muted-foreground">
                     Interactive demonstration for the library
                   </p>
                 </div>
@@ -85,7 +85,7 @@ export default function CesiumUtilsIntro() {
               <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div>
                   <h4 className="font-medium">API Documentation</h4>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-sm text-muted-foreground">
                     Complete documentation for all classes and methods
                   </p>
                 </div>
@@ -118,7 +118,7 @@ export default function CesiumUtilsIntro() {
               <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div>
                   <h4 className="font-medium">GitHub Repository</h4>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-sm text-muted-foreground">
                     Source code, issues, and feature requests
                   </p>
                 </div>
@@ -153,7 +153,7 @@ export default function CesiumUtilsIntro() {
               <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div>
                   <h4 className="font-medium">NPM Package</h4>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-sm text-muted-foreground">
                     Package information and download statistics
                   </p>
                 </div>
@@ -176,7 +176,7 @@ export default function CesiumUtilsIntro() {
         </CardContent>
       </Card>
 
-      <div className="prose prose-zinc dark:prose-invert prose-headings:tracking-tight mt-8 max-w-none">
+      <div className="prose mt-8 max-w-none prose-zinc dark:prose-invert prose-headings:tracking-tight">
         <h2 className="text-2xl font-bold tracking-tight">
           What is Cesium Utils?
         </h2>
@@ -235,7 +235,7 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>
                     Tag-based organization for entities, primitives, and data
@@ -245,7 +245,7 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>
                     Bulk operations on collections (show/hide, style, remove)
@@ -254,7 +254,7 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>
                     Simplified querying by properties, spatial extent, or custom
@@ -277,7 +277,7 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>
                     Priority-based terrain compositing from multiple sources
@@ -286,14 +286,14 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>Geographical bounds for terrain source selection</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>Smooth transitions between terrain sources</span>
                 </li>
@@ -313,14 +313,14 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>Camera synchronization across multiple viewers</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>
                     Copying existing viewer by inheriting it's properties
@@ -342,14 +342,14 @@ export default function CesiumUtilsIntro() {
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>Consistent highlighting across entity types</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <ChevronRight
                     size={18}
-                    className="text-primary mt-0.5 shrink-0"
+                    className="mt-0.5 shrink-0 text-primary"
                   />
                   <span>Customizable highlight styles with transitions</span>
                 </li>
@@ -359,7 +359,7 @@ export default function CesiumUtilsIntro() {
         </div>
       </div>
 
-      <div className="prose text-primary mt-8 max-w-none">
+      <div className="prose mt-8 max-w-none text-primary">
         <h2 className="tracking-tight">Getting Started</h2>
         <p>
           Follow these steps to integrate <code>@juun-roh/cesium-utils</code>{" "}

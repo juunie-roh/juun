@@ -201,7 +201,7 @@ export default function Data() {
         width={1600}
         height={750}
       />
-      <p className="mb-0 mt-2 text-right text-sm">
+      <p className="mt-2 mb-0 text-right text-sm">
         Multi-Zones Diagram, Next.js
       </p>
       <p className="mt-2">
