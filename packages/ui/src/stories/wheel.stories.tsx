@@ -327,7 +327,7 @@ const RenderInteractive = () => {
         </WheelContent>
       </Wheel>
       {selectedOption !== null && (
-        <div className="bg-primary text-primary-foreground mt-4 rounded p-2">
+        <div className="mt-4 rounded bg-primary p-2 text-primary-foreground">
           Selected:{" "}
           {selectedOption.title || `Option ${selectedOption.index + 1}`}
         </div>

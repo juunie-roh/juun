@@ -46,7 +46,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
           <li
             key={`timeline-${index}`}
             className={cn(
-              "bg-accent-foreground relative flex flex-row-reverse",
+              "relative flex flex-row-reverse bg-accent-foreground",
               index % 2 === 0 && "flex-row",
             )}
           >
@@ -57,12 +57,12 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                   index % 2 === 0 && "items-end",
                 )}
               >
-                <h3 className="text-background font-(family-name:--font-stabil-grotesk-trial) text-[11vw] font-bold tracking-tighter underline underline-offset-[1.8vw]">
+                <h3 className="font-(family-name:--font-stabil-grotesk-trial) text-[11vw] font-bold tracking-tighter text-background underline underline-offset-[1.8vw]">
                   {String(index + 1).padStart(3, "0")}
                 </h3>
                 <div
                   className={cn(
-                    "font-(family-name:--font-victor-serif-trial) text-muted text-left text-sm md:text-base lg:text-lg",
+                    "text-left font-(family-name:--font-victor-serif-trial) text-sm text-muted md:text-base lg:text-lg",
                     index % 2 === 0 && "text-right",
                   )}
                 >
@@ -73,7 +73,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
             </div>
             <Item
               className={cn(
-                "bg-background rounded-4xl mb-4 w-2/3",
+                "mb-4 w-2/3 rounded-4xl bg-background",
                 index % 2 === 0 && "rounded-r-none",
                 index % 2 === 1 && "rounded-l-none",
                 index === 0 && "rounded-t-none",
@@ -111,7 +111,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                           Details
                         </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up -mt-4">
+                      <CollapsibleContent className="-mt-4 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                         <MarkdownRenderer
                           html={(await md.parse(item.detail)).html}
                         />

@@ -1,3 +1,4 @@
+import { defineConfig } from "eslint/config";
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -46,7 +47,7 @@ export const tsRules = {
   'consistent-return': 'off',
 };
 
-const config = [
+export default defineConfig([
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
@@ -64,6 +65,4 @@ const config = [
     },
     rules: tsRules,
   },
-];
-
-export default config;
+]);

@@ -19,7 +19,7 @@ export function Marquee({
     <div className={cn("relative flex overflow-x-hidden", className)}>
       <div
         className={cn(
-          "whitespace-nowrap py-12",
+          "py-12 whitespace-nowrap",
           direction === "left" ? "animate-marquee" : "animate-marquee-reverse",
         )}
       >
@@ -27,7 +27,7 @@ export function Marquee({
       </div>
       <div
         className={cn(
-          "absolute top-0 whitespace-nowrap py-12",
+          "absolute top-0 py-12 whitespace-nowrap",
           direction === "left"
             ? "animate-marquee2"
             : "animate-marquee2-reverse",

@@ -43,7 +43,7 @@ const wheelVariants = cva("relative size-[200px]", {
       primary: "bg-primary text-primary-foreground",
       secondary: "bg-secondary text-secondary-foreground",
       destructive: "bg-destructive text-accent",
-      outline: "bg-background border",
+      outline: "border bg-background",
     },
   },
 });
@@ -311,7 +311,7 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
     <div
       ref={ref}
       className={cn(
-        "bg-secondary text-secondary-foreground pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm px-2 py-1 text-center text-sm",
+        "pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-sm bg-secondary px-2 py-1 text-center text-sm whitespace-nowrap text-secondary-foreground",
         className,
       )}
       {...props}

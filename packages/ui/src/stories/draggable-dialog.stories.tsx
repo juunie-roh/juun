@@ -72,7 +72,7 @@ export const Default: Story = {
               </DialogDescription>
             </DraggableDialogHeader>
             <div className="py-4">
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 You can interact with content outside this dialog since it's
                 non-modal and interactive.
               </p>
@@ -304,11 +304,11 @@ export const NotificationDialog: Story = {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-semibold">Sarah Johnson</h4>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm text-muted-foreground">
                       Hey! Just wanted to let you know that the project is ready
                       for review. Please check it out when you have a chance.
                     </p>
-                    <p className="text-muted-foreground mt-2 text-xs">
+                    <p className="mt-2 text-xs text-muted-foreground">
                       2 minutes ago
                     </p>
                   </div>
@@ -343,7 +343,7 @@ export const ConfirmationDialog: Story = {
           <DraggableDialogContent open={open}>
             <DraggableDialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <AlertTriangle className="text-destructive h-4 w-4" />
+                <AlertTriangle className="h-4 w-4 text-destructive" />
                 Confirm Deletion
               </DialogTitle>
               <DialogDescription>
@@ -352,14 +352,14 @@ export const ConfirmationDialog: Story = {
               </DialogDescription>
             </DraggableDialogHeader>
             <div className="py-4">
-              <div className="border-destructive/20 bg-destructive/5 rounded-lg border p-4">
+              <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-4">
                 <p className="text-sm">
                   <strong>Item:</strong> Project Report.pdf
                 </p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   <strong>Size:</strong> 2.4 MB
                 </p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   <strong>Created:</strong> 2 days ago
                 </p>
               </div>

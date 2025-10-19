@@ -8,8 +8,8 @@ import { BlogMetadata } from "../_utils/post";
 export default function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
   return (
     <section>
-      <div className="grid-cols-responsive gap-x-responsive mx-auto grid place-items-center px-4 pt-8">
-        <div className="pt-18 col-span-full pb-10 lg:col-span-12 lg:col-start-3">
+      <div className="mx-auto grid grid-cols-responsive place-items-center gap-x-responsive px-4 pt-8">
+        <div className="col-span-full pt-18 pb-10 lg:col-span-12 lg:col-start-3">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="font-(family-name:--font-stabil-grotesk-trial,--font-rix) text-4xl font-bold tracking-tight lg:col-span-8">
               {metadata.title}
@@ -21,7 +21,7 @@ export default function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
         </div>
         {metadata.image && (
           <div className="col-span-full w-full lg:col-span-12 lg:col-start-3">
-            <AspectRatio ratio={16 / 9} className="bg-muted w-full">
+            <AspectRatio ratio={16 / 9} className="w-full bg-muted">
               <Suspense fallback={<Skeleton className="size-full" />}>
                 <Image
                   src={metadata.image}

@@ -7,8 +7,8 @@ export default function BlogItemLoading() {
     <Fragment>
       {/* Header Section - matches BlogHeader structure */}
       <section>
-        <div className="grid-cols-16 mx-auto grid place-items-center gap-8 px-4 pt-8">
-          <div className="pt-18 col-span-full pb-10 lg:col-span-12 lg:col-start-3">
+        <div className="mx-auto grid grid-cols-16 place-items-center gap-8 px-4 pt-8">
+          <div className="col-span-full pt-18 pb-10 lg:col-span-12 lg:col-start-3">
             <div className="flex flex-col gap-2 text-center">
               <Skeleton className="mx-auto h-10 w-3/4" />
               <Skeleton className="mx-auto h-5 w-1/2" />
@@ -23,13 +23,13 @@ export default function BlogItemLoading() {
       </section>
 
       {/* Content Section - matches BlogContent structure */}
-      <section className="bg-background relative">
-        <div className="grid-cols-16 m-auto grid gap-x-8 px-4">
-          <hr className="mt-18 col-span-full border-t pt-5 md:col-span-8 md:col-start-5 lg:col-span-full" />
+      <section className="relative bg-background">
+        <div className="m-auto grid grid-cols-16 gap-x-8 px-4">
+          <hr className="col-span-full mt-18 border-t pt-5 md:col-span-8 md:col-start-5 lg:col-span-full" />
         </div>
         <div
           id="text-content"
-          className="grid-cols-16 relative m-auto grid gap-x-8 px-4"
+          className="relative m-auto grid grid-cols-16 gap-x-8 px-4"
         >
           {/* Table of Contents Skeleton */}
           <div className="sticky top-24 z-[1] mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid">
@@ -93,8 +93,8 @@ export default function BlogItemLoading() {
       </section>
 
       {/* Footer Section - placeholder for BlogFooter */}
-      <section className="bg-background relative">
-        <div className="grid-cols-16 m-auto grid gap-x-8 px-4 pb-12">
+      <section className="relative bg-background">
+        <div className="m-auto grid grid-cols-16 gap-x-8 px-4 pb-12">
           <div className="col-span-full lg:col-span-8 lg:col-start-5">
             <div className="space-y-4 rounded-lg border p-6">
               <Skeleton className="h-6 w-1/3" />

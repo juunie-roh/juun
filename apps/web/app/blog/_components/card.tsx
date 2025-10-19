@@ -50,13 +50,13 @@ export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link
       href={`/blog/${slug}`}
-      className="font-(family-name:--font-geist-sans,--font-rix) group block size-full"
+      className="group block size-full font-(family-name:--font-geist-sans,--font-rix)"
     >
       <div className="relative w-full">
         <div className="grid w-full grid-cols-1 gap-4">
           <AspectRatio
             ratio={16 / 9}
-            className="bg-muted size-full overflow-hidden"
+            className="size-full overflow-hidden bg-muted"
           >
             {post.metadata.image && (
               <LogoAvatar className="size-full rounded-none">
@@ -70,7 +70,7 @@ export function BlogCard({ post }: BlogCardProps) {
             )}
           </AspectRatio>
 
-          <div className="text-muted-foreground flex items-center justify-between gap-3 text-xs">
+          <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
             <div className="flex gap-2">
               {post.metadata.category && (
                 <div className="flex flex-wrap justify-self-start">
@@ -92,7 +92,7 @@ export function BlogCard({ post }: BlogCardProps) {
             )}
           </div>
 
-          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-lg font-bold leading-snug tracking-tight">
+          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-lg leading-snug font-bold tracking-tight">
             {post.metadata.title}
           </div>
 
@@ -113,13 +113,13 @@ export function BlogCardSkeleton() {
           {/* Image skeleton */}
           <AspectRatio
             ratio={16 / 9}
-            className="bg-muted size-full overflow-hidden"
+            className="size-full overflow-hidden bg-muted"
           >
             <Skeleton className="size-full" />
           </AspectRatio>
 
           {/* Metadata skeleton */}
-          <div className="text-muted-foreground flex items-center gap-3 text-xs">
+          <div className="flex items-center gap-3 text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
               <Skeleton className="size-3" />
               <Skeleton className="h-3 w-16" />

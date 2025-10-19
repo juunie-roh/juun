@@ -10,22 +10,22 @@ export default function BlogContent({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="bg-background relative">
-      <div className="grid-cols-responsive gap-x-responsive m-auto grid px-4">
+    <section className="relative bg-background">
+      <div className="m-auto grid grid-cols-responsive gap-x-responsive px-4">
         <Separator
           orientation="horizontal"
-          className="mt-18 col-span-full col-start-1 mb-5 md:col-span-8 md:col-start-3 lg:col-span-full"
+          className="col-span-full col-start-1 mt-18 mb-5 md:col-span-8 md:col-start-3 lg:col-span-full"
         />
       </div>
       <div
         id="text-content"
-        className="grid-cols-responsive gap-x-responsive relative m-auto grid px-4"
+        className="relative m-auto grid grid-cols-responsive gap-x-responsive px-4"
       >
         <div className="sticky top-24 z-[1] mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid">
           <TableOfContents className="col-span-full" />
         </div>
         <div className="col-span-full grid w-full grid-cols-subgrid md:col-start-3 lg:col-start-5 lg:row-start-1">
-          <Prose className="font-(family-name:--font-geist-sans,--font-geist-mono,--font-rix) col-span-full mt-8 md:col-span-8">
+          <Prose className="col-span-full mt-8 font-(family-name:--font-geist-sans,--font-geist-mono,--font-rix) md:col-span-8">
             {children}
           </Prose>
         </div>

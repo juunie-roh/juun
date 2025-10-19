@@ -123,12 +123,12 @@ const CodeBlock = ({
     <div
       id={id}
       className={cn(
-        "bg-background relative overflow-hidden rounded-md border shadow",
+        "relative overflow-hidden rounded-md border bg-background shadow",
         className,
       )}
     >
-      <div className="bg-muted flex items-center justify-between rounded-t-md border-b px-4 py-2">
-        <div className="text-muted-foreground text-sm font-medium">
+      <div className="flex items-center justify-between rounded-t-md border-b bg-muted px-4 py-2">
+        <div className="text-sm font-medium text-muted-foreground">
           {fileName}
         </div>
         <Button
