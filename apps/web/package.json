@@ -22,6 +22,8 @@
   "dependencies": {
     "@config/tailwind": "workspace:^",
     "@juun-roh/cesium-utils": "^0.3.5",
+    "@juun/api": "workspace:^",
+    "@juun/db": "workspace:^",
     "@juun/ui": "workspace:^",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/api-logs": "^0.205.0",
