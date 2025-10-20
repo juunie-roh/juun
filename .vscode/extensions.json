@@ -4,6 +4,7 @@
     "esbenp.prettier-vscode", // Prettier for code formatting
     "bradlc.vscode-tailwindcss", // intellisense for tailwind css
     "DavidAnson.vscode-markdownlint", // Markdown Linter
-    "streetsidesoftware.code-spell-checker" // Spell Checker
+    "streetsidesoftware.code-spell-checker", // Spell Checker
+    "Prisma.prisma" // Prisma DB Client
   ]
 }
