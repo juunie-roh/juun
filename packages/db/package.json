@@ -13,7 +13,9 @@
     "push": "prisma db push",
     "pull": "prisma db pull",
     "studio": "prisma studio",
-    "migrate": "prisma migrate dev"
+    "migrate": "prisma migrate dev",
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc -p ./tsconfig.json --noEmit"
   },
   "dependencies": {
     "@prisma/client": "^6.17.1"
