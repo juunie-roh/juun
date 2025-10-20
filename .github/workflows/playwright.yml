@@ -13,6 +13,7 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - uses: actions/checkout@v5
@@ -30,6 +31,8 @@ jobs:
             ${{ runner.os }}-turbo-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Generate Prisma Client
+        run: pnpm db generate
       - name: Install Playwright Browsers
         run: pnpm --filter @juun/web exec playwright install --with-deps
       - name: Build web app
