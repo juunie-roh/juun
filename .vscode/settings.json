@@ -27,6 +27,7 @@
     "PGHOST",
     "PGPASSWORD",
     "PGUSER",
+    "Pooler",
     "replicaset",
     "retryable",
     "shadcn",

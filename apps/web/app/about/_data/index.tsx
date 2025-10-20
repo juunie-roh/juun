@@ -384,4 +384,119 @@ transplantable without breaking other routes.
 Inspired by monolith from 2001: A Space Odyssey.
 `,
   },
+  {
+    title: "Serverless Database Integration",
+    description:
+      "Integrated Prisma ORM with Neon PostgreSQL for serverless architecture, eliminating traditional backend framework",
+    date: "2025-10-20",
+    category: "Architecture",
+    tags: ["Database", "Prisma", "Neon", "Serverless", "Edge Computing"],
+    detail: `
+### Why Serverless?
+
+Traditional backend frameworks require managing servers, scaling, and infrastructure.
+This project demonstrates a modern paradigm shift: **delegating backend tasks to
+distributed edge computing systems**.
+
+### Architecture Implementation
+
+**Database Layer**
+- **ORM**: Prisma Client (type-safe queries)
+- **Database**: Neon PostgreSQL (serverless, auto-scaling)
+- **Connection**: Pooled connections for edge environments
+- **Pattern**: Singleton preventing connection exhaustion
+
+**Query Organization**
+\`\`\`typescript
+// Namespace pattern for clean API
+import post from "@juun/db/queries/post";
+
+// Type-safe, auto-complete friendly
+const posts = await post.get.all();
+const single = await post.get.bySlug("my-post");
+\`\`\`
+
+**Database Design**
+- Normalized schema (posts, tags, categories)
+- Many-to-many relations via junction tables
+- Markdown content stored in PostgreSQL TEXT
+- Category as ENUM (fixed vocabulary)
+- Tags as dynamic table (future expansion)
+
+### Key Benefits
+
+**No Backend Framework Needed**
+- Next.js Server Components ARE the backend
+- Direct database access from components
+- No separate API layer required
+- Type safety from database to UI
+
+**Automatic Scaling**
+- Database: Neon auto-scales compute + auto-suspends when idle
+- Functions: Vercel Edge handles 0 → ∞ requests automatically
+- No configuration needed
+
+**Global Distribution**
+- Code runs near users (50+ edge locations)
+- Low latency worldwide
+- Automatic failover
+
+**Cost Effective**
+- Pay only for actual execution time
+- Zero cost when idle
+- No over-provisioning
+
+**Type Safety**
+- Prisma generates types from schema
+- End-to-end TypeScript inference
+- Compile-time query validation
+
+### Deployment Flow
+
+    1. Git Push
+       ↓
+    2. pnpm install
+       └─> postinstall: prisma generate
+       └─> Generates type-safe client
+       ↓
+    3. Build (Turborepo)
+       └─> Apps can import @juun/db/queries/post
+       ↓
+    4. Deploy to Edge Network
+       └─> Functions distributed globally
+       └─> Connect to Neon via DATABASE_URL
+
+### Trade-offs
+
+**Advantages**
+- [x] Zero infrastructure management
+- [x] Automatic global scaling
+- [x] Pay-per-use pricing
+- [x] Type-safe database access
+- [x] Simplified deployment
+- [x] Better DX (collocated code)
+
+**Limitations**
+- [ ] Vendor lock-in (Vercel + Neon)
+- [ ] Cold start latency (minimal with edge)
+- [ ] Stateless by design (no persistent connections)
+- [ ] Different debugging paradigm
+
+### Results
+
+- Blog content migrated from TSX files to PostgreSQL
+- Type-safe queries with namespace organization
+- Zero backend framework code
+- Automatic scaling ready
+- CI/CD includes Prisma generation
+- Full end-to-end type safety
+
+### Related Concept
+
+This demonstrates **distributed computing as a service**:
+Instead of manually setting up K8s, load balancers, and backend
+frameworks, delegate the entire complexity to edge computing platforms.
+Focus on business logic, not infrastructure.
+`,
+  },
 ];
