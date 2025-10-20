@@ -10,6 +10,7 @@
     "./utils/*": "./src/utils/*.ts"
   },
   "scripts": {
+    "postinstall": "prisma generate",
     "generate": "prisma generate",
     "push": "prisma db push",
     "pull": "prisma db pull",

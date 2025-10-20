@@ -56,8 +56,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Generate Prisma Client
-        run: pnpm db generate
       - name: esLinter
         run: pnpm lint
       - name: Type Checking
