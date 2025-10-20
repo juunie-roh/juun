@@ -1,5 +1,5 @@
-import { readFile } from "fs/promises";
-import { join } from "path";
+import post from "@juun/db/post";
+import { notFound } from "next/navigation";
 
 import BlogContent from "@/app/blog/_components/content";
 import BlogFooter from "@/app/blog/_components/footer";
@@ -9,18 +9,26 @@ import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
 
 export default async function YarnBerryMarkdownDemo() {
-  const markdownPath = join(process.cwd(), "app/test/test-md/yarn-berry.md");
-  const markdownSource = await readFile(markdownPath, "utf-8");
+  const result = await post.get.bySlug("yarn-berry");
+  if (result === null) return notFound();
 
-  const { html, data } = await md.parse(markdownSource);
+  const metadata: BlogMetadata = {
+    title: result.title,
+    description: result.description,
+    date: result.created_at,
+    tags: result.tags,
+    image: result.image,
+  };
+
+  const { html } = await md.parse(result.content);
 
   return (
     <main className="relative">
-      <BlogHeader metadata={data as BlogMetadata} />
+      <BlogHeader metadata={metadata} />
       <BlogContent>
         <MarkdownRenderer html={html} />
       </BlogContent>
-      <BlogFooter metadata={data as BlogMetadata} />
+      <BlogFooter metadata={metadata} />
     </main>
   );
 }
