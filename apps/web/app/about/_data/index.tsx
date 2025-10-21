@@ -430,6 +430,7 @@ const single = await post.get.bySlug("my-post");
 - Direct database access from components
 - No separate API layer required
 - Type safety from database to UI
+- Reduce complexity of backend configurations
 
 **Automatic Scaling**
 - Database: Neon auto-scales compute + auto-suspends when idle
@@ -440,11 +441,6 @@ const single = await post.get.bySlug("my-post");
 - Code runs near users (50+ edge locations)
 - Low latency worldwide
 - Automatic failover
-
-**Cost Effective**
-- Pay only for actual execution time
-- Zero cost when idle
-- No over-provisioning
 
 **Type Safety**
 - Prisma generates types from schema
@@ -484,7 +480,7 @@ const single = await post.get.bySlug("my-post");
 
 ### Results
 
-- Blog content migrated from TSX files to PostgreSQL
+- Blog content migration tested from TSX files to PostgreSQL
 - Type-safe queries with namespace organization
 - Zero backend framework code
 - Automatic scaling ready
