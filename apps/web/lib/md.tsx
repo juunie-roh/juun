@@ -98,6 +98,7 @@ namespace md {
                 alt={String(alt || "")}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                unoptimized={safeSrc.endsWith(".gif")}
               />
             </Suspense>
           </AspectRatio>
