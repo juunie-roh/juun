@@ -28,7 +28,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
 
 # vercel
 .vercel
@@ -58,3 +58,6 @@ CLAUDE.md
 **/blob-report/
 **/playwright/.cache/
 **/playwright/.auth/
+
+# prisma
+**/generated/prisma

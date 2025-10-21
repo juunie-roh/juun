@@ -1,0 +1,29 @@
+{
+  "name": "@juun/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./*": "./src/queries/*.ts",
+    "./utils/*": "./src/utils/*.ts"
+  },
+  "scripts": {
+    "postinstall": "prisma generate",
+    "generate": "prisma generate",
+    "push": "prisma db push",
+    "pull": "prisma db pull",
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev",
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.17.1"
+  },
+  "devDependencies": {
+    "@config/typescript": "workspace:^",
+    "prisma": "^6.17.1"
+  }
+}
