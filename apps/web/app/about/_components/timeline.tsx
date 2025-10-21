@@ -111,9 +111,9 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                           Details
                         </Button>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="-mt-4 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+                      <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                         <MarkdownRenderer
-                          html={(await md.parse(item.detail)).html}
+                          parsed={await md.parse(item.detail)}
                         />
                       </CollapsibleContent>
                     </Collapsible>

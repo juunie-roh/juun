@@ -40,18 +40,18 @@ console.log(simple)
 [Link test](https://example.com)
 `;
 
-  const { html, data } = await md.parse(markdownSource);
+  const parsed = await md.parse(markdownSource);
 
   return (
     <article className="mx-auto w-full max-w-3xl px-2 pt-4 pb-20 md:px-8 xl:w-3xl">
       <header className="mb-8">
         <h1 className="mb-4 text-3xl font-bold tracking-tighter">
-          {data.title}
+          {parsed.data.title}
         </h1>
-        <p className="text-lg">{data.description}</p>
+        <p className="text-lg">{parsed.data.description}</p>
       </header>
 
-      <MarkdownRenderer html={html} />
+      <MarkdownRenderer parsed={parsed} />
     </article>
   );
 }

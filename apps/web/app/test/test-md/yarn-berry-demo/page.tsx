@@ -20,13 +20,13 @@ export default async function YarnBerryMarkdownDemo() {
     image: result.image,
   };
 
-  const { html } = await md.parse(result.content);
+  const parsed = await md.parse(result.content);
 
   return (
     <main className="relative">
       <BlogHeader metadata={metadata} />
       <BlogContent>
-        <MarkdownRenderer html={html} />
+        <MarkdownRenderer parsed={parsed} />
       </BlogContent>
       <BlogFooter metadata={metadata} />
     </main>
