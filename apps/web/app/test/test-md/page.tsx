@@ -1,4 +1,3 @@
-import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
 
 export default async function TestMDX() {
@@ -51,7 +50,7 @@ console.log(simple)
         <p className="text-lg">{parsed.data.description}</p>
       </header>
 
-      <MarkdownRenderer parsed={parsed} />
+      {md.render(parsed)}
     </article>
   );
 }

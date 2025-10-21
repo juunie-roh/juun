@@ -5,7 +5,6 @@ import BlogContent from "@/app/blog/_components/content";
 import BlogFooter from "@/app/blog/_components/footer";
 import BlogHeader from "@/app/blog/_components/header";
 import { BlogMetadata } from "@/app/blog/_utils/post";
-import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
 
 export default async function YarnBerryMarkdownDemo() {
@@ -25,9 +24,7 @@ export default async function YarnBerryMarkdownDemo() {
   return (
     <main className="relative">
       <BlogHeader metadata={metadata} />
-      <BlogContent>
-        <MarkdownRenderer parsed={parsed} />
-      </BlogContent>
+      <BlogContent>{md.render(parsed)}</BlogContent>
       <BlogFooter metadata={metadata} />
     </main>
   );

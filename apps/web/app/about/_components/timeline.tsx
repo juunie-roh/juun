@@ -17,7 +17,6 @@ import {
 import { cn } from "@juun/ui/lib/utils";
 import { ChevronRight } from "lucide-react";
 
-import { MarkdownRenderer } from "@/components/md/renderer";
 import md from "@/lib/md";
 import { formatDateSafe } from "@/utils/date";
 
@@ -112,9 +111,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                         </Button>
                       </CollapsibleTrigger>
                       <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-                        <MarkdownRenderer
-                          parsed={await md.parse(item.detail)}
-                        />
+                        {md.render(await md.parse(item.detail))}
                       </CollapsibleContent>
                     </Collapsible>
                   </ItemActions>

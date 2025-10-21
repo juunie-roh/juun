@@ -1,5 +1,6 @@
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 import { Skeleton } from "@juun/ui/skeleton";
 import matter from "gray-matter";
 import Image from "next/image";
@@ -160,6 +161,16 @@ namespace md {
       content: file.result as ReactElement,
       data,
     };
+  }
+
+  /**
+   * Render parsed markdown content with Prose styling (client-side)
+   *
+   * The content is already converted to React elements by rehype-react,
+   * so we simply render it inside the Prose wrapper for styling.
+   */
+  export function render(parsed: ParsedContent): ReactElement {
+    return <Prose>{parsed.content}</Prose>;
   }
 }
 
