@@ -1,15 +1,14 @@
-import post from "@juun/db/post";
 import { notFound } from "next/navigation";
 
 import BlogContent from "@/app/blog/_components/content";
 import BlogFooter from "@/app/blog/_components/footer";
 import BlogHeader from "@/app/blog/_components/header";
 import { BlogMetadata } from "@/app/blog/_utils/post";
-import { MarkdownRenderer } from "@/components/md/renderer";
+import cache from "@/lib/cache";
 import md from "@/lib/md";
 
-export default async function YarnBerryMarkdownDemo() {
-  const result = await post.get.bySlug("yarn-berry");
+export default async function NpmMdDemo() {
+  const result = await cache.post.get.bySlug("npm-packages");
   if (result === null) return notFound();
 
   const metadata: BlogMetadata = {
@@ -20,14 +19,12 @@ export default async function YarnBerryMarkdownDemo() {
     image: result.image,
   };
 
-  const { html } = await md.parse(result.content);
+  const parsed = await md.parse(result.content);
 
   return (
     <main className="relative">
       <BlogHeader metadata={metadata} />
-      <BlogContent>
-        <MarkdownRenderer html={html} />
-      </BlogContent>
+      <BlogContent>{md.render(parsed)}</BlogContent>
       <BlogFooter metadata={metadata} />
     </main>
   );

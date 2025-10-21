@@ -40,10 +40,16 @@
     "@vercel/speed-insights": "^1.2.0",
     "cesium": "^1.134.1",
     "gray-matter": "^4.0.3",
-    "marked": "^16.4.1",
+    "hast-util-to-jsx-runtime": "^2.3.6",
     "next": "^15.5.6",
     "next-intl": "^4.3.12",
+    "probe-image-size": "^7.2.3",
+    "rehype-react": "^8.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
     "three": "^0.180.0",
+    "unified": "^11.0.5",
     "webpack": "^5.102.1",
     "zustand": "^5.0.8"
   },
@@ -55,6 +61,7 @@
     "@storybook/nextjs": "^9.1.13",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^24.9.1",
+    "@types/probe-image-size": "^7.2.5",
     "@types/three": "^0.180.0",
     "ts-node": "^10.9.2"
   }

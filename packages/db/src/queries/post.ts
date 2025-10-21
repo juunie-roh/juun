@@ -21,17 +21,17 @@ namespace post {
 
   export namespace get {
     /**
-     * Get all posts with tags
-     * Posts are ordered by created_at descending (newest first)
+     * Get all posts with tags without contents
+     *
+     * Posts are ordered by `created_at` descending (newest first)
      */
-    export async function all(): Promise<WithTags[]> {
+    export async function all(): Promise<Omit<WithTags, "content">[]> {
       const posts = await prisma.post.findMany({
         select: {
           id: true,
           title: true,
           slug: true,
           description: true,
-          content: true,
           category: true,
           image: true,
           created_at: true,
@@ -62,7 +62,6 @@ namespace post {
         title: post.title,
         slug: post.slug,
         description: post.description ?? undefined,
-        content: post.content,
         category: post.category ?? undefined,
         image: post.image ?? undefined,
         created_at: post.created_at,
