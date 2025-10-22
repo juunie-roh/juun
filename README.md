@@ -27,7 +27,7 @@ This project serves as:
 
 ### Architecture Decisions
 
-- **Serverless Database**: Prisma + Neon PostgreSQL for auto-scaling, zero-ops data layer ([Read more](https://juun.vercel.app/blog/serverless-database))
+- **Serverless Database**: Prisma + Neon PostgreSQL for auto-scaling, zero-ops data layer
 - **Monorepo Structure**: Turborepo-powered workspace with shared configurations
 - **Feature Isolation**: Route-scoped state management and component organization ([Read more](https://juun.vercel.app/blog/separation-of-concerns))
 - **Hybrid State Management**: Zustand for global, React Context for route-specific state
@@ -145,7 +145,7 @@ PostgreSQL Database (auto-scaling compute + storage)
 - ⚡ ~99% cache hit rate for public content
 - 🛠 Zero ops - no servers to manage
 
-**Learn More**: [Serverless Database Architecture](https://juun.vercel.app/blog/serverless-database) | [Cache Layer Documentation](apps/web/lib/cache/README.md)
+**Learn More**: [Cache Layer Documentation](apps/web/lib/cache/README.md)
 
 ### State Management Strategy
 
@@ -249,25 +249,18 @@ pnpm cz               # Same as above
 
 All articles are available at [https://juun.vercel.app/blog](https://juun.vercel.app/blog)
 
-**Architecture & Patterns**:
+**Analysis**:
 
-- [Serverless Database with Prisma + Neon](https://juun.vercel.app/blog/serverless-database)
-- [Separation of Concerns in Frontend Development](https://juun.vercel.app/blog/separation-of-concerns)
 - [Micro Frontend: Common Misconceptions](https://juun.vercel.app/blog/micro-frontend)
-
-**Performance Optimization**:
-
-- [Module Bundle Optimization in Next.js](https://juun.vercel.app/blog/bundle-optimization)
-- [Docker Image Optimization: Multi-stage Builds](https://juun.vercel.app/blog/docker-image-optimization)
-
-**DevOps & Infrastructure**:
-
-- [Publishing npm Packages with CI/CD](https://juun.vercel.app/blog/npm-packages)
-- [Yarn Berry PnP Configuration](https://juun.vercel.app/blog/yarn-berry)
+- [Cloud Native Application and MSA: compared to Android OS](https://juun.vercel.app/blog/cloud-native)
 
 **Case Studies**:
 
-- [Next.js Server-Side Caching](https://juun.vercel.app/blog/nextjs-server-side-caching)
+- [Separation of Concerns in Frontend Development](https://juun.vercel.app/blog/separation-of-concerns)
+- [Module Bundle Optimization in Next.js](https://juun.vercel.app/blog/bundle-optimization)
+- [Publishing npm Packages with CI/CD](https://juun.vercel.app/blog/npm-packages)
+- [Docker Image Optimization: Multi-stage Builds](https://juun.vercel.app/blog/docker-image-optimization)
+- [Yarn Berry PnP Configuration](https://juun.vercel.app/blog/yarn-berry)
 
 ## 🐳 Docker
 
