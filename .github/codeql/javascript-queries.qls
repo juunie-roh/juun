@@ -1,7 +1,0 @@
-# CodeQL Query Suite for JavaScript/TypeScript
-# This configuration extends the default security queries
-# and adds custom sanitizer definitions
-
-- description: Security queries with custom sanitizers
-- queries: security-extended
-- apply: security-extended

@@ -8,11 +8,13 @@ GitHub's CodeQL security scanner uses static analysis to detect potential securi
 
 ## Files
 
-### `extensions.yml`
+### `javascript-customizations.yml`
 
-Defines custom sanitizers that CodeQL should recognize as safe:
+CodeQL model file that defines custom sanitizers using the official model format:
 
-- `safeUrl` from `apps/web/utils/security.ts` - URL sanitizer that prevents XSS attacks
+- Declares `safeUrl` as a neutral model (taint flow)
+- Marks `safeUrl` return values as sanitized for XSS, HTML injection, and JS injection
+- Uses CodeQL's standard extensible predicates for maximum compatibility
 
 ### `custom-queries.ql`
 
@@ -22,9 +24,7 @@ Custom CodeQL query that defines taint-tracking rules for our sanitizers. This q
 2. Identifies sinks where XSS can occur (href attributes)
 3. Marks `safeUrl()` return values as sanitized barriers
 
-### `javascript-queries.qls`
-
-Query suite that extends the default security queries with our custom configurations.
+This query provides an additional layer of protection alongside the model file.
 
 ## How It Works
 

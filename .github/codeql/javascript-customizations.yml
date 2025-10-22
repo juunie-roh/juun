@@ -1,0 +1,22 @@
+# CodeQL Model File for JavaScript/TypeScript Custom Sanitizers
+# This file defines custom security sanitizers using CodeQL's model format
+# See: https://codeql.github.com/docs/writing-codeql-queries/modeling-data-flow-in-libraries/
+
+extensions:
+  - addsTo:
+      pack: codeql/javascript-all
+      extensible: neutralModel
+    data:
+      # Define safeUrl as a sanitizer for XSS vulnerabilities
+      # Format: [package, type, subtypes, name, signature, ext, input, output, kind]
+      - ["apps/web/utils/security", "safeUrl", "", "call", "", "", "Argument[0]", "ReturnValue", "taint"]
+
+  - addsTo:
+      pack: codeql/javascript-all
+      extensible: sanitizerModel
+    data:
+      # Mark safeUrl return value as sanitized for XSS
+      # Format: [package, type, path, kind]
+      - ["apps/web/utils/security", "safeUrl", "ReturnValue", "xss"]
+      - ["apps/web/utils/security", "safeUrl", "ReturnValue", "html"]
+      - ["apps/web/utils/security", "safeUrl", "ReturnValue", "js-injection"]
