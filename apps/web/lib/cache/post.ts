@@ -85,11 +85,11 @@ namespace post {
      * }
      * ```
      */
-    export const bySlug = unstable_cache(
-      async (slug: string) => postQuery.get.bySlug(slug),
-      ["post-by-slug"],
-      CACHE_CONFIG,
-    );
+    export const bySlug = (slug: string) =>
+      unstable_cache(async () => postQuery.get.bySlug(slug), [`post-${slug}`], {
+        revalidate: 3600,
+        tags: ["posts", `post-${slug}`],
+      })();
   }
 
   /**
