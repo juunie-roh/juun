@@ -10,6 +10,7 @@ export default defineConfig({
       exclude: [
         "**/index.*",
         "**/__tests__/**",
+        "**/*.(test|spec).*",
         "**/__mocks__/**",
         "**/*.stories.*",
         "**/*.d.ts",
