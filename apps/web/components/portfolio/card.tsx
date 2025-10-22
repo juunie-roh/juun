@@ -25,11 +25,11 @@ interface PortfolioCardProps {
 
 export function PortfolioCard({ post }: PortfolioCardProps) {
   // prevent XSS(Cross-site scripting)
-  const slug = safeUrl(post.slug);
-  if (slug === null) return null;
+  const url = safeUrl(`/portfolio/${post.slug}`);
+  if (url === null) return null;
 
   return (
-    <Link href={`/portfolio/${slug}`} className="group block">
+    <Link href={url} className="group block">
       <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
         {post.metadata.image ? (
           <div className="relative aspect-video w-full overflow-hidden bg-gray-100">

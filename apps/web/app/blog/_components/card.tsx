@@ -24,8 +24,8 @@ interface BlogCardProps {
 export function BlogCard({ post }: BlogCardProps) {
   const t = useTranslations("blog");
   // Prevent XSS (Cross-site scripting)
-  const slug = safeUrl(post.slug);
-  if (slug === null) return null;
+  const url = safeUrl(`/blog/${post.slug}`);
+  if (url === null) return null;
 
   // Calculate estimated reading time (roughly 200 words per minute)
   const getReadingTime = (content?: string, wordCount?: number): number => {
@@ -49,7 +49,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={url}
       className="group block size-full font-(family-name:--font-geist-sans,--font-rix)"
     >
       <div className="relative w-full">
