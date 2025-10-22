@@ -1,0 +1,15 @@
+# CodeQL Data Extensions
+# Defines custom sanitizers and security patterns for the codebase
+
+extensions:
+  - addsTo:
+      pack: codeql/javascript-queries
+      extensible: xssSanitizer
+    data:
+      - ["utils/security", "safeUrl", "sanitizer"]
+
+  - addsTo:
+      pack: codeql/javascript-queries
+      extensible: urlSanitizer
+    data:
+      - ["utils/security", "safeUrl", "sanitizer"]
