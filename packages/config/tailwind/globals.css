@@ -153,6 +153,13 @@
   --animate-marquee2-reverse: marquee-right-2 25s linear infinite;
   /* Application header height */
   --spacing-header: --spacing(18);
+  /* custom font families */
+  --font-sans: var(--font-geist-sans), var(--font-rix), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  --font-stabil-grotesk: var(--font-stabil-grotesk-trial);
+  --font-victor-serif: var(--font-victor-serif-trial);
 }
 
 @layer base {
@@ -160,11 +167,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-geist-sans), var(--font-rix), var(--font-sans);
+    @apply bg-background text-foreground font-sans;
   }
 
   code, pre {
-    font-family: var(--font-geist-mono), var(--font-mono);
+    @apply font-mono;
   }
 }

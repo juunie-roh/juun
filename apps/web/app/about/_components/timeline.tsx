@@ -56,12 +56,12 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                   index % 2 === 0 && "items-end",
                 )}
               >
-                <h3 className="font-(family-name:--font-stabil-grotesk-trial) text-[11vw] font-bold tracking-tighter text-background underline underline-offset-[1.8vw]">
+                <h3 className="font-stabil-grotesk text-[11vw] font-bold tracking-tighter text-background underline underline-offset-[1.8vw]">
                   {String(index + 1).padStart(3, "0")}
                 </h3>
                 <div
                   className={cn(
-                    "text-left font-(family-name:--font-victor-serif-trial) text-sm text-muted md:text-base lg:text-lg",
+                    "text-left font-victor-serif text-sm text-muted md:text-base lg:text-lg",
                     index % 2 === 0 && "text-right",
                   )}
                 >
@@ -80,7 +80,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
               )}
             >
               <ItemHeader className="flex-col items-start justify-start">
-                <ItemTitle className="font-(family-name:--font-stabil-grotesk-trial) text-2xl font-bold tracking-tight">
+                <ItemTitle className="font-stabil-grotesk text-2xl font-bold tracking-tight">
                   {item.title}
                 </ItemTitle>
 

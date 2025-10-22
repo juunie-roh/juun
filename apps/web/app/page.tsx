@@ -19,7 +19,7 @@ export default function Home() {
       <HeroHome />
       <main className="w-full p-4">
         <section className="relative mx-auto w-full max-w-7xl">
-          <h2 className="mb-4 font-(family-name:--font-stabil-grotesk-trial) text-3xl font-bold tracking-tight">
+          <h2 className="mb-4 font-stabil-grotesk text-3xl font-bold tracking-tight">
             Articles
           </h2>
           <Carousel opts={{ align: "start" }} className="w-full px-12">
@@ -27,7 +27,7 @@ export default function Home() {
               {posts.map((post) => (
                 <CarouselItem
                   key={post.slug}
-                  className="basis-[100%] md:basis-1/3"
+                  className="basis-full md:basis-1/3"
                 >
                   <Suspense fallback={<BlogCardSkeleton />} key={post.slug}>
                     <BlogCard post={post} />
@@ -35,8 +35,8 @@ export default function Home() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-0" />
-            <CarouselNext className="-right-0" />
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
           </Carousel>
         </section>
       </main>
