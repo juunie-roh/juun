@@ -37,7 +37,7 @@ jobs:
         run: pnpm build --filter @juun/web
       - name: Run Playwright tests
         run: pnpm --filter @juun/web exec playwright test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
