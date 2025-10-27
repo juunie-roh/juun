@@ -49,6 +49,12 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   output: "standalone",
+  outputFileTracingIncludes: {
+    "/**/*": [
+      "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.node",
+      "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.so.node",
+    ],
+  },
   experimental: {
     // externalDir: true,
     // The serverActions value needs to be an object, not a boolean
