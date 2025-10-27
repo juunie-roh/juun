@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "turbo build",
+    "build:docker": "docker build --secret id=env,src=.env -t juun .",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test",
@@ -52,7 +53,7 @@
     "commitizen": "^4.3.1",
     "eslint": "^9.38.0",
     "husky": "^9.1.7",
-    "inquirer": "~9",
+    "inquirer": "~9.3.8",
     "jsdom": "^27.0.1",
     "lint-staged": "^16.2.6",
     "prettier-plugin-tailwindcss": "^0.7.1",

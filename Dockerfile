@@ -59,10 +59,9 @@ USER nextjs
 
 # Build with secrets and remove .env from standalone output
 RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \
-    # --mount=type=secret,id=env,target=/app/apps/web/.env,uid=1001,gid=1001 \
-    # --mount=type=secret,id=env,target=/app/packages/db/.env,uid=1001,gid=1001 \
-    pnpm build --filter=@juun/web && \
-    find /app/apps/web/.next/standalone -name ".env*" -type f -delete
+    --mount=type=secret,id=env,target=/app/apps/web/.env,uid=1001,gid=1001 \
+    --mount=type=secret,id=env,target=/app/packages/db/.env,uid=1001,gid=1001 \
+    pnpm build --filter=@juun/web
 
 # Production image
 FROM node:24-alpine3.21 AS runner
@@ -78,8 +77,7 @@ ENV NODE_ENV=production \
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Copy only the necessary Next.js output (standalone already includes dependencies)
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+# Copy only the necessary Next.js output (standalone already includes dependencies and public assets)
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 

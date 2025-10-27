@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@config/tailwind": "workspace:^",
-    "@juun-roh/cesium-utils": "^0.3.5",
+    "@juun-roh/cesium-utils": "^0.3.6",
     "@juun/api": "workspace:^",
     "@juun/db": "workspace:^",
     "@juun/ui": "workspace:^",
