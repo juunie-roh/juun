@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:24-alpine3.19 AS base
+FROM node:24-alpine3.21 AS base
 WORKDIR /app
 
 # Set common environment variables
@@ -34,14 +34,19 @@ COPY --chown=nextjs:nodejs apps/web/package.json ./apps/web/package.json
 COPY --chown=nextjs:nodejs packages/config/eslint/package.json ./packages/config/eslint/package.json
 COPY --chown=nextjs:nodejs packages/config/tailwind/package.json ./packages/config/tailwind/package.json
 COPY --chown=nextjs:nodejs packages/config/typescript/package.json ./packages/config/typescript/package.json
+COPY --chown=nextjs:nodejs packages/api/package.json ./packages/api/package.json
+COPY --chown=nextjs:nodejs packages/db/package.json ./packages/db/package.json
 COPY --chown=nextjs:nodejs packages/ui/package.json ./packages/ui/package.json
+
+# Copy Prisma schema
+COPY --chown=nextjs:nodejs packages/db/prisma ./packages/db/prisma
 
 # Copy build configuration (needed for install)
 COPY turbo.json ./
 
 # Install dependencies (cached unless package.json files change)
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store,uid=1001,gid=1001 \
-    pnpm install --frozen-lockfile --prefer-offline
+    pnpm install -r --frozen-lockfile --prefer-offline
 
 # Builder stage - build only
 FROM deps AS builder
@@ -52,12 +57,15 @@ COPY --chown=nextjs:nodejs apps/web/ ./apps/web/
 
 USER nextjs
 
-# Build only with Turborepo cache mount
+# Build with secrets and remove .env from standalone output
 RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \
-    pnpm build --filter=@juun/web
+    # --mount=type=secret,id=env,target=/app/apps/web/.env,uid=1001,gid=1001 \
+    # --mount=type=secret,id=env,target=/app/packages/db/.env,uid=1001,gid=1001 \
+    pnpm build --filter=@juun/web && \
+    find /app/apps/web/.next/standalone -name ".env*" -type f -delete
 
 # Production image
-FROM node:24-alpine3.19 AS runner
+FROM node:24-alpine3.21 AS runner
 WORKDIR /app
 
 # Set production environment

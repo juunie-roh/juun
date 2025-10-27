@@ -42,8 +42,7 @@ coverage
 *storybook.log
 
 # Development
-.env*.local
-.env.development
+.env*
 *.log
 npm-debug.log*
 yarn-debug.log*
