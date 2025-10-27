@@ -96,7 +96,7 @@ importers:
         specifier: ^9.1.7
         version: 9.1.7
       inquirer:
-        specifier: ~9
+        specifier: ~9.3.8
         version: 9.3.8(@types/node@24.9.1)
       jsdom:
         specifier: ^27.0.1
@@ -126,8 +126,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/config/tailwind
       '@juun-roh/cesium-utils':
-        specifier: ^0.3.5
-        version: 0.3.5(cesium@1.134.1)
+        specifier: ^0.3.6
+        version: 0.3.6(cesium@1.134.1)
       '@juun/api':
         specifier: workspace:^
         version: link:../../packages/api
@@ -449,7 +449,7 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-syntax-highlighter:
-        specifier: ^15.5.13
+        specifier: ^15.6.6
         version: 15.6.6(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
@@ -1658,8 +1658,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@juun-roh/cesium-utils@0.3.5':
-    resolution: {integrity: sha512-+2dDj8E/hM+2P4ekqC0TgU0skSRGn/W2qqbWe9wVQK7ogeNLBKz4uvSU27gGYIR+WXlRtSuGAlC4Gyei+WBqug==}
+  '@juun-roh/cesium-utils@0.3.6':
+    resolution: {integrity: sha512-obSQ5BamRquRBouQVYbSOOyYxcKMt6dxE/hBVMH4TSTrcGbvQP32XdN8+PK5Wkw8sn8Hfz7cocxtRw8itgZeNw==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       cesium: ^1.133.0
@@ -9147,7 +9147,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@juun-roh/cesium-utils@0.3.5(cesium@1.134.1)':
+  '@juun-roh/cesium-utils@0.3.6(cesium@1.134.1)':
     dependencies:
       cesium: 1.134.1
 
