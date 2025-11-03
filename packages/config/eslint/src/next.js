@@ -1,8 +1,16 @@
 import { defineConfig } from "eslint/config";
 import nextPlugin from '@next/eslint-plugin-next';
-import { compat } from './util.js';
 
+// Manually construct flat config from Next.js plugin instead of using FlatCompat
+// to avoid "unexpected name property" error with ESLint 9
 export default defineConfig([
-  ...compat.config(nextPlugin.configs.recommended),
-  ...compat.config(nextPlugin.configs['core-web-vitals']),
+  {
+    plugins: {
+      '@next/next': nextPlugin,
+    },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+    },
+  },
 ]);

@@ -97,6 +97,7 @@ namespace post {
    *
    * Invalidates all cached post queries by revalidating the "posts" tag.
    * Use this after creating, updating, or deleting posts.
+   * Uses "max" profile for stale-while-revalidate semantics (Next.js 16+).
    *
    * @returns Promise that resolves when cache is invalidated
    *
@@ -111,12 +112,12 @@ namespace post {
    * ```ts
    * // In an API route
    * import { revalidateTag } from "next/cache";
-   * revalidateTag("posts"); // Alternative direct approach
+   * revalidateTag("posts", "max"); // Alternative direct approach
    * ```
    */
   export async function revalidate() {
     const { revalidateTag } = await import("next/cache");
-    revalidateTag("posts");
+    revalidateTag("posts", "max");
   }
 }
 

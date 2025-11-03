@@ -11,7 +11,7 @@ import { cn } from "@juun/ui/lib/utils";
 import { ArrowRight, Bookmark } from "lucide-react";
 import { Fragment, useEffect, useState } from "react";
 
-import { getHeadings, Heading } from "../_utils/post";
+import { getHeadings, Heading } from "../_utils/headings";
 
 interface TableOfContentsProps {
   /**
