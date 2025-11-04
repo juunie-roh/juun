@@ -1,5 +1,10 @@
 "use client";
 
+// Set Cesium base URL BEFORE importing Cesium (works with both webpack and Turbopack)
+if (typeof window !== "undefined" && process.env.CESIUM_BASE_URL) {
+  window.CESIUM_BASE_URL = process.env.CESIUM_BASE_URL;
+}
+
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "cesium/Build/Cesium/Widgets/lighter.css";
 

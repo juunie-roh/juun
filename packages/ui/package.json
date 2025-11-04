@@ -43,18 +43,21 @@
     "embla-carousel-react": "^8.6.0",
     "react-day-picker": "9.11.1",
     "react-resizable-panels": "^3.0.6",
-    "react-syntax-highlighter": "^15.6.6",
+    "react-syntax-highlighter": "^16.1.0",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@storybook/react-vite": "^9.1.15",
+    "@storybook/addon-a11y": "^10.0.2",
+    "@storybook/addon-docs": "^10.0.2",
+    "@storybook/addon-links": "^10.0.2",
+    "@storybook/react-vite": "^10.0.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint-plugin-storybook": "^9.1.15"
+    "eslint-plugin-storybook": "^10.0.2"
   },
   "exports": {
     "./*": "./src/components/*.tsx",

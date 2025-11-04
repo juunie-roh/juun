@@ -5,10 +5,15 @@ import webpack from "webpack";
 
 import packageJson from "./package.json" with { type: "json" };
 
-const cesiumVersion = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
+const CESIUM_VERSION = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
+const CESIUM_BASE_URL = `https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/`;
 
 const nextConfig: NextConfig = {
-  // turbopack configuration (unused)
+  env: {
+    CESIUM_BASE_URL,
+  },
+
+  // turbopack configuration
   turbopack: {
     rules: {
       "*.svg": {
@@ -16,45 +21,15 @@ const nextConfig: NextConfig = {
       },
     },
   },
-
-  // webpack configuration
-  webpack(config, options) {
-    // svg loader
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-    config.resolve.fallback = { fs: false };
-
-    // cesium assets using official cdn
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        CESIUM_BASE_URL: JSON.stringify(
-          `https://cdn.jsdelivr.net/npm/cesium@${cesiumVersion}/Build/Cesium/`,
-        ),
-      }),
-    );
-
-    // sourcemap settings
-    if (!options.dev) {
-      config.devtool = options.isServer
-        ? false
-        : "eval-cheap-module-source-map";
-    }
-
-    return config;
-  },
-  // disable lint check on build
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   output: "standalone",
-  outputFileTracingIncludes: {
-    "/**/*": [
-      "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.node",
-      "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.so.node",
-    ],
-  },
+  // outputFileTracingIncludes: {
+  //   "/**/*": [
+  //     "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.node",
+  //     "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.so.node",
+  //   ],
+  // },
+  // Explicitly mark Prisma as server-side external package for Turbopack
+  serverExternalPackages: ["@prisma/client", "@prisma/engines"],
   experimental: {
     // externalDir: true,
     // The serverActions value needs to be an object, not a boolean
@@ -69,6 +44,32 @@ const nextConfig: NextConfig = {
     "@config/tailwind",
     "@config/typescript",
   ],
+
+  // webpack configuration
+  webpack(config, options) {
+    // svg loader
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+    config.resolve.fallback = { fs: false };
+
+    // cesium assets using official cdn
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        CESIUM_BASE_URL: JSON.stringify(CESIUM_BASE_URL),
+      }),
+    );
+
+    // sourcemap settings (webpack only)
+    // Development: uses default sourcemaps
+    // Production: disabled for security and performance
+    if (!options.dev) {
+      config.devtool = false;
+    }
+
+    return config;
+  },
 };
 
 const analyze = process.env.ANALYZE === "true";
