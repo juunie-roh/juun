@@ -1,3 +1,5 @@
+/// <reference path="../../global.d.ts" />
+
 import { createIcon } from "@juun/ui/lib/utils";
 
 import SvgBuildingLibrary from "./building-library.svg";
