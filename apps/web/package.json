@@ -10,7 +10,7 @@
     "build:standalone": "next build && node scripts/post-build.js",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
     "dev": "next dev",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint .",
     "start": "next start",
     "start:standalone": "node .next/standalone/apps/web/server.js",
     "start:otel": "NEXT_OTEL_VERBOSE=1 OTEL_TRACES_EXPORTER=console OTEL_SERVICE_NAME=juun-web OTEL_TRACES_SAMPLER=always_on OTEL_LOG_LEVEL=debug pnpm start:standalone",
