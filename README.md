@@ -71,7 +71,7 @@ View the complete [development timeline](https://juun.vercel.app/about) document
 
 ### Core Technologies
 
-- **Framework**: [Next.js 15](https://nextjs.org/) + [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Framework**: [Next.js 16](https://nextjs.org/) (Turbopack) + [React 19.2](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - **Database**: [Prisma ORM](https://www.prisma.io/) + [Neon PostgreSQL](https://neon.tech/) (serverless)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/) components
 - **3D/Maps**: [Three.js](https://threejs.org/) + [Cesium](https://cesium.com/) (native implementation)
