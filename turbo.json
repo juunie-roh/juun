@@ -31,7 +31,8 @@
       "outputs": [".next/**", "!.next/cache/**", "out/**"]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types"],
+      "cache": false
     },
     "dev": {
       "cache": false,
