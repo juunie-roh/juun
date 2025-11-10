@@ -22,12 +22,6 @@ const nextConfig: NextConfig = {
     },
   },
   output: "standalone",
-  // outputFileTracingIncludes: {
-  //   "/**/*": [
-  //     "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.node",
-  //     "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.so.node",
-  //   ],
-  // },
   // Explicitly mark Prisma as server-side external package for Turbopack
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
   experimental: {
@@ -40,6 +34,8 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: [
     "@juun/ui",
+    "@juun/api",
+    "@juun/db",
     "@config/eslint",
     "@config/tailwind",
     "@config/typescript",
