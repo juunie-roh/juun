@@ -21,7 +21,7 @@ export default function BlogContent({
         id="text-content"
         className="relative m-auto grid grid-cols-responsive gap-x-responsive px-4"
       >
-        <div className="sticky top-24 z-[1] mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid">
+        <div className="sticky top-24 z-1 mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid">
           <TableOfContents className="col-span-full" />
         </div>
         <div className="col-span-full grid w-full grid-cols-subgrid md:col-start-3 lg:col-start-5 lg:row-start-1">

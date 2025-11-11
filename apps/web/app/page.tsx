@@ -7,12 +7,13 @@ import {
 } from "@juun/ui/carousel";
 import { Fragment, Suspense } from "react";
 
+import cache from "@/lib/cache";
+
 import HeroHome from "./_components/hero-home";
 import { BlogCard, BlogCardSkeleton } from "./blog/_components/card";
-import { getPosts } from "./blog/_utils/post";
 
-export default function Home() {
-  const posts = getPosts();
+export default async function Home() {
+  const posts = await cache.post.get.all();
 
   return (
     <Fragment>
@@ -25,12 +26,9 @@ export default function Home() {
           <Carousel opts={{ align: "start" }} className="w-full px-12">
             <CarouselContent>
               {posts.map((post) => (
-                <CarouselItem
-                  key={post.slug}
-                  className="basis-full md:basis-1/3"
-                >
-                  <Suspense fallback={<BlogCardSkeleton />} key={post.slug}>
-                    <BlogCard post={post} />
+                <CarouselItem key={post.id} className="basis-full md:basis-1/3">
+                  <Suspense fallback={<BlogCardSkeleton />} key={post.id}>
+                    <BlogCard metadata={post} />
                   </Suspense>
                 </CarouselItem>
               ))}

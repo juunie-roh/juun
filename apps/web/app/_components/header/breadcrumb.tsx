@@ -38,10 +38,23 @@ function generateBreadcrumbs(pathname: string): BreadcrumbSegment[] {
     // Create the href up to current segment
     const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
 
-    // Format the label: convert kebab-case or snake_case to Title Case
-    const label = segment
-      .replace(/-|_/g, " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase());
+    let label = segment;
+
+    // Check if this segment is a blog post ID
+    const blogIndex = pathSegments.indexOf("blog");
+    if (blogIndex !== -1 && index === blogIndex + 1) {
+      const numericId = parseInt(segment, 10);
+      if (!isNaN(numericId)) {
+        label = "Article";
+      }
+    }
+
+    // If not a blog post ID, format the label: convert kebab-case or snake_case to Title Case
+    if (label === segment) {
+      label = segment
+        .replace(/-|_/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+    }
 
     // Check if this is the current (last) segment
     const isCurrent = index === pathSegments.length - 1;

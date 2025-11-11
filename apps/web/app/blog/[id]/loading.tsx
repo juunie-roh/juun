@@ -32,7 +32,7 @@ export default function BlogItemLoading() {
           className="relative m-auto grid grid-cols-16 gap-x-8 px-4"
         >
           {/* Table of Contents Skeleton */}
-          <div className="sticky top-24 z-[1] mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid">
+          <div className="sticky top-24 z-1 mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid">
             <div className="col-span-full space-y-3">
               <Skeleton className="h-5 w-24" />
               <div className="space-y-2">
