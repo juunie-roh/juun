@@ -12,7 +12,7 @@ import { safeUrl } from "@/utils/security";
 
 export function BlogCard({ metadata }: { metadata: cache.post.Metadata }) {
   // Prevent XSS (Cross-site scripting)
-  const url = safeUrl(`/test/blog/${metadata.id}`);
+  const url = safeUrl(`/blog/${metadata.id}`);
   if (url === null) return null;
 
   // Calculate estimated reading time (roughly 200 words per minute)

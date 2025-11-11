@@ -71,7 +71,7 @@ namespace post {
     }
 
     /**
-     * Get a single post by slug
+     * Get a single post by id, including it's content
      */
     export async function byId(
       id: number,

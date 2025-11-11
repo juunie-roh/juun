@@ -70,17 +70,17 @@ namespace post {
     );
 
     /**
-     * Get a single post by slug with caching
+     * Get a single post by id with caching
      *
      * Returns full post with content and tags.
-     * Each slug is cached separately for 1 hour with tag "posts".
+     * Each id is cached separately for 1 hour with tag "posts".
      *
-     * @param slug - Post slug identifier
+     * @param id - Post id identifier
      * @returns Promise resolving to post with content, or null if not found
      *
      * @example
      * ```ts
-     * const post = await cache.post.get.bySlug("npm-packages");
+     * const post = await cache.post.get.byId(2);
      * if (post) {
      *   console.log(post.title, post.content);
      * }
