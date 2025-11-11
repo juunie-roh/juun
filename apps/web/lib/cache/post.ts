@@ -44,6 +44,7 @@ const CACHE_CONFIG = {
  * This namespace mirrors @juun/db/post structure but adds Next.js caching.
  */
 namespace post {
+  export type Metadata = Awaited<ReturnType<(typeof get)["all"]>>[number];
   /**
    * Query methods for retrieving posts
    */
