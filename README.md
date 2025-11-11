@@ -20,8 +20,8 @@ This project serves as:
 
 ### Performance Optimizations
 
-- **Bundle Size**: 66-72% reduction through strategic lazy loading and dependency analysis ([Read more](https://juun.vercel.app/blog/bundle-optimization))
-- **Docker Image**: 34% reduction (526MB → 346MB) with 99% layer efficiency ([Read more](https://juun.vercel.app/blog/docker-image-optimization))
+- **Bundle Size**: 66-72% reduction through strategic lazy loading and dependency analysis ([Read more](https://juun.vercel.app/blog/5))
+- **Docker Image**: 34% reduction (526MB → 346MB) with 99% layer efficiency ([Read more](https://juun.vercel.app/blog/3))
 - **Native Implementation**: Removed 1MB Resium wrapper, implemented direct Cesium integration
 - **Server-Side Caching**: Next.js cache layer reducing database queries by ~99%
 
@@ -29,19 +29,19 @@ This project serves as:
 
 - **Serverless Database**: Prisma + Neon PostgreSQL for auto-scaling, zero-ops data layer
 - **Monorepo Structure**: Turborepo-powered workspace with shared configurations
-- **Feature Isolation**: Route-scoped state management and component organization ([Read more](https://juun.vercel.app/blog/separation-of-concerns))
+- **Feature Isolation**: Route-scoped state management and component organization ([Read more](https://juun.vercel.app/blog/7))
 - **Hybrid State Management**: Zustand for global, React Context for route-specific state
 
 ### DevOps & CI/CD
 
-- **npm Package Publishing**: Designed workflow with manual approval stage for governance ([Read more](https://juun.vercel.app/blog/npm-packages))
-- **Package Manager Migration**: Yarn Berry → PNPM for better monorepo compatibility ([Read more](https://juun.vercel.app/blog/yarn-berry))
+- **npm Package Publishing**: Designed workflow with manual approval stage for governance ([Read more](https://juun.vercel.app/blog/2))
+- **Package Manager Migration**: Yarn Berry → PNPM for better monorepo compatibility ([Read more](https://juun.vercel.app/blog/1))
 - **Testing Migration**: Jest → Vitest + Playwright for improved DX and E2E coverage
 - **Automated Documentation**: TypeDoc + GitHub Pages deployment pipeline
 
 ### Learning Through Experimentation
 
-- **Micro-Frontend Experiment**: Implemented and removed multi-zone after discovering 77% performance degradation ([Read more](https://juun.vercel.app/blog/micro-frontend))
+- **Micro-Frontend Experiment**: Implemented and removed multi-zone after discovering 77% performance degradation ([Read more](https://juun.vercel.app/blog/6))
 - **Package Optimization**: Learned and applied modular exports for tree-shaking efficiency
 - **Evidence-Based Decisions**: Used experimental findings to influence production architecture at work
 
@@ -157,7 +157,7 @@ PostgreSQL Database (auto-scaling compute + storage)
 
 **Pattern**: Prefer React Context for feature-specific state to prevent global pollution and improve portability.
 
-**Learn More**: [Separation of Concerns in Frontend](https://juun.vercel.app/blog/separation-of-concerns)
+**Learn More**: [Separation of Concerns in Frontend](https://juun.vercel.app/blog/7)
 
 ### Monorepo Benefits
 
@@ -251,16 +251,16 @@ All articles are available at [https://juun.vercel.app/blog](https://juun.vercel
 
 **Analysis**:
 
-- [Micro Frontend: Common Misconceptions](https://juun.vercel.app/blog/micro-frontend)
-- [Cloud Native Application and MSA: compared to Android OS](https://juun.vercel.app/blog/cloud-native)
+- [Micro Frontend: Common Misconceptions](https://juun.vercel.app/blog/6)
+- [Cloud Native Application and MSA: compared to Android OS](https://juun.vercel.app/blog/4)
 
 **Case Studies**:
 
-- [Separation of Concerns in Frontend Development](https://juun.vercel.app/blog/separation-of-concerns)
-- [Module Bundle Optimization in Next.js](https://juun.vercel.app/blog/bundle-optimization)
-- [Publishing npm Packages with CI/CD](https://juun.vercel.app/blog/npm-packages)
-- [Docker Image Optimization: Multi-stage Builds](https://juun.vercel.app/blog/docker-image-optimization)
-- [Yarn Berry PnP Configuration](https://juun.vercel.app/blog/yarn-berry)
+- [Separation of Concerns in Frontend Development](https://juun.vercel.app/blog/7)
+- [Module Bundle Optimization in Next.js](https://juun.vercel.app/blog/5)
+- [Publishing npm Packages with CI/CD](https://juun.vercel.app/blog/2)
+- [Docker Image Optimization: Multi-stage Builds](https://juun.vercel.app/blog/3)
+- [Yarn Berry PnP Configuration](https://juun.vercel.app/blog/1)
 
 ## 🐳 Docker
 
@@ -282,7 +282,7 @@ docker run -p 3000:3000 -e DATABASE_URL="your_database_url" your-app-name
 - **Layers**: 99% efficiency through proper caching
 - **Security**: Non-root user execution
 
-**Learn More**: [Docker Image Optimization](https://juun.vercel.app/blog/docker-image-optimization)
+**Learn More**: [Docker Image Optimization](https://juun.vercel.app/blog/3)
 
 ## 🚀 Deployment
 
