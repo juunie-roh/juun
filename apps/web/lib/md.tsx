@@ -7,7 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ComponentProps, type ReactElement, Suspense } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import rehypeRaw from "rehype-raw";
 import rehypeReact, { type Components } from "rehype-react";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
@@ -98,6 +100,7 @@ namespace md {
                 alt={String(alt || "")}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                className="m-0!"
                 unoptimized={safeSrc.endsWith(".gif")}
               />
             </Suspense>
@@ -147,7 +150,9 @@ namespace md {
     const file = await unified()
       .use(remarkParse) // Parse markdown to mdast (Markdown AST)
       .use(remarkGfm) // Support GitHub Flavored Markdown (tables, strikethrough, etc.)
-      .use(remarkRehype) // Convert mdast to hast (HTML AST)
+      .use(remarkRehype, { allowDangerousHtml: true }) // Convert mdast to hast (HTML AST), allow raw HTML
+      .use(rehypeRaw) // Parse raw HTML nodes in the tree
+      .use(rehypeUnwrapImages) // Unwrap images from <p> tags to prevent hydration errors
       .use(rehypeReact, {
         // Convert hast to React elements using modern JSX runtime
         Fragment,
