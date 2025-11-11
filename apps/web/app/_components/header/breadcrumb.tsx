@@ -27,7 +27,7 @@ interface BreadcrumbProps {
   className?: string;
 }
 
-const generateBreadcrumbs = (pathname: string): BreadcrumbSegment[] => {
+function generateBreadcrumbs(pathname: string): BreadcrumbSegment[] {
   // Skip empty segments and filter out any dynamic route parameters (segments that start with "[" and end with "]")
   const pathSegments = pathname
     .split("/")
@@ -48,7 +48,7 @@ const generateBreadcrumbs = (pathname: string): BreadcrumbSegment[] => {
 
     return { href, label, isCurrent };
   });
-};
+}
 
 export default function Breadcrumb({
   homeHref = "/",
