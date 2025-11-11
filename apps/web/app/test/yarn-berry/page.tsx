@@ -8,7 +8,7 @@ import cache from "@/lib/cache";
 import md from "@/lib/md";
 
 export default async function YarnBerryMarkdownDemo() {
-  const result = await cache.post.get.bySlug("yarn-berry");
+  const result = await cache.post.get.byId(1);
   if (result === null) return notFound();
 
   const metadata: BlogMetadata = {

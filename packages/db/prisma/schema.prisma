@@ -11,7 +11,6 @@ datasource db {
 model post {
   id          Int           @id @default(autoincrement())
   title       String        @db.VarChar(255)
-  slug        String        @unique @db.VarChar(255)
   description String?
   content     String
   created_at  DateTime      @default(now()) @db.Timestamptz(6)
@@ -20,7 +19,7 @@ model post {
   image       String?       @db.VarChar(500)
   post_tags   post_tag[]
 
-  @@index([slug])
+  @@index([id])
   @@index([category])
 }
 
