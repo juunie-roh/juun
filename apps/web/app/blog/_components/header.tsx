@@ -3,9 +3,16 @@ import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import { Suspense } from "react";
 
-import { BlogMetadata } from "../_utils/post";
+import type cache from "@/lib/cache";
 
-export default function BlogHeader({ metadata }: { metadata: BlogMetadata }) {
+export default function BlogHeader({
+  metadata,
+}: {
+  metadata: Omit<
+    cache.post.Metadata,
+    "id" | "category" | "word_count" | "created_at"
+  >;
+}) {
   return (
     <section>
       <div className="mx-auto grid grid-cols-responsive place-items-center gap-x-responsive px-4 pt-8">

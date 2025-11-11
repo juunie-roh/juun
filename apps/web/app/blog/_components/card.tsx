@@ -5,26 +5,14 @@ import { Skeleton } from "@juun/ui/skeleton";
 import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 
+import type cache from "@/lib/cache";
 import { formatDateSafe } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
 
-import { BlogMetadata } from "../_utils/post";
-
-export interface Post {
-  slug: string;
-  metadata: BlogMetadata;
-}
-
-interface BlogCardProps {
-  post: Post;
-}
-
-export function BlogCard({ post }: BlogCardProps) {
-  const t = useTranslations("blog");
+export function BlogCard({ metadata }: { metadata: cache.post.Metadata }) {
   // Prevent XSS (Cross-site scripting)
-  const url = safeUrl(`/blog/${post.slug}`);
+  const url = safeUrl(`/test/blog/${metadata.id}`);
   if (url === null) return null;
 
   // Calculate estimated reading time (roughly 200 words per minute)
@@ -42,10 +30,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
   // For now we might only have description, but this should be updated
   // to use the full content word count once available in the metadata
-  const readingTime = getReadingTime(
-    post.metadata.description,
-    post.metadata.wordCount,
-  );
+  const readingTime = getReadingTime(metadata.description, metadata.word_count);
 
   return (
     <Link
@@ -58,11 +43,11 @@ export function BlogCard({ post }: BlogCardProps) {
             ratio={16 / 9}
             className="size-full overflow-hidden bg-muted"
           >
-            {post.metadata.image && (
+            {metadata.image && (
               <LogoAvatar className="size-full rounded-none">
                 <Image
-                  src={post.metadata.image}
-                  alt={post.metadata.title || "Blog post image"}
+                  src={metadata.image}
+                  alt={metadata.title || "Blog post image"}
                   fill
                   className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"
                 />
@@ -72,10 +57,10 @@ export function BlogCard({ post }: BlogCardProps) {
 
           <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
             <div className="flex gap-2">
-              {post.metadata.category && (
+              {metadata.category && (
                 <div className="flex flex-wrap justify-self-start">
                   <Badge variant="default">
-                    {t(`category.${post.metadata.category}`)}
+                    {metadata.category.replaceAll("_", " ")}
                   </Badge>
                 </div>
               )}
@@ -84,20 +69,20 @@ export function BlogCard({ post }: BlogCardProps) {
                 <span>{readingTime} min read</span>
               </div>
             </div>
-            {post.metadata.date && (
+            {metadata.updated_at && (
               <div className="flex items-center gap-1">
                 <Calendar className="size-3" />
-                <span>{formatDateSafe(post.metadata.date)}</span>
+                <span>{formatDateSafe(metadata.updated_at)}</span>
               </div>
             )}
           </div>
 
           <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-lg leading-snug font-bold tracking-tight">
-            {post.metadata.title}
+            {metadata.title}
           </div>
 
           <div className="mt-auto line-clamp-2 w-full max-w-fit">
-            {post.metadata.description}
+            {metadata.description}
           </div>
         </div>
       </div>

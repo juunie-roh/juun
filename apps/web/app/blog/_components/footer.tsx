@@ -7,11 +7,17 @@ import { Separator } from "@juun/ui/separator";
 import { Link } from "lucide-react";
 import { toast } from "sonner";
 
+import type cache from "@/lib/cache";
 import { formatDateSafe } from "@/utils/date";
 
-import { BlogMetadata } from "../_utils/post";
-
-export default function BlogFooter({ metadata }: { metadata: BlogMetadata }) {
+export default function BlogFooter({
+  metadata,
+}: {
+  metadata: Omit<
+    cache.post.Metadata,
+    "id" | "category" | "word_count" | "created_at"
+  >;
+}) {
   return (
     <section className="m-auto grid grid-cols-responsive gap-x-responsive px-4">
       <div className="col-span-full grid w-full grid-cols-subgrid px-4 pt-8">
@@ -19,7 +25,9 @@ export default function BlogFooter({ metadata }: { metadata: BlogMetadata }) {
           <div className="flex flex-col gap-3">
             <Separator orientation="horizontal" />
             <p className="pt-3 text-lg">Date</p>
-            <p className="text-sm">{formatDateSafe(metadata.date, true)}</p>
+            <p className="text-sm">
+              {formatDateSafe(metadata.updated_at, true)}
+            </p>
           </div>
           {metadata.tags && (
             <div className="flex flex-col gap-3">
