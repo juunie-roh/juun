@@ -5,7 +5,9 @@ import webpack from "webpack";
 
 import packageJson from "./package.json" with { type: "json" };
 
+// get cesium version from the project's package.json
 const CESIUM_VERSION = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
+// use Cesium's official CDN URL with specified version dynamically
 const CESIUM_BASE_URL = `https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/`;
 
 const nextConfig: NextConfig = {
@@ -22,30 +24,18 @@ const nextConfig: NextConfig = {
     },
   },
   output: "standalone",
-  // outputFileTracingIncludes: {
-  //   "/**/*": [
-  //     "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.node",
-  //     "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/*.so.node",
-  //   ],
-  // },
   // Explicitly mark Prisma as server-side external package for Turbopack
   serverExternalPackages: ["@prisma/client", "@prisma/engines"],
   experimental: {
     // externalDir: true,
-    // The serverActions value needs to be an object, not a boolean
-    serverActions: {
-      allowedOrigins: ["*"],
-    },
+    // serverActions: {
+    //   allowedOrigins: ["*"],
+    // },
     optimizePackageImports: ["lucide-react"],
   },
-  transpilePackages: [
-    "@juun/ui",
-    "@config/eslint",
-    "@config/tailwind",
-    "@config/typescript",
-  ],
+  transpilePackages: ["@juun/ui", "@juun/api", "@juun/db"],
 
-  // webpack configuration
+  // webpack configuration, for explicit webpack build (with --webpack)
   webpack(config, options) {
     // svg loader
     config.module.rules.push({

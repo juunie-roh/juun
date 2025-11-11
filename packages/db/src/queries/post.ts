@@ -9,7 +9,6 @@ namespace post {
   export interface WithTags {
     id: number;
     title: string;
-    slug: string;
     description: string | undefined;
     content: string;
     category: PostCategory | undefined;
@@ -30,7 +29,6 @@ namespace post {
         select: {
           id: true,
           title: true,
-          slug: true,
           description: true,
           category: true,
           image: true,
@@ -60,7 +58,6 @@ namespace post {
       return posts.map((post) => ({
         id: post.id,
         title: post.title,
-        slug: post.slug,
         description: post.description ?? undefined,
         category: post.category ?? undefined,
         image: post.image ?? undefined,
@@ -73,13 +70,12 @@ namespace post {
     /**
      * Get a single post by slug
      */
-    export async function bySlug(slug: string): Promise<WithTags | null> {
+    export async function byId(id: number): Promise<WithTags | null> {
       const post = await prisma.post.findUnique({
-        where: { slug },
+        where: { id },
         select: {
           id: true,
           title: true,
-          slug: true,
           description: true,
           content: true,
           category: true,
@@ -108,7 +104,6 @@ namespace post {
       return {
         id: post.id,
         title: post.title,
-        slug: post.slug,
         description: post.description ?? undefined,
         content: post.content,
         category: post.category ?? undefined,

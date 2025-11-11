@@ -8,7 +8,7 @@ import cache from "@/lib/cache";
 import md from "@/lib/md";
 
 export default async function NpmMdDemo() {
-  const result = await cache.post.get.bySlug("npm-publish");
+  const result = await cache.post.get.byId(2);
   if (result === null) return notFound();
 
   const metadata: BlogMetadata = {
