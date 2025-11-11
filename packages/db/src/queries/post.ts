@@ -11,6 +11,7 @@ namespace post {
     title: string;
     description: string | undefined;
     content: string;
+    word_count: number;
     category: PostCategory | undefined;
     image: string | undefined;
     created_at: Date;
@@ -30,6 +31,7 @@ namespace post {
           id: true,
           title: true,
           description: true,
+          word_count: true,
           category: true,
           image: true,
           created_at: true,
@@ -58,6 +60,7 @@ namespace post {
       return posts.map((post) => ({
         id: post.id,
         title: post.title,
+        word_count: post.word_count,
         description: post.description ?? undefined,
         category: post.category ?? undefined,
         image: post.image ?? undefined,
@@ -70,7 +73,9 @@ namespace post {
     /**
      * Get a single post by slug
      */
-    export async function byId(id: number): Promise<WithTags | null> {
+    export async function byId(
+      id: number,
+    ): Promise<Omit<WithTags, "word_count"> | null> {
       const post = await prisma.post.findUnique({
         where: { id },
         select: {
