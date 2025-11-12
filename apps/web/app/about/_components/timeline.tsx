@@ -98,9 +98,9 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
                 </ItemDescription>
               </ItemContent>
               {item.detail && (
-                <ItemFooter>
-                  <ItemActions>
-                    <Collapsible>
+                <ItemFooter className="w-full">
+                  <ItemActions className="w-full">
+                    <Collapsible className="w-full">
                       <CollapsibleTrigger asChild>
                         <Button
                           variant="link"
