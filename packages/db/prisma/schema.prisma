@@ -13,11 +13,11 @@ model post {
   title       String        @db.VarChar(255)
   description String?
   content     String
-  word_count  Int
   created_at  DateTime      @default(now()) @db.Timestamptz(6)
   updated_at  DateTime      @updatedAt @db.Timestamptz(6)
   category    PostCategory?
   image       String?       @db.VarChar(500)
+  word_count  Int
   post_tags   post_tag[]
 
   @@index([id])

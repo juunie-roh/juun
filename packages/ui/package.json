@@ -50,14 +50,14 @@
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@storybook/addon-a11y": "^10.0.6",
-    "@storybook/addon-docs": "^10.0.6",
-    "@storybook/addon-links": "^10.0.6",
-    "@storybook/react-vite": "^10.0.6",
+    "@storybook/addon-a11y": "^10.0.7",
+    "@storybook/addon-docs": "^10.0.7",
+    "@storybook/addon-links": "^10.0.7",
+    "@storybook/react-vite": "^10.0.7",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "eslint-plugin-storybook": "^10.0.6"
+    "eslint-plugin-storybook": "^10.0.7"
   },
   "exports": {
     "./*": "./src/components/*.tsx",

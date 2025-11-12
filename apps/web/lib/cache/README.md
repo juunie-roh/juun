@@ -36,12 +36,12 @@ Both `@juun/db` and `@/lib/cache` follow the same namespace pattern:
 // @juun/db structure
 import db from "@juun/db/post";
 db.get.all();
-db.get.bySlug("slug");
+db.get.byId(1);
 
 // @/lib/cache structure (same API!)
 import cache from "@/lib/cache";
 cache.post.get.all();      // Cached version
-cache.post.get.bySlug("slug"); // Cached version
+cache.post.get.byId(1); // Cached version
 cache.post.revalidate();   // Cache invalidation
 ```
 
@@ -55,8 +55,8 @@ import cache from "@/lib/cache";
 // Get all posts (cached for 1 hour)
 const posts = await cache.post.get.all();
 
-// Get post by slug (cached for 1 hour)
-const post = await cache.post.get.bySlug("npm-packages");
+// Get post by id (cached for 1 hour)
+const post = await cache.post.get.byId(1);
 
 if (!post) {
   notFound();
@@ -73,23 +73,6 @@ await cache.post.revalidate();
 // Method 2: Using Next.js directly
 import { revalidateTag } from "next/cache";
 revalidateTag("posts");
-```
-
-### Example: Server Action with Cache Invalidation
-
-```typescript
-"use server";
-
-import cache from "@/lib/cache";
-import db from "@juun/db/post";
-
-export async function updatePost(slug: string, data: PostData) {
-  // Update in database (uncached)
-  await db.update.bySlug(slug, data);
-
-  // Invalidate all post caches
-  await cache.post.revalidate();
-}
 ```
 
 ## Adding New Cached Entities
@@ -217,13 +200,13 @@ const CACHE_CONFIG = {
 For fine-grained cache control:
 
 ```typescript
-export const bySlug = (slug: string) =>
+export const byId = (id: number) =>
   unstable_cache(
-    async () => postQuery.get.bySlug(slug),
-    [`post-${slug}`], // Unique key per slug
+    async () => postQuery.get.byId(id),
+    [`post-${id}`], // Unique key per id
     {
       revalidate: 3600,
-      tags: ["posts", `post-${slug}`], // Multiple tags
+      tags: ["posts", `post-${id}`], // Multiple tags
     }
   )();
 
@@ -238,10 +221,10 @@ revalidateTag("posts");
 ### Conditional Caching
 
 ```typescript
-export const getPost = (slug: string, useCache = true) =>
+export const getPost = (id: number, useCache = true) =>
   useCache
-    ? cache.post.get.bySlug(slug)
-    : db.post.get.bySlug(slug);
+    ? cache.post.get.byId(id)
+    : db.post.get.byId(id);
 ```
 
 ## Debugging & Monitoring
