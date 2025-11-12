@@ -34,6 +34,46 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
   transpilePackages: ["@juun/ui", "@juun/api", "@juun/db"],
+  // support old blog slug-based urls redirect to new id-based urls
+  redirects() {
+    return [
+      {
+        source: "/blog/yarn-berry",
+        destination: "/blog/1",
+        permanent: true,
+      },
+      {
+        source: "/blog/npm-packages",
+        destination: "/blog/2",
+        permanent: true,
+      },
+      {
+        source: "/blog/docker-image-optimization",
+        destination: "/blog/3",
+        permanent: true,
+      },
+      {
+        source: "/blog/cloud-native",
+        destination: "/blog/4",
+        permanent: true,
+      },
+      {
+        source: "/blog/bundle-optimization",
+        destination: "/blog/5",
+        permanent: true,
+      },
+      {
+        source: "/blog/micro-frontend",
+        destination: "/blog/6",
+        permanent: true,
+      },
+      {
+        source: "/blog/separation-of-concerns",
+        destination: "/blog/7",
+        permanent: true,
+      },
+    ];
+  },
 
   // webpack configuration, for explicit webpack build (with --webpack)
   webpack(config, options) {
