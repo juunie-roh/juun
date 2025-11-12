@@ -65,12 +65,12 @@ Yarn Berry PnP caused critical issues:
 Migrate to PNPM
 
 ### Rationale
-- [x] Native Next.js standalone support
-- [x] Vercel monorepo compatibility
-- [x] Efficient disk usage with hard linking
-- [x] Strong monorepo support
-- [ ] Lost: Zero-install capability
-- [ ] Lost: PnP speed benefits
+- Native Next.js standalone support
+- Vercel monorepo compatibility
+- Efficient disk usage with hard linking
+- Strong monorepo support
+- Lost: Zero-install capability
+- Lost: PnP speed benefits
 
 ### Outcome
 - Docker image reduced to 346MB (50% reduction)
@@ -465,18 +465,18 @@ const single = await post.get.bySlug("my-post");
 ### Trade-offs
 
 **Advantages**
-- [x] Zero infrastructure management
-- [x] Automatic global scaling
-- [x] Pay-per-use pricing
-- [x] Type-safe database access
-- [x] Simplified deployment
-- [x] Better DX (collocated code)
+- Zero infrastructure management
+- Automatic global scaling
+- Pay-per-use pricing
+- Type-safe database access
+- Simplified deployment
+- Better DX (collocated code)
 
 **Limitations**
-- [ ] Vendor lock-in (Vercel + Neon)
-- [ ] Cold start latency (minimal with edge)
-- [ ] Stateless by design (no persistent connections)
-- [ ] Different debugging paradigm
+- Vendor lock-in (Vercel + Neon)
+- Cold start latency (minimal with edge)
+- Stateless by design (no persistent connections)
+- Different debugging paradigm
 
 ### Results
 
@@ -493,6 +493,100 @@ This demonstrates **distributed computing as a service**:
 Instead of manually setting up K8s, load balancers, and backend
 frameworks, delegate the entire complexity to edge computing platforms.
 Focus on business logic, not infrastructure.
+`,
+  },
+  {
+    title: "Blog System Migration",
+    description:
+      "Migrated the blog system and routes of this project from file-based to database-driven, linked with ORM-ed queries. To provide consistent design for markdown contents, designed a custom content management system with data processing pipeline.",
+    date: "2025-11-11",
+    category: "Architecture",
+    tags: [
+      "ADR",
+      "Database-Driven",
+      "Markdown",
+      "CMS",
+      "AST",
+      "Pipeline",
+      "Migration",
+      "Compatibility",
+    ],
+    detail: `
+### Situation
+
+The blog system used file-based routes with TSX components (\`/blog/[slug]/page.tsx\`).
+I had to rebuild the whole project to publish an article. It was inefficient, and most of all, inconvenient.
+Then, I came up with an idea that utilizing markdown syntax for writing contents might be applicable to this project, as many platforms are supporting or using it.
+
+### Tasks
+
+- **Database Integration**: Leverage existing Neon PostgreSQL + Prisma infrastructure
+- **Content Pipeline**: Design markdown processing pipeline with consistent styling
+- **Custom Components**: Map markdown elements to Next.js optimized components (Image, Link)
+- **Routing Strategy**: Migrate from slug-based to ID-based URLs
+- **Backward Compatibility**: Maintain old URLs via redirects (SEO preservation)
+- **Security & Performance**: Implement URL sanitization, image optimization, lazy loading
+
+### Actions
+
+#### Phase 1: Infrastructure Preparation
+
+1. Designed normalized schema: \`post\` table with many-to-many \`tag\` relations via junction table
+2. Created \`@juun/db\` package: framework-agnostic database client with namespace pattern
+3. Added caching layer using \`next/cache\` to reduce database queries by ~99%
+4. Structured both DB and cache APIs with consistent namespace pattern (\`post.get.all()\`, \`post.get.byId()\`)
+
+#### Phase 2: Content Pipeline Development
+
+5. Designed markdown processing pipeline using unified/remark/rehype ecosystem:
+   - \`gray-matter\`: Extract frontmatter metadata
+   - \`remark-parse\` → \`remark-gfm\` → \`remark-rehype\`: Markdown to HTML AST
+   - \`rehype-raw\`: Parse raw HTML nodes
+   - \`rehype-unwrap-images\`: Prevent hydration errors
+   - \`rehype-react\`: Convert AST to React elements
+6. Implemented custom component mappings:
+   - \`<a>\` → Next.js \`Link\` (client-side navigation) / secure external links
+   - \`<img>\` → Next.js \`Image\` + auto-dimension detection + AspectRatio wrapper
+   - \`<pre>\` → Custom \`CodeBlock\` with syntax highlighting (PrismJS)
+7. Added security layer: URL sanitization to prevent XSS attacks
+8. Integrated \`Prose\` typography component for consistent content styling
+
+#### Phase 3: Migration Execution
+
+9. Changed routing from \`/blog/[slug]\` to \`/blog/[id]\` (simpler queries, no collision handling)
+10. Converted 7 blog articles from TSX to markdown, stored in PostgreSQL
+11. Implemented 7 permanent redirects (301) in \`next.config.ts\` for SEO preservation
+12. Updated breadcrumb component to handle numeric IDs intelligently
+13. Configured ISR with 1-hour revalidation for content freshness
+
+### Results
+
+#### Technical Achievements
+
+- **Content Management**: Write markdown → publish instantly (no rebuild required)
+- **Performance**: Database queries reduced ~99% via caching, images optimized automatically
+- **Developer Experience**: Clean separation between content (markdown) and presentation (components)
+- **Scalability**: Architecture supports future features (search, filtering, admin interface)
+
+#### Architecture Quality
+
+- Framework-agnostic database layer (reusable beyond Next.js)
+- Production-grade error handling (fallbacks for optimization failures)
+- AST-level transformations (transferable to any content processing)
+- Security hardening (URL sanitization, XSS prevention)
+
+#### Skills Demonstrated
+
+- Data transformation pipelines (input → process → output architecture)
+- AST manipulation (unified/remark/rehype ecosystem)
+- Multi-library integration (coordinating 8+ libraries coherently)
+- Migration considerations (backward compatibility)
+
+### Challenges
+
+- Image optimization required auto-dimension detection with fallback strategies
+- Hydration errors needed \`rehype-unwrap-images\` plugin to prevent React mismatches
+- Balancing automatic optimization with markdown authoring flexibility
 `,
   },
 ];
