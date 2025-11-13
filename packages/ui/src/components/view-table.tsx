@@ -1,6 +1,4 @@
-"use client";
-
-import { cn } from "@juun/ui/lib/utils";
+import { cn, getColumnPinningStyles } from "@juun/ui/lib/utils";
 import {
   Table,
   TableBody,
@@ -9,48 +7,38 @@ import {
   TableHeader,
   TableRow,
 } from "@juun/ui/table";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { ComponentProps } from "react";
+import { flexRender, Table as RTable } from "@tanstack/react-table";
+import { ComponentProps, ReactNode } from "react";
 
 export interface ViewTableProps<TData> extends ComponentProps<typeof Table> {
-  columns: ColumnDef<TData, any>[];
-  data: TData[];
-  pinHeader?: boolean;
+  table: RTable<TData>;
+  empty?: ReactNode;
 }
 
 /**
  * a simple table for viewing data.
  */
 export default function ViewTable<TData>({
-  columns,
-  data,
-  pinHeader,
+  table,
+  empty,
   className,
   ...props
 }: ViewTableProps<TData>) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   return (
-    <Table
-      className={cn("w-full overflow-hidden overflow-y-auto", className)}
-      {...props}
-    >
-      <TableHeader
-        className={cn(pinHeader && "sticky top-0 z-10 bg-background")}
-      >
+    <Table className={className} {...props}>
+      <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
-          <TableRow key={headerGroup.id}>
+          <TableRow key={headerGroup.id} className="group">
             {headerGroup.headers.map((header) => (
-              <TableHead key={header.id}>
+              <TableHead
+                key={header.id}
+                className={cn(
+                  "relative",
+                  header.column.getIsPinned() &&
+                    "sticky bg-background opacity-95 group-hover:bg-muted",
+                )}
+                style={getColumnPinningStyles(header.column)}
+              >
                 {header.isPlaceholder
                   ? null
                   : flexRender(
@@ -67,19 +55,32 @@ export default function ViewTable<TData>({
           table.getRowModel().rows.map((row) => (
             <TableRow
               key={row.id}
+              className="group"
               data-state={row.getIsSelected() && "selected"}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
+                <TableCell
+                  key={cell.id}
+                  className={cn(
+                    "relative",
+                    cell.column.getIsPinned() &&
+                      "sticky bg-background opacity-95 group-hover:bg-muted",
+                  )}
+                  style={getColumnPinningStyles(cell.column)}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
             </TableRow>
           ))
         ) : (
+          // if there is no items, render empty state
           <TableRow>
-            <TableCell colSpan={columns.length} className="h-24 text-center">
-              No results.
+            <TableCell
+              colSpan={table.getAllColumns().length}
+              className={cn("h-24 text-center", empty && "h-auto")}
+            >
+              {empty ?? "No results."}
             </TableCell>
           </TableRow>
         )}
