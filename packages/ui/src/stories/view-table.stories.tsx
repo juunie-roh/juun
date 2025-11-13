@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { Pin, PinOff } from "lucide-react";
 
+import { Button } from "../components/button";
 import ViewTable from "../components/view-table";
+import { useTable } from "../hooks/use-table";
 
 // Sample data types
 interface Person {
@@ -176,15 +179,11 @@ const meta: Meta<typeof ViewTable<any>> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    columns: {
-      description: "Column definitions for the table",
+    table: {
+      description: "Table object created with `@tanstack/react-table`.",
     },
-    data: {
-      description: "Array of data to display in the table",
-    },
-    pinHeader: {
-      control: "boolean",
-      description: "Whether to pin the header to the top when scrolling",
+    empty: {
+      description: "Custom empty state content when no data is available",
     },
     className: {
       control: "text",
@@ -198,32 +197,34 @@ type Story = StoryObj<typeof meta>;
 
 // Basic examples
 export const Default: Story = {
-  args: {
-    columns: peopleColumns,
-    data: samplePeople,
+  render: (args) => {
+    const { table } = useTable(peopleColumns, samplePeople);
+    return <ViewTable {...args} table={table} />;
   },
 };
 
-export const WithPinnedHeader: Story = {
+export const CustomEmptyState: Story = {
   args: {
-    columns: peopleColumns,
-    data: samplePeople,
-    pinHeader: true,
+    empty: (
+      <div className="text-muted-foreground">
+        No people found. Try adding some data.
+      </div>
+    ),
   },
   parameters: {
     docs: {
       description: {
-        story: "Table with pinned header that stays visible when scrolling.",
+        story: "Table with a custom empty state message.",
       },
     },
+  },
+  render: (args) => {
+    const { table } = useTable(peopleColumns, []);
+    return <ViewTable {...args} table={table} />;
   },
 };
 
 export const ProductTable: Story = {
-  args: {
-    columns: productColumns,
-    data: sampleProducts,
-  },
   parameters: {
     docs: {
       description: {
@@ -232,13 +233,13 @@ export const ProductTable: Story = {
       },
     },
   },
+  render: (args) => {
+    const { table } = useTable(productColumns, sampleProducts);
+    return <ViewTable {...args} table={table} />;
+  },
 };
 
 export const EmptyState: Story = {
-  args: {
-    columns: peopleColumns,
-    data: [],
-  },
   parameters: {
     docs: {
       description: {
@@ -246,37 +247,39 @@ export const EmptyState: Story = {
       },
     },
   },
+  render: (args) => {
+    const { table } = useTable(peopleColumns, []);
+    return <ViewTable {...args} table={table} />;
+  },
 };
 
 export const LargeDataset: Story = {
-  args: {
-    columns: peopleColumns,
-    data: Array.from({ length: 50 }, (_, i) => ({
-      id: `${i + 1}`,
-      firstName: `User${i + 1}`,
-      lastName: `Lastname${i + 1}`,
-      age: Math.floor(Math.random() * 50) + 20,
-      email: `user${i + 1}@example.com`,
-      status: Math.random() > 0.5 ? "active" : ("inactive" as const),
-    })),
-    pinHeader: true,
-  },
   parameters: {
     docs: {
       description: {
-        story:
-          "Table with a larger dataset to demonstrate scrolling behavior with pinned header.",
+        story: "Table with a larger dataset to demonstrate scrolling behavior.",
       },
     },
+  },
+  render: (args) => {
+    const { table } = useTable(
+      peopleColumns,
+      Array.from({ length: 50 }, (_, i) => ({
+        id: `${i + 1}`,
+        firstName: `User${i + 1}`,
+        lastName: `Lastname${i + 1}`,
+        age: Math.floor(Math.random() * 50) + 20,
+        email: `user${i + 1}@example.com`,
+        status: Math.random() > 0.5 ? "active" : ("inactive" as const),
+      })),
+    );
+    return <ViewTable {...args} table={table} />;
   },
 };
 
 export const CustomStyling: Story = {
   args: {
-    columns: productColumns,
-    data: sampleProducts,
     className: "border-2 border-dashed border-gray-300 rounded-lg",
-    pinHeader: true,
   },
   parameters: {
     docs: {
@@ -284,6 +287,10 @@ export const CustomStyling: Story = {
         story: "Table with custom styling applied through className prop.",
       },
     },
+  },
+  render: (args) => {
+    const { table } = useTable(productColumns, sampleProducts);
+    return <ViewTable {...args} table={table} />;
   },
 };
 
@@ -306,10 +313,6 @@ const simpleData = [
 ];
 
 export const SimpleTable: Story = {
-  args: {
-    columns: simpleColumns,
-    data: simpleData,
-  },
   parameters: {
     docs: {
       description: {
@@ -318,44 +321,85 @@ export const SimpleTable: Story = {
       },
     },
   },
+  render: (args) => {
+    const { table } = useTable(simpleColumns, simpleData);
+    return <ViewTable {...args} table={table} />;
+  },
 };
 
-// Showcase different table sizes
-export const TableShowcase: Story = {
+// Column pinning example
+const pinnedColumns = [
+  person.accessor("id", {
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() =>
+          column.getIsPinned() ? column.pin(false) : column.pin("left")
+        }
+      >
+        ID {column.getIsPinned() ? <Pin /> : <PinOff />}
+      </Button>
+    ),
+    size: 100,
+  }),
+  person.accessor("firstName", {
+    header: "First Name",
+  }),
+  person.accessor("lastName", {
+    header: "Last Name",
+  }),
+  person.accessor("age", {
+    header: "Age",
+  }),
+  person.accessor("email", {
+    header: "Email",
+  }),
+  person.accessor("status", {
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() =>
+          column.getIsPinned() ? column.pin(false) : column.pin("right")
+        }
+      >
+        Status {column.getIsPinned() ? <Pin /> : <PinOff />}
+      </Button>
+    ),
+    cell: ({ row }) => {
+      const status = row.getValue("status") as string;
+
+      return (
+        <span
+          className={`inline-flex rounded-full px-2 text-xs leading-5 font-semibold ${
+            status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-red-100 text-red-800"
+          }`}
+        >
+          {status}
+        </span>
+      );
+    },
+  }),
+];
+
+export const ColumnPinning: Story = {
   render: () => {
+    const { table } = useTable(pinnedColumns, samplePeople);
     return (
-      <div className="space-y-8">
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">People Table</h3>
-          <ViewTable<Person>
-            columns={peopleColumns}
-            data={samplePeople.slice(0, 3)}
-          />
-        </div>
-
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Product Inventory</h3>
-          <ViewTable<Product>
-            columns={productColumns}
-            data={sampleProducts.slice(0, 3)}
-            pinHeader
-          />
-        </div>
-
-        <div>
-          <h3 className="mb-4 text-lg font-semibold">Empty State</h3>
-          <ViewTable<{ name: string; value: string }>
-            columns={simpleColumns}
-            data={[]}
-          />
-        </div>
+      <div className="w-[500px] overflow-x-auto">
+        <ViewTable table={table} />
       </div>
     );
   },
   parameters: {
+    layout: "centered",
     docs: {
       description: {
-        story: "Showcase of different table configurations and use cases.",
+        story:
+          "Table with column pinning support. Columns can be pinned to the left or right using the table's column pinning API. The ID column is configured with a fixed size.",
       },
     },
   },

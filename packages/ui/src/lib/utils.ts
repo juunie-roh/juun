@@ -1,3 +1,4 @@
+import { Column } from "@tanstack/react-table";
 import { type ClassValue, clsx } from "clsx";
 import { createLucideIcon } from "lucide-react";
 import type { FC, ReactElement } from "react";
@@ -16,6 +17,27 @@ type IconNode = [elementName: SVGElementType, attrs: Record<string, string>][];
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function getColumnPinningStyles<TData>(
+  column: Column<TData>,
+): React.CSSProperties {
+  const isPinned = column.getIsPinned();
+  const isLastLeftPinnedColumn =
+    isPinned === "left" && column.getIsLastColumn("left");
+  const isFirstRightPinnedColumn =
+    isPinned === "right" && column.getIsFirstColumn("right");
+
+  return {
+    boxShadow: isLastLeftPinnedColumn
+      ? "-4px 0 4px -4px gray inset"
+      : isFirstRightPinnedColumn
+        ? "4px 0 4px -4px gray inset"
+        : undefined,
+    left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
+    right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
+    width: column.getSize(),
+  };
 }
 
 export function createIcon(
