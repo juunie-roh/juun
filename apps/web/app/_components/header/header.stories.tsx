@@ -17,7 +17,7 @@ import ThemeSwitch from "./switch";
 
 const navigationItems = [
   { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Portfolio" },
+  { href: "/playground", label: "Playground" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -158,7 +158,7 @@ export const HomePath: Story = {
 
 export const PortfolioPath: Story = {
   args: {
-    mockPath: "/portfolio",
+    mockPath: "/playground",
   },
   parameters: {
     docs: {
@@ -171,7 +171,7 @@ export const PortfolioPath: Story = {
 
 export const NestedPath: Story = {
   args: {
-    mockPath: "/portfolio/project-name",
+    mockPath: "/playground/project-name",
   },
   parameters: {
     docs: {
@@ -198,7 +198,7 @@ export const DeepPath: Story = {
 // Responsive viewport examples
 export const Mobile: Story = {
   args: {
-    mockPath: "/portfolio",
+    mockPath: "/playground",
   },
   parameters: {
     viewport: {
@@ -214,7 +214,7 @@ export const Mobile: Story = {
 
 export const Tablet: Story = {
   args: {
-    mockPath: "/portfolio/project-name",
+    mockPath: "/playground/project-name",
   },
   parameters: {
     viewport: {
@@ -230,7 +230,7 @@ export const Tablet: Story = {
 
 export const Desktop: Story = {
   args: {
-    mockPath: "/portfolio/project-name/details",
+    mockPath: "/playground/project-name/details",
   },
   parameters: {
     viewport: {

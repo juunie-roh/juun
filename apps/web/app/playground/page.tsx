@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import {
   PortfolioCard,
   PortfolioCardSkeleton,
-} from "@/components/portfolio/card";
+} from "@/components/playground/card";
 
 import { getPosts } from "./utils";
 

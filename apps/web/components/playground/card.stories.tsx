@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useEffect, useState } from "react";
 
-import { PortfolioCard, PortfolioCardSkeleton } from "../portfolio/card";
+import { PortfolioCard, PortfolioCardSkeleton } from "./card";
 
 // Sample data for stories
 const samplePortfolioPost = {

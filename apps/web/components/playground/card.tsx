@@ -10,7 +10,7 @@ import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
 
-import { PortfolioMetadata } from "@/app/portfolio/types";
+import { PortfolioMetadata } from "@/app/playground/types";
 import { formatDateSafe } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
 
@@ -25,7 +25,7 @@ interface PortfolioCardProps {
 
 export function PortfolioCard({ post }: PortfolioCardProps) {
   // prevent XSS(Cross-site scripting)
-  const url = safeUrl(`/portfolio/${post.slug}`);
+  const url = safeUrl(`/playground/${post.slug}`);
   if (url === null) return null;
 
   return (

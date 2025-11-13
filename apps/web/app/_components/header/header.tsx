@@ -15,8 +15,8 @@ import ThemeSwitch from "./switch";
 
 const navigationItems = [
   { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Blog" },
+  { href: "/playground", label: "Playground" },
 ];
 
 export default function Header() {
