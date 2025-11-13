@@ -81,10 +81,10 @@ export default async function BlogItemPage({
   const parsed = await md.parse(post.content);
 
   return (
-    <main className="relative">
+    <article className="relative">
       <BlogHeader metadata={metadata} />
       <BlogContent>{md.render(parsed)}</BlogContent>
       <BlogFooter metadata={metadata} />
-    </main>
+    </article>
   );
 }

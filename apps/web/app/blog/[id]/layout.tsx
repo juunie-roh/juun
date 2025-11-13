@@ -4,9 +4,9 @@ export default function BlogItemLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main className="relative">
+    <div className="relative">
       <ScrollProgressBar />
-      {children}
-    </main>
+      <main>{children}</main>
+    </div>
   );
 }
