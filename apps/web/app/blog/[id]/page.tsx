@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import cache from "@/lib/cache";
 import md from "@/lib/md";
 
-import BlogContent from "../_components/content";
-import BlogFooter from "../_components/footer";
-import BlogHeader from "../_components/header";
+import BlogContent from "../_components/article/content";
+import BlogFooter from "../_components/article/footer";
+import BlogHeader from "../_components/article/header";
 
 // ISR: Revalidate every hour (3600 seconds)
 export const revalidate = 3600;

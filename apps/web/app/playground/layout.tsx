@@ -1,12 +1,18 @@
 import { Metadata } from "next";
 
+import BaseLayout from "@/layouts/base";
+
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "What I have made",
+  title: "Playground",
+  description: "Experimented or experimenting technologies",
 };
 
-export default function PortfolioLayout({
+export default function PlaygroundLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <main className="min-h-[50vh] px-4 py-8 md:px-8">{children}</main>;
+  return (
+    <BaseLayout>
+      <main className="space-y-12">{children}</main>
+    </BaseLayout>
+  );
 }

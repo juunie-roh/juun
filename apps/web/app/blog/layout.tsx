@@ -1,16 +1,18 @@
 import { Metadata } from "next";
 
+import BaseLayout from "@/layouts/base";
+
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Records of used technologies",
+  description: "Records of experiments, learnings, achievements, analyses",
 };
 
 export default function BlogLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="min-h-screen py-8" tabIndex={-1}>
-      {children}
-    </div>
+    <BaseLayout>
+      <main className="mx-auto">{children}</main>
+    </BaseLayout>
   );
 }
