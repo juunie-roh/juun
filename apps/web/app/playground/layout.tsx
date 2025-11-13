@@ -3,16 +3,16 @@ import { Metadata } from "next";
 import BaseLayout from "@/layouts/base";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Records of experiments, learnings, achievements, analyses",
+  title: "Playground",
+  description: "Experimented or experimenting technologies",
 };
 
-export default function BlogLayout({
+export default function PlaygroundLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <BaseLayout>
-      <main className="mx-auto">{children}</main>
+      <main className="space-y-12">{children}</main>
     </BaseLayout>
   );
 }

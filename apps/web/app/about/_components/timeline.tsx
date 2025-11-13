@@ -29,14 +29,18 @@ type TimelineItem = {
   detail?: string;
 };
 
-export default function Timeline({ items }: { items: TimelineItem[] }) {
+interface TimelineProps {
+  items: TimelineItem[];
+}
+
+export default function Timeline({ items }: TimelineProps) {
   // sort items by oldest date
   const sortedItems = [...items].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
 
   return (
-    <section className="relative w-full">
+    <>
       <h2 className="p-4 text-3xl font-bold tracking-tight">
         Project Timeline
       </h2>
@@ -121,7 +125,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
           </li>
         ))}
       </ol>
-    </section>
+    </>
   );
 }
 

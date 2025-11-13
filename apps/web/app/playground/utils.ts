@@ -19,7 +19,7 @@ function extractPortfolioMetadata(filePath: string): PortfolioMetadata {
  * @returns Array of posts
  */
 export function getPosts(sortDescending = true): Post<PortfolioMetadata>[] {
-  const postsDir = path.join(process.cwd(), "app", "portfolio", "posts");
+  const postsDir = path.join(process.cwd(), "app", "playground", "posts");
   return getPostsFromDirectory<PortfolioMetadata>(
     postsDir,
     extractPortfolioMetadata,

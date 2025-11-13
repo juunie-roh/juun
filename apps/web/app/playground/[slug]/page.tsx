@@ -38,7 +38,7 @@ export async function generateMetadata({
         `Portfolio project: ${post.metadata.title}`,
       images: post.metadata.image,
       siteName: post.metadata.title,
-      url: `https://juun.vercel.app/portfolio/${slug}`,
+      url: `https://juun.vercel.app/playground/${slug}`,
     },
   };
 }

@@ -2,7 +2,7 @@ import { Prose } from "@juun/ui/prose";
 import { Separator } from "@juun/ui/separator";
 import React from "react";
 
-import { TableOfContents } from "./table-of-contents";
+import TableOfContents from "./table-of-contents";
 
 export default function BlogContent({
   children,

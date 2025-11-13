@@ -31,7 +31,7 @@ describe("safeUrl", () => {
     it("should allow relative URLs", () => {
       expect(safeUrl("/path/to/page")).toBe("/path/to/page");
       expect(safeUrl("/blog/post-slug")).toBe("/blog/post-slug");
-      expect(safeUrl("/portfolio/project-1")).toBe("/portfolio/project-1");
+      expect(safeUrl("/playground/project-1")).toBe("/playground/project-1");
     });
 
     it("should allow relative paths with ./ and ../", () => {
@@ -185,9 +185,9 @@ describe("safeUrl", () => {
     });
 
     it("should allow portfolio project URLs", () => {
-      expect(safeUrl("/portfolio/project-1")).toBe("/portfolio/project-1");
-      expect(safeUrl("/portfolio/web-app-2024")).toBe(
-        "/portfolio/web-app-2024",
+      expect(safeUrl("/playground/project-1")).toBe("/playground/project-1");
+      expect(safeUrl("/playground/web-app-2024")).toBe(
+        "/playground/web-app-2024",
       );
     });
 

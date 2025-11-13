@@ -176,7 +176,10 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <Timeline items={TIMELINE_ITEMS} />
+      {/* Project Timeline */}
+      <section className="relative w-full" id="timeline">
+        <Timeline items={TIMELINE_ITEMS} />
+      </section>
     </Fragment>
   );
 }
