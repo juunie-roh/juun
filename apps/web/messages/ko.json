@@ -5,6 +5,20 @@
     "cancel": "취소"
   },
   "blog": {
+    "alert": {
+      "item": {
+        "notFound": {
+          "title": "",
+          "description": ""
+        }
+      },
+      "items": {
+        "notFound": {
+          "title": "No blog posts yet",
+          "description": "Your blog posts will appear here once you add them to the database."
+        }
+      }
+    },
     "category": {
       "analysis": "Analysis",
       "case": "Case Study"

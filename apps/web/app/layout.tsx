@@ -5,6 +5,7 @@ import { TooltipProvider } from "@juun/ui/tooltip";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 
 import {
   antonio,
@@ -65,12 +66,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased`}
       >
         <ThemeProvider>
-          <TooltipProvider>
-            <Header />
-            {children}
-            <Toaster />
-            <Analytics />
-          </TooltipProvider>
+          <NextIntlClientProvider>
+            <TooltipProvider>
+              <Header />
+              <div className="min-h-[calc(100vh-var(--spacing-header))] px-4 py-8">
+                {children}
+              </div>
+              <Toaster />
+              <Analytics />
+            </TooltipProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
         <SpeedInsights />
       </body>
