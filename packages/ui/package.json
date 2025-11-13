@@ -1,9 +1,14 @@
 {
   "name": "@juun/ui",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.0",
   "type": "module",
   "author": "juun",
+  "exports": {
+    "./*": "./src/components/*.tsx",
+    "./lib/*": "./src/lib/*.ts",
+    "./hooks/*": "./src/hooks/*.ts"
+  },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
@@ -58,10 +63,5 @@
     "@testing-library/react": "^16.3.0",
     "@types/react-syntax-highlighter": "^15.5.13",
     "eslint-plugin-storybook": "^10.0.7"
-  },
-  "exports": {
-    "./*": "./src/components/*.tsx",
-    "./lib/*": "./src/lib/*.ts",
-    "./hooks/*": "./src/hooks/*.ts"
   }
 }
