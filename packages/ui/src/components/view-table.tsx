@@ -33,9 +33,9 @@ export default function ViewTable<TData>({
               <TableHead
                 key={header.id}
                 className={cn(
-                  "relative",
+                  "relative z-0",
                   header.column.getIsPinned() &&
-                    "sticky bg-background opacity-95 group-hover:bg-muted",
+                    "sticky z-1 bg-background opacity-95 group-hover:bg-muted",
                 )}
                 style={getColumnPinningStyles(header.column)}
               >
@@ -62,9 +62,9 @@ export default function ViewTable<TData>({
                 <TableCell
                   key={cell.id}
                   className={cn(
-                    "relative",
+                    "relative z-0",
                     cell.column.getIsPinned() &&
-                      "sticky bg-background opacity-95 group-hover:bg-muted",
+                      "sticky z-1 bg-background opacity-95 group-hover:bg-muted",
                   )}
                   style={getColumnPinningStyles(cell.column)}
                 >
