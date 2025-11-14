@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 001: 100 Days CSS</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame {
+      background: #43389F;
+      background: linear-gradient(to top right, #43389F 0%, #4ec6ca 100%);
+      
+      font-family: 'Courier New', 'Courier', sans-serif;
+      color: #fff;
+    }
+
+    .center {
+      position: absolute;
+      top: 50.8%;
+      left: 50.5%;
+      transform: translate(-50%, -50%);
+    }
+
+    .number {
+      position: relative;
+      height: 100px;
+      width: 200px;
+    }
+
+    .one1,
+    .one2,
+    .zero1,
+    .zero2 {
+      background: #fff;
+      border-radius: 3px;
+      box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .one1 {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: -16px;
+      width: 20px;
+      height: 40px;
+      transform: rotate(50deg);
+    }
+
+    .one2 {
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 100px;
+    }
+
+    .zero1,
+    .zero2 {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 17px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 24px solid #fff;
+      background: none;
+    }
+
+    .zero2 {
+      z-index: 1;
+      left: 100px;
+    }
+
+    .big,
+    .small {
+      position: relative;
+      z-index: 10;
+      text-transform: uppercase;
+      display: block;
+      font-weight: 700;
+    }
+
+    .big {
+      font-size: 82px;
+      line-height: 60px;
+      margin-top: 6px;
+    }
+
+    .small {
+      font-size: 23px;
+      line-height: 20px;
+      letter-spacing: .04em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="center">
+      <div class="number">
+        <div class="one1"></div>
+        <div class="one2"></div>
+        <div class="zero1"></div>
+        <div class="zero2"></div>
+      </div>
+      <span class="big">Days</span>
+      <span class="small">CSS Challenge</span>
+    </div>
+  </div>
+</body>
+
+</html>

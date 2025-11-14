@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day013 : User Gallery</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    :root {
+      --red: #ec6565;
+    }
+
+    .frame {
+      font-family: 'Open Sans', Helvetica, sans-serif;
+      font-size: 20px;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .profile {
+      float: left;
+      position: relative;
+      width: 193px; height: 193px;
+      margin: 4px 0 0 4px;
+      background: pink;
+      cursor: pointer;
+      color: #000;
+      font-weight: 600;
+      line-height: 193px;
+      text-align: center;
+    }
+    
+    .overlay {
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: all 0.6s;
+    }
+
+    .profile:hover .overlay {
+      opacity: 1;
+    }
+
+    .plus {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 50px; height: 50px;
+      background: var(--red);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(2);
+      transition: all 0.6s;
+    }
+    .plus::before,
+    .plus::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      display: block;
+      width: 2px; height: 14px;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+    .plus::after { width: 14px; height: 2px; }
+
+    .profile:hover .plus {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .detail {
+      position: absolute;
+      left: 0; top: 0;
+      display: block;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      transition: all 0.6s;
+    }
+
+    .bg-img-wrap,
+    .info-text-wrap {
+      width: 100%; height: 45%;
+      background: #ddd;
+      transform: translateY(-100%);
+      transition: all 0.6s 0.3s;
+    }
+    .bg-img-wrap {
+      display: flex;
+      justify-content: center; align-items: center;
+      color: #000;
+      font-weight: 600;
+    }
+    .info-text-wrap {
+      height: 55%;
+      background: var(--red);
+      transform: translateY(100%);
+    }
+    .userName {
+      position: relative;
+      top: 60px;
+      width: 100%;
+      margin-bottom: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .info-text-wrap ul {
+      position: relative;
+      top: 80px;
+      display: flex;
+      justify-content: space-around;
+      width: 240px;
+      margin: auto;
+    }
+    .info-text-wrap ul li {
+      display: flex;
+      justify-content: center; align-items: center;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    svg {
+      width: 28px; height: 28px;
+      fill: #fff;
+    }
+    .info-text-wrap ul li:hover { background: #fff; }
+    .info-text-wrap ul li:hover svg { fill: var(--red); }
+
+
+    .profileImg {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: #fff;
+      padding: 2px;
+      transform: translate(-50%, -300%);
+      transition: transform 0.6s ease-in;
+    }
+    .img { 
+      position: relative;
+      display: flex;
+      justify-content: center; align-items: center;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: pink;
+      color: #000;
+      font-weight: 600;
+    }
+    #close {
+      position: absolute;
+      right: 5px; top: 5px;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--red);
+      transform: translateY(-200%);
+      transition: transform 0.6s ease-in, background-color 0.3s;
+      cursor: pointer;
+    }
+    #close::before,
+    #close::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      display: block;
+      width: 2px; height: 14px;
+      background: #fff;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    #close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+    #close:hover { background: #fff; }
+    #close:hover::before,
+    #close:hover::after { background: var(--red); }
+
+    .detail.on { pointer-events: all; }
+    .detail.on .bg-img-wrap,
+    .detail.on .info-text-wrap { transform: translateY(0); transition: all 0.6s; }
+    .detail.on .profileImg { transform: translate(-50%, -70%); transition: transform 0.6s 0.3s ease-out; }
+    .detail.on #close { transform: translateY(0); transition: transform 0.6s 0.3s ease-out, background-color 0.3s; }
+    
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div id="profile01" class="profile">
+      profile01
+      <div class="overlay">
+        <div class="plus"></div>
+      </div>
+    </div>
+    <div id="profile02" class="profile">
+      profile02
+      <div class="overlay">
+        <div class="plus"></div>
+      </div>
+    </div>
+    <div id="profile03" class="profile">
+      profile03
+      <div class="overlay">
+        <div class="plus"></div>
+      </div>
+    </div>
+    <div id="profile04" class="profile">
+      profile04
+      <div class="overlay">
+        <div class="plus"></div>
+      </div>
+    </div>
+
+    <div class="detail">
+      <div class="bg-img-wrap"></div>
+      <div class="info-text-wrap">
+        <div class="userName">user name 1</div>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.487 17.14-4.065-3.696a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.391L6.859 3.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 17.705 21c.202 0 .326-.006.359-.008a.992.992 0 0 0 .648-.291l1.86-2.171a.997.997 0 0 0-.085-1.39z"></path></svg></li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 5.589 2 10c0 2.908 1.898 5.515 5 6.934V22l5.34-4.005C17.697 17.852 22 14.32 22 10c0-4.411-4.486-8-10-8z"></path></svg></li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path></svg></li>
+        </ul>
+      </div>
+      <div class="profileImg">
+        <div class="img"></div>
+      </div>
+      <div id="close"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const profiles = document.querySelectorAll('.profile');
+    const detail = document.querySelector('.detail');
+    const bgImgWrap = document.querySelector('.bg-img-wrap');
+    const profileImg = document.querySelector('.detail .profileImg .img');
+    const userName = document.querySelector('.userName');
+
+    const close = document.getElementById('close');
+    profiles.forEach((profile, i) => {
+      profile.addEventListener('click', () => {
+        bgImgWrap.innerText = `background0${i + 1}`;
+        profileImg.innerText = profile.innerText;
+        userName.innerText = `user 0${i + 1}`;
+        detail.classList.add('on');
+      })
+    });
+
+    close.addEventListener('click', () => {
+      detail.classList.remove('on');
+    });
+  </script>
+</body>
+</html>

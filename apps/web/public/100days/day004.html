@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 004 : Loading</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame { background-color: #E56262; }
+    .center {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      top: 130px;
+      left: 130px;
+    }
+
+    .center>div { 
+      position: absolute;
+      border-radius: 50%; 
+      background-color: #fff;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+      transform: scale(0);
+      animation-direction: alternate;
+    }
+    .dot1 {
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      z-index: 1;
+      animation: dot1 3s infinite ease;
+    }
+    .dot2 {
+      top: 25px;
+      left: 25px;
+      width: 100px;
+      height: 100px;
+      z-index: 2;
+      animation: dot2 3s infinite ease;
+    }
+    .dot3 {
+      top: 50px;
+      left: 50px;
+      width: 50px;
+      height: 50px;
+      z-index: 3;
+      animation: dot3 3s infinite ease;
+    }
+
+    @keyframes dot1 {
+      from { transform: scale(0); }
+      75%, to { transform: scale(1); }
+    }
+
+    @keyframes dot2 {
+      from, 25% { transform: scale(0); }
+      75%, to { transform: scale(1); }
+    }
+
+    @keyframes dot3 {
+      from, 50% { transform: scale(0); }
+      75%, to { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="center">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+      <div class="dot3"></div>
+    </div>
+  </div>
+</body>
+
+</html>

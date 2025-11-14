@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 002: Menu Icon</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame {
+      background: #3FAF82;
+    }
+
+    .memo {
+      color: #fff;
+    }
+
+    .center {
+      position: relative;
+      /* border: 1px solid black; */
+      width: 80px;
+      height: 52px;
+      top: calc(50% - 26px);
+      left: calc(50% - 40px);
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 80px;
+      height: 8px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+      transition-duration: 0.3s;
+    }
+
+    .bar1 {
+      position: absolute;
+      top: 0;
+    }
+
+    .bar2 {
+      position: absolute;
+      top: 22px;
+      transition: transform 0.6s 0.3s;
+    }
+
+    .bar3 {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .active .bar1 {
+      transform: translateY(22px) rotate(45deg);
+      animation: bar1active 0.6s ease normal;
+    }
+
+    .active .bar2 {
+      transform: scale(0);
+      transition: transform 0.3s;
+    }
+
+    .active .bar3 {
+      transform: translateY(-22px) rotate(-45deg);
+      animation: bar3active 0.6s ease normal;
+    }
+
+    .removal .bar1 {
+      animation: bar1removal 0.6s ease;
+    }
+    .removal .bar3 {
+      animation: bar3removal 0.6s ease;
+    }
+
+    @keyframes bar1active {
+      from { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(22px) rotate(0); }
+      to { transform: translateY(22px) rotate(45deg); }
+    }
+
+    @keyframes bar3active {
+      from { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-22px) rotate(0); }
+      to { transform: translateY(-22px) rotate(-45deg); }
+    }
+
+    @keyframes bar1removal {
+      from { transform: translateY(22px) rotate(45deg); }
+      50% { transform: translateY(22px) rotate(0); }
+      to { transform: translateY(0) rotate(0); }
+    }
+
+    @keyframes bar3removal {
+      from { transform: translateY(-22px) rotate(-45deg); }
+      50% { transform: translateY(-22px) rotate(0); }
+      to { transform: translateY(0) rotate(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <!-- <p class="memo">
+      backward animation not applied
+      <br>
+      solution | animation: reverse;
+      <br>
+      active true/false, add-remove class, no toggle
+    </p> -->
+    <div class="center">
+      <div class="bar bar1"></div>
+      <div class="bar bar2"></div>
+      <div class="bar bar3"></div>
+    </div>
+  </div>
+
+  <script>
+    const center = document.querySelector('.center');
+    center.addEventListener('click', function() {
+      if (center.classList.contains('active')) {
+        center.classList.add('removal');
+      } else {
+        center.classList.remove('removal');
+      }
+
+      center.classList.toggle('active');
+    })
+  </script>
+</body>
+
+</html>

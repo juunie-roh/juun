@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day007 : Notification</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    :root {
+      --blue-light: #B2DAFF;
+      --blue: #5F98CD;
+      --blue-dark: #264057;
+    }
+
+    .frame {
+      background-color: var(--blue-dark);
+      overflow: hidden;
+      font-family: 'Open Sans', Helvetica, sans-serif;
+    }
+
+    .center {
+      position: absolute; left: 50px; top: 50px;
+      width: 300px; height: 300px;
+      overflow: hidden;
+    }
+
+    .panel {
+      position: relative;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+      transition: transform 0.5s ease;
+      z-index: 10;
+    }
+    .center.menu-active .panel {
+      transform: translateX(50%);
+    }
+    header {
+      position: relative;
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%; height: 70px;
+      padding: 0 20px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    #menuBtn, #searchBtn { cursor: pointer; color: var(--blue-light); font-size: 24px; }
+    #menuBtn:hover, #searchBtn:hover { color: #fff; }
+
+    .search-input {
+      position: absolute;
+      width: 220px;
+      padding: 1em;
+      border-radius: 2em;
+      border: none; outline: none;
+      background: #fff;
+      opacity: 0;
+      transform: translateX(15px);
+      transition: all 0.3s ease-in-out;
+      pointer-events: none;
+      color: #666;
+      font-weight: 400;
+    }
+    .search-input.active { 
+      pointer-events: all; 
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .menu {
+      position: absolute; left: 0px; top: 15px;
+      width: 170px; height: 270px;
+      padding-left: 20px;
+      background: #43627d;
+      border-radius: 5px;
+      transform: translateX(50px);
+      transition: transform 0.5s ease;
+      z-index: 1;
+    }
+    .center.menu-active .menu {
+      box-shadow: 5px 5px 8px 0 rgba(0,0,0,0.2);
+      transform: translateX(0);
+    }
+    .menu ul {
+      display: flex; flex-direction: column; justify-content: space-evenly;
+      height: 100%;
+    }
+    .menu ul li {  cursor: pointer; color: var(--blue-light); font-size: 14px; }
+    .menu ul li i { margin-right: 0.5em; }
+    .menu ul li:hover { color: #fff; }
+
+    .notifications {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      overflow-y: scroll;
+      padding: 0 27px;
+    }
+    .notifications::before { 
+      content: '';
+      position: absolute; left: 27px; top: 0;
+      display: block;
+      width: 2px; height: 100%;
+      background: #ebebeb;
+      z-index: 0;
+    }
+    .notifications li {
+      position: relative; left: 13px;
+      width: calc(100% - 13px);
+      margin-top: 20px;
+      z-index: 2;
+      color: #666;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .notifications li::before {
+      content: '';
+      position: absolute; left: -22px; top: -1px;
+      display: block;
+      width: 12px; height: 12px;
+      border: 4px solid #fff;
+      border-radius: 50%;
+      background: var(--blue);
+      z-index: 2;
+    }
+    .notifications li::after {
+      content: '';
+      position: absolute; left: -16px; top: 5px;
+      display: block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      z-index: 3;
+    }
+    .notifications li span { display: block; font-size: 11px; }
+    .notifications li:hover { color: var(--blue); }
+    .notifications li p b { font-weight: 600; }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="center">
+      <div class="panel">
+        <header>
+          <div id="menuBtn">
+            <i class='bx bx-menu-alt-left'></i>
+          </div>
+          <span>Notifications</span>
+          <input type="text" class="search-input" placeholder="Search ...">
+          <div id="searchBtn">
+            <i class='bx bx-search'></i>
+          </div>
+          <script>
+            const center = document.querySelector('.center');
+            const searchInput = document.querySelector('.search-input');
+            const menuBtn = document.getElementById('menuBtn');
+            const searchBtn = document.getElementById('searchBtn');
+
+            menuBtn.addEventListener('click', function() {
+              center.classList.toggle('menu-active');
+            });
+            searchBtn.addEventListener('click', function() {
+              searchInput.classList.toggle('active');
+            });
+          </script>
+        </header>
+        <div class="notifications">
+          <ul>
+            <li>
+              <span>9:24 AM</span>
+              <p>
+                <b>John Walker</b>
+                posted a photo on your wall.
+              </p>
+            </li>
+            <li>
+              <span>8:19 AM</span>
+              <p>
+                <b>Alice Parker</b>
+                commented your last post.
+              </p>
+            </li>
+            <li>
+              <span>Yesterday</span>
+              <p>
+                <b>Luke Wayne</b>
+                added you as a friend.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><i class='bx bxs-dashboard'></i>Dash Board</li>
+          <li><i class='bx bxs-user'></i>Profile</li>
+          <li><i class='bx bxs-bell' ></i>Notifications</li>
+          <li><i class='bx bxs-chat' ></i>Messages</li>
+          <li><i class='bx bxs-cog' ></i>Settings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

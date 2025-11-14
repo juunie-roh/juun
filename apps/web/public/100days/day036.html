@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 036: Tabs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame {
+      overflow: hidden;
+      font-family: 'Open Sans', Helvetica, sans-serif;
+      background: #283642;
+    }
+    
+    .center {
+      position: absolute;
+      top: 80px; left: 40px;
+      width: 320px; height: 240px;
+      background: #fff;
+      box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.3);
+    }
+    
+    .top {
+      position: absolute;
+      z-index: 1;
+      top: 0; left: 0; right: 0;
+      height: 40px;
+      background: #3D4D5E;
+    }
+    
+    input[type="radio"] { display: none; }
+    input[type="radio"]:checked + .tab { background: #5DA2ED; color: #fff; }
+    
+    .tab {
+      float: left;
+      position: relative;
+      z-index: 5;
+      width: 40px; height: 40px;
+      text-align: center;
+      line-height: 38px;
+      color: #8398AD;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background .5s ease-in-out;
+      
+      &.search { float: right }
+      &:hover { color: #fff }
+    }
+
+    .content {
+      position: absolute;
+      top: 40px;
+      color: #000;
+
+      .box {
+        position: absolute;
+        top: 0; left: 0; opacity: 0;
+        transform: translateY(3px);
+        pointer-events: none;
+        padding: 25px;
+        transition: all .3s ease-in;
+      }
+
+      h1 {
+        font-weight: 400;
+        font-size: 16px;
+        color: #415868;
+      }
+
+      p { 
+        margin: 17px 0; 
+
+        span {
+          display: block;
+          height: 4px;
+          background: #E9E9E9;
+          margin: 6px 0;
+        }
+      }
+    }
+
+    #tab-1:checked ~ .content #box-1,
+    #tab-2:checked ~ .content #box-2,
+    #tab-3:checked ~ .content #box-3,
+    #tab-4:checked ~ .content #box-4 {
+      pointer-events: all;
+      opacity: 1;
+      transform: translateY(0);
+      transition: all .5s ease-out .4s;
+    }
+    
+    </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="center">
+      
+      <div class="tabs">
+        <div class="top"></div>
+
+        <input type="radio" name="rd" id="tab-1" checked="checked" />
+        <label for="tab-1" class="tab">
+          <span class="fa fa-eye"></span>
+        </label>
+
+        <input type="radio" name="rd" id="tab-2" />
+        <label for="tab-2" class="tab">
+          <span class="fa fa-comments"></span>
+        </label>
+
+        <input type="radio" name="rd" id="tab-3" />
+        <label for="tab-3" class="tab">
+          <span class="fa fa-bell"></span>
+        </label>
+
+        <input type="radio" name="rd" id="tab-4" />
+        <label for="tab-4" class="tab">
+          <span class="fa fa-cog"></span>
+        </label>
+
+        <label class="tab search">
+          <span class="fa fa-search"></span>
+        </label>
+
+        <div class="content">
+          <div class="box" id="box-1">
+            <h1>Dashboard</h1>
+            <p>
+              <span style="width: 250px"></span>
+              <span style="width: 270px"></span>
+              <span style="width: 235px"></span>
+              <span style="width: 260px"></span>
+              <span style="width: 53px"></span>
+            </p>
+            <p>
+              <span style="width: 262px;"></span>
+              <span style="width: 234px;"></span>
+              <span style="width: 246px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 144px;"></span>
+            </p>
+          </div>
+
+          <div class="box" id="box-2">
+            <h1>Comments</h1>
+            <p>
+              <span style="width: 250px;"></span>
+              <span style="width: 270px;"></span>
+              <span style="width: 235px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 53px;"></span>
+            </p>
+            <p>
+              <span style="width: 262px;"></span>
+              <span style="width: 234px;"></span>
+              <span style="width: 246px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 144px;"></span>
+            </p>
+          </div>
+          
+          <div class="box" id="box-3">
+            <h1>Notifications</h1>
+            <p>
+              <span style="width: 250px;"></span>
+              <span style="width: 270px;"></span>
+              <span style="width: 235px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 53px;"></span>
+            </p>
+            <p>
+              <span style="width: 262px;"></span>
+              <span style="width: 234px;"></span>
+              <span style="width: 246px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 144px;"></span>
+            </p>
+          </div>
+          
+          <div class="box" id="box-4">
+            <h1>Settings</h1>
+            <p>
+              <span style="width: 250px;"></span>
+              <span style="width: 270px;"></span>
+              <span style="width: 235px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 53px;"></span>
+            </p>
+            <p>
+              <span style="width: 262px;"></span>
+              <span style="width: 234px;"></span>
+              <span style="width: 246px;"></span>
+              <span style="width: 260px;"></span>
+              <span style="width: 144px;"></span>
+            </p>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

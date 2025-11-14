@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 003: The Pyramide</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame {
+      background: #272C34;
+    }
+
+    .memo {
+      color: #fff;
+    }
+
+    .center {
+      position: relative;
+      top: 110px;
+      left: 110px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .cover {
+      position: absolute;
+      top: 110px;
+      left: 110px;
+      width: 180px;
+      height: 180px;
+      background: #272C34;
+      z-index: 99;
+
+      animation-name: fade;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    .sky {
+      position: relative;
+      width: 180px;
+      height: 124px;
+      background: #7DDFFC;
+      z-index: 0;
+    }
+
+    .ground {
+      position: relative;
+      width: 180px;
+      height: 56px;
+      background: #F0DE75;
+      z-index: 3;
+    }
+
+    .sun {
+      position: absolute;
+      top: 7px;
+      left: 73px;
+      width: 34px;
+      height: 34px;
+      background: #FFEF00;
+      border-radius: 50%;
+      z-index: 1;
+
+      animation-name: sun;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      transform-origin: 50% 400%;
+    }
+
+    .shadow {
+      position: absolute;
+      top: 124px;
+      left: 30px;
+      width: 120px;
+      height: 30px;
+      background: rgba(0, 0, 0, 0.2);
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      z-index: 4;
+
+      transform-origin: center top;
+      animation-name: shadow;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    .pyramide-left {
+      position: absolute;
+      top: 64px;
+      left: 30px;
+      width: 120px;
+      height: 60px;
+      background: #fff;
+      clip-path: polygon(0 100%, 50% 0, 60% 100%);
+      z-index: 2;
+
+      animation-name: pyrleft;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    .pyramide-right {
+      position: absolute;
+      top: 64px;
+      left: 30px;
+      width: 120px;
+      height: 60px;
+      background: #ddd;
+      clip-path: polygon(50% 0, 100% 100%, 50% 100%);
+      z-index: 1;
+
+      animation-name: pyrright;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fade { from, to { opacity: 1.0; } 40%, 60% { opacity: 0; } }
+    @keyframes sun {
+      from { transform: rotate(-80deg); }
+      25% { transform: rotate(-30deg); }
+      50% { transform: rotate(-30deg); }
+      to { transform: rotate(70deg); }
+    }
+    @keyframes shadow {
+      from { transform: skewX(80deg); }
+      25% { transform: skewX(70deg); }
+      50% { transform: skewX(70deg); }
+      to { transform: skewX(-90deg); }
+    }
+
+    @keyframes pyrleft { from, 50% { background: #fff; } 80%, to { background: #ddd; } }
+    @keyframes pyrright { from, 50% { background: #ddd; } 80%, to { background: #fff; } }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <p class="memo">
+      shadow shrink not applied
+    </p>
+    <div class="center">
+      <div class="sky"></div>
+      <div class="ground"></div>
+      <div class="pyramide-left"></div>
+      <div class="pyramide-right"></div>
+      <div class="sun"></div>
+      <div class="shadow"></div>
+    </div>
+    <div class="cover"></div>
+  </div>
+</body>
+
+</html>

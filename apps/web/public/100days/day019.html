@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day019 : Slider with Radio Buttons</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame {
+      /* background: #ddd; */
+      overflow: hidden;
+    }
+    .center {
+      position: absolute;
+      left: 0px; top: 0px;
+      display: flex;
+      justify-content: center; align-items: center;
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    /* fieldset { border: none; }
+    input[type="radio"] {
+      display: none;
+    } */
+    
+    .circle-wrap {
+      position: relative;
+      z-index: 11;
+      display: flex;
+      justify-content: space-between;
+      width: 170px;
+    }
+
+    .circle {
+      display: block;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      cursor: pointer;
+    }
+
+    .active-circle {
+      position: absolute;
+      /* gap: 65px */
+      left: 120px; top: 180px;
+      z-index: 11;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      transition: all 1s ease;
+    }
+
+    .bg-wrap {
+      position: absolute;
+      left: 0px; top: 0px;
+      z-index: 1;
+      display: flex;
+      width: 300%; height: 100%;
+      transition: all 1s ease; 
+      /* background: #777; */
+    }
+
+    .bg { width: 33.3333%; height: 100%; }
+    .bg1 { background: #9b59b6; }
+    .bg2 { background: #3498db; }
+    .bg3 { background: #1abc9c; }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="center">
+      <div class="circle-wrap">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+      <div class="active-circle"></div>
+      <div class="bg-wrap" id="bgWrap">
+        <div class="bg bg1"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const circles = document.querySelectorAll('.circle');
+    const bgWrap = document.getElementById('bgWrap');
+    const activeCircle = document.querySelector('.active-circle');
+
+    circles.forEach((circle, i) => {
+      circle.addEventListener('click', () => {
+        activeCircle.style.transform = `translateX(${i * 60}px)`;
+        bgWrap.style.transform = `translateX(${i * -400}px)`;
+      })
+    })
+  </script>
+</body>
+
+</html>
