@@ -8,10 +8,10 @@ import {
 import React from "react";
 
 interface TableOptions {
-  initialSorting?: SortingState;
-  initialColumnPinning?: ColumnPinningState;
-  enableSorting?: boolean;
   enableColumnPinning?: boolean;
+  enableSorting?: boolean;
+  initialColumnPinning?: ColumnPinningState;
+  initialSorting?: SortingState;
 }
 
 export function useTable<TData>(
