@@ -2,10 +2,10 @@ import { Debug, Physics } from "@react-three/cannon";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Fragment, Suspense } from "react";
 
-import Beetle from "@/components/three/beetle";
-import Canvas from "@/components/three/canvas";
-import Cylinder from "@/components/three/cylinder";
-import Plane from "@/components/three/plane";
+import Beetle from "../beetle";
+import Canvas from "../canvas";
+import Cylinder from "../cylinder";
+import Plane from "../plane";
 
 export default function CannonVehicle({ debug = false }: { debug: boolean }) {
   return (
