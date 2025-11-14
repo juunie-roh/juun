@@ -8,7 +8,7 @@ export default function CesiumUtilsSidebar({
 }) {
   return (
     <Sidebar
-      className="mt-[var(--spacing-header)] h-[calc(100svh-var(--spacing-header))]"
+      className="mt-header h-[calc(100svh-var(--spacing-header))]"
       collapsible="offcanvas"
       side="right"
       variant="floating"

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day005 : Statistics</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    :root {
+      --red: #fa7373;
+      --blue: #7ba2ff;
+    }
+
+    .frame {
+      background-color: #42a7a1;
+      font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .card {
+      position: absolute;
+      top: calc((100% - 220px) / 2);
+      left: calc((100% - 280px) / 2);
+      width: 280px;
+      height: 220px;
+      overflow: hidden;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .header {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      padding: 13px;
+      background-color: #f1ba64;
+    }
+
+    .upper,
+    .lower {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .upper { align-items: flex-end; }
+    .lower { align-items: flex-start;}
+
+    .upper span:first-child,
+    .lower span:last-child {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .upper span:last-child,
+    .lower span:first-child {
+      font-weight: 400;
+      font-size: 11px;
+    }
+
+    .contents {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      padding: 1em;
+      color: #555;
+      font-size: 11px;
+    }
+
+    .params { width: 100%; text-align: end; font-size: 11px; }
+    .params span { position: relative; padding-left: 25px; }
+    .params span::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 11px;
+      height: 3px;
+      left: 9px;
+      top: 6px;
+      border-radius: 3px;
+      background-color: var(--red);
+    }
+    .params span:last-child::before { background-color: var(--blue); }
+
+    .statistic {
+      position: relative;
+      width: 238px;
+      height: 90px;
+      margin: 0 auto;
+    }
+
+    .red,
+    .blue {
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .red { background-color: var(--red); }
+    .blue { background-color: var(--blue); }
+
+    .red:first-child { left: -3px; bottom: 42.8%; }
+    .red:nth-child(2) { left: calc(100% / 7 + 5px); bottom: 81.2%; }
+    .red:nth-child(3) { left: calc((100% / 7 + 5px) * 2 + 4px); bottom: 74.6%; }
+    .red:nth-child(4) { left: calc((100% / 7 + 5px) * 3 + 5px); bottom: 87.7%; }
+    .red:nth-child(5) { left: calc((100% / 7 + 5px) * 4 + 6px); bottom: 51.7%; }
+    .red:nth-child(6) { left: calc((100% / 7 + 5px) * 5 + 3px); bottom: 43.4%; }
+    .red:last-child { right: -3px; bottom: 42.8%; }
+
+    .blue:first-child { left: -3px; bottom: 13%; }
+    .blue:nth-child(2) { left: calc(100% / 7 + 5px); bottom: 20.5%; }
+    .blue:nth-child(3) { left: calc((100% / 7 + 5px) * 2 + 4px); bottom: 11%; }
+    .blue:nth-child(4) { left: calc((100% / 7 + 5px) * 3 + 5px); bottom: 18%; }
+    .blue:nth-child(5) { left: calc((100% / 7 + 5px) * 4 + 6px); bottom: 12.5%; }
+    .blue:nth-child(6) { left: calc((100% / 7 + 5px) * 5 + 3px); bottom: 6.5%; }
+    .blue:last-child { right: -3px; bottom: 10%; }
+
+    .days {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      color: #999;
+      font-size: 9px;
+      line-height: 30px;
+    }
+    .days span { text-transform: uppercase; }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="card">
+      <div class="header">
+        <div class="upper">
+          <span>WEEKLY REPORT</span>
+          <span>Revenue</span>
+        </div>
+        <div class="lower">
+          <span>01.Feb ~ 07.Feb</span>
+          <span>&dollar; 3621.79</span>
+        </div>
+      </div>
+      <div class="contents">
+        <div class="params">
+          <span>Views</span>
+          <span>Purchases</span>
+        </div>
+        <div class="statistic">
+          <div>
+            <span class="red"></span>
+            <span class="red"></span>
+            <span class="red"></span>
+            <span class="red"></span>
+            <span class="red"></span>
+            <span class="red"></span>
+            <span class="red"></span>
+          </div>
+          <div>
+            <span class="blue"></span>
+            <span class="blue"></span>
+            <span class="blue"></span>
+            <span class="blue"></span>
+            <span class="blue"></span>
+            <span class="blue"></span>
+            <span class="blue"></span>
+          </div>
+          <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="0,41 35,12 72,17 105.5,7 140,34.5 169,40.5 200,41" fill="none" stroke="var(--red)" stroke-width="2px" />
+            <polyline points="0,63 35,58 72,65 105.5,60 140,64 169,69 200,66" fill="none" stroke="var(--blue)" stroke-width="2px" />
+          </svg>
+        </div>
+        <div class="days">
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+          <span>Sun</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+
+</html>

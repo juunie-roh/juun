@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day023 : Animated Typography</title>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    .frame {
+      background: #E16D6C;
+      overflow: hidden;
+      font-family: 'Open Sans', Helvetica, sans-serif;
+    }
+
+    .line {
+      position: absolute;
+      top: 198px;
+      width: 150px; height: 4px;
+      background: #fff;
+      transform: scaleX(0);
+    }
+    .line.left { 
+      right: 50%; 
+      transform-origin: right center;
+      animation: line-left 1s 1s ease;
+    }
+    .line.right { 
+      left: 50%;
+      transform-origin: left center;
+      animation: line-right 1s 1s ease;
+     }
+
+    @keyframes line-left {
+      from { transform: scaleX(0); }
+      50% { transform: scaleX(1); transform-origin: right center; }
+      50.0001% { transform-origin: left center; }
+      to { transform: scaleX(0); transform-origin: left center; }
+    }
+    @keyframes line-right {
+      from { transform: scaleX(0); }
+      50% { transform: scaleX(1); transform-origin: left center; }
+      50.0001% { transform-origin: right center; }
+      to { transform: scaleX(0); transform-origin: right center; }
+    }
+
+    .bracket {
+      position: absolute;
+      top: 160px;
+      width: 4px; height: 80px;
+      border: 4px solid #fff;
+      transform: scaleY(0);
+    }
+    .bracket.left {
+      left: 50px; 
+      border-right: none;
+      transform-origin: left center;
+      animation: bracket 0.5s 2s ease forwards;
+    }
+    .bracket.right {
+      right: 50px;
+      border-left: none;
+      transform-origin: right center;
+      animation: bracket 0.5s 2s ease forwards;
+    }
+    @keyframes bracket {
+      from { width: 4px; transform: scaleY(0); }
+      50% { width: 4px; transform: scaleY(1); }
+      to { width: 30px; transform: scaleY(1); }
+    }
+
+    .text {
+      width: 100%;
+      transform: scaleY(0);
+      transform-origin: center center;
+
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .big {
+      height: 100%;
+      font-weight: 800;
+      font-size: 50px;
+      line-height: 400px;
+      animation: text 0.5s 2.25s ease forwards;
+    }
+    .small {
+      position: absolute;
+      font-size: 32px;
+      font-weight: 300;
+    }
+    .top { 
+      top: 130px; 
+      transform-origin: center bottom;
+      animation: top 0.5s 2.25s ease forwards;
+    }
+    .bottom { 
+      bottom: 130px;
+       transform-origin: center top; 
+       animation: bottom 0.5s 2.25s ease forwards;
+    }
+    @keyframes text {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+    @keyframes top {
+      from { opacity: 0; transform: translateX(-10%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes bottom {
+      from { opacity: 0; transform: translateX(10%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="line left"></div>
+    <div class="line right"></div>
+    <div class="bracket left"></div>
+    <div class="bracket right"></div>
+    <div class="text big">moments</div>
+    <div class="text small top">collect</div>
+    <div class="text small bottom">not things</div>
+  </div>
+</body>
+
+</html>

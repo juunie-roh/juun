@@ -1,4 +1,3 @@
-import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { Skeleton } from "@juun/ui/skeleton";
 import type { CanvasProps } from "@react-three/fiber";
 import { lazy, Suspense } from "react";
@@ -9,12 +8,9 @@ export default function Canvas({ children, ...props }: CanvasProps) {
   return (
     <Suspense
       fallback={
-        <AspectRatio
-          ratio={16 / 9}
-          className="size-full overflow-hidden rounded-md"
-        >
-          <Skeleton className="aspect-video w-full" />
-        </AspectRatio>
+        <div className="size-full overflow-hidden rounded-md">
+          <Skeleton className="size-full" />
+        </div>
       }
     >
       <LazyCanvas {...props}>{children}</LazyCanvas>

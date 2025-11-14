@@ -10,8 +10,7 @@ import { useFrame } from "@react-three/fiber";
 import { type Ref, useRef } from "react";
 import type { Group, Object3D } from "three";
 
-import { useControls } from "@/hooks/use-controls";
-
+import { useControls } from "../../../_hooks/use-controls";
 import { Chassis } from "./chassis";
 import { Wheel } from "./wheel";
 

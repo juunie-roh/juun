@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day010 : Watch Face</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <style>
+    :root {
+      --red: #f85b5b;
+      --spinner-time: 20s; 
+      /* real time: --spinner-time: 120s; */
+    }
+    .frame { 
+      background: #777; 
+      color: #fff; 
+      font-family: 'Open Sans', Helvetica, sans-serif;
+      font-size: 12px; 
+      line-height: 100%; 
+      text-transform: uppercase;
+    }
+
+    .center { 
+      position: absolute; left: 87px; top: 87px;
+      display: flex; justify-content: center; align-items: center;
+      width: 212px; height: 212px;
+      background: #333;
+      border: 7px solid #555;
+      border-radius: 50%;
+      text-align: center;
+    }
+
+    .text {
+      position: absolute;
+      width: 130px;
+      z-index: 2;
+    }
+    .text p b { font-weight: 600; }
+    .text>p { display: block; }
+    .text>p:nth-child(2) { margin: 20px 0; font-size: 40px; }
+    .text>p:nth-child(2) span { animation: tiktok 1s linear infinite; }
+    .text>p:last-child { display: flex; justify-content: space-around; width: 100%; }
+    .text>p:last-child i {
+      color: var(--red);
+      margin-right: 5px;
+      animation: heartbeat 0.5s ease-in infinite alternate;
+    }
+    @keyframes tiktok { from, to, 49.9999% { opacity: 1; } 50%, 99.9999% { opacity: 0;}}
+    @keyframes heartbeat { from { transform: scale(1); } to{ transform: scale(1.2); } }
+
+    .spinner {
+      position: absolute;
+      width: 192px; height: 192px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .circle {
+      position: absolute;
+      width: 100%; height: 50%;
+      border: 3px solid var(--red);
+      border-radius: 192px 192px 0 0;
+      border-bottom-color: transparent;
+      transform-origin: center bottom;
+    }
+
+    .red-right { opacity: 1; transform: rotate(-90deg); animation: red-right var(--spinner-time) linear infinite; }
+    .red-left { opacity: 0; transform: rotate(90deg); animation: red-left var(--spinner-time) linear infinite; }
+    .black { left: -1px; top: -1px; width: calc(100% + 1px); height: calc(50% + 1px); border-color: #555; border-width: 5px; border-bottom-color: transparent;}
+    .black-right { opacity: 1; border-color: #333; border-bottom-color: transparent; transform: rotate(-90deg); animation: black-right var(--spinner-time) linear infinite; }
+    .black-left { opacity: 0; border-color: #333; border-bottom-color: transparent; transform: rotate(90deg); animation: black-left var(--spinner-time) linear infinite; }
+
+    @keyframes red-right { 
+      from { opacity: 1; transform: rotate(-90deg); }
+      25%, 74.99% { opacity: 1; transform: rotate(90deg); }
+      75%, to { opacity: 0; transform: rotate(90deg); }
+    }
+    @keyframes red-left {
+      from, 24.99% { opacity: 0; transform: rotate(90deg); }
+      25% { opacity: 1; transform: rotate(90deg); }
+      50%, to { opacity: 1; transform: rotate(270deg); }
+    }
+    @keyframes black-right {
+      from, 24.99% { opacity: 1; transform: rotate(-90deg); }
+      25% { opacity: 1; transform: rotate(-90deg); }
+      50% { opacity: 1; transform: rotate(-90deg); }
+      75%, to { opacity: 1;  transform: rotate(90deg); }
+    }
+    @keyframes black-left {
+      from, 74.99% { opacity: 0; transform: rotate(90deg); }
+      75% { opacity: 1; transform: rotate(90deg); }
+      to { opacity: 1; transform: rotate(270deg); }
+    }
+    .points {
+      position: absolute;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+    }
+
+    .point {
+      position: absolute;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+    }
+    .point::before {
+      content: '';
+      position: absolute; left: calc(50% - 1px);
+      display: block;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <!-- <p class="memo">spinner animation not applied</p> -->
+    <div class="center">
+      <div class="text">
+        <p>MON 15 JAN 2015</p>
+        <p><b>11 <span>:</span> 42</b></p>
+        <p>
+          <span><i class='bx bxs-heart'></i>81</span>
+          <span>1248 KCAL</span>
+        </p>
+      </div>
+      <div class="spinner">
+        <div class="circle red-right"></div>
+        <div class="circle black black-right"></div>
+        <div class="circle red-left"></div>
+        <div class="circle black black-left"></div>
+      </div>
+      <div class="points">
+      </div>
+    </div>
+  </div>
+  <script>
+    const points = document.querySelector('.points');
+    for (let i = 0; i < 60; ++i) {
+      const newPoint = document.createElement('div');
+      newPoint.classList.add('point');
+      newPoint.style.transform = `rotate(${6 * i}deg)`;
+      points.appendChild(newPoint);
+    }
+  </script>
+</body>
+
+</html>
