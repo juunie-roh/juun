@@ -11,8 +11,8 @@ export default function BaseLayout({
   return (
     <div
       className={cn(
-        "relative min-h-[calc(100vh-var(--spacing-header))] px-4 py-8",
-        fixHeight && "h-[calc(100vh-var(--spacing-header))]",
+        "relative min-h-[calc(100vh-var(--spacing-header)-1px)] px-4 py-8",
+        fixHeight && "h-[calc(100vh-var(--spacing-header)-1px)]",
       )}
     >
       {children}
