@@ -7,25 +7,40 @@ import {
 } from "@tanstack/react-table";
 import React from "react";
 
+interface TableOptions {
+  initialSorting?: SortingState;
+  initialColumnPinning?: ColumnPinningState;
+  enableSorting?: boolean;
+  enableColumnPinning?: boolean;
+}
+
 export function useTable<TData>(
   columns: ColumnDef<TData, any>[],
   data: TData[],
+  options?: TableOptions,
 ) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
-    left: [],
-    right: [],
-  });
+  const enableColumnPinning = options?.enableColumnPinning ?? true;
+  const enableSorting = options?.enableSorting ?? true;
+
+  const [sorting, setSorting] = React.useState<SortingState>(
+    options?.initialSorting ?? [],
+  );
+  const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>(
+    options?.initialColumnPinning ?? { left: [], right: [] },
+  );
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    onColumnPinningChange: setColumnPinning,
-    onSortingChange: setSorting,
+    enableSorting,
+    enableColumnPinning,
+    // only set handlers if features are enabled
+    onColumnPinningChange: enableColumnPinning ? setColumnPinning : undefined,
+    onSortingChange: enableSorting ? setSorting : undefined,
     state: {
-      columnPinning,
-      sorting,
+      ...(enableColumnPinning && { columnPinning }),
+      ...(enableSorting && { sorting }),
     },
   });
 
