@@ -264,6 +264,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.90.9
         version: 5.90.9(react@19.2.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
       zod:
         specifier: ^4.1.12
         version: 4.1.12
