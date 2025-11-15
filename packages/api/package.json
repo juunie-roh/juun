@@ -5,9 +5,8 @@
   "type": "module",
   "author": "juun",
   "exports": {
-    ".": "./src/index.ts",
-    "./react": "./src/react/index.ts",
-    "./fetcher": "./src/fetcher/index.ts"
+    ".": "./src/fetcher/index.ts",
+    "./react/*": "./src/react/*.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -18,8 +17,17 @@
   "dependencies": {
     "zod": "^4.1.12"
   },
-  "optionalDependencies": {
-    "@tanstack/react-query": "^5.90.9"
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@tanstack/react-query": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "@tanstack/react-query": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
