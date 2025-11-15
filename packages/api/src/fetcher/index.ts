@@ -1,5 +1,4 @@
 import Fetcher from "./base";
-import FetcherBuilder from "./builder";
 
-export { Fetcher, FetcherBuilder };
+export { Fetcher };
 export type * from "./base";

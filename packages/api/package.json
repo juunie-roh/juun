@@ -6,6 +6,7 @@
   "author": "juun",
   "exports": {
     ".": "./src/index.ts",
+    "./react": "./src/react/index.ts",
     "./fetcher": "./src/fetcher/index.ts"
   },
   "scripts": {
@@ -13,6 +14,12 @@
     "check-types": "tsc -p ./tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest watch --ui --coverage"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "optionalDependencies": {
+    "@tanstack/react-query": "^5.90.9"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",

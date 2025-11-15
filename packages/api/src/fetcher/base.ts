@@ -1,68 +1,5 @@
 import FetcherError from "./error";
 
-type ResponseTransformer<TInput = unknown, TOutput = unknown> = (
-  data: TInput,
-  response: Response,
-) => TOutput | Promise<TOutput>;
-
-/**
- * HTTP methods supported by the API builder
- */
-export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-
-/**
- * Idempotent HTTP methods that are safe to retry per RFC 7231/9110
- */
-const IDEMPOTENT_METHODS: HttpMethod[] = ["GET", "PUT", "DELETE"];
-
-/**
- * Configuration for retry behavior following industry standards (AWS/GCP/axios-retry)
- */
-export interface RetryConfig {
-  /** Maximum retry attempts (default: 3) */
-  maxRetries?: number;
-  /** Initial delay between retries in milliseconds (default: 100) */
-  initialDelay?: number;
-  /** Maximum delay cap for exponential backoff in milliseconds (default: 32000) */
-  maxDelay?: number;
-  /** Use exponential backoff (default: true) */
-  exponential?: boolean;
-  /** HTTP status codes that trigger a retry (default: [408, 429, 500, 502, 503, 504]) */
-  retryableStatuses?: number[];
-  /** Only retry idempotent methods per RFC 7231 (default: true) */
-  onlyIdempotent?: boolean;
-  /** Callback fired on each retry attempt */
-  onRetry?: (attempt: number, error: Error, delayMs: number) => void;
-}
-
-/**
- * Default retry configuration following industry standards
- */
-const DEFAULT_RETRY_CONFIG: Required<RetryConfig> = {
-  maxRetries: 3,
-  initialDelay: 100,
-  maxDelay: 32000,
-  exponential: true,
-  retryableStatuses: [408, 429, 500, 502, 503, 504],
-  onlyIdempotent: true,
-  onRetry: () => {},
-};
-
-/**
- * Configuration options for the API builder
- */
-export interface FetcherConfig {
-  baseUrl?: string;
-  path?: string;
-  method?: HttpMethod;
-  headers?: Record<string, string>;
-  timeout?: number;
-  queryParams?: Record<string, string | number | boolean>;
-  body?: unknown;
-  transformers?: ResponseTransformer[];
-  retry?: RetryConfig;
-}
-
 /**
  * HTTP client for executing configured API requests
  *
@@ -85,8 +22,8 @@ export interface FetcherConfig {
  *   .setRetry({ maxRetries: 3 })
  *   .build();
  *
- * // Execute request
- * const users = await fetcher.execute<User[]>();
+ * // Fetch request
+ * const users = await fetcher.fetch<User[]>();
  * ```
  *
  * @example
@@ -99,7 +36,7 @@ export interface FetcherConfig {
  *   retry: { maxRetries: 3 }
  * });
  *
- * const data = await fetcher.execute();
+ * const data = await fetcher.fetch();
  * ```
  *
  * @example
@@ -118,18 +55,18 @@ export interface FetcherConfig {
  *   .setSchema(userSchema)
  *   .build();
  *
- * const user = await fetcher.execute(); // Validated & typed
+ * const user = await fetcher.fetch(); // Validated & typed
  * ```
  */
-export default class Fetcher {
-  private readonly _config: FetcherConfig;
+class Fetcher {
+  private readonly _config: Fetcher.Config;
 
-  constructor(config: FetcherConfig) {
+  constructor(config: Fetcher.Config) {
     this._config = { ...config };
   }
 
   /** Get a readonly copy of the current configuration */
-  get config(): Readonly<FetcherConfig> {
+  get config(): Readonly<Fetcher.Config> {
     return { ...this._config };
   }
 
@@ -153,14 +90,14 @@ export default class Fetcher {
    * @example
    * ```typescript
    * // Basic GET request
-   * const users = await fetcher.execute<User[]>();
+   * const users = await fetcher.fetch<User[]>();
    * ```
    *
    * @example
    * ```typescript
    * // With error handling
    * try {
-   *   const data = await fetcher.execute<ApiResponse>();
+   *   const data = await fetcher.fetch<ApiResponse>();
    * } catch (error) {
    *   if (error instanceof FetcherError) {
    *     console.error('HTTP Error:', error.status);
@@ -183,13 +120,13 @@ export default class Fetcher {
    *   })
    *   .build();
    *
-   * const data = await fetcher.execute();
+   * const data = await fetcher.fetch();
    * ```
    */
-  async execute<T = unknown>(): Promise<T> {
+  async fetch<T = unknown>(): Promise<T> {
     // If no retry config, just perform request once
     if (!this._config.retry) {
-      return this.fetch<T>();
+      return this.execute<T>();
     }
 
     const retryConfig = { ...DEFAULT_RETRY_CONFIG, ...this._config.retry };
@@ -197,7 +134,7 @@ export default class Fetcher {
 
     for (let attempt = 0; attempt <= retryConfig.maxRetries; attempt++) {
       try {
-        return await this.fetch<T>();
+        return await this.execute<T>();
       } catch (error) {
         lastError = error as Error;
 
@@ -233,7 +170,7 @@ export default class Fetcher {
   /**
    * Perform the actual HTTP request
    */
-  private async fetch<T>(): Promise<T> {
+  private async execute<T>(): Promise<T> {
     const { baseUrl, path, method, headers, timeout, queryParams, body } =
       this._config;
 
@@ -284,13 +221,17 @@ export default class Fetcher {
       }
 
       // Handle empty responses
+      // TODO: handle other response types
       const contentType = response.headers.get("content-type");
       let result: unknown;
 
-      if (!contentType || contentType.includes("application/json")) {
-        result = await response.json();
+      const text = await response.text();
+      if (!text) {
+        result = null;
+      } else if (!contentType || contentType.includes("application/json")) {
+        result = JSON.parse(text);
       } else {
-        result = await response.text();
+        result = text;
       }
 
       // Apply transformers in order
@@ -321,7 +262,7 @@ export default class Fetcher {
    */
   private shouldRetry(
     error: Error,
-    retryConfig: Required<RetryConfig>,
+    retryConfig: Required<Fetcher.RetryConfig>,
   ): boolean {
     // Check if method is idempotent
     if (retryConfig.onlyIdempotent) {
@@ -366,3 +307,168 @@ export default class Fetcher {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
+
+/**
+ * Idempotent HTTP methods that are safe to retry per RFC 7231/9110
+ */
+const IDEMPOTENT_METHODS: Fetcher.HttpMethod[] = ["GET", "PUT", "DELETE"];
+
+/**
+ * Default retry configuration following industry standards
+ */
+const DEFAULT_RETRY_CONFIG: Required<Fetcher.RetryConfig> = {
+  maxRetries: 3,
+  initialDelay: 100,
+  maxDelay: 32000,
+  exponential: true,
+  retryableStatuses: [408, 429, 500, 502, 503, 504],
+  onlyIdempotent: true,
+  onRetry: () => {},
+};
+
+namespace Fetcher {
+  /**
+   * Configuration options for the API builder
+   */
+  export interface Config {
+    baseUrl?: string;
+    path?: string;
+    method?: HttpMethod;
+    headers?: Record<string, string>;
+    timeout?: number;
+    queryParams?: Record<string, string | number | boolean>;
+    body?: unknown;
+    transformers?: ResponseTransformer[];
+    retry?: RetryConfig;
+  }
+
+  /**
+   * Configuration for retry behavior following industry standards (AWS/GCP/axios-retry)
+   */
+  export interface RetryConfig {
+    /** Maximum retry attempts (default: 3) */
+    maxRetries?: number;
+    /** Initial delay between retries in milliseconds (default: 100) */
+    initialDelay?: number;
+    /** Maximum delay cap for exponential backoff in milliseconds (default: 32000) */
+    maxDelay?: number;
+    /** Use exponential backoff (default: true) */
+    exponential?: boolean;
+    /** HTTP status codes that trigger a retry (default: [408, 429, 500, 502, 503, 504]) */
+    retryableStatuses?: number[];
+    /** Only retry idempotent methods per RFC 7231 (default: true) */
+    onlyIdempotent?: boolean;
+    /** Callback fired on each retry attempt */
+    onRetry?: (attempt: number, error: Error, delayMs: number) => void;
+  }
+
+  /**
+   * HTTP methods supported by the API builder
+   */
+  export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+
+  type ResponseTransformer<Input = unknown, Output = unknown> = (
+    data: Input,
+    response: Response,
+  ) => Output | Promise<Output>;
+
+  /**
+   * Factory method: Create a Fetcher pre-configured for JSON APIs
+   *
+   * Sets up a fetcher with:
+   * - JSON content-type header
+   * - 30-second timeout
+   * - Specified base URL
+   *
+   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com')
+   * @param config - Optional additional configuration to merge
+   * @returns Configured Fetcher instance ready to use
+   *
+   * @example
+   * ```typescript
+   * const fetcher = Fetcher.json('https://api.example.com', {
+   *   path: '/users',
+   *   retry: { maxRetries: 3 }
+   * });
+   *
+   * const users = await fetcher.fetch<User[]>();
+   * ```
+   */
+  export function json(baseUrl: string, config?: Partial<Config>): Fetcher {
+    return new Fetcher({
+      ...config,
+      baseUrl,
+      timeout: config?.timeout ?? 30000,
+      headers: {
+        "Content-Type": "application/json",
+        ...config?.headers,
+      },
+    });
+  }
+
+  /**
+   * Factory method: Create a Fetcher pre-configured for Bearer token authentication
+   *
+   * Sets up a fetcher with:
+   * - Bearer token authentication
+   * - JSON content-type header
+   * - Specified base URL
+   *
+   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com')
+   * @param token - The bearer token (will be sent as 'Authorization: Bearer {token}')
+   * @param config - Optional additional configuration to merge
+   * @returns Configured Fetcher instance ready to use
+   *
+   * @example
+   * ```typescript
+   * const fetcher = Fetcher.withBearer(
+   *   'https://api.example.com',
+   *   'abc123',
+   *   { path: '/protected/users' }
+   * );
+   *
+   * const users = await fetcher.fetch<User[]>();
+   * ```
+   */
+  export function withBearer(
+    baseUrl: string,
+    token: string,
+    config?: Partial<Config>,
+  ): Fetcher {
+    return new Fetcher({
+      ...config,
+      baseUrl,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        ...config?.headers,
+      },
+    });
+  }
+
+  /**
+   * Factory method: Create a Fetcher from an existing configuration
+   *
+   * Useful for creating variations of existing fetchers or
+   * restoring fetchers from serialized configurations.
+   *
+   * @param config - Fetcher configuration object
+   * @returns Fetcher initialized with the provided configuration
+   *
+   * @example
+   * ```typescript
+   * const config = {
+   *   baseUrl: 'https://api.example.com',
+   *   path: '/users',
+   *   timeout: 5000
+   * };
+   *
+   * const fetcher = Fetcher.from(config);
+   * ```
+   */
+  export function from(config: Config): Fetcher {
+    return new Fetcher(config);
+  }
+}
+
+export default Fetcher;
