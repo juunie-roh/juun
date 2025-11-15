@@ -1,10 +1,6 @@
-import {
-  type QueryKey,
-  useQuery,
-  type UseQueryOptions,
-} from "@tanstack/react-query";
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 
-import type { Fetcher } from "../fetcher";
+import { Fetcher } from "../fetcher";
 import FetcherError from "../fetcher/error";
 
 /**
@@ -13,10 +9,8 @@ import FetcherError from "../fetcher/error";
  * Wraps a Fetcher instance with React Query's useQuery hook, providing
  * automatic caching, background refetching, and state management.
  *
- * @template T - The expected response data type
  * @param fetcher - Configured Fetcher instance
- * @param queryKey - React Query cache key (state-driven, not auto-generated)
- * @param options - Additional React Query options
+ * @param options - React Query options
  * @returns React Query result with data, loading, error states
  *
  * @example
@@ -32,7 +26,7 @@ import FetcherError from "../fetcher/error";
  *
  *   const { data, isLoading, error } = useFetcher<User[]>(
  *     fetcher,
- *     queryKey
+ *     { queryKey }
  *   );
  *
  *   if (isLoading) return <div>Loading...</div>;
@@ -45,10 +39,10 @@ import FetcherError from "../fetcher/error";
  * @example
  * ```typescript
  * // With React Query options
- * const { data } = useFetcher<Post>(
+ * const { data } = useFetcher(
  *   fetcher,
- *   ['posts', postId],
  *   {
+ *     queryKey: ['posts', postId],
  *     staleTime: 5000,
  *     enabled: !!postId,
  *     retry: 3
@@ -74,12 +68,10 @@ import FetcherError from "../fetcher/error";
  */
 export function useFetcher<T = unknown>(
   fetcher: Fetcher,
-  queryKey: QueryKey,
-  options?: Omit<UseQueryOptions<T, FetcherError>, "queryFn">,
+  options: Omit<UseQueryOptions<T, FetcherError>, "queryFn">,
 ) {
   return useQuery<T, FetcherError>({
     ...options,
-    queryKey,
     queryFn: async () => {
       return fetcher.fetch<T>();
     },
