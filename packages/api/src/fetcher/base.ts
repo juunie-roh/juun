@@ -10,25 +10,9 @@ import FetcherError from "./error";
  * - JSON and text response parsing
  * - Comprehensive error handling
  *
- * **Note:** Fetcher instances are typically created via {@link FetcherBuilder} rather than
- * directly instantiated.
- *
  * @example
  * ```typescript
- * // Create via builder (recommended)
- * const fetcher = new FetcherBuilder()
- *   .setBaseUrl('https://api.example.com')
- *   .setPath('/users')
- *   .setRetry({ maxRetries: 3 })
- *   .build();
- *
- * // Fetch request
- * const users = await fetcher.fetch<User[]>();
- * ```
- *
- * @example
- * ```typescript
- * // Direct instantiation (advanced usage)
+ * // Direct instantiation
  * const fetcher = new Fetcher({
  *   baseUrl: 'https://api.example.com',
  *   path: '/users',
@@ -49,11 +33,11 @@ import FetcherError from "./error";
  *   name: z.string(),
  * });
  *
- * const fetcher = new FetcherBuilder()
- *   .setBaseUrl('https://api.example.com')
- *   .setPath('/users/1')
- *   .setSchema(userSchema)
- *   .build();
+ * const fetcher = new Fetcher({
+ *   baseUrl: 'https://api.example.com',
+ *   path: '/users/1',
+ *   schema: userSchema,
+ * });
  *
  * const user = await fetcher.fetch(); // Validated & typed
  * ```
@@ -110,15 +94,15 @@ class Fetcher {
    * @example
    * ```typescript
    * // With retry monitoring
-   * const fetcher = new FetcherBuilder()
-   *   .setBaseUrl('https://api.example.com')
-   *   .setRetry({
+   * const fetcher = new Fetcher({
+   *   baseUrl: 'https://api.example.com',
+   *   retry: {
    *     maxRetries: 3,
    *     onRetry: (attempt, error, delay) => {
    *       console.log(`Retry ${attempt} after ${delay}ms`);
    *     }
-   *   })
-   *   .build();
+   *   },
+   * })
    *
    * const data = await fetcher.fetch();
    * ```
