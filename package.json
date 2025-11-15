@@ -1,7 +1,7 @@
 {
   "name": "juun",
   "version": "0.0.2",
-  "packageManager": "pnpm@10.21.0",
+  "packageManager": "pnpm@10.22.0",
   "private": true,
   "author": "juun",
   "type": "module",
@@ -68,7 +68,8 @@
     "overrides": {
       "refractor>prismjs": "^1.30.0",
       "tmp": "^0.2.4",
-      "vite": "^7.1.11"
+      "vite": "^7.1.11",
+      "js-yaml": "^4.1.1"
     }
   }
 }
