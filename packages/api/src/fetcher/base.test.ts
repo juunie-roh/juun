@@ -54,7 +54,7 @@ describe("Fetcher", () => {
     it("should throw error if baseUrl is not set", async () => {
       const fetcher = new Fetcher({});
 
-      await expect(fetcher.execute()).rejects.toThrow("Base URL is required");
+      await expect(fetcher.fetch()).rejects.toThrow("Base URL is required");
     });
 
     it("should make GET request with correct URL", async () => {
@@ -71,7 +71,7 @@ describe("Fetcher", () => {
         method: "GET",
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         "https://api.example.com/users",
@@ -95,7 +95,7 @@ describe("Fetcher", () => {
         queryParams: { page: 1, limit: 10, active: true },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         "https://api.example.com/users?page=1&limit=10&active=true",
@@ -113,7 +113,7 @@ describe("Fetcher", () => {
         headers: { Authorization: "Bearer token", "X-Custom": "value" },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         expect.any(String),
@@ -140,7 +140,7 @@ describe("Fetcher", () => {
         body,
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         expect.any(String),
@@ -162,7 +162,7 @@ describe("Fetcher", () => {
         body: { ignored: true },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         expect.any(String),
@@ -182,7 +182,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
-      const result = await fetcher.execute<{ id: number; name: string }>();
+      const result = await fetcher.fetch<{ id: number; name: string }>();
 
       expect(result).toEqual(responseData);
     });
@@ -196,7 +196,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
-      const result = await fetcher.execute<string>();
+      const result = await fetcher.fetch<string>();
 
       expect(result).toBe("Plain text response");
     });
@@ -211,18 +211,16 @@ describe("Fetcher", () => {
         headers: {
           get: vi.fn(() => null), // Return null for content-type
         },
-        json: vi.fn(async () => responseData),
         text: vi.fn(async () => JSON.stringify(responseData)),
       } as unknown as Response;
 
       mockFetch.mockResolvedValueOnce(mockResponse);
 
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
-      const result = await fetcher.execute();
+      const result = await fetcher.fetch();
 
       expect(result).toEqual(responseData);
-      expect(mockResponse.json).toHaveBeenCalled();
-      expect(mockResponse.text).not.toHaveBeenCalled();
+      expect(mockResponse.text).toHaveBeenCalled();
     });
 
     it("should throw FetcherError on HTTP error status", async () => {
@@ -232,8 +230,8 @@ describe("Fetcher", () => {
 
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
 
-      await expect(fetcher.execute()).rejects.toThrow(FetcherError);
-      await expect(fetcher.execute()).rejects.toThrow("HTTP 404: Not Found");
+      await expect(fetcher.fetch()).rejects.toThrow(FetcherError);
+      await expect(fetcher.fetch()).rejects.toThrow("HTTP 404: Not Found");
     });
 
     it("should throw FetcherError with response object", async () => {
@@ -246,7 +244,7 @@ describe("Fetcher", () => {
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
 
       try {
-        await fetcher.execute();
+        await fetcher.fetch();
       } catch (error) {
         expect(error).toBeInstanceOf(FetcherError);
         if (error instanceof FetcherError) {
@@ -268,7 +266,7 @@ describe("Fetcher", () => {
         timeout: 5000,
       });
 
-      const executePromise = fetcher.execute();
+      const executePromise = fetcher.fetch();
 
       // Advance timers to trigger timeout
       vi.advanceTimersByTime(5000);
@@ -289,7 +287,7 @@ describe("Fetcher", () => {
         timeout: 5000,
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         expect.any(String),
@@ -311,7 +309,7 @@ describe("Fetcher", () => {
         timeout: 5000,
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(clearTimeoutSpy).toHaveBeenCalled();
     });
@@ -326,7 +324,7 @@ describe("Fetcher", () => {
         timeout: 5000,
       });
 
-      await expect(fetcher.execute()).rejects.toThrow("Network error");
+      await expect(fetcher.fetch()).rejects.toThrow("Network error");
       expect(clearTimeoutSpy).toHaveBeenCalled();
     });
 
@@ -343,7 +341,7 @@ describe("Fetcher", () => {
           method,
         });
 
-        await fetcher.execute();
+        await fetcher.fetch();
 
         expect(mockFetch).toHaveBeenCalledWith(
           expect.any(String),
@@ -357,7 +355,7 @@ describe("Fetcher", () => {
 
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
 
-      await expect(fetcher.execute()).rejects.toThrow("Network failure");
+      await expect(fetcher.fetch()).rejects.toThrow("Network failure");
     });
 
     it("should construct URL correctly without path", async () => {
@@ -367,7 +365,7 @@ describe("Fetcher", () => {
 
       const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         "https://api.example.com/",
@@ -385,7 +383,7 @@ describe("Fetcher", () => {
         path: "",
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(mockFetch).toHaveBeenCalledWith(
         "https://api.example.com/",
@@ -408,7 +406,7 @@ describe("Fetcher", () => {
         transformers: [(data: any) => data.data],
       });
 
-      const result = await fetcher.execute<{ value: number }>();
+      const result = await fetcher.fetch<{ value: number }>();
 
       expect(result).toEqual({ value: 42 });
     });
@@ -430,7 +428,7 @@ describe("Fetcher", () => {
         ],
       });
 
-      const result = await fetcher.execute<number[]>();
+      const result = await fetcher.fetch<number[]>();
 
       expect(result).toEqual([1, 2, 3]);
     });
@@ -455,7 +453,7 @@ describe("Fetcher", () => {
         ],
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(capturedResponse).toBeDefined();
       expect(capturedResponse?.status).toBe(200);
@@ -481,7 +479,7 @@ describe("Fetcher", () => {
         ],
       });
 
-      const result = await fetcher.execute<{
+      const result = await fetcher.fetch<{
         id: number;
         transformed: boolean;
       }>();
@@ -501,7 +499,7 @@ describe("Fetcher", () => {
         baseUrl: "https://api.example.com",
       });
 
-      const result = await fetcher.execute<{ value: number }>();
+      const result = await fetcher.fetch<{ value: number }>();
 
       expect(result).toEqual({ value: 42 });
     });
@@ -539,7 +537,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3, initialDelay: 10 },
       });
 
-      const result = await fetcher.execute<{ success: boolean }>();
+      const result = await fetcher.fetch<{ success: boolean }>();
 
       expect(result).toEqual({ success: true });
       expect(mockFetch).toHaveBeenCalledTimes(3);
@@ -561,7 +559,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3, initialDelay: 10 },
       });
 
-      const result = await fetcher.execute();
+      const result = await fetcher.fetch();
 
       expect(result).toEqual({ success: true });
       expect(mockFetch).toHaveBeenCalledTimes(3);
@@ -577,7 +575,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3 },
       });
 
-      await expect(fetcher.execute()).rejects.toThrow("HTTP 400: Bad Request");
+      await expect(fetcher.fetch()).rejects.toThrow("HTTP 400: Bad Request");
       expect(mockFetch).toHaveBeenCalledTimes(1);
     });
 
@@ -591,7 +589,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 2, initialDelay: 10 },
       });
 
-      await expect(fetcher.execute()).rejects.toThrow(FetcherError);
+      await expect(fetcher.fetch()).rejects.toThrow(FetcherError);
       expect(mockFetch).toHaveBeenCalledTimes(3); // Initial + 2 retries
     });
 
@@ -620,7 +618,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3, initialDelay: 10, onRetry },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       expect(onRetry).toHaveBeenCalledTimes(2);
       expect(onRetry).toHaveBeenNthCalledWith(
@@ -667,7 +665,7 @@ describe("Fetcher", () => {
         },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       // First retry delay should be around 100ms (±30% jitter)
       const firstDelay = onRetry.mock.calls[0][2];
@@ -710,7 +708,7 @@ describe("Fetcher", () => {
         },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       // Both delays should be around 100ms (±30% jitter)
       const firstDelay = onRetry.mock.calls[0][2];
@@ -753,7 +751,7 @@ describe("Fetcher", () => {
         },
       });
 
-      await fetcher.execute();
+      await fetcher.fetch();
 
       // All delays should be capped at maxDelay (±30% jitter)
       onRetry.mock.calls.forEach((call) => {
@@ -774,7 +772,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3 },
       });
 
-      await expect(postFetcher.execute()).rejects.toThrow(FetcherError);
+      await expect(postFetcher.fetch()).rejects.toThrow(FetcherError);
       expect(mockFetch).toHaveBeenCalledTimes(1);
 
       mockFetch.mockClear();
@@ -797,7 +795,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3, initialDelay: 10 },
       });
 
-      await getFetcher.execute();
+      await getFetcher.fetch();
       expect(mockFetch).toHaveBeenCalledTimes(2);
     });
 
@@ -822,7 +820,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3, initialDelay: 10, onlyIdempotent: false },
       });
 
-      const result = await fetcher.execute();
+      const result = await fetcher.fetch();
 
       expect(result).toEqual({ success: true });
       expect(mockFetch).toHaveBeenCalledTimes(2);
@@ -838,7 +836,7 @@ describe("Fetcher", () => {
         retry: { maxRetries: 3, initialDelay: 10, retryableStatuses: [418] },
       });
 
-      await expect(fetcher.execute()).rejects.toThrow(FetcherError);
+      await expect(fetcher.fetch()).rejects.toThrow(FetcherError);
       // Should retry on 418
       expect(mockFetch).toHaveBeenCalledTimes(4); // Initial + 3 retries
     });
@@ -855,10 +853,224 @@ describe("Fetcher", () => {
         baseUrl: "https://api.example.com",
       });
 
-      const result = await fetcher.execute();
+      const result = await fetcher.fetch();
 
       expect(result).toEqual({ success: true });
       expect(mockFetch).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("factory methods", () => {
+    describe("Fetcher.json", () => {
+      it("should create fetcher with JSON configuration", () => {
+        const fetcher = Fetcher.json("https://api.example.com");
+
+        expect(fetcher).toBeInstanceOf(Fetcher);
+        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.headers).toEqual({
+          "Content-Type": "application/json",
+        });
+        expect(fetcher.config.timeout).toBe(30000);
+      });
+
+      it("should merge additional config", () => {
+        const fetcher = Fetcher.json("https://api.example.com", {
+          path: "/users",
+          timeout: 5000,
+          headers: { "X-Custom": "value" },
+        });
+
+        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.path).toBe("/users");
+        expect(fetcher.config.timeout).toBe(5000);
+        expect(fetcher.config.headers).toEqual({
+          "Content-Type": "application/json",
+          "X-Custom": "value",
+        });
+      });
+
+      it("should allow overriding Content-Type header", () => {
+        const fetcher = Fetcher.json("https://api.example.com", {
+          headers: { "Content-Type": "text/plain" },
+        });
+
+        expect(fetcher.config.headers).toEqual({
+          "Content-Type": "text/plain",
+        });
+      });
+
+      it("should work with retry config", async () => {
+        vi.useRealTimers();
+
+        mockFetch
+          .mockResolvedValueOnce(
+            new Response(null, {
+              status: 503,
+              statusText: "Service Unavailable",
+            }),
+          )
+          .mockResolvedValueOnce(
+            new Response(JSON.stringify({ success: true }), {
+              status: 200,
+              headers: { "Content-Type": "application/json" },
+            }),
+          );
+
+        const fetcher = Fetcher.json("https://api.example.com", {
+          path: "/users",
+          retry: { maxRetries: 3, initialDelay: 10 },
+        });
+
+        const result = await fetcher.fetch();
+
+        expect(result).toEqual({ success: true });
+        expect(mockFetch).toHaveBeenCalledTimes(2);
+      });
+    });
+
+    describe("Fetcher.withBearer", () => {
+      it("should create fetcher with Bearer authentication", () => {
+        const fetcher = Fetcher.withBearer(
+          "https://api.example.com",
+          "token123",
+        );
+
+        expect(fetcher).toBeInstanceOf(Fetcher);
+        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.headers).toEqual({
+          Authorization: "Bearer token123",
+          "Content-Type": "application/json",
+        });
+      });
+
+      it("should format token as Bearer", () => {
+        const fetcher = Fetcher.withBearer(
+          "https://api.example.com",
+          "mytoken",
+        );
+
+        expect(fetcher.config.headers?.Authorization).toBe("Bearer mytoken");
+      });
+
+      it("should merge additional config", () => {
+        const fetcher = Fetcher.withBearer(
+          "https://api.example.com",
+          "token123",
+          {
+            path: "/protected",
+            headers: { "X-Request-ID": "abc" },
+          },
+        );
+
+        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.path).toBe("/protected");
+        expect(fetcher.config.headers).toEqual({
+          Authorization: "Bearer token123",
+          "Content-Type": "application/json",
+          "X-Request-ID": "abc",
+        });
+      });
+
+      it("should allow overriding Authorization header", () => {
+        const fetcher = Fetcher.withBearer(
+          "https://api.example.com",
+          "token123",
+          {
+            headers: { Authorization: "Custom auth" },
+          },
+        );
+
+        expect(fetcher.config.headers?.Authorization).toBe("Custom auth");
+      });
+
+      it("should make authenticated request", async () => {
+        mockFetch.mockResolvedValueOnce(
+          new Response(JSON.stringify({ user: "john" }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }),
+        );
+
+        const fetcher = Fetcher.withBearer(
+          "https://api.example.com",
+          "token123",
+          { path: "/me" },
+        );
+
+        await fetcher.fetch();
+
+        expect(mockFetch).toHaveBeenCalledWith(
+          "https://api.example.com/me",
+          expect.objectContaining({
+            headers: expect.objectContaining({
+              Authorization: "Bearer token123",
+            }),
+          }),
+        );
+      });
+    });
+
+    describe("Fetcher.from", () => {
+      it("should create fetcher from existing config", () => {
+        const config: Fetcher.Config = {
+          baseUrl: "https://api.example.com",
+          path: "/users",
+          method: "POST",
+          timeout: 5000,
+        };
+
+        const fetcher = Fetcher.from(config);
+
+        expect(fetcher).toBeInstanceOf(Fetcher);
+        expect(fetcher.config).toEqual(config);
+      });
+
+      it("should work with complex config", () => {
+        const onRetry = vi.fn();
+        const transformer = (data: unknown) => data;
+
+        const config: Fetcher.Config = {
+          baseUrl: "https://api.example.com",
+          path: "/users",
+          method: "POST",
+          timeout: 5000,
+          headers: { "X-Custom": "value" },
+          queryParams: { page: 1, limit: 10 },
+          body: { name: "John" },
+          transformers: [transformer],
+          retry: {
+            maxRetries: 3,
+            initialDelay: 100,
+            exponential: true,
+            onRetry,
+          },
+        };
+
+        const fetcher = Fetcher.from(config);
+
+        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.path).toBe("/users");
+        expect(fetcher.config.method).toBe("POST");
+        expect(fetcher.config.timeout).toBe(5000);
+        expect(fetcher.config.headers).toEqual({ "X-Custom": "value" });
+        expect(fetcher.config.queryParams).toEqual({ page: 1, limit: 10 });
+        expect(fetcher.config.body).toEqual({ name: "John" });
+        expect(fetcher.config.transformers).toEqual([transformer]);
+        expect(fetcher.config.retry?.maxRetries).toBe(3);
+        expect(fetcher.config.retry?.onRetry).toBe(onRetry);
+      });
+
+      it("should create independent instance", () => {
+        const config: Fetcher.Config = {
+          baseUrl: "https://api.example.com",
+        };
+
+        const fetcher = Fetcher.from(config);
+
+        config.baseUrl = "https://different.com";
+
+        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+      });
     });
   });
 });

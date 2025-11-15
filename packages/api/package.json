@@ -5,14 +5,29 @@
   "type": "module",
   "author": "juun",
   "exports": {
-    ".": "./src/index.ts",
-    "./fetcher": "./src/fetcher/index.ts"
+    ".": "./src/fetcher/index.ts",
+    "./react/*": "./src/react/*.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest watch --ui --coverage"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "@tanstack/react-query": "^5.90.9"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "@tanstack/react-query": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
