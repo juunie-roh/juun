@@ -7,18 +7,29 @@ import {
   ChevronRight,
   ImageOff,
   PanelLeftDashed,
+  TriangleAlert,
   Workflow,
 } from "lucide-react";
-import Image from "next/image";
+import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import md from "@/lib/md";
 import { formatDateSafe } from "@/utils/date";
 
-import { PlaygroundCategory, PlaygroundItem as Item } from "../_data";
+import { PlaygroundCategory } from "../_data";
 
-export default async function PlaygroundItem({
+export interface PlaygroundItemProps {
+  title: string;
+  description: React.ReactNode;
+  date: string;
+  category: PlaygroundCategory;
+  href: string;
+  image?: string;
+  imageStyle?: ImageProps["style"];
+  className?: string;
+}
+
+export default function PlaygroundItem({
   title,
   description,
   date,
@@ -27,11 +38,12 @@ export default async function PlaygroundItem({
   image,
   imageStyle,
   className,
-}: Item & { className?: string }) {
+}: PlaygroundItemProps) {
   const IconMap: Record<PlaygroundCategory, React.JSX.Element> = {
     "3D": <Box />,
     UI: <PanelLeftDashed />,
-    CMS: <Workflow />,
+    "Content Management": <Workflow />,
+    "Not Found": <TriangleAlert />,
   };
 
   return (
@@ -56,7 +68,7 @@ export default async function PlaygroundItem({
           <h2 className="font-stabil-grotesk text-3xl font-bold tracking-tight">
             {title}
           </h2>
-          {md.render(await md.parse(description))}
+          {description}
           <footer className="flex items-center justify-between">
             {/* Date */}
             <div className="flex items-center gap-1 text-sm text-muted-foreground">
