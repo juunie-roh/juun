@@ -1,6 +1,10 @@
 import { ImageProps } from "next/image";
 
-export type PlaygroundCategory = "3D" | "UI" | "CMS";
+export type PlaygroundCategory =
+  | "3D"
+  | "UI"
+  | "Content Management"
+  | "Not Found";
 
 export type PlaygroundItem = {
   title: string;
@@ -25,6 +29,18 @@ export const PLAYGROUND_ITEMS: PlaygroundItem[] = [
 - **HybridTerrainProvider**: Combines multiple terrain sources with automatic fallback handling ([PR submitted](https://github.com/CesiumGS/cesium/pull/12822) to core library)
 - **Collection**: Type-safe wrapper for Cesium data structures with enhanced TypeScript support
 - **Highlight**: Flyweight visual highlighting with silhouette and surface effects`,
+  },
+  {
+    title: "UI Tests",
+    date: "2025-03-02",
+    category: "UI",
+    href: "/playground/ui-tests",
+    image: "/images/playground/wheel.png",
+    imageStyle: { objectFit: "cover" },
+    description: `Experimental UI component showcase featuring custom-built interaction patterns and animation systems.
+
+- **Marquee Component**: Infinite scroll animation with bidirectional movement and seamless looping
+- **Wheel Interfaces**: A unique circular menu system for 3D scene interaction.`,
   },
   {
     title: "Three.js with Physics",
