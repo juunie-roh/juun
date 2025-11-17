@@ -38,11 +38,11 @@ const preview: Preview = {
       <NextIntlClientProvider locale="ko" messages={{}}>
         <ThemeProvider>
           <TooltipProvider>
-            <body
+            <div
               className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased`}
             >
               <Story />
-            </body>
+            </div>
           </TooltipProvider>
         </ThemeProvider>
       </NextIntlClientProvider>
