@@ -15,7 +15,7 @@ import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { API_LABELS, getApiOptions } from "../../_utils";
+import { API_LABELS, getApiOptions } from "../../_data";
 
 const API_OPTIONS = getApiOptions();
 

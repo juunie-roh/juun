@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useCesiumUtils } from "../_contexts/cesium-utils";
-import { isValidApi } from "../_utils";
+import { isValidApi } from "../_data";
 import ApiFeatureDetail from "./api/feature-detail";
 import Viewer from "./viewer";
 

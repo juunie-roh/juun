@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
-import { getFeatures, isValidApi } from "../../_utils";
+import { getFeatures, isValidApi } from "../../_data";
 
 export default function ApiFeatureList() {
   const { feature, setFeature } = useCesiumUtils();

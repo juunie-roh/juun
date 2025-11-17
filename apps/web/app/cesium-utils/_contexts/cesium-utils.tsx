@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type { Feature } from "../_utils";
+import type { Feature } from "../_data";
 
 type CesiumUtilsContextType = {
   feature?: Feature;

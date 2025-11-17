@@ -6,6 +6,7 @@
   "author": "juun",
   "exports": {
     ".": "./src/fetcher/index.ts",
+    "./react": "./src/react/index.ts",
     "./react/*": "./src/react/*.ts"
   },
   "scripts": {
