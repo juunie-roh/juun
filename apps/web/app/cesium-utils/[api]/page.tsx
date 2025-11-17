@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ResizableViewerController } from "../_components";
-import { API_KEYS, getApiMetadata, isValidApi } from "../_utils";
+import { API_KEYS, getApiMetadata, isValidApi } from "../_data";
 interface PageProps {
   params: Promise<{ api?: string }>;
 }

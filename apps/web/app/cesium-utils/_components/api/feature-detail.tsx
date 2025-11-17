@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
-import { API_LABELS, getFeatures, isValidApi } from "../../_utils";
+import { API_LABELS, getFeatures, isValidApi } from "../../_data";
 
 export default function ApiFeatureDetail() {
   const { feature } = useCesiumUtils();
