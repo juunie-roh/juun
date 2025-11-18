@@ -18,6 +18,20 @@ export type PlaygroundItem = {
 
 export const PLAYGROUND_ITEMS: PlaygroundItem[] = [
   {
+    title: "Markdown Input Renderer",
+    date: "2025-11-18",
+    category: "Content Management",
+    href: "/playground/input-renderer",
+    image: "/images/playground/markdown-icon.png",
+    imageStyle: { objectFit: "contain" },
+    description: `Real-time markdown preview system demonstrating the custom content processing pipeline used throughout this project.
+
+- **Live Preview**: Debounced real-time rendering with URL-based state management for instant feedback
+- **Custom Pipeline**: Full \`unified/remark/rehype\` processing with Next.js Image, Link, and syntax-highlighted CodeBlock components
+- **Production Pipeline**: Uses the exact same markdown parser as the blog system for consistent rendering
+- **Server-Side Rendering**: React Server Components handle parsing and rendering, avoiding client-side serialization issues`,
+  },
+  {
     title: "Cesium Utils Demo",
     date: "2025-05-13",
     category: "3D",
