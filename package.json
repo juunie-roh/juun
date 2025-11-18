@@ -56,9 +56,7 @@
   },
   "pnpm": {
     "overrides": {
-      "refractor>prismjs": "^1.30.0",
       "tmp": "^0.2.4",
-      "vite": "^7.1.11",
       "js-yaml": "^4.1.1"
     }
   }
