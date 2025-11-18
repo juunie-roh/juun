@@ -589,4 +589,70 @@ Then, I came up with an idea that utilizing markdown syntax for writing contents
 - Balancing automatic optimization with markdown authoring flexibility
 `,
   },
+  {
+    title: "Portfolio to Playground Reconstruction",
+    description:
+      "Redefined portfolio as playground, and migrated system from file-based dynamic routes to static routes with centralized configuration, following \`cesium-utils\` page's architectural pattern.",
+    date: "2025-11-17",
+    category: "Architecture",
+    tags: ["ADR", "Architecture", "Next.js", "Refactoring"],
+    detail: `
+### Situation
+
+The original portfolio system used file-based dynamic routes (\`[slug]\` pattern) where each project had its \`tsx\` files.
+Additionally, the term "portfolio" felt too formal for experimental tech demos and learning projects.
+For items that can have their own layouts for each, dynamic routing system with unified layout was not appropriate.
+To disclose the purpose of this section clearer, rebranding and reconstruction was inevitable.
+
+### Task
+
+Redesign the portfolio architecture to:
+
+1. Rebrand from "portfolio" to "playground" to better reflect the experimental nature.
+2. Switch to static routing system to enable various layouts for each item.
+3. Provide alternative for each item's entry point. Since no longer utilizing dynamic routing system, automatic entry point generation (previously with card component) will be lost.
+4. Adopt the proven architectural pattern from \`cesium-utils\`. (private folders, centralized config)
+5. Ensure type safety and prevent runtime errors from missing data
+
+### Action
+
+#### 1. Conceptual Rebranding
+
+- Renamed \`/portfolio\` to \`/playground\` across the codebase.
+- Updated terminology: "portfolio items" → "playground items".
+
+#### 2. Routing System Migration
+
+- Removed dynamic \`[slug]\` routes and individual project \`tsx\` files.
+- Created static routes under \`/playground\`, enabling independent layouts per item.
+
+#### 3. Entry Point Generation
+
+- Created \`apps/web/app/playground/_data/index.ts\` as single source of truth, following \`cesium-utils\` pattern.
+- Entry points for each playground item are sourced from centralized data, displayed by \`PlaygroundItem\` component.
+
+#### 4. Component Architecture
+
+- Followed existing \`cesium-utils\` pattern. Private folders for feature isolation and cohesion, with centralized item configuration.
+- Built reusable \`PlaygroundItem\` component with consistent styling.
+- Removed file-based routing utilities (slug generation, file-system utility).
+
+#### 5. Type Safety Assurance
+
+- Defined types (\`PlaygroundItem\`, \`PlaygroundCategory\`) including \`imageStyle\` prop for flexible image rendering modes.
+
+#### 6. Content Rendering
+
+- Reused existing markdown processing infrastructure for item descriptions.
+- Server-side data transformation, client-side rendering for optimal performance.
+
+### Result
+
+The playground section now has a clearer purpose and improved narrative.
+Complexity of adding items slightly increased by taking static routing instead of dynamic, because automatic entry point and route generation were lost.
+But at the same time, by adopting \`cesium-utils\` pattern with centralized configurations, the overall complexity was maintained at a similar level.
+Further, it freed items from fixed layout constraints, letting them have diverse layouts aligned with their own purposes.
+Now it can serve static html pages as is, without framework coordination.
+`,
+  },
 ];
