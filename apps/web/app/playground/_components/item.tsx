@@ -18,6 +18,13 @@ import { formatDateSafe } from "@/utils/date";
 
 import { PlaygroundCategory } from "../_data";
 
+const IconMap: Record<PlaygroundCategory, React.JSX.Element> = {
+  "3D": <Box />,
+  UI: <PanelLeftDashed />,
+  "Content Management": <Workflow />,
+  "Not Found": <TriangleAlert />,
+};
+
 export interface PlaygroundItemProps {
   title: string;
   description: React.ReactNode;
@@ -39,13 +46,6 @@ export default function PlaygroundItem({
   imageStyle,
   className,
 }: PlaygroundItemProps) {
-  const IconMap: Record<PlaygroundCategory, React.JSX.Element> = {
-    "3D": <Box />,
-    UI: <PanelLeftDashed />,
-    "Content Management": <Workflow />,
-    "Not Found": <TriangleAlert />,
-  };
-
   return (
     <article
       className={cn(
