@@ -33,7 +33,14 @@ const rendered = md.render(parsed);
 
 ### Images
 
-![Example](https://via.placeholder.com/600x400)
+![Example](/images/playground/markdown-icon.png)
+
+### Tables
+
+|Header|Header|Header|
+|---|---|---|
+|Item|Item|Item|
+|Item|Item|Item|
 
 > **Note**: This preview uses the exact same pipeline as the blog system.
 `;
