@@ -5,7 +5,6 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@juun/ui/resizable";
-import { ScrollArea } from "@juun/ui/scroll-area";
 import { Textarea } from "@juun/ui/textarea";
 import { useRouter } from "next/navigation";
 import { type ReactElement, useCallback, useEffect, useState } from "react";
@@ -49,14 +48,12 @@ export function MarkdownInput({
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full">
       <ResizablePanel className="flex flex-col p-4">
-        <ScrollArea className="h-full overflow-hidden rounded-lg border">
-          <Textarea
-            value={value}
-            onChange={handleChange}
-            className="h-full min-h-full resize-none border-none font-mono"
-            placeholder="# Start writing markdown..."
-          />
-        </ScrollArea>
+        <Textarea
+          value={value}
+          onChange={handleChange}
+          className="h-full min-h-0 resize-none border-none font-mono"
+          placeholder="# Start writing markdown..."
+        />
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel className="flex flex-col">
