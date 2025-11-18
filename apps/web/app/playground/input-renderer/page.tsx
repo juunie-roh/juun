@@ -6,12 +6,34 @@ const INITIAL_CONTENT = `# Welcome to Markdown Input Renderer
 
 This playground demonstrates the **custom markdown processing pipeline** used in this project.
 
+## Processing Pipeline
+
+\`\`\`text
+Markdown String
+  ↓ gray-matter (extract frontmatter)
+Markdown Content
+  ↓ remark-parse (unified)
+Markdown AST (mdast)
+  ↓ remark-gfm
+Enhanced Markdown AST (tables, strikethrough, etc.)
+  ↓ remark-rehype
+HTML AST (hast)
+  ↓ rehype-raw (parse raw HTML nodes)
+  ↓ rehype-unwrap-images (cleanup <p> wrappers)
+Processed HTML AST
+  ↓ rehype-react (with custom component mappings)
+React Elements (JSX)
+  ↓ <Prose> wrapper
+Final Rendered Output
+\`\`\`
+
 ## Features
 
-- GitHub Flavored Markdown support
+- GitHub Flavored Markdown support (tables, strikethrough, task lists)
 - Custom component mappings (Next.js Image, Link, CodeBlock)
 - Syntax highlighting for code blocks
 - Security: URL sanitization and XSS prevention
+- Automatic image dimension detection
 
 ## Try it out!
 
