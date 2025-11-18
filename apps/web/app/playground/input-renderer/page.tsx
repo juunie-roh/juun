@@ -1,0 +1,70 @@
+import md from "@/lib/md";
+
+import { MarkdownInput } from "./_components/markdown-input";
+
+const INITIAL_CONTENT = `# Welcome to Markdown Input Renderer
+
+This playground demonstrates the **custom markdown processing pipeline** used in this project.
+
+## Features
+
+- GitHub Flavored Markdown support
+- Custom component mappings (Next.js Image, Link, CodeBlock)
+- Syntax highlighting for code blocks
+- Security: URL sanitization and XSS prevention
+
+## Try it out!
+
+Edit this text and see the preview update in real-time.
+
+### Code Example
+
+\`\`\`typescript
+import md from "@/lib/md";
+
+const parsed = await md.parse(markdown);
+const rendered = md.render(parsed);
+\`\`\`
+
+### Links
+
+- [Internal link](/blog)
+- [External link](https://github.com)
+
+### Images
+
+![Example](https://via.placeholder.com/600x400)
+
+> **Note**: This preview uses the exact same pipeline as the blog system.
+`;
+
+interface InputRendererPageProps {
+  searchParams: Promise<{ content?: string }>;
+}
+
+export default async function InputRendererPage({
+  searchParams,
+}: InputRendererPageProps) {
+  const params = await searchParams;
+  const content = params.content || INITIAL_CONTENT;
+
+  let renderedContent;
+  let error: string | null = null;
+
+  try {
+    const parsed = await md.parse(content);
+    renderedContent = md.render(parsed);
+  } catch (e) {
+    error = e instanceof Error ? e.message : "Failed to parse markdown";
+  }
+
+  return (
+    <div className="size-full overflow-hidden rounded-lg border">
+      <MarkdownInput
+        initialContent={content}
+        renderedContent={renderedContent}
+        error={error}
+      />
+    </div>
+  );
+}
