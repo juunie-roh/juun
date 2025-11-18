@@ -51,7 +51,7 @@ export function MarkdownInput({
         <Textarea
           value={value}
           onChange={handleChange}
-          className="h-full min-h-0 resize-none border-none font-mono"
+          className="h-full min-h-0 resize-none font-mono"
           placeholder="# Start writing markdown..."
         />
       </ResizablePanel>
