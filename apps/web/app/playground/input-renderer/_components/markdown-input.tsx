@@ -9,7 +9,7 @@ import { Textarea } from "@juun/ui/textarea";
 import { useRouter } from "next/navigation";
 import { type ReactElement, useCallback, useEffect, useState } from "react";
 
-import { MarkdownPreview } from "./markdown-preview";
+import MarkdownPreview from "./markdown-preview";
 
 interface MarkdownInputProps {
   initialContent: string;
@@ -17,7 +17,7 @@ interface MarkdownInputProps {
   error: string | null;
 }
 
-export function MarkdownInput({
+export default function MarkdownInput({
   initialContent,
   renderedContent,
   error,
