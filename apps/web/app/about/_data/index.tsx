@@ -2,86 +2,93 @@ import { TimelineItem } from "../_components/timeline";
 
 export const TIMELINE_ITEMS: TimelineItem[] = [
   {
+    id: 1,
     title: "Project Inception",
     description:
-      "Initial commit with standard single Next.js application, with various development tools and Yarn Berry PnP.",
+      "Initial commit with standard single Next.js application, including various development tools and Yarn Berry PnP.",
     detail: `
-### The Initial Commit
+### Situation
 
-The foundation of the project. A single Next.js application with Yarn Berry PnP. 
-Trial of modern tool chains, which I found useful at that time.`,
+This is the foundation of the project: a single Next.js application with Yarn Berry PnP. 
+A trial of modern toolchains, which I knew and found useful at that time.`,
     date: "2024-09-27",
     category: "Foundation",
     tags: ["Next.js", "TypeScript", "Yarn Berry", "PnP"],
   },
   {
+    id: 2,
     title: "Monorepo Architecture",
     description:
-      "Restructured from single Next.js app to Turborepo-powered monorepo with shared packages",
+      "Restructured from single Next.js app to monorepo with shared packages",
     date: "2025-03-04",
     category: "Architecture",
-    tags: ["Monorepo", "Turborepo", "Architecture", "Scalability"],
+    tags: ["ADR", "Monorepo", "Yarn Berry", "Architecture", "Scalability"],
     detail: `
-### The Problem
-- Single Next.js app becoming complex
-- UI components needed reusability
-- Configuration duplication across files
-- Difficult to extract and share utilities
+### Situation
 
-### Decision
-Transform to monorepo with Turborepo
-
-### Structure
-- apps/web: Main Next.js application
-- packages/config: Shared configurations
-- packages/ui: Shared component library
-
-### Benefits
-- Clear separation of concerns
-- Turborepo caching improves build speed
-- Independent versioning per package
-
-### Challenges
-- Package manager compatibility (led to Yarn → PNPM migration)
-- Learning curve for workspace protocols
-- Docker build complexity increased
-`,
+Came across the concept of monorepo, and got curious about it.
+Yarn Berry supports \`workspace\`, enabling monorepo management, and it seemed quite simple to implement.
+As an exploration of technology, I decided to try it out and experiment.`,
   },
   {
+    id: 3,
     title: "Package Manager Migration",
     description:
       "Migrated from Yarn Berry PnP to PNPM due to Next.js standalone and Vercel monorepo incompatibility",
     date: "2025-03-20",
     category: "Infrastructure",
-    tags: ["Article", "Yarn Berry", "PNPM", "Package Manager", "Monorepo"],
+    tags: [
+      "Article",
+      "Yarn Berry",
+      "PNPM",
+      "Package Manager",
+      "Monorepo",
+      "Turborepo",
+    ],
     detail: `
-### The Problem
-Yarn Berry PnP caused critical issues:
-- Next.js standalone build couldn't find modules in .yarn/cache
-- Vercel monorepo deployment incompatible with PnP
-- Docker image ballooned to 681MB due to workarounds
+### Situation
 
-### Decision
-Migrate to PNPM
+Encountered critical issues with Yarn Berry PnP while trying to deploy this project on Vercel.
+Vercel's deployment environment builds based on traditional \`node_modules\` directories.
+This required additional configurations to properly build with Yarn Berry's Zip File System, forcing the build system to reference the \`.pnp.cjs\` file during build.
+I found additional problems with the Next.js standalone build option, where bundling dependent modules failed with Yarn Berry ZipFS.
 
-### Rationale
-- Native Next.js standalone support
-- Vercel monorepo compatibility
-- Efficient disk usage with hard linking
-- Strong monorepo support
-- Lost: Zero-install capability
-- Lost: PnP speed benefits
+### Task
 
-### Outcome
-- Docker image reduced to 346MB (50% reduction)
-- Deployment reliability improved
-- Build process simplified
+- Migrate package manager from Yarn Berry to PNPM, maintaining monorepo configurations
+
+### Action
+
+#### 1. Package Manager Migration
+
+- Removed Yarn Berry configuration (\`.yarnrc.yml\`, \`.pnp.cjs\`)
+- Installed PNPM and configured workspace protocol
+- Updated all \`package.json\` workspace references
+
+#### 2. Build System Updates
+
+- Modified Docker image build for PNPM
+- Updated CI/CD pipeline (GitHub Actions)
+- Configured Vercel build settings for PNPM
+- Verified the standalone build option
+
+#### 3. Monorepo Configuration
+
+- Migrated from Yarn workspaces to PNPM workspaces
+- Updated Turborepo configuration
+- Verified workspace dependency resolution
+
+### Result
+
+Lost zero-install advantage, but the project build became compatible with Vercel's deployment environment and the Next.js standalone build option.
+Additionally, the Docker image size reduced from over 1GB to 346MB.
 
 ### Related Article
-["Yarn Berry PnP Configuration"](/blog/yarn-berry)
+["Yarn Berry PnP Configuration"](/blog/1)
 `,
   },
   {
+    id: 4,
     title: "Bundle Optimization",
     description:
       "Achieved 66-72% bundle size reduction through strategic lazy loading and dependency analysis",
@@ -89,33 +96,52 @@ Migrate to PNPM
     category: "Performance",
     tags: ["Article", "Performance", "Bundle", "Optimization", "Lazy Loading"],
     detail: `
-### Initial State
-- Bundle size: 2.53MB
-- Heavy dependencies loaded upfront
-- Barrel exports preventing tree-shaking
+### Situation
 
-### Strategy
-1. Identified barrel export issues
-2. Implemented route-based code splitting
-3. Lazy loaded heavy dependencies (Cesium, Three.js)
-4. Removed unnecessary wrapper libraries
+Found \`First Load JS\` size bloat after \`cesium\` integration. From the build result, every page was requiring over 2MB of JS.
+Vercel Speed Insights dashboard was showing FCP (First Contentful Paint) peaks of up to 10 seconds.
+
+### Task
+
+- Identify the root cause of performance degradation and improve performance.
+
+### Action
+
+#### 1. Measured bundle sizes with \`@next/bundle-analyzer\`
+
+- Identified bundles required for each routes
+- Configured build option with bundle analysis
+
+#### 2. Researched about module bundling process
+
+- Figured out how the module bundling is processed
+- Detected side effects of barrel exports
+- Updated UI package's export strategy from single \`index\` to individual file
+
+#### 3. Lazy loaded heavy dependencies (Cesium, Three.js)
+
+- Defined boundaries of bundles per routes
+- Decided which to apply lazy loading and applied
+- Wrapped components using heavy dependencies with lazy loading and \`Suspense\`
+
+#### 4. Applied lightweight library variants
+
+- Restricted languages supported from \`react-syntax-highlighter\` using lightweight variants
 
 ### Results
-- Final bundle: 853kB (66% reduction)
-- Some configurations: 72% reduction
-- Improved First Contentful Paint
 
-### Key Techniques
-- Dynamic imports for 3D libraries
-- Avoided barrel exports pattern
-- Component-level lazy loading
-- Dependency audit and pruning
+The blind use of barrel exports and external libraries was a major factor in the performance degradation.
+The bundle size for home page dropped from 2.55 MB to 853KB, about 66% reduction. 
+First contentful paint was stabilized at an average 1.2s.
+This affected to the \`@juun-roh/cesium-utils\` package's modular export strategy.
 
 ### Related Article
-["Bundle Optimization"](/blog/bundle-optimization)
+
+["Bundle Optimization"](/blog/5)
   `,
   },
   {
+    id: 5,
     title: "Docker Build Optimization",
     description:
       "Reduced Docker image from 526MB to 346MB (34% reduction) with 99% layer efficiency",
@@ -147,10 +173,11 @@ Migrate to PNPM
 - Leveraged BuildKit features
 
 ### Related Article
-["Docker Image Optimization"](/blog/docker-image-optimization)
+["Docker Image Optimization"](/blog/3)
   `,
   },
   {
+    id: 6,
     title: "Micro-Frontend Experiment",
     description:
       "Implemented Next.js multi-zone architecture, then removed it after discovering 77% performance degradation",
@@ -185,6 +212,7 @@ for micro-frontend at work, preventing costly architectural mistake.
 `,
   },
   {
+    id: 7,
     title: "Resium Removal: Native Cesium",
     description:
       "Removed Resium wrapper library (-1MB), implemented direct Cesium integration with custom React wrapper",
@@ -213,6 +241,7 @@ Remove Resium, implement native Cesium with custom React wrapper
   `,
   },
   {
+    id: 8,
     title: "Cesium Utils Page Architecture Overhaul",
     description:
       "Complete refactoring for portability, high cohesion, and separation of concerns using private folders and route-scoped context",
@@ -343,6 +372,7 @@ transplantable without breaking other routes.
 `,
   },
   {
+    id: 9,
     title: "Testing Framework Migration",
     description:
       "Migrated from Jest to Vitest for unit tests, added Playwright for E2E testing",
@@ -372,6 +402,7 @@ transplantable without breaking other routes.
   `,
   },
   {
+    id: 10,
     title: "Timeline Implementation",
     description:
       "Designed and implemented timeline for the project. Inspired by monolith from 2001: A Space Odyssey.",
@@ -385,6 +416,7 @@ Inspired by monolith from 2001: A Space Odyssey.
 `,
   },
   {
+    id: 11,
     title: "Serverless Database Integration",
     description:
       "Integrated Prisma ORM with Neon PostgreSQL for serverless architecture, eliminating traditional backend framework",
@@ -496,6 +528,7 @@ Focus on business logic, not infrastructure.
 `,
   },
   {
+    id: 12,
     title: "Blog System Migration",
     description:
       "Migrated the blog system and routes of this project from file-based to database-driven, linked with ORM-ed queries. To provide consistent design for markdown contents, designed a custom content management system with data processing pipeline.",
@@ -516,7 +549,7 @@ Focus on business logic, not infrastructure.
 
 The blog system used file-based routes with TSX components (\`/blog/[slug]/page.tsx\`).
 I had to rebuild the whole project to publish an article. It was inefficient, and most of all, inconvenient.
-Then, I came up with an idea that utilizing markdown syntax for writing contents might be applicable to this project, as many platforms are supporting or using it.
+Then, I realized markdown syntax could be applicable to this project, as many platforms support it.
 
 ### Tasks
 
@@ -532,7 +565,7 @@ Then, I came up with an idea that utilizing markdown syntax for writing contents
 #### Phase 1: Infrastructure Preparation
 
 1. Designed normalized schema: \`post\` table with many-to-many \`tag\` relations via junction table
-2. Created \`@juun/db\` package: framework-agnostic database client with namespace pattern
+2. Created the \`@juun/db\` package: a framework-agnostic database client with namespace pattern
 3. Added caching layer using \`next/cache\` to reduce database queries by ~99%
 4. Structured both DB and cache APIs with consistent namespace pattern (\`post.get.all()\`, \`post.get.byId()\`)
 
@@ -590,6 +623,7 @@ Then, I came up with an idea that utilizing markdown syntax for writing contents
 `,
   },
   {
+    id: 13,
     title: "Portfolio to Playground Reconstruction",
     description:
       "Redefined portfolio as playground, and migrated system from file-based dynamic routes to static routes with centralized configuration, following \`cesium-utils\` page's architectural pattern.",
@@ -601,8 +635,8 @@ Then, I came up with an idea that utilizing markdown syntax for writing contents
 
 The original portfolio system used file-based dynamic routes (\`[slug]\` pattern) where each project had its \`tsx\` files.
 Additionally, the term "portfolio" felt too formal for experimental tech demos and learning projects.
-For items that can have their own layouts for each, dynamic routing system with unified layout was not appropriate.
-To disclose the purpose of this section clearer, rebranding and reconstruction was inevitable.
+For items that can have their own layouts for each, a dynamic routing system with unified layout was not appropriate.
+To disclose the purpose of this section more clearly, rebranding and reconstruction were inevitable.
 
 ### Task
 
@@ -649,8 +683,8 @@ Redesign the portfolio architecture to:
 ### Result
 
 The playground section now has a clearer purpose and improved narrative.
-Complexity of adding items slightly increased by taking static routing instead of dynamic, because automatic entry point and route generation were lost.
-But at the same time, by adopting \`cesium-utils\` pattern with centralized configurations, the overall complexity was maintained at a similar level.
+The complexity of adding items slightly increased by adopting static routing instead of dynamic, because automatic entry point and route generation were lost.
+But at the same time, by adopting the \`cesium-utils\` pattern with centralized configurations, the overall complexity was maintained at a similar level.
 Further, it freed items from fixed layout constraints, letting them have diverse layouts aligned with their own purposes.
 Now it can serve static html pages as is, without framework coordination.
 `,
