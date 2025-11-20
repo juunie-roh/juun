@@ -7,26 +7,26 @@ import {
 } from "@juun/ui/resizable";
 import { Textarea } from "@juun/ui/textarea";
 import { useRouter } from "next/navigation";
-import { type ReactElement, useCallback, useEffect, useState } from "react";
+import React from "react";
 
-import { MarkdownPreview } from "./markdown-preview";
+import MarkdownPreview from "./markdown-preview";
 
 interface MarkdownInputProps {
   initialContent: string;
-  renderedContent?: ReactElement;
+  renderedContent?: React.ReactElement;
   error: string | null;
 }
 
-export function MarkdownInput({
+export default function MarkdownInput({
   initialContent,
   renderedContent,
   error,
 }: MarkdownInputProps) {
   const router = useRouter();
-  const [value, setValue] = useState(initialContent);
+  const [value, setValue] = React.useState(initialContent);
 
   // Debounced URL update
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setTimeout(() => {
       const params = new URLSearchParams();
       params.set("content", value);
@@ -38,7 +38,7 @@ export function MarkdownInput({
     return () => clearTimeout(timer);
   }, [value, router]);
 
-  const handleChange = useCallback(
+  const handleChange = React.useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setValue(e.target.value);
     },

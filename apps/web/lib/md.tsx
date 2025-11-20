@@ -1,3 +1,5 @@
+import "server-only";
+
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { CodeBlock } from "@juun/ui/code-block";
 import { Prose } from "@juun/ui/prose";

@@ -1,10 +1,18 @@
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Fragment } from "react";
 
+import TimelineOrderButton from "./_components/order-button";
 import Timeline from "./_components/timeline";
 import { TIMELINE_ITEMS } from "./_data";
 
-export default function AboutPage() {
+export default async function AboutPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ order?: "asc" | "desc" }>;
+}) {
+  const params = await searchParams;
+  const order = params.order;
+
   return (
     <Fragment>
       {/* Technologies */}
@@ -178,7 +186,13 @@ export default function AboutPage() {
       </section>
       {/* Project Timeline */}
       <section className="relative w-full" id="timeline">
-        <Timeline items={TIMELINE_ITEMS} />
+        <div className="flex items-center gap-2 p-4">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Project Timeline
+          </h2>
+          <TimelineOrderButton order={order} />
+        </div>
+        <Timeline items={TIMELINE_ITEMS} order={order} />
       </section>
     </Fragment>
   );

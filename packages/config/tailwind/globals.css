@@ -63,7 +63,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   /* custom dashed background image */
-  --bg-dashed: repeating-linear-gradient(45deg, var(--color-border), var(--color-border) 1px, transparent 1px, transparent 5px);
+  --bg-dashed: repeating-linear-gradient(45deg, var(--color-border), var(--color-border) 2px, transparent 2px, transparent 5px);
   /* custom grid layout variables */
   --grid-cols-responsive: repeat(16, minmax(0, 1fr));
   --grid-gap-responsive: 32px;

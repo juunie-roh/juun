@@ -1,6 +1,6 @@
 import md from "@/lib/md";
 
-import { MarkdownInput } from "./_components/markdown-input";
+import MarkdownInput from "./_components/markdown-input";
 
 const INITIAL_CONTENT = `# Welcome to Markdown Input Renderer
 

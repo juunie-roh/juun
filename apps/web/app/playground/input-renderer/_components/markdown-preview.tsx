@@ -9,7 +9,10 @@ interface MarkdownPreviewProps {
   error: string | null;
 }
 
-export function MarkdownPreview({ content, error }: MarkdownPreviewProps) {
+export default function MarkdownPreview({
+  content,
+  error,
+}: MarkdownPreviewProps) {
   return (
     <ScrollArea className="h-full p-4">
       {error ? (
