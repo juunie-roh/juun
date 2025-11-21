@@ -72,7 +72,9 @@ export function BlogCard({ metadata }: { metadata: cache.post.Metadata }) {
             {metadata.updated_at && (
               <div className="flex items-center gap-1">
                 <Calendar className="size-3" />
-                <span>{formatDateSafe(metadata.updated_at)}</span>
+                <time dateTime={metadata.updated_at.toString()}>
+                  {formatDateSafe(metadata.updated_at)}
+                </time>
               </div>
             )}
           </div>
@@ -81,9 +83,7 @@ export function BlogCard({ metadata }: { metadata: cache.post.Metadata }) {
             {metadata.title}
           </div>
 
-          <div className="mt-auto line-clamp-2 w-full max-w-fit">
-            {metadata.description}
-          </div>
+          <div className="mt-auto w-full max-w-fit">{metadata.description}</div>
         </div>
       </div>
     </Link>

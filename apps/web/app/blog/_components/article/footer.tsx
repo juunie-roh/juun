@@ -24,15 +24,15 @@ export default function BlogFooter({
         <div className="col-span-full col-start-1 flex flex-col gap-8 md:col-span-8 md:col-start-3 lg:col-start-5">
           <div className="flex flex-col gap-3">
             <Separator orientation="horizontal" />
-            <p className="pt-3 text-lg">Date</p>
-            <p className="text-sm">
+            <span className="block pt-3 text-lg">Date</span>
+            <time className="text-sm" dateTime={metadata.updated_at.toString()}>
               {formatDateSafe(metadata.updated_at, true)}
-            </p>
+            </time>
           </div>
           {metadata.tags && (
             <div className="flex flex-col gap-3">
               <Separator orientation="horizontal" />
-              <p className="pt-3 text-lg">Tags</p>
+              <span className="block pt-3 text-lg">Tags</span>
               <div className="flex flex-wrap gap-2">
                 {metadata.tags.map((tag) => (
                   <Badge key={tag} variant="secondary">
@@ -44,7 +44,7 @@ export default function BlogFooter({
           )}
           <div className="flex flex-col gap-3">
             <Separator orientation="horizontal" />
-            <p className="pt-3 text-lg">Share article</p>
+            <span className="block pt-3 text-lg">Share article</span>
             <div className="flex gap-2">
               <Button
                 variant="ghost"
