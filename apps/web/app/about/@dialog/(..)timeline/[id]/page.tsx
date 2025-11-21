@@ -18,13 +18,7 @@ export default async function AboutTimelineDialog({
   const parsed = await md.parse(item.detail);
 
   return (
-    <TimelineDetailDialog>
-      <h2 className="text-2xl font-bold">{item.title}</h2>
-      <p className="mb-4 text-sm text-muted-foreground">
-        {item.category} • {item.date}
-      </p>
-      <div className="prose dark:prose-invert">{md.render(parsed)}</div>
-    </TimelineDetailDialog>
+    <TimelineDetailDialog item={item}>{md.render(parsed)}</TimelineDetailDialog>
   );
 }
 

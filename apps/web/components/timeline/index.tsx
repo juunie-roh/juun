@@ -64,8 +64,10 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
 
             <ItemFooter>
               <ItemActions>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={`/timeline/${item.id}`}>Details</Link>
+                <Button variant="link" size="sm" asChild>
+                  <Link href={`/timeline/${item.id}`} prefetch>
+                    Details
+                  </Link>
                 </Button>
               </ItemActions>
             </ItemFooter>
