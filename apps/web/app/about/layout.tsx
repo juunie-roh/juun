@@ -2,13 +2,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description:
-    "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
+  description: "About this learning laboratory playground",
   openGraph: {
     type: "website",
     title: "About",
-    description:
-      "Technology-agnostic developer's architecture playground where modern web development meets real-world solutions",
+    description: "About this learning laboratory playground",
     siteName: `Juun - About`,
     images: ["/images/juun.png"],
     url: "https://juun.vercel.app/about",
@@ -17,6 +15,12 @@ export const metadata: Metadata = {
 
 export default function AboutLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return <main>{children}</main>;
+  dialog,
+}: Readonly<{ children: React.ReactNode; dialog: React.ReactNode }>) {
+  return (
+    <main>
+      {children}
+      {dialog}
+    </main>
+  );
 }

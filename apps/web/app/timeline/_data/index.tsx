@@ -5,7 +5,7 @@ export type TimelineItem = {
   description: string;
   category: string;
   tags: string[];
-  detail?: string;
+  detail: string;
 };
 
 export const TIMELINE_ITEMS: TimelineItem[] = [

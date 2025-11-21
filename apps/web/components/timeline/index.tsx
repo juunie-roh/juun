@@ -11,9 +11,8 @@ import {
 } from "@juun/ui/item";
 import Link from "next/link";
 
+import { TimelineItem } from "@/app/timeline/_data";
 import { formatDateSafe } from "@/utils/date";
-
-import { TimelineItem } from "./data";
 
 interface TimelineProps {
   items: Omit<TimelineItem, "detail">[];

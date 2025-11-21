@@ -56,8 +56,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  dialog,
 }: Readonly<{
   children: React.ReactNode;
+  dialog: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -70,6 +72,7 @@ export default function RootLayout({
             <TooltipProvider>
               <Header />
               {children}
+              {dialog}
               <Toaster />
               <Analytics />
             </TooltipProvider>

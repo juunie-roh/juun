@@ -1,8 +1,8 @@
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Fragment } from "react";
 
+import { TIMELINE_ITEMS } from "@/app/timeline/_data";
 import Timeline from "@/components/timeline";
-import { TIMELINE_ITEMS } from "@/components/timeline/data";
 import TimelineOrderButton from "@/components/timeline/order-button";
 
 export default async function AboutPage({
