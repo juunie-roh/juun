@@ -71,10 +71,13 @@ export default function PlaygroundItem({
           {description}
           <footer className="flex items-center justify-between">
             {/* Date */}
-            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+            <time
+              className="flex items-center gap-1 text-sm text-muted-foreground"
+              dateTime={date}
+            >
               <Calendar className="inline-block size-4" />
               {formatDateSafe(date)}
-            </div>
+            </time>
             {/* Link */}
             <Button variant="link" asChild className="w-fit">
               <Link href={href}>
