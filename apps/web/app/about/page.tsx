@@ -1,9 +1,9 @@
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Fragment } from "react";
 
-import TimelineOrderButton from "./_components/order-button";
-import Timeline from "./_components/timeline";
-import { TIMELINE_ITEMS } from "./_data";
+import Timeline from "@/components/timeline";
+import { TIMELINE_ITEMS } from "@/components/timeline/data";
+import TimelineOrderButton from "@/components/timeline/order-button";
 
 export default async function AboutPage({
   searchParams,
@@ -184,9 +184,10 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
+
       {/* Project Timeline */}
-      <section className="relative w-full" id="timeline">
-        <div className="flex items-center gap-2 p-4">
+      <section className="relative mx-auto w-full max-w-7xl p-4" id="timeline">
+        <div className="flex items-center gap-2">
           <h2 className="text-3xl font-bold tracking-tight">
             Project Timeline
           </h2>

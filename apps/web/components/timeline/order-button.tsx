@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function TimelineOrderButton({
-  order = "asc",
+  order = "desc",
   ...props
 }: React.ComponentProps<typeof Button> & {
   order?: "asc" | "desc";

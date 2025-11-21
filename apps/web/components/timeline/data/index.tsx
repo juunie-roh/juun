@@ -1,4 +1,12 @@
-import { TimelineItem } from "../_components/timeline";
+export type TimelineItem = {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  detail?: string;
+};
 
 export const TIMELINE_ITEMS: TimelineItem[] = [
   {
@@ -421,7 +429,7 @@ Inspired by monolith from 2001: A Space Odyssey.
     description:
       "Integrated Prisma ORM with Neon PostgreSQL for serverless architecture, eliminating traditional backend framework",
     date: "2025-10-20",
-    category: "Architecture",
+    category: "Infrastructure",
     tags: ["Database", "Prisma", "Neon", "Serverless", "Edge Computing"],
     detail: `
 ### Why Serverless?
