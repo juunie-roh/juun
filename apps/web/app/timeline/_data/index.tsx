@@ -193,7 +193,10 @@ This affected to the \`@juun-roh/cesium-utils\` package's modular export strateg
     category: "Architecture",
     tags: ["Article", "MFE", "Multi-Zone", "Performance", "Reversal"],
     detail: `
-### Context
+### Situation
+
+Micro-frontend was proposed by executives at work place. 
+
 Researching micro-frontend patterns for blog article and 
 production application at work.
 
@@ -418,7 +421,7 @@ transplantable without breaking other routes.
     category: "Architecture",
     tags: ["ADR", "Component", "Timeline", "Design"],
     detail: `
-### The Timeline Component
+### Situation
 
 Inspired by monolith from 2001: A Space Odyssey.
 `,
@@ -432,6 +435,10 @@ Inspired by monolith from 2001: A Space Odyssey.
     category: "Infrastructure",
     tags: ["Database", "Prisma", "Neon", "Serverless", "Edge Computing"],
     detail: `
+### Situation
+
+The file-based blog system was a prototype of database-driven system.
+
 ### Why Serverless?
 
 Traditional backend frameworks require managing servers, scaling, and infrastructure.
@@ -695,6 +702,70 @@ The complexity of adding items slightly increased by adopting static routing ins
 But at the same time, by adopting the \`cesium-utils\` pattern with centralized configurations, the overall complexity was maintained at a similar level.
 Further, it freed items from fixed layout constraints, letting them have diverse layouts aligned with their own purposes.
 Now it can serve static html pages as is, without framework coordination.
+`,
+  },
+  {
+    id: 14,
+    title: "Timeline Improvement",
+    description:
+      "Detected performance degradation of the timeline component, causing server-side rendering and the resulting HTML bloat. Reduced HTML from 319 KB to 257 KB (19% reduction) and separated markdown parsing so detail sections are parsed individually using Next.js parallel & intercepting route pattern.",
+    date: "2025-11-21",
+    category: "Performance",
+    tags: [
+      "ADR",
+      "Performance",
+      "Optimization",
+      "Next.js",
+      "SoC",
+      "Architecture",
+      "Timeline",
+      "SSR",
+      "Refactoring",
+    ],
+    detail: `
+### Situation
+
+The detail section of the timeline component was rendered upfront despite being collapsed.
+The section was parsed by the markdown utility on the server-side. Parsing all details at once delayed access of the page.
+Also the resulting HTML bloated up to 319 KB.
+
+### Task
+
+- Separate the markdown parsing process from timeline rendering
+
+### Action
+
+#### 1. Attempted client-side rendering on demand
+
+- The \`md\` utility is declared "server-only". I had to break the current structure to make it available on client.
+- Tried it out anyway, and the resulting code felt messy for me. Reverted this trial.
+
+#### 2. Researched alternatives
+
+- Discovered Next.js parallel routes pattern.
+- Analyzed its feature, and found that it fits to the current situation. Contents are rendered on server-side, but independently.
+
+#### 3. Implemented Next.js parallel routes
+
+- Removed collapsed details from timeline component.
+- Replaced the collapsible detail with link.
+- Created separate routes for timeline details.
+- Adjusted layouts to properly handle \`@dialog\` slots.
+
+#### 4. Identified production issues
+
+- The route interception was failing on production environment.
+- Compared implementation with Next.js official tutorials.
+- Found missing \`app/default.tsx\` file required for parallel routes.
+- Added the default route handler to fix production build.
+
+### Result
+
+- **Reduced HTML size by 62 KB** (from 319 KB to 257 KB, 19% reduction)
+- Detail sections now parse on-demand when user clicks "Details" link
+- Maintained server-side rendering benefits for SEO
+- Modal behavior works correctly in both development and production environments
+- Cleaner separation of concerns - timeline component focuses on list rendering, detail parsing happens in separate route
 `,
   },
 ];
