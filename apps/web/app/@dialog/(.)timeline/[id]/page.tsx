@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { TIMELINE_ITEMS } from "@/app/timeline/_data";
-import { TimelineDetailDialog } from "@/components/timeline/detail-dialog";
+import { TimelineDialog } from "@/components/timeline/dialog";
 import md from "@/lib/md";
 
 export default async function HomeTimelineDialog({
@@ -17,9 +17,7 @@ export default async function HomeTimelineDialog({
 
   const parsed = await md.parse(item.detail);
 
-  return (
-    <TimelineDetailDialog item={item}>{md.render(parsed)}</TimelineDetailDialog>
-  );
+  return <TimelineDialog item={item}>{md.render(parsed)}</TimelineDialog>;
 }
 
 export async function generateStaticParams() {

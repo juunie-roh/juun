@@ -9,24 +9,44 @@ import {
   DialogTitle,
 } from "@juun/ui/dialog";
 import { ScrollArea } from "@juun/ui/scroll-area";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 
 import { TimelineItem } from "@/app/timeline/_data";
+import { useTimelineDialog } from "@/stores/slices/timeline-dialog";
 
-export function TimelineDetailDialog({
+export function TimelineDialog({
   item,
   children,
 }: {
   item: Omit<TimelineItem, "detail">;
   children: React.ReactNode;
 }) {
+  const { isOpen, open, close } = useTimelineDialog();
   const router = useRouter();
+  const pathname = usePathname();
+  const initialPathname = React.useRef(pathname);
+
+  // Open dialog on mount
+  React.useEffect(() => {
+    open();
+  }, [open]);
+
+  // Close dialog when route changes
+  React.useEffect(() => {
+    if (pathname !== initialPathname.current) {
+      close();
+    }
+  }, [pathname, close]);
 
   return (
     <Dialog
-      defaultOpen
+      open={isOpen}
       onOpenChange={(open) => {
-        if (!open) router.back();
+        if (!open) {
+          close();
+          router.back();
+        }
       }}
     >
       <DialogContent className="flex h-full max-h-[80vh] max-w-4xl flex-col">
@@ -43,7 +63,7 @@ export function TimelineDetailDialog({
             ))}
           </div>
         </DialogHeader>
-        <ScrollArea className="h-full min-h-0">{children}</ScrollArea>
+        <ScrollArea className="h-full min-h-0 flex-wrap">{children}</ScrollArea>
       </DialogContent>
     </Dialog>
   );
