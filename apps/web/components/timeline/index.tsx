@@ -47,7 +47,7 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
           </div>
           <Item className="mb-auto w-full gap-2 bg-background p-2">
             <ItemHeader className="flex-col items-start justify-start gap-2">
-              <ItemTitle className="font-stabil-grotesk text-xl font-bold tracking-tight">
+              <ItemTitle className="text-xl font-bold tracking-tight">
                 {item.title}
               </ItemTitle>
               <div className="flex w-full flex-wrap gap-1.5">
