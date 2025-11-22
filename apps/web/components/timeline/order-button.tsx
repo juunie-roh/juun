@@ -2,13 +2,16 @@
 
 import { Button } from "@juun/ui/button";
 import { ClockArrowDown, ClockArrowUp } from "lucide-react";
+import type { LinkProps } from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function TimelineOrderButton({
+  href,
   order = "desc",
   ...props
 }: React.ComponentProps<typeof Button> & {
+  href: LinkProps["href"];
   order?: "asc" | "desc";
 }) {
   const router = useRouter();
@@ -19,8 +22,8 @@ export default function TimelineOrderButton({
     const newOrder = currentOrder === "asc" ? "desc" : "asc";
     const params = new URLSearchParams(searchParams);
     params.set("order", newOrder);
-    router.replace(`/about?${params.toString()}`, { scroll: false });
-  }, [currentOrder, searchParams, router]);
+    router.replace(`${href}?${params.toString()}`, { scroll: false });
+  }, [currentOrder, searchParams, router, href]);
 
   return (
     <Button variant="ghost" size="icon" {...props} onClick={handleToggle}>

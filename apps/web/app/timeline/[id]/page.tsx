@@ -57,7 +57,7 @@ export async function generateMetadata({
   if (!item) return {} satisfies Metadata;
 
   return {
-    title: { default: "Juun | Timeline", template: "Juun | Timeline - %s" },
+    title: item.title,
     description: item.description,
     keywords: item.tags,
     openGraph: {

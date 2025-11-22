@@ -13,8 +13,8 @@ export default function HeroHome() {
           </div>
         </div>
       </div>
-      <div className="relative w-full bg-background px-4">
-        <div className="relative mx-auto size-full max-w-7xl overflow-hidden border-b">
+      <div className="relative w-full border-b bg-background px-4">
+        <div className="relative mx-auto size-full max-w-7xl overflow-hidden">
           <p
             className="absolute top-0 right-0 -translate-y-1/2 text-[20vw] tracking-tighter text-primary"
             aria-hidden="true"

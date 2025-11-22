@@ -30,7 +30,7 @@ export function TimelineDetailDialog({
       }}
     >
       <DialogContent className="flex h-full max-h-[80vh] max-w-4xl flex-col">
-        <DialogHeader className="shrink-0">
+        <DialogHeader className="shrink-0 text-left">
           <DialogTitle className="mr-2 font-stabil-grotesk text-2xl font-bold tracking-tight">
             {item.title}
           </DialogTitle>

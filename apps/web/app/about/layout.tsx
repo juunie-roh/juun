@@ -15,12 +15,6 @@ export const metadata: Metadata = {
 
 export default function AboutLayout({
   children,
-  dialog,
-}: Readonly<{ children: React.ReactNode; dialog: React.ReactNode }>) {
-  return (
-    <main>
-      {children}
-      {dialog}
-    </main>
-  );
+}: Readonly<{ children: React.ReactNode }>) {
+  return <main>{children}</main>;
 }

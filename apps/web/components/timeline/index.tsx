@@ -2,10 +2,8 @@ import { Badge } from "@juun/ui/badge";
 import { Button } from "@juun/ui/button";
 import {
   Item,
-  ItemActions,
   ItemContent,
   ItemDescription,
-  ItemFooter,
   ItemHeader,
   ItemTitle,
 } from "@juun/ui/item";
@@ -30,24 +28,29 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
     <ol>
       {sortedItems.map((item) => (
         <li key={`timeline-${item.id}`} className="relative flex h-full gap-0">
-          <div className="relative w-1/5 min-w-32 shrink-0 border-r p-2 pl-0 text-right text-muted-foreground">
+          <div className="relative flex w-1/5 min-w-32 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
             <div className="text-right font-victor-serif text-sm text-muted-foreground">
-              <span className="relative block text-xl font-semibold">
+              <span className="relative mb-2 block text-xl font-semibold">
                 {item.category}
                 <div
                   role="none"
-                  className="absolute top-2 -right-2 size-1.5 translate-x-1/2 translate-y-1/2 rounded-full bg-muted-foreground ring ring-border ring-offset-1"
+                  className="absolute top-6 -right-2 size-1.5 translate-x-1/2 translate-y-1/2 rounded-full bg-primary ring ring-muted-foreground ring-offset-1"
                 />
               </span>
               <time dateTime={item.date}>{formatDateSafe(item.date)}</time>
             </div>
+            <Button variant="link" size="sm" asChild>
+              <Link href={`/timeline/${item.id}`} prefetch>
+                Details
+              </Link>
+            </Button>
           </div>
-          <Item className="w-full gap-2 bg-background p-2">
-            <ItemHeader className="flex-col items-start justify-start">
-              <ItemTitle className="font-stabil-grotesk text-xl font-bold tracking-tight">
+          <Item className="mb-auto w-full gap-2 bg-background p-2">
+            <ItemHeader className="flex-col items-start justify-start gap-2">
+              <ItemTitle className="text-xl font-bold tracking-tight">
                 {item.title}
               </ItemTitle>
-              <div className="flex w-full flex-wrap gap-2">
+              <div className="flex w-full flex-wrap gap-1.5">
                 {item.tags.map((tag) => (
                   <Badge key={tag} variant="secondary">
                     {tag}
@@ -57,20 +60,10 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
             </ItemHeader>
 
             <ItemContent>
-              <ItemDescription className="line-clamp-none text-sm">
+              <ItemDescription className="line-clamp-none text-sm text-wrap">
                 {item.description}
               </ItemDescription>
             </ItemContent>
-
-            <ItemFooter>
-              <ItemActions>
-                <Button variant="link" size="sm" asChild>
-                  <Link href={`/timeline/${item.id}`} prefetch>
-                    Details
-                  </Link>
-                </Button>
-              </ItemActions>
-            </ItemFooter>
           </Item>
         </li>
       ))}
