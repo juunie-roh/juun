@@ -28,7 +28,7 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
     <ol>
       {sortedItems.map((item) => (
         <li key={`timeline-${item.id}`} className="relative flex h-full gap-0">
-          <div className="relative flex w-1/5 min-w-32 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
+          <div className="relative flex w-1/5 min-w-36 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
             <div className="text-right font-victor-serif text-sm text-muted-foreground">
               <span className="relative mb-2 block text-xl font-semibold">
                 {item.category}
