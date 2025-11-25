@@ -25,6 +25,10 @@ export default function MarkdownInput({
   const router = useRouter();
   const [value, setValue] = React.useState(initialContent);
 
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.target.value);
+  };
+
   // Debounced URL update
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,13 +41,6 @@ export default function MarkdownInput({
 
     return () => clearTimeout(timer);
   }, [value, router]);
-
-  const handleChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setValue(e.target.value);
-    },
-    [],
-  );
 
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full">

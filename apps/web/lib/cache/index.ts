@@ -18,9 +18,11 @@
  */
 
 import postCache from "./post";
+import timelineCache from "./timeline";
 
 namespace cache {
   export import post = postCache;
+  export import timeline = timelineCache;
 }
 
 export default cache;

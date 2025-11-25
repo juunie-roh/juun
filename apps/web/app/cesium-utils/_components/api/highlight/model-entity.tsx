@@ -18,10 +18,8 @@ export default function ModelEntity() {
   const [width, setWidth] = useState<number>(2);
   const [show, setShow] = useState<boolean>(false);
 
-  const highlight = useMemo(
-    () => (viewer ? Highlight.getInstance(viewer) : undefined),
-    [viewer],
-  );
+  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
+
   const entity = useMemo(() => {
     const position = Cesium.Cartesian3.fromDegrees(
       -123.0744619,

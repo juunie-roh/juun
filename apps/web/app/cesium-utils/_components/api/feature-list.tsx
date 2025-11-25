@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
 } from "@juun/ui/sidebar";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
 import { getFeatures, isValidApi } from "../../_data";
@@ -21,12 +21,7 @@ export default function ApiFeatureList() {
   // Get current API from URL
   const api = pathname.split("/").pop();
 
-  const features = useMemo(() => {
-    if (api && isValidApi(api)) {
-      return getFeatures(api);
-    }
-    return undefined;
-  }, [api]);
+  const features = api && isValidApi(api) ? getFeatures(api) : undefined;
 
   // Set initial active item as description (first item of features)
   useEffect(() => {

@@ -36,10 +36,7 @@ export default function SunlightAnalysis() {
     defaultValues: options,
   });
 
-  const sunlight = React.useMemo(
-    () => (viewer ? new Sunlight(viewer) : undefined),
-    [viewer],
-  );
+  const sunlight = viewer ? new Sunlight(viewer) : undefined;
 
   return (
     <div className="flex size-full flex-col gap-4">

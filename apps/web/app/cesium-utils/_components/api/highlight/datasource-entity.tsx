@@ -15,7 +15,7 @@ import {
   ScreenSpaceEventHandler,
   ScreenSpaceEventType,
 } from "cesium";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";
@@ -27,24 +27,7 @@ export default function DataSourceEntity() {
   const [width, setWidth] = useState<number>(2);
   const [color, setColor] = useState<string>(Color.RED.toCssColorString());
 
-  const highlight = useMemo(
-    () => (viewer ? Highlight.getInstance(viewer) : undefined),
-    [viewer],
-  );
-
-  const onMouseMove = useCallback(
-    (movement: ScreenSpaceEventHandler.MotionEvent) => {
-      if (!viewer || !highlight || !isPicking) return;
-      const picked = viewer.scene.pick(movement.endPosition);
-      if (!defined(picked)) return highlight.hide();
-      highlight.show(picked, {
-        outline,
-        width,
-        color: Color.fromCssColorString(color),
-      });
-    },
-    [isPicking, viewer, highlight, outline, width, color],
-  );
+  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
 
   useEffect(() => {
     if (!viewer) return;
@@ -65,6 +48,19 @@ export default function DataSourceEntity() {
     };
   }, [viewer]);
 
+  const onMouseMove = useEffectEvent(
+    (movement: ScreenSpaceEventHandler.MotionEvent) => {
+      if (!viewer || !highlight || !isPicking) return;
+      const picked = viewer.scene.pick(movement.endPosition);
+      if (!defined(picked)) return highlight.hide();
+      highlight.show(picked, {
+        outline,
+        width,
+        color: Color.fromCssColorString(color),
+      });
+    },
+  );
+
   useEffect(() => {
     if (isPicking) {
       viewer?.screenSpaceEventHandler.setInputAction(
@@ -79,7 +75,7 @@ export default function DataSourceEntity() {
         ScreenSpaceEventType.MOUSE_MOVE,
       );
     };
-  }, [highlight, viewer, isPicking, onMouseMove]);
+  }, [highlight, viewer, isPicking]);
 
   return (
     <div className="flex flex-col gap-2 p-2">

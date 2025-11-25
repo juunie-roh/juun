@@ -17,7 +17,7 @@ import { formatDateSafe } from "@/utils/date";
 
 import TimelineTags from "./tag";
 
-export function TimelineDialog({
+export default function TimelineDialog({
   item,
   children,
 }: {
