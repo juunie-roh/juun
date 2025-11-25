@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { TIMELINE_ITEMS } from "@/app/timeline/_data";
-import { TimelineDialog } from "@/components/timeline/dialog";
+import TimelineDialog from "@/components/timeline/dialog";
 import md from "@/lib/md";
 
 export default async function HomeTimelineDialog({
