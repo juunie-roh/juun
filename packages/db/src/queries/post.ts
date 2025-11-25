@@ -1,6 +1,5 @@
-import type { PostCategory } from "@prisma/client";
-
 import { prisma } from "../client";
+import type { PostCategory } from "../generated/prisma/client";
 
 namespace post {
   /**

@@ -2,8 +2,15 @@
   "extends": "@config/typescript/base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": ".",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "dist", "src/generated/**/*"]
 }
