@@ -24,7 +24,7 @@ This is the foundation of the project: a single Next.js application with Yarn Be
 A trial of modern toolchains, which I knew and found useful at that time.`,
     date: "2024-09-27",
     category: "Foundation",
-    tags: ["NextJS", "TypeScript", "yarn-berry", "PnP"],
+    tags: ["NextJS", "TypeScript", "Yarn Berry", "PnP"],
   },
   {
     id: 2,
@@ -33,11 +33,11 @@ A trial of modern toolchains, which I knew and found useful at that time.`,
       "Restructured from single Next.js app to monorepo with shared packages",
     date: "2025-03-04",
     category: "Architecture",
-    tags: ["ADR", "monorepo", "yarn-berry", "architecture", "scalability"],
+    tags: ["ADR", "monorepo", "Yarn Berry", "architecture", "scalability"],
     detail: `
 ### Situation
 
-Came across the concept of monorepo, and got curious about it.
+Discovered the monorepo architecture pattern and wanted to explore its benefits.
 Yarn Berry supports \`workspace\`, enabling monorepo management, and it seemed quite simple to implement.
 As an exploration of technology, I decided to try it out and experiment.`,
   },
@@ -48,7 +48,7 @@ As an exploration of technology, I decided to try it out and experiment.`,
       "Migrated from Yarn Berry PnP to PNPM due to Next.js standalone and Vercel monorepo incompatibility",
     date: "2025-03-20",
     category: "Infrastructure",
-    tags: ["yarn-berry", "pnpm", "package manager", "monorepo"],
+    tags: ["Yarn Berry", "PNPM", "Package Manager", "monorepo"],
     article: "/blog/1",
     detail: `
 ### Situation
@@ -136,7 +136,7 @@ Vercel Speed Insights dashboard was showing FCP (First Contentful Paint) peaks o
 The blind use of barrel exports and external libraries was a major factor in the performance degradation.
 The bundle size for home page dropped from 2.55 MB to 853KB, about 66% reduction. 
 First contentful paint was stabilized at an average 1.2s.
-This affected to the \`@juun-roh/cesium-utils\` package's modular export strategy.
+This affected the \`@juun-roh/cesium-utils\` package's modular export strategy.
   `,
   },
   {
@@ -146,7 +146,7 @@ This affected to the \`@juun-roh/cesium-utils\` package's modular export strateg
       "Reduced Docker image from 526MB to 346MB (34% reduction) with 99% layer efficiency",
     date: "2025-07-10",
     category: "Infrastructure",
-    tags: ["docker", "optimization", "devops", "ci-cd"],
+    tags: ["Docker", "optimization", "DevOps", "CI/CD"],
     article: "/blog/3",
     detail: `
 ### Initial Problems
@@ -180,15 +180,13 @@ This affected to the \`@juun-roh/cesium-utils\` package's modular export strateg
       "Implemented Next.js multi-zone architecture, then removed it after discovering 77% performance degradation",
     date: "2025-07-25",
     category: "Architecture",
-    tags: ["mfe", "multi-zone", "performance", "reversal"],
+    tags: ["MFE", "multi-zone", "performance", "reversal"],
     article: "/blog/6",
     detail: `
 ### Situation
 
 Micro-frontend was proposed by executives at work place. 
-
-Researching micro-frontend patterns for blog article and 
-production application at work.
+Wanted to research micro-frontend patterns for both blog content and a production application at work.
 
 ### The Experiment
 - Implemented Next.js multi-zone
@@ -218,25 +216,27 @@ for micro-frontend at work, preventing costly architectural mistake.
     category: "Performance",
     tags: ["Cesium", "bundle", "optimization", "performance", "React"],
     detail: `
-### Context
-Using Resium (React wrapper for Cesium) added 1MB to bundle.
-Only using basic Cesium features, not Resium's abstractions.
+### Situation
 
-### Decision
-Remove Resium, implement native Cesium with custom React wrapper
+Using Resium (React wrapper for Cesium) added 1MB to the bundle.
+Only using Resium's basic Viewer component, others were redundant.
+Additionally, Resium's declarative abstractions are not appropriate for dynamic scenes.
 
-### Implementation
-- Created custom viewer component with forwardRef
+### Task
+
+- Remove Resium dependency
+
+### Action
+
+#### Implemented native component
+
+- Created custom viewer component with \`forwardRef\`
 - Direct Cesium API usage
 - Maintained React-friendly interface
 
-### Trade-offs
-- -1MB bundle size (significant for FCP)
-- Direct API access = more control
-- Better performance characteristics
-- More code to maintain
-- Lost React abstractions
-  `,
+### Result
+
+Reduced bundle size by 1 MB (significant for FCP) and gained full control over Cesium APIs.`,
   },
   {
     id: 8,
@@ -248,116 +248,44 @@ Remove Resium, implement native Cesium with custom React wrapper
     tags: ["refactor", "SoC", "architecture", "context", "portability"],
     article: "/blog/7",
     detail: `
-### The Problem
+### Situation
+
 Original structure scattered components across global folders:
+
 - Cesium viewer in global Zustand store
 - Components mixed with other routes
 - Duplicate folder names (app/cesium-utils + components/cesium)
 - No clear feature boundaries
 - Impossible to transplant to other projects
 
-### Organizational Driver
-Work requirement: services must be portable between projects with 
-same framework. Entire feature should be self-contained and 
-transplantable without breaking other routes.
+**Requirement**: Features must be portable between projects with the same framework. Each feature should be self-contained and transplantable without breaking other routes.
 
-### Refactoring Strategy
+### Task
 
-**1. Private Folder Pattern (Framework Concern)**
-- _components/: Route-specific UI components
-- _contexts/: Route-scoped React Context providers
-- _utils/: Centralized API configuration
-- _layouts/: Layout components for structure
-- [api]/: Dynamic routes for each Cesium utility demo
+- Redefine variable scopes within the route
+- Minimize dependencies from outside the route folder
+- Centralize configuration
 
-**2. State Management Shift (State Concern)**
-- FROM: Global Zustand store for viewer
-- TO: Route-scoped React Context (useViewer, useCesiumUtils)
-- WHY: Viewer only needed within cesium-utils route
-- BENEFIT: Automatic cleanup when leaving route
+### Action
 
-**3. Centralized Configuration (State Concern)**
-- Single source of truth: _utils/api.ts
-- All API definitions in one place
-- Components consume config, don't define it
-- Easy to add/remove APIs without touching components
+#### 1. Utilize Next.js private folder pattern
 
-**4. High Cohesion (Organizational Concern)**
-- All related code in single route folder
-- Minimal external dependencies
-- Duplicated code allowed to maintain independence
-- DRY principle relaxed for portability
+- Placed all related components under the route
 
-**5. Lazy Loading (Performance Concern)**
-- Cesium imports only when route accessed
-- Reduced First Contentful Paint for non-users
-- Bundle optimization through route-based code splitting
+#### 2. Limited variable scopes
 
-### Before/After Structure
+- Identified and restricted variables to the route by switching from Zustand to React context
 
-    BEFORE:
-    ├── app/cesium-utils/
-    │   ├── page.tsx
-    │   └── layout.tsx
-    ├── components/cesium/          # Scattered
-    ├── contexts/                   # Mixed with other routes
-    └── lib/stores/                 # Global Zustand
+#### 3. Centralized configuration
 
-    AFTER:
-    └── app/cesium-utils/
-      ├── _components/            # Feature-isolated
-      ├── _contexts/              # Route-scoped
-      │   ├── viewer.tsx          # React Context for viewer
-      │   └── cesium-utils.tsx    # React Context for features
-      ├── _layouts/               # Layout separation
-      ├── _utils/
-      │   └── api.ts              # Centralized config
-      ├── [api]/page.tsx          # Dynamic routing
-      ├── page.tsx
-      └── layout.tsx              # Provides contexts
-
-### Key Decisions
-
-**Why Context over Zustand?**
-- Viewer state only relevant within cesium-utils route
-- No need for global accessibility
-- Automatic cleanup on route exit
-- Better encapsulation
-
-**Why Private Folders?**
-- Next.js feature: folders starting with _ not exposed as routes
-- Solves duplicate naming problem
-- Clear signal: "internal to this route"
-- Enables high cohesion without polluting URL structure
-
-**Why Centralized API Config?**
-- APIs frequently added/removed during development
-- Components shouldn't know about all APIs
-- Single file update for new API vs touching multiple components
-- State management delegated to configuration layer
-
-**Why Allow Code Duplication?**
-- Portability > DRY principle
-- Changes in one route don't break others
-- Feature can be copy-pasted to other projects
-- Independence more valuable than shared code
-
-### Concerns Addressed
-
-1. **Framework Concerns**: Private folder pattern
-2. **Organizational Concerns**: Portability, self-containment
-3. **State Concerns**: Route-scoped context, centralized config
-4. **Layout Concerns**: Separated structural components
-5. **Performance Concerns**: Lazy loading, bundle optimization
+- Listed all rendering configurations in a single file
 
 ### Results
 
-- Complete feature isolation
-- Transplantable to other projects (tested: works with copy-paste)
-- No global state pollution
-- Easier API additions (single file change)
-- Improved bundle size (lazy loading)
-- Clear mental model (everything in one place)
+Duplicate folder names were eliminated by using the private folder pattern, increasing cohesion of related components per route.
+Switching from Zustand to React context minimized dependencies outside the route and ensured proper cleanup when the user navigates away.
+A single configuration source reduced maintenance burden and simplified adding new features.
+However, achieving copy-paste portability required some violation of the DRY principle.
 `,
   },
   {
@@ -371,7 +299,7 @@ transplantable without breaking other routes.
     detail: `
 ### Situation
 
-Vitest configuration was much easier than Jest.
+Jest configuration complexity issue prompted exploration of alternatives.
 
 ### Changes
 - **Unit/Integration**: Jest → Vitest
@@ -404,7 +332,7 @@ Vitest configuration was much easier than Jest.
 
 ### Result
 
-A timeline component having design inspired by monolith from 2001: A Space Odyssey.
+A timeline component with a design inspired by monolith from 2001: A Space Odyssey.
 `,
   },
   {
