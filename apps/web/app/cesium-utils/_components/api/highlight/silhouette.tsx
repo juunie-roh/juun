@@ -2,7 +2,7 @@
 
 import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useEffectEvent, useMemo, useState } from "react";
 
 import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";
@@ -12,16 +12,13 @@ export default function Silhouette() {
   const [color, setColor] = useState<string>(
     Cesium.Color.RED.toCssColorString(),
   );
-  const highlight = useMemo(
-    () => (viewer ? Highlight.getInstance(viewer) : undefined),
-    [viewer],
-  );
+  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
   const tilesetPromise = useMemo(
     () => Cesium.Cesium3DTileset.fromIonAssetId(75343),
     [],
   );
 
-  const onMouseMove = useCallback(
+  const onMouseMove = useEffectEvent(
     (movement: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
       if (!viewer || !highlight) return;
       const picked = viewer.scene.pick(movement.endPosition);
@@ -30,7 +27,6 @@ export default function Silhouette() {
         color: Cesium.Color.fromCssColorString(color),
       });
     },
-    [viewer, highlight, color],
   );
 
   useEffect(() => {
@@ -79,7 +75,7 @@ export default function Silhouette() {
           console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
         });
     };
-  }, [viewer, highlight, onMouseMove, tilesetPromise]);
+  }, [viewer, highlight, tilesetPromise]);
 
   return (
     <div className="flex flex-col gap-2 p-2">

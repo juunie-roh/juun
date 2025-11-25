@@ -18,12 +18,12 @@ export default function TimelineOrderButton({
   const searchParams = useSearchParams();
   const currentOrder = (searchParams.get("order") as "asc" | "desc") || order;
 
-  const handleToggle = React.useCallback(() => {
+  const handleToggle = () => {
     const newOrder = currentOrder === "asc" ? "desc" : "asc";
     const params = new URLSearchParams(searchParams);
     params.set("order", newOrder);
     router.replace(`${href}?${params.toString()}`, { scroll: false });
-  }, [currentOrder, searchParams, router, href]);
+  };
 
   return (
     <Button variant="ghost" size="icon" {...props} onClick={handleToggle}>

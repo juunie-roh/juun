@@ -9,7 +9,7 @@ import {
   HeightReference,
   Math as CMath,
 } from "cesium";
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 
 import { useViewer } from "../../_contexts";
 
@@ -42,28 +42,28 @@ const ENTITY = new Entity({
 export default function EntityToggler() {
   const [on, setOn] = useState(false);
   const { viewer } = useViewer();
-  const entities = useMemo(() => {
-    if (!viewer) return;
-    const c = new Collection({ collection: viewer.entities, tag: "toggler" });
-    c.addEventListener("add", () => {
+  const entities = viewer
+    ? new Collection({ collection: viewer.entities, tag: "toggler" })
+    : undefined;
+  if (entities) {
+    entities.addEventListener("add", () => {
       setOn(true);
-      console.log("🚀 ~ entities ~ add:", c.values);
+      console.log("🚀 ~ entities ~ add:", entities.values);
     });
-    c.addEventListener("remove", () => {
+    entities.addEventListener("remove", () => {
       setOn(false);
-      console.log("🚀 ~ entities ~ remove:", c.values);
+      console.log("🚀 ~ entities ~ remove:", entities.values);
     });
-    return c;
-  }, [viewer]);
+  }
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     if (!entities || !viewer) return;
     if (!on) {
       entities.add(ENTITY);
     } else {
       entities.remove(ENTITY);
     }
-  }, [entities, on, viewer]);
+  };
 
   return (
     <div className="flex flex-col gap-2">

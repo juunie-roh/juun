@@ -2,7 +2,7 @@
 
 import { SidebarProvider, useSidebar } from "@juun/ui/sidebar";
 import type { ReactNode } from "react";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type AppSidebarContextProps = {
   // Outer sidebar (from page-level SidebarProvider)
@@ -45,21 +45,18 @@ export function AppSidebarProvider({ children }: { children: ReactNode }) {
   const [active, setActive] = useState<string | null>(null);
   const [content, setContent] = useState<string | null>(null);
 
-  const contextValue = useMemo(
-    () => ({
-      outer,
-      innerOpen,
-      setInnerOpen,
-      active,
-      setActive,
-      content,
-      setContent,
-    }),
-    [outer, innerOpen, setInnerOpen, active, setActive, content, setContent],
-  );
-
   return (
-    <AppSidebarContext.Provider value={contextValue}>
+    <AppSidebarContext.Provider
+      value={{
+        outer,
+        innerOpen,
+        setInnerOpen,
+        active,
+        setActive,
+        content,
+        setContent,
+      }}
+    >
       {children}
     </AppSidebarContext.Provider>
   );

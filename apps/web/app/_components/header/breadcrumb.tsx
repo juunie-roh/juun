@@ -11,7 +11,7 @@ import {
 import { Home } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useMemo } from "react";
+import { Fragment } from "react";
 
 interface BreadcrumbSegment {
   href: string;
@@ -71,14 +71,9 @@ export default function Breadcrumb({
 }: BreadcrumbProps) {
   const pathname = usePathname();
 
-  const segments = useMemo(() => {
-    // If custom segments are provided, use those instead of generating from pathname
-    if (customSegments) {
-      return customSegments;
-    }
-
-    return generateBreadcrumbs(pathname);
-  }, [pathname, customSegments]);
+  const segments = customSegments
+    ? customSegments
+    : generateBreadcrumbs(pathname);
 
   return (
     <BreadcrumbRoot className={className}>

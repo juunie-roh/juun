@@ -21,10 +21,7 @@ export default function PolygonHighlight() {
     Cesium.Color.RED.toCssColorString(),
   );
 
-  const highlight = useMemo(
-    () => (viewer ? Highlight.getInstance(viewer) : undefined),
-    [viewer],
-  );
+  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
 
   const e = useMemo(
     () =>

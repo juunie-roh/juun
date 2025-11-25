@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
   },
   output: "standalone",
   // Explicitly mark Prisma as server-side external package for Turbopack
-  serverExternalPackages: ["@prisma/client", "@prisma/engines"],
+  serverExternalPackages: ["prisma"],
   experimental: {
     // externalDir: true,
     // serverActions: {
@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
     // },
     optimizePackageImports: ["lucide-react"],
   },
+  reactCompiler: true,
   transpilePackages: ["@juun/ui", "@juun/api", "@juun/db"],
   // support old blog slug-based urls redirect to new id-based urls
   redirects() {

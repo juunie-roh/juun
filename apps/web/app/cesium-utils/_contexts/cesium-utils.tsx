@@ -27,19 +27,10 @@ export function CesiumUtilsProvider({
   children: React.ReactNode;
 }) {
   const [feature, setFeature] = React.useState<Feature>();
-  const removeFeature = React.useCallback(() => setFeature(undefined), []);
-  // Context value memoization to prevent re-rendering
-  const contextValue = React.useMemo(
-    () => ({
-      feature,
-      setFeature,
-      removeFeature,
-    }),
-    [feature, setFeature, removeFeature],
-  );
+  const removeFeature = () => setFeature(undefined);
 
   return (
-    <CesiumUtilsContext.Provider value={contextValue}>
+    <CesiumUtilsContext.Provider value={{ feature, setFeature, removeFeature }}>
       {children}
     </CesiumUtilsContext.Provider>
   );

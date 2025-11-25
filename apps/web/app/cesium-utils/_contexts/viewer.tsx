@@ -17,17 +17,9 @@ export function useViewer() {
 
 export function ViewerProvider({ children }: { children: React.ReactNode }) {
   const [viewer, setViewer] = React.useState<Viewer>();
-  // Context value memoization to prevent re-rendering
-  const contextValue = React.useMemo(
-    () => ({
-      viewer,
-      setViewer,
-    }),
-    [viewer, setViewer],
-  );
 
   return (
-    <ViewerContext.Provider value={contextValue}>
+    <ViewerContext.Provider value={{ viewer, setViewer }}>
       {children}
     </ViewerContext.Provider>
   );
