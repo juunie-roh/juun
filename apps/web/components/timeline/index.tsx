@@ -4,6 +4,7 @@ import {
   Item,
   ItemContent,
   ItemDescription,
+  ItemFooter,
   ItemHeader,
   ItemTitle,
 } from "@juun/ui/item";
@@ -11,6 +12,8 @@ import Link from "next/link";
 
 import { TimelineItem } from "@/app/timeline/_data";
 import { formatDateSafe } from "@/utils/date";
+
+import TimelineTags from "./tag";
 
 interface TimelineProps {
   items: Omit<TimelineItem, "detail">[];
@@ -50,13 +53,10 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
               <ItemTitle className="text-xl font-bold tracking-tight">
                 {item.title}
               </ItemTitle>
-              <div className="flex w-full flex-wrap gap-1.5">
-                {item.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
+              <TimelineTags tags={item.tags}>
+                {item.article && <Badge>Article</Badge>}
+                {item.playground && <Badge>Playground</Badge>}
+              </TimelineTags>
             </ItemHeader>
 
             <ItemContent>
@@ -64,6 +64,30 @@ export default function Timeline({ items, order = "desc" }: TimelineProps) {
                 {item.description}
               </ItemDescription>
             </ItemContent>
+
+            {(item.article || item.playground) && (
+              <ItemFooter className="justify-start">
+                Related:
+                {item.article && (
+                  <Link
+                    href={item.article}
+                    prefetch
+                    className="hover:underline"
+                  >
+                    Article
+                  </Link>
+                )}
+                {item.playground && (
+                  <Link
+                    href={item.playground}
+                    prefetch
+                    className="hover:underline"
+                  >
+                    Playground
+                  </Link>
+                )}
+              </ItemFooter>
+            )}
           </Item>
         </li>
       ))}

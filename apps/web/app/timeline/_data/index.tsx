@@ -6,6 +6,9 @@ export type TimelineItem = {
   category: string;
   tags: string[];
   detail: string;
+  // related links
+  article?: string;
+  playground?: string;
 };
 
 export const TIMELINE_ITEMS: TimelineItem[] = [
@@ -21,7 +24,7 @@ This is the foundation of the project: a single Next.js application with Yarn Be
 A trial of modern toolchains, which I knew and found useful at that time.`,
     date: "2024-09-27",
     category: "Foundation",
-    tags: ["Next.js", "TypeScript", "Yarn Berry", "PnP"],
+    tags: ["NextJS", "TypeScript", "yarn-berry", "PnP"],
   },
   {
     id: 2,
@@ -30,7 +33,7 @@ A trial of modern toolchains, which I knew and found useful at that time.`,
       "Restructured from single Next.js app to monorepo with shared packages",
     date: "2025-03-04",
     category: "Architecture",
-    tags: ["ADR", "Monorepo", "Yarn Berry", "Architecture", "Scalability"],
+    tags: ["ADR", "monorepo", "yarn-berry", "architecture", "scalability"],
     detail: `
 ### Situation
 
@@ -45,14 +48,8 @@ As an exploration of technology, I decided to try it out and experiment.`,
       "Migrated from Yarn Berry PnP to PNPM due to Next.js standalone and Vercel monorepo incompatibility",
     date: "2025-03-20",
     category: "Infrastructure",
-    tags: [
-      "Article",
-      "Yarn Berry",
-      "PNPM",
-      "Package Manager",
-      "Monorepo",
-      "Turborepo",
-    ],
+    tags: ["yarn-berry", "pnpm", "package manager", "monorepo"],
+    article: "/blog/1",
     detail: `
 ### Situation
 
@@ -90,9 +87,6 @@ I found additional problems with the Next.js standalone build option, where bund
 
 Lost zero-install advantage, but the project build became compatible with Vercel's deployment environment and the Next.js standalone build option.
 Additionally, the Docker image size reduced from over 1GB to 346MB.
-
-### Related Article
-["Yarn Berry PnP Configuration"](/blog/1)
 `,
   },
   {
@@ -102,7 +96,8 @@ Additionally, the Docker image size reduced from over 1GB to 346MB.
       "Achieved 66-72% bundle size reduction through strategic lazy loading and dependency analysis",
     date: "2025-06-20",
     category: "Performance",
-    tags: ["Article", "Performance", "Bundle", "Optimization", "Lazy Loading"],
+    tags: ["performance", "bundle", "optimization", "lazy-loading"],
+    article: "/blog/5",
     detail: `
 ### Situation
 
@@ -142,10 +137,6 @@ The blind use of barrel exports and external libraries was a major factor in the
 The bundle size for home page dropped from 2.55 MB to 853KB, about 66% reduction. 
 First contentful paint was stabilized at an average 1.2s.
 This affected to the \`@juun-roh/cesium-utils\` package's modular export strategy.
-
-### Related Article
-
-["Bundle Optimization"](/blog/5)
   `,
   },
   {
@@ -153,9 +144,10 @@ This affected to the \`@juun-roh/cesium-utils\` package's modular export strateg
     title: "Docker Build Optimization",
     description:
       "Reduced Docker image from 526MB to 346MB (34% reduction) with 99% layer efficiency",
-    date: "2025-09-23",
+    date: "2025-07-10",
     category: "Infrastructure",
-    tags: ["Article", "Docker", "Optimization", "DevOps", "CI/CD"],
+    tags: ["docker", "optimization", "devops", "ci-cd"],
+    article: "/blog/3",
     detail: `
 ### Initial Problems
 - Image size: 526MB
@@ -179,9 +171,6 @@ This affected to the \`@juun-roh/cesium-utils\` package's modular export strateg
 - Separated dependency installation from build
 - Production-only dependencies in final image
 - Leveraged BuildKit features
-
-### Related Article
-["Docker Image Optimization"](/blog/3)
   `,
   },
   {
@@ -191,7 +180,8 @@ This affected to the \`@juun-roh/cesium-utils\` package's modular export strateg
       "Implemented Next.js multi-zone architecture, then removed it after discovering 77% performance degradation",
     date: "2025-07-25",
     category: "Architecture",
-    tags: ["Article", "MFE", "Multi-Zone", "Performance", "Reversal"],
+    tags: ["mfe", "multi-zone", "performance", "reversal"],
+    article: "/blog/6",
     detail: `
 ### Situation
 
@@ -217,9 +207,6 @@ Removed multi-zone architecture after 1 day
 ### Professional Impact
 Used this experimental evidence to challenge executive proposal 
 for micro-frontend at work, preventing costly architectural mistake.
-
-### Related Article
-["Micro Frontend: Common Misconceptions"](/blog/micro-frontend) documenting findings
 `,
   },
   {
@@ -229,7 +216,7 @@ for micro-frontend at work, preventing costly architectural mistake.
       "Removed Resium wrapper library (-1MB), implemented direct Cesium integration with custom React wrapper",
     date: "2025-09-19",
     category: "Performance",
-    tags: ["Cesium", "Bundle Optimization", "Performance", "React"],
+    tags: ["Cesium", "bundle", "optimization", "performance", "React"],
     detail: `
 ### Context
 Using Resium (React wrapper for Cesium) added 1MB to bundle.
@@ -258,14 +245,8 @@ Remove Resium, implement native Cesium with custom React wrapper
       "Complete refactoring for portability, high cohesion, and separation of concerns using private folders and route-scoped context",
     date: "2025-09-26",
     category: "Architecture",
-    tags: [
-      "Article",
-      "Refactor",
-      "SoC",
-      "Architecture",
-      "Context",
-      "Portability",
-    ],
+    tags: ["refactor", "SoC", "architecture", "context", "portability"],
+    article: "/blog/7",
     detail: `
 ### The Problem
 Original structure scattered components across global folders:
@@ -377,9 +358,6 @@ transplantable without breaking other routes.
 - Easier API additions (single file change)
 - Improved bundle size (lazy loading)
 - Clear mental model (everything in one place)
-
-### Related Article
-["Separation of Concerns in Frontend Development"](/blog/separation-of-concerns)
 `,
   },
   {
@@ -389,11 +367,11 @@ transplantable without breaking other routes.
       "Migrated from Jest to Vitest for unit tests, added Playwright for E2E testing",
     date: "2025-09-28",
     category: "Infrastructure",
-    tags: ["Testing", "Vitest", "Playwright", "DX"],
+    tags: ["testing", "Vitest", "Playwright", "DX"],
     detail: `
-### Motivation
-- Complex configuration of Jest
-- Missing E2E coverage
+### Situation
+
+Vitest configuration was much easier than Jest.
 
 ### Changes
 - **Unit/Integration**: Jest → Vitest
@@ -419,11 +397,14 @@ transplantable without breaking other routes.
       "Designed and implemented timeline for the project. Inspired by monolith from 2001: A Space Odyssey.",
     date: "2025-10-13",
     category: "Architecture",
-    tags: ["ADR", "Component", "Timeline", "Design"],
+    tags: ["ADR", "component", "design"],
     detail: `
 ### Situation
 
-Inspired by monolith from 2001: A Space Odyssey.
+
+### Result
+
+A timeline component having design inspired by monolith from 2001: A Space Odyssey.
 `,
   },
   {
@@ -433,17 +414,12 @@ Inspired by monolith from 2001: A Space Odyssey.
       "Integrated Prisma ORM with Neon PostgreSQL for serverless architecture, eliminating traditional backend framework",
     date: "2025-10-20",
     category: "Infrastructure",
-    tags: ["Database", "Prisma", "Neon", "Serverless", "Edge Computing"],
+    tags: ["database", "Prisma", "Neon", "serverless", "edge-computing"],
     detail: `
 ### Situation
 
-The file-based blog system was a prototype of database-driven system.
-
-### Why Serverless?
-
-Traditional backend frameworks require managing servers, scaling, and infrastructure.
-This project demonstrates a modern paradigm shift: **delegating backend tasks to
-distributed edge computing systems**.
+The file-based dynamic routing blog system was a prototype of database-driven system.
+It was designed to be database-driven from the start; but running a server privately just for this blog articles was over-kill.
 
 ### Architecture Implementation
 
@@ -546,18 +522,18 @@ Focus on business logic, not infrastructure.
     id: 12,
     title: "Blog System Migration",
     description:
-      "Migrated the blog system and routes of this project from file-based to database-driven, linked with ORM-ed queries. To provide consistent design for markdown contents, designed a custom content management system with data processing pipeline.",
+      "Migrated the blog system and routes of this project from file-based to database-driven having custom content management system.",
     date: "2025-11-11",
     category: "Architecture",
     tags: [
       "ADR",
-      "Database-Driven",
+      "database-driven",
       "Markdown",
       "CMS",
       "AST",
-      "Pipeline",
-      "Migration",
-      "Compatibility",
+      "pipeline",
+      "migration",
+      "compatibility",
     ],
     detail: `
 ### Situation
@@ -644,7 +620,7 @@ Then, I realized markdown syntax could be applicable to this project, as many pl
       "Redefined portfolio as playground, and migrated system from file-based dynamic routes to static routes with centralized configuration, following \`cesium-utils\` page's architectural pattern.",
     date: "2025-11-17",
     category: "Architecture",
-    tags: ["ADR", "Architecture", "Next.js", "Refactoring"],
+    tags: ["ADR", "architecture", "NextJS", "refactoring"],
     detail: `
 ### Situation
 
@@ -708,23 +684,23 @@ Now it can serve static html pages as is, without framework coordination.
     id: 14,
     title: "Timeline Improvement",
     description:
-      "Detected performance degradation of the timeline component, causing server-side rendering and the resulting HTML bloat. Reduced HTML from 319 KB to 257 KB (19% reduction) and separated markdown parsing so detail sections are parsed individually using Next.js parallel & intercepting route pattern.",
+      "Reduced HTML from 319 KB to 257 KB (19% reduction) and separated markdown parsing so detail sections are parsed individually using Next.js parallel & intercepting route pattern.",
     date: "2025-11-21",
     category: "Performance",
     tags: [
       "ADR",
-      "Performance",
-      "Optimization",
-      "Next.js",
+      "performance",
+      "optimization",
+      "NextJS",
       "SoC",
-      "Architecture",
-      "Timeline",
+      "architecture",
       "SSR",
-      "Refactoring",
+      "refactoring",
     ],
     detail: `
 ### Situation
 
+Detected performance degradation of the timeline component, causing server-side rendering and the resulting HTML bloat. 
 The detail section of the timeline component was rendered upfront despite being collapsed.
 The section was parsed by the markdown utility on the server-side. Parsing all details at once delayed access of the page.
 Also the resulting HTML bloated up to 319 KB.
