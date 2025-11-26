@@ -205,7 +205,6 @@ namespace post {
    * ```
    */
   export async function revalidate() {
-    "use server";
     const { revalidateTag } = await import("next/cache");
     revalidateTag("posts", "max");
   }
