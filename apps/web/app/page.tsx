@@ -29,14 +29,14 @@ export default async function Home({
     <Fragment>
       <HeroHome />
       <main className="mb-10 size-full">
-        {/* Project Timeline */}
+        {/* Decision Records */}
         <section
           className="relative mx-auto w-full max-w-7xl border-x border-b"
           id="timeline"
         >
           <div className="flex items-center gap-2 border-b px-4 py-2">
             <h2 className="font-stabil-grotesk text-3xl font-bold tracking-tight">
-              Project Timeline
+              Decision Records
             </h2>
             <TimelineOrderButton href="/" order={order} />
           </div>
