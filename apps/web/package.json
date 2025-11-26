@@ -36,6 +36,7 @@
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.0",
+    "@tanstack/react-query": "^5.90.11",
     "@tanstack/react-table": "^8.21.3",
     "@vercel/analytics": "^1.5.0",
     "@vercel/otel": "^2.1.0",
