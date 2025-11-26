@@ -68,6 +68,62 @@ namespace post {
         tags: post.post_tags.map((pt) => pt.tag.name),
       }));
     }
+    /**
+     * Get all posts having specific tags
+     */
+    export async function byTags(
+      tags: string[],
+    ): Promise<Omit<WithTags, "content">[]> {
+      const posts = await prisma.post.findMany({
+        where: {
+          AND: tags.map((name) => ({
+            post_tags: {
+              some: { tag: { name } },
+            },
+          })),
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          word_count: true,
+          category: true,
+          image: true,
+          created_at: true,
+          updated_at: true,
+          post_tags: {
+            select: {
+              tag: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+            orderBy: {
+              tag: {
+                name: "asc",
+              },
+            },
+          },
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      // Transform data to flatten tags
+      return posts.map((post) => ({
+        id: post.id,
+        title: post.title,
+        word_count: post.word_count,
+        description: post.description ?? undefined,
+        category: post.category ?? undefined,
+        image: post.image ?? undefined,
+        created_at: post.created_at,
+        updated_at: post.updated_at,
+        tags: post.post_tags.map((pt) => pt.tag.name),
+      }));
+    }
 
     /**
      * Get a single post by id, including it's content

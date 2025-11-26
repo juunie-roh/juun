@@ -179,7 +179,7 @@ This affected the \`@juun-roh/cesium-utils\` package's modular export strategy.
     description:
       "Implemented Next.js multi-zone architecture, then removed it after discovering 77% performance degradation",
     date: "2025-07-25",
-    category: "Architecture",
+    category: "Experiment",
     tags: ["MFE", "multi-zone", "performance", "reversal"],
     article: "/blog/6",
     detail: `
@@ -357,23 +357,6 @@ It was designed to be database-driven from the start; but running a server priva
 - **Connection**: Pooled connections for edge environments
 - **Pattern**: Singleton preventing connection exhaustion
 
-**Query Organization**
-\`\`\`typescript
-// Namespace pattern for clean API
-import post from "@juun/db/queries/post";
-
-// Type-safe, auto-complete friendly
-const posts = await post.get.all();
-const single = await post.get.bySlug("my-post");
-\`\`\`
-
-**Database Design**
-- Normalized schema (posts, tags, categories)
-- Many-to-many relations via junction tables
-- Markdown content stored in PostgreSQL TEXT
-- Category as ENUM (fixed vocabulary)
-- Tags as dynamic table (future expansion)
-
 ### Key Benefits
 
 **No Backend Framework Needed**
@@ -463,6 +446,7 @@ Focus on business logic, not infrastructure.
       "migration",
       "compatibility",
     ],
+    playground: "/playground/input-renderer",
     detail: `
 ### Situation
 
