@@ -7,6 +7,7 @@
   "scripts": {
     "analyze": "ANALYZE=true next build",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "build:standalone": "next build && node scripts/post-build.js",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
     "dev": "next dev",
@@ -80,6 +81,7 @@
     "@types/probe-image-size": "^7.2.5",
     "@types/three": "^0.181.0",
     "babel-plugin-react-compiler": "^1.0.0",
+    "next-sitemap": "^4.2.3",
     "ts-node": "^10.9.2"
   }
 }

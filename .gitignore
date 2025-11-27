@@ -27,7 +27,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
+# local files
+*.local.*
 .env
 
 # vercel
@@ -49,7 +50,7 @@ next-env.d.ts
 .eslintcache
 apps/web/public/cesium
 storybook-static
-CLAUDE.md
+CLAUDE.local.md
 .claude
 
 # Playwright
