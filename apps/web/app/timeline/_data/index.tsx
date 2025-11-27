@@ -260,6 +260,8 @@ Original structure scattered components across global folders:
 
 **Requirement**: Features must be portable between projects with the same framework. Each feature should be self-contained and transplantable without breaking other routes.
 
+This requirement originated from my workplace.
+
 ### Task
 
 - Redefine variable scopes within the route
@@ -286,6 +288,8 @@ Duplicate folder names were eliminated by using the private folder pattern, incr
 Switching from Zustand to React context minimized dependencies outside the route and ensured proper cleanup when the user navigates away.
 A single configuration source reduced maintenance burden and simplified adding new features.
 However, achieving copy-paste portability required some violation of the DRY principle.
+
+The exact pattern was applied to the workplace for service portability.
 `,
   },
   {
