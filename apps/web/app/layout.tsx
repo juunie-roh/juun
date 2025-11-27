@@ -63,6 +63,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="DSWX9T0ryTPX662pi_ffZ-CXOJglx8olV7olIsOHfBg"
+        />
+      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased`}
