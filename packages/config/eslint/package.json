@@ -11,9 +11,9 @@
     "./*": "./src/*"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.1",
-    "@next/eslint-plugin-next": "^16.0.4",
+    "@next/eslint-plugin-next": "^16.0.5",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",
@@ -25,7 +25,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-storybook": "^10.0.8",
+    "eslint-plugin-storybook": "^10.1.2",
     "eslint-plugin-testing-library": "^7.13.5",
     "eslint-plugin-turbo": "^2.6.1",
     "eslint-plugin-unused-imports": "^4.3.0"
