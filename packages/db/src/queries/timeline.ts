@@ -1,23 +1,20 @@
 import { prisma } from "../client";
 import type { TimelineCategory } from "../generated/prisma/client";
 
-namespace timeline {
-  /**
-   * Timeline with tags
-   */
-  export interface WithTags {
-    id: number;
-    title: string;
-    description: string;
-    category: TimelineCategory;
-    detail: string;
-    article: string | undefined;
-    playground: string | undefined;
-    created_at: Date;
-    updated_at: Date;
-    tags: string[];
-  }
+type timeline = {
+  id: number;
+  title: string;
+  description: string;
+  category: TimelineCategory;
+  detail: string;
+  article: string | undefined;
+  playground: string | undefined;
+  created_at: Date;
+  updated_at: Date;
+  tags: string[];
+};
 
+namespace timeline {
   export namespace get {
     /**
      * Get all timeline items with tags without details
@@ -26,7 +23,7 @@ namespace timeline {
      */
     export async function all(
       order: "asc" | "desc" | undefined,
-    ): Promise<Omit<WithTags, "detail">[]> {
+    ): Promise<Omit<timeline, "detail">[]> {
       const timelines = await prisma.timeline.findMany({
         select: {
           id: true,
@@ -74,7 +71,7 @@ namespace timeline {
     /**
      * Get a single timeline item by id, including its detail
      */
-    export async function byId(id: number): Promise<WithTags | null> {
+    export async function byId(id: number): Promise<timeline | null> {
       const timeline = await prisma.timeline.findUnique({
         where: { id },
         select: {
