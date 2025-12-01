@@ -1,7 +1,7 @@
 import { prisma } from "../client";
 import type { TimelineCategory } from "../generated/prisma/client";
 
-type timeline = {
+export type Timeline = {
   id: number;
   title: string;
   description: string;
@@ -23,7 +23,7 @@ namespace timeline {
      */
     export async function all(
       order: "asc" | "desc" | undefined,
-    ): Promise<Omit<timeline, "detail">[]> {
+    ): Promise<Omit<Timeline, "detail">[]> {
       const timelines = await prisma.timeline.findMany({
         select: {
           id: true,
@@ -35,18 +35,8 @@ namespace timeline {
           created_at: true,
           updated_at: true,
           timeline_tags: {
-            select: {
-              tag: {
-                select: {
-                  name: true,
-                },
-              },
-            },
-            orderBy: {
-              tag: {
-                name: "asc",
-              },
-            },
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
           },
         },
         orderBy: {
@@ -71,7 +61,7 @@ namespace timeline {
     /**
      * Get a single timeline item by id, including its detail
      */
-    export async function byId(id: number): Promise<timeline | null> {
+    export async function byId(id: number): Promise<Timeline | null> {
       const timeline = await prisma.timeline.findUnique({
         where: { id },
         select: {
@@ -85,18 +75,8 @@ namespace timeline {
           created_at: true,
           updated_at: true,
           timeline_tags: {
-            select: {
-              tag: {
-                select: {
-                  name: true,
-                },
-              },
-            },
-            orderBy: {
-              tag: {
-                name: "asc",
-              },
-            },
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
           },
         },
       });
