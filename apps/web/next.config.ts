@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
     // },
     optimizePackageImports: ["lucide-react"],
   },
+  cacheComponents: true,
   reactCompiler: true,
   transpilePackages: ["@juun/ui", "@juun/api", "@juun/db"],
   // support old blog slug-based urls redirect to new id-based urls

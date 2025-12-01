@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "declaration": false
   },
-  "include": ["./**/*"],
+  "include": ["src/**/*", "prisma.config.ts"],
   "exclude": ["node_modules", "dist", "src/generated/**/*"]
 }

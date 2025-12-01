@@ -17,14 +17,11 @@ import TimelineTags from "./tag";
 
 interface TimelineProps {
   items: Omit<TimelineItem, "detail">[];
-  order?: "asc" | "desc";
 }
 
-export default function Timeline({ items, order = "desc" }: TimelineProps) {
-  const sortedItems = [...items].sort((a, b) =>
-    order === "desc"
-      ? new Date(b.date).getTime() - new Date(a.date).getTime()
-      : new Date(a.date).getTime() - new Date(b.date).getTime(),
+export default function Timeline({ items }: TimelineProps) {
+  const sortedItems = [...items].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
   return (

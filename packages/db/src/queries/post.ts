@@ -1,30 +1,27 @@
 import { prisma } from "../client";
 import type { PostCategory } from "../generated/prisma/client";
 
-namespace post {
-  /**
-   * Post with tags
-   */
-  export interface WithTags {
-    id: number;
-    title: string;
-    description: string | undefined;
-    content: string;
-    word_count: number;
-    category: PostCategory | undefined;
-    image: string | undefined;
-    created_at: Date;
-    updated_at: Date;
-    tags: string[];
-  }
+export type Post = {
+  id: number;
+  title: string;
+  description: string | undefined;
+  content: string;
+  word_count: number;
+  category: PostCategory | undefined;
+  image: string | undefined;
+  created_at: Date;
+  updated_at: Date;
+  tags: string[];
+};
 
+namespace post {
   export namespace get {
     /**
      * Get all posts with tags without contents
      *
      * Posts are ordered by `created_at` descending (newest first)
      */
-    export async function all(): Promise<Omit<WithTags, "content">[]> {
+    export async function all(): Promise<Omit<Post, "content">[]> {
       const posts = await prisma.post.findMany({
         select: {
           id: true,
@@ -36,23 +33,11 @@ namespace post {
           created_at: true,
           updated_at: true,
           post_tags: {
-            select: {
-              tag: {
-                select: {
-                  name: true,
-                },
-              },
-            },
-            orderBy: {
-              tag: {
-                name: "asc",
-              },
-            },
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
           },
         },
-        orderBy: {
-          created_at: "desc",
-        },
+        orderBy: { created_at: "desc" },
       });
 
       // Transform data to flatten tags
@@ -73,7 +58,7 @@ namespace post {
      */
     export async function byTags(
       tags: string[],
-    ): Promise<Omit<WithTags, "content">[]> {
+    ): Promise<Omit<Post, "content">[]> {
       const posts = await prisma.post.findMany({
         where: {
           AND: tags.map((name) => ({
@@ -92,18 +77,8 @@ namespace post {
           created_at: true,
           updated_at: true,
           post_tags: {
-            select: {
-              tag: {
-                select: {
-                  name: true,
-                },
-              },
-            },
-            orderBy: {
-              tag: {
-                name: "asc",
-              },
-            },
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
           },
         },
         orderBy: {
@@ -130,7 +105,7 @@ namespace post {
      */
     export async function byId(
       id: number,
-    ): Promise<Omit<WithTags, "word_count"> | null> {
+    ): Promise<Omit<Post, "word_count"> | null> {
       const post = await prisma.post.findUnique({
         where: { id },
         select: {
@@ -143,18 +118,8 @@ namespace post {
           created_at: true,
           updated_at: true,
           post_tags: {
-            select: {
-              tag: {
-                select: {
-                  name: true,
-                },
-              },
-            },
-            orderBy: {
-              tag: {
-                name: "asc",
-              },
-            },
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
           },
         },
       });

@@ -7,7 +7,7 @@ import {
 } from "@juun/ui/navigation-menu";
 import { Separator } from "@juun/ui/separator";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 
 import Breadcrumb from "./breadcrumb";
 import HeaderDrawer from "./drawer";
@@ -64,7 +64,9 @@ export default function Header() {
           <HeaderDrawer navigationItems={navigationItems} />
         </div>
       </div>
-      <Breadcrumb className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+      <Suspense fallback={null}>
+        <Breadcrumb className="absolute -bottom-4 w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+      </Suspense>
     </header>
   );
 }

@@ -1,3 +1,4 @@
+import type { Post } from "@juun/db/post";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -9,7 +10,8 @@ import BlogFooter from "../_components/article/footer";
 import BlogHeader from "../_components/article/header";
 
 // ISR: Revalidate every hour (3600 seconds)
-export const revalidate = 3600;
+// page level ISR incompatible with next "cacheComponents"
+// export const revalidate = 3600;
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
@@ -68,8 +70,8 @@ export default async function BlogItemPage({
   if (!post) notFound();
 
   const metadata: Omit<
-    cache.post.Metadata,
-    "id" | "category" | "word_count" | "created_at"
+    Post,
+    "id" | "content" | "category" | "word_count" | "created_at"
   > = {
     title: post.title,
     description: post.description,

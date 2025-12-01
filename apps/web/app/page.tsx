@@ -8,21 +8,13 @@ import {
 import { Fragment, Suspense } from "react";
 
 import Timeline from "@/components/timeline";
-import TimelineOrderButton from "@/components/timeline/order-button";
 import cache from "@/lib/cache";
 
 import HeroHome from "./_components/hero-home";
 import { BlogCard, BlogCardSkeleton } from "./blog/_components/card";
 import { TIMELINE_ITEMS } from "./timeline/_data";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ order?: "asc" | "desc" }>;
-}) {
-  const params = await searchParams;
-  const order = params.order;
-
+export default async function Home() {
   const posts = await cache.post.get.all();
 
   return (
@@ -38,12 +30,12 @@ export default async function Home({
             <h2 className="font-stabil-grotesk text-3xl font-bold tracking-tight">
               Decision Records
             </h2>
-            <TimelineOrderButton href="/" order={order} />
+            {/* <TimelineOrderButton href="/" order={order} /> */}
           </div>
-          <Timeline items={TIMELINE_ITEMS} order={order} />
+          <Timeline items={TIMELINE_ITEMS} />
         </section>
 
-        {/* Blog Articles */}
+        {/* Blog Articles Carousel */}
         <section className="relative mx-auto w-full max-w-7xl border border-t-0">
           <h2 className="mb-4 border-b px-4 py-2 font-stabil-grotesk text-3xl font-bold tracking-tight">
             Articles

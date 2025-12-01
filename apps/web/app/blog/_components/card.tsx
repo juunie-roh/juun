@@ -1,3 +1,4 @@
+import { Post } from "@juun/db/post";
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { Badge } from "@juun/ui/badge";
 import { LogoAvatar } from "@juun/ui/logo-avatar";
@@ -6,11 +7,10 @@ import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import type cache from "@/lib/cache";
 import { formatDateSafe } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
 
-export function BlogCard({ metadata }: { metadata: cache.post.Metadata }) {
+export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
   // Prevent XSS (Cross-site scripting)
   const url = safeUrl(`/blog/${metadata.id}`);
   if (url === null) return null;

@@ -6,7 +6,7 @@ This project demonstrates architectural thinking across multiple domains: techni
 
 [Live Site](https://juun.vercel.app) ·
 [Blog Articles](https://juun.vercel.app/blog) ·
-[Project Timeline](https://juun.vercel.app)
+[Playground](https://juun.vercel.app/playground)
 
 ## Purpose
 
