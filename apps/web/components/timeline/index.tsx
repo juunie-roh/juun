@@ -20,9 +20,13 @@ interface TimelineProps {
 }
 
 export default function Timeline({ items }: TimelineProps) {
+  const sortedItems = [...items].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+
   return (
     <ol>
-      {items.map((item) => (
+      {sortedItems.map((item) => (
         <li key={`timeline-${item.id}`} className="relative flex h-full gap-0">
           <div className="relative flex w-1/5 min-w-36 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
             <div className="text-right font-victor-serif text-sm text-muted-foreground">

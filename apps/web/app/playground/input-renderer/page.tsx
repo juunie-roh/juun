@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import md from "@/lib/md";
 
 import MarkdownInput from "./_components/markdown-input";
@@ -67,13 +69,11 @@ const rendered = md.render(parsed);
 > **Note**: This preview uses the exact same pipeline as the blog system.
 `;
 
-interface InputRendererPageProps {
-  searchParams: Promise<{ content?: string }>;
-}
-
-export default async function InputRendererPage({
+async function InputRendererContent({
   searchParams,
-}: InputRendererPageProps) {
+}: {
+  searchParams: Promise<{ content?: string }>;
+}) {
   const params = await searchParams;
   const content = params.content || INITIAL_CONTENT;
 
@@ -88,12 +88,24 @@ export default async function InputRendererPage({
   }
 
   return (
+    <MarkdownInput
+      initialContent={content}
+      renderedContent={renderedContent}
+      error={error}
+    />
+  );
+}
+
+export default async function InputRendererPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ content?: string }>;
+}) {
+  return (
     <div className="size-full overflow-hidden rounded-lg border">
-      <MarkdownInput
-        initialContent={content}
-        renderedContent={renderedContent}
-        error={error}
-      />
+      <Suspense fallback={<div className="p-4">Loading...</div>}>
+        <InputRendererContent searchParams={searchParams} />
+      </Suspense>
     </div>
   );
 }
