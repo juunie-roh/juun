@@ -1,5 +1,6 @@
 "use client";
 
+import type { Post } from "@juun/db/post";
 import { Badge } from "@juun/ui/badge";
 import { Button } from "@juun/ui/button";
 import { LogoAvatar } from "@juun/ui/logo-avatar";
@@ -7,15 +8,14 @@ import { Separator } from "@juun/ui/separator";
 import { Link } from "lucide-react";
 import { toast } from "sonner";
 
-import type cache from "@/lib/cache";
 import { formatDateSafe } from "@/utils/date";
 
 export default function BlogFooter({
   metadata,
 }: {
   metadata: Omit<
-    cache.post.Metadata,
-    "id" | "category" | "word_count" | "created_at"
+    Post,
+    "id" | "content" | "category" | "word_count" | "created_at"
   >;
 }) {
   return (

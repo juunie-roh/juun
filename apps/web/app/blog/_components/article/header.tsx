@@ -1,16 +1,15 @@
+import type { Post } from "@juun/db/post";
 import { AspectRatio } from "@juun/ui/aspect-ratio";
 import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import { Suspense } from "react";
 
-import type cache from "@/lib/cache";
-
 export default function BlogHeader({
   metadata,
 }: {
   metadata: Omit<
-    cache.post.Metadata,
-    "id" | "category" | "word_count" | "created_at"
+    Post,
+    "id" | "content" | "category" | "word_count" | "created_at"
   >;
 }) {
   return (

@@ -1,3 +1,4 @@
+import type { Post } from "@juun/db/post";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -68,8 +69,8 @@ export default async function BlogItemPage({
   if (!post) notFound();
 
   const metadata: Omit<
-    cache.post.Metadata,
-    "id" | "category" | "word_count" | "created_at"
+    Post,
+    "id" | "content" | "category" | "word_count" | "created_at"
   > = {
     title: post.title,
     description: post.description,
