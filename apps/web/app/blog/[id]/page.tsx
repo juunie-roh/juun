@@ -10,7 +10,8 @@ import BlogFooter from "../_components/article/footer";
 import BlogHeader from "../_components/article/header";
 
 // ISR: Revalidate every hour (3600 seconds)
-export const revalidate = 3600;
+// page level ISR incompatible with next "cacheComponents"
+// export const revalidate = 3600;
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
