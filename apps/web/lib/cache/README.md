@@ -1,6 +1,6 @@
 # Cache Layer
 
-This directory contains Next.js caching wrappers for database queries.
+This directory contains Next.js caching wrappers for database queries using Next.js 16's `"use cache"` directive.
 
 ## Why This Layer Exists
 
@@ -8,7 +8,7 @@ The `@juun/db` package provides pure Prisma queries without any framework depend
 
 This cache layer:
 
-- ✅ Wraps `@juun/db` queries with Next.js `unstable_cache`
+- ✅ Wraps `@juun/db` queries with Next.js 16's `"use cache"` directive
 - ✅ Provides consistent cache configuration across the app
 - ✅ Keeps `@juun/db` framework-agnostic (can be used in other apps)
 - ✅ Enables easy cache invalidation with tags
@@ -34,15 +34,15 @@ Both `@juun/db` and `@/lib/cache` follow the same namespace pattern:
 
 ```typescript
 // @juun/db structure
-import db from "@juun/db/post";
-db.get.all();
-db.get.byId(1);
+import post from "@juun/db/post";
+await post.get.all();
+await post.get.byId(1);
 
 // @/lib/cache structure (same API!)
 import cache from "@/lib/cache";
-cache.post.get.all();      // Cached version
-cache.post.get.byId(1); // Cached version
-cache.post.revalidate();   // Cache invalidation
+await cache.post.get.all();      // Cached version
+await cache.post.get.byId(1);    // Cached version
+await cache.post.revalidate();   // Cache invalidation
 ```
 
 ## Usage
@@ -66,61 +66,63 @@ if (!post) {
 ### Cache Invalidation
 
 ```typescript
-// Method 1: Using cache helper
+// Method 1: Using cache helper (recommended)
 import cache from "@/lib/cache";
 await cache.post.revalidate();
+await cache.timeline.revalidate();
 
 // Method 2: Using Next.js directly
 import { revalidateTag } from "next/cache";
-revalidateTag("posts");
+revalidateTag("posts", "max");      // Invalidate all post queries
+revalidateTag("timelines", "max");  // Invalidate all timeline queries
 ```
 
 ## Adding New Cached Entities
 
 Follow this pattern to add caching for other database entities:
 
-### Step 1: Create Cache File
+### Step 1: Create Cache Directory
 
-Create `lib/cache/{entity}.ts`:
+Create `lib/cache/{entity}/` directory structure:
+
+**`lib/cache/{entity}/get.ts`:**
 
 ```typescript
-/**
- * {Entity} cache layer
- *
- * Provides Next.js-cached wrappers around @juun/db/{entity} queries.
- * Mirrors the same namespace structure for API consistency.
- */
-
 import entityQuery from "@juun/db/{entity}";
-import { unstable_cache } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 
-const CACHE_CONFIG = {
-  revalidate: 3600, // 1 hour
-  tags: ["{entities}"],
-};
-
-namespace {entity} {
-  export namespace get {
-    export const all = unstable_cache(
-      async () => entityQuery.get.all(),
-      ["{entities}-all"],
-      CACHE_CONFIG,
-    );
-
-    export const byId = unstable_cache(
-      async (id: number) => entityQuery.get.byId(id),
-      ["{entity}-by-id"],
-      CACHE_CONFIG,
-    );
-  }
-
-  export async function revalidate() {
-    const { revalidateTag } = await import("next/cache");
-    revalidateTag("{entities}");
-  }
+export async function all() {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("{entities}");
+  return await entityQuery.get.all();
 }
 
-export default {entity};
+export async function byId(id: number) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("{entities}", `{entity}-${id}`);
+  return await entityQuery.get.byId(id);
+}
+```
+
+**`lib/cache/{entity}/index.ts`:**
+
+```typescript
+import * as get from "./get";
+
+export { get };
+
+export async function revalidate() {
+  const { revalidateTag } = await import("next/cache");
+  revalidateTag("{entities}", "max");
+}
+
+export const CACHE_CONFIG = {
+  revalidate: 3600,
+  staleTime: 3_600_000,  // 1 hour in milliseconds
+  tags: ["{entities}"],
+};
 ```
 
 ### Step 2: Update Index
@@ -128,14 +130,9 @@ export default {entity};
 Add to `lib/cache/index.ts`:
 
 ```typescript
-import {entity}Cache from "./{entity}";
+import * as {entity} from "./{entity}";
 
-namespace cache {
-  export import post = postCache;
-  export import {entity} = {entity}Cache; // Add this line
-}
-
-export default cache;
+export default { post, timeline, {entity} };
 ```
 
 ### Step 3: Use in Components
@@ -154,7 +151,8 @@ await cache.{entity}.revalidate();
 
 | Setting | Value | Description |
 |---------|-------|-------------|
-| `revalidate` | 3600 seconds (1 hour) | Cache lifetime |
+| `cacheLife` | `"hours"` (1 hour) | Cache lifetime preset |
+| `staleTime` | 3,600,000 ms (1 hour) | Maximum stale time |
 | `tags` | Entity-specific | For cache invalidation |
 
 ### Cache Tags by Entity
@@ -162,18 +160,27 @@ await cache.{entity}.revalidate();
 | Entity | Tags | Purpose |
 |--------|------|---------|
 | `post` | `["posts"]` | Invalidate all post queries |
-| `user` | `["users"]` | Invalidate all user queries |
+| `timeline` | `["timelines"]` | Invalidate all timeline queries |
 
 ### Customizing Cache Duration
 
-Adjust `revalidate` based on data volatility:
+Use Next.js 16's `cacheLife()` presets or custom durations:
 
 ```typescript
-const CACHE_CONFIG = {
-  revalidate: 60,    // 1 minute - frequently updated data
-  revalidate: 3600,  // 1 hour - moderate updates (default)
-  revalidate: 86400, // 24 hours - rarely updated data
-  revalidate: false, // Never revalidate (manual only)
+// Using presets
+"use cache";
+cacheLife("seconds");  // 1 second
+cacheLife("minutes");  // 5 minutes
+cacheLife("hours");    // 1 hour (default for this project)
+cacheLife("days");     // 7 days
+cacheLife("weeks");    // 4 weeks
+cacheLife("max");      // Indefinite (manual revalidation only)
+
+// Custom configuration
+export const CACHE_CONFIG = {
+  revalidate: 60,         // Revalidate after 60 seconds
+  staleTime: 60_000,      // Serve stale for 60 seconds
+  tags: ["{entities}"],   // Cache tags for invalidation
 };
 ```
 
@@ -195,36 +202,36 @@ const CACHE_CONFIG = {
 
 ## Advanced Patterns
 
-### Per-Parameter Cache Keys
+### Per-Item Cache Tags
 
-For fine-grained cache control:
+For fine-grained cache control, use multiple tags:
 
 ```typescript
-export const byId = (id: number) =>
-  unstable_cache(
-    async () => postQuery.get.byId(id),
-    [`post-${id}`], // Unique key per id
-    {
-      revalidate: 3600,
-      tags: ["posts", `post-${id}`], // Multiple tags
-    }
-  )();
+export async function byId(id: number) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("posts", `post-${id}`);  // Multiple tags for granular control
+  return await postQuery.get.byId(id);
+}
 
 // Invalidate specific post
 import { revalidateTag } from "next/cache";
-revalidateTag("post-npm-packages");
+revalidateTag("post-1", "max");  // Invalidate only post with id=1
 
 // Invalidate all posts
-revalidateTag("posts");
+revalidateTag("posts", "max");   // Invalidate all posts
 ```
 
 ### Conditional Caching
 
 ```typescript
-export const getPost = (id: number, useCache = true) =>
+import cache from "@/lib/cache";
+import db from "@juun/db/post";
+
+export const getPost = async (id: number, useCache = true) =>
   useCache
-    ? cache.post.get.byId(id)
-    : db.post.get.byId(id);
+    ? await cache.post.get.byId(id)
+    : await db.get.byId(id);
 ```
 
 ## Debugging & Monitoring
@@ -254,7 +261,7 @@ import { revalidateTag } from "next/cache";
 
 export async function POST() {
   console.log("Invalidating posts cache...");
-  revalidateTag("posts");
+  revalidateTag("posts", "max");  // "max" scope for maximum invalidation
   console.log("Cache invalidated!");
 
   return Response.json({ success: true });
@@ -265,19 +272,26 @@ export async function POST() {
 
 ```text
 lib/cache/
-├── index.ts           # Main export (cache namespace)
-├── post.ts            # Post queries cache
-├── user.ts            # User queries cache (example)
-└── README.md          # This file
+├── index.ts                # Main export (cache namespace)
+├── post/                   # Post cache directory
+│   ├── index.ts            # Post exports (get, revalidate, CACHE_CONFIG)
+│   └── get.ts              # Cached post.get queries (all, byId)
+├── timeline/               # Timeline cache directory
+│   ├── index.ts            # Timeline exports (get, revalidate, CACHE_CONFIG)
+│   └── get.ts              # Cached timeline.get queries (all, byId)
+└── README.md               # This file
 ```
 
 ## Best Practices
 
 1. **Mirror DB Structure** - Keep the same namespace structure as `@juun/db`
-2. **Consistent Tags** - Use plural entity names for tags (`"posts"`, `"users"`)
-3. **Document Cache Duration** - Comment why specific durations are chosen
-4. **Test Invalidation** - Verify cache clears after mutations
-5. **Monitor Performance** - Use cache debugging in development
+2. **Consistent Tags** - Use plural entity names for tags (`"posts"`, `"timelines"`)
+3. **Use `cacheLife()` Presets** - Prefer built-in presets (`"hours"`, `"days"`) over custom durations
+4. **Per-Item Tags** - Add item-specific tags (e.g., `post-${id}`) for granular invalidation
+5. **Document Cache Duration** - Comment why specific durations are chosen
+6. **Test Invalidation** - Verify cache clears after mutations with `"max"` scope
+7. **Monitor Performance** - Use cache debugging in development
+8. **Organize by Directory** - Group related cache functions in subdirectories (`post/`, `timeline/`)
 
 ## Migration Guide
 
@@ -303,7 +317,9 @@ export default async function Page() {
 
 ## References
 
-- [Next.js Data Cache](https://nextjs.org/docs/app/building-your-application/caching#data-cache)
-- [unstable_cache API](https://nextjs.org/docs/app/api-reference/functions/unstable_cache)
-- [revalidateTag API](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)
+- [Next.js 16 Caching](https://nextjs.org/docs/app/building-your-application/caching)
+- [`"use cache"` Directive](https://nextjs.org/docs/app/api-reference/directives/use-cache)
+- [`cacheLife()` API](https://nextjs.org/docs/app/api-reference/functions/cacheLife)
+- [`cacheTag()` API](https://nextjs.org/docs/app/api-reference/functions/cacheTag)
+- [`revalidateTag()` API](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)
 - [@juun/db Package](../../../../packages/db/README.md)
