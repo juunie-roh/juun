@@ -1,21 +1,200 @@
 # Juun
 
-**A self-documenting knowledge system where the development process is the content.**
+[![Live Site](https://img.shields.io/badge/Live-juun.vercel.app-blue?style=flat-square)](https://juun.vercel.app)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js)](https://nextjs.org/)
+
+> **A self-documenting knowledge system where the development process is the content.**
 
 This project demonstrates architectural thinking across multiple domains: technical implementation, editorial design, information architecture, and knowledge management. Every decision is documented, every experiment is tracked, and the project itself serves as both portfolio and learning laboratory.
 
-[Live Site](https://juun.vercel.app) ·
-[Blog Articles](https://juun.vercel.app/blog) ·
-[Playground](https://juun.vercel.app/playground)
+🌐 [Live Site](https://juun.vercel.app) · 📝 [Blog Articles](https://juun.vercel.app/blog) · 🎮 [Playground](https://juun.vercel.app/playground) · 📊 [Timeline](https://juun.vercel.app/#timeline)
 
-## Purpose
+---
 
-This project serves multiple integrated functions:
+## Philosophy
 
-**Knowledge System**: Development process generates documentation automatically. Building features creates timeline entries, solving problems produces blog articles, and architectural decisions become ADRs—all from the same work.
+Unlike traditional portfolios that showcase finished products, Juun treats software development as a knowledge discipline:
 
-**Design Laboratory**: Exploring information architecture through progressive disclosure. Magazine-inspired index design, sequential access patterns, and visual hierarchy that mirrors cognitive load.
+- **Building features** → Creates timeline entries (ADRs)
+- **Solving problems** → Produces blog articles
+- **Architectural decisions** → Generates documented experiments
+- **The development process IS the content**
 
-**Technical Playground**: Real-world implementations of monorepo patterns, serverless architecture, performance optimization, and modern frontend patterns—all measured and documented.
+**Result**: A living documentation system demonstrating *how* decisions are made, not just *what* was built.
 
-**Professional Demonstration**: Not showcasing what was built, but HOW decisions are made. Architectural thinking made visible through systematic documentation across 14+ decision points.
+---
+
+## Key Features
+
+### 📊 Decision Records (Timeline)
+
+14+ architectural decision records with quantified outcomes:
+
+- 66-72% bundle size reduction
+- 34% Docker image optimization
+- 19% HTML size reduction
+- Real failures documented (1-day MFE reversal)
+
+### 📝 Technical Articles
+
+In-depth blog articles covering:
+
+- Infrastructure (Docker, CI/CD, package management)
+- Performance (bundle optimization, lazy loading)
+- Architecture (MFE critique, separation of concerns)
+- Bilingual: Korean primary + English LinkedIn versions
+
+### 🎮 Interactive Playground
+
+- **Markdown Input Renderer**: Real-time preview of the blog's content pipeline
+- **Cesium Utils Demo**: [@juun-roh/cesium-utils](https://www.npmjs.com/package/@juun-roh/cesium-utils) npm package showcase
+- **3D Graphics**: Three.js + Cannon physics simulations
+- **UI Experiments**: Custom components (Wheel, Marquee)
+
+### 🏗️ Production-Grade Architecture
+
+- Turborepo monorepo with PNPM workspaces
+- Framework-agnostic database layer (`@juun/db`)
+- Next.js 16 caching with `"use cache"` directive
+- Parallel routes + intercepting routes for modal UX
+- Comprehensive testing (Vitest + Playwright)
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Framework** | Next.js 16, React 19.2, Turbopack |
+| **Language** | TypeScript 5.9 |
+| **Database** | Prisma ORM + Neon PostgreSQL |
+| **Build System** | Turborepo with remote caching |
+| **Package Manager** | PNPM (workspace protocol) |
+| **3D Graphics** | CesiumJS (Geospatial) + Three.js + Cannon |
+| **State Management** | Zustand (global) + React Context (route-scoped) |
+| **Styling** | Tailwind CSS + shadcn/ui |
+| **Testing** | Vitest + React Testing Library + Playwright |
+| **CI/CD** | GitHub Actions + Vercel |
+| **Documentation** | Storybook |
+
+---
+
+## Project Structure
+
+```text
+juun/
+├── apps/
+│   └── web/                      # Next.js 16 application
+│       ├── app/                  # App Router
+│       │   ├── blog/[id]/        # Database-driven blog
+│       │   ├── timeline/         # ADR timeline
+│       │   ├── playground/       # Interactive demos
+│       │   └── @dialog/          # Parallel routes for modals
+│       ├── components/           # Shared React components
+│       ├── lib/
+│       │   ├── cache/            # Next.js cache wrappers
+│       │   └── md.tsx            # Markdown processing
+│       └── utils/                # Utilities (security, image, date)
+├── packages/
+│   ├── ui/                       # shadcn/ui component library
+│   ├── db/                       # Framework-agnostic Prisma layer
+│   ├── api/                      # HTTP client with retry
+│   └── config/                   # Shared configs (ESLint, Tailwind, TS)
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 24.x or higher
+- PNPM 10.24.0 or higher
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/juunie-roh/juun.git
+cd juun
+
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your DATABASE_URL
+
+# Generate Prisma Client
+pnpm db generate
+
+# Start development server
+pnpm dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to see the application.
+
+### Development Commands
+
+```bash
+# Core development
+pnpm dev                  # Start dev server (with Turbopack)
+pnpm build                # Build all packages
+pnpm lint                 # Run ESLint
+pnpm test                 # Run unit tests (Vitest)
+pnpm test:e2e             # Run E2E tests (Playwright)
+pnpm check-types          # TypeScript type checking
+
+# Package shortcuts
+pnpm web <command>        # Run command in @juun/web
+pnpm db <command>         # Run command in @juun/db
+pnpm ui <command>         # Run command in @juun/ui
+
+# Database operations
+pnpm db generate          # Generate Prisma Client
+pnpm db push              # Push schema to database (dev)
+pnpm db studio            # Open Prisma Studio GUI
+
+# Web-specific
+pnpm web storybook        # Start Storybook (port 6006)
+pnpm web analyze          # Bundle analysis
+
+# Commits
+git cz                    # Commitizen for conventional commits
+```
+
+---
+
+## Measured Performance Improvements
+
+| Optimization | Before | After | Reduction |
+|--------------|--------|-------|-----------|
+| Home page bundle | 2.53 MB | 853 KB | **66%** |
+| Docker image | 526 MB | 346 MB | **34%** |
+| Timeline HTML | 319 KB | 257 KB | **19%** |
+| First Contentful Paint | 10s peaks | 1.2s stable | **88%** |
+
+*All optimizations documented in [Timeline](https://juun.vercel.app/#timeline) entries #4, #5, #7, #14.*
+
+## Documentation
+
+- **Blog Articles**: In-depth technical write-ups at [juun.vercel.app/blog](https://juun.vercel.app/blog)
+- **Timeline**: Chronological ADRs at [juun.vercel.app/#timeline](https://juun.vercel.app/#timeline)
+
+---
+
+## Author
+
+### HyungJuun Roh (Juun)
+
+- Website: [juun.vercel.app](https://juun.vercel.app)
+- GitHub: [@juunie-roh](https://github.com/juunie-roh)
+- LinkedIn: [HyungJuun Roh](https://linkedin.com/in/juun-roh)
+
+---
+
+<p align="center">
+  <i>Every decision documented. Every experiment measured. Every failure owned.</i>
+</p>
