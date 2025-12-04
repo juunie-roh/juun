@@ -20,11 +20,11 @@
     "check-types": "tsc -p ./tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.0.1",
-    "@prisma/client": "^7.0.1"
+    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/client": "^7.1.0"
   },
   "devDependencies": {
     "@config/typescript": "workspace:^",
-    "prisma": "^7.0.1"
+    "prisma": "^7.1.0"
   }
 }
