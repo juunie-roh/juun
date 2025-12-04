@@ -12,7 +12,7 @@ export default function BlogContent({
   return (
     <section className="relative bg-background">
       <div
-        className="m-auto grid grid-cols-responsive gap-x-responsive px-4"
+        className="m-auto grid grid-cols-responsive gap-x-responsive"
         role="none"
       >
         <Separator
@@ -22,7 +22,7 @@ export default function BlogContent({
       </div>
       <div
         id="text-content"
-        className="relative m-auto grid grid-cols-responsive gap-x-responsive px-4"
+        className="relative m-auto grid grid-cols-responsive gap-x-responsive"
       >
         <nav
           aria-label="Table of contents"
