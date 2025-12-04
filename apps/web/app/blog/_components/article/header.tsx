@@ -13,7 +13,7 @@ export default function BlogHeader({
   >;
 }) {
   return (
-    <header className="mx-auto grid grid-cols-responsive place-items-center gap-x-responsive px-4 pt-8">
+    <header className="mx-auto grid grid-cols-responsive place-items-center gap-x-responsive pt-8">
       <div className="col-span-full pt-18 pb-10 lg:col-span-12 lg:col-start-3">
         <div className="flex flex-col gap-2 text-center">
           <h1 className="font-(family-name:--font-stabil-grotesk-trial,--font-rix) text-4xl font-bold tracking-tight lg:col-span-8">
