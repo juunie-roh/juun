@@ -45,7 +45,7 @@
     "lint-staged": "^16.2.7",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "storybook": "^10.1.4",
-    "turbo": "^2.6.2",
+    "turbo": "^2.6.3",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
   },
