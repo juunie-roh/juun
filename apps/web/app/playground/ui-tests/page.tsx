@@ -4,7 +4,7 @@ import ConfirmWheel from "@/components/wheel/ConfirmWheel";
 import FiveWheel from "@/components/wheel/FiveWheel";
 import FourWheel from "@/components/wheel/FourWheel";
 
-export default function Test() {
+export default function UITestPage() {
   return (
     <main className="relative w-full">
       <h2 className="px-4 py-8 text-3xl font-bold tracking-tighter">
