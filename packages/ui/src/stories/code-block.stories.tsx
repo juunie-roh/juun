@@ -112,7 +112,7 @@ const meta: Meta<typeof CodeBlock> = {
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "test"],
   argTypes: {
     code: {
       control: "text",

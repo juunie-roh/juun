@@ -16,7 +16,7 @@ export function Abbr({ title, children, delayDuration }: AbbrProps) {
   return (
     <Tooltip delayDuration={delayDuration}>
       <TooltipTrigger asChild className="underline decoration-dotted">
-        <abbr aria-label={title}>{children}</abbr>
+        <abbr>{children}</abbr>
       </TooltipTrigger>
       <TooltipContent side="bottom">
         <p>{title}</p>

@@ -34,7 +34,7 @@ const meta: Meta<typeof DraggableDialogContent> = {
         "A draggable dialog component that extends the standard dialog with drag-and-drop functionality.",
     },
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "test"],
   argTypes: {
     open: {
       control: "boolean",

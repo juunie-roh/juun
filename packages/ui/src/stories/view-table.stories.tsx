@@ -177,7 +177,7 @@ const meta: Meta<typeof ViewTable<any>> = {
       subtitle: "A simple table for viewing data using TanStack React Table.",
     },
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "test"],
   argTypes: {
     table: {
       description: "Table object created with `@tanstack/react-table`.",
