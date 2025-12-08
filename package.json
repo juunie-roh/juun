@@ -24,11 +24,11 @@
     "db": "pnpm --filter @juun/db"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@commitlint/cz-commitlint": "^20.1.0",
-    "@commitlint/format": "^20.0.0",
-    "@commitlint/types": "^20.0.0",
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
+    "@commitlint/cz-commitlint": "^20.2.0",
+    "@commitlint/format": "^20.2.0",
+    "@commitlint/types": "^20.2.0",
     "@config/eslint": "workspace:^",
     "@testing-library/dom": "^10.4.1",
     "@types/node": "^24.10.1",
