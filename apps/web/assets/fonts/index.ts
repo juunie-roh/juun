@@ -18,6 +18,12 @@ export const antonio = localFont({
   weight: "100 400 700",
 });
 
+export const attilaSansSharpTrial = localFont({
+  src: "AttilaSansSharpTrial-Medium.otf",
+  variable: "--font-attila-sans-sharp-trial",
+  weight: "500",
+});
+
 export const rix = localFont({
   src: [
     { path: "./RixL.ttf", weight: "300", style: "normal" },
