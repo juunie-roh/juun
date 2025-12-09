@@ -4,7 +4,7 @@
  * @param locale The locale to use for formatting
  * @returns Formatted date string or the original string if parsing fails
  */
-export function formatDateSafe(
+export function formatDate(
   date: Date | string | undefined | null,
   full?: boolean,
   locale: string = "en-US",
@@ -16,10 +16,10 @@ export function formatDateSafe(
     const parsedDate = parseDate(date);
     // If parsing fails, return the original string
     if (!parsedDate) return date;
-    return formatDate(parsedDate, full, locale);
+    return _formatDate(parsedDate, full, locale);
   }
 
-  return formatDate(date, full, locale);
+  return _formatDate(date, full, locale);
 }
 
 /**
@@ -28,7 +28,7 @@ export function formatDateSafe(
  * @param locale The locale to use for formatting (default: 'en-US')
  * @returns A string in the format "Month YYYY"
  */
-export function formatDate(
+function _formatDate(
   date: Date,
   full: boolean = false,
   locale: string = "en-US",

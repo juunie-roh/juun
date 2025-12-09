@@ -7,7 +7,7 @@ import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { formatDateSafe } from "@/utils/date";
+import { formatDate } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
 
 export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
@@ -73,7 +73,7 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
               <div className="flex items-center gap-1">
                 <Calendar className="size-3" />
                 <time dateTime={metadata.updated_at.toString()}>
-                  {formatDateSafe(metadata.updated_at)}
+                  {formatDate(metadata.updated_at)}
                 </time>
               </div>
             )}

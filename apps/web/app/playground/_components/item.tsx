@@ -14,7 +14,7 @@ import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import { formatDateSafe } from "@/utils/date";
+import { formatDate } from "@/utils/date";
 
 import { PlaygroundCategory } from "../_data";
 
@@ -76,7 +76,7 @@ export default function PlaygroundItem({
               dateTime={date}
             >
               <Calendar className="inline-block size-4" />
-              {formatDateSafe(date)}
+              {formatDate(date)}
             </time>
             {/* Link */}
             <Button variant="link" asChild className="w-fit">

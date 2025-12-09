@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 import { TimelineItem } from "@/app/timeline/_data";
-import { formatDateSafe } from "@/utils/date";
+import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";
 
@@ -41,7 +41,7 @@ export default function TimelineDialog({
                 {item.id.toString().padStart(3, "0")}
               </span>
               <time dateTime={item.date} className="font-victor-serif">
-                {formatDateSafe(item.date)}
+                {formatDate(item.date)}
               </time>
             </div>
           </aside>
