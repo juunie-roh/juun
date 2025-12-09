@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 
 import { TimelineItem } from "@/app/timeline/_data";
-import { formatDateSafe } from "@/utils/date";
+import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";
 
@@ -37,7 +37,7 @@ export default function Timeline({ items }: TimelineProps) {
                   className="absolute top-6 -right-2 size-1.5 translate-x-1/2 translate-y-1/2 rounded-full bg-primary ring ring-muted-foreground ring-offset-1"
                 />
               </span>
-              <time dateTime={item.date}>{formatDateSafe(item.date)}</time>
+              <time dateTime={item.date}>{formatDate(item.date)}</time>
             </div>
             <Button variant="link" size="sm" asChild>
               <Link href={`/timeline/${item.id}`} prefetch>

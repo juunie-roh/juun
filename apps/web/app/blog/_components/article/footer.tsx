@@ -5,10 +5,10 @@ import { Badge } from "@juun/ui/badge";
 import { Button } from "@juun/ui/button";
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Separator } from "@juun/ui/separator";
+import { toast } from "@juun/ui/sonner";
 import { Link } from "lucide-react";
-import { toast } from "sonner";
 
-import { formatDateSafe } from "@/utils/date";
+import { formatDate } from "@/utils/date";
 
 export default function BlogFooter({
   metadata,
@@ -26,7 +26,7 @@ export default function BlogFooter({
             <Separator orientation="horizontal" />
             <span className="block pt-3 text-lg">Date</span>
             <time className="text-sm" dateTime={metadata.updated_at.toString()}>
-              {formatDateSafe(metadata.updated_at, true)}
+              {formatDate(metadata.updated_at, true)}
             </time>
           </div>
           {metadata.tags && (

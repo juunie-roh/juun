@@ -1,8 +1,9 @@
+import { Button } from "@juun/ui/button";
 import { ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import NavigationBackButton from "@/components/navigation/back";
 import md from "@/lib/md";
 
 import { TIMELINE_ITEMS } from "../_data";
@@ -21,10 +22,12 @@ export default async function TimelineDetailPage({
 
   return (
     <article className="mx-auto max-w-4xl p-8">
-      <NavigationBackButton>
-        <ChevronLeft />
-        Back
-      </NavigationBackButton>
+      <Button asChild>
+        <Link href="/">
+          <ChevronLeft />
+          Return
+        </Link>
+      </Button>
 
       <header className="mb-8">
         <h1 className="mb-2 text-4xl font-bold">{item.title}</h1>
