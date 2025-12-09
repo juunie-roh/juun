@@ -54,6 +54,9 @@ importers:
       lint-staged:
         specifier: ^16.2.7
         version: 16.2.7
+      prettier-plugin-tailwindcss:
+        specifier: ^0.7.2
+        version: 0.7.2(prettier@3.6.2)
       turbo:
         specifier: ^2.6.3
         version: 2.6.3
