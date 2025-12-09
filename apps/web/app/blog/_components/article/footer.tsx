@@ -5,8 +5,8 @@ import { Badge } from "@juun/ui/badge";
 import { Button } from "@juun/ui/button";
 import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Separator } from "@juun/ui/separator";
+import { toast } from "@juun/ui/sonner";
 import { Link } from "lucide-react";
-import { toast } from "sonner";
 
 import { formatDate } from "@/utils/date";
 

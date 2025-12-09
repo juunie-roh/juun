@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Toaster } from "sonner";
 
 import { CodeBlock } from "../components/code-block";
+import { Toaster } from "../components/sonner";
 
 // Sample code for different languages
 const typescriptExample = `interface User {

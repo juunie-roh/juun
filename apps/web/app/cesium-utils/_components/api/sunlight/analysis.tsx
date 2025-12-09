@@ -13,12 +13,12 @@ import {
 import { Input } from "@juun/ui/input";
 import { Label } from "@juun/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@juun/ui/popover";
+import { toast } from "@juun/ui/sonner";
 import { Switch } from "@juun/ui/switch";
 import { Sunlight } from "@juun-roh/cesium-utils/experimental";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 import { useViewer } from "../../../_contexts";
 

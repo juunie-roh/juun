@@ -3,8 +3,8 @@ import "@config/tailwind/globals.css";
 import { TooltipProvider } from "@juun/ui/tooltip";
 import type { Preview } from "@storybook/nextjs";
 import { NextIntlClientProvider } from "next-intl";
-import { ThemeProvider } from "next-themes";
 
+import ThemeProvider from "@/app/_contexts/theme-provider";
 import {
   antonio,
   geistMono,
