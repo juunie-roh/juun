@@ -21,10 +21,14 @@
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.1.0",
-    "@prisma/client": "^7.1.0"
+    "@prisma/client": "^7.1.0",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "prisma": "^7.1.0"
+    "@types/node": "^24.10.1",
+    "prisma": "^7.1.0",
+    "typescript": "^5.9.3"
   }
 }

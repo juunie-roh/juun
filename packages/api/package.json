@@ -19,7 +19,7 @@
     "zod": "^4.1.13"
   },
   "peerDependencies": {
-    "@tanstack/react-query": "^5.90.9",
+    "@tanstack/react-query": "^5.90.12",
     "react": "^19.2.0"
   },
   "peerDependenciesMeta": {
@@ -32,6 +32,11 @@
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
-    "@config/typescript": "workspace:^"
+    "@config/typescript": "workspace:^",
+    "@types/node": "^24.10.1",
+    "@vitest/coverage-v8": "^4.0.15",
+    "jsdom": "^27.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
   }
 }

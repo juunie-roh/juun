@@ -10,24 +10,53 @@
     ".": "./index.js",
     "./*": "./src/*"
   },
-  "devDependencies": {
+  "dependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.1",
-    "@next/eslint-plugin-next": "^16.0.7",
-    "@types/eslint-plugin-jsx-a11y": "^6.10.1",
     "@typescript-eslint/eslint-plugin": "^8.48.1",
     "@typescript-eslint/parser": "^8.48.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsdoc": "^61.5.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-storybook": "^10.1.4",
-    "eslint-plugin-testing-library": "^7.13.5",
     "eslint-plugin-turbo": "^2.6.3",
     "eslint-plugin-unused-imports": "^4.3.0"
+  },
+  "peerDependencies": {
+    "@next/eslint-plugin-next": "^16.0.7",
+    "@testing-library/dom": "^10.4.1",
+    "@types/eslint-plugin-jsx-a11y": "^6.10.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-storybook": "^10.1.4",
+    "eslint-plugin-testing-library": "^7.13.5"
+  },
+  "peerDependenciesMeta": {
+    "@next/eslint-plugin-next": {
+      "optional": true
+    },
+    "@testing-library/dom": {
+      "optional": true
+    },
+    "@types/eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-storybook": {
+      "optional": true
+    },
+    "eslint-plugin-testing-library": {
+      "optional": true
+    }
   }
 }
