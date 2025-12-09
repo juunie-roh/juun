@@ -24,7 +24,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 flex w-full items-center border-b bg-background/50 px-4 backdrop-blur-lg">
       <div className="flex h-header w-full items-center justify-between">
         <Link href="/">
-          <h1 className="scroll-m-20 font-(family-name:--font-antonio) text-3xl font-bold tracking-tighter lg:text-4xl">
+          <h1 className="scroll-m-20 font-stabil-grotesk text-4xl font-bold tracking-tight lg:text-5xl">
             Juun
           </h1>
         </Link>

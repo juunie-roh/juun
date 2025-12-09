@@ -34,6 +34,13 @@ export const rix = localFont({
   weight: "300 500 700",
 });
 
+export const victorNarrowTrial = localFont({
+  src: "VictorNarrowTrial-Medium.otf",
+  weight: "500",
+  style: "normal",
+  variable: "--font-victor-narrow-trial",
+});
+
 export const victorSerifTrial = localFont({
   src: [
     {

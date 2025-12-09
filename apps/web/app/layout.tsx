@@ -14,6 +14,7 @@ import {
   geistSans,
   rix,
   stabilGroteskTrial,
+  victorNarrowTrial,
   victorSerifTrial,
 } from "@/assets/fonts";
 
@@ -72,7 +73,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
       >
         <ThemeProvider>
           <NextIntlClientProvider>
