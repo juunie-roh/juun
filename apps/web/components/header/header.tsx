@@ -1,9 +1,11 @@
 "use client";
 
+import { Button } from "@juun/ui/button";
 import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
 import { Separator } from "@juun/ui/separator";
 import { motion } from "framer-motion";
-import { CirclePlay, Redo2 } from "lucide-react";
+import { CirclePlay } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -13,28 +15,28 @@ import { useHeaderMotion } from "./use-header-motion";
 
 export default function Header() {
   const isHome = usePathname() === "/";
-  const [expanded, setExpanded] = React.useState<boolean>();
+  const [state, setState] = React.useState<"expanded" | "collapsed">();
   const containerRef = React.useRef(null);
   const { scroll } = useHeaderMotion(containerRef);
   const isLarge = useMediaQuery("(width >= 64rem)");
 
   React.useEffect(() => {
-    if (isHome) setExpanded(undefined);
+    if (isHome) setState(undefined);
   }, [isHome]);
 
   return (
     <div
       ref={containerRef}
-      className={expanded === undefined ? "h-[200vh]" : "h-auto"}
+      className={state === undefined ? "h-[200vh]" : "h-auto"}
     >
-      <motion.header className="fixed top-0 size-full">
+      <motion.header className="fixed top-0 size-full" data-state={state}>
         <motion.div
-          className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
+          className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background/75 backdrop-blur-lg lg:grid-rows-15"
           style={{
             height:
-              expanded === undefined
+              state === undefined
                 ? scroll.container.height
-                : expanded
+                : state
                   ? "100vh"
                   : 0,
           }}
@@ -51,7 +53,7 @@ export default function Header() {
             <Link
               href="/blog"
               prefetch
-              onNavigate={() => setExpanded(false)}
+              onNavigate={() => setState("collapsed")}
               className="group flex size-full items-center justify-center overflow-hidden bg-primary lg:items-end"
             >
               <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-all duration-500 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
@@ -113,27 +115,38 @@ export default function Header() {
             }}
           >
             <motion.div
-              className="absolute top-0 -left-[50vw] w-[200vw]"
+              className="absolute -top-px -left-[50vw] w-[200vw]"
               style={{ translateY: scroll.translate.top }}
             >
               <Separator className="bg-muted-foreground" />
             </motion.div>
             <motion.h1
-              className="absolute -top-[23cqh] left-[calc(100vw/12)] inline-block cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
+              className="absolute -top-[24cqh] left-[calc(100vw/12)] inline-block cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
               style={{ translateX: scroll.translate.left }}
             >
               Juun
             </motion.h1>
             <motion.div
-              className="absolute right-[calc(100vw/12)] size-[100cqh] bg-gray-200 lg:right-[calc(100vw/16*4)]"
+              className="absolute right-[calc(100vw/12)] size-[100cqh] bg-blend-overlay lg:right-[calc(100vw/16*4)]"
               style={{
                 right: scroll.main.toggle.right,
                 translateX: scroll.main.toggle.translateX,
               }}
             >
-              <motion.div className="size-full">
-                <Redo2 className="size-full -scale-100" />
-              </motion.div>
+              <Button
+                className="size-full rounded-none"
+                variant="ghost"
+                onClick={() => {
+                  if (!state || state === "collapsed") {
+                    setState("expanded");
+                  } else {
+                    setState("collapsed");
+                  }
+                }}
+              >
+                <Image src="/favicon.ico" alt="icon" fill className="p-3" />
+                <span className="sr-only">Header Toggle Button</span>
+              </Button>
             </motion.div>
             <motion.div
               className="absolute bottom-0 -left-[50vw] w-[200vw]"
@@ -157,7 +170,7 @@ export default function Header() {
             <Link
               href="/playground"
               prefetch
-              onNavigate={() => setExpanded(false)}
+              onNavigate={() => setState("collapsed")}
               className="group flex size-full w-full overflow-hidden bg-primary px-3 py-4"
             >
               <span className="absolute top-0 right-0 origin-top font-stabil-grotesk text-4xl font-semibold text-background transition-all duration-500 [writing-mode:vertical-lr] group-hover:scale-110">
@@ -167,7 +180,9 @@ export default function Header() {
             </Link>
           </motion.div>
         </motion.div>
-        <Breadcrumb className="relative bottom-0 left-1/2 w-fit -translate-x-1/2 overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+        <div className="relative bottom-0 left-4 h-3.5 w-fit bg-border">
+          <Breadcrumb className="relative w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+        </div>
       </motion.header>
     </div>
   );
