@@ -3,13 +3,13 @@
 import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
 import { Separator } from "@juun/ui/separator";
 import { motion } from "framer-motion";
-import { CirclePlay } from "lucide-react";
+import { CirclePlay, Redo2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
 import Breadcrumb from "./breadcrumb";
-import { useHeaderScroll } from "./useHeaderScroll";
+import { useHeaderScroll } from "./use-header-scroll";
 
 export default function Header() {
   const isHome = usePathname() === "/";
@@ -21,6 +21,7 @@ export default function Header() {
     translateLeft,
     translateTop,
     translateBottom,
+    main,
   } = useHeaderScroll(containerRef);
   const isLarge = useMediaQuery("(width >= 64rem)");
 
@@ -42,7 +43,7 @@ export default function Header() {
           }}
         >
           <motion.div
-            className="@container z-1 col-span-1 col-start-1 row-span-4 row-start-2 lg:col-span-5 lg:col-start-11 lg:row-span-5 lg:row-start-1"
+            className="@container-[size] z-1 col-span-4 col-start-2 row-start-2 lg:col-span-5 lg:col-start-11 lg:row-span-5 lg:row-start-1"
             style={{
               translateX: isLarge ? translateRight : translateLeft,
               translateY: translateTop,
@@ -51,9 +52,9 @@ export default function Header() {
             <Link
               href="/blog"
               prefetch
-              className="group flex size-full w-full justify-center overflow-hidden bg-primary lg:block"
+              className="group flex size-full items-center justify-center overflow-hidden bg-primary lg:items-end"
             >
-              <span className="relative inline-block origin-top-left text-end font-stabil-grotesk text-[calc(100cqw)] font-semibold tracking-tight text-background transition-all duration-500 [writing-mode:sideways-lr] group-hover:scale-110 lg:[writing-mode:unset]">
+              <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-all duration-500 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
                 Blog
               </span>
             </Link>
@@ -75,19 +76,19 @@ export default function Header() {
           {/* Vertical separators */}
           <motion.div
             className="col-start-2 row-span-full h-full lg:col-start-3"
-            style={{ translateX: translateLeft }}
+            style={{ translateX: translateRight }}
           >
             <Separator orientation="vertical" className="bg-muted-foreground" />
           </motion.div>
           <motion.div
             className="-col-start-2 row-span-full h-full lg:-col-start-5"
-            style={{ translateX: translateRight }}
+            style={{ translateX: translateLeft }}
           >
             <Separator orientation="vertical" className="bg-muted-foreground" />
           </motion.div>
 
           <motion.div
-            className="col-span-10 col-start-2 row-start-2 flex w-full flex-col lg:col-start-3 lg:row-start-5 lg:-translate-y-2/5"
+            className="col-span-10 col-start-2 row-start-2 flex w-full flex-col lg:col-start-3 lg:row-start-5 lg:-translate-y-3/5"
             style={{
               translateX: isLarge ? translateLeft : translateRight,
               translateY: translateTop,
@@ -101,7 +102,14 @@ export default function Header() {
             </div>
           </motion.div>
 
-          <div className="@container-[size] relative col-span-10 col-start-2 row-start-6 flex h-full items-center lg:col-start-3 lg:row-span-3 lg:row-start-7">
+          <motion.div
+            className="@container-[size] absolute top-1/2 left-0 flex h-[calc(100vh/11)] min-h-header w-full items-center lg:top-[calc(100vh/15*6)] lg:h-[calc(100vh/15*3)]"
+            style={{
+              top: main.top,
+              translateY: main.translateY,
+              height: main.height,
+            }}
+          >
             <motion.div
               className="absolute top-0 -left-[50vw] w-[200vw]"
               style={{ translateY: translateTop }}
@@ -109,18 +117,29 @@ export default function Header() {
               <Separator className="bg-muted-foreground" />
             </motion.div>
             <motion.h1
-              className="absolute -top-[23cqh] inline-block font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary"
+              className="absolute -top-[23cqh] left-[calc(100vw/12)] inline-block font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
               style={{ translateX: translateLeft }}
             >
               <Link href="/">Juun</Link>
             </motion.h1>
+            <motion.div
+              className="absolute right-[calc(100vw/12)] size-[100cqh] bg-gray-200 lg:right-[calc(100vw/16*4)]"
+              style={{
+                right: main.toggle.right,
+                translateX: main.toggle.translateX,
+              }}
+            >
+              <motion.div className="size-full">
+                <Redo2 className="size-full -scale-100" />
+              </motion.div>
+            </motion.div>
             <motion.div
               className="absolute bottom-0 -left-[50vw] w-[200vw]"
               style={{ translateY: translateBottom }}
             >
               <Separator className="bg-muted-foreground" />
             </motion.div>
-          </div>
+          </motion.div>
 
           <motion.div className="relative col-span-2 col-start-10 row-span-3 -row-start-5 lg:col-start-1 lg:row-span-6 lg:-row-start-5"></motion.div>
 
