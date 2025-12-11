@@ -7,38 +7,30 @@ import { motion } from "framer-motion";
 import { CirclePlay } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 
 import Breadcrumb from "./breadcrumb";
 import { useHeaderMotion } from "./use-header-motion";
 
 export default function Header() {
-  const isHome = usePathname() === "/";
-  const [state, setState] = React.useState<"expanded" | "collapsed">();
   const containerRef = React.useRef(null);
-  const { scroll } = useHeaderMotion(containerRef);
+  const {
+    scroll,
+    state,
+    setState,
+    animateToExpanded,
+    animateToCollapsed,
+    isHome,
+  } = useHeaderMotion(containerRef);
   const isLarge = useMediaQuery("(width >= 64rem)");
 
-  React.useEffect(() => {
-    if (isHome) setState(undefined);
-  }, [isHome]);
-
   return (
-    <div
-      ref={containerRef}
-      className={state === undefined ? "h-[200vh]" : "h-auto"}
-    >
-      <motion.header className="fixed top-0 size-full" data-state={state}>
+    <div ref={containerRef} className={isHome ? "h-[200vh]" : "h-auto"}>
+      <motion.header className="fixed top-0 z-50 w-full" data-state={state}>
         <motion.div
-          className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background/75 backdrop-blur-lg lg:grid-rows-15"
+          className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
           style={{
-            height:
-              state === undefined
-                ? scroll.container.height
-                : state
-                  ? "100vh"
-                  : 0,
+            height: scroll.container.height,
           }}
         >
           <motion.div
@@ -53,7 +45,10 @@ export default function Header() {
             <Link
               href="/blog"
               prefetch
-              onNavigate={() => setState("collapsed")}
+              onNavigate={() => {
+                setState("collapsed");
+                animateToCollapsed();
+              }}
               className="group flex size-full items-center justify-center overflow-hidden bg-primary lg:items-end"
             >
               <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-all duration-500 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
@@ -136,11 +131,15 @@ export default function Header() {
               <Button
                 className="size-full rounded-none"
                 variant="ghost"
+                aria-disabled={!state}
                 onClick={() => {
-                  if (!state || state === "collapsed") {
+                  if (!state) return;
+                  if (state === "collapsed") {
                     setState("expanded");
+                    animateToExpanded();
                   } else {
                     setState("collapsed");
+                    animateToCollapsed();
                   }
                 }}
               >
@@ -170,7 +169,10 @@ export default function Header() {
             <Link
               href="/playground"
               prefetch
-              onNavigate={() => setState("collapsed")}
+              onNavigate={() => {
+                setState("collapsed");
+                animateToCollapsed();
+              }}
               className="group flex size-full w-full overflow-hidden bg-primary px-3 py-4"
             >
               <span className="absolute top-0 right-0 origin-top font-stabil-grotesk text-4xl font-semibold text-background transition-all duration-500 [writing-mode:vertical-lr] group-hover:scale-110">
@@ -180,7 +182,7 @@ export default function Header() {
             </Link>
           </motion.div>
         </motion.div>
-        <div className="relative bottom-0 left-4 h-3.5 w-fit bg-border">
+        <div className="relative bottom-0 left-1/2 h-3.5 w-fit -translate-x-1/2 bg-border">
           <Breadcrumb className="relative w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
         </div>
       </motion.header>
