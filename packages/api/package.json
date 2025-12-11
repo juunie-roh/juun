@@ -33,9 +33,9 @@
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.3",
     "@vitest/coverage-v8": "^4.0.15",
-    "jsdom": "^27.2.0",
+    "jsdom": "^27.3.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
   }
