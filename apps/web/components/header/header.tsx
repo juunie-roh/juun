@@ -9,20 +9,13 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 import Breadcrumb from "./breadcrumb";
-import { useHeaderScroll } from "./use-header-scroll";
+import { useHeaderMotion } from "./use-header-motion";
 
 export default function Header() {
   const isHome = usePathname() === "/";
   const [expanded, setExpanded] = React.useState<boolean>();
   const containerRef = React.useRef(null);
-  const {
-    contentHeight,
-    translateRight,
-    translateLeft,
-    translateTop,
-    translateBottom,
-    main,
-  } = useHeaderScroll(containerRef);
+  const { scroll } = useHeaderMotion(containerRef);
   const isLarge = useMediaQuery("(width >= 64rem)");
 
   React.useEffect(() => {
@@ -39,19 +32,26 @@ export default function Header() {
           className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
           style={{
             height:
-              expanded === undefined ? contentHeight : expanded ? "100vh" : 0,
+              expanded === undefined
+                ? scroll.container.height
+                : expanded
+                  ? "100vh"
+                  : 0,
           }}
         >
           <motion.div
-            className="@container-[size] z-1 col-span-4 col-start-2 row-start-2 lg:col-span-5 lg:col-start-11 lg:row-span-5 lg:row-start-1"
+            className="@container-[size] z-1 col-span-5 col-start-2 row-start-3 lg:col-start-11 lg:row-span-5 lg:row-start-1"
             style={{
-              translateX: isLarge ? translateRight : translateLeft,
-              translateY: translateTop,
+              translateX: isLarge
+                ? scroll.translate.right
+                : scroll.translate.left,
+              translateY: scroll.translate.top,
             }}
           >
             <Link
               href="/blog"
               prefetch
+              onNavigate={() => setExpanded(false)}
               className="group flex size-full items-center justify-center overflow-hidden bg-primary lg:items-end"
             >
               <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-all duration-500 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
@@ -63,70 +63,72 @@ export default function Header() {
           {/* Horizontal separators */}
           <motion.div
             className="col-span-full row-start-2 w-full lg:row-start-5"
-            style={{ translateY: translateTop }}
+            style={{ translateY: scroll.translate.top }}
           >
             <Separator className="bg-muted-foreground" />
           </motion.div>
           <motion.div
             className="col-span-full -row-start-2 w-full lg:-row-start-5"
-            style={{ translateY: translateBottom }}
+            style={{ translateY: scroll.translate.bottom }}
           >
             <Separator className="bg-muted-foreground" />
           </motion.div>
           {/* Vertical separators */}
           <motion.div
             className="col-start-2 row-span-full h-full lg:col-start-3"
-            style={{ translateX: translateRight }}
+            style={{ translateX: scroll.translate.right }}
           >
             <Separator orientation="vertical" className="bg-muted-foreground" />
           </motion.div>
           <motion.div
             className="-col-start-2 row-span-full h-full lg:-col-start-5"
-            style={{ translateX: translateLeft }}
+            style={{ translateX: scroll.translate.left }}
           >
             <Separator orientation="vertical" className="bg-muted-foreground" />
           </motion.div>
 
           <motion.div
-            className="col-span-10 col-start-2 row-start-2 flex w-full flex-col lg:col-start-3 lg:row-start-5 lg:-translate-y-3/5"
+            className="col-span-5 col-start-7 row-start-2 flex flex-col lg:col-start-3 lg:row-start-5"
             style={{
-              translateX: isLarge ? translateLeft : translateRight,
-              translateY: translateTop,
+              translateX: isLarge
+                ? scroll.translate.left
+                : scroll.translate.right,
+              translateY: scroll.translate.top,
             }}
           >
-            <div className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:text-start lg:text-2xl">
+            <div className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:-translate-y-full lg:text-start lg:text-2xl">
               Technology-Agnostic
             </div>
-            <div className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:text-start lg:text-2xl">
+            <div className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:-translate-y-full lg:text-start lg:text-2xl">
               Architectural Playground
             </div>
           </motion.div>
 
           <motion.div
-            className="@container-[size] absolute top-1/2 left-0 flex h-[calc(100vh/11)] min-h-header w-full items-center lg:top-[calc(100vh/15*6)] lg:h-[calc(100vh/15*3)]"
+            className="@container-[size] absolute top-[calc(100vh/11*6)] left-0 flex h-[calc(100vh/11)] min-h-header w-full items-center lg:top-[calc(100vh/15*6)] lg:h-[calc(100vh/15*3)]"
             style={{
-              top: main.top,
-              translateY: main.translateY,
-              height: main.height,
+              top: scroll.main.top,
+              translateY: scroll.main.translateY,
+              height: scroll.main.height,
             }}
           >
             <motion.div
               className="absolute top-0 -left-[50vw] w-[200vw]"
-              style={{ translateY: translateTop }}
+              style={{ translateY: scroll.translate.top }}
             >
               <Separator className="bg-muted-foreground" />
             </motion.div>
             <motion.h1
-              className="absolute -top-[23cqh] left-[calc(100vw/12)] inline-block font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
-              style={{ translateX: translateLeft }}
+              className="absolute -top-[23cqh] left-[calc(100vw/12)] inline-block cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
+              style={{ translateX: scroll.translate.left }}
             >
-              <Link href="/">Juun</Link>
+              Juun
             </motion.h1>
             <motion.div
               className="absolute right-[calc(100vw/12)] size-[100cqh] bg-gray-200 lg:right-[calc(100vw/16*4)]"
               style={{
-                right: main.toggle.right,
-                translateX: main.toggle.translateX,
+                right: scroll.main.toggle.right,
+                translateX: scroll.main.toggle.translateX,
               }}
             >
               <motion.div className="size-full">
@@ -135,7 +137,7 @@ export default function Header() {
             </motion.div>
             <motion.div
               className="absolute bottom-0 -left-[50vw] w-[200vw]"
-              style={{ translateY: translateBottom }}
+              style={{ translateY: scroll.translate.bottom }}
             >
               <Separator className="bg-muted-foreground" />
             </motion.div>
@@ -146,13 +148,16 @@ export default function Header() {
           <motion.div
             className="@container relative isolate z-1 col-span-2 col-start-10 row-span-3 -row-start-5 overflow-hidden lg:col-start-1 lg:row-span-6 lg:-row-start-5"
             style={{
-              translateX: isLarge ? translateLeft : translateRight,
-              translateY: translateBottom,
+              translateX: isLarge
+                ? scroll.translate.left
+                : scroll.translate.right,
+              translateY: scroll.translate.bottom,
             }}
           >
             <Link
               href="/playground"
               prefetch
+              onNavigate={() => setExpanded(false)}
               className="group flex size-full w-full overflow-hidden bg-primary px-3 py-4"
             >
               <span className="absolute top-0 right-0 origin-top font-stabil-grotesk text-4xl font-semibold text-background transition-all duration-500 [writing-mode:vertical-lr] group-hover:scale-110">
