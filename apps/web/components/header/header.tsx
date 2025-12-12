@@ -155,7 +155,7 @@ export default function Header() {
 
           {state === undefined && (
             <motion.div
-              className="absolute right-1/2 bottom-6 translate-x-1/2 lg:right-2 lg:translate-x-0"
+              className="absolute right-1/2 bottom-4 translate-x-1/2 lg:right-4 lg:translate-x-0"
               style={motionStyles.indicator}
             >
               <ChevronsDown className="size-8 animate-bounce drop-shadow-sm drop-shadow-primary/50 lg:size-12" />
