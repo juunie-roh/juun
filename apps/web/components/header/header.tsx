@@ -3,7 +3,7 @@
 import { Button } from "@juun/ui/button";
 import { Separator } from "@juun/ui/separator";
 import { motion } from "framer-motion";
-import { ChevronsDown, CirclePlay } from "lucide-react";
+import { ChevronsDown, CirclePlay, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -24,7 +24,7 @@ export default function Header() {
       }
     >
       <motion.header className="fixed top-0 z-50 w-full" data-state={state}>
-        <motion.div
+        <motion.nav
           className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
           style={motionStyles.container}
         >
@@ -50,13 +50,13 @@ export default function Header() {
           {/* Horizontal separators */}
           <motion.div
             className="col-span-full row-start-2 w-full lg:row-start-5"
-            style={motionStyles.separator.top}
+            style={motionStyles.separator.slow.top}
           >
             <Separator className="bg-muted-foreground" />
           </motion.div>
           <motion.div
             className="col-span-full -row-start-2 w-full lg:-row-start-5"
-            style={motionStyles.separator.bottom}
+            style={motionStyles.separator.slow.bottom}
           >
             <Separator className="bg-muted-foreground" />
           </motion.div>
@@ -94,13 +94,13 @@ export default function Header() {
           >
             <motion.div
               className="absolute -top-px -left-[50vw] w-[200vw]"
-              style={motionStyles.separator.top}
+              style={motionStyles.separator.slow.top}
             >
               <Separator className="bg-muted-foreground" />
             </motion.div>
             <motion.h1
-              className="absolute -top-[24cqh] left-[calc(100vw/12)] inline-block cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
-              style={motionStyles.separator.right}
+              className="absolute -top-[24cqh] left-[calc(100vw/12)] inline-block origin-left cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
+              style={motionStyles.title.font}
             >
               Juun
             </motion.h1>
@@ -109,9 +109,9 @@ export default function Header() {
               style={motionStyles.title.button}
             >
               <Button
-                className="size-full rounded-none"
-                variant="ghost"
-                aria-disabled={!state}
+                className="group size-full rounded-none hover:cursor-pointer disabled:opacity-100"
+                variant="default"
+                disabled={!state}
                 onClick={() => {
                   if (!state) return;
                   if (state === "collapsed") {
@@ -121,13 +121,22 @@ export default function Header() {
                   }
                 }}
               >
-                <Image src="/favicon.ico" alt="icon" fill className="p-3" />
+                {state === undefined || state === "collapsed" ? (
+                  <Image
+                    src="/favicon.ico"
+                    alt="icon"
+                    fill
+                    className="p-4 invert transition-all group-hover:scale-110 dark:invert-0"
+                  />
+                ) : (
+                  <X className="size-full transition-all group-hover:scale-110" />
+                )}
                 <span className="sr-only">Header Toggle Button</span>
               </Button>
             </motion.div>
             <motion.div
               className="absolute bottom-0 -left-[50vw] w-[200vw]"
-              style={motionStyles.separator.bottom}
+              style={motionStyles.separator.slow.bottom}
             >
               <Separator className="bg-muted-foreground" />
             </motion.div>
@@ -155,13 +164,13 @@ export default function Header() {
 
           {state === undefined && (
             <motion.div
-              className="absolute right-1/2 bottom-4 translate-x-1/2 lg:right-4 lg:translate-x-0"
+              className="absolute right-1/2 bottom-[calc(100vh/11)] translate-x-1/2 lg:right-4 lg:bottom-[calc(100vh/15)] lg:translate-x-0"
               style={motionStyles.indicator}
             >
               <ChevronsDown className="size-8 animate-bounce drop-shadow-sm drop-shadow-primary/50 lg:size-12" />
             </motion.div>
           )}
-        </motion.div>
+        </motion.nav>
 
         {/* breadcrumb */}
         <div className="relative bottom-0 left-1/2 h-3.5 w-fit -translate-x-1/2 bg-border">

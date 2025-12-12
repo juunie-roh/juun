@@ -40,7 +40,8 @@ export function useHeaderMotion(
   // initial values for title area
   const titleTop = lg ? ((100 * vh) / 15) * 6 : ((100 * vh) / 11) * 5;
   const titleHeight = lg ? ((100 * vh) / 15) * 3 : HEADER_HEIGHT;
-  const titleAdjustment = lg ? "0%" : "-50%";
+  const titleContainerPosition = lg ? "0%" : "-50%";
+  const titleFontPosition = lg ? ((100 * vw) / 16) * 2 : (100 * vw) / 12;
   const titleButtonRight = lg ? ((100 * vw) / 16) * 4 : (100 * vw) / 12;
   const titleButtonAdjustment = lg ? "100%" : "0%";
 
@@ -49,7 +50,7 @@ export function useHeaderMotion(
     100 * vh,
     100 * vh,
     100 * vh,
-    HEADER_HEIGHT,
+    100 * vh,
     HEADER_HEIGHT,
   ];
 
@@ -57,23 +58,33 @@ export function useHeaderMotion(
   const SLIDE_OUT_TO_TOP = [0, -50 * vh, -100 * vh, -100 * vh, -100 * vh];
   const SLIDE_OUT_TO_RIGHT = [0, 50 * vw, 100 * vw, 100 * vw, 100 * vw];
   const SLIDE_OUT_TO_BOTTOM = [0, 50 * vh, 100 * vh, 100 * vh, 100 * vh];
+  const SLOW_SLIDE_OUT_TO_TOP = [0, 0, 0 * vh, -25 * vh, -50 * vh];
+  const SLOW_SLIDE_OUT_TO_BOTTOM = [0, 0, 0 * vh, 25 * vh, 50 * vh];
   const DELAYED_SLIDE_OUT_TO_BOTTOM = [0, 0, 0, 50 * vh, 100 * vh];
 
-  const TITLE_TOP_TO_ZERO = [titleTop, titleTop, titleTop, 0, 0];
+  const TITLE_TOP_TO_ZERO = [titleTop, titleTop, titleTop, titleTop, 0];
   const TITLE_HEIGHT_TO_FIXED = [
     titleHeight,
     titleHeight,
     titleHeight,
-    HEADER_HEIGHT,
+    titleHeight,
     HEADER_HEIGHT,
   ];
-  const TITLE_POSITION_ADJUSTMENT = [
-    titleAdjustment,
-    titleAdjustment,
-    titleAdjustment,
-    "0%",
+  const TITLE_CONTAINER_POSITION_TO_ZERO = [
+    titleContainerPosition,
+    titleContainerPosition,
+    titleContainerPosition,
+    titleContainerPosition,
     "0%",
   ];
+  const TITLE_FONT_POSITION_TO_FIXED = [
+    titleFontPosition,
+    titleFontPosition,
+    16,
+    16,
+    16,
+  ];
+  const TITLE_FONT_SCALE_TO_HALF = ["100%", "100%", "50%", "50%", "50%"];
   const TITLE_BUTTON_RIGHT_TO_CENTER = [
     titleButtonRight,
     titleButtonRight,
@@ -110,6 +121,22 @@ export function useHeaderMotion(
       bottom: {
         translateY: useTransform(progress, ANIMATION_STEP, SLIDE_OUT_TO_BOTTOM),
       } satisfies MotionStyle,
+      slow: {
+        top: {
+          translateY: useTransform(
+            progress,
+            ANIMATION_STEP,
+            SLOW_SLIDE_OUT_TO_TOP,
+          ),
+        } satisfies MotionStyle,
+        bottom: {
+          translateY: useTransform(
+            progress,
+            ANIMATION_STEP,
+            SLOW_SLIDE_OUT_TO_BOTTOM,
+          ),
+        } satisfies MotionStyle,
+      },
     },
 
     tagline: {
@@ -147,8 +174,16 @@ export function useHeaderMotion(
         translateY: useTransform(
           progress,
           ANIMATION_STEP,
-          TITLE_POSITION_ADJUSTMENT,
+          TITLE_CONTAINER_POSITION_TO_ZERO,
         ),
+      } satisfies MotionStyle,
+      font: {
+        left: useTransform(
+          progress,
+          ANIMATION_STEP,
+          TITLE_FONT_POSITION_TO_FIXED,
+        ),
+        scale: useTransform(progress, ANIMATION_STEP, TITLE_FONT_SCALE_TO_HALF),
       } satisfies MotionStyle,
       button: {
         right: useTransform(
