@@ -9,6 +9,7 @@ import Link from "next/link";
 import React from "react";
 
 import Breadcrumb from "./breadcrumb";
+import ThemeSwitch from "./theme-switch";
 import { useHeaderMotion } from "./use-header-motion";
 
 export default function Header() {
@@ -36,9 +37,7 @@ export default function Header() {
             <Link
               href="/blog"
               prefetch
-              onNavigate={() => {
-                setState("collapsed");
-              }}
+              onNavigate={() => setState("collapsed")}
               className="group flex size-full items-center justify-center overflow-hidden bg-primary lg:items-end"
             >
               <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-all duration-500 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
@@ -150,9 +149,7 @@ export default function Header() {
             <Link
               href="/playground"
               prefetch
-              onNavigate={() => {
-                setState("collapsed");
-              }}
+              onNavigate={() => setState("collapsed")}
               className="group flex size-full w-full overflow-hidden bg-primary px-3 py-4"
             >
               <span className="absolute top-0 right-0 origin-top font-stabil-grotesk text-4xl font-semibold text-background transition-all duration-500 [writing-mode:vertical-lr] group-hover:scale-110">
@@ -170,12 +167,23 @@ export default function Header() {
               <ChevronsDown className="size-8 animate-bounce drop-shadow-sm drop-shadow-primary/50 lg:size-12" />
             </motion.div>
           )}
+
+          {/* theme switch */}
+          <motion.div
+            className="absolute top-1/2 right-4 -translate-y-1/2"
+            style={motionStyles.theme_switch}
+          >
+            <ThemeSwitch />
+          </motion.div>
         </motion.nav>
 
         {/* breadcrumb */}
-        <div className="relative bottom-0 left-1/2 h-3.5 w-fit -translate-x-1/2 bg-border">
+        <motion.div
+          className="relative bottom-0 left-4 w-fit"
+          style={motionStyles.breadcrumb}
+        >
           <Breadcrumb className="relative w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
-        </div>
+        </motion.div>
       </motion.header>
     </div>
   );
