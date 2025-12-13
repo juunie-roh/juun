@@ -6,7 +6,7 @@ import FourWheel from "@/components/wheel/FourWheel";
 
 export default function UITestPage() {
   return (
-    <main className="relative w-full">
+    <main className="relative w-full pt-header">
       <h2 className="px-4 py-8 text-3xl font-bold tracking-tighter">
         Infinite Scroll Animation Component
       </h2>

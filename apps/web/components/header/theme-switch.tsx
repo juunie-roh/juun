@@ -3,15 +3,15 @@
 import { Button } from "@juun/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import React from "react";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
   // Local animation state - decoupled from the actual theme
-  const [animatingDark, setAnimatingDark] = useState(false);
+  const [animatingDark, setAnimatingDark] = React.useState(false);
 
   // Sync animation state with theme on mount
-  useEffect(() => {
+  React.useEffect(() => {
     if (theme) {
       setAnimatingDark(theme === "dark");
     }
@@ -52,7 +52,7 @@ export default function ThemeSwitch() {
 
       {/* Sun icon - left side */}
       <div
-        className="absolute top-1/2 left-[7px] -translate-y-1/2 transition-opacity duration-300"
+        className="absolute top-1/2 left-1.75 -translate-y-1/2 transition-opacity duration-300"
         style={{ opacity: animatingDark ? 0.4 : 1 }}
       >
         <Sun className="size-4" />
@@ -60,7 +60,7 @@ export default function ThemeSwitch() {
 
       {/* Moon icon - right side */}
       <div
-        className="absolute top-1/2 right-[7px] -translate-y-1/2 transition-opacity duration-300"
+        className="absolute top-1/2 right-1.75 -translate-y-1/2 transition-opacity duration-300"
         style={{ opacity: animatingDark ? 1 : 0.4 }}
       >
         <Moon className="size-4" />

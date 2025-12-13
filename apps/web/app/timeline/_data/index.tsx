@@ -260,7 +260,7 @@ Original structure scattered components across global folders:
 
 **Requirement**: Features must be portable between projects with the same framework. Each feature should be self-contained and transplantable without breaking other routes.
 
-This requirement originated from my workplace.
+This requirement originated from the workplace.
 
 ### Task
 
@@ -289,8 +289,7 @@ Switching from Zustand to React context minimized dependencies outside the route
 A single configuration source reduced maintenance burden and simplified adding new features.
 However, achieving copy-paste portability required some violation of the DRY principle.
 
-The exact pattern was applied to the workplace for service portability.
-`,
+The exact pattern was applied to the workplace for service portability.`,
   },
   {
     id: 9,
@@ -319,8 +318,7 @@ Jest configuration complexity issue prompted exploration of alternatives.
 ### Challenges
 - Migration of existing tests
 - Learning Playwright patterns
-- CI/CD pipeline updates
-  `,
+- CI/CD pipeline updates`,
   },
   {
     id: 10,
@@ -333,10 +331,11 @@ Jest configuration complexity issue prompted exploration of alternatives.
     detail: `
 ### Situation
 
+Blog contents were neglected by visitors, realized the length and depth of the articles caused cognitive loads.
 
 ### Result
 
-A timeline component with a design inspired by monolith from 2001: A Space Odyssey.
+A timeline component with description dialog having design inspired by monolith from 2001: A Space Odyssey.
 `,
   },
   {
@@ -600,5 +599,154 @@ Also the resulting HTML bloated up to 319 KB.
 - Modal behavior works correctly in both development and production environments
 - Cleaner separation of concerns - timeline component focuses on list rendering, detail parsing happens in separate route
 `,
+  },
+  {
+    id: 15,
+    title: "Storybook + Vitest Integration for Component Testing",
+    description:
+      "Integrated Storybook stories with Vitest using @storybook/addon-vitest for unified component testing in browser environment",
+    date: "2025-12-05",
+    category: "Infrastructure",
+    tags: ["testing", "DX", "Storybook"],
+    detail: `
+### Situation
+
+Discovered \`@storybook/addon-vitest\` on Storybook's *"Level Up"* onboarding page.
+Visual UI components required additional browser environment setups to run unit tests.
+The addon features enable to run Storybook's tests on CLI environments without additional configurations.
+Wanted to consolidate testing documentation (Storybook) and testing execution (Vitest) into a unified workflow.
+
+### Task
+
+- Install \`@storybook/addon-vitest\` and configure integration between Storybook stories and Vitest
+- Enable browser-based component testing without duplicating test code
+- Set up infrastructure to run interactive tests defined in Storybook stories via Vitest CLI
+
+### Action
+
+#### 1. Installed Dependencies
+- Added \`@storybook/addon-vitest\` (v10.1.8) for Storybook-Vitest integration
+- Added \`@vitest/browser-playwright\` (v4.0.15) for browser mode support
+
+#### 2. Configured Storybook
+- Registered \`@storybook/addon-vitest\` addon to enable test execution from stories
+- Kept existing addons: accessibility (a11y), docs, and links
+
+#### 3. Configured Vitest
+- Created Vitest project named "storybook" with \`storybookTest()\` plugin
+- Configured plugin to point to \`.storybook/\` directory and launch Storybook via \`pnpm storybook --no-open\`
+- Enabled browser mode with Playwright provider (headless Chromium)
+- Added tag filtering (\`tags: { include: ["test"] }\`) to only run stories tagged with "test"
+- Referenced setup file \`.storybook/vitest.setup.ts\` for Storybook annotations
+
+#### 4. Created Setup File
+- Used \`setProjectAnnotations()\` to load Storybook preview configuration
+- Registered \`beforeAll\` hook to initialize Storybook context for tests
+
+#### 5. Added Test Scripts
+- \`pnpm test\`: Run all stories tagged "test" once (\`vitest run --project=storybook\`)
+
+#### 6. Wrote Interactive Tests
+- Tagged story with \`["autodocs", "test"]\` to include in test runs
+- Added \`play\` function with user interaction simulation (hover, unhover)
+- Verified DOM rendering, tooltip behavior, and accessibility attributes
+
+### Result
+
+Successfully unified component documentation and testing into a single workflow. Stories now serve as both visual documentation in Storybook UI and executable tests in Vitest, eliminating the need to maintain separate test files. Visual and interaction tests that previously required manual inspection in Storybook can now run automatically in CI/CD pipeline via \`pnpm test\`.
+
+The integration significantly reduced configuration complexity by leveraging Storybook's browser environment setup for Vitest. All tests run in real browser context (Chromium via Playwright) by default, eliminating JSDOM-related limitations and the need for custom browser environment configurations. Tag-based filtering (\`tags: ["test"]\`) provides granular control over which stories execute as tests.
+
+The trade-off was removing the existing standalone Vitest setup in favor of the Storybook-driven approach, which introduced new testing syntax. Developers now write \`play\` functions using Storybook's testing utilities (\`within\`, \`userEvent\`, \`expect\` from \`storybook/test\`) instead of traditional Vitest test blocks. While this requires learning Storybook-specific patterns, it reduces context switching by keeping tests colocated with stories.`,
+  },
+  {
+    id: 16,
+    title: "Renewal of Header Component",
+    description:
+      "Redesigned header as state-driven multi-role component: landing page, navigation bar, and transition mask in one",
+    date: "2025-12-13",
+    category: "Architecture",
+    tags: [
+      "ADR",
+      "UI/UX",
+      "Framer Motion",
+      "experimental",
+      "state-driven design",
+    ],
+    detail: `
+### Situation
+
+The existing header was a conventional sticky navigation bar—functional but unremarkable. Three links (About, Blog, Playground) in a NavigationMenu with responsive drawer for mobile. It worked, but it didn't belong in a project calling itself an "Architectural Playground." The design communicated utility, not experimentation.
+
+Wanted a header that could be three things: an immersive landing experience on home, a compact navigation bar elsewhere, and a transition mask that buys time during route changes. Not three components composed together—one component in different states. The implementation should be invisible; users shouldn't know whether they're seeing scroll-driven or button-triggered animation.
+
+### Task
+
+- Design one component with three distinct roles driven by state transitions
+- Implement scroll-as-narrative on homepage where interaction IS the experience
+- Create seamless deception: identical appearance regardless of activation mechanism (scroll vs. button)
+- Use animation timing strategically as loading choreography during route transitions
+- Expose structural elements (grid lines as visible layout system)
+- Apply minimal affordance: elements exist only when needed
+
+### Action
+
+#### 1. Built Working, Then Broke It
+
+Started with intent, not knowledge. Knew the destination—didn't know the library.
+
+Initial implementation functioned on homepage with scroll-driven animation. Direct navigation to \`/blog\` exposed the initialization bug: header assumed scroll context always existed. Scroll-vs-button race condition surfaced when rapidly toggling states.
+
+Fixed at the right layer:
+- State initialization: Properly handle undefined → collapsed → expanded transitions regardless of entry point
+- Scroll lock: Prevent scroll interference during button-triggered transitions
+
+#### 2. Refactored After Understanding 
+
+First version worked. Second version was organized.
+
+- Renamed by meaning: \`motionStyles.link.blog\` instead of generic identifiers
+- Consolidated animation effects into \`useHeaderMotion\` hook
+- Internalized triggers: Component owns its state transitions
+
+#### 3. Added Choreography Depth
+
+Single-phase animation became staged narrative:
+- Navigation tiles exit fast (immediate user feedback)
+- Separators linger (structural context persists)
+- Scroll indicator hangs longest (teaching moment fades gradually)
+- 1-second collapse duration buys time for Next.js route transitions—users watch the grid fold while the framework works underneath
+
+#### 4. Exposed the Grid System 
+
+Grid lines aren't decorative—they're the actual CSS Grid layout system made visible. When they animate away, you're watching the architecture disassemble. Structure as aesthetic.
+
+- Horizontal and vertical separators positioned on grid lines
+- Separators animate independently with different timing curves
+- The visual system IS the layout system
+
+#### 5. Implemented Minimal Affordance 
+
+Elements exist only when needed:
+- Chevron teaches scroll on initial load, then vanishes forever (\`state === undefined\`)
+- Toggle button becomes X only when closable (\`state === "expanded"\`)
+- Blog/Playground areas are navigation and landing simultaneously—no duplicate elements
+- Removed "About" link entirely—two destinations, not three
+
+#### 6. Deferred Abstraction 
+
+Recognized potential for reusable package
+
+### Result
+
+Created a header that teaches Framer Motion through failure.
+
+The component successfully fulfills three roles through state-driven design. On homepage, scroll IS the narrative—the user's journey through the page collapses the fullscreen grid into navigation. On other pages, direct button control provides the same visual result with different trigger. During route transitions, the 1-second animation choreography masks Next.js loading states.
+
+The seamless deception works: users cannot distinguish scroll-driven from button-triggered states. The expanded header looks and behaves identically regardless of how it was activated. Implementation details vanish behind consistent surface presentation.
+
+Animation serves dual purpose: aesthetic experience and functional time budget. The staged choreography (fast tile exits, lingering separators, delayed indicator fade) creates narrative depth while Next.js prefetches and hydrates routes. Loading states become part of the designed experience rather than technical necessity.
+
+The architectural trade-off is maintenance complexity. A single component handling three distinct roles requires careful state machine design and comprehensive edge case handling. The scroll-vs-button race condition, initialization on direct navigation, and state persistence across route changes all required specific solutions. The implementation is more fragile than three separate components would be—but the user experience is more coherent.`,
   },
 ];

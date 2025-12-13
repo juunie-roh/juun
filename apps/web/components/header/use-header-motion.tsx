@@ -99,6 +99,14 @@ export function useHeaderMotion(
     "50%",
     "50%",
   ];
+  const BREADCRUMB_POSITION_ADJUSTMENT = ["0%", "0%", "0%", "0%", "-50%"];
+  const THEME_SWITCH_POSITION_ADJUSTMENT = [
+    100 * vw,
+    100 * vw,
+    100 * vw,
+    50 * vw,
+    0,
+  ];
 
   // Switch between scroll-based and manual progress
   const progress = state === undefined ? scrollYProgress : toggleProgress;
@@ -204,6 +212,21 @@ export function useHeaderMotion(
         progress,
         ANIMATION_STEP,
         DELAYED_SLIDE_OUT_TO_BOTTOM,
+      ),
+    } satisfies MotionStyle,
+
+    breadcrumb: {
+      translateY: useTransform(
+        progress,
+        ANIMATION_STEP,
+        BREADCRUMB_POSITION_ADJUSTMENT,
+      ),
+    } satisfies MotionStyle,
+    theme_switch: {
+      translateX: useTransform(
+        progress,
+        ANIMATION_STEP,
+        THEME_SWITCH_POSITION_ADJUSTMENT,
       ),
     } satisfies MotionStyle,
   };
