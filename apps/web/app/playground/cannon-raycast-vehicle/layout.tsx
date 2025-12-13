@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import BaseLayout from "@/layouts/base";
+import FullScreenLayout from "@/layouts/full-screen";
 
 export const metadata: Metadata = {
   title: "Three Cannon Raycast Vehicle Example",
@@ -19,5 +20,9 @@ export const metadata: Metadata = {
 export default function CannonRaycastVehicleLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <BaseLayout fixHeight>{children}</BaseLayout>;
+  return (
+    <BaseLayout>
+      <FullScreenLayout fixHeight>{children}</FullScreenLayout>
+    </BaseLayout>
+  );
 }

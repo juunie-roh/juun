@@ -8,6 +8,8 @@ import {
 } from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
+import BaseLayout from "@/layouts/base";
+
 import { ApiCombobox, ApiFeatureList } from "./_components";
 import { CesiumUtilsProvider, ViewerProvider } from "./_contexts";
 import { CesiumUtilsSidebar } from "./_layouts";
@@ -32,28 +34,30 @@ export default function CesiumUtilsDemoLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ViewerProvider>
-      <CesiumUtilsProvider>
-        <SidebarProvider className="h-[calc(100vh-var(--spacing-header))] min-h-0">
-          <SidebarInset className="flex min-w-0 flex-col overflow-hidden">
-            <header className="flex h-14 shrink-0 items-center gap-2 border-b bg-background">
-              <div className="flex h-full flex-1 items-center justify-end gap-2 p-4">
-                <SidebarTrigger />
-              </div>
-            </header>
-            <div className="min-h-0 flex-1 p-4">{children}</div>
-          </SidebarInset>
-          <CesiumUtilsSidebar>
-            <SidebarGroup>
-              <SidebarGroupLabel>Select API</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <ApiCombobox />
-              </SidebarGroupContent>
-            </SidebarGroup>
-            <ApiFeatureList />
-          </CesiumUtilsSidebar>
-        </SidebarProvider>
-      </CesiumUtilsProvider>
-    </ViewerProvider>
+    <BaseLayout>
+      <ViewerProvider>
+        <CesiumUtilsProvider>
+          <SidebarProvider className="h-[calc(100vh-var(--spacing-header))] min-h-0">
+            <SidebarInset className="flex min-w-0 flex-col overflow-hidden">
+              <header className="flex h-14 shrink-0 items-center gap-2 border-b bg-background">
+                <div className="flex h-full flex-1 items-center justify-end gap-2 p-4">
+                  <SidebarTrigger />
+                </div>
+              </header>
+              <div className="min-h-0 flex-1 p-4">{children}</div>
+            </SidebarInset>
+            <CesiumUtilsSidebar>
+              <SidebarGroup>
+                <SidebarGroupLabel>Select API</SidebarGroupLabel>
+                <SidebarGroupContent>
+                  <ApiCombobox />
+                </SidebarGroupContent>
+              </SidebarGroup>
+              <ApiFeatureList />
+            </CesiumUtilsSidebar>
+          </SidebarProvider>
+        </CesiumUtilsProvider>
+      </ViewerProvider>
+    </BaseLayout>
   );
 }
