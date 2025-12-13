@@ -26,11 +26,15 @@ export default function Header() {
     >
       <motion.header className="fixed top-0 z-50 w-full" data-state={state}>
         <motion.nav
+          role="banner"
+          aria-label="Site header"
           className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
           style={motionStyles.container}
         >
           {/* link blog */}
           <motion.div
+            role="navigation"
+            aria-label="Blog navigation"
             className="@container-[size] z-1 col-span-5 col-start-2 row-start-3 lg:col-start-11 lg:row-span-5 lg:row-start-1"
             style={motionStyles.link.blog}
           >
@@ -48,12 +52,14 @@ export default function Header() {
 
           {/* Horizontal separators */}
           <motion.div
+            aria-hidden="true"
             className="col-span-full row-start-2 w-full lg:row-start-5"
             style={motionStyles.separator.slow.top}
           >
             <Separator className="bg-muted-foreground" />
           </motion.div>
           <motion.div
+            aria-hidden="true"
             className="col-span-full -row-start-2 w-full lg:-row-start-5"
             style={motionStyles.separator.slow.bottom}
           >
@@ -61,12 +67,14 @@ export default function Header() {
           </motion.div>
           {/* Vertical separators */}
           <motion.div
+            aria-hidden="true"
             className="col-start-2 row-span-full h-full lg:col-start-3"
             style={motionStyles.separator.left}
           >
             <Separator orientation="vertical" className="bg-muted-foreground" />
           </motion.div>
           <motion.div
+            aria-hidden="true"
             className="-col-start-2 row-span-full h-full lg:-col-start-5"
             style={motionStyles.separator.right}
           >
@@ -75,23 +83,28 @@ export default function Header() {
 
           {/* tagline */}
           <motion.div
+            role="region"
+            aria-label="Site tagline"
             className="col-span-5 col-start-7 row-start-2 flex flex-col lg:col-start-3 lg:row-start-5"
             style={motionStyles.tagline}
           >
-            <div className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:-translate-y-full lg:text-start lg:text-2xl">
+            <p className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:-translate-y-full lg:text-start lg:text-2xl">
               Technology-Agnostic
-            </div>
-            <div className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:-translate-y-full lg:text-start lg:text-2xl">
+            </p>
+            <p className="text-end font-mono text-base leading-5.5 text-wrap text-primary md:text-lg lg:-translate-y-full lg:text-start lg:text-2xl">
               Architectural Playground
-            </div>
+            </p>
           </motion.div>
 
           {/* title */}
           <motion.div
+            role="region"
+            aria-label="Site branding"
             className="@container-[size] absolute top-[calc(100vh/11*6)] left-0 flex h-[calc(100vh/11)] min-h-header w-full items-center lg:top-[calc(100vh/15*6)] lg:h-[calc(100vh/15*3)]"
             style={motionStyles.title.container}
           >
             <motion.div
+              aria-hidden="true"
               className="absolute -top-px -left-[50vw] w-[200vw]"
               style={motionStyles.separator.slow.top}
             >
@@ -134,6 +147,7 @@ export default function Header() {
               </Button>
             </motion.div>
             <motion.div
+              aria-hidden="true"
               className="absolute bottom-0 -left-[50vw] w-[200vw]"
               style={motionStyles.separator.slow.bottom}
             >
@@ -143,6 +157,8 @@ export default function Header() {
 
           {/* link playground */}
           <motion.div
+            role="navigation"
+            aria-label="Playground navigation"
             className="@container relative isolate z-1 col-span-2 col-start-10 row-span-3 -row-start-5 overflow-hidden lg:col-start-1 lg:row-span-6 lg:-row-start-5"
             style={motionStyles.link.playground}
           >
@@ -161,6 +177,7 @@ export default function Header() {
 
           {state === undefined && (
             <motion.div
+              aria-hidden="true"
               className="absolute right-1/2 bottom-[calc(100vh/11)] translate-x-1/2 lg:right-4 lg:bottom-[calc(100vh/15)] lg:translate-x-0"
               style={motionStyles.indicator}
             >
@@ -170,6 +187,8 @@ export default function Header() {
 
           {/* theme switch */}
           <motion.div
+            role="region"
+            aria-label="Theme controls"
             className="absolute top-1/2 right-4 -translate-y-1/2"
             style={motionStyles.theme_switch}
           >
@@ -179,6 +198,8 @@ export default function Header() {
 
         {/* breadcrumb */}
         <motion.div
+          role="navigation"
+          aria-label="Breadcrumb"
           className="relative bottom-0 left-4 w-fit"
           style={motionStyles.breadcrumb}
         >
