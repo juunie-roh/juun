@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
+import { Suspense } from "react";
 
 import {
   antonio,
@@ -78,7 +79,9 @@ export default function RootLayout({
         <ThemeProvider>
           <NextIntlClientProvider>
             <TooltipProvider>
-              <Header />
+              <Suspense fallback={null}>
+                <Header />
+              </Suspense>
               {children}
               {dialog}
               <Toaster />
