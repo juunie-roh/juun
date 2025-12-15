@@ -8,7 +8,7 @@ import {
 } from "@juun/ui/sidebar";
 import { Metadata } from "next";
 
-import PaddingTopHeaderLayout from "@/layouts/padding-top-header";
+import HeaderOffsetLayout from "@/layouts/header-offset";
 
 import { ApiCombobox, ApiFeatureList } from "./_components";
 import { CesiumUtilsProvider, ViewerProvider } from "./_contexts";
@@ -34,7 +34,7 @@ export default function CesiumUtilsDemoLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <PaddingTopHeaderLayout>
+    <HeaderOffsetLayout>
       <ViewerProvider>
         <CesiumUtilsProvider>
           <SidebarProvider className="h-[calc(100vh-var(--spacing-header))] min-h-0">
@@ -58,6 +58,6 @@ export default function CesiumUtilsDemoLayout({
           </SidebarProvider>
         </CesiumUtilsProvider>
       </ViewerProvider>
-    </PaddingTopHeaderLayout>
+    </HeaderOffsetLayout>
   );
 }

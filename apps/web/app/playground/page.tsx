@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import BaseInnerLayout from "@/layouts/base-inner";
+import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
-import PaddingTopHeaderLayout from "@/layouts/padding-top-header";
 import md from "@/lib/md";
 
 import PlaygroundItem from "./_components/item";
@@ -22,10 +22,10 @@ export default async function Playground() {
   );
 
   return (
-    <main>
-      <PaddingTopHeaderLayout>
-        <MaxWidthLayout>
-          <BaseInnerLayout>
+    <HeaderOffsetLayout>
+      <MaxWidthLayout>
+        <BaseInnerLayout>
+          <main>
             <div className="flex flex-col gap-8 border bg-(image:--bg-dashed) py-8">
               {items.length === 0 ? (
                 <PlaygroundItem
@@ -41,9 +41,9 @@ export default async function Playground() {
                 ))
               )}
             </div>
-          </BaseInnerLayout>
-        </MaxWidthLayout>
-      </PaddingTopHeaderLayout>
-    </main>
+          </main>
+        </BaseInnerLayout>
+      </MaxWidthLayout>
+    </HeaderOffsetLayout>
   );
 }

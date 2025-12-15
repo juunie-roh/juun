@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import FullScreenLayout from "@/layouts/full-screen";
-import PaddingTopHeaderLayout from "@/layouts/padding-top-header";
+import HeaderOffsetLayout from "@/layouts/header-offset";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -12,10 +12,10 @@ export default function BlogLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <PaddingTopHeaderLayout>
+    <HeaderOffsetLayout>
       <FullScreenLayout>
         <main className="mx-auto">{children}</main>
       </FullScreenLayout>
-    </PaddingTopHeaderLayout>
+    </HeaderOffsetLayout>
   );
 }

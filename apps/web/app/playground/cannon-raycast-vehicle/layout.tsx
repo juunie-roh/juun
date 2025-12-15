@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import BaseInnerLayout from "@/layouts/base-inner";
 import FullScreenLayout from "@/layouts/full-screen";
-import PaddingTopHeaderLayout from "@/layouts/padding-top-header";
+import HeaderOffsetLayout from "@/layouts/header-offset";
 
 export const metadata: Metadata = {
   title: "Three Cannon Raycast Vehicle Example",
@@ -22,10 +22,10 @@ export default function CannonRaycastVehicleLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <PaddingTopHeaderLayout>
-      <FullScreenLayout fix-height>
+    <HeaderOffsetLayout>
+      <FullScreenLayout fixHeight>
         <BaseInnerLayout>{children}</BaseInnerLayout>
       </FullScreenLayout>
-    </PaddingTopHeaderLayout>
+    </HeaderOffsetLayout>
   );
 }

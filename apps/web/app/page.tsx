@@ -8,8 +8,8 @@ import {
 import { Suspense } from "react";
 
 import Timeline from "@/components/timeline";
+import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
-import PaddingTopHeaderLayout from "@/layouts/padding-top-header";
 import cache from "@/lib/cache";
 
 import HeroHome from "./_components/hero-home";
@@ -20,10 +20,10 @@ export default async function Home() {
   const posts = await cache.post.get.all();
 
   return (
-    <PaddingTopHeaderLayout>
+    <HeaderOffsetLayout>
       <HeroHome />
       <main className="mb-10 size-full border-y">
-        <MaxWidthLayout border-x>
+        <MaxWidthLayout borderX>
           {/* Decision Records */}
           <section className="relative w-full border-b" id="timeline">
             <div className="flex items-center gap-2 border-b px-4 py-2">
@@ -61,6 +61,6 @@ export default async function Home() {
           </section>
         </MaxWidthLayout>
       </main>
-    </PaddingTopHeaderLayout>
+    </HeaderOffsetLayout>
   );
 }

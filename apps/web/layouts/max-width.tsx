@@ -3,10 +3,10 @@ import React from "react";
 
 export default function MaxWidthLayout({
   children,
-  "border-x": borderX,
+  borderX,
 }: Readonly<{
   children: React.ReactNode;
-  "border-x"?: boolean;
+  borderX?: boolean;
 }>) {
   return (
     <div className={cn("mx-auto max-w-7xl", borderX && "xl:border-x")}>

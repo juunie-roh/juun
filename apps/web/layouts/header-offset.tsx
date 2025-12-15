@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PaddingTopHeaderLayout({
+export default function HeaderOffsetLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
