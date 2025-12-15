@@ -1,5 +1,6 @@
 "use client";
 
+import { Timeline } from "@juun/db/timeline";
 import { Badge } from "@juun/ui/badge";
 import {
   Dialog,
@@ -12,7 +13,6 @@ import { ScrollArea } from "@juun/ui/scroll-area";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import { TimelineItem } from "@/app/timeline/_data";
 import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";
@@ -21,7 +21,7 @@ export default function TimelineDialog({
   item,
   children,
 }: {
-  item: Omit<TimelineItem, "detail">;
+  item: Timeline;
   children: React.ReactNode;
 }) {
   const router = useRouter();
@@ -40,8 +40,11 @@ export default function TimelineDialog({
               <span className="block font-stabil-grotesk text-5xl font-bold tracking-tight underline underline-offset-8">
                 {item.id.toString().padStart(3, "0")}
               </span>
-              <time dateTime={item.date} className="font-victor-serif">
-                {formatDate(item.date)}
+              <time
+                dateTime={item.created_at.toLocaleDateString()}
+                className="font-victor-serif"
+              >
+                {formatDate(item.created_at)}
               </time>
             </div>
           </aside>
