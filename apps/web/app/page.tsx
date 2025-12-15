@@ -14,10 +14,10 @@ import cache from "@/lib/cache";
 
 import HeroHome from "./_components/hero-home";
 import { BlogCard, BlogCardSkeleton } from "./blog/_components/card";
-import { TIMELINE_ITEMS } from "./timeline/_data";
 
 export default async function Home() {
   const posts = await cache.post.get.all();
+  const items = await cache.timeline.get.all();
 
   return (
     <HeaderOffsetLayout>
@@ -32,7 +32,7 @@ export default async function Home() {
               </h2>
               {/* <TimelineOrderButton href="/" order={order} /> */}
             </div>
-            <Timeline items={TIMELINE_ITEMS} />
+            <Timeline items={items} />
           </section>
 
           {/* Blog Articles Carousel */}

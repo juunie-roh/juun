@@ -4,9 +4,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import cache from "@/lib/cache";
 import md from "@/lib/md";
-
-import { TIMELINE_ITEMS } from "../_data";
+import { formatDate } from "@/utils/date";
 
 export default async function TimelineDetailPage({
   params,
@@ -14,7 +14,7 @@ export default async function TimelineDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const item = TIMELINE_ITEMS.find((i) => i.id === parseInt(id));
+  const item = await cache.timeline.get.byId(Number(id));
 
   if (!item) notFound();
 
@@ -32,7 +32,7 @@ export default async function TimelineDetailPage({
       <header className="mb-8">
         <h1 className="mb-2 text-4xl font-bold">{item.title}</h1>
         <p className="text-muted-foreground">
-          {item.category} • {item.date}
+          {item.category} • {formatDate(item.created_at, true)}
         </p>
       </header>
 
@@ -44,7 +44,7 @@ export default async function TimelineDetailPage({
 }
 
 export async function generateStaticParams() {
-  return TIMELINE_ITEMS.filter((item) => item.detail).map((item) => ({
+  return (await cache.timeline.get.all()).map((item) => ({
     id: item.id.toString(),
   }));
 }
@@ -55,7 +55,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const item = TIMELINE_ITEMS.find((item) => item.id === parseInt(id));
+  const item = await cache.timeline.get.byId(Number(id));
 
   if (!item) return {} satisfies Metadata;
 

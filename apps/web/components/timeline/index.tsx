@@ -1,3 +1,4 @@
+import { Timeline as TimelineItem } from "@juun/db/timeline";
 import { Badge } from "@juun/ui/badge";
 import { Button } from "@juun/ui/button";
 import {
@@ -11,7 +12,6 @@ import {
 import { Separator } from "@juun/ui/separator";
 import Link from "next/link";
 
-import { TimelineItem } from "@/app/timeline/_data";
 import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";
@@ -22,7 +22,8 @@ interface TimelineProps {
 
 export default function Timeline({ items }: TimelineProps) {
   const sortedItems = [...items].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    (a, b) =>
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
   );
 
   return (
@@ -32,7 +33,7 @@ export default function Timeline({ items }: TimelineProps) {
           <div className="relative flex w-1/5 min-w-36 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
             <div className="text-right font-victor-serif text-sm text-muted-foreground">
               <span className="relative mb-2 block text-xl font-semibold">
-                {item.category}
+                {item.category.charAt(0) + item.category.slice(1).toLowerCase()}
                 <Separator
                   className="absolute -bottom-0.75 left-0 w-[105%]!"
                   orientation="horizontal"
@@ -42,7 +43,9 @@ export default function Timeline({ items }: TimelineProps) {
                   className="absolute top-6 -right-2 size-1.5 translate-x-1/2 translate-y-1/2 rounded-full bg-primary ring ring-muted-foreground ring-offset-1"
                 />
               </span>
-              <time dateTime={item.date}>{formatDate(item.date)}</time>
+              <time dateTime={item.created_at.toLocaleDateString()}>
+                {formatDate(item.created_at)}
+              </time>
             </div>
             <Button variant="link" size="sm" className="h-fit" asChild>
               <Link href={`/timeline/${item.id}`} prefetch>
