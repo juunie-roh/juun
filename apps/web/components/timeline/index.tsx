@@ -33,7 +33,7 @@ export default function Timeline({ items }: TimelineProps) {
           <div className="relative flex w-1/5 min-w-36 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
             <div className="text-right font-victor-serif text-sm text-muted-foreground">
               <span className="relative mb-2 block text-xl font-semibold">
-                {item.category}
+                {item.category.charAt(0) + item.category.slice(1).toLowerCase()}
                 <Separator
                   className="absolute -bottom-0.75 left-0 w-[105%]!"
                   orientation="horizontal"
