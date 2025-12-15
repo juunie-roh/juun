@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 
-import BaseLayout from "@/layouts/base";
+import BaseInnerLayout from "@/layouts/base-inner";
 import FullScreenLayout from "@/layouts/full-screen";
+import PaddingTopHeaderLayout from "@/layouts/padding-top-header";
 
 export const metadata: Metadata = {
   title: "Markdown Input Renderer",
@@ -23,8 +24,10 @@ export default function InputRendererLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <BaseLayout>
-      <FullScreenLayout fix-height>{children}</FullScreenLayout>
-    </BaseLayout>
+    <PaddingTopHeaderLayout>
+      <FullScreenLayout fix-height>
+        <BaseInnerLayout>{children}</BaseInnerLayout>
+      </FullScreenLayout>
+    </PaddingTopHeaderLayout>
   );
 }

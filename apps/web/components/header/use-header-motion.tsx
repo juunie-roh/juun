@@ -14,8 +14,10 @@ import React from "react";
 export function useHeaderMotion(
   containerRef?: React.RefObject<HTMLElement | null> | undefined,
 ) {
-  // Match with --spacing-header variable at tailwind global.css
+  // Match with --spacing-header variable at tailwind global.css, --spacing(18)
   const HEADER_HEIGHT = 72;
+  // --container-7xl
+  const CONTAINER_7XL = 1280;
   // Same media query with tailwind "lg:" prefix
   const lg = useMediaQuery("(width >= 64rem)");
   // Variables for screen ratio
@@ -42,7 +44,7 @@ export function useHeaderMotion(
   const titleHeight = lg ? ((100 * vh) / 15) * 3 : HEADER_HEIGHT;
   const titleContainerPosition = lg ? "0%" : "-50%";
   const titleFontPosition = lg ? ((100 * vw) / 16) * 2 : (100 * vw) / 12;
-  const titleButtonRight = lg ? ((100 * vw) / 16) * 4 : (100 * vw) / 12;
+  const titleButtonRight = lg ? `${(100 / 16) * 4}%` : `${100 / 12}%`;
   const titleButtonAdjustment = lg ? "100%" : "0%";
 
   // animation output ranges
@@ -77,6 +79,13 @@ export function useHeaderMotion(
     titleContainerPosition,
     "0%",
   ];
+  const TITLE_CONTAINER_MAX_WIDTH = [
+    100 * vw,
+    100 * vw,
+    100 * vw,
+    100 * vw,
+    CONTAINER_7XL,
+  ];
   const TITLE_FONT_POSITION_TO_FIXED = [
     titleFontPosition,
     titleFontPosition,
@@ -88,9 +97,9 @@ export function useHeaderMotion(
   const TITLE_BUTTON_RIGHT_TO_CENTER = [
     titleButtonRight,
     titleButtonRight,
-    50 * vw,
-    50 * vw,
-    50 * vw,
+    "50%",
+    "50%",
+    "50%",
   ];
   const TITLE_BUTTON_POSITION_ADJUSTMENT = [
     titleButtonAdjustment,
@@ -183,6 +192,13 @@ export function useHeaderMotion(
           progress,
           ANIMATION_STEP,
           TITLE_CONTAINER_POSITION_TO_ZERO,
+        ),
+      } satisfies MotionStyle,
+      width: {
+        maxWidth: useTransform(
+          progress,
+          ANIMATION_STEP,
+          TITLE_CONTAINER_MAX_WIDTH,
         ),
       } satisfies MotionStyle,
       font: {

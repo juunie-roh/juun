@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function BaseLayout({
+export default function PaddingTopHeaderLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
