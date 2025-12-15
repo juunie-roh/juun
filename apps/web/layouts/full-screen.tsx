@@ -3,10 +3,10 @@ import React from "react";
 
 export default function FullScreenLayout({
   children,
-  fixHeight,
+  "fix-height": fixHeight,
 }: Readonly<{
   children: React.ReactNode;
-  fixHeight?: boolean;
+  "fix-height"?: boolean;
 }>) {
   return (
     <div
