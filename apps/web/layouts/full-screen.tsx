@@ -11,7 +11,7 @@ export default function FullScreenLayout({
   return (
     <div
       className={cn(
-        "relative min-h-[calc(100vh-var(--spacing-header)-1px)] px-4 py-8",
+        "relative min-h-[calc(100vh-var(--spacing-header)-1px)]",
         fixHeight && "h-[calc(100vh-var(--spacing-header)-1px)]",
       )}
     >

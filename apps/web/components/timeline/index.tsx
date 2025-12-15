@@ -8,6 +8,7 @@ import {
   ItemHeader,
   ItemTitle,
 } from "@juun/ui/item";
+import { Separator } from "@juun/ui/separator";
 import Link from "next/link";
 
 import { TimelineItem } from "@/app/timeline/_data";
@@ -32,6 +33,10 @@ export default function Timeline({ items }: TimelineProps) {
             <div className="text-right font-victor-serif text-sm text-muted-foreground">
               <span className="relative mb-2 block text-xl font-semibold">
                 {item.category}
+                <Separator
+                  className="absolute -bottom-0.75 left-0 w-[105%]!"
+                  orientation="horizontal"
+                />
                 <div
                   role="none"
                   className="absolute top-6 -right-2 size-1.5 translate-x-1/2 translate-y-1/2 rounded-full bg-primary ring ring-muted-foreground ring-offset-1"
@@ -39,7 +44,7 @@ export default function Timeline({ items }: TimelineProps) {
               </span>
               <time dateTime={item.date}>{formatDate(item.date)}</time>
             </div>
-            <Button variant="link" size="sm" asChild>
+            <Button variant="link" size="sm" className="h-fit" asChild>
               <Link href={`/timeline/${item.id}`} prefetch>
                 Details
               </Link>

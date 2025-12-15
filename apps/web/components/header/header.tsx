@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import MaxWidthLayout from "@/layouts/max-width";
+
 import Breadcrumb from "./breadcrumb";
 import ThemeSwitch from "./theme-switch";
 import { useHeaderMotion } from "./use-header-motion";
@@ -104,54 +106,68 @@ export default function Header() {
             style={motionStyles.title.container}
           >
             <motion.div
-              aria-hidden="true"
-              className="absolute -top-px -left-[50vw] w-[200vw]"
-              style={motionStyles.separator.slow.top}
+              className="relative mx-auto size-full"
+              style={motionStyles.title.width}
             >
-              <Separator className="bg-muted-foreground" />
-            </motion.div>
-            <motion.h1
-              className="absolute -top-[24cqh] left-[calc(100vw/12)] inline-block origin-left cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
-              style={motionStyles.title.font}
-            >
-              Juun
-            </motion.h1>
-            <motion.div
-              className="absolute right-[calc(100vw/12)] size-[100cqh] bg-blend-overlay lg:right-[calc(100vw/16*4)]"
-              style={motionStyles.title.button}
-            >
-              <Button
-                className="group size-full rounded-none hover:cursor-pointer disabled:opacity-100"
-                variant="default"
-                disabled={!state}
-                onClick={() => {
-                  if (!state) return;
-                  if (state === "collapsed") {
-                    setState("expanded");
-                  } else {
-                    setState("collapsed");
-                  }
-                }}
+              <motion.div
+                aria-hidden="true"
+                className="absolute -top-px -left-[50vw] w-[200vw]"
+                style={motionStyles.separator.slow.top}
               >
-                {state === undefined || state === "collapsed" ? (
-                  <Image
-                    src="/favicon.ico"
-                    alt="icon"
-                    fill
-                    className="p-4 invert transition-all group-hover:scale-110 dark:invert-0"
-                  />
-                ) : (
-                  <X className="size-full transition-all group-hover:scale-110" />
-                )}
-                <span className="sr-only">Header Toggle Button</span>
-              </Button>
-            </motion.div>
-            <motion.div
-              aria-hidden="true"
-              className="absolute bottom-0 -left-[50vw] w-[200vw]"
-              style={motionStyles.separator.slow.bottom}
-            >
-              <Separator className="bg-muted-foreground" />
+                <Separator className="bg-muted-foreground" />
+              </motion.div>
+              <motion.h1
+                className="absolute -top-[24cqh] left-[calc(100vw/12)] inline-block origin-left cursor-default font-stabil-grotesk text-[135cqh] leading-none font-bold tracking-tight text-primary lg:left-[calc(100vw/16*2)]"
+                style={motionStyles.title.font}
+              >
+                Juun
+              </motion.h1>
+              <motion.div
+                className="absolute right-[calc(100vw/12)] size-[100cqh] bg-blend-overlay lg:right-[calc(100vw/16*4)]"
+                style={motionStyles.title.button}
+              >
+                <Button
+                  className="group size-full rounded-none hover:cursor-pointer disabled:opacity-100"
+                  variant="default"
+                  disabled={!state}
+                  onClick={() => {
+                    if (!state) return;
+                    if (state === "collapsed") {
+                      setState("expanded");
+                    } else {
+                      setState("collapsed");
+                    }
+                  }}
+                >
+                  {state === undefined || state === "collapsed" ? (
+                    <Image
+                      src="/favicon.ico"
+                      alt="icon"
+                      fill
+                      className="p-4 invert transition-all group-hover:scale-110 dark:invert-0"
+                    />
+                  ) : (
+                    <X className="size-full transition-all group-hover:scale-110" />
+                  )}
+                  <span className="sr-only">Header Toggle Button</span>
+                </Button>
+              </motion.div>
+              {/* theme switch */}
+              <motion.div
+                role="region"
+                aria-label="Theme controls"
+                className="absolute top-1/2 right-4 -translate-y-1/2"
+                style={motionStyles.theme_switch}
+              >
+                <ThemeSwitch />
+              </motion.div>
+              <motion.div
+                aria-hidden="true"
+                className="absolute bottom-0 -left-[50vw] w-[200vw]"
+                style={motionStyles.separator.slow.bottom}
+              >
+                <Separator className="bg-muted-foreground" />
+              </motion.div>
             </motion.div>
           </motion.div>
 
@@ -178,32 +194,24 @@ export default function Header() {
           {state === undefined && (
             <motion.div
               aria-hidden="true"
-              className="absolute right-1/2 bottom-[calc(100vh/11)] translate-x-1/2 lg:right-4 lg:bottom-[calc(100vh/15)] lg:translate-x-0"
+              className="absolute right-1/2 bottom-[calc(100vh/11)] translate-x-1/2 lg:right-[calc(100vw/16*2)] lg:bottom-[calc(100vh/15)]"
               style={motionStyles.indicator}
             >
               <ChevronsDown className="size-8 animate-bounce drop-shadow-sm drop-shadow-primary/50 lg:size-12" />
             </motion.div>
           )}
-
-          {/* theme switch */}
-          <motion.div
-            role="region"
-            aria-label="Theme controls"
-            className="absolute top-1/2 right-4 -translate-y-1/2"
-            style={motionStyles.theme_switch}
-          >
-            <ThemeSwitch />
-          </motion.div>
         </motion.nav>
 
         {/* breadcrumb */}
         <motion.div
           role="navigation"
           aria-label="Breadcrumb"
-          className="relative bottom-0 left-4 w-fit"
+          className="pointer-events-none relative bottom-0 left-4 w-full"
           style={motionStyles.breadcrumb}
         >
-          <Breadcrumb className="relative w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+          <MaxWidthLayout>
+            <Breadcrumb className="pointer-events-auto relative w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
+          </MaxWidthLayout>
         </motion.div>
       </motion.header>
     </div>
