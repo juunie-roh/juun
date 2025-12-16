@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import BaseInnerLayout from "@/layouts/base-inner";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
-import md from "@/lib/md";
+import md from "@/lib/server/md";
 
 import PlaygroundItem from "./_components/item";
 import { PLAYGROUND_ITEMS } from "./_data";

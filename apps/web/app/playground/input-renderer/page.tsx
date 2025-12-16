@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import md from "@/lib/md";
+import md from "@/lib/server/md";
 
 import MarkdownInput from "./_components/markdown-input";
 

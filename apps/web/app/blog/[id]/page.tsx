@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import cache from "@/lib/cache";
-import md from "@/lib/md";
+import md from "@/lib/server/md";
 
 import BlogContent from "../_components/article/content";
 import BlogFooter from "../_components/article/footer";

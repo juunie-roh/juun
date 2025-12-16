@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import TimelineDialog from "@/components/timeline/dialog";
 import cache from "@/lib/cache";
-import md from "@/lib/md";
+import md from "@/lib/server/md";
 
 export async function generateStaticParams() {
   return (await cache.timeline.get.all()).map((item) => ({
