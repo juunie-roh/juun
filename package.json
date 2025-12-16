@@ -30,7 +30,7 @@
     "@commitlint/format": "^20.2.0",
     "@commitlint/types": "^20.2.0",
     "@config/eslint": "workspace:^",
-    "@types/node": "^24.10.3",
+    "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "commitizen": "^4.3.1",
