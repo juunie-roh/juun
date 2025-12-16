@@ -1,4 +1,3 @@
-import { Timeline as TimelineItem } from "@juun/db/timeline";
 import { Badge } from "@juun/ui/badge";
 import { Button } from "@juun/ui/button";
 import {
@@ -12,7 +11,9 @@ import {
 import { Separator } from "@juun/ui/separator";
 import Link from "next/link";
 
+import type { Timeline as TimelineItem } from "@/lib/cache";
 import { formatDate } from "@/utils/date";
+import { capitalize } from "@/utils/string";
 
 import TimelineTags from "./tag";
 
@@ -21,19 +22,14 @@ interface TimelineProps {
 }
 
 export default function Timeline({ items }: TimelineProps) {
-  const sortedItems = [...items].sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-  );
-
   return (
     <ol>
-      {sortedItems.map((item) => (
+      {items.map((item) => (
         <li key={`timeline-${item.id}`} className="relative flex h-full gap-0">
           <div className="relative flex w-1/5 min-w-36 shrink-0 flex-col items-end justify-between gap-2 border-r p-2 pl-0 text-muted-foreground">
             <div className="text-right font-victor-serif text-sm text-muted-foreground">
               <span className="relative mb-2 block text-xl font-semibold">
-                {item.category.charAt(0) + item.category.slice(1).toLowerCase()}
+                {capitalize(item.category)}
                 <Separator
                   className="absolute -bottom-0.75 left-0 w-[105%]!"
                   orientation="horizontal"

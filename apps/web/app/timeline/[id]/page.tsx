@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import cache from "@/lib/cache";
-import md from "@/lib/md";
+import md from "@/lib/server/md";
 import { formatDate } from "@/utils/date";
 
 export default async function TimelineDetailPage({

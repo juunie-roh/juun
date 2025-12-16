@@ -75,7 +75,7 @@ export default function HybridExample() {
           if (visualizer?.visible) {
             visualizer.hide();
           } else {
-            visualizer?.show(13);
+            visualizer?.show();
           }
 
           setIsShowing(visualizer?.visible);

@@ -17,8 +17,8 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
-import { getImageDimensions } from "@/utils/image";
 import { safeUrl } from "@/utils/security";
+import { getImageDimensions } from "@/utils/server/image";
 
 namespace md {
   /**
