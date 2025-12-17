@@ -5,5 +5,5 @@ export default function HeaderOffsetLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="pt-header">{children}</div>;
+  return <div className="size-full pt-header">{children}</div>;
 }
