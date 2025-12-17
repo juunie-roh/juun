@@ -23,7 +23,7 @@ export default function CannonRaycastVehicleLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <HeaderOffsetLayout>
-      <FullScreenLayout fixHeight>
+      <FullScreenLayout>
         <BaseInnerLayout>{children}</BaseInnerLayout>
       </FullScreenLayout>
     </HeaderOffsetLayout>

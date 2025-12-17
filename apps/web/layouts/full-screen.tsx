@@ -1,20 +1,12 @@
-import { cn } from "@juun/ui/lib/utils";
 import React from "react";
 
 export default function FullScreenLayout({
   children,
-  fixHeight,
 }: Readonly<{
   children: React.ReactNode;
-  fixHeight?: boolean;
 }>) {
   return (
-    <div
-      className={cn(
-        "relative min-h-[calc(100vh-var(--spacing-header)-1px)]",
-        fixHeight && "h-[calc(100vh-var(--spacing-header)-1px)]",
-      )}
-    >
+    <div className="relative h-[calc(100vh-var(--spacing-header))] w-full">
       {children}
     </div>
   );
