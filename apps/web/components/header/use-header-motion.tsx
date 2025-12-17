@@ -37,7 +37,8 @@ export function useHeaderMotion(
     offset: ["start start", "end start"],
   });
   // Progress for button-triggered animations
-  const toggleProgress = useMotionValue(state === "expanded" ? 0 : 1);
+  // Initialize to 1 when collapsed, 0 otherwise (expanded or undefined)
+  const toggleProgress = useMotionValue(state === "collapsed" ? 1 : 0);
 
   // initial values for title area
   const titleTop = lg ? ((100 * vh) / 15) * 6 : ((100 * vh) / 11) * 5;
