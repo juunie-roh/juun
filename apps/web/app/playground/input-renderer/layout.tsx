@@ -25,7 +25,7 @@ export default function InputRendererLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <HeaderOffsetLayout>
-      <FullScreenLayout fixHeight>
+      <FullScreenLayout>
         <BaseInnerLayout>{children}</BaseInnerLayout>
       </FullScreenLayout>
     </HeaderOffsetLayout>
