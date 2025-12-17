@@ -34,9 +34,9 @@
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
     "@types/node": "^24.10.4",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/coverage-v8": "^4.0.16",
     "jsdom": "^27.3.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.16"
   }
 }
