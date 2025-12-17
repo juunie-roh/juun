@@ -1,4 +1,7 @@
-import { cn, getColumnPinningStyles } from "@juun/ui/lib/utils";
+import { flexRender, Table as RTable } from "@tanstack/react-table";
+import { ComponentProps, ReactNode } from "react";
+
+import { cn, getColumnPinningStyles } from "../lib/utils";
 import {
   Table,
   TableBody,
@@ -6,9 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@juun/ui/table";
-import { flexRender, Table as RTable } from "@tanstack/react-table";
-import { ComponentProps, ReactNode } from "react";
+} from "./table";
 
 export interface ViewTableProps<TData> extends ComponentProps<typeof Table> {
   table: RTable<TData>;

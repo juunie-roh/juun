@@ -1,11 +1,12 @@
 "use client";
 
-import { cn } from "@juun/ui/lib/utils";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { TriangleAlert } from "lucide-react";
 import type { HTMLAttributes, ReactElement, SVGAttributes } from "react";
 import { Children, forwardRef, isValidElement, useState } from "react";
+
+import { cn } from "../lib/utils";
 
 // Internal Types
 type Angle = { start: number; end: number };

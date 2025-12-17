@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@juun/ui/lib/utils";
 import { Copy } from "lucide-react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
@@ -16,6 +15,7 @@ import yaml from "react-syntax-highlighter/dist/esm/languages/prism/yaml";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { toast } from "sonner";
 
+import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { ScrollArea, ScrollBar } from "./scroll-area";
 
