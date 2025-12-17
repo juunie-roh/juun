@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:24-alpine3.21 AS base
+FROM node:25-alpine3.23 AS base
 WORKDIR /app
 
 # Set common environment variables
@@ -64,7 +64,7 @@ RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \
     pnpm build --filter=@juun/web
 
 # Production image
-FROM node:24-alpine3.21 AS runner
+FROM node:25-alpine3.23 AS runner
 WORKDIR /app
 
 # Set production environment

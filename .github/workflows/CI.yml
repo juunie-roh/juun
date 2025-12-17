@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 24.x
+          - 25.x
     name: Build with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
