@@ -5,13 +5,15 @@
   "type": "module",
   "author": "juun",
   "exports": {
-    ".": "./src/fetcher/index.ts",
+    "./fetcher": "./src/fetcher/index.ts",
     "./react": "./src/react/index.ts",
-    "./react/*": "./src/react/*.ts"
+    "./react/*": "./src/react/*.ts",
+    "./openapi/types/*": "./generated/openapi/*.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
+    "generate": "node ./scripts/generate-openapi-types.cjs",
     "test": "vitest run",
     "test:watch": "vitest watch --ui --coverage"
   },
@@ -36,6 +38,7 @@
     "@types/node": "^25.0.3",
     "@vitest/coverage-v8": "^4.0.16",
     "jsdom": "^27.3.0",
+    "openapi-typescript": "^7.10.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.16"
   }

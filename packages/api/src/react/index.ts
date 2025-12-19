@@ -11,7 +11,7 @@
  * @example
  * ```typescript
  * import { useFetcher, useMutator } from '@juun/api/react';
- * import { Fetcher } from '@juun/api';
+ * import { Fetcher } from '@juun/api/fetcher';
  *
  * // Query hook
  * const fetcher = Fetcher.json('https://api.example.com', { path: '/users' });

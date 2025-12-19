@@ -668,12 +668,12 @@ describe("Fetcher", () => {
       await fetcher.fetch();
 
       // First retry delay should be around 100ms (±30% jitter)
-      const firstDelay = onRetry.mock.calls[0][2];
+      const firstDelay = onRetry.mock.calls[0]![2];
       expect(firstDelay).toBeGreaterThanOrEqual(70);
       expect(firstDelay).toBeLessThanOrEqual(130);
 
       // Second retry delay should be around 200ms (±30% jitter)
-      const secondDelay = onRetry.mock.calls[1][2];
+      const secondDelay = onRetry.mock.calls[1]![2];
       expect(secondDelay).toBeGreaterThanOrEqual(140);
       expect(secondDelay).toBeLessThanOrEqual(260);
     });
@@ -711,8 +711,8 @@ describe("Fetcher", () => {
       await fetcher.fetch();
 
       // Both delays should be around 100ms (±30% jitter)
-      const firstDelay = onRetry.mock.calls[0][2];
-      const secondDelay = onRetry.mock.calls[1][2];
+      const firstDelay = onRetry.mock.calls[0]![2];
+      const secondDelay = onRetry.mock.calls[1]![2];
 
       expect(firstDelay).toBeGreaterThanOrEqual(70);
       expect(firstDelay).toBeLessThanOrEqual(130);
