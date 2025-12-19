@@ -9,10 +9,10 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { restrictToWindowEdges } from "@dnd-kit/modifiers";
-import { cn } from "@juun/ui/lib/utils";
 import { Grip } from "lucide-react";
 import * as React from "react";
 
+import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { DialogContent, DialogHeader } from "./dialog";
 

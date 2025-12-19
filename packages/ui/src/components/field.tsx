@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@juun/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { useMemo } from "react";
 
+import { cn } from "../lib/utils";
 import { Label } from "./label";
 import { Separator } from "./separator";
 
@@ -196,17 +196,21 @@ function FieldError({
       return children;
     }
 
-    if (!errors) {
+    if (!errors?.length) {
       return null;
     }
 
-    if (errors?.length === 1 && errors[0]?.message) {
-      return errors[0].message;
+    const uniqueErrors = [
+      ...new Map(errors.map((error) => [error?.message, error])).values(),
+    ];
+
+    if (uniqueErrors?.length == 1) {
+      return uniqueErrors[0]?.message;
     }
 
     return (
       <ul className="ml-4 flex list-disc flex-col gap-1">
-        {errors.map(
+        {uniqueErrors.map(
           (error, index) =>
             error?.message && <li key={index}>{error.message}</li>,
         )}

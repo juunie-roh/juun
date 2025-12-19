@@ -1,24 +1,21 @@
 "use client";
 
-import { cn } from "@juun/ui/lib/utils";
 import * as React from "react";
 
-import { ScrollArea, ScrollBar } from "./scroll-area";
+import { cn } from "../lib/utils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <ScrollArea
+    <div
       data-slot="table-container"
-      className="relative isolate w-full overflow-x-auto"
+      className="relative w-full overflow-x-auto"
     >
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm", className)}
         {...props}
       />
-      <ScrollBar orientation="vertical" className="z-2" />
-      <ScrollBar orientation="horizontal" className="z-2" />
-    </ScrollArea>
+    </div>
   );
 }
 

@@ -16,7 +16,8 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 24.x
+          - 24.x # Backward compatibility
+          - 25.x
     name: Build with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
@@ -43,6 +44,8 @@ jobs:
           path: |
             ~/.pnpm-store
             ${{ github.workspace }}/.pnpm-store
+            node_modules
+            */*/node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-

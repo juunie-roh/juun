@@ -1,5 +1,6 @@
-import { cn } from "@juun/ui/lib/utils";
 import React from "react";
+
+import { cn } from "../lib/utils";
 
 interface LogoAvatarProps
   extends Omit<React.HTMLProps<HTMLDivElement>, "color"> {

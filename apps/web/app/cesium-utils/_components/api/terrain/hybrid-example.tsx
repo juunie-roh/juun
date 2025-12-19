@@ -24,23 +24,19 @@ export default function HybridExample() {
         });
 
         terrain.readyEvent.addEventListener((provider) => {
-          // region 1: at level 13, having world terrain
+          // Region 1: Level 13 world terrain covering area A
           const region: TerrainRegion = {
             provider,
-            tiles: new Map().set(13, {
-              x: [13963, 13967],
-              y: [2389, 2393],
-            }),
+            tiles: new Map().set(13, { x: [13963, 13967], y: [2389, 2393] }),
           };
 
+          // Region 2: Level 13 world terrain covering area B
           const region2: TerrainRegion = {
             provider,
-            tiles: new Map().set(13, {
-              x: [13956, 13959],
-              y: 2392,
-            }),
+            tiles: new Map().set(13, { x: [13956, 13959], y: 2392 }),
           };
 
+          // Region 3: Level 14 ellipsoid terrain (higher zoom override)
           const region3: TerrainRegion = {
             provider: new EllipsoidTerrainProvider(),
             tiles: new Map().set(14, { x: [27930, 27931], y: [4784, 4785] }),

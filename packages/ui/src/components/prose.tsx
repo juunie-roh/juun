@@ -1,5 +1,6 @@
-import { cn } from "@juun/ui/lib/utils";
 import type { ComponentProps } from "react";
+
+import { cn } from "../lib/utils";
 
 function Prose({ className, children, ...props }: ComponentProps<"div">) {
   return (
