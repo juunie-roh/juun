@@ -4,6 +4,6 @@ export default [
   ...base,
   ...typescript,
   {
-    ignores: ["src/generated/**/*"],
+    ignores: ["generated/prisma/**/*"],
   },
 ];
