@@ -2,7 +2,7 @@
 
 import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
-import { useEffect, useEffectEvent, useMemo, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";
@@ -13,9 +13,8 @@ export default function Silhouette() {
     Cesium.Color.RED.toCssColorString(),
   );
   const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
-  const tilesetPromise = useMemo(
-    () => Cesium.Cesium3DTileset.fromIonAssetId(75343),
-    [],
+  const tilesetPromiseRef = useRef(
+    Cesium.Cesium3DTileset.fromIonAssetId(75343),
   );
 
   const onMouseMove = useEffectEvent(
@@ -31,6 +30,7 @@ export default function Silhouette() {
 
   useEffect(() => {
     if (!viewer) return;
+    const tilesetPromise = tilesetPromiseRef.current;
     viewer.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
         -74.01881302800248,
@@ -75,7 +75,7 @@ export default function Silhouette() {
           console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
         });
     };
-  }, [viewer, highlight, tilesetPromise]);
+  }, [viewer]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
