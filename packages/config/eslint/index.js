@@ -17,4 +17,4 @@ export default defineConfig([
   ...prettier,
 ]);
 
-export { a11y, base, next, prettier, react, storybook, typescript };
+export { defineConfig, a11y, base, next, prettier, react, storybook, typescript };

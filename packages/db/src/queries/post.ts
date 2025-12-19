@@ -1,5 +1,5 @@
+import type { PostCategory } from "../../generated/prisma/client";
 import { prisma } from "../client";
-import type { PostCategory } from "../generated/prisma/client";
 
 export type Post = {
   id: number;

@@ -1,5 +1,5 @@
+import type { TimelineCategory } from "../../generated/prisma/client";
 import { prisma } from "../client";
-import type { TimelineCategory } from "../generated/prisma/client";
 
 export type Timeline = {
   id: number;

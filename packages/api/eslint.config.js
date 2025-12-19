@@ -1,3 +1,9 @@
-import { base, typescript } from "@config/eslint";
+import { base, defineConfig, typescript } from "@config/eslint";
 
-export default [...base, ...typescript];
+export default defineConfig([
+  ...base,
+  ...typescript,
+  {
+    ignores: ["generated/openapi/**/*"],
+  },
+]);
