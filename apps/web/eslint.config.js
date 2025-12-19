@@ -1,5 +1,4 @@
-import config from "@config/eslint";
-import { defineConfig } from "eslint/config";
+import config, { defineConfig } from "@config/eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig([
