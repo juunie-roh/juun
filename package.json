@@ -1,7 +1,7 @@
 {
   "name": "juun",
   "version": "0.0.2",
-  "packageManager": "pnpm@10.26.0",
+  "packageManager": "pnpm@10.26.1",
   "private": true,
   "author": "juun",
   "type": "module",
@@ -39,7 +39,7 @@
     "inquirer": "~9.3.8",
     "lint-staged": "^16.2.7",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "turbo": "^2.6.3"
+    "turbo": "^2.7.1"
   },
   "config": {
     "commitizen": {

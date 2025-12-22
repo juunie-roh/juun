@@ -37,8 +37,10 @@ export const CESIUM_APIS: ApiConfig[] = [
       },
       {
         value: "item-1",
-        label: "Add / Remove Item",
-        render: React.lazy(() => import("../_components/entity-toggler")),
+        label: "Tag-based Control (entities)",
+        render: React.lazy(
+          () => import("../_components/api/collection/tag-based-control"),
+        ),
       },
     ],
   },
