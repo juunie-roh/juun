@@ -150,7 +150,7 @@ await cache.{entity}.revalidate();
 ### Default Configuration
 
 | Setting | Value | Description |
-|---------|-------|-------------|
+| --------- | ------- | ------------- |
 | `cacheLife` | `"hours"` (1 hour) | Cache lifetime preset |
 | `staleTime` | 3,600,000 ms (1 hour) | Maximum stale time |
 | `tags` | Entity-specific | For cache invalidation |
@@ -158,7 +158,7 @@ await cache.{entity}.revalidate();
 ### Cache Tags by Entity
 
 | Entity | Tags | Purpose |
-|--------|------|---------|
+| -------- | ------ | --------- |
 | `post` | `["posts"]` | Invalidate all post queries |
 | `timeline` | `["timelines"]` | Invalidate all timeline queries |
 
