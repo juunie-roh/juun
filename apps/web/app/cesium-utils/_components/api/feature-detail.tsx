@@ -64,30 +64,30 @@ export default function ApiFeatureDetail() {
 function Default() {
   return (
     <Prose>
-      <h2 className="mb-2 tracking-tight">Cesium Utils Demo</h2>
-      <p className="mb-4">
+      <h2>Cesium Utils Demo</h2>
+      <p>
         This page demonstrates the capabilities of the{" "}
         <code>@juun-roh/cesium-utils</code> library, a utility package.
       </p>
 
-      <h3 className="mb-2 text-lg font-semibold">Environment</h3>
-      <p className="mb-4">
+      <h3>Environment</h3>
+      <p>
         This demonstration is built using{" "}
         <Link href="https://nextjs.org">Next.js</Link>, the React framework, and
         leverages native Cesium APIs with a lightweight React wrapper for
         optimal performance and direct access to 3D geospatial capabilities.
       </p>
 
-      <h3 className="mb-2 text-lg font-semibold">Usage</h3>
-      <p className="mb-4">
+      <h3>Usage</h3>
+      <p>
         The <code>@juun-roh/cesium-utils</code> package maintains vanilla
         CesiumJS compatibility, meaning you can use it in any Cesium project
         regardless of framework choice. The utilities work directly with
         standard Cesium objects and APIs.
       </p>
 
-      <h4 className="mb-2 text-base font-medium">Traditional CesiumJS</h4>
-      <p className="mb-4">
+      <h4>Traditional CesiumJS</h4>
+      <p>
         For traditional CesiumJS projects, import the utilities directly and use
         them with your existing viewer setup:
       </p>
@@ -123,8 +123,8 @@ async function main() {
 main();`}
       />
 
-      <h4 className="mb-2 text-base font-medium">React Integration</h4>
-      <p className="mb-4">
+      <h4>React Integration</h4>
+      <p>
         When using React, the utilities integrate seamlessly with native Cesium
         viewers. Access the viewer through React refs or context and apply the
         utility methods:
