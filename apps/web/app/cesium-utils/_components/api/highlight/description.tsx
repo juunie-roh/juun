@@ -1,16 +1,17 @@
 import { CodeBlock } from "@juun/ui/code-block";
+import { Prose } from "@juun/ui/prose";
 
 export default function HighlightDescription() {
   return (
-    <div className="prose max-w-none prose-zinc dark:prose-invert prose-headings:tracking-tight">
-      <h2 className="mb-2">Highlight</h2>
+    <Prose>
+      <h2>Highlight</h2>
       <p>
         A lightweight multiton highlight manager for Cesium using flyweight
         pattern that provides unified highlighting for both 2D surface and 3D
         objects.
       </p>
 
-      <h3 className="mb-2">About</h3>
+      <h3>About</h3>
       <ul>
         <li>
           <b>Supports</b>: Ground-clamped <code>Entity</code> instances,
@@ -37,7 +38,7 @@ export default function HighlightDescription() {
         </li>
       </ul>
 
-      <h3 className="mb-2">Usage</h3>
+      <h3>Usage</h3>
       <p>
         You can either use the unified highlight manager <code>Highlight</code>{" "}
         which automatically handles object type detection and routing, or
@@ -133,6 +134,6 @@ surfaceHighlight.destroy();
 silhouetteHighlight.destroy();`}
         />
       </details>
-    </div>
+    </Prose>
   );
 }

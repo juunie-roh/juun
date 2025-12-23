@@ -177,7 +177,7 @@ export default function TagBasedControl() {
   const toggleHighlight = (type: BuildingType) => {
     if (!collection) return;
 
-    const highlightColors = {
+    const highlightColors: Record<BuildingType, ColorMaterialProperty> = {
       residential: new ColorMaterialProperty(Color.LIME.withAlpha(0.9)),
       commercial: new ColorMaterialProperty(Color.CYAN.withAlpha(0.9)),
       industrial: new ColorMaterialProperty(Color.CRIMSON.withAlpha(0.9)),
@@ -347,22 +347,16 @@ export default function TagBasedControl() {
       {/* Property Control Section */}
       <div className="space-y-2">
         <Label className="text-sm font-semibold">
-          Property Control (material)
+          Property(material) Control
           <Tooltip>
             <TooltipTrigger>
               <Info className="size-4" />
             </TooltipTrigger>
             <TooltipContent>
-              <div>
-                <code>
-                  collection.show("residential" | "commercial" | "industrial")
-                </code>
-              </div>
-              <div>
-                <code>
-                  collection.hide("residential" | "commercial" | "industrial")
-                </code>
-              </div>
+              <code>
+                collection.forEach(callback, "residential" | "commercial" |
+                "industrial")
+              </code>
             </TooltipContent>
           </Tooltip>
         </Label>
@@ -411,7 +405,7 @@ export default function TagBasedControl() {
             </TooltipContent>
           </Tooltip>
         </Label>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           <Button
             onClick={() => removeByType("residential")}
             disabled={!collection || stats.residential === 0}

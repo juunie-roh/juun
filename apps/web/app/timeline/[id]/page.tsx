@@ -1,4 +1,5 @@
 import { Button } from "@juun/ui/button";
+import { Prose } from "@juun/ui/prose";
 import { ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -36,9 +37,7 @@ export default async function TimelineDetailPage({
         </p>
       </header>
 
-      <div className="prose max-w-none dark:prose-invert">
-        {md.render(parsed)}
-      </div>
+      <Prose>{md.render(parsed)}</Prose>
     </article>
   );
 }
