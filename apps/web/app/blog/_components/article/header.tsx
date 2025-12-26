@@ -1,8 +1,9 @@
 import type { Post } from "@juun/db/post";
-import { AspectRatio } from "@juun/ui/aspect-ratio";
-import { Skeleton } from "@juun/ui/skeleton";
 import Image from "next/image";
 import { Suspense } from "react";
+
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BlogHeader({
   metadata,

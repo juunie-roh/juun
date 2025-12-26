@@ -1,7 +1,5 @@
 import "@config/tailwind/globals.css";
 
-import { Toaster } from "@juun/ui/sonner";
-import { TooltipProvider } from "@juun/ui/tooltip";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -19,6 +17,8 @@ import {
   victorSerifTrial,
 } from "@/assets/fonts";
 import Header from "@/components/header";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import ThemeProvider from "@/contexts/theme-provider";
 
 export const metadata: Metadata = {

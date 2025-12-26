@@ -1,13 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import React from "react";
+
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@juun/ui/resizable";
-import { Textarea } from "@juun/ui/textarea";
-import { useRouter } from "next/navigation";
-import React from "react";
+} from "@/components/ui/resizable";
+import { Textarea } from "@/components/ui/textarea";
 
 import MarkdownPreview from "./markdown-preview";
 

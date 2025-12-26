@@ -1,12 +1,12 @@
 import { Post } from "@juun/db/post";
-import { AspectRatio } from "@juun/ui/aspect-ratio";
-import { Badge } from "@juun/ui/badge";
-import { LogoAvatar } from "@juun/ui/logo-avatar";
-import { Skeleton } from "@juun/ui/skeleton";
 import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Badge } from "@/components/ui/badge";
+import { LogoAvatar } from "@/components/ui/logo-avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
 

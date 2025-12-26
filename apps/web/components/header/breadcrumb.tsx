@@ -1,5 +1,10 @@
 "use client";
 
+import { Home } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
+
 import {
   Breadcrumb as BreadcrumbRoot,
   BreadcrumbItem,
@@ -7,11 +12,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@juun/ui/breadcrumb";
-import { Home } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fragment } from "react";
+} from "@/components/ui/breadcrumb";
 
 interface BreadcrumbSegment {
   href: string;

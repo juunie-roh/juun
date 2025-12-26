@@ -1,8 +1,7 @@
 "use client";
 
-import { Sidebar, SidebarHeader, SidebarRail } from "@juun/ui/sidebar";
-
 import { useAppSidebar } from "@/app/test/sidebar/_contexts/app-sidebar";
+import { Sidebar, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
 
 export default function InnerSidebar() {
   const { content } = useAppSidebar();

@@ -1,14 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@juun/ui/dialog";
-import { ScrollArea } from "@juun/ui/scroll-area";
-import { Skeleton } from "@juun/ui/skeleton";
-import { useRouter } from "next/navigation";
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function TimelineDialogLoading() {
   const router = useRouter();

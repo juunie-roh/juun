@@ -1,6 +1,3 @@
-import { Button } from "@juun/ui/button";
-import { cn } from "@juun/ui/lib/utils";
-import { Skeleton } from "@juun/ui/skeleton";
 import {
   Box,
   Calendar,
@@ -14,6 +11,9 @@ import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 import { formatDate } from "@/utils/date";
 
 import { PlaygroundCategory } from "../_data";
@@ -56,8 +56,8 @@ export default function PlaygroundItem({
       {/* Text section */}
       <div className="flex w-full basis-1/2 flex-col">
         {/* Category Header */}
-        <header className="flex w-full items-center gap-2 border-b-2 border-dashed px-8 py-[18px]">
-          <div className="rounded bg-primary p-0.5 text-primary-foreground [&>svg]:size-[18px]">
+        <header className="flex w-full items-center gap-2 border-b-2 border-dashed px-8 py-4.5">
+          <div className="rounded bg-primary p-0.5 text-primary-foreground [&>svg]:size-4.5">
             {IconMap[category]}
           </div>
           <span className="text-lg leading-none font-semibold tracking-tight">

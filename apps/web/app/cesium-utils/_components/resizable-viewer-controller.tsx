@@ -1,13 +1,14 @@
 "use client";
 
-import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@juun/ui/resizable";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+} from "@/components/ui/resizable";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { useCesiumUtils } from "../_contexts/cesium-utils";
 import { isValidApi } from "../_data";

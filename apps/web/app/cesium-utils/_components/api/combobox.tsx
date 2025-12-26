@@ -1,6 +1,10 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
+import { ChevronDown } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -8,12 +12,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@juun/ui/command";
-import { cn } from "@juun/ui/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@juun/ui/popover";
-import { ChevronDown } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 import { API_LABELS, getApiOptions } from "../../_data";
 

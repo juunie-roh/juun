@@ -1,8 +1,9 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 
 export default function BlogItemError() {
   return (

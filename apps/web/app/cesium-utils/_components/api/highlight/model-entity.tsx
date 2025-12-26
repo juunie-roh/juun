@@ -1,11 +1,12 @@
 "use client";
 
-import { Checkbox } from "@juun/ui/checkbox";
-import { Label } from "@juun/ui/label";
-import { Slider } from "@juun/ui/slider";
 import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
 import { useEffect, useMemo, useState } from "react";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 
 import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";

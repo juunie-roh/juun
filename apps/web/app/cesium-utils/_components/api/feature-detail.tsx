@@ -1,10 +1,11 @@
 "use client";
 
-import { CodeBlock } from "@juun/ui/code-block";
-import { Prose } from "@juun/ui/prose";
-import { Skeleton } from "@juun/ui/skeleton";
 import Link from "next/link";
 import { Suspense } from "react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+import { Prose } from "@/components/ui/prose";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
 import { API_LABELS, getFeatures, isValidApi } from "../../_data";

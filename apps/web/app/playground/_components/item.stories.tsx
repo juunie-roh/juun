@@ -1,5 +1,6 @@
-import { Prose } from "@juun/ui/prose";
-import type { Meta, StoryObj } from "@storybook/nextjs";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+
+import { Prose } from "@/components/ui/prose";
 
 import PlaygroundItem from "./item";
 
@@ -59,7 +60,7 @@ type Story = StoryObj<typeof PlaygroundItem>;
 
 export const Default: Story = {
   render: (args) => (
-    <div className="w-[700px] border bg-(image:--bg-dashed) py-8">
+    <div className="w-175 border bg-(image:--bg-dashed) py-8">
       <PlaygroundItem {...args} />
     </div>
   ),
@@ -67,7 +68,7 @@ export const Default: Story = {
 
 export const MultipleItems: Story = {
   render: (args) => (
-    <div className="flex w-[700px] flex-col gap-8 border bg-(image:--bg-dashed) py-8">
+    <div className="flex w-175 flex-col gap-8 border bg-(image:--bg-dashed) py-8">
       <PlaygroundItem {...args} />
       <PlaygroundItem {...args} />
       <PlaygroundItem {...args} />
@@ -78,7 +79,7 @@ export const MultipleItems: Story = {
 
 export const ItemsNotFound: Story = {
   render: () => (
-    <div className="w-[700px] border bg-(image:--bg-dashed) py-8">
+    <div className="w-175 border bg-(image:--bg-dashed) py-8">
       <PlaygroundItem
         title="No Items Found"
         category="Not Found"

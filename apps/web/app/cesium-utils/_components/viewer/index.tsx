@@ -1,5 +1,6 @@
-import { Skeleton } from "@juun/ui/skeleton";
 import { lazy, Suspense } from "react";
+
+import { Skeleton } from "@/components/ui/skeleton";
 
 import type { ViewerProps } from "./viewer";
 

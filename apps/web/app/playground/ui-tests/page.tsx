@@ -1,5 +1,4 @@
-import { Marquee } from "@juun/ui/marquee";
-
+import { Marquee } from "@/components/ui/marquee";
 import ConfirmWheel from "@/components/wheel/ConfirmWheel";
 import FiveWheel from "@/components/wheel/FiveWheel";
 import FourWheel from "@/components/wheel/FourWheel";

@@ -1,8 +1,9 @@
 "use client";
 
-import { SidebarProvider, useSidebar } from "@juun/ui/sidebar";
 import type { ReactNode } from "react";
 import { createContext, useContext, useState } from "react";
+
+import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 
 type AppSidebarContextProps = {
   // Outer sidebar (from page-level SidebarProvider)

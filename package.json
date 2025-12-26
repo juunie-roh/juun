@@ -20,7 +20,6 @@
     "check-types": "turbo check-types",
     "web": "pnpm --filter @juun/web",
     "api": "pnpm --filter @juun/api",
-    "ui": "pnpm --filter @juun/ui",
     "db": "pnpm --filter @juun/db"
   },
   "devDependencies": {

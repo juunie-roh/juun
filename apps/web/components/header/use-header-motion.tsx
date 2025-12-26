@@ -1,6 +1,5 @@
 "use client";
 
-import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
 import {
   animate,
   type MotionStyle,
@@ -10,6 +9,8 @@ import {
 } from "framer-motion";
 import { usePathname } from "next/navigation";
 import React from "react";
+
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function useHeaderMotion(
   containerRef?: React.RefObject<HTMLElement | null> | undefined,

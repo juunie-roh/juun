@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
   reactCompiler: true,
-  transpilePackages: ["@juun/ui", "@juun/api", "@juun/db"],
+  transpilePackages: ["@juun/api", "@juun/db"],
   // support old blog slug-based urls redirect to new id-based urls
   redirects() {
     return [

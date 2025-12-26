@@ -1,11 +1,5 @@
 "use client";
 
-import { Badge } from "@juun/ui/badge";
-import { Button } from "@juun/ui/button";
-import { Label } from "@juun/ui/label";
-import { Separator } from "@juun/ui/separator";
-import { Toggle } from "@juun/ui/toggle";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@juun/ui/tooltip";
 import { Collection } from "@juun-roh/cesium-utils";
 import {
   Cartesian3,
@@ -17,6 +11,17 @@ import {
 } from "cesium";
 import { Eye, EyeOff, Info, Trash } from "lucide-react";
 import { useEffect, useEffectEvent, useMemo, useState } from "react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { useViewer } from "../../../_contexts";
 

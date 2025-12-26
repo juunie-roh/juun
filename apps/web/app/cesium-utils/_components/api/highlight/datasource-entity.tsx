@@ -1,10 +1,5 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
-import { Checkbox } from "@juun/ui/checkbox";
-import { Label } from "@juun/ui/label";
-import { Separator } from "@juun/ui/separator";
-import { Slider } from "@juun/ui/slider";
 import { Highlight } from "@juun-roh/cesium-utils";
 import {
   Cartesian3,
@@ -16,6 +11,12 @@ import {
   ScreenSpaceEventType,
 } from "cesium";
 import { useEffect, useEffectEvent, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 
 import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";

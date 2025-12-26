@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
-import { Separator } from "@juun/ui/separator";
 import { motion } from "framer-motion";
 import { ChevronsDown, CirclePlay, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import MaxWidthLayout from "@/layouts/max-width";
 
 import Breadcrumb from "./breadcrumb";
