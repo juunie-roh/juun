@@ -4,7 +4,6 @@ import { TooltipProvider } from "@juun/ui/tooltip";
 import type { Preview } from "@storybook/nextjs";
 import { NextIntlClientProvider } from "next-intl";
 
-import ThemeProvider from "@/app/_contexts/theme-provider";
 import {
   antonio,
   geistMono,
@@ -13,6 +12,7 @@ import {
   stabilGroteskTrial,
   victorSerifTrial,
 } from "@/assets/fonts";
+import ThemeProvider from "@/contexts/theme-provider";
 
 const preview: Preview = {
   parameters: {

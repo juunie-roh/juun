@@ -19,8 +19,7 @@ import {
   victorSerifTrial,
 } from "@/assets/fonts";
 import Header from "@/components/header";
-
-import ThemeProvider from "./_contexts/theme-provider";
+import ThemeProvider from "@/contexts/theme-provider";
 
 export const metadata: Metadata = {
   title: {
