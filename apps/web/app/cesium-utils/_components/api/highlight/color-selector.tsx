@@ -1,3 +1,6 @@
+import { Color } from "cesium";
+import { SetStateAction } from "react";
+
 import {
   Select,
   SelectContent,
@@ -6,9 +9,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@juun/ui/select";
-import { Color } from "cesium";
-import { SetStateAction } from "react";
+} from "@/components/ui/select";
 
 interface ColorSelectorProps {
   color: ReturnType<Color["toCssColorString"]>;

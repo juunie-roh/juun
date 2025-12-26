@@ -1,6 +1,7 @@
-import { Skeleton } from "@juun/ui/skeleton";
 import type { CanvasProps } from "@react-three/fiber";
 import { lazy, Suspense } from "react";
+
+import { Skeleton } from "@/components/ui/skeleton";
 
 const LazyCanvas = lazy(() => import("./canvas"));
 

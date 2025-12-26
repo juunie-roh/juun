@@ -8,13 +8,14 @@ if (typeof window !== "undefined" && process.env.CESIUM_BASE_URL) {
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "cesium/Build/Cesium/Widgets/lighter.css";
 
-import { cn } from "@juun/ui/lib/utils";
 import {
   CameraEventType,
   KeyboardEventModifier,
   Viewer as CesiumViewer,
 } from "cesium";
 import { forwardRef, useEffect, useRef } from "react";
+
+import { cn } from "@/lib/utils";
 
 import { useViewer } from "../../_contexts";
 

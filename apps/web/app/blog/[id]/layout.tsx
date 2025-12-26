@@ -1,5 +1,4 @@
-import { ScrollProgressBar } from "@juun/ui/scroll-progress-bar";
-
+import { ScrollProgressBar } from "@/components/ui/scroll-progress-bar";
 import BaseInnerLayout from "@/layouts/base-inner";
 
 export default function BlogItemLayout({

@@ -1,6 +1,7 @@
-import { Prose } from "@juun/ui/prose";
-import { Separator } from "@juun/ui/separator";
 import React from "react";
+
+import { Prose } from "@/components/ui/prose";
+import { Separator } from "@/components/ui/separator";
 
 import TableOfContents from "./table-of-contents";
 

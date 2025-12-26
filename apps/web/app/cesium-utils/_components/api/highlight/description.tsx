@@ -1,5 +1,5 @@
-import { CodeBlock } from "@juun/ui/code-block";
-import { Prose } from "@juun/ui/prose";
+import { CodeBlock } from "@/components/ui/code-block";
+import { Prose } from "@/components/ui/prose";
 
 export default function HighlightDescription() {
   return (

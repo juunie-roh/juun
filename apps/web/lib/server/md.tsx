@@ -1,9 +1,5 @@
 import "server-only";
 
-import { AspectRatio } from "@juun/ui/aspect-ratio";
-import { CodeBlock } from "@juun/ui/code-block";
-import { Prose } from "@juun/ui/prose";
-import { Skeleton } from "@juun/ui/skeleton";
 import matter from "gray-matter";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +13,10 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { CodeBlock } from "@/components/ui/code-block";
+import { Prose } from "@/components/ui/prose";
+import { Skeleton } from "@/components/ui/skeleton";
 import { safeUrl } from "@/utils/security";
 import { getImageDimensions } from "@/utils/server/image";
 

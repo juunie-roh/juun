@@ -1,6 +1,6 @@
-import { CodeBlock } from "@juun/ui/code-block";
-import { Prose } from "@juun/ui/prose";
-import { ScrollArea } from "@juun/ui/scroll-area";
+import { CodeBlock } from "@/components/ui/code-block";
+import { Prose } from "@/components/ui/prose";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function CollectionDescription() {
   return (

@@ -1,6 +1,7 @@
-import { AspectRatio } from "@juun/ui/aspect-ratio";
-import { Skeleton } from "@juun/ui/skeleton";
 import { Fragment } from "react";
+
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BlogItemLoading() {
   return (

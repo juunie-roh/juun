@@ -1,9 +1,10 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
+
+import { Button } from "@/components/ui/button";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();

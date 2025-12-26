@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
 import { ClockArrowDown, ClockArrowUp } from "lucide-react";
 import type { LinkProps } from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+
+import { Button } from "@/components/ui/button";
 
 export default function TimelineOrderButton({
   href,

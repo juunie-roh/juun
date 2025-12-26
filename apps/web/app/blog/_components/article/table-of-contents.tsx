@@ -1,15 +1,16 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
+import { ArrowRight, Bookmark } from "lucide-react";
+import { Fragment, useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@juun/ui/collapsible";
-import { useMediaQuery } from "@juun/ui/hooks/use-media-query";
-import { cn } from "@juun/ui/lib/utils";
-import { ArrowRight, Bookmark } from "lucide-react";
-import { Fragment, useEffect, useState } from "react";
+} from "@/components/ui/collapsible";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 
 interface TableOfContentsProps {
   /**

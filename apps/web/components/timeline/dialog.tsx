@@ -1,18 +1,18 @@
 "use client";
 
 import { Timeline } from "@juun/db/timeline";
-import { Badge } from "@juun/ui/badge";
+import { useRouter } from "next/navigation";
+import React from "react";
+
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@juun/ui/dialog";
-import { ScrollArea } from "@juun/ui/scroll-area";
-import { useRouter } from "next/navigation";
-import React from "react";
-
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";

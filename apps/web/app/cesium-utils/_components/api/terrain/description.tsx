@@ -1,4 +1,4 @@
-import { Prose } from "@juun/ui/prose";
+import { Prose } from "@/components/ui/prose";
 
 export default function TerrainDescription() {
   return (

@@ -1,13 +1,13 @@
+import { Suspense } from "react";
+
+import Timeline from "@/components/timeline";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@juun/ui/carousel";
-import { Suspense } from "react";
-
-import Timeline from "@/components/timeline";
+} from "@/components/ui/carousel";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
 import cache from "@/lib/cache";

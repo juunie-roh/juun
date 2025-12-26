@@ -1,7 +1,8 @@
 "use client";
 
-import { Wheel, WheelContent } from "@juun/ui/wheel";
 import { Copy, Delete, Info, Move, RotateCw } from "lucide-react";
+
+import { Wheel, WheelContent } from "@/components/ui/wheel";
 
 function FiveWheel() {
   return (

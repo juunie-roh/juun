@@ -1,6 +1,7 @@
-import { Badge } from "@juun/ui/badge";
-import { cn } from "@juun/ui/lib/utils";
 import React from "react";
+
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export default function TimelineTags({
   tags,

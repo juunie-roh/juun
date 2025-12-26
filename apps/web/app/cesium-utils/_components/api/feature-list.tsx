@@ -1,5 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -7,9 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@juun/ui/sidebar";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+} from "@/components/ui/sidebar";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
 import { getFeatures, isValidApi } from "../../_data";

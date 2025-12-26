@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
 import { Minus, Plus } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { useBearStore } from "@/stores/slices/bear";
 
 const BearCounter = () => {

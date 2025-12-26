@@ -1,7 +1,14 @@
 "use client";
 
-import { Button } from "@juun/ui/button";
-import { Calendar } from "@juun/ui/calendar";
+import { Sunlight } from "@juun-roh/cesium-utils/experimental";
+import * as Cesium from "cesium";
+import { ChevronDown, MousePointer2, MousePointer2Off } from "lucide-react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -9,18 +16,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "@juun/ui/form";
-import { Input } from "@juun/ui/input";
-import { Label } from "@juun/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@juun/ui/popover";
-import { toast } from "@juun/ui/sonner";
-import { Switch } from "@juun/ui/switch";
-import { Toggle } from "@juun/ui/toggle";
-import { Sunlight } from "@juun-roh/cesium-utils/experimental";
-import * as Cesium from "cesium";
-import { ChevronDown, MousePointer2, MousePointer2Off } from "lucide-react";
-import React from "react";
-import { useForm } from "react-hook-form";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Switch } from "@/components/ui/switch";
+import { Toggle } from "@/components/ui/toggle";
 
 import { useViewer } from "../../../_contexts";
 
@@ -133,22 +138,22 @@ export default function SunlightAnalysis() {
         const position = viewer.scene.pickPosition(event.position);
         const dateTime = getDateTime();
         toast.info(`Clicked at ${position}, time set to ${dateTime}`);
-        // if (position && sunlightRef.current && dateTime) {
-        //   try {
-        //     const result = sunlightRef.current.analyze(
-        //       position,
-        //       Cesium.JulianDate.fromDate(dateTime),
-        //       options,
-        //     );
-        //     toast.info(`Sunlight: ${result.result} At: ${result.timestamp}`);
-        //   } catch (error) {
-        //     toast.error(
-        //       `Analysis failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-        //     );
-        //     console.error("Sunlight analysis error:", error);
-        //     console.error("Scene mode at error:", viewer.scene.mode);
-        //   }
-        // }
+        if (position && sunlightRef.current && dateTime) {
+          try {
+            const result = sunlightRef.current.analyze(
+              position,
+              Cesium.JulianDate.fromDate(dateTime),
+              options,
+            );
+            toast.info(`Sunlight: ${result.result} At: ${result.timestamp}`);
+          } catch (error) {
+            toast.error(
+              `Analysis failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+            );
+            console.error("Sunlight analysis error:", error);
+            console.error("Scene mode at error:", viewer.scene.mode);
+          }
+        }
       },
     );
 

@@ -1,10 +1,10 @@
-import { Button } from "@juun/ui/button";
-import { Prose } from "@juun/ui/prose";
 import { ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
+import { Prose } from "@/components/ui/prose";
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
 import { formatDate } from "@/utils/date";

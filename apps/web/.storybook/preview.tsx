@@ -1,10 +1,8 @@
 import "@config/tailwind/globals.css";
 
-import { TooltipProvider } from "@juun/ui/tooltip";
-import type { Preview } from "@storybook/nextjs";
+import type { Preview } from "@storybook/nextjs-vite";
 import { NextIntlClientProvider } from "next-intl";
 
-import ThemeProvider from "@/app/_contexts/theme-provider";
 import {
   antonio,
   geistMono,
@@ -13,9 +11,12 @@ import {
   stabilGroteskTrial,
   victorSerifTrial,
 } from "@/assets/fonts";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import ThemeProvider from "@/contexts/theme-provider";
 
 const preview: Preview = {
   parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,

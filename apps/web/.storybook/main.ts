@@ -1,4 +1,4 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+import type { StorybookConfig } from "@storybook/nextjs-vite";
 
 const config: StorybookConfig = {
   stories: ["../**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -6,22 +6,23 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
     "@storybook/addon-links",
+    "@storybook/addon-vitest",
   ],
   framework: {
-    name: "@storybook/nextjs",
+    name: "@storybook/nextjs-vite",
     options: {},
   },
-  webpackFinal: async (config) => {
-    config.module?.rules?.push(
-      // svgr loader
-      {
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      },
-    );
+  // webpackFinal: async (config) => {
+  //   config.module?.rules?.push(
+  //     // svgr loader
+  //     {
+  //       test: /\.svg$/,
+  //       use: ["@svgr/webpack"],
+  //     },
+  //   );
 
-    return config;
-  },
+  //   return config;
+  // },
 };
 
 export default config;

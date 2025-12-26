@@ -1,10 +1,13 @@
 "use client";
 
+import { BookOpen, Bot, ChevronRight, SquareTerminal } from "lucide-react";
+
+import { useAppSidebar } from "@/app/test/sidebar/_contexts/app-sidebar";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@juun/ui/collapsible";
+} from "@/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarMenu,
@@ -13,10 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@juun/ui/sidebar";
-import { BookOpen, Bot, ChevronRight, SquareTerminal } from "lucide-react";
-
-import { useAppSidebar } from "@/app/test/sidebar/_contexts/app-sidebar";
+} from "@/components/ui/sidebar";
 
 export interface NavMainItem {
   id: string;

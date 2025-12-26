@@ -1,5 +1,7 @@
-import { Badge } from "@juun/ui/badge";
-import { Button } from "@juun/ui/button";
+import Link from "next/link";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Item,
   ItemContent,
@@ -7,10 +9,8 @@ import {
   ItemFooter,
   ItemHeader,
   ItemTitle,
-} from "@juun/ui/item";
-import { Separator } from "@juun/ui/separator";
-import Link from "next/link";
-
+} from "@/components/ui/item";
+import { Separator } from "@/components/ui/separator";
 import type { Timeline as TimelineItem } from "@/lib/cache";
 import { formatDate } from "@/utils/date";
 import { capitalize } from "@/utils/string";

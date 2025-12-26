@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -5,9 +7,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@juun/ui/sidebar";
-import { Metadata } from "next";
-
+} from "@/components/ui/sidebar";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 
 import { ApiCombobox, ApiFeatureList } from "./_components";

@@ -1,13 +1,13 @@
 "use client";
 
 import type { Post } from "@juun/db/post";
-import { Badge } from "@juun/ui/badge";
-import { Button } from "@juun/ui/button";
-import { LogoAvatar } from "@juun/ui/logo-avatar";
-import { Separator } from "@juun/ui/separator";
-import { toast } from "@juun/ui/sonner";
 import { Link } from "lucide-react";
+import { toast } from "sonner";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { LogoAvatar } from "@/components/ui/logo-avatar";
+import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/utils/date";
 
 export default function BlogFooter({

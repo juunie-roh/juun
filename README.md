@@ -66,7 +66,7 @@ In-depth blog articles covering:
 ## Tech Stack
 
 | Layer | Technology |
-|-------|------------|
+| ------- | ------------ |
 | **Framework** | Next.js 16, React 19.2, Turbopack |
 | **Language** | TypeScript 5.9 |
 | **Database** | Prisma ORM + Neon PostgreSQL |
@@ -150,7 +150,6 @@ pnpm check-types          # TypeScript type checking
 # Package shortcuts
 pnpm web <command>        # Run command in @juun/web
 pnpm db <command>         # Run command in @juun/db
-pnpm ui <command>         # Run command in @juun/ui
 
 # Database operations
 pnpm db generate          # Generate Prisma Client
@@ -170,7 +169,7 @@ git cz                    # Commitizen for conventional commits
 ## Measured Performance Improvements
 
 | Optimization | Before | After | Reduction |
-|--------------|--------|-------|-----------|
+| -------------- | -------- | ------- | ----------- |
 | Home page bundle | 2.53 MB | 853 KB | **66%** |
 | Docker image | 526 MB | 346 MB | **34%** |
 | Timeline HTML | 319 KB | 257 KB | **19%** |

@@ -1,5 +1,6 @@
-import { LogoAvatar } from "@juun/ui/logo-avatar";
 import { Fragment } from "react";
+
+import { LogoAvatar } from "@/components/ui/logo-avatar";
 
 export default async function AboutPage() {
   return (

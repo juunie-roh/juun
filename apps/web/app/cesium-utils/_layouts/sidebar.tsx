@@ -1,5 +1,10 @@
-import { Sidebar, SidebarContent, SidebarHeader } from "@juun/ui/sidebar";
 import { ReactNode } from "react";
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+} from "@/components/ui/sidebar";
 
 export default function CesiumUtilsSidebar({
   children,
