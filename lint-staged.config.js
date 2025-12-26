@@ -30,14 +30,5 @@ export default {
       return `pnpm --filter @juun/db exec eslint --fix --cache ${relativePaths.join(" ")}`;
     },
   ],
-  "packages/ui/**/*.+(js|jsx|ts|tsx)": [
-    (filenames) => {
-      const relativePaths = filenames.map((f) => {
-        const match = f.match(/packages\/ui\/(.+)$/);
-        return match ? match[1] : f;
-      });
-      return `pnpm --filter @juun/ui exec eslint --fix --cache ${relativePaths.join(" ")}`;
-    },
-  ],
   "**/*.+(yml|yaml)": ["yamllint"],
 };
