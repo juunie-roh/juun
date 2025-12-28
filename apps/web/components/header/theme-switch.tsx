@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
 
@@ -8,66 +8,88 @@ import { Button } from "@/components/ui/button";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
-  // Local animation state - decoupled from the actual theme
-  const [animatingDark, setAnimatingDark] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
-  // Sync animation state with theme on mount
+  const segments = React.useMemo(
+    () =>
+      [
+        { value: "system", icon: Monitor, label: "System" },
+        { value: "light", icon: Sun, label: "Light" },
+        { value: "dark", icon: Moon, label: "Dark" },
+      ] as const,
+    [],
+  );
+
+  // Sync mounted state
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Update active index when theme changes
   React.useEffect(() => {
     if (theme) {
-      setAnimatingDark(theme === "dark");
+      const index = segments.findIndex((s) => s.value === theme);
+      if (index !== -1) {
+        setActiveIndex(index);
+      }
     }
-  }, [theme]);
+  }, [theme, segments]);
 
-  const isDark = theme === "dark";
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="flex h-8 w-auto items-center rounded-full border border-input bg-muted p-0.5">
+        <div className="flex gap-0.5">
+          {/* Placeholder segments */}
+          <div className="size-7 rounded-full" />
+          <div className="size-7 rounded-full" />
+          <div className="size-7 rounded-full" />
+        </div>
+      </div>
+    );
+  }
 
-  const toggleTheme = () => {
-    // First update our animation state
-    setAnimatingDark(!isDark);
-
-    // Then update the actual theme after a small delay to let animation complete
-    setTimeout(() => {
-      setTheme(isDark ? "light" : "dark");
-    }, 150); // Half the animation duration to feel responsive but let animation start
-  };
-
-  // Custom switch with both icons visible
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      className="relative h-8 w-16 overflow-hidden rounded-full border border-input p-0"
-      onClick={toggleTheme}
-    >
-      {/* Background track */}
-      <div className="absolute inset-0 bg-muted" />
-
-      {/* Moving thumb */}
+    <div className="relative flex h-8 w-auto items-center rounded-full border border-input bg-muted p-0.5">
+      {/* Sliding thumb */}
       <div
-        className="absolute size-6 rounded-full bg-background shadow-sm transition-all duration-300 ease-in-out"
+        className="absolute size-7 rounded-full bg-background shadow-sm transition-all duration-300 ease-in-out"
         style={{
-          transform: animatingDark ? "translateX(1rem)" : "translateX(-1rem)",
-          left: "50%",
-          marginLeft: "-12px", // Half of the width of the thumb
+          transform: `translateX(calc(${activeIndex} * (1.75rem + 0.125rem)))`,
+          left: "0.125rem",
         }}
       />
 
-      {/* Sun icon - left side */}
-      <div
-        className="absolute top-1/2 left-1.75 -translate-y-1/2 transition-opacity duration-300"
-        style={{ opacity: animatingDark ? 0.4 : 1 }}
-      >
-        <Sun className="size-4" />
-      </div>
+      <div className="relative flex gap-0.5">
+        {segments.map(({ value, icon: Icon, label }, index) => {
+          const isActive = theme === value;
+          return (
+            <Button
+              key={value}
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                // First update our animation state immediately
+                setActiveIndex(index);
 
-      {/* Moon icon - right side */}
-      <div
-        className="absolute top-1/2 right-1.75 -translate-y-1/2 transition-opacity duration-300"
-        style={{ opacity: animatingDark ? 1 : 0.4 }}
-      >
-        <Moon className="size-4" />
+                // Then update the actual theme after a small delay to let animation complete
+                setTimeout(() => {
+                  setTheme(value);
+                }, 150);
+              }}
+              className="relative z-10 size-7 rounded-full p-0 hover:bg-transparent"
+              aria-label={`Switch to ${label} theme`}
+              aria-pressed={isActive}
+            >
+              <Icon
+                className={`size-4 transition-opacity duration-200 ${isActive ? "opacity-100" : "opacity-40"}`}
+              />
+            </Button>
+          );
+        })}
       </div>
-
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+      <span className="sr-only">Select theme</span>
+    </div>
   );
 }
