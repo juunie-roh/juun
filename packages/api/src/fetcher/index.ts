@@ -1,5 +1,5 @@
-import Fetcher from "./base";
 import FetcherError from "./error";
+import Fetcher from "./fetcher";
 
 export { Fetcher, FetcherError };
-export type * from "./base";
+export type * from "./fetcher";

@@ -1,7 +1,7 @@
 import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 
-import { Fetcher } from "../fetcher";
-import FetcherError from "../fetcher/error";
+import { Fetcher } from "@/fetcher";
+import FetcherError from "@/fetcher/error";
 
 /**
  * React Query hook for fetching data with Fetcher

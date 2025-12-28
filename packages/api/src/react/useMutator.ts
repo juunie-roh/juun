@@ -1,7 +1,7 @@
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 
-import { Fetcher } from "../fetcher";
-import FetcherError from "../fetcher/error";
+import { Fetcher } from "@/fetcher";
+import FetcherError from "@/fetcher/error";
 
 /**
  * React Query hook for mutations with Fetcher
