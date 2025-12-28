@@ -30,7 +30,10 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
 
   // For now we might only have description, but this should be updated
   // to use the full content word count once available in the metadata
-  const readingTime = getReadingTime(metadata.description, metadata.word_count);
+  const readingTime = getReadingTime(
+    metadata.description ?? undefined,
+    metadata.word_count,
+  );
 
   return (
     <Link

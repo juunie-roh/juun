@@ -1,16 +1,9 @@
-import type { PostCategory } from "../../generated/prisma/client";
+import type { postModel } from "@/generated/prisma/models";
+
 import { prisma } from "../client";
 
-export type Post = {
-  id: number;
-  title: string;
-  description: string | undefined;
-  content: string;
-  word_count: number;
-  category: PostCategory | undefined;
-  image: string | undefined;
-  created_at: Date;
-  updated_at: Date;
+// Use Prisma's generated timeline type and extend with tags
+export type Post = postModel & {
   tags: string[];
 };
 
@@ -45,9 +38,9 @@ namespace post {
         id: post.id,
         title: post.title,
         word_count: post.word_count,
-        description: post.description ?? undefined,
-        category: post.category ?? undefined,
-        image: post.image ?? undefined,
+        description: post.description,
+        category: post.category,
+        image: post.image,
         created_at: post.created_at,
         updated_at: post.updated_at,
         tags: post.post_tags.map((pt) => pt.tag.name),
@@ -91,9 +84,9 @@ namespace post {
         id: post.id,
         title: post.title,
         word_count: post.word_count,
-        description: post.description ?? undefined,
-        category: post.category ?? undefined,
-        image: post.image ?? undefined,
+        description: post.description,
+        category: post.category,
+        image: post.image,
         created_at: post.created_at,
         updated_at: post.updated_at,
         tags: post.post_tags.map((pt) => pt.tag.name),
@@ -129,10 +122,10 @@ namespace post {
       return {
         id: post.id,
         title: post.title,
-        description: post.description ?? undefined,
+        description: post.description,
         content: post.content,
-        category: post.category ?? undefined,
-        image: post.image ?? undefined,
+        category: post.category,
+        image: post.image,
         created_at: post.created_at,
         updated_at: post.updated_at,
         tags: post.post_tags.map((pt) => pt.tag.name),
