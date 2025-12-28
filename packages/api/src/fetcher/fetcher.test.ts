@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import Fetcher from "./base";
 import FetcherError from "./error";
+import Fetcher from "./fetcher";
 
 // Mock fetch globally
 const mockFetch = vi.fn();
