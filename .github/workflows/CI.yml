@@ -64,5 +64,8 @@ jobs:
         run: pnpm lint
       - name: Type Checking
         run: pnpm check-types
+      # Storybook tests require playwright browsers
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
       - name: Run Tests
         run: pnpm test
