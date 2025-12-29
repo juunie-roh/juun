@@ -55,6 +55,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Build sub packages to generate type declaration files
+      - name: Build packages
+        run: pnpm --filter @juun/db build && pnpm --filter @juun/api build
       - name: Generate Next.js types
         run: pnpm --filter @juun/web exec next typegen
       - name: esLinter
