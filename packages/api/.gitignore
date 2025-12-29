@@ -16,6 +16,3 @@ CLAUDE.local.md
 .turbo
 
 coverage
-
-# Generated types
-/generated/openapi
