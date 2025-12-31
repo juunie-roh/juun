@@ -46,14 +46,21 @@ export default function SunlightAnalysis() {
   });
 
   const sunlightRef = React.useRef<Sunlight>(null);
-  const tilesetPromise = React.useRef(
-    Cesium.Cesium3DTileset.fromIonAssetId(75343),
-  );
   const indicatorRef = React.useRef<Cesium.Entity>(null);
 
   React.useEffect(() => {
     setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
   }, []);
+
+  const addTileset = React.useEffectEvent(async () => {
+    if (!viewer) return;
+    try {
+      const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
+      viewer.scene.primitives.add(tileset);
+    } catch (e) {
+      console.error(`Error creating tileset: ${e}`);
+    }
+  });
 
   // Initial viewer setup
   React.useEffect(() => {
@@ -66,6 +73,7 @@ export default function SunlightAnalysis() {
       Cesium.Terrain.fromWorldTerrain({ requestVertexNormals: true }),
     );
     viewer.shadows = true;
+
     viewer.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
         -74.01881302800248,
@@ -80,31 +88,13 @@ export default function SunlightAnalysis() {
       endTransform: Cesium.Matrix4.IDENTITY,
     });
     // Load NY tileset
-    const tileset = tilesetPromise.current;
-    tileset
-      .then((tile) => {
-        if (viewer.scene.primitives.contains(tile)) {
-          tile.show = true;
-          return;
-        }
-
-        viewer.scene.primitives.add(tile);
-      })
-      .catch((error: any) => {
-        console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
-      });
+    addTileset();
 
     return () => {
-      // disable NY tileset
-      tileset
-        .then((tile) => {
-          tile.show = false;
-        })
-        .catch((error: any) => {
-          console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
-        });
+      if (!viewer) return;
+      viewer.scene.primitives.removeAll();
     };
-  }, [viewer, tilesetPromise]);
+  }, [viewer]);
 
   const [isPicking, setIsPicking] = React.useState<boolean>(false);
   const onMouseMove =
@@ -132,7 +122,7 @@ export default function SunlightAnalysis() {
 
   const onLeftClick =
     React.useEffectEvent<Cesium.ScreenSpaceEventHandler.PositionedEventCallback>(
-      (event) => {
+      async (event) => {
         if (!viewer) return;
 
         const position = viewer.scene.pickPosition(event.position);
@@ -140,7 +130,7 @@ export default function SunlightAnalysis() {
         toast.info(`Clicked at ${position}, time set to ${dateTime}`);
         if (position && sunlightRef.current && dateTime) {
           try {
-            const result = sunlightRef.current.analyze(
+            const result = await sunlightRef.current.analyze(
               position,
               Cesium.JulianDate.fromDate(dateTime),
               options,
