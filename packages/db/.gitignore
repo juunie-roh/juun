@@ -2,7 +2,16 @@ node_modules
 
 .env
 
+# misc
+.DS_Store
+*.pem
 .eslintcache
+apps/web/public/cesium
+storybook-static
+CLAUDE.local.md
+.claude
+
+dist
 
 .turbo
 

@@ -55,11 +55,17 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Build sub packages to generate type declaration files
+      - name: Build packages
+        run: pnpm --filter @juun/db build && pnpm --filter @juun/api build
       - name: Generate Next.js types
         run: pnpm --filter @juun/web exec next typegen
       - name: esLinter
         run: pnpm lint
       - name: Type Checking
         run: pnpm check-types
+      # Storybook tests require playwright browsers
+      - name: Install Playwright browsers
+        run: pnpm web exec playwright install --with-deps chromium
       - name: Run Tests
         run: pnpm test

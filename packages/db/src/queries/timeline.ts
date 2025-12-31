@@ -1,16 +1,9 @@
-import type { TimelineCategory } from "../../generated/prisma/client";
+import type { timelineModel } from "@/generated/prisma/models";
+
 import { prisma } from "../client";
 
-export type Timeline = {
-  id: number;
-  title: string;
-  description: string;
-  category: TimelineCategory;
-  detail: string;
-  article: string | undefined;
-  playground: string | undefined;
-  created_at: Date;
-  updated_at: Date;
+// Use Prisma's generated timeline type and extend with tags
+export type Timeline = timelineModel & {
   tags: string[];
 };
 
@@ -50,8 +43,8 @@ namespace timeline {
         title: timeline.title,
         description: timeline.description,
         category: timeline.category,
-        article: timeline.article ?? undefined,
-        playground: timeline.playground ?? undefined,
+        article: timeline.article,
+        playground: timeline.playground,
         created_at: timeline.created_at,
         updated_at: timeline.updated_at,
         tags: timeline.timeline_tags.map((tt) => tt.tag.name),
@@ -89,8 +82,8 @@ namespace timeline {
         description: timeline.description,
         category: timeline.category,
         detail: timeline.detail,
-        article: timeline.article ?? undefined,
-        playground: timeline.playground ?? undefined,
+        article: timeline.article,
+        playground: timeline.playground,
         created_at: timeline.created_at,
         updated_at: timeline.updated_at,
         tags: timeline.timeline_tags.map((tt) => tt.tag.name),

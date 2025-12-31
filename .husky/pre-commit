@@ -1,3 +1,7 @@
+# Prevent stale OpenAPI types
+pnpm api generate
+git add packages/api/generated
+
 pnpm test
 
 pnpm lint-staged

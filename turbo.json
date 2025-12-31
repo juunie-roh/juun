@@ -28,7 +28,7 @@
         "NEON_PROJECT_ID"
       ],
       "inputs": ["$TURBO_DEFAULT$"],
-      "outputs": [".next/**", "!.next/cache/**", "out/**"]
+      "outputs": [".next/**", "!.next/cache/**", "out/**", "dist/**"]
     },
     "check-types": {
       "dependsOn": ["^check-types"],

@@ -50,7 +50,7 @@ export async function generateMetadata({
       type: "article",
       title: post.title,
       description: post.description || `Blog post: ${post.title}`,
-      images: post.image,
+      images: post.image ?? undefined,
       siteName: post.title,
       url: `https://juun.vercel.app/blog/${id}`,
     },
