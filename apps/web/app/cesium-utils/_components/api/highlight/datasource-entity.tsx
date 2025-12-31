@@ -10,7 +10,7 @@ import {
   ScreenSpaceEventHandler,
   ScreenSpaceEventType,
 } from "cesium";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -28,10 +28,12 @@ export default function DataSourceEntity() {
   const [width, setWidth] = useState<number>(2);
   const [color, setColor] = useState<string>(Color.RED.toCssColorString());
 
-  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
+  const highlightRef = useRef<Highlight>(null);
 
   useEffect(() => {
     if (!viewer) return;
+
+    highlightRef.current = Highlight.getInstance(viewer);
     // Set GeoJsonDataSource to the viewer on mount
     viewer.dataSources.add(
       GeoJsonDataSource.load("/data/ne_10m_us_states.topojson"),
@@ -51,10 +53,10 @@ export default function DataSourceEntity() {
 
   const onMouseMove = useEffectEvent(
     (movement: ScreenSpaceEventHandler.MotionEvent) => {
-      if (!viewer || !highlight || !isPicking) return;
+      if (!viewer || !highlightRef.current || !isPicking) return;
       const picked = viewer.scene.pick(movement.endPosition);
-      if (!defined(picked)) return highlight.hide();
-      highlight.show(picked, {
+      if (!defined(picked)) return highlightRef.current.hide();
+      highlightRef.current.show(picked, {
         outline,
         width,
         color: Color.fromCssColorString(color),
@@ -71,12 +73,12 @@ export default function DataSourceEntity() {
     }
 
     return () => {
-      highlight?.hide();
+      highlightRef.current?.hide();
       viewer?.screenSpaceEventHandler.removeInputAction(
         ScreenSpaceEventType.MOUSE_MOVE,
       );
     };
-  }, [highlight, viewer, isPicking]);
+  }, [viewer, isPicking]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
@@ -84,7 +86,7 @@ export default function DataSourceEntity() {
         <ColorSelector color={color} setColor={setColor} />
         <Button
           className="grow"
-          disabled={!highlight}
+          disabled={!highlightRef}
           onClick={() => setIsPicking(!isPicking)}
         >
           Mouse Event {isPicking ? "off" : "on"}
