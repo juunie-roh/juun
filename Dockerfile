@@ -23,8 +23,7 @@ FROM base AS deps
 RUN apk update && \
     apk add --no-cache libc6-compat && \
     # Set pnpm
-    corepack enable && \
-    corepack prepare pnpm@latest --activate && \
+    npm install -g pnpm && \
     # Clean up apk cache
     rm -rf /var/cache/apk/*
 
@@ -36,7 +35,6 @@ COPY --chown=nextjs:nodejs packages/config/tailwind/package.json ./packages/conf
 COPY --chown=nextjs:nodejs packages/config/typescript/package.json ./packages/config/typescript/package.json
 COPY --chown=nextjs:nodejs packages/api/package.json ./packages/api/package.json
 COPY --chown=nextjs:nodejs packages/db/package.json ./packages/db/package.json
-COPY --chown=nextjs:nodejs packages/ui/package.json ./packages/ui/package.json
 
 # Copy Prisma schema
 COPY --chown=nextjs:nodejs packages/db/prisma ./packages/db/prisma
