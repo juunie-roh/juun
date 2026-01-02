@@ -232,11 +232,12 @@ export default function TagBasedControl() {
             </TooltipContent>
           </Tooltip>
         </Label>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button
             onClick={() => addBuildings("residential", 5)}
             disabled={!collection}
             size="sm"
+            className="flex-1"
           >
             +5 Residential
           </Button>
@@ -244,6 +245,7 @@ export default function TagBasedControl() {
             onClick={() => addBuildings("commercial", 3)}
             disabled={!collection}
             size="sm"
+            className="flex-1"
           >
             +3 Commercial
           </Button>
@@ -251,6 +253,7 @@ export default function TagBasedControl() {
             onClick={() => addBuildings("industrial", 2)}
             disabled={!collection}
             size="sm"
+            className="flex-1"
           >
             +2 Industrial
           </Button>
@@ -275,20 +278,20 @@ export default function TagBasedControl() {
             </TooltipContent>
           </Tooltip>
         </Label>
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-1 items-center gap-1">
             <span>residential</span>
             <Badge>{stats.residential}</Badge>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-1 items-center gap-1">
             <span>commercial</span>
             <Badge>{stats.commercial}</Badge>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-1 items-center gap-1">
             <span>industrial</span>
             <Badge>{stats.industrial}</Badge>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-1 items-center gap-1">
             <span>total</span>
             <Badge>{stats.total}</Badge>
           </div>
@@ -319,12 +322,13 @@ export default function TagBasedControl() {
             </TooltipContent>
           </Tooltip>
         </Label>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Toggle
             onClick={() => toggleVisibility("residential")}
             disabled={!collection || stats.residential === 0}
             size="sm"
             variant="outline"
+            className="min-w-fit flex-1"
           >
             {visibility.residential ? <Eye /> : <EyeOff />} Residential
           </Toggle>
@@ -333,6 +337,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.commercial === 0}
             size="sm"
             variant="outline"
+            className="min-w-fit flex-1"
           >
             {visibility.commercial ? <Eye /> : <EyeOff />} Commercial
           </Toggle>
@@ -341,6 +346,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.industrial === 0}
             size="sm"
             variant="outline"
+            className="min-w-fit flex-1"
           >
             {visibility.industrial ? <Eye /> : <EyeOff />} Industrial
           </Toggle>
@@ -365,12 +371,13 @@ export default function TagBasedControl() {
             </TooltipContent>
           </Tooltip>
         </Label>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Toggle
             onClick={() => toggleHighlight("residential")}
             disabled={!collection || stats.residential === 0}
             size="sm"
             variant="outline"
+            className="min-w-fit flex-1"
           >
             Residential
           </Toggle>
@@ -379,6 +386,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.commercial === 0}
             size="sm"
             variant="outline"
+            className="min-w-fit flex-1"
           >
             Commercial
           </Toggle>
@@ -387,6 +395,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.industrial === 0}
             size="sm"
             variant="outline"
+            className="min-w-fit flex-1"
           >
             Industrial
           </Toggle>
@@ -410,12 +419,13 @@ export default function TagBasedControl() {
             </TooltipContent>
           </Tooltip>
         </Label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button
             onClick={() => removeByType("residential")}
             disabled={!collection || stats.residential === 0}
             size="sm"
             variant="destructive"
+            className="min-w-fit flex-1"
           >
             <Trash /> Residential
           </Button>
@@ -424,6 +434,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.commercial === 0}
             size="sm"
             variant="destructive"
+            className="min-w-fit flex-1"
           >
             <Trash /> Commercial
           </Button>
@@ -432,6 +443,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.industrial === 0}
             size="sm"
             variant="destructive"
+            className="min-w-fit flex-1"
           >
             <Trash /> Industrial
           </Button>
@@ -440,6 +452,7 @@ export default function TagBasedControl() {
             disabled={!collection || stats.total === 0}
             size="sm"
             variant="destructive"
+            className="min-w-fit flex-1"
           >
             <Trash /> Clear All
           </Button>
