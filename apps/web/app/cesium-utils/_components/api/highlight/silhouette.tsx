@@ -2,35 +2,44 @@
 
 import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import React from "react";
 
 import { useViewer } from "../../../_contexts";
 import ColorSelector from "./color-selector";
 
 export default function Silhouette() {
   const { viewer } = useViewer();
-  const [color, setColor] = useState<string>(
+  const [color, setColor] = React.useState<string>(
     Cesium.Color.RED.toCssColorString(),
   );
-  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
-  const tilesetPromiseRef = useRef(
-    Cesium.Cesium3DTileset.fromIonAssetId(75343),
-  );
+  const highlightRef = React.useRef<Highlight>(null);
 
-  const onMouseMove = useEffectEvent(
+  const addTileset = React.useEffectEvent(async () => {
+    if (!viewer) return;
+    try {
+      const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(75343);
+      viewer.scene.primitives.add(tileset);
+    } catch (e) {
+      console.error(`Error creating tileset: ${e}`);
+    }
+  });
+
+  const onMouseMove = React.useEffectEvent(
     (movement: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
-      if (!viewer || !highlight) return;
+      if (!viewer || !highlightRef.current) return;
       const picked = viewer.scene.pick(movement.endPosition);
-      if (!Cesium.defined(picked)) return highlight.hide();
-      highlight.show(picked, {
+      if (!Cesium.defined(picked)) return highlightRef.current.hide();
+      highlightRef.current.show(picked, {
         color: Cesium.Color.fromCssColorString(color),
       });
     },
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!viewer) return;
-    const tilesetPromise = tilesetPromiseRef.current;
+
+    highlightRef.current = Highlight.getInstance(viewer);
+
     viewer.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
         -74.01881302800248,
@@ -45,18 +54,7 @@ export default function Silhouette() {
       endTransform: Cesium.Matrix4.IDENTITY,
     });
 
-    tilesetPromise
-      .then((tileset) => {
-        if (viewer.scene.primitives.contains(tileset)) {
-          tileset.show = true;
-          return;
-        }
-
-        viewer.scene.primitives.add(tileset);
-      })
-      .catch((error: any) => {
-        console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
-      });
+    addTileset();
 
     viewer.screenSpaceEventHandler.setInputAction(
       onMouseMove,
@@ -67,13 +65,6 @@ export default function Silhouette() {
       viewer?.screenSpaceEventHandler.removeInputAction(
         Cesium.ScreenSpaceEventType.MOUSE_MOVE,
       );
-      tilesetPromise
-        .then((tileset) => {
-          tileset.show = false;
-        })
-        .catch((error: any) => {
-          console.log("🚀 ~ Cesium3DTileset.fromIonAssetId ~ error:", error);
-        });
     };
   }, [viewer]);
 

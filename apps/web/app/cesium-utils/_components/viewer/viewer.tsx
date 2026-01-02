@@ -34,8 +34,9 @@ const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
   ({ bottomContainer = true, flyTo, className, extend, ...props }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const viewerRef = useRef<CesiumViewer | undefined>(undefined);
-    const { setViewer } = useViewer();
+    const { viewer, setViewer } = useViewer();
 
+    // Viewer initialization
     useEffect(() => {
       if (!containerRef.current) return;
 
@@ -88,20 +89,36 @@ const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
         }
       }
 
+      // Cleanup function
+      return () => {
+        if (viewerRef.current && !viewerRef.current.isDestroyed()) {
+          const viewer = viewerRef.current;
+
+          // Stop the automatic render loop to prevent pending callbacks
+          viewer.useDefaultRenderLoop = false;
+
+          try {
+            // Destroy the viewer - it handles all internal cleanup
+            // Try-catch handles Cesium's internal race conditions with pending animation frames
+            viewer.destroy();
+          } catch (error) {
+            // Suppress errors from Cesium's internal timing issues during destruction
+            console.warn("Viewer destruction warning:", error);
+          }
+        }
+        viewerRef.current = undefined;
+        setViewer(undefined);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- props object causes infinite re-renders
+    }, []);
+
+    useEffect(() => {
+      if (!viewer) return;
       // Set initial camera position
       if (flyTo) {
         viewer.camera.flyTo(flyTo);
       }
-
-      // Cleanup function
-      return () => {
-        if (viewerRef.current && !viewerRef.current.isDestroyed()) {
-          viewerRef.current.destroy();
-        }
-        setViewer(undefined);
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps -- props object causes infinite re-renders
-    }, [bottomContainer, flyTo, setViewer, extend]);
+    }, [viewer, flyTo]);
 
     return (
       <div
@@ -118,5 +135,7 @@ const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
     );
   },
 );
+
+Viewer.displayName = "Cesium Viewer Container";
 
 export default Viewer;

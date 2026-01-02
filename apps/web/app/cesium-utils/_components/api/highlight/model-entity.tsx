@@ -2,7 +2,7 @@
 
 import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -19,7 +19,7 @@ export default function ModelEntity() {
   const [width, setWidth] = useState<number>(2);
   const [show, setShow] = useState<boolean>(false);
 
-  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
+  const highlightRef = useRef<Highlight>(null);
 
   const entity = useMemo(() => {
     const position = Cesium.Cartesian3.fromDegrees(
@@ -52,6 +52,8 @@ export default function ModelEntity() {
   useEffect(() => {
     if (!viewer) return;
 
+    highlightRef.current = Highlight.getInstance(viewer);
+
     viewer.entities.add(entity);
     viewer.trackedEntity = entity;
 
@@ -61,13 +63,13 @@ export default function ModelEntity() {
   }, [viewer, entity]);
 
   useEffect(() => {
-    if (!viewer || !highlight) return;
-    if (!show) return highlight.hide();
-    highlight.show(entity, {
+    if (!viewer || !highlightRef.current) return;
+    if (!show) return highlightRef.current.hide();
+    highlightRef.current.show(entity, {
       color: Cesium.Color.fromCssColorString(color),
       width,
     });
-  }, [show, viewer, highlight, color, entity, width]);
+  }, [show, viewer, color, entity, width]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
@@ -91,8 +93,8 @@ export default function ModelEntity() {
           min={1}
           step={1}
           onValueChange={(v) => setWidth(v[0]!)}
-          disabled={!highlight}
-          className={highlight ? "opacity-100" : "opacity-30"}
+          disabled={!viewer}
+          className={viewer ? "opacity-100" : "opacity-30"}
         />
       </div>
     </div>

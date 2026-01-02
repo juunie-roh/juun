@@ -2,7 +2,7 @@
 
 import { Highlight } from "@juun-roh/cesium-utils";
 import * as Cesium from "cesium";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,8 +21,7 @@ export default function PolygonHighlight() {
   const [color, setColor] = useState<string>(
     Cesium.Color.RED.toCssColorString(),
   );
-
-  const highlight = viewer ? Highlight.getInstance(viewer) : undefined;
+  const highlightRef = useRef<Highlight>(null);
 
   const e = useMemo(
     () =>
@@ -58,6 +57,8 @@ export default function PolygonHighlight() {
 
   useEffect(() => {
     if (!viewer) return;
+
+    highlightRef.current = Highlight.getInstance(viewer);
     viewer.entities.add(e);
 
     viewer.zoomTo(e);
@@ -68,14 +69,14 @@ export default function PolygonHighlight() {
   }, [viewer, e]);
 
   useEffect(() => {
-    if (!highlight) return;
-    if (!isShowing) return highlight.hide();
-    highlight.show(e, {
+    if (!highlightRef.current) return;
+    if (!isShowing) return highlightRef.current.hide();
+    highlightRef.current.show(e, {
       color: Cesium.Color.fromCssColorString(color),
       outline,
       width,
     });
-  }, [highlight, e, isShowing, color, outline, width]);
+  }, [e, isShowing, color, outline, width]);
 
   return (
     <div className="flex flex-col gap-2 p-2">
@@ -83,7 +84,7 @@ export default function PolygonHighlight() {
         <ColorSelector color={color} setColor={setColor} />
         <Button
           className="grow"
-          disabled={!highlight}
+          disabled={!viewer}
           onClick={() => setIsShowing(!isShowing)}
         >
           {isShowing ? "hide" : "show"} highlight

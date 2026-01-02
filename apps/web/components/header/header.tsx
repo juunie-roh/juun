@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronsDown, CirclePlay, X } from "lucide-react";
+import { ChevronsDown, CirclePlay, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -139,13 +139,15 @@ export default function Header() {
                     }
                   }}
                 >
-                  {state === undefined || state === "collapsed" ? (
+                  {state === undefined ? (
                     <Image
                       src="/favicon.ico"
                       alt="icon"
                       fill
                       className="p-4 invert transition-all group-hover:scale-110 dark:invert-0"
                     />
+                  ) : state === "collapsed" ? (
+                    <Menu className="size-full transition-all group-hover:scale-110" />
                   ) : (
                     <X className="size-full transition-all group-hover:scale-110" />
                   )}

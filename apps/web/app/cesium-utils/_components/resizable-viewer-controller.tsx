@@ -97,7 +97,6 @@ export default function ResizableViewerController({
       <ResizablePanel defaultSize={70} minSize={40}>
         <div className="size-full">
           <Viewer
-            key={pathname} // refresh the viewer when API changes
             bottomContainer={false}
             animation={false}
             timeline={false}
