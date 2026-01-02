@@ -1,3 +1,6 @@
+import { CircleAlert } from "lucide-react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { CodeBlock } from "@/components/ui/code-block";
 import { Prose } from "@/components/ui/prose";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -14,11 +17,15 @@ export default function CollectionDescription() {
           with a powerful tagging and grouping system. It provides a unified API
           for batch operations, filtering, and event handling.
         </p>
-        <p className="text-sm text-muted-foreground">
-          <b>Note:</b> This wrapper is designed for common use cases. For
-          specific or advanced operations unique to individual collection types,
-          use the native Cesium collection APIs directly.
-        </p>
+        <Alert>
+          <CircleAlert />
+          <AlertTitle>Note</AlertTitle>
+          <AlertDescription>
+            This wrapper is designed for common use cases. For specific or
+            advanced operations unique to individual collection types, use the
+            native Cesium collection APIs directly.
+          </AlertDescription>
+        </Alert>
 
         <h3>Core Problems It Solves</h3>
         <ul>
