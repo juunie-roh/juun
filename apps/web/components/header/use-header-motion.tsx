@@ -110,7 +110,7 @@ export function useHeaderMotion(
     "50%",
     "50%",
   ];
-  const BREADCRUMB_POSITION_ADJUSTMENT = ["0%", "0%", "0%", "0%", "-50%"];
+  // const BREADCRUMB_POSITION_ADJUSTMENT = ["0%", "0%", "0%", "0%", "-50%"];
   const THEME_SWITCH_POSITION_ADJUSTMENT = [
     100 * vw,
     100 * vw,
@@ -233,13 +233,13 @@ export function useHeaderMotion(
       ),
     } satisfies MotionStyle,
 
-    breadcrumb: {
-      translateY: useTransform(
-        progress,
-        ANIMATION_STEP,
-        BREADCRUMB_POSITION_ADJUSTMENT,
-      ),
-    } satisfies MotionStyle,
+    // breadcrumb: {
+    //   translateY: useTransform(
+    //     progress,
+    //     ANIMATION_STEP,
+    //     BREADCRUMB_POSITION_ADJUSTMENT,
+    //   ),
+    // } satisfies MotionStyle,
     theme_switch: {
       translateX: useTransform(
         progress,
