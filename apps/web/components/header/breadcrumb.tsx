@@ -91,7 +91,7 @@ export default function Breadcrumb({
           ) : (
             <BreadcrumbPage className="cursor-default rounded-md bg-background px-1.5 shadow-sm">
               <span className="flex items-center">
-                <Home className="mr-2 -ml-1 size-4" />
+                <Home className="mr-2 -ml-0.5 size-4" />
                 {homeLabel}
               </span>
             </BreadcrumbPage>
