@@ -9,6 +9,7 @@ import { LogoAvatar } from "@/components/ui/logo-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/utils/date";
 import { safeUrl } from "@/utils/security";
+import { capitalize } from "@/utils/string";
 
 export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
   // Prevent XSS (Cross-site scripting)
@@ -63,7 +64,7 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
               {metadata.category && (
                 <div className="flex flex-wrap justify-self-start">
                   <Badge variant="default">
-                    {metadata.category.replaceAll("_", " ")}
+                    {capitalize(metadata.category, /[_]+/g)}
                   </Badge>
                 </div>
               )}

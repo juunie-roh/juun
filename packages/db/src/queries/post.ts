@@ -117,6 +117,7 @@ namespace post {
             orderBy: { tag: { name: "asc" } },
           },
         },
+        orderBy: { created_at: "desc" },
       });
 
       return posts.map((post) => ({
