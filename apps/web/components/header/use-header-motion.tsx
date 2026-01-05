@@ -15,7 +15,7 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 export function useHeaderMotion(
   containerRef?: React.RefObject<HTMLElement | null> | undefined,
 ) {
-  // Match with --spacing-header variable at tailwind global.css, --spacing(18)
+  // Match with --spacing-header variable at tailwind global.css, --spacing(15)
   const HEADER_HEIGHT = 60;
   // --container-7xl
   const CONTAINER_7XL = 1280;
