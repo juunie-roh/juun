@@ -5,10 +5,21 @@ import FourWheel from "@/components/wheel/FourWheel";
 import BaseInnerLayout from "@/layouts/base-inner";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 
+import HeroHome from "./_components/hero-home";
+
 export default function UITestPage() {
   return (
     <HeaderOffsetLayout>
       <main className="relative w-full">
+        <section>
+          <BaseInnerLayout>
+            <h2 className="mb-8 text-3xl font-bold tracking-tighter">
+              Hero Component
+            </h2>
+          </BaseInnerLayout>
+          <HeroHome />
+        </section>
+
         <section>
           <BaseInnerLayout>
             <h2 className="mb-8 text-3xl font-bold tracking-tighter">
@@ -30,6 +41,7 @@ export default function UITestPage() {
             </Marquee>
           </BaseInnerLayout>
         </section>
+
         <section>
           <BaseInnerLayout>
             <h2 className="mb-8 text-3xl font-bold tracking-tighter">
