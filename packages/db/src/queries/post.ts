@@ -1,3 +1,4 @@
+import type { PostCategory } from "@/generated/prisma/enums";
 import type { postModel } from "@/generated/prisma/models";
 
 import { prisma } from "../client";
@@ -10,7 +11,7 @@ export type Post = postModel & {
 namespace post {
   export namespace get {
     /**
-     * Get all posts with tags without contents
+     * Get all posts without contents
      *
      * Posts are ordered by `created_at` descending (newest first)
      */
@@ -47,7 +48,7 @@ namespace post {
       }));
     }
     /**
-     * Get all posts having specific tags
+     * Get all posts having specific tags without contents
      */
     export async function byTags(
       tags: string[],
@@ -92,9 +93,48 @@ namespace post {
         tags: post.post_tags.map((pt) => pt.tag.name),
       }));
     }
+    /**
+     * Get all posts classified with `category` without contents
+     *
+     * @see {@link PostCategory}
+     */
+    export async function byCategory(
+      category: PostCategory,
+    ): Promise<Omit<Post, "content">[]> {
+      const posts = await prisma.post.findMany({
+        where: { category },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          word_count: true,
+          category: true,
+          image: true,
+          created_at: true,
+          updated_at: true,
+          post_tags: {
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
+          },
+        },
+        orderBy: { created_at: "desc" },
+      });
+
+      return posts.map((post) => ({
+        id: post.id,
+        title: post.title,
+        word_count: post.word_count,
+        description: post.description,
+        category: post.category,
+        image: post.image,
+        created_at: post.created_at,
+        updated_at: post.updated_at,
+        tags: post.post_tags.map((pt) => pt.tag.name),
+      }));
+    }
 
     /**
-     * Get a single post by id, including it's content
+     * Get a single post by id, with content, without word count
      */
     export async function byId(
       id: number,

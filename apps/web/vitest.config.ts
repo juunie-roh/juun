@@ -10,19 +10,31 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   test: {
     exclude: ["**/node_modules/**", "**/__e2e__/**"],
-    environment: "jsdom",
     coverage: {
-      include: ["src/**"],
+      include: ["components/**", "lib/**", "utils/**", "hooks/**", "stores/**"],
       exclude: [
+        "**/node_modules/**",
         "**/index.*",
-        "**/__tests__/**",
         "**/*.(test|spec).*",
+        "**/__tests__/**",
         "**/__mocks__/**",
         "**/*.d.ts",
-        "**/__e2e__/**",
+        "**/*.stories.*",
       ],
     },
     projects: [
+      {
+        test: {
+          name: "unit",
+          environment: "jsdom",
+          include: ["**/*.{test,spec}.{ts,tsx}", "**/__tests__/**/*.{ts,tsx}"],
+          exclude: [
+            "**/__e2e__/**",
+            "**/*.stories.{ts,tsx}", // Don't run stories as unit tests
+            "**/node_modules/**",
+          ],
+        },
+      },
       {
         extends: true,
         plugins: [
