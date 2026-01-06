@@ -1,7 +1,6 @@
 "use client";
 
 import { Timeline } from "@juun/db/timeline";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +12,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useRouter } from "@/i18n/navigation";
 import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";

@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { ChevronsDown, CirclePlay, Menu, X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "@/i18n/navigation";
 import MaxWidthLayout from "@/layouts/max-width";
 
 import Breadcrumb from "./breadcrumb";

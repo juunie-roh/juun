@@ -1,8 +1,6 @@
 "use client";
 
 import { Home } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 
 import {
@@ -13,6 +11,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { usePathname } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 
 interface BreadcrumbSegment {
   href: string;

@@ -2,10 +2,11 @@
 
 import { ClockArrowDown, ClockArrowUp } from "lucide-react";
 import type { LinkProps } from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
+import { useRouter } from "@/i18n/navigation";
 
 export default function TimelineOrderButton({
   href,

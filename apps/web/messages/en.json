@@ -34,11 +34,6 @@
       }
     }
   },
-  "common": {
-    "confirm": "확인",
-    "close": "닫기",
-    "cancel": "취소"
-  },
   "blog": {
     "alert": {
       "items": {
@@ -49,7 +44,7 @@
       }
     },
     "card": {
-      "readingTime": "{readingTime, plural, other {#}}분 소요"
+      "readingTime": "{readingTime, plural, =1 {# min} other {# mins}} read"
     }
   }
 }

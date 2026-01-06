@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +9,7 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "@/i18n/navigation";
 import type { Timeline as TimelineItem } from "@/lib/cache";
 import { formatDate } from "@/utils/date";
 import { capitalize } from "@/utils/string";

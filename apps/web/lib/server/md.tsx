@@ -2,7 +2,6 @@ import "server-only";
 
 import matter from "gray-matter";
 import Image from "next/image";
-import Link from "next/link";
 import { type ComponentProps, type ReactElement, Suspense } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import rehypeRaw from "rehype-raw";
@@ -17,6 +16,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CodeBlock } from "@/components/ui/code-block";
 import { Prose } from "@/components/ui/prose";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Link } from "@/i18n/navigation";
 import { safeUrl } from "@/utils/security";
 import { getImageDimensions } from "@/utils/server/image";
 

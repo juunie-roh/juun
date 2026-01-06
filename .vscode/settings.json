@@ -59,6 +59,8 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "i18n-ally.localesPaths": ["apps/web/messages"],
+  "i18n-ally.keystyle": "nested",
   "tailwindCSS.codeLens": true,
   "tailwindCSS.experimental.configFile": "packages/config/tailwind/globals.css",
   "prettier.singleQuote": true,

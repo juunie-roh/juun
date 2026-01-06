@@ -7,10 +7,10 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { usePathname } from "next/navigation";
 import React from "react";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { usePathname } from "@/i18n/navigation";
 
 export function useHeaderMotion(
   containerRef?: React.RefObject<HTMLElement | null> | undefined,
