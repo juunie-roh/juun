@@ -43,39 +43,46 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/blog/yarn-berry",
-        destination: "/blog/1",
+        destination: "/ko/blog/1",
         permanent: true,
       },
       {
         source: "/blog/npm-packages",
-        destination: "/blog/2",
+        destination: "/ko/blog/2",
         permanent: true,
       },
       {
         source: "/blog/docker-image-optimization",
-        destination: "/blog/3",
+        destination: "/ko/blog/3",
         permanent: true,
       },
       {
         source: "/blog/cloud-native",
-        destination: "/blog/4",
+        destination: "/ko/blog/4",
         permanent: true,
       },
       {
         source: "/blog/bundle-optimization",
-        destination: "/blog/5",
+        destination: "/ko/blog/5",
         permanent: true,
       },
       {
         source: "/blog/micro-frontend",
-        destination: "/blog/6",
+        destination: "/ko/blog/6",
         permanent: true,
       },
       {
         source: "/blog/separation-of-concerns",
-        destination: "/blog/7",
+        destination: "/ko/blog/7",
         permanent: true,
       },
+    ];
+  },
+  // rewrite paths with i18n wrapped link for static html pages
+  rewrites() {
+    return [
+      { source: "/ko/100days/:path*", destination: "/100days/:path*" },
+      { source: "/en/100days/:path*", destination: "/100days/:path*" },
     ];
   },
 

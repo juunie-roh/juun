@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { ChevronsDown, CirclePlay, Menu, X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "@/i18n/navigation";
 import MaxWidthLayout from "@/layouts/max-width";
 
 import Breadcrumb from "./breadcrumb";
@@ -205,16 +205,22 @@ export default function Header() {
         </motion.nav>
 
         {/* breadcrumb */}
-        <motion.div
+        {/* <motion.div
           role="navigation"
           aria-label="Breadcrumb"
           className="pointer-events-none relative bottom-0 left-4 w-full"
-          style={motionStyles.breadcrumb}
-        >
-          <MaxWidthLayout>
-            <Breadcrumb className="pointer-events-auto relative w-fit overflow-hidden rounded-full bg-border p-1 transition-all duration-300" />
-          </MaxWidthLayout>
-        </motion.div>
+          // style={motionStyles.breadcrumb}
+        > */}
+        <MaxWidthLayout>
+          <div className="relative ml-4 w-fit">
+            <div
+              role="none"
+              className="absolute left-0 h-1/2 w-full bg-border"
+            />
+            <Breadcrumb className="pointer-events-auto relative flex w-fit items-center rounded-lg bg-border p-1 transition-all duration-300" />
+          </div>
+        </MaxWidthLayout>
+        {/* </motion.div> */}
       </motion.header>
     </div>
   );

@@ -1,8 +1,6 @@
 "use client";
 
 import { Home } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 
 import {
@@ -13,6 +11,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { usePathname } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 
 interface BreadcrumbSegment {
   href: string;
@@ -89,9 +89,9 @@ export default function Breadcrumb({
               </BreadcrumbLink>
             </>
           ) : (
-            <BreadcrumbPage className="m-0 cursor-default rounded-full bg-background px-2">
+            <BreadcrumbPage className="cursor-default rounded-md bg-background px-1.5 shadow-sm">
               <span className="flex items-center">
-                <Home className="mr-2 -ml-1 size-4" />
+                <Home className="mr-2 -ml-0.5 size-4" />
                 {homeLabel}
               </span>
             </BreadcrumbPage>
@@ -104,7 +104,7 @@ export default function Breadcrumb({
 
           return isLast || segment.isCurrent ? (
             <BreadcrumbItem key={segment.href}>
-              <BreadcrumbPage className="cursor-default rounded-full bg-background px-2 shadow-sm">
+              <BreadcrumbPage className="cursor-default rounded-md bg-background px-1.5 shadow-sm">
                 {segment.label}
               </BreadcrumbPage>
             </BreadcrumbItem>

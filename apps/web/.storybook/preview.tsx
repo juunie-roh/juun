@@ -14,8 +14,18 @@ import {
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ThemeProvider from "@/contexts/theme-provider";
 
+import nextIntl from "./next-intl";
+
 const preview: Preview = {
+  initialGlobals: {
+    locale: "en",
+    locales: {
+      en: "English",
+      ko: "한국어",
+    },
+  },
   parameters: {
+    nextIntl,
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
@@ -36,7 +46,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <NextIntlClientProvider locale="ko" messages={{}}>
+      <NextIntlClientProvider locale="en">
         <ThemeProvider>
           <TooltipProvider>
             <div

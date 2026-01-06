@@ -7,16 +7,16 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { usePathname } from "next/navigation";
 import React from "react";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { usePathname } from "@/i18n/navigation";
 
 export function useHeaderMotion(
   containerRef?: React.RefObject<HTMLElement | null> | undefined,
 ) {
-  // Match with --spacing-header variable at tailwind global.css, --spacing(18)
-  const HEADER_HEIGHT = 72;
+  // Match with --spacing-header variable at tailwind global.css, --spacing(15)
+  const HEADER_HEIGHT = 60;
   // --container-7xl
   const CONTAINER_7XL = 1280;
   // Same media query with tailwind "lg:" prefix
@@ -110,7 +110,7 @@ export function useHeaderMotion(
     "50%",
     "50%",
   ];
-  const BREADCRUMB_POSITION_ADJUSTMENT = ["0%", "0%", "0%", "0%", "-50%"];
+  // const BREADCRUMB_POSITION_ADJUSTMENT = ["0%", "0%", "0%", "0%", "-50%"];
   const THEME_SWITCH_POSITION_ADJUSTMENT = [
     100 * vw,
     100 * vw,
@@ -233,13 +233,13 @@ export function useHeaderMotion(
       ),
     } satisfies MotionStyle,
 
-    breadcrumb: {
-      translateY: useTransform(
-        progress,
-        ANIMATION_STEP,
-        BREADCRUMB_POSITION_ADJUSTMENT,
-      ),
-    } satisfies MotionStyle,
+    // breadcrumb: {
+    //   translateY: useTransform(
+    //     progress,
+    //     ANIMATION_STEP,
+    //     BREADCRUMB_POSITION_ADJUSTMENT,
+    //   ),
+    // } satisfies MotionStyle,
     theme_switch: {
       translateX: useTransform(
         progress,

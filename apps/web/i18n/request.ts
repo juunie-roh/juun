@@ -1,19 +1,44 @@
-import type { AbstractIntlMessages } from "next-intl";
+import { type AbstractIntlMessages, Formats, hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 
-import type messages from "@/messages/ko.json";
+import { routing } from "./routing";
 
-declare module "next-intl" {
-  interface AppConfig {
-    Messages: typeof messages;
-  }
-}
+export const formats = {
+  dateTime: {
+    short: {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    },
+    long: {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    },
+  },
+  number: {
+    precise: {
+      maximumFractionDigits: 5,
+    },
+  },
+  list: {
+    enumeration: {
+      style: "long",
+      type: "conjunction",
+    },
+  },
+} satisfies Formats;
 
-export default getRequestConfig(async () => {
-  const locale = "ko";
+export default getRequestConfig(async ({ requestLocale }) => {
+  const requested = await requestLocale;
+  const locale = hasLocale(routing.locales, requested)
+    ? requested
+    : routing.defaultLocale;
+
   return {
     locale,
     messages: (await import(`../messages/${locale}.json`))
       .default as AbstractIntlMessages,
+    formats,
   };
 });

@@ -156,7 +156,7 @@
   --animate-marquee2: marquee-left-2 25s linear infinite;
   --animate-marquee2-reverse: marquee-right-2 25s linear infinite;
   /* Application header height */
-  --spacing-header: --spacing(18);
+  --spacing-header: --spacing(15);
   /* custom font families */
   --font-sans: var(--font-geist-sans), var(--font-rix), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
