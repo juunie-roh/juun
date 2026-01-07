@@ -24,7 +24,7 @@ export default function Header() {
     <div
       ref={containerRef}
       className={
-        isHome ? "h-[200vh] overscroll-contain" : "h-auto overscroll-contain"
+        isHome ? "h-screen overscroll-contain" : "h-auto overscroll-contain"
       }
     >
       <motion.header className="fixed top-0 z-50 w-full" data-state={state}>

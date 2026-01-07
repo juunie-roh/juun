@@ -41,7 +41,7 @@ export default function TimelineDialog({
                 {item.id.toString().padStart(3, "0")}
               </span>
               <time
-                dateTime={item.created_at.toLocaleDateString()}
+                dateTime={new Date(item.created_at).toISOString()}
                 className="font-victor-serif"
               >
                 {formatDate(item.created_at)}

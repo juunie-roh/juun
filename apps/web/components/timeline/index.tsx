@@ -38,7 +38,7 @@ export default function Timeline({ items }: TimelineProps) {
                   className="absolute top-6 -right-2 size-1.5 translate-x-1/2 translate-y-1/2 rounded-full bg-primary ring ring-muted-foreground ring-offset-1"
                 />
               </span>
-              <time dateTime={item.created_at.toLocaleDateString()}>
+              <time dateTime={new Date(item.created_at).toISOString()}>
                 {formatDate(item.created_at)}
               </time>
             </div>

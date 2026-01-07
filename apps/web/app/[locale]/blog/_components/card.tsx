@@ -62,28 +62,25 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
             )}
           </AspectRatio>
 
-          <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-            <div className="flex gap-2">
-              {metadata.category && (
-                <div className="flex flex-wrap justify-self-start">
-                  <Badge variant="default">
-                    {capitalize(metadata.category, /[_]+/g)}
-                  </Badge>
-                </div>
-              )}
+          <div className="relative flex items-center justify-between gap-3 text-xs text-muted-foreground">
+            <div className="flex flex-wrap justify-self-start">
+              <Badge variant="default">
+                {capitalize(metadata.category, /[_]+/g)}
+              </Badge>
+            </div>
+
+            <div className="absolute right-0 flex flex-col items-start">
               <div className="flex items-center gap-1">
+                <Calendar className="size-3" />
+                <time dateTime={new Date(metadata.created_at).toISOString()}>
+                  {f.dateTime(metadata.created_at, "short")}
+                </time>
+              </div>
+              <div className="flex items-center justify-end gap-1">
                 <Clock className="size-3" />
                 <span>{t("readingTime", { readingTime })}</span>
               </div>
             </div>
-            {metadata.updated_at && (
-              <div className="flex items-center gap-1">
-                <Calendar className="size-3" />
-                <time dateTime={metadata.updated_at.toString()}>
-                  {f.dateTime(metadata.updated_at, "short")}
-                </time>
-              </div>
-            )}
           </div>
 
           <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-2xl leading-snug font-bold tracking-tight lg:text-lg">
@@ -111,19 +108,25 @@ export function BlogCardSkeleton() {
           </AspectRatio>
 
           {/* Metadata skeleton */}
-          <div className="flex items-center gap-3 text-xs text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <Skeleton className="size-3" />
-              <Skeleton className="h-3 w-16" />
+          <div className="relative flex items-center justify-between gap-3 text-xs text-muted-foreground">
+            <div className="flex flex-wrap justify-self-start">
+              <Skeleton className="h-5 w-20" />
             </div>
-            <div className="flex items-center gap-1">
-              <Skeleton className="size-3" />
-              <Skeleton className="h-3 w-16" />
+
+            <div className="absolute right-0">
+              <div className="flex items-center gap-1">
+                <Skeleton className="size-3" />
+                <Skeleton className="h-3 w-16" />
+              </div>
+              <div className="flex items-center justify-end gap-1">
+                <Skeleton className="size-3" />
+                <Skeleton className="h-3 w-16" />
+              </div>
             </div>
           </div>
 
           {/* Title skeleton */}
-          <div className="w-full max-w-fit">
+          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-2xl leading-snug font-bold tracking-tight lg:text-lg">
             <Skeleton className="h-6 w-3/4" />
           </div>
 
