@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Bookmark } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Fragment, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -105,6 +106,7 @@ export default function TableOfContents({
   contentSelector = ".prose",
   headingSelector = "h2, h3",
 }: TableOfContentsProps) {
+  const t = useTranslations("components.blog.article.table-of-contents");
   const isLg = useMediaQuery("width > 64rem");
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
@@ -202,7 +204,7 @@ export default function TableOfContents({
         className,
       )}
     >
-      <h4 className="mb-4 px-6 font-medium">JUMP TO SECTION</h4>
+      <h4 className="mb-4 px-6 font-medium">{t("title")}</h4>
       <nav className="max-h-[50vh] overflow-hidden overflow-y-auto px-3">
         {tocContent}
       </nav>

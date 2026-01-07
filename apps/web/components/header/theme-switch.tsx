@@ -1,12 +1,14 @@
 "use client";
 
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 
 export default function ThemeSwitch() {
+  const t = useTranslations("components.header.theme");
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -14,7 +16,7 @@ export default function ThemeSwitch() {
   const segments = React.useMemo(
     () =>
       [
-        { value: "system", icon: Monitor, label: "System" },
+        // { value: "system", icon: Monitor, label: "System" },
         { value: "light", icon: Sun, label: "Light" },
         { value: "dark", icon: Moon, label: "Dark" },
       ] as const,
@@ -42,9 +44,9 @@ export default function ThemeSwitch() {
       <div className="flex h-8 w-auto items-center rounded-full border border-input bg-muted p-0.5">
         <div className="flex gap-0.5">
           {/* Placeholder segments */}
-          <div className="size-7 rounded-full" />
-          <div className="size-7 rounded-full" />
-          <div className="size-7 rounded-full" />
+          {Array(segments.length).map((_v, i) => (
+            <div key={i} className="size-7 rounded-full" />
+          ))}
         </div>
       </div>
     );
@@ -79,7 +81,7 @@ export default function ThemeSwitch() {
                 }, 150);
               }}
               className="relative z-10 size-7 rounded-full p-0 hover:bg-transparent"
-              aria-label={`Switch to ${label} theme`}
+              aria-label={t("aria-label", { label })}
               aria-pressed={isActive}
             >
               <Icon
@@ -89,7 +91,7 @@ export default function ThemeSwitch() {
           );
         })}
       </div>
-      <span className="sr-only">Select theme</span>
+      <span className="sr-only">{t("span")}</span>
     </div>
   );
 }

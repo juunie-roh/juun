@@ -75,7 +75,7 @@ export default function PlaygroundItem({
             {/* Date */}
             <time
               className="flex items-center gap-1 text-sm text-muted-foreground"
-              dateTime={f.dateTime(date, "short")}
+              dateTime={new Date(date).toISOString()}
             >
               <Calendar className="inline-block size-4" />
               {f.dateTime(date, "short")}
