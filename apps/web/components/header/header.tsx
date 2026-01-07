@@ -11,6 +11,7 @@ import { Link } from "@/i18n/navigation";
 import MaxWidthLayout from "@/layouts/max-width";
 
 import Breadcrumb from "./breadcrumb";
+import I18nButton from "./i18n-button";
 import ThemeSwitch from "./theme-switch";
 import { useHeaderMotion } from "./use-header-motion";
 
@@ -157,10 +158,11 @@ export default function Header() {
               {/* theme switch */}
               <motion.div
                 role="region"
-                aria-label="Theme controls"
-                className="absolute top-1/2 right-4 -translate-y-1/2"
+                aria-label="Controllers"
+                className="absolute top-1/2 right-4 flex -translate-y-1/2 items-center gap-2"
                 style={motionStyles.theme_switch}
               >
+                <I18nButton />
                 <ThemeSwitch />
               </motion.div>
               <motion.div

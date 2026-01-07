@@ -39,17 +39,35 @@
     "close": "닫기",
     "cancel": "취소"
   },
-  "blog": {
-    "alert": {
-      "items": {
-        "notFound": {
-          "title": "",
-          "description": ""
+  "components": {
+    "blog": {
+      "alert": {
+        "items": {
+          "notFound": {
+            "title": "",
+            "description": ""
+          }
         }
+      },
+      "article": {
+        "table-of-contents": {
+          "title": "목차 바로가기"
+        }
+      },
+      "card": {
+        "readingTime": "{readingTime, plural, other {#}}분 소요"
       }
     },
-    "card": {
-      "readingTime": "{readingTime, plural, other {#}}분 소요"
+    "header": {
+      "i18n": {
+        "aria-label": "Switch locale to English",
+        "span": "언어 설정 변경"
+      },
+      "theme": {
+        "aria-label": "{label} 테마로 변경",
+        "span": "테마 선택"
+      }
     }
   }
+  
 }

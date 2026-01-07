@@ -13,7 +13,7 @@ import { capitalize } from "@/utils/string";
 
 export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
   const f = useFormatter();
-  const t = useTranslations("blog.card");
+  const t = useTranslations("components.blog.card");
 
   // Prevent XSS (Cross-site scripting)
   const url = safeUrl(`/blog/${metadata.id}`);
@@ -86,7 +86,7 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
             )}
           </div>
 
-          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-lg leading-snug font-bold tracking-tight">
+          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-2xl leading-snug font-bold tracking-tight lg:text-lg">
             {metadata.title}
           </div>
 
