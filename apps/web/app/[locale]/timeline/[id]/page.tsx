@@ -8,6 +8,65 @@ import { Prose } from "@/components/ui/prose";
 import { Link } from "@/i18n/navigation";
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
+import {
+  getCanonicalUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
+
+export async function generateStaticParams() {
+  const items = await cache.timeline.get.all();
+
+  return items.map((item) => ({
+    id: item.id.toString(),
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const item = await cache.timeline.get.byId(Number(id));
+
+  if (!item) return {} satisfies Metadata;
+
+  const path = `/timeline/${id}`;
+  const { title, description, tags, category, created_at, updated_at } = item;
+  const canonicalUrl = await getCanonicalUrl(path);
+
+  return {
+    alternates: {
+      canonical: canonicalUrl,
+      languages: getLanguageAlternates(path),
+    },
+
+    title,
+    description,
+    keywords: tags,
+    authors: [{ name: "Juun", url: "https://juun.vercel.app" }],
+
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      siteName: "Juun's Playground",
+      url: canonicalUrl,
+      tags,
+
+      publishedTime: created_at.toISOString(),
+      modifiedTime: updated_at.toISOString(),
+      authors: ["Juun Roh"],
+      section: category,
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  } satisfies Metadata;
+}
 
 export default async function TimelineDetailPage({
   params,
@@ -35,42 +94,14 @@ export default async function TimelineDetailPage({
       <header className="mb-8">
         <h1 className="mb-2 text-4xl font-bold">{item.title}</h1>
         <p className="text-muted-foreground">
-          {item.category} • {f.dateTime(item.created_at, "long")}
+          {item.category} •{" "}
+          <time dateTime={item.created_at.toISOString()}>
+            {f.dateTime(item.created_at, "long")}
+          </time>
         </p>
       </header>
 
       <Prose>{md.render(parsed)}</Prose>
     </article>
   );
-}
-
-export async function generateStaticParams() {
-  return (await cache.timeline.get.all()).map((item) => ({
-    id: item.id.toString(),
-  }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}): Promise<Metadata> {
-  const { id } = await params;
-  const item = await cache.timeline.get.byId(Number(id));
-
-  if (!item) return {} satisfies Metadata;
-
-  return {
-    title: item.title,
-    description: item.description,
-    keywords: item.tags,
-    openGraph: {
-      type: "article",
-      title: item.title,
-      description: item.description,
-      siteName: `Juun - Timeline Detail`,
-      images: ["/images/juun.png"],
-      url: `https://juun.vercel.app/timeline/${item.id}`,
-    },
-  } satisfies Metadata;
 }
