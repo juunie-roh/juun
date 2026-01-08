@@ -5,10 +5,13 @@ import { getFormatter, getLocale } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
 import { Prose } from "@/components/ui/prose";
-import { BASE_URL } from "@/constants";
 import { Link } from "@/i18n/navigation";
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
+import {
+  getCanonicalUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
 
 export async function generateStaticParams() {
   const items = await cache.timeline.get.all();
@@ -23,17 +26,20 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const locale = await getLocale();
   const { id } = await params;
   const item = await cache.timeline.get.byId(Number(id));
 
   if (!item) return {} satisfies Metadata;
 
+  const path = `/timeline/${id}`;
   const { title, description, tags, category, created_at, updated_at } = item;
-  const url = `${BASE_URL}/${locale}/timeline/${id}`;
+  const canonicalUrl = await getCanonicalUrl(path);
 
   return {
-    alternates: { canonical: url },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: getLanguageAlternates(path),
+    },
 
     title,
     description,
@@ -45,7 +51,7 @@ export async function generateMetadata({
       title,
       description,
       siteName: "Juun's Playground",
-      url,
+      url: canonicalUrl,
       tags,
 
       publishedTime: created_at.toISOString(),

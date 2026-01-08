@@ -1,16 +1,24 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
-import { BASE_URL } from "@/constants";
 import HeaderOffsetLayout from "@/layouts/header-offset";
+import {
+  BASE_URL,
+  getCanonicalUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
 
 export async function generateMetadata() {
-  const locale = await getLocale();
   const t = await getTranslations("metadata./blog");
-  const url = `${BASE_URL}/${locale}/blog`;
+
+  const path = "/blog";
+  const canonicalUrl = await getCanonicalUrl(path);
 
   const metadata: Metadata = {
-    alternates: { canonical: url },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: getLanguageAlternates(path),
+    },
 
     title: t("title"),
     description: t("description"),
@@ -18,7 +26,7 @@ export async function generateMetadata() {
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url,
+      url: canonicalUrl,
     },
 
     twitter: {

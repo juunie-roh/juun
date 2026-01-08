@@ -1,10 +1,13 @@
 import { Metadata } from "next";
-import { getLocale } from "next-intl/server";
 
 import { ScrollProgressBar } from "@/components/ui/scroll-progress-bar";
-import { BASE_URL } from "@/constants";
 import BaseInnerLayout from "@/layouts/base-inner";
 import cache from "@/lib/cache";
+import {
+  BASE_URL,
+  getCanonicalUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
@@ -20,7 +23,6 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const locale = await getLocale();
   // Ensure params to be resolved
   const { id } = await params;
   // Get all posts
@@ -35,13 +37,17 @@ export async function generateMetadata({
     };
   }
 
+  const path = `/blog/${id}`;
   const { title, description, category, image, tags, created_at, updated_at } =
     post;
-  const url = `${BASE_URL}/${locale}/blog/${id}`;
+  const canonicalUrl = await getCanonicalUrl(path);
 
   // Return metadata based on the post's metadata
   return {
-    alternates: { canonical: url },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: getLanguageAlternates(path),
+    },
 
     title,
     description: description || `Blog post: ${title}`,
@@ -63,7 +69,7 @@ export async function generateMetadata({
           ]
         : undefined,
       siteName: "Juun's Playground",
-      url,
+      url: canonicalUrl,
       tags,
 
       publishedTime: created_at.toISOString(),

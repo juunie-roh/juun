@@ -1,23 +1,30 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
-import { BASE_URL } from "@/constants";
 import BaseInnerLayout from "@/layouts/base-inner";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
 import md from "@/lib/server/md";
+import {
+  BASE_URL,
+  getCanonicalUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
 
 import PlaygroundItem from "./_components/item";
 import { PLAYGROUND_ITEMS } from "./_data";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
   const t = await getTranslations("metadata./playground");
 
-  const url = `${BASE_URL}/${locale}/playground`;
+  const path = "/playground";
+  const canonicalUrl = await getCanonicalUrl(path);
 
   return {
-    alternates: { canonical: url },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: getLanguageAlternates(path),
+    },
 
     title: t("title"),
     description: t("description"),
@@ -25,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url,
+      url: canonicalUrl,
       images: [`${BASE_URL}/images/juun.png`],
     },
 

@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 
 import {
@@ -21,27 +21,26 @@ import {
 import Header from "@/components/header";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { BASE_URL } from "@/constants";
 import ThemeProvider from "@/contexts/theme-provider";
 import { routing } from "@/i18n/routing";
+import {
+  BASE_URL,
+  getCanonicalUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
   const t = await getTranslations("metadata./");
+  const canonicalUrl = await getCanonicalUrl();
   const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
     alternates: {
-      canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        ...Object.fromEntries(
-          routing.locales.map((locale) => [locale, `${BASE_URL}/${locale}`]),
-        ),
-        "x-default": `${BASE_URL}/${routing.defaultLocale}`,
-      },
+      canonical: canonicalUrl,
+      languages: getLanguageAlternates(),
     },
 
     title: { template: t("title.template"), default: t("title.default") },
@@ -68,7 +67,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: t("description"),
       siteName: t("openGraph.siteName"),
       images: [`${BASE_URL}/images/juun.png`],
-      url: `${BASE_URL}/${locale}`,
+      url: canonicalUrl,
     },
 
     twitter: {
