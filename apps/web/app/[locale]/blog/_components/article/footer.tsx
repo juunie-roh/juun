@@ -29,7 +29,7 @@ export default function BlogFooter({
             <span className="block pt-3 text-lg">Date</span>
             <time
               className="text-sm"
-              dateTime={f.dateTime(metadata.updated_at, "long")}
+              dateTime={new Date(metadata.updated_at).toISOString()}
             >
               {f.dateTime(metadata.updated_at, "long")}
             </time>
