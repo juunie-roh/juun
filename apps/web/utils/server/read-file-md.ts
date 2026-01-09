@@ -1,11 +1,11 @@
 import "server-only";
 
 import fs from "fs";
+import { getFormatter } from "next-intl/server";
 import path from "path";
 
 import type { BaseMetadata, Post } from "@/types/post.types";
-import { sortPostsByDate } from "@/utils/compare";
-import { parseDate } from "@/utils/date";
+import { compare } from "@/utils/compare";
 
 /**
  * Extract common metadata properties from a file
@@ -14,10 +14,11 @@ import { parseDate } from "@/utils/date";
  * @param additionalExtractors Optional functions to extract additional metadata
  * @returns Metadata object
  */
-export function extractBaseMetadata<T extends BaseMetadata>(
+export async function extractBaseMetadata<T extends BaseMetadata>(
   filePath: string,
   additionalExtractors?: (content: string, metadata: T) => void,
-): T {
+): Promise<T> {
+  const f = await getFormatter();
   try {
     const content = fs.readFileSync(filePath, "utf8");
 
@@ -47,7 +48,7 @@ export function extractBaseMetadata<T extends BaseMetadata>(
     // Look for date and parse it to a Date object
     const dateMatch = content.match(/date:\s*['"`](.+?)['"`]/);
     if (dateMatch && dateMatch[1]) {
-      const parsedDate = parseDate(dateMatch[1]);
+      const parsedDate = f.dateTime(new Date(dateMatch[1]));
       if (parsedDate) {
         metadata.date = parsedDate;
       } else {
@@ -128,7 +129,11 @@ export function getPostsFromDirectory<T extends BaseMetadata>(
     });
 
     // Sort posts by date
-    return sortPostsByDate(posts, sortDescending);
+    return posts.toSorted((a, b) =>
+      sortDescending
+        ? compare(b.metadata.date, a.metadata.date)
+        : compare(a.metadata.date, b.metadata.date),
+    );
   } catch (error: any) {
     console.error(`Error reading posts: ${error.message}`);
     return [];

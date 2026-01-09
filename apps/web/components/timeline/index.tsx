@@ -1,3 +1,5 @@
+import { getFormatter } from "next-intl/server";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +13,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Link } from "@/i18n/navigation";
 import type { Timeline as TimelineItem } from "@/lib/cache";
-import { formatDate } from "@/utils/date";
 import { capitalize } from "@/utils/string";
 
 import TimelineTags from "./tag";
@@ -20,7 +21,9 @@ interface TimelineProps {
   items: Omit<TimelineItem, "detail">[];
 }
 
-export default function Timeline({ items }: TimelineProps) {
+export default async function Timeline({ items }: TimelineProps) {
+  const f = await getFormatter({ locale: "en" });
+
   return (
     <ol>
       {items.map((item) => (
@@ -39,7 +42,10 @@ export default function Timeline({ items }: TimelineProps) {
                 />
               </span>
               <time dateTime={new Date(item.created_at).toISOString()}>
-                {formatDate(item.created_at)}
+                {f.dateTime(item.created_at, {
+                  month: "short",
+                  year: "numeric",
+                })}
               </time>
             </div>
             <Button variant="link" size="sm" className="h-fit" asChild>

@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "@/i18n/navigation";
-import { formatDate } from "@/utils/date";
 
 import TimelineTags from "./tag";
 
@@ -44,7 +43,11 @@ export default function TimelineDialog({
                 dateTime={new Date(item.created_at).toISOString()}
                 className="font-victor-serif"
               >
-                {formatDate(item.created_at)}
+                {/* Fix date time format with "en" locale */}
+                {new Intl.DateTimeFormat("en", {
+                  month: "short",
+                  year: "numeric",
+                }).format(new Date(item.created_at))}
               </time>
             </div>
           </aside>
