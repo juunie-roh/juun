@@ -1,9 +1,12 @@
 /**
  * Compares two values for use in Array.sort()
+ *
  * Returns:
  * - negative number if a < b
  * - 0 if a equals b
  * - positive number if a > b
+ *
+ * @template T compare value type
  *
  * @param a First value to compare
  * @param b Second value to compare
@@ -88,53 +91,3 @@ export const compareBy = <T>(key: keyof T, descending = false) => {
     return descending ? -result : result;
   };
 };
-
-/**
- * Sorts a collection of posts by date
- *
- * @param posts Array of posts to sort
- * @param descending If true, returns newest posts first (default)
- * @returns Sorted array of posts
- */
-export function sortPostsByDate<
-  T extends { metadata: { date?: Date | string | null | undefined } },
->(posts: T[], descending = true): T[] {
-  return [...posts].sort((a, b) => {
-    const timestampA = getTimestamp(a.metadata.date);
-    const timestampB = getTimestamp(b.metadata.date);
-
-    // If both posts have valid timestamps, compare them
-    if (timestampA !== null && timestampB !== null) {
-      return descending
-        ? timestampB - timestampA // Newest first
-        : timestampA - timestampB; // Oldest first
-    }
-
-    // Posts without dates should be sorted last, regardless of sort direction
-    if (timestampA === null && timestampB !== null) return 1;
-    if (timestampA !== null && timestampB === null) return -1;
-
-    // If neither has a date, maintain original order
-    return 0;
-  });
-}
-
-/**
- * Helper to get timestamp from various date formats
- * @param date Date object, string date, or null/undefined
- * @returns timestamp number or null
- */
-function getTimestamp(date: Date | string | null | undefined): number | null {
-  if (!date) return null;
-
-  if (date instanceof Date) {
-    return date.getTime();
-  }
-
-  if (typeof date === "string") {
-    const parsed = new Date(date);
-    return isNaN(parsed.getTime()) ? null : parsed.getTime();
-  }
-
-  return null;
-}
