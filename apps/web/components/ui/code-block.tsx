@@ -3,6 +3,7 @@
 import { Copy } from "lucide-react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
+import diff from "react-syntax-highlighter/dist/esm/languages/prism/diff";
 import docker from "react-syntax-highlighter/dist/esm/languages/prism/docker";
 import ignore from "react-syntax-highlighter/dist/esm/languages/prism/ignore";
 import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
@@ -30,6 +31,7 @@ SyntaxHighlighter.registerLanguage("docker", docker);
 SyntaxHighlighter.registerLanguage("yaml", yaml);
 SyntaxHighlighter.registerLanguage("ignore", ignore);
 SyntaxHighlighter.registerLanguage("pure", pure);
+SyntaxHighlighter.registerLanguage("diff", diff);
 
 /**
  * @see {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD AVAILABLE_LANGUAGES_PRISM}
@@ -44,7 +46,8 @@ type SupportedLanguage =
   | "docker"
   | "yaml"
   | "ignore"
-  | "pure"; // monospaced plain text
+  | "pure" // monospaced plain text
+  | "diff";
 
 const languageMap: Record<string, SupportedLanguage> = {
   ts: "typescript",
@@ -63,6 +66,7 @@ const languageMap: Record<string, SupportedLanguage> = {
   gitignore: "ignore",
   gitattributes: "pure",
   text: "pure",
+  diff: "diff",
 };
 
 interface CodeBlockProps {
