@@ -162,8 +162,8 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-  --font-stabil-grotesk: var(--font-stabil-grotesk-trial);
-  --font-victor-serif: var(--font-victor-serif-trial);
+  --font-stabil-grotesk: var(--font-stabil-grotesk-trial), var(--font-sans);
+  --font-victor-serif: var(--font-victor-serif-trial), var(--font-sans);
 }
 
 @layer base {

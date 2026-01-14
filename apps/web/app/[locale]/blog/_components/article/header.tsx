@@ -17,10 +17,10 @@ export default function BlogHeader({
     <header className="mx-auto grid grid-cols-responsive place-items-center gap-x-responsive pt-8">
       <div className="col-span-full pt-18 pb-10 lg:col-span-12 lg:col-start-3">
         <div className="flex flex-col gap-2 text-center">
-          <h1 className="font-(family-name:--font-stabil-grotesk-trial,--font-rix) text-4xl font-bold tracking-tight lg:col-span-8">
+          <h1 className="font-stabil-grotesk text-4xl font-bold tracking-tight lg:col-span-8">
             {metadata.title}
           </h1>
-          <p className="font-(family-name:--font-geist-sans) text-sm lg:col-span-full">
+          <p className="font-sans text-sm lg:col-span-full">
             {metadata.description}
           </p>
         </div>

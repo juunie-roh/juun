@@ -4,11 +4,12 @@ import type { Preview } from "@storybook/nextjs-vite";
 import { NextIntlClientProvider } from "next-intl";
 
 import {
-  antonio,
+  attilaSansSharpTrial,
   geistMono,
   geistSans,
   rix,
   stabilGroteskTrial,
+  victorNarrowTrial,
   victorSerifTrial,
 } from "@/assets/fonts";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -50,7 +51,7 @@ const preview: Preview = {
         <ThemeProvider>
           <TooltipProvider>
             <div
-              className={`${geistSans.variable} ${geistMono.variable} ${antonio.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased`}
+              className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
             >
               <Story />
             </div>

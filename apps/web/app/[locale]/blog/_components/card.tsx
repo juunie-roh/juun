@@ -40,10 +40,7 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
   );
 
   return (
-    <Link
-      href={url}
-      className="group block size-full font-(family-name:--font-geist-sans,--font-rix)"
-    >
+    <Link href={url} className="group block size-full font-sans">
       <div className="relative w-full">
         <div className="grid w-full grid-cols-1 gap-4">
           <AspectRatio
@@ -83,7 +80,7 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
             </div>
           </div>
 
-          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-2xl leading-snug font-bold tracking-tight lg:text-lg">
+          <div className="w-full max-w-fit font-stabil-grotesk text-2xl leading-snug font-bold tracking-tight lg:text-lg">
             {metadata.title}
           </div>
 
@@ -126,7 +123,7 @@ export function BlogCardSkeleton() {
           </div>
 
           {/* Title skeleton */}
-          <div className="font(font-family:--font-stabil-grotesk-trial) w-full max-w-fit text-2xl leading-snug font-bold tracking-tight lg:text-lg">
+          <div className="w-full max-w-fit font-stabil-grotesk text-2xl leading-snug font-bold tracking-tight lg:text-lg">
             <Skeleton className="h-6 w-3/4" />
           </div>
 
