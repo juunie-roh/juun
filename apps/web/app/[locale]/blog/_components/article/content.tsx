@@ -32,7 +32,7 @@ export default function BlogContent({
           <TableOfContents className="col-span-full" />
         </nav>
         <div className="col-span-full grid w-full grid-cols-subgrid md:col-start-3 lg:col-start-5 lg:row-start-1">
-          <Prose className="col-span-full mt-8 font-(family-name:--font-geist-sans,--font-geist-mono,--font-rix) md:col-span-8">
+          <Prose className="col-span-full mt-8 font-sans md:col-span-8">
             {children}
           </Prose>
         </div>
