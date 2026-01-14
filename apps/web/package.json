@@ -7,7 +7,6 @@
   "scripts": {
     "analyze": "ANALYZE=true next build",
     "build": "next build",
-    "postbuild": "next-sitemap",
     "build:standalone": "next build && node scripts/post-build.js",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
     "dev": "next dev",
@@ -137,7 +136,6 @@
     "eslint-plugin-storybook": "^10.1.11",
     "eslint-plugin-testing-library": "^7.15.4",
     "jsdom": "^27.4.0",
-    "next-sitemap": "^4.2.3",
     "storybook": "^10.1.11",
     "storybook-next-intl": "^10.0.1",
     "ts-node": "^10.9.2",
