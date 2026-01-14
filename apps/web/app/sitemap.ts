@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { routing } from "@/i18n/routing";
 import cache from "@/lib/cache";
 import { BASE_URL, getLanguageAlternates } from "@/utils/server/metadata";
 
@@ -10,14 +11,16 @@ type SitemapEntry = MetadataRoute.Sitemap[number];
 
 /**
  * Create a sitemap entry with language alternates
+ * Uses the default locale for the canonical <loc> URL
  */
 function createEntry(
   path: string,
   lastModified?: Date,
   options?: Partial<SitemapEntry>,
 ): SitemapEntry {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return {
-    url: `${BASE_URL}${path}`,
+    url: `${BASE_URL}/${routing.defaultLocale}${normalizedPath === "/" ? "" : normalizedPath}`,
     lastModified: lastModified ?? new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
