@@ -76,7 +76,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
-    "framer-motion": "^12.25.0",
+    "framer-motion": "^12.26.2",
     "gray-matter": "^4.0.3",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "input-otp": "^1.4.2",
@@ -88,7 +88,7 @@
     "react": "^19.2.3",
     "react-day-picker": "^9.13.0",
     "react-dom": "^19.2.3",
-    "react-hook-form": "^7.71.0",
+    "react-hook-form": "^7.71.1",
     "react-resizable-panels": "^3.0.6",
     "react-syntax-highlighter": "^16.1.0",
     "recharts": "2.15.4",
@@ -106,7 +106,7 @@
     "vaul": "^1.1.2",
     "webpack": "^5.104.1",
     "zod": "^4.3.5",
-    "zustand": "^5.0.9"
+    "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
@@ -122,14 +122,14 @@
     "@svgr/webpack": "^8.1.0",
     "@testing-library/dom": "^10.4.1",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
-    "@types/node": "^25.0.6",
+    "@types/node": "^25.0.8",
     "@types/probe-image-size": "^7.2.5",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/three": "^0.182.0",
-    "@vitest/browser-playwright": "^4.0.16",
-    "@vitest/coverage-v8": "^4.0.16",
+    "@vitest/browser-playwright": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.17",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
@@ -142,6 +142,6 @@
     "storybook-next-intl": "^10.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.17"
   }
 }
