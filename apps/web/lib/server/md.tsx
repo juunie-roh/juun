@@ -48,7 +48,7 @@ namespace md {
             href={safeHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline-offset-3"
+            className="underline-offset-2"
             {...props}
           >
             {children}
@@ -58,7 +58,7 @@ namespace md {
 
       // Internal links use Next.js Link for client-side navigation
       return (
-        <Link href={safeHref} className="underline-offset-3" {...props}>
+        <Link href={safeHref} className="underline-offset-2" {...props}>
           {children}
         </Link>
       );

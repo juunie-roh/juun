@@ -1,3 +1,4 @@
+import { Noto_Sans_KR } from "next/font/google";
 import localFont from "next/font/local";
 
 export const geistSans = localFont({
@@ -12,16 +13,15 @@ export const geistMono = localFont({
   weight: "100 900",
 });
 
+export const notoSansKR = Noto_Sans_KR({
+  weight: "variable",
+  variable: "--font-noto-sans-kr",
+  subsets: ["latin"], // Korean loaded dynamically via unicode-range
+});
+
 export const attilaSansSharpTrial = localFont({
   src: "AttilaSansSharpTrial-Medium.otf",
   variable: "--font-attila-sans-sharp-trial",
-  weight: "500",
-});
-
-export const rix = localFont({
-  src: "RixM.ttf",
-  style: "normal",
-  variable: "--font-rix",
   weight: "500",
 });
 

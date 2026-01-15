@@ -7,7 +7,7 @@ import {
   attilaSansSharpTrial,
   geistMono,
   geistSans,
-  rix,
+  notoSansKR,
   stabilGroteskTrial,
   victorNarrowTrial,
   victorSerifTrial,
@@ -51,7 +51,7 @@ const preview: Preview = {
         <ThemeProvider>
           <TooltipProvider>
             <div
-              className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
+              className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
             >
               <Story />
             </div>
