@@ -11,7 +11,7 @@ import {
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
-  const posts = await cache.post.get.all();
+  const posts = await cache.post.select.all();
   return posts.map((post) => ({
     id: post.id.toString(),
   }));
@@ -26,7 +26,7 @@ export async function generateMetadata({
   // Ensure params to be resolved
   const { id } = await params;
   // Get all posts
-  const posts = await cache.post.get.all();
+  const posts = await cache.post.select.all();
   // Find the specific post by slug
   const post = posts.find((post) => post.id === Number(id));
   // If post not found, return basic metadata

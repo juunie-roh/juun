@@ -12,7 +12,7 @@ import {
   attilaSansSharpTrial,
   geistMono,
   geistSans,
-  rix,
+  notoSansKR,
   stabilGroteskTrial,
   victorNarrowTrial,
   victorSerifTrial,
@@ -123,7 +123,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${rix.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
     >
       <body>
         <ThemeProvider>

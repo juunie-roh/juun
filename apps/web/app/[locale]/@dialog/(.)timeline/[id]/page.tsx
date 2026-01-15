@@ -6,7 +6,7 @@ import cache from "@/lib/cache";
 import md from "@/lib/server/md";
 
 export async function generateStaticParams() {
-  return (await cache.timeline.get.all()).map((item) => ({
+  return (await cache.timeline.select.all()).map((item) => ({
     id: item.id.toString(),
   }));
 }
@@ -17,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const item = await cache.timeline.get.byId(Number(id));
+  const item = await cache.timeline.select.byId(Number(id));
 
   if (!item) return {} satisfies Metadata;
 
@@ -42,7 +42,7 @@ export default async function HomeTimelineDialog({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const item = await cache.timeline.get.byId(Number(id));
+  const item = await cache.timeline.select.byId(Number(id));
 
   if (!item?.detail) notFound();
 

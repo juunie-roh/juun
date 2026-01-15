@@ -8,8 +8,10 @@ export type Post = postModel & {
   tags: string[];
 };
 
+export type Input = Omit<Post, "created_at" | "updated_at" | "id">;
+
 namespace post {
-  export namespace get {
+  export namespace select {
     /**
      * Get all posts without contents
      *
@@ -170,6 +172,79 @@ namespace post {
         updated_at: post.updated_at,
         tags: post.post_tags.map((pt) => pt.tag.name),
       };
+    }
+  }
+
+  export namespace create {
+    /**
+     * Create a new post with tags
+     *
+     * Tags are created if they don't exist (connectOrCreate pattern)
+     * Word count is automatically calculated from content
+     */
+    export async function one(input: Input): Promise<Post> {
+      const { title, description, content, category, image, tags } = input;
+      const word_count = calculateWordCount(content);
+
+      const post = await prisma.post.create({
+        data: {
+          title,
+          description,
+          content,
+          word_count,
+          category,
+          image,
+          post_tags: {
+            create: tags.map((tagName) => ({
+              tag: {
+                connectOrCreate: {
+                  where: { name: tagName },
+                  create: { name: tagName },
+                },
+              },
+            })),
+          },
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          content: true,
+          word_count: true,
+          category: true,
+          image: true,
+          created_at: true,
+          updated_at: true,
+          post_tags: {
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
+          },
+        },
+      });
+
+      return {
+        id: post.id,
+        title: post.title,
+        description: post.description,
+        content: post.content,
+        word_count: post.word_count,
+        category: post.category,
+        image: post.image,
+        created_at: post.created_at,
+        updated_at: post.updated_at,
+        tags: post.post_tags.map((pt) => pt.tag.name),
+      };
+    }
+
+    /**
+     * Calculate word count from content
+     * Counts words separated by whitespace, handling both English and Korean text
+     */
+    function calculateWordCount(content: string): number {
+      return content
+        .replace(/[^\p{L}\p{N}\s]/gu, "") // Remove non-letter, non-number characters
+        .split(/\s+/)
+        .filter((word) => word.length > 0).length;
     }
   }
 }

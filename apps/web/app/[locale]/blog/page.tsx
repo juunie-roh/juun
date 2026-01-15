@@ -8,7 +8,7 @@ import BlogItemsNotFoundAlert from "./_components/alert/items-not-found";
 import { BlogCard, BlogCardSkeleton } from "./_components/card";
 
 export default async function Blog() {
-  const posts = await cache.post.get.all();
+  const posts = await cache.post.select.all();
 
   return (
     <MaxWidthLayout>

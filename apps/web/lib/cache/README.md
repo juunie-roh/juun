@@ -35,13 +35,13 @@ Both `@juun/db` and `@/lib/cache` follow the same namespace pattern:
 ```typescript
 // @juun/db structure
 import post from "@juun/db/post";
-await post.get.all();
-await post.get.byId(1);
+await post.select.all();
+await post.select.byId(1);
 
 // @/lib/cache structure (same API!)
 import cache from "@/lib/cache";
-await cache.post.get.all();      // Cached version
-await cache.post.get.byId(1);    // Cached version
+await cache.post.select.all();      // Cached version
+await cache.post.select.byId(1);    // Cached version
 await cache.post.revalidate();   // Cache invalidation
 ```
 
@@ -53,10 +53,10 @@ await cache.post.revalidate();   // Cache invalidation
 import cache from "@/lib/cache";
 
 // Get all posts (cached for 1 hour)
-const posts = await cache.post.get.all();
+const posts = await cache.post.select.all();
 
 // Get post by id (cached for 1 hour)
-const post = await cache.post.get.byId(1);
+const post = await cache.post.select.byId(1);
 
 if (!post) {
   notFound();
@@ -95,14 +95,14 @@ export async function all() {
   "use cache";
   cacheLife("hours");
   cacheTag("{entities}");
-  return await entityQuery.get.all();
+  return await entityQuery.select.all();
 }
 
 export async function byId(id: number) {
   "use cache";
   cacheLife("hours");
   cacheTag("{entities}", `{entity}-${id}`);
-  return await entityQuery.get.byId(id);
+  return await entityQuery.select.byId(id);
 }
 ```
 
@@ -140,8 +140,8 @@ export default { post, timeline, {entity} };
 ```typescript
 import cache from "@/lib/cache";
 
-const entities = await cache.{entity}.get.all();
-const entity = await cache.{entity}.get.byId(1);
+const entities = await cache.{entity}.select.all();
+const entity = await cache.{entity}.select.byId(1);
 await cache.{entity}.revalidate();
 ```
 
@@ -211,7 +211,7 @@ export async function byId(id: number) {
   "use cache";
   cacheLife("hours");
   cacheTag("posts", `post-${id}`);  // Multiple tags for granular control
-  return await postQuery.get.byId(id);
+  return await postQuery.select.byId(id);
 }
 
 // Invalidate specific post
@@ -230,8 +230,8 @@ import db from "@juun/db/post";
 
 export const getPost = async (id: number, useCache = true) =>
   useCache
-    ? await cache.post.get.byId(id)
-    : await db.get.byId(id);
+    ? await cache.post.select.byId(id)
+    : await db.select.byId(id);
 ```
 
 ## Debugging & Monitoring
@@ -301,7 +301,7 @@ lib/cache/
 import post from "@juun/db/post";
 
 export default async function Page() {
-  const posts = await post.get.all(); // Re-fetches every request
+  const posts = await post.select.all(); // Re-fetches every request
 }
 ```
 
@@ -311,7 +311,7 @@ export default async function Page() {
 import cache from "@/lib/cache";
 
 export default async function Page() {
-  const posts = await cache.post.get.all(); // Cached for 1 hour
+  const posts = await cache.post.select.all(); // Cached for 1 hour
 }
 ```
 
