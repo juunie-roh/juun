@@ -4,14 +4,14 @@ import localFont from "next/font/local";
 export const geistSans = localFont({
   src: "GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "variable",
+  weight: "100 900",
   display: "swap",
 });
 
 export const geistMono = localFont({
   src: "GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  weight: "variable",
+  weight: "100 900",
   display: "swap",
 });
 
