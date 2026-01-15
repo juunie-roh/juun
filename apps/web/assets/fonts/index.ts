@@ -5,18 +5,21 @@ export const geistSans = localFont({
   src: "GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  display: "swap",
 });
 
 export const geistMono = localFont({
   src: "GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  display: "swap",
 });
 
 export const notoSansKR = Noto_Sans_KR({
   weight: "variable",
   variable: "--font-noto-sans-kr",
   subsets: ["latin"], // Korean loaded dynamically via unicode-range
+  display: "swap",
 });
 
 export const attilaSansSharpTrial = localFont({
@@ -76,4 +79,5 @@ export const stabilGroteskTrial = localFont({
   variable: "--font-stabil-grotesk-trial",
   weight: "100 400 500 700",
   style: "normal italic",
+  display: "block",
 });
