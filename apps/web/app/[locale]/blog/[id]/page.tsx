@@ -16,7 +16,7 @@ export default async function BlogItemPage({
   // Ensure params to be resolved
   const { id } = await params;
   // Get all posts
-  const post = await cache.post.get.byId(Number(id));
+  const post = await cache.post.select.byId(Number(id));
   // If post not found, show 404
   if (!post) notFound();
 

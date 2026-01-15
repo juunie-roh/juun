@@ -42,13 +42,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Blog posts (dynamic from database)
-  const posts = await cache.post.get.all();
+  const posts = await cache.post.select.all();
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) =>
     createEntry(`/blog/${post.id}`, post.updated_at),
   );
 
   // Timeline items (dynamic from database)
-  const timelineItems = await cache.timeline.get.all();
+  const timelineItems = await cache.timeline.select.all();
   const timelineEntries: MetadataRoute.Sitemap = timelineItems.map((item) =>
     createEntry(`/timeline/${item.id}`, item.updated_at),
   );

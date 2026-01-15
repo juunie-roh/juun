@@ -8,7 +8,7 @@ export type Timeline = timelineModel & {
 };
 
 namespace timeline {
-  export namespace get {
+  export namespace select {
     /**
      * Get all timeline items with tags without details
      *
