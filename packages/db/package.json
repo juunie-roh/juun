@@ -44,12 +44,12 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
-    "pg": "^8.17.0"
+    "pg": "^8.17.1"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@types/node": "^25.0.8",
+    "@types/node": "^25.0.9",
     "prisma": "^7.2.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"

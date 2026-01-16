@@ -47,7 +47,7 @@ export default function Header() {
               onNavigate={() => setState("collapsed")}
               className="group flex size-full items-center justify-center overflow-hidden bg-primary lg:items-end"
             >
-              <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-all duration-500 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
+              <span className="relative block w-full origin-right text-end font-stabil-grotesk text-[min(100cqh,25cqw)] font-semibold tracking-tight text-background transition-transform duration-300 group-hover:scale-110 lg:origin-left lg:text-start lg:text-[40cqh]">
                 Blog
               </span>
             </Link>
