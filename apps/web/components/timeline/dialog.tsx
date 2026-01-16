@@ -1,6 +1,6 @@
 "use client";
 
-import { Timeline } from "@juun/db/timeline";
+import type { Timeline } from "@juun/db/timeline";
 import React from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -55,7 +55,9 @@ export default function TimelineDialog({
             <DialogTitle className="me-4 font-stabil-grotesk text-2xl font-bold tracking-tight">
               {item.title}
             </DialogTitle>
-            <DialogDescription>{item.description}</DialogDescription>
+            <DialogDescription>
+              {item.translation.description}
+            </DialogDescription>
             <TimelineTags tags={item.tags}>
               {item.article && <Badge>Article</Badge>}
               {item.playground && <Badge>Playground</Badge>}

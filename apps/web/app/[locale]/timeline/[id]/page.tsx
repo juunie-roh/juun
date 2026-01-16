@@ -26,13 +26,15 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const locale = await getLocale();
   const { id } = await params;
-  const item = await cache.timeline.select.byId(Number(id));
+  const item = await cache.timeline.select.byId(Number(id), locale);
 
   if (!item) return {} satisfies Metadata;
 
   const path = `/timeline/${id}`;
-  const { title, description, tags, category, created_at, updated_at } = item;
+  const { title, tags, category, created_at, updated_at } = item;
+  const { description } = item.translation;
   const canonicalUrl = await getCanonicalUrl(path);
 
   return {
@@ -75,11 +77,11 @@ export default async function TimelineDetailPage({
 }) {
   const locale = await getLocale();
   const { id } = await params;
-  const item = await cache.timeline.select.byId(Number(id));
+  const item = await cache.timeline.select.byId(Number(id), locale);
 
   if (!item) notFound();
 
-  const parsed = await md.parse(item.detail);
+  const parsed = await md.parse(item.translation.content);
   const f = await getFormatter({ locale });
 
   return (

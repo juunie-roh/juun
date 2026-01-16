@@ -10,18 +10,16 @@ export default defineConfig({
     "src/queries/timeline.ts",
     "src/utils/test-connection.ts",
   ],
-  esbuildOptions(options) {
-    options.platform = "node";
-  },
+  external: ["@prisma/client", "@prisma/adapter-pg", "pg"],
   format: ["cjs", "esm"],
   minify: true,
-  target: "esnext",
-  external: ["@prisma/client", "@prisma/adapter-pg", "pg"],
   outExtension({ format }) {
     return {
       js: format === "cjs" ? ".cjs" : ".js",
     };
   },
+  platform: "neutral",
   sourcemap: false,
+  target: "esnext",
   treeshake: true,
 });

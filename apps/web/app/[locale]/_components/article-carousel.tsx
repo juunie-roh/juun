@@ -1,4 +1,4 @@
-import { Post } from "@juun/db/post";
+import type { PostWithoutContent } from "@juun/db/post";
 import React from "react";
 
 import {
@@ -14,7 +14,7 @@ import { BlogCard, BlogCardSkeleton } from "../blog/_components/card";
 export default function ArticleCarousel({
   posts,
 }: {
-  posts: Omit<Post, "content">[];
+  posts: PostWithoutContent[];
 }) {
   return (
     <Carousel opts={{ align: "start" }} className="w-full px-12">

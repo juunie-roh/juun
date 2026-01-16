@@ -1,18 +1,18 @@
-import type { Post } from "@juun/db/post";
 import Image from "next/image";
 import { Suspense } from "react";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function BlogHeader({
-  metadata,
-}: {
-  metadata: Omit<
-    Post,
-    "id" | "content" | "category" | "word_count" | "created_at"
-  >;
-}) {
+interface BlogHeaderProps {
+  metadata: {
+    title: string;
+    description: string | null;
+    image: string | null;
+  };
+}
+
+export default function BlogHeader({ metadata }: BlogHeaderProps) {
   return (
     <header className="mx-auto grid grid-cols-responsive place-items-center gap-x-responsive pt-8">
       <div className="col-span-full pt-18 pb-10 lg:col-span-12 lg:col-start-3">

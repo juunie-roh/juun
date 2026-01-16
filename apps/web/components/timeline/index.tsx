@@ -1,3 +1,4 @@
+import type { TimelineWithoutContent } from "@juun/db/timeline";
 import { getFormatter } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
@@ -12,13 +13,12 @@ import {
 } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "@/i18n/navigation";
-import type { Timeline as TimelineItem } from "@/lib/cache";
 import { capitalize } from "@/utils/string";
 
 import TimelineTags from "./tag";
 
 interface TimelineProps {
-  items: Omit<TimelineItem, "detail">[];
+  items: TimelineWithoutContent[];
 }
 
 export default async function Timeline({ items }: TimelineProps) {
@@ -67,7 +67,7 @@ export default async function Timeline({ items }: TimelineProps) {
 
             <ItemContent>
               <ItemDescription className="line-clamp-none text-sm text-wrap">
-                {item.description}
+                {item.translation.description}
               </ItemDescription>
             </ItemContent>
 

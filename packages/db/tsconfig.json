@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "declaration": false,
-    "paths": { "@/*": ["./*"] },
+    "paths": { "@/*": ["./src/*"] },
   },
   "include": ["src/**/*", "prisma.config.ts", "tsup.config.ts"],
   "exclude": ["node_modules", "dist", "src/generated/**/*"]

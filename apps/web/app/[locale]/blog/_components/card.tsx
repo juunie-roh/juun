@@ -1,4 +1,4 @@
-import { Post } from "@juun/db/post";
+import type { PostWithoutContent } from "@juun/db/post";
 import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import { useFormatter, useTranslations } from "next-intl";
@@ -11,7 +11,7 @@ import { Link } from "@/i18n/navigation";
 import { safeUrl } from "@/utils/security";
 import { capitalize } from "@/utils/string";
 
-export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
+export function BlogCard({ metadata }: { metadata: PostWithoutContent }) {
   const f = useFormatter();
   const t = useTranslations("components.blog.card");
 
@@ -32,12 +32,13 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
     return Math.max(1, Math.ceil(words / 200));
   };
 
+  // Use translation fields (title is on base object)
+  const { title } = metadata;
+  const { description, word_count } = metadata.translation;
+
   // For now we might only have description, but this should be updated
   // to use the full content word count once available in the metadata
-  const readingTime = getReadingTime(
-    metadata.description ?? undefined,
-    metadata.word_count,
-  );
+  const readingTime = getReadingTime(description ?? undefined, word_count);
 
   return (
     <Link href={url} className="group block size-full font-sans">
@@ -51,7 +52,7 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
               <LogoAvatar className="size-full rounded-none">
                 <Image
                   src={metadata.image}
-                  alt={metadata.title || "Blog post image"}
+                  alt={title || "Blog post image"}
                   fill
                   className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"
                 />
@@ -81,10 +82,10 @@ export function BlogCard({ metadata }: { metadata: Omit<Post, "content"> }) {
           </div>
 
           <div className="w-full max-w-fit font-stabil-grotesk text-2xl leading-snug font-bold tracking-tight lg:text-lg">
-            {metadata.title}
+            {title}
           </div>
 
-          <div className="mt-auto w-full max-w-fit">{metadata.description}</div>
+          <div className="mt-auto w-full max-w-fit">{description}</div>
         </div>
       </div>
     </Link>

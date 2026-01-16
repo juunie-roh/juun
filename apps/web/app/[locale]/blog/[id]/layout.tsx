@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 
 import { ScrollProgressBar } from "@/components/ui/scroll-progress-bar";
 import BaseInnerLayout from "@/layouts/base-inner";
@@ -23,13 +24,12 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  // Ensure params to be resolved
+  const locale = await getLocale();
   const { id } = await params;
-  // Get all posts
-  const posts = await cache.post.select.all();
-  // Find the specific post by slug
+
+  const posts = await cache.post.select.all(locale);
   const post = posts.find((post) => post.id === Number(id));
-  // If post not found, return basic metadata
+
   if (!post) {
     return {
       title: "Project Not Found",
@@ -38,11 +38,10 @@ export async function generateMetadata({
   }
 
   const path = `/blog/${id}`;
-  const { title, description, category, image, tags, created_at, updated_at } =
-    post;
+  const { title, category, image, tags, created_at, updated_at } = post;
+  const { description } = post.translation;
   const canonicalUrl = await getCanonicalUrl(path);
 
-  // Return metadata based on the post's metadata
   return {
     alternates: {
       canonical: canonicalUrl,
@@ -82,7 +81,6 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description: description || `Blog post: ${title}`,
-      // creator: "@juun_roh", // if you have a handle
       images: image
         ? [image.startsWith("http") ? image : `${BASE_URL}${image}`]
         : undefined,
