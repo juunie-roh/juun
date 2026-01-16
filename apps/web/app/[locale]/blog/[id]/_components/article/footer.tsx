@@ -1,6 +1,5 @@
 "use client";
 
-import type { Post } from "@juun/db/post";
 import { Link } from "lucide-react";
 import { useFormatter } from "next-intl";
 import { toast } from "sonner";
@@ -10,14 +9,14 @@ import { Button } from "@/components/ui/button";
 import { LogoAvatar } from "@/components/ui/logo-avatar";
 import { Separator } from "@/components/ui/separator";
 
-export default function BlogFooter({
-  metadata,
-}: {
-  metadata: Omit<
-    Post,
-    "id" | "content" | "category" | "word_count" | "created_at"
-  >;
-}) {
+interface BlogFooterProps {
+  metadata: {
+    updated_at: Date;
+    tags: string[];
+  };
+}
+
+export default function BlogFooter({ metadata }: BlogFooterProps) {
   const f = useFormatter();
 
   return (

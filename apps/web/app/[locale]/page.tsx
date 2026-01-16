@@ -1,3 +1,5 @@
+import { getLocale } from "next-intl/server";
+
 import Timeline from "@/components/timeline";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
@@ -6,8 +8,9 @@ import cache from "@/lib/cache";
 import ArticleCarousel from "./_components/article-carousel";
 
 export default async function Home() {
-  const posts = await cache.post.select.byCategory("ANALYSIS");
-  const items = await cache.timeline.select.all();
+  const locale = await getLocale();
+  const posts = await cache.post.select.byCategory("ANALYSIS", locale);
+  const items = await cache.timeline.select.all("desc", locale);
 
   return (
     <HeaderOffsetLayout>

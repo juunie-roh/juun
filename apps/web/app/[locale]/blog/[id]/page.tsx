@@ -1,37 +1,32 @@
-import type { Post } from "@juun/db/post";
 import { notFound } from "next/navigation";
+import { getLocale } from "next-intl/server";
 
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
 
-import BlogContent from "../_components/article/content";
-import BlogFooter from "../_components/article/footer";
-import BlogHeader from "../_components/article/header";
+import { BlogContent, BlogFooter, BlogHeader } from "./_components";
 
 export default async function BlogItemPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  // Ensure params to be resolved
+  const locale = await getLocale();
   const { id } = await params;
-  // Get all posts
-  const post = await cache.post.select.byId(Number(id));
-  // If post not found, show 404
+
+  const post = await cache.post.select.byId(Number(id), locale);
   if (!post) notFound();
 
-  const metadata: Omit<
-    Post,
-    "id" | "content" | "category" | "word_count" | "created_at"
-  > = {
-    title: post.title,
-    description: post.description,
+  // Flatten translation fields for article components
+  const metadata = {
+    title: post.translation.title,
+    description: post.translation.description,
     updated_at: post.updated_at,
     tags: post.tags,
     image: post.image,
   };
 
-  const parsed = await md.parse(post.content);
+  const parsed = await md.parse(post.translation.content);
 
   return (
     <article className="relative">

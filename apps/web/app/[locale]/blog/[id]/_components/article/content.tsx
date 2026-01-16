@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Button } from "@/components/ui/button";
 import { Prose } from "@/components/ui/prose";
 import { Separator } from "@/components/ui/separator";
 
@@ -25,17 +26,23 @@ export default function BlogContent({
         id="text-content"
         className="relative m-auto grid grid-cols-responsive gap-x-responsive"
       >
+        {/* Return to List */}
+        <nav>
+          <Button variant="secondary"></Button>
+        </nav>
+        {/* Article Content */}
+        <div className="col-span-full grid w-full grid-cols-subgrid md:col-start-3 lg:col-start-5 lg:row-start-1">
+          <Prose className="col-span-full mt-8 font-sans md:col-span-8">
+            {children}
+          </Prose>
+        </div>
+        {/* Table Of Contents */}
         <nav
           aria-label="Table of contents"
           className="sticky top-24 z-1 mb-8 hidden h-fit grid-cols-subgrid lg:col-span-4 lg:col-start-13 lg:row-start-1 lg:grid"
         >
           <TableOfContents className="col-span-full" />
         </nav>
-        <div className="col-span-full grid w-full grid-cols-subgrid md:col-start-3 lg:col-start-5 lg:row-start-1">
-          <Prose className="col-span-full mt-8 font-sans md:col-span-8">
-            {children}
-          </Prose>
-        </div>
       </div>
     </section>
   );
