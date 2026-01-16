@@ -1,33 +1,75 @@
-import type { PostCategory } from "@/generated/prisma/enums";
-import type { postModel } from "@/generated/prisma/models";
+import { prisma } from "@/client";
+import { DEFAULT_LOCALE } from "@/constants";
+import type { Locale, PostCategory } from "@/generated/prisma/enums";
+import type {
+  post_translationModel,
+  postModel,
+} from "@/generated/prisma/models";
 
-import { prisma } from "../client";
-
-// Use Prisma's generated timeline type and extend with tags
-export type Post = postModel & {
+// Base post type without translatable fields
+type PostBase = Pick<
+  postModel,
+  "id" | "category" | "image" | "created_at" | "updated_at"
+> & {
   tags: string[];
 };
 
-export type Input = Omit<Post, "created_at" | "updated_at" | "id">;
+// Translation fields
+type PostTranslation = Pick<
+  post_translationModel,
+  "locale" | "title" | "description" | "content" | "word_count"
+>;
+
+// Post with translation (full content)
+export type Post = PostBase & {
+  translation: PostTranslation;
+};
+
+// Post without content (for list views)
+export type PostWithoutContent = PostBase & {
+  translation: Omit<PostTranslation, "content">;
+};
+
+// Input for creating posts
+export type Input = {
+  category: PostCategory;
+  image?: string | null;
+  tags: string[];
+  translations: {
+    locale: Locale;
+    title: string;
+    description?: string | null;
+    content: string;
+  }[];
+};
 
 namespace post {
   export namespace select {
     /**
-     * Get all posts without contents
+     * Get all posts without contents for a specific locale
      *
      * Posts are ordered by `created_at` descending (newest first)
+     * Falls back to default locale (ko) if translation not found
      */
-    export async function all(): Promise<Omit<Post, "content">[]> {
+    export async function all(
+      locale: Locale = DEFAULT_LOCALE,
+    ): Promise<PostWithoutContent[]> {
       const posts = await prisma.post.findMany({
         select: {
           id: true,
-          title: true,
-          description: true,
-          word_count: true,
           category: true,
           image: true,
           created_at: true,
           updated_at: true,
+          translations: {
+            where: { locale },
+            select: {
+              locale: true,
+              title: true,
+              description: true,
+              word_count: true,
+            },
+          },
           post_tags: {
             select: { tag: { select: { name: true } } },
             orderBy: { tag: { name: "asc" } },
@@ -36,25 +78,61 @@ namespace post {
         orderBy: { created_at: "desc" },
       });
 
-      // Transform data to flatten tags
-      return posts.map((post) => ({
-        id: post.id,
-        title: post.title,
-        word_count: post.word_count,
-        description: post.description,
-        category: post.category,
-        image: post.image,
-        created_at: post.created_at,
-        updated_at: post.updated_at,
-        tags: post.post_tags.map((pt) => pt.tag.name),
-      }));
+      // Translation type for list views (without content)
+      type ListTranslation = {
+        locale: Locale;
+        title: string;
+        description: string | null;
+        word_count: number;
+      };
+
+      // Handle fallback for missing translations
+      return Promise.all(
+        posts.map(async (post) => {
+          let translation: ListTranslation | undefined = post.translations[0];
+
+          // Fallback to default locale if translation missing
+          if (!translation && locale !== DEFAULT_LOCALE) {
+            const fallbackTranslation =
+              await prisma.post_translation.findUnique({
+                where: {
+                  post_id_locale: { post_id: post.id, locale: DEFAULT_LOCALE },
+                },
+                select: {
+                  locale: true,
+                  title: true,
+                  description: true,
+                  word_count: true,
+                },
+              });
+            translation = fallbackTranslation ?? undefined;
+          }
+
+          return {
+            id: post.id,
+            category: post.category,
+            image: post.image,
+            created_at: post.created_at,
+            updated_at: post.updated_at,
+            tags: post.post_tags.map((pt) => pt.tag.name),
+            translation: translation ?? {
+              locale,
+              title: "",
+              description: null,
+              word_count: 0,
+            },
+          };
+        }),
+      );
     }
+
     /**
      * Get all posts having specific tags without contents
      */
     export async function byTags(
       tags: string[],
-    ): Promise<Omit<Post, "content">[]> {
+      locale: Locale = DEFAULT_LOCALE,
+    ): Promise<PostWithoutContent[]> {
       const posts = await prisma.post.findMany({
         where: {
           AND: tags.map((name) => ({
@@ -65,55 +143,19 @@ namespace post {
         },
         select: {
           id: true,
-          title: true,
-          description: true,
-          word_count: true,
           category: true,
           image: true,
           created_at: true,
           updated_at: true,
-          post_tags: {
-            select: { tag: { select: { name: true } } },
-            orderBy: { tag: { name: "asc" } },
+          translations: {
+            where: { locale },
+            select: {
+              locale: true,
+              title: true,
+              description: true,
+              word_count: true,
+            },
           },
-        },
-        orderBy: {
-          created_at: "desc",
-        },
-      });
-
-      // Transform data to flatten tags
-      return posts.map((post) => ({
-        id: post.id,
-        title: post.title,
-        word_count: post.word_count,
-        description: post.description,
-        category: post.category,
-        image: post.image,
-        created_at: post.created_at,
-        updated_at: post.updated_at,
-        tags: post.post_tags.map((pt) => pt.tag.name),
-      }));
-    }
-    /**
-     * Get all posts classified with `category` without contents
-     *
-     * @see {@link PostCategory}
-     */
-    export async function byCategory(
-      category: PostCategory,
-    ): Promise<Omit<Post, "content">[]> {
-      const posts = await prisma.post.findMany({
-        where: { category },
-        select: {
-          id: true,
-          title: true,
-          description: true,
-          word_count: true,
-          category: true,
-          image: true,
-          created_at: true,
-          updated_at: true,
           post_tags: {
             select: { tag: { select: { name: true } } },
             orderBy: { tag: { name: "asc" } },
@@ -122,36 +164,150 @@ namespace post {
         orderBy: { created_at: "desc" },
       });
 
-      return posts.map((post) => ({
-        id: post.id,
-        title: post.title,
-        word_count: post.word_count,
-        description: post.description,
-        category: post.category,
-        image: post.image,
-        created_at: post.created_at,
-        updated_at: post.updated_at,
-        tags: post.post_tags.map((pt) => pt.tag.name),
-      }));
+      // Translation type for list views (without content)
+      type ListTranslation = {
+        locale: Locale;
+        title: string;
+        description: string | null;
+        word_count: number;
+      };
+
+      return Promise.all(
+        posts.map(async (post) => {
+          let translation: ListTranslation | undefined = post.translations[0];
+
+          if (!translation && locale !== DEFAULT_LOCALE) {
+            const fallbackTranslation =
+              await prisma.post_translation.findUnique({
+                where: {
+                  post_id_locale: { post_id: post.id, locale: DEFAULT_LOCALE },
+                },
+                select: {
+                  locale: true,
+                  title: true,
+                  description: true,
+                  word_count: true,
+                },
+              });
+            translation = fallbackTranslation ?? undefined;
+          }
+
+          return {
+            id: post.id,
+            category: post.category,
+            image: post.image,
+            created_at: post.created_at,
+            updated_at: post.updated_at,
+            tags: post.post_tags.map((pt) => pt.tag.name),
+            translation: translation ?? {
+              locale,
+              title: "",
+              description: null,
+              word_count: 0,
+            },
+          };
+        }),
+      );
     }
 
     /**
-     * Get a single post by id, with content, without word count
+     * Get all posts classified with `category` without contents
+     *
+     * @see {@link PostCategory}
      */
-    export async function byId(
-      id: number,
-    ): Promise<Omit<Post, "word_count"> | null> {
-      const post = await prisma.post.findUnique({
-        where: { id },
+    export async function byCategory(
+      category: PostCategory,
+      locale: Locale = DEFAULT_LOCALE,
+    ): Promise<PostWithoutContent[]> {
+      const posts = await prisma.post.findMany({
+        where: { category },
         select: {
           id: true,
-          title: true,
-          description: true,
-          content: true,
           category: true,
           image: true,
           created_at: true,
           updated_at: true,
+          translations: {
+            where: { locale },
+            select: {
+              locale: true,
+              title: true,
+              description: true,
+              word_count: true,
+            },
+          },
+          post_tags: {
+            select: { tag: { select: { name: true } } },
+            orderBy: { tag: { name: "asc" } },
+          },
+        },
+        orderBy: { created_at: "desc" },
+      });
+
+      // Translation type for list views (without content)
+      type ListTranslation = {
+        locale: Locale;
+        title: string;
+        description: string | null;
+        word_count: number;
+      };
+
+      return Promise.all(
+        posts.map(async (post) => {
+          let translation: ListTranslation | undefined = post.translations[0];
+
+          if (!translation && locale !== DEFAULT_LOCALE) {
+            const fallbackTranslation =
+              await prisma.post_translation.findUnique({
+                where: {
+                  post_id_locale: { post_id: post.id, locale: DEFAULT_LOCALE },
+                },
+                select: {
+                  locale: true,
+                  title: true,
+                  description: true,
+                  word_count: true,
+                },
+              });
+            translation = fallbackTranslation ?? undefined;
+          }
+
+          return {
+            id: post.id,
+            category: post.category,
+            image: post.image,
+            created_at: post.created_at,
+            updated_at: post.updated_at,
+            tags: post.post_tags.map((pt) => pt.tag.name),
+            translation: translation ?? {
+              locale,
+              title: "",
+              description: null,
+              word_count: 0,
+            },
+          };
+        }),
+      );
+    }
+
+    /**
+     * Get a single post by id with content for a specific locale
+     */
+    export async function byId(
+      id: number,
+      locale: Locale = DEFAULT_LOCALE,
+    ): Promise<Post | null> {
+      const post = await prisma.post.findUnique({
+        where: { id },
+        select: {
+          id: true,
+          category: true,
+          image: true,
+          created_at: true,
+          updated_at: true,
+          translations: {
+            where: { locale },
+          },
           post_tags: {
             select: { tag: { select: { name: true } } },
             orderBy: { tag: { name: "asc" } },
@@ -161,39 +317,59 @@ namespace post {
 
       if (!post) return null;
 
+      let translation: post_translationModel | undefined = post.translations[0];
+
+      // Fallback to default locale
+      if (!translation && locale !== DEFAULT_LOCALE) {
+        translation =
+          (await prisma.post_translation.findUnique({
+            where: { post_id_locale: { post_id: id, locale: DEFAULT_LOCALE } },
+          })) ?? undefined;
+      }
+
+      if (!translation) return null;
+
       return {
         id: post.id,
-        title: post.title,
-        description: post.description,
-        content: post.content,
         category: post.category,
         image: post.image,
         created_at: post.created_at,
         updated_at: post.updated_at,
         tags: post.post_tags.map((pt) => pt.tag.name),
+        translation: {
+          locale: translation.locale,
+          title: translation.title,
+          description: translation.description,
+          content: translation.content,
+          word_count: translation.word_count,
+        },
       };
     }
   }
 
   export namespace create {
     /**
-     * Create a new post with tags
+     * Create a new post with translations and tags
      *
      * Tags are created if they don't exist (connectOrCreate pattern)
-     * Word count is automatically calculated from content
+     * Word count is automatically calculated from content for each translation
      */
     export async function one(input: Input): Promise<Post> {
-      const { title, description, content, category, image, tags } = input;
-      const word_count = calculateWordCount(content);
+      const { category, image, tags, translations } = input;
 
       const post = await prisma.post.create({
         data: {
-          title,
-          description,
-          content,
-          word_count,
           category,
           image,
+          translations: {
+            create: translations.map((t) => ({
+              locale: t.locale,
+              title: t.title,
+              description: t.description,
+              content: t.content,
+              word_count: calculateWordCount(t.content),
+            })),
+          },
           post_tags: {
             create: tags.map((tagName) => ({
               tag: {
@@ -207,14 +383,13 @@ namespace post {
         },
         select: {
           id: true,
-          title: true,
-          description: true,
-          content: true,
-          word_count: true,
           category: true,
           image: true,
           created_at: true,
           updated_at: true,
+          translations: {
+            where: { locale: DEFAULT_LOCALE },
+          },
           post_tags: {
             select: { tag: { select: { name: true } } },
             orderBy: { tag: { name: "asc" } },
@@ -222,17 +397,22 @@ namespace post {
         },
       });
 
+      const translation = post.translations[0];
+
       return {
         id: post.id,
-        title: post.title,
-        description: post.description,
-        content: post.content,
-        word_count: post.word_count,
         category: post.category,
         image: post.image,
         created_at: post.created_at,
         updated_at: post.updated_at,
         tags: post.post_tags.map((pt) => pt.tag.name),
+        translation: translation ?? {
+          locale: DEFAULT_LOCALE,
+          title: "",
+          description: null,
+          content: "",
+          word_count: 0,
+        },
       };
     }
 
