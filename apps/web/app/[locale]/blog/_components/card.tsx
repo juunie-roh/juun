@@ -32,8 +32,9 @@ export function BlogCard({ metadata }: { metadata: PostWithoutContent }) {
     return Math.max(1, Math.ceil(words / 200));
   };
 
-  // Use translation fields
-  const { title, description, word_count } = metadata.translation;
+  // Use translation fields (title is on base object)
+  const { title } = metadata;
+  const { description, word_count } = metadata.translation;
 
   // For now we might only have description, but this should be updated
   // to use the full content word count once available in the metadata

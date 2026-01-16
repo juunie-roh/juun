@@ -10,7 +10,13 @@ import type {
 // Base timeline type without translatable fields
 type TimelineBase = Pick<
   timelineModel,
-  "id" | "category" | "article" | "playground" | "created_at" | "updated_at"
+  | "id"
+  | "title"
+  | "category"
+  | "article"
+  | "playground"
+  | "created_at"
+  | "updated_at"
 > & {
   tags: string[];
 };
@@ -18,17 +24,17 @@ type TimelineBase = Pick<
 // Translation fields
 type TimelineTranslation = Pick<
   timeline_translationModel,
-  "locale" | "title" | "description" | "detail"
+  "locale" | "description" | "content"
 >;
 
-// Timeline with translation (full detail)
+// Timeline with translation (full content)
 export type Timeline = TimelineBase & {
   translation: TimelineTranslation;
 };
 
-// Timeline without detail (for list views)
-export type TimelineWithoutDetail = TimelineBase & {
-  translation: Omit<TimelineTranslation, "detail">;
+// Timeline without content (for list views)
+export type TimelineWithoutContent = TimelineBase & {
+  translation: Omit<TimelineTranslation, "content">;
 };
 
 namespace timeline {
@@ -42,10 +48,11 @@ namespace timeline {
     export async function all(
       order: SortOrder | undefined,
       locale: Locale = DEFAULT_LOCALE,
-    ): Promise<TimelineWithoutDetail[]> {
+    ): Promise<TimelineWithoutContent[]> {
       const timelines = await prisma.timeline.findMany({
         select: {
           id: true,
+          title: true,
           category: true,
           article: true,
           playground: true,
@@ -55,7 +62,6 @@ namespace timeline {
             where: { locale },
             select: {
               locale: true,
-              title: true,
               description: true,
             },
           },
@@ -72,9 +78,8 @@ namespace timeline {
       // Handle fallback for missing translations
       return Promise.all(
         timelines.map(async (timeline) => {
-          let translation:
-            | { locale: Locale; title: string; description: string }
-            | undefined = timeline.translations[0];
+          let translation: { locale: Locale; description: string } | undefined =
+            timeline.translations[0];
 
           // Fallback to default locale if translation missing
           if (!translation && locale !== DEFAULT_LOCALE) {
@@ -88,7 +93,6 @@ namespace timeline {
                 },
                 select: {
                   locale: true,
-                  title: true,
                   description: true,
                 },
               });
@@ -97,6 +101,7 @@ namespace timeline {
 
           return {
             id: timeline.id,
+            title: timeline.title,
             category: timeline.category,
             article: timeline.article,
             playground: timeline.playground,
@@ -105,7 +110,6 @@ namespace timeline {
             tags: timeline.timeline_tags.map((tt) => tt.tag.name),
             translation: translation ?? {
               locale,
-              title: "",
               description: "",
             },
           };
@@ -124,6 +128,7 @@ namespace timeline {
         where: { id },
         select: {
           id: true,
+          title: true,
           category: true,
           article: true,
           playground: true,
@@ -158,6 +163,7 @@ namespace timeline {
 
       return {
         id: timeline.id,
+        title: timeline.title,
         category: timeline.category,
         article: timeline.article,
         playground: timeline.playground,
@@ -166,9 +172,8 @@ namespace timeline {
         tags: timeline.timeline_tags.map((tt) => tt.tag.name),
         translation: {
           locale: translation.locale,
-          title: translation.title,
           description: translation.description,
-          detail: translation.detail,
+          content: translation.content,
         },
       };
     }

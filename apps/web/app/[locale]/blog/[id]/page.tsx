@@ -19,7 +19,7 @@ export default async function BlogItemPage({
 
   // Flatten translation fields for article components
   const metadata = {
-    title: post.translation.title,
+    title: post.title,
     description: post.translation.description,
     updated_at: post.updated_at,
     tags: post.tags,

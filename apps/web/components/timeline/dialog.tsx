@@ -53,7 +53,7 @@ export default function TimelineDialog({
           </aside>
           <DialogHeader className="text-left">
             <DialogTitle className="me-4 font-stabil-grotesk text-2xl font-bold tracking-tight">
-              {item.translation.title}
+              {item.title}
             </DialogTitle>
             <DialogDescription>
               {item.translation.description}

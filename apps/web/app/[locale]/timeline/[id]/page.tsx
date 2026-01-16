@@ -33,8 +33,8 @@ export async function generateMetadata({
   if (!item) return {} satisfies Metadata;
 
   const path = `/timeline/${id}`;
-  const { tags, category, created_at, updated_at } = item;
-  const { title, description } = item.translation;
+  const { title, tags, category, created_at, updated_at } = item;
+  const { description } = item.translation;
   const canonicalUrl = await getCanonicalUrl(path);
 
   return {
@@ -81,7 +81,7 @@ export default async function TimelineDetailPage({
 
   if (!item) notFound();
 
-  const parsed = await md.parse(item.translation.detail);
+  const parsed = await md.parse(item.translation.content);
   const f = await getFormatter({ locale });
 
   return (
@@ -94,7 +94,7 @@ export default async function TimelineDetailPage({
       </Button>
 
       <header className="mb-8">
-        <h1 className="mb-2 text-4xl font-bold">{item.translation.title}</h1>
+        <h1 className="mb-2 text-4xl font-bold">{item.title}</h1>
         <p className="text-muted-foreground">
           {item.category} •{" "}
           <time dateTime={item.created_at.toISOString()}>

@@ -69,7 +69,7 @@ model timeline {
 
   // Legacy columns - to be removed after migration
   description String?
-  detail      String?
+  content     String?
 
   @@index([id])
   @@index([category])
@@ -81,7 +81,7 @@ model timeline_translation {
   timeline_id Int
   locale      Locale
   description String
-  detail      String
+  content     String
   timeline    timeline @relation(fields: [timeline_id], references: [id], onDelete: Cascade)
 
   @@unique([timeline_id, locale])

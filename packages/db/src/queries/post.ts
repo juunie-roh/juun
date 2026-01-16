@@ -9,7 +9,7 @@ import type {
 // Base post type without translatable fields
 type PostBase = Pick<
   postModel,
-  "id" | "category" | "image" | "created_at" | "updated_at"
+  "id" | "title" | "category" | "image" | "created_at" | "updated_at"
 > & {
   tags: string[];
 };
@@ -17,7 +17,7 @@ type PostBase = Pick<
 // Translation fields
 type PostTranslation = Pick<
   post_translationModel,
-  "locale" | "title" | "description" | "content" | "word_count"
+  "locale" | "description" | "content" | "word_count"
 >;
 
 // Post with translation (full content)
@@ -32,12 +32,12 @@ export type PostWithoutContent = PostBase & {
 
 // Input for creating posts
 export type Input = {
+  title: string;
   category: PostCategory;
   image?: string | null;
   tags: string[];
   translations: {
     locale: Locale;
-    title: string;
     description?: string | null;
     content: string;
   }[];
@@ -57,6 +57,7 @@ namespace post {
       const posts = await prisma.post.findMany({
         select: {
           id: true,
+          title: true,
           category: true,
           image: true,
           created_at: true,
@@ -65,7 +66,6 @@ namespace post {
             where: { locale },
             select: {
               locale: true,
-              title: true,
               description: true,
               word_count: true,
             },
@@ -81,7 +81,6 @@ namespace post {
       // Translation type for list views (without content)
       type ListTranslation = {
         locale: Locale;
-        title: string;
         description: string | null;
         word_count: number;
       };
@@ -100,7 +99,6 @@ namespace post {
                 },
                 select: {
                   locale: true,
-                  title: true,
                   description: true,
                   word_count: true,
                 },
@@ -110,6 +108,7 @@ namespace post {
 
           return {
             id: post.id,
+            title: post.title,
             category: post.category,
             image: post.image,
             created_at: post.created_at,
@@ -117,7 +116,6 @@ namespace post {
             tags: post.post_tags.map((pt) => pt.tag.name),
             translation: translation ?? {
               locale,
-              title: "",
               description: null,
               word_count: 0,
             },
@@ -143,6 +141,7 @@ namespace post {
         },
         select: {
           id: true,
+          title: true,
           category: true,
           image: true,
           created_at: true,
@@ -151,7 +150,6 @@ namespace post {
             where: { locale },
             select: {
               locale: true,
-              title: true,
               description: true,
               word_count: true,
             },
@@ -167,7 +165,6 @@ namespace post {
       // Translation type for list views (without content)
       type ListTranslation = {
         locale: Locale;
-        title: string;
         description: string | null;
         word_count: number;
       };
@@ -184,7 +181,6 @@ namespace post {
                 },
                 select: {
                   locale: true,
-                  title: true,
                   description: true,
                   word_count: true,
                 },
@@ -194,6 +190,7 @@ namespace post {
 
           return {
             id: post.id,
+            title: post.title,
             category: post.category,
             image: post.image,
             created_at: post.created_at,
@@ -201,7 +198,6 @@ namespace post {
             tags: post.post_tags.map((pt) => pt.tag.name),
             translation: translation ?? {
               locale,
-              title: "",
               description: null,
               word_count: 0,
             },
@@ -223,6 +219,7 @@ namespace post {
         where: { category },
         select: {
           id: true,
+          title: true,
           category: true,
           image: true,
           created_at: true,
@@ -231,7 +228,6 @@ namespace post {
             where: { locale },
             select: {
               locale: true,
-              title: true,
               description: true,
               word_count: true,
             },
@@ -247,7 +243,6 @@ namespace post {
       // Translation type for list views (without content)
       type ListTranslation = {
         locale: Locale;
-        title: string;
         description: string | null;
         word_count: number;
       };
@@ -264,7 +259,6 @@ namespace post {
                 },
                 select: {
                   locale: true,
-                  title: true,
                   description: true,
                   word_count: true,
                 },
@@ -274,6 +268,7 @@ namespace post {
 
           return {
             id: post.id,
+            title: post.title,
             category: post.category,
             image: post.image,
             created_at: post.created_at,
@@ -281,7 +276,6 @@ namespace post {
             tags: post.post_tags.map((pt) => pt.tag.name),
             translation: translation ?? {
               locale,
-              title: "",
               description: null,
               word_count: 0,
             },
@@ -301,6 +295,7 @@ namespace post {
         where: { id },
         select: {
           id: true,
+          title: true,
           category: true,
           image: true,
           created_at: true,
@@ -331,6 +326,7 @@ namespace post {
 
       return {
         id: post.id,
+        title: post.title,
         category: post.category,
         image: post.image,
         created_at: post.created_at,
@@ -338,7 +334,6 @@ namespace post {
         tags: post.post_tags.map((pt) => pt.tag.name),
         translation: {
           locale: translation.locale,
-          title: translation.title,
           description: translation.description,
           content: translation.content,
           word_count: translation.word_count,
@@ -355,16 +350,16 @@ namespace post {
      * Word count is automatically calculated from content for each translation
      */
     export async function one(input: Input): Promise<Post> {
-      const { category, image, tags, translations } = input;
+      const { title, category, image, tags, translations } = input;
 
       const post = await prisma.post.create({
         data: {
+          title,
           category,
           image,
           translations: {
             create: translations.map((t) => ({
               locale: t.locale,
-              title: t.title,
               description: t.description,
               content: t.content,
               word_count: calculateWordCount(t.content),
@@ -383,6 +378,7 @@ namespace post {
         },
         select: {
           id: true,
+          title: true,
           category: true,
           image: true,
           created_at: true,
@@ -401,6 +397,7 @@ namespace post {
 
       return {
         id: post.id,
+        title: post.title,
         category: post.category,
         image: post.image,
         created_at: post.created_at,
@@ -408,7 +405,6 @@ namespace post {
         tags: post.post_tags.map((pt) => pt.tag.name),
         translation: translation ?? {
           locale: DEFAULT_LOCALE,
-          title: "",
           description: null,
           content: "",
           word_count: 0,

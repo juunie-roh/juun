@@ -1,4 +1,4 @@
-import type { TimelineWithoutDetail } from "@juun/db/timeline";
+import type { TimelineWithoutContent } from "@juun/db/timeline";
 import { getFormatter } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +18,7 @@ import { capitalize } from "@/utils/string";
 import TimelineTags from "./tag";
 
 interface TimelineProps {
-  items: TimelineWithoutDetail[];
+  items: TimelineWithoutContent[];
 }
 
 export default async function Timeline({ items }: TimelineProps) {
@@ -57,7 +57,7 @@ export default async function Timeline({ items }: TimelineProps) {
           <Item className="mb-auto w-full gap-2 bg-background p-2">
             <ItemHeader className="flex-col items-start justify-start gap-2">
               <ItemTitle className="text-xl font-bold tracking-tight">
-                {item.translation.title}
+                {item.title}
               </ItemTitle>
               <TimelineTags tags={item.tags}>
                 {item.article && <Badge>Article</Badge>}

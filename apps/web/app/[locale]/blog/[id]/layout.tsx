@@ -38,8 +38,8 @@ export async function generateMetadata({
   }
 
   const path = `/blog/${id}`;
-  const { category, image, tags, created_at, updated_at } = post;
-  const { title, description } = post.translation;
+  const { title, category, image, tags, created_at, updated_at } = post;
+  const { description } = post.translation;
   const canonicalUrl = await getCanonicalUrl(path);
 
   return {

@@ -23,7 +23,8 @@ export async function generateMetadata({
 
   if (!item) return {} satisfies Metadata;
 
-  const { title, description } = item.translation;
+  const { title } = item;
+  const { description } = item.translation;
 
   return {
     title,
@@ -49,9 +50,9 @@ export default async function HomeTimelineDialog({
   const { id } = await params;
   const item = await cache.timeline.select.byId(Number(id), locale);
 
-  if (!item?.translation.detail) notFound();
+  if (!item?.translation.content) notFound();
 
-  const parsed = await md.parse(item.translation.detail);
+  const parsed = await md.parse(item.translation.content);
 
   return <TimelineDialog item={item}>{md.render(parsed)}</TimelineDialog>;
 }
