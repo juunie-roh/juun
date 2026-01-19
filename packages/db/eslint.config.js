@@ -4,6 +4,6 @@ export default defineConfig([
   ...base,
   ...typescript,
   {
-    ignores: ["generated/prisma/**/*"],
+    ignores: ["src/generated/prisma/**/*"],
   },
 ]);
