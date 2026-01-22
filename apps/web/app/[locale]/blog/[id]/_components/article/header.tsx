@@ -34,6 +34,7 @@ export default function BlogHeader({ metadata }: BlogHeaderProps) {
                 alt={metadata.title}
                 className="size-full object-contain"
                 preload
+                fetchPriority="high"
                 fill
               />
             </Suspense>
