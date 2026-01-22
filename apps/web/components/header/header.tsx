@@ -17,8 +17,19 @@ import { useHeaderMotion } from "./use-header-motion";
 
 export default function Header() {
   const containerRef = React.useRef(null);
-  const { motionStyles, state, setState, isHome } =
+  const { motionStyles, state, setState, isHome, mounted } =
     useHeaderMotion(containerRef);
+
+  // Prevent rendering until mounted to avoid CLS from hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="h-screen overscroll-contain">
+        <header className="fixed top-0 z-50 w-full">
+          <nav className="h-header border-b bg-background" />
+        </header>
+      </div>
+    );
+  }
 
   return (
     <div
