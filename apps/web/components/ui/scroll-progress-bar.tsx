@@ -43,9 +43,11 @@ export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
       progressBar.style.width = `${progress}%`;
 
       // Update ARIA attributes for accessibility
+      const roundedProgress = Math.round(progress);
+      progressBar.setAttribute("aria-valuenow", roundedProgress.toString());
       progressBar.setAttribute(
-        "aria-valuenow",
-        Math.round(progress).toString(),
+        "aria-valuetext",
+        `${roundedProgress}% scrolled`,
       );
     };
 
@@ -85,9 +87,11 @@ export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
         className={cn("h-full bg-primary", className)}
         style={{ width: "0%" }}
         role="progressbar"
+        aria-label="Scroll progress"
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={0}
+        aria-valuetext="0% scrolled"
       />
     </div>
   );

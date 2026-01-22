@@ -54,6 +54,8 @@ export function BlogCard({ metadata }: { metadata: PostWithoutContent }) {
                   src={metadata.image}
                   alt={title || "Blog post image"}
                   fill
+                  loading="eager"
+                  fetchPriority="high"
                   className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"
                 />
               </LogoAvatar>

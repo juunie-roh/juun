@@ -53,6 +53,7 @@ export default function BlogFooter({ metadata }: BlogFooterProps) {
               <Button
                 variant="ghost"
                 size="icon"
+                aria-label="Copy URL to clipboard"
                 onClick={() => {
                   navigator.clipboard.writeText(window.location.href);
                   toast.success("URL copied to clipboard!", {
