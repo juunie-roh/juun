@@ -9,7 +9,7 @@ import {
 } from "@/utils/server/metadata";
 
 export async function generateMetadata() {
-  const t = await getTranslations("metadata./blog");
+  const t = await getTranslations("/blog.metadata");
 
   const path = "/blog";
   const canonicalUrl = await getCanonicalUrl(path);

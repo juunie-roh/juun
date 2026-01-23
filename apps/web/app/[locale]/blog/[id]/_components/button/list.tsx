@@ -13,19 +13,19 @@ export default function ListButton({
   React.ComponentProps<typeof Button>,
   "asChild" | "aria-label" | "variant"
 >) {
-  const t = useTranslations("components.blog.article.list");
+  const t = useTranslations("/blog.article");
 
   return (
     <Button
       asChild
-      aria-label={t("title")}
+      aria-label={t("list")}
       variant="link"
       className={className}
       {...props}
     >
       <Link href="/blog">
         <List />
-        {t("title")}
+        {t("list")}
       </Link>
     </Button>
   );

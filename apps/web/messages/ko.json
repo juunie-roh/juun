@@ -1,6 +1,6 @@
 {
-  "metadata": {
-    "/": {
+  "/": {
+    "metadata": {
       "title": { "template": "Juun | %s", "default": "Juun" },
       "description": "Technology-Agnostic Architectural Playground",
       "applicationName": "Juun's Playground",
@@ -10,14 +10,50 @@
         "url": "https://juun.vercel.app"
       }
     },
-    "/blog": {
+    "header": {
+      "i18n": {
+        "aria-label": "Switch locale to English",
+        "label": "언어 설정 변경"
+      },
+      "theme": {
+        "aria-label": "{label} 테마로 변경",
+        "label": "테마 선택"
+      }
+    }
+  },
+  "/blog": {
+    "metadata": {
       "title": "Blog",
       "description": "Records of experiments, learnings, achievements, analyses",
       "openGraph": {
         "url": "https://juun.vercel.app/ko/blog"
       }
     },
-    "/playground": {
+    "alert": {
+      "items": {
+        "notFound": {
+          "title": "",
+          "description": ""
+        }
+      }
+    },
+    "article": {
+      "table-of-contents": "목차 바로가기",
+      "list": "목록으로 돌아가기",
+      "clipboard": {
+        "label": "클립보드로 복사",
+        "success": "클립보드에 URL이 복사되었습니다!"
+      },
+      "facebook": "페이스북에 공유하기",
+      "linkedin": "링크드인에 공유하기",
+      "x": "엑스(트위터)에 공유하기"
+    },
+    "card": {
+      "readingTime": "{readingTime, plural, other {#}}분 소요"
+    }
+  },
+  "/playground": {
+    "metadata": {
       "title": "Playground",
       "description": "Experimented or experimenting technologies",
       "openGraph": {
@@ -25,42 +61,10 @@
       }
     }
   },
-  "common": {
-    "confirm": "확인",
-    "close": "닫기",
-    "cancel": "취소"
-  },
-  "components": {
-    "blog": {
-      "alert": {
-        "items": {
-          "notFound": {
-            "title": "",
-            "description": ""
-          }
-        }
-      },
-      "article": {
-        "table-of-contents": {
-          "title": "목차 바로가기"
-        },
-        "list": {
-          "title": "목록으로 돌아가기"
-        }
-      },
-      "card": {
-        "readingTime": "{readingTime, plural, other {#}}분 소요"
-      }
-    },
-    "header": {
-      "i18n": {
-        "aria-label": "Switch locale to English",
-        "span": "언어 설정 변경"
-      },
-      "theme": {
-        "aria-label": "{label} 테마로 변경",
-        "span": "테마 선택"
-      }
+  "ui": {
+    "carousel": {
+      "next": "다음 슬라이드",
+      "prev": "이전 슬라이드"
     }
   }
 }

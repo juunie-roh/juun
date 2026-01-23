@@ -1,15 +1,19 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { LogoAvatar } from "@/components/ui/logo-avatar";
 import { Link } from "@/i18n/navigation";
 
 export default function LinkedInShareButton() {
+  const t = useTranslations("/blog.article");
+
   return (
-    <Button asChild variant="ghost" size="icon">
+    <Button asChild variant="ghost" size="icon" aria-label={t("linkedin")}>
       <Link
         target="_blank"
-        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
+        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window?.location.href)}`}
       >
         <LogoAvatar color="#0A66C2">
           <svg

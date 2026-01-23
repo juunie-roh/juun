@@ -33,7 +33,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("metadata./");
+  const t = await getTranslations("/.metadata");
   const canonicalUrl = await getCanonicalUrl();
   const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),

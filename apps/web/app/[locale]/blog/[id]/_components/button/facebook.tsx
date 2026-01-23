@@ -1,15 +1,19 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { LogoAvatar } from "@/components/ui/logo-avatar";
 import { Link } from "@/i18n/navigation";
 
 export default function FacebookShareButton() {
+  const t = useTranslations("/blog.article");
+
   return (
-    <Button asChild variant="ghost" size="icon">
+    <Button asChild variant="ghost" size="icon" aria-label={t("facebook")}>
       <Link
         target="_blank"
-        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window?.location.href)}`}
       >
         <LogoAvatar color="#0866FF">
           <svg

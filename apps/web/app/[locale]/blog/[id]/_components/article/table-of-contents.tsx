@@ -94,7 +94,7 @@ export default function TableOfContents({
   contentSelector = ".prose",
   headingSelector = "h2, h3",
 }: TableOfContentsProps) {
-  const t = useTranslations("components.blog.article.table-of-contents");
+  const t = useTranslations("/blog.article");
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
 
@@ -190,9 +190,9 @@ export default function TableOfContents({
         className,
       )}
     >
-      <h4 className="mb-4 px-6 font-medium">{t("title")}</h4>
+      <h2 className="mb-4 px-6 font-medium">{t("table-of-contents")}</h2>
       <nav
-        aria-label={t("title")}
+        aria-label={t("table-of-contents")}
         className="max-h-[50vh] overflow-hidden overflow-y-auto px-3"
       >
         {tocContent}

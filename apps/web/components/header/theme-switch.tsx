@@ -8,7 +8,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 
 export default function ThemeSwitch() {
-  const t = useTranslations("components.header.theme");
+  const t = useTranslations("/.header.theme");
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -91,7 +91,7 @@ export default function ThemeSwitch() {
           );
         })}
       </div>
-      <span className="sr-only">{t("span")}</span>
+      <span className="sr-only">{t("label")}</span>
     </div>
   );
 }
