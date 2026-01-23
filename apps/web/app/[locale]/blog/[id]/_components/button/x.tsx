@@ -1,15 +1,19 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { LogoAvatar } from "@/components/ui/logo-avatar";
 import { Link } from "@/i18n/navigation";
 
 export default function XShareButton() {
+  const t = useTranslations("/blog.article");
+
   return (
-    <Button asChild variant="ghost" size="icon">
+    <Button asChild variant="ghost" size="icon" aria-label={t("x")}>
       <Link
         target="_blank"
-        href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}`}
+        href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window?.location.href)}`}
       >
         <LogoAvatar color="#000000">
           <svg

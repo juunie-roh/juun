@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function BlogItemsNotFoundAlert() {
-  const t = useTranslations("components.blog.alert.items.notFound");
+  const t = useTranslations("/blog.alert.items.notFound");
 
   return (
     <Alert>

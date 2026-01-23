@@ -13,7 +13,7 @@ import { capitalize } from "@/utils/string";
 
 export function BlogCard({ metadata }: { metadata: PostWithoutContent }) {
   const f = useFormatter();
-  const t = useTranslations("components.blog.card");
+  const t = useTranslations("/blog.card");
 
   // Prevent XSS (Cross-site scripting)
   const url = safeUrl(`/blog/${metadata.id}`);

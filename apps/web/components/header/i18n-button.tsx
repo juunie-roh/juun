@@ -10,7 +10,7 @@ export default function I18nButton() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const t = useTranslations("components.header.i18n");
+  const t = useTranslations("/.header.i18n");
 
   const handleLocaleChange = () => {
     const newLocale = locale === "ko" ? "en" : "ko";
@@ -29,7 +29,7 @@ export default function I18nButton() {
       <span className="absolute right-0.5 bottom-0.5 font-black tracking-tighter [-webkit-text-stroke:1px_var(--color-background)] [text-stroke:1px_var(--color-background)]">
         {locale.toUpperCase()}
       </span>
-      <span className="sr-only">{t("span")}</span>
+      <span className="sr-only">{t("label")}</span>
     </Button>
   );
 }

@@ -1,54 +1,70 @@
 {
-  "metadata": {
-    "/": {
+  "/": {
+    "metadata": {
       "title": { "template": "Juun | %s", "default": "Juun" },
       "description": "Technology-Agnostic Architectural Playground",
       "applicationName": "Juun's Playground",
       "generator": "Next.js",
       "openGraph": {
-        "siteName": "Juun's Playground"
-      }
-    },
-    "/blog": {
-      "title": "Blog",
-      "description": "Records of experiments, learnings, achievements, analyses"
-    },
-    "/playground": {
-      "title": "Playground",
-      "description": "Experimented or experimenting technologies"
-    }
-  },
-  "components": {
-    "blog": {
-      "alert": {
-        "items": {
-          "notFound": {
-            "title": "",
-            "description": ""
-          }
-        }
-      },
-      "article": {
-        "table-of-contents": {
-          "title": "JUMP TO SECTION"
-        },
-        "list": {
-          "title": "Return to List"
-        }
-      },
-      "card": {
-        "readingTime": "{readingTime, plural, =1 {# min} other {# mins}} read"
+        "siteName": "Juun's Playground",
+        "url": "https://juun.vercel.app"
       }
     },
     "header": {
       "i18n": {
         "aria-label": "언어 설정을 한국어로 변경합니다",
-        "span": "Switch Locale"
+        "label": "Switch Locale"
       },
       "theme": {
         "aria-label": "Switch to {label} theme",
-        "span": "Switch Theme"
+        "label": "Switch Theme"
       }
+    }
+  },
+  "/blog": {
+    "metadata": {
+      "title": "Blog",
+      "description": "Records of experiments, learnings, achievements, analyses",
+      "openGraph": {
+        "url": "https://juun.vercel.app/en/blog"
+      }
+    },
+    "alert": {
+      "items": {
+        "notFound": {
+          "title": "",
+          "description": ""
+        }
+      }
+    },
+    "article": {
+      "table-of-contents": "JUMP TO SECTION",
+      "list": "Return to List",
+      "clipboard": {
+        "label": "Copy to clipboard",
+        "success": "URL copied to clipboard!"
+      },
+      "facebook": "Share on Facebook",
+      "linkedin": "Share on LinkedIn",
+      "x": "Share on X(Twitter)"
+    },
+    "card": {
+      "readingTime": "{readingTime, plural, =1 {# min} other {# mins}} read"
+    }
+  },
+  "/playground": {
+    "metadata": {
+      "title": "Playground",
+      "description": "Experimented or experimenting technologies",
+      "openGraph": {
+        "url": "https://juun.vercel.app/en/playground"
+      }
+    }
+  },
+  "ui": {
+    "carousel": {
+      "next": "Next slide",
+      "prev": "Previous slide"
     }
   }
 }

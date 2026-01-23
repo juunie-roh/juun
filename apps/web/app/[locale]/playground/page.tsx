@@ -15,7 +15,7 @@ import PlaygroundItem from "./_components/item";
 import { PLAYGROUND_ITEMS } from "./_data";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("metadata./playground");
+  const t = await getTranslations("/playground.metadata");
 
   const path = "/playground";
   const canonicalUrl = await getCanonicalUrl(path);
