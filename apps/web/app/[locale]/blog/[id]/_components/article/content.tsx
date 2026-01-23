@@ -3,7 +3,7 @@ import React from "react";
 import { Prose } from "@/components/ui/prose";
 import { Separator } from "@/components/ui/separator";
 
-import ListButton from "./list-button";
+import ListButton from "../button/list";
 import TableOfContents from "./table-of-contents";
 
 export default function BlogContent({
