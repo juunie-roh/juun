@@ -31,6 +31,9 @@
       "article": {
         "table-of-contents": {
           "title": "JUMP TO SECTION"
+        },
+        "list": {
+          "title": "Return to List"
         }
       },
       "card": {
