@@ -1,13 +1,12 @@
-"use client";
-
-import { Link } from "lucide-react";
 import { useFormatter } from "next-intl";
-import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { LogoAvatar } from "@/components/ui/logo-avatar";
 import { Separator } from "@/components/ui/separator";
+
+import ClipboardButton from "../button/clipboard";
+import FacebookShareButton from "../button/facebook";
+import LinkedInShareButton from "../button/linkedin";
+import XShareButton from "../button/x";
 
 interface BlogFooterProps {
   metadata: {
@@ -50,22 +49,10 @@ export default function BlogFooter({ metadata }: BlogFooterProps) {
             <Separator orientation="horizontal" />
             <span className="block pt-3 text-lg">Share article</span>
             <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Copy URL to clipboard"
-                onClick={() => {
-                  navigator.clipboard.writeText(window.location.href);
-                  toast.success("URL copied to clipboard!", {
-                    id: "article-copied",
-                    duration: 2000,
-                  });
-                }}
-              >
-                <LogoAvatar>
-                  <Link />
-                </LogoAvatar>
-              </Button>
+              <ClipboardButton />
+              <FacebookShareButton />
+              <XShareButton />
+              <LinkedInShareButton />
             </div>
           </div>
         </div>
