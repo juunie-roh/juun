@@ -42,15 +42,15 @@
     "check-types": "tsc -p ./tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.2.0",
-    "@prisma/client": "^7.2.0",
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^7.3.0",
     "pg": "^8.17.2"
   },
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@types/node": "^25.0.9",
-    "prisma": "^7.2.0",
+    "@types/node": "^25.0.10",
+    "prisma": "^7.3.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
