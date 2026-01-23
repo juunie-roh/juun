@@ -1,16 +1,9 @@
 "use client";
 
-import { ArrowRight, Bookmark } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 
 interface TableOfContentsProps {
@@ -18,10 +11,6 @@ interface TableOfContentsProps {
    * CSS class for the container
    */
   className?: string;
-  /**
-   * Add border to the ToC
-   */
-  bordered?: boolean;
   /**
    * Container selector where headers are located
    * Defaults to '.prose' which is the standard blog content container
@@ -102,15 +91,12 @@ function getHeadings(
  */
 export default function TableOfContents({
   className,
-  bordered = true,
   contentSelector = ".prose",
   headingSelector = "h2, h3",
 }: TableOfContentsProps) {
   const t = useTranslations("components.blog.article.table-of-contents");
-  const isLg = useMediaQuery("width > 64rem");
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const headingElements = getHeadings(contentSelector, headingSelector);
@@ -197,56 +183,20 @@ export default function TableOfContents({
     </ul>
   );
 
-  return isLg ? (
+  return (
     <div
       className={cn(
-        "hidden w-full overflow-auto rounded-lg bg-card py-4 text-sm lg:block",
+        "hidden w-full overflow-auto rounded-lg bg-card text-sm lg:block",
         className,
       )}
     >
       <h4 className="mb-4 px-6 font-medium">{t("title")}</h4>
-      <nav className="max-h-[50vh] overflow-hidden overflow-y-auto px-3">
+      <nav
+        aria-label={t("title")}
+        className="max-h-[50vh] overflow-hidden overflow-y-auto px-3"
+      >
         {tocContent}
       </nav>
-    </div>
-  ) : (
-    <div className={cn("xl:hidden", className)}>
-      <Collapsible
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        className={cn(
-          "w-full max-w-64 rounded-md bg-card",
-          bordered && "border",
-        )}
-      >
-        <CollapsibleTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn(
-              isOpen && "flex w-full items-center justify-between px-2.5",
-            )}
-          >
-            {isOpen ? (
-              <Fragment>
-                <ArrowRight />
-                <Bookmark className="fill-primary" />
-              </Fragment>
-            ) : (
-              <>
-                <Bookmark />
-              </>
-            )}
-            <span className="sr-only">Toggle table of contents</span>
-          </Button>
-        </CollapsibleTrigger>
-
-        <CollapsibleContent>
-          <div className="mt-2 max-h-[50vh] overflow-y-auto px-4 pb-4">
-            {tocContent}
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
     </div>
   );
 }

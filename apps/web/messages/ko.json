@@ -43,6 +43,9 @@
       "article": {
         "table-of-contents": {
           "title": "목차 바로가기"
+        },
+        "list": {
+          "title": "목록으로 돌아가기"
         }
       },
       "card": {
@@ -60,5 +63,4 @@
       }
     }
   }
-  
 }
