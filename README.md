@@ -15,6 +15,8 @@ This project demonstrates architectural thinking across multiple domains: techni
 
 ## Philosophy
 
+> **Want the deep dive?** Read [Software Architecture](https://juun.vercel.app/ko/blog/9) — an article about why this project is structured to embed its maker's thinking process.
+
 Unlike traditional portfolios that showcase finished products, Juun treats software development as a knowledge discipline:
 
 - **Building features** → Creates timeline entries (ADRs)
@@ -30,7 +32,7 @@ Unlike traditional portfolios that showcase finished products, Juun treats softw
 
 ### 📊 Decision Records (Timeline)
 
-14+ architectural decision records with quantified outcomes:
+21+ architectural decision records with quantified outcomes:
 
 - 66-72% bundle size reduction
 - 34% Docker image optimization
@@ -45,6 +47,13 @@ In-depth blog articles covering:
 - Performance (bundle optimization, lazy loading)
 - Architecture (MFE critique, separation of concerns)
 - Bilingual: Korean primary + English LinkedIn versions
+
+### 🌐 Internationalization
+
+- Bilingual content system (Korean primary, English)
+- Database-driven translations via junction tables
+- SEO-optimized with canonical URLs and language alternates
+- Locale-aware formatting (dates, numbers)
 
 ### 🎮 Interactive Playground
 
@@ -75,30 +84,39 @@ In-depth blog articles covering:
 | **3D Graphics** | CesiumJS (Geospatial) + Three.js + Cannon |
 | **State Management** | Zustand (global) + React Context (route-scoped) |
 | **Styling** | Tailwind CSS + shadcn/ui |
-| **Testing** | Vitest + React Testing Library + Playwright |
+| **Testing** | Vitest + Storybook (browser tests) + Playwright |
 | **CI/CD** | GitHub Actions + Vercel |
 | **Documentation** | Storybook |
 
 ---
+
+## Architecture Highlights
+
+| Pattern | Implementation |
+| ------- | -------------- |
+| **Namespace queries** | `post.select.byId()`, `timeline.select.all()` |
+| **Cache separation** | Pure DB layer + Next.js cache wrappers |
+| **Translation fallback** | Korean default when locale missing |
+| **Typography-driven schema** | Titles on base table (Latin font), content in translation tables |
+| **Failed experiments documented** | 1-day MFE reversal (Timeline #14) |
 
 ## Project Structure
 
 ```text
 juun/
 ├── apps/
-│   └── web/                      # Next.js 16 application
-│       ├── app/                  # App Router
-│       │   ├── blog/[id]/        # Database-driven blog
-│       │   ├── timeline/         # ADR timeline
-│       │   ├── playground/       # Interactive demos
-│       │   └── @dialog/          # Parallel routes for modals
-│       ├── components/           # Shared React components
-│       ├── lib/
-│       │   ├── cache/            # Next.js cache wrappers
-│       │   └── md.tsx            # Markdown processing
+│   └── web/
+│       ├── app/
+│       │   ├── [locale]/
+│       │   │   ├── blog/[id]/
+│       │   │   ├── timeline/[id]/
+│       │   │   ├── playground/
+│       │   │   └── cesium-utils/
+│       │   └── @dialog/
+│       └── lib/
+│           └── cache/            # Next.js 16 "use cache" wrappers
 │       └── utils/                # Utilities (security, image, date)
 ├── packages/
-│   ├── ui/                       # shadcn/ui component library
 │   ├── db/                       # Framework-agnostic Prisma layer
 │   ├── api/                      # HTTP client with retry
 │   └── config/                   # Shared configs (ESLint, Tailwind, TS)
@@ -110,8 +128,8 @@ juun/
 
 ### Prerequisites
 
-- Node.js 24.x or higher
-- PNPM 10.24.0 or higher
+- Node.js 24.x or 25.x (both tested in CI)
+- PNPM 10.28.0 or higher
 
 ### Installation
 
