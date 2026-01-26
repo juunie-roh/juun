@@ -38,7 +38,7 @@
     "inquirer": "~9.3.8",
     "lint-staged": "^16.2.7",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "turbo": "^2.7.5"
+    "turbo": "^2.7.6"
   },
   "config": {
     "commitizen": {
