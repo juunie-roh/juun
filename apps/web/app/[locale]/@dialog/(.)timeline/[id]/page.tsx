@@ -5,6 +5,7 @@ import { getLocale } from "next-intl/server";
 import TimelineDialog from "@/components/timeline/dialog";
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
+import { validateId } from "@/utils/validation";
 
 export async function generateStaticParams() {
   return (await cache.timeline.select.all()).map((item) => ({
@@ -17,9 +18,11 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const id = validateId((await params).id);
+  if (!id) return {} satisfies Metadata;
+
   const locale = await getLocale();
-  const { id } = await params;
-  const item = await cache.timeline.select.byId(Number(id), locale);
+  const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) return {} satisfies Metadata;
 
@@ -46,9 +49,11 @@ export default async function HomeTimelineDialog({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const id = validateId((await params).id);
+  if (!id) notFound();
+
   const locale = await getLocale();
-  const { id } = await params;
-  const item = await cache.timeline.select.byId(Number(id), locale);
+  const item = await cache.timeline.select.byId(id, locale);
 
   if (!item?.translation.content) notFound();
 

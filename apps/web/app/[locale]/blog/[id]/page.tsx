@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server";
 
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
+import { validateId } from "@/utils/validation";
 
 import { BlogContent, BlogFooter, BlogHeader } from "./_components";
 
@@ -11,10 +12,12 @@ export default async function BlogItemPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const locale = await getLocale();
-  const { id } = await params;
+  const id = validateId((await params).id);
+  if (!id) notFound();
 
-  const post = await cache.post.select.byId(Number(id), locale);
+  const locale = await getLocale();
+
+  const post = await cache.post.select.byId(id, locale);
   if (!post) notFound();
 
   // Flatten translation fields for article components

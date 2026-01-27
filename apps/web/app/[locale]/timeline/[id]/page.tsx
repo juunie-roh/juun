@@ -12,6 +12,7 @@ import {
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
+import { validateId } from "@/utils/validation";
 
 export async function generateStaticParams() {
   const items = await cache.timeline.select.all();
@@ -26,9 +27,11 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const id = validateId((await params).id);
+  if (!id) return {} satisfies Metadata;
+
   const locale = await getLocale();
-  const { id } = await params;
-  const item = await cache.timeline.select.byId(Number(id), locale);
+  const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) return {} satisfies Metadata;
 
@@ -75,9 +78,11 @@ export default async function TimelineDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const id = validateId((await params).id);
+  if (!id) notFound();
+
   const locale = await getLocale();
-  const { id } = await params;
-  const item = await cache.timeline.select.byId(Number(id), locale);
+  const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) notFound();
 
