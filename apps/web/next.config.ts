@@ -10,6 +10,50 @@ const CESIUM_VERSION = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
 // use Cesium's official CDN URL with specified version dynamically
 const CESIUM_BASE_URL = `https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/`;
 
+const isDev = process.env.NODE_ENV === "development";
+
+// CSP domain allowlists grouped by service
+const CSP = {
+  vercel: {
+    scripts: [
+      "https://vercel.live",
+      "https://*.vercel.live",
+      "https://va.vercel-scripts.com",
+    ],
+    connect: [
+      "https://vercel.live",
+      "https://*.vercel.live",
+      "wss://vercel.live",
+      "wss://*.vercel.live",
+    ],
+    frames: ["https://vercel.live", "https://*.vercel.live"],
+  },
+  cesium: {
+    scripts: ["https://cdn.jsdelivr.net"],
+    connect: [
+      "https://cdn.jsdelivr.net",
+      "https://api.cesium.com",
+      "https://assets.ion.cesium.com", // Cesium ion assets
+      "https://*.virtualearth.net",
+      "http://*.virtualearth.net", // Bing Maps tiles use HTTP
+    ],
+    workers: ["https://cdn.jsdelivr.net"],
+  },
+} as const;
+
+// Build CSP directives
+const cspDirectives = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${[...CSP.cesium.scripts, ...CSP.vercel.scripts].join(" ")}`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self' data:",
+  `connect-src 'self' ${[...CSP.vercel.connect, ...CSP.cesium.connect].join(" ")}`,
+  `worker-src 'self' blob: ${CSP.cesium.workers.join(" ")}`,
+  `frame-src ${CSP.vercel.frames.join(" ")}`,
+  "frame-ancestors 'none'",
+].join("; ");
+
 const nextConfig: NextConfig = {
   env: {
     CESIUM_BASE_URL,
@@ -109,19 +153,13 @@ const nextConfig: NextConfig = {
             value: "max-age=63072000; includeSubDomains; preload",
           },
           // Content Security Policy - restricts resource loading to mitigate XSS
+          // Development: Report-Only mode (logs violations without blocking)
+          // Production: Enforcing mode (blocks violations)
           {
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'", // Default: only same-origin resources
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://vercel.live https://*.vercel.live https://va.vercel-scripts.com", // Scripts: self + Cesium CDN + Vercel toolbar + Vercel Analytics
-              "style-src 'self' 'unsafe-inline'", // Styles: self + inline (Tailwind)
-              "img-src 'self' data: https:", // Images: self + data URIs + any HTTPS
-              "font-src 'self' data:", // Fonts: self + data URIs
-              "connect-src 'self' https://vercel.live https://*.vercel.live wss://vercel.live wss://*.vercel.live https://cdn.jsdelivr.net https://api.cesium.com https://*.virtualearth.net http://*.virtualearth.net https://assets.ion.cesium.com/", // XHR/WebSocket: self + Vercel + Cesium CDN + Cesium API + Bing Maps (HTTP for tiles)
-              "worker-src 'self' blob: https://cdn.jsdelivr.net", // Web Workers: self + blob URLs + Cesium CDN workers
-              "frame-src https://vercel.live https://*.vercel.live", // Iframes: Vercel toolbar
-              "frame-ancestors 'none'", // Prevents embedding in iframes (like X-Frame-Options)
-            ].join("; "),
+            key: isDev
+              ? "Content-Security-Policy-Report-Only"
+              : "Content-Security-Policy",
+            value: cspDirectives,
           },
         ],
       },
