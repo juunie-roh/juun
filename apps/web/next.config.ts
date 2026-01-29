@@ -113,11 +113,13 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'", // Default: only same-origin resources
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://vercel.live", // Scripts: self + Cesium CDN + Vercel toolbar
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://vercel.live https://*.vercel.live https://va.vercel-scripts.com", // Scripts: self + Cesium CDN + Vercel toolbar + Vercel Analytics
               "style-src 'self' 'unsafe-inline'", // Styles: self + inline (Tailwind)
               "img-src 'self' data: https:", // Images: self + data URIs + any HTTPS
               "font-src 'self' data:", // Fonts: self + data URIs
-              "connect-src 'self' https://vercel.live wss://vercel.live", // XHR/WebSocket: self + Vercel
+              "connect-src 'self' https://vercel.live https://*.vercel.live wss://vercel.live wss://*.vercel.live https://cdn.jsdelivr.net https://api.cesium.com https://*.virtualearth.net http://*.virtualearth.net https://assets.ion.cesium.com/", // XHR/WebSocket: self + Vercel + Cesium CDN + Cesium API + Bing Maps (HTTP for tiles)
+              "worker-src 'self' blob: https://cdn.jsdelivr.net", // Web Workers: self + blob URLs + Cesium CDN workers
+              "frame-src https://vercel.live https://*.vercel.live", // Iframes: Vercel toolbar
               "frame-ancestors 'none'", // Prevents embedding in iframes (like X-Frame-Options)
             ].join("; "),
           },
