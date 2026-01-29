@@ -49,7 +49,7 @@
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@types/node": "^25.0.10",
+    "@types/node": "^25.1.0",
     "prisma": "^7.3.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
