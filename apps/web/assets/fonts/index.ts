@@ -13,6 +13,7 @@ export const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
   display: "swap",
+  preload: false,
 });
 
 export const notoSansKR = Noto_Sans_KR({
@@ -26,6 +27,8 @@ export const attilaSansSharpTrial = localFont({
   src: "AttilaSansSharpTrial-Medium.otf",
   variable: "--font-attila-sans-sharp-trial",
   weight: "500",
+  display: "swap",
+  preload: false,
 });
 
 export const victorNarrowTrial = localFont({
@@ -33,6 +36,8 @@ export const victorNarrowTrial = localFont({
   weight: "500",
   style: "normal",
   variable: "--font-victor-narrow-trial",
+  display: "swap",
+  preload: false,
 });
 
 export const victorSerifTrial = localFont({
@@ -51,6 +56,8 @@ export const victorSerifTrial = localFont({
   weight: "400",
   style: "normal italic",
   variable: "--font-victor-serif-trial",
+  display: "swap",
+  preload: false,
 });
 
 export const stabilGroteskTrial = localFont({
@@ -79,5 +86,6 @@ export const stabilGroteskTrial = localFont({
   variable: "--font-stabil-grotesk-trial",
   weight: "100 400 500 700",
   style: "normal italic",
-  display: "block",
+  display: "swap",
+  preload: false,
 });
