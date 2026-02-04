@@ -13,16 +13,19 @@ export const BASE_URL = "https://juun.vercel.app";
  */
 export function getLanguageAlternates(path: string = "") {
   // Remove leading slash for consistency
-  const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+
+  const getUrl = (locale: string) =>
+    new URL(
+      `/${locale}${normalizedPath === "/" ? "" : normalizedPath}`,
+      BASE_URL,
+    ).toString();
 
   return {
     ...Object.fromEntries(
-      routing.locales.map((locale) => [
-        locale,
-        `${BASE_URL}/${locale}${normalizedPath ? `/${normalizedPath}` : ""}`,
-      ]),
+      routing.locales.map((locale) => [locale, getUrl(locale)]),
     ),
-    "x-default": `${BASE_URL}/${routing.defaultLocale}${normalizedPath ? `/${normalizedPath}` : ""}`,
+    "x-default": getUrl(routing.defaultLocale),
   };
 }
 
@@ -35,5 +38,9 @@ export function getLanguageAlternates(path: string = "") {
 export async function getCanonicalUrl(path: string = "") {
   const locale = await getLocale();
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
-  return `${BASE_URL}/${locale}${normalizedPath ? `/${normalizedPath}` : ""}`;
+
+  return new URL(
+    `/${locale}${normalizedPath === "/" ? "" : normalizedPath}`,
+    BASE_URL,
+  ).toString();
 }
