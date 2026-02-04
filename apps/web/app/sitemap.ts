@@ -15,12 +15,13 @@ type SitemapEntry = MetadataRoute.Sitemap[number];
  */
 function createEntry(
   path: string,
+  locale: string,
   lastModified?: Date,
   options?: Partial<SitemapEntry>,
 ): SitemapEntry {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return {
-    url: `${BASE_URL}/${routing.defaultLocale}${normalizedPath === "/" ? "" : normalizedPath}`,
+    url: `${BASE_URL}/${locale}${normalizedPath === "/" ? "" : normalizedPath}`,
     lastModified: lastModified ?? new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
@@ -31,42 +32,52 @@ function createEntry(
   };
 }
 
+// Helper to create entries for all locales
+function createEntriesForAllLocales(
+  path: string,
+  lastModified?: Date,
+  options?: Partial<SitemapEntry>,
+): SitemapEntry[] {
+  return routing.locales.map((locale) =>
+    createEntry(path, locale, lastModified, options),
+  );
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
-    createEntry("", new Date(), { priority: 1.0 }),
-    createEntry("/about"),
-    createEntry("/blog"),
-    createEntry("/playground"),
-    createEntry("/cesium-utils"),
+    ...createEntriesForAllLocales("", new Date(), { priority: 1.0 }),
+    ...createEntriesForAllLocales("/about"),
+    ...createEntriesForAllLocales("/blog"),
+    ...createEntriesForAllLocales("/playground"),
+    ...createEntriesForAllLocales("/cesium-utils"),
   ];
 
-  // Blog posts (dynamic from database)
+  // Blog posts
   const posts = await cache.post.select.all();
-  const blogEntries: MetadataRoute.Sitemap = posts.map((post) =>
-    createEntry(`/blog/${post.id}`, post.updated_at),
+  const blogEntries = posts.flatMap((post) =>
+    createEntriesForAllLocales(`/blog/${post.id}`, post.updated_at),
   );
 
-  // Timeline items (dynamic from database)
+  // Timeline items
   const timelineItems = await cache.timeline.select.all();
-  const timelineEntries: MetadataRoute.Sitemap = timelineItems.map((item) =>
-    createEntry(`/timeline/${item.id}`, item.updated_at),
+  const timelineEntries = timelineItems.flatMap((item) =>
+    createEntriesForAllLocales(`/timeline/${item.id}`, item.updated_at),
   );
 
-  // Playground items (static configuration)
-  // Filter out external links (like /100days/index.html)
-  const playgroundEntries: MetadataRoute.Sitemap = PLAYGROUND_ITEMS.filter(
-    (item) => item.href.startsWith("/playground/"),
-  ).map((item) =>
-    createEntry(
+  // Playground items
+  const playgroundEntries = PLAYGROUND_ITEMS.filter((item) =>
+    item.href.startsWith("/playground/"),
+  ).flatMap((item) =>
+    createEntriesForAllLocales(
       item.href,
       item.date instanceof Date ? item.date : new Date(item.date),
     ),
   );
 
-  // Cesium API pages (static configuration)
-  const cesiumEntries: MetadataRoute.Sitemap = API_KEYS.map((api) =>
-    createEntry(`/cesium-utils/${api}`),
+  // Cesium API pages
+  const cesiumEntries = API_KEYS.flatMap((api) =>
+    createEntriesForAllLocales(`/cesium-utils/${api}`),
   );
 
   return [
