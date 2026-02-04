@@ -11,7 +11,6 @@ type SitemapEntry = MetadataRoute.Sitemap[number];
 
 /**
  * Create a sitemap entry with language alternates
- * Uses the default locale for the canonical <loc> URL
  */
 function createEntry(
   path: string,
@@ -20,11 +19,13 @@ function createEntry(
   options?: Partial<SitemapEntry>,
 ): SitemapEntry {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const fullPath = `/${locale}${normalizedPath === "/" ? "" : normalizedPath}`;
+
   return {
-    url: `${BASE_URL}/${locale}${normalizedPath === "/" ? "" : normalizedPath}`,
+    url: new URL(fullPath, BASE_URL).toString(),
     lastModified: lastModified ?? new Date(),
     changeFrequency: "weekly",
-    priority: 0.8,
+    priority: 0.6,
     alternates: {
       languages: getLanguageAlternates(path),
     },
@@ -47,10 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     ...createEntriesForAllLocales("", new Date(), { priority: 1.0 }),
-    ...createEntriesForAllLocales("/about"),
-    ...createEntriesForAllLocales("/blog"),
-    ...createEntriesForAllLocales("/playground"),
-    ...createEntriesForAllLocales("/cesium-utils"),
+    ...createEntriesForAllLocales("/about", undefined, { priority: 0.8 }),
+    ...createEntriesForAllLocales("/blog", undefined, { priority: 0.8 }),
+    ...createEntriesForAllLocales("/playground", undefined, { priority: 0.8 }),
+    ...createEntriesForAllLocales("/cesium-utils", undefined, {
+      priority: 0.8,
+    }),
   ];
 
   // Blog posts
