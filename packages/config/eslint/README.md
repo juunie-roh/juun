@@ -59,7 +59,7 @@ export default [
 This package uses **peer dependencies** for optional ESLint plugins. Install only what you need based on which configs you use:
 
 | Config | Required Peer Dependencies |
-|--------|---------------------------|
+| ------ | ------------------------- |
 | `base` | None (core dependencies only) |
 | `typescript` | None (core dependencies only) |
 | `prettier` | None (core dependencies only) |
