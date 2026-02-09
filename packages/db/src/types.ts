@@ -1,7 +1,7 @@
 import { SortOrder } from "@/generated/prisma/internal/prismaNamespace";
 
 // Re-export types from generated Prisma client
-export type {
+export {
   Locale,
   PostCategory,
   TimelineCategory,

@@ -9,6 +9,7 @@
     "build": {
       "dependsOn": ["^build"],
       "env": [
+        "NEXT_PUBLIC_BASE_URL",
         "POSTGRES_URL",
         "POSTGRES_PRISMA_URL",
         "DATABASE_URL_UNPOOLED",

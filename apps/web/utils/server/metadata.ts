@@ -4,7 +4,8 @@ import { getLocale } from "next-intl/server";
 
 import { routing } from "@/i18n/routing";
 
-export const BASE_URL = "https://juun.vercel.app";
+export const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ?? ("https://juun.vercel.app" as const);
 
 /**
  * Generate language alternates for a given path
