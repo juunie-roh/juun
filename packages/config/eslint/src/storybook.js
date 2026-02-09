@@ -1,9 +1,8 @@
 import { defineConfig } from "eslint/config";
 import storybook from 'eslint-plugin-storybook';
-import { compat } from './util.js';
 
 export default defineConfig([
-  ...compat.config(storybook.configs.recommended),
+  ...storybook.configs['flat/recommended'],
   {
     files: ['*.stories.*'],
     rules: {

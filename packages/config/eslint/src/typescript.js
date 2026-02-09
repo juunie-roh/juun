@@ -7,11 +7,6 @@ import { baseRules } from './base.js';
 
 export const tsRules = {
   ...baseRules,
-  'react/function-component-definition': 'off',
-  'react/destructuring-assignment': 'off',
-  'react/require-default-props': 'off',
-  'react/jsx-props-no-spreading': 'off',
-
   '@typescript-eslint/array-type': 'off',
   '@typescript-eslint/ban-ts-comment': 'off',
   '@typescript-eslint/ban-tslint-comment': 'off',
