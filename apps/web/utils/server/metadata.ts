@@ -38,10 +38,7 @@ export function getLanguageAlternates(path: string = "") {
  */
 export async function getCanonicalUrl(path: string = "") {
   const locale = await getLocale();
-  const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+  const pathname = `/${locale}${path.startsWith("/") ? path : `/${path}`}`;
 
-  return new URL(
-    `/${locale}${normalizedPath === "/" ? "" : normalizedPath}`,
-    BASE_URL,
-  ).toString();
+  return new URL(pathname, BASE_URL).toString();
 }
