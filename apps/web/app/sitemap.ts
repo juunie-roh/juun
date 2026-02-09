@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 
 import { routing } from "@/i18n/routing";
 import cache from "@/lib/cache";
-import { BASE_URL, getLanguageAlternates } from "@/utils/server/metadata";
+import {
+  buildLocalizedUrl,
+  getLanguageAlternates,
+} from "@/utils/server/metadata";
 
 import { API_KEYS } from "./[locale]/cesium-utils/_data";
 import { PLAYGROUND_ITEMS } from "./[locale]/playground/_data";
@@ -18,11 +21,8 @@ function createEntry(
   lastModified?: Date,
   options?: Partial<SitemapEntry>,
 ): SitemapEntry {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  const fullPath = `/${locale}${normalizedPath === "/" ? "" : normalizedPath}`;
-
   return {
-    url: new URL(fullPath, BASE_URL).toString(),
+    url: buildLocalizedUrl(locale, path),
     lastModified: lastModified ?? new Date(),
     changeFrequency: "weekly",
     priority: 0.6,
