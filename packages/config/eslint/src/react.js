@@ -22,6 +22,11 @@ export default defineConfig([
       'react/prop-types': 'off', // Not needed with TypeScript
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
+
+      'react/function-component-definition': 'off',
+      'react/destructuring-assignment': 'off',
+      'react/require-default-props': 'off',
+      'react/jsx-props-no-spreading': 'off',
     },
   },
 ]);
