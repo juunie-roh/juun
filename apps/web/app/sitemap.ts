@@ -18,11 +18,10 @@ function createEntry(
   lastModified?: Date,
   options?: Partial<SitemapEntry>,
 ): SitemapEntry {
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  const fullPath = `/${locale}${normalizedPath === "/" ? "" : normalizedPath}`;
+  const pathname = `/${locale}${path.startsWith("/") ? path : `/${path}`}`;
 
   return {
-    url: new URL(fullPath, BASE_URL).toString(),
+    url: new URL(pathname, BASE_URL).toString(),
     lastModified: lastModified ?? new Date(),
     changeFrequency: "weekly",
     priority: 0.6,
