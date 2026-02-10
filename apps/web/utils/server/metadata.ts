@@ -7,8 +7,16 @@ import { routing } from "@/i18n/routing";
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ?? ("https://juun.vercel.app" as const);
 
+/**
+ * Build a full URL with locale prefix for a given path
+ * @param locale - The locale code (e.g., "ko", "en")
+ * @param path - The path without locale (e.g., "/blog", "/blog/1"). Root "/" and "" both resolve without trailing slash.
+ * @returns Full URL string (e.g., "https://juun.vercel.app/ko/blog")
+ */
 export function buildLocalizedUrl(locale: string, path: string = "") {
-  const pathname = `/${locale}${path.startsWith("/") ? path : `/${path}`}`;
+  const normalizedPath =
+    path === "/" ? "" : path.startsWith("/") ? path : path ? `/${path}` : "";
+  const pathname = `/${locale}${normalizedPath}`;
   return new URL(pathname, BASE_URL).toString();
 }
 
