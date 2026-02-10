@@ -8,6 +8,11 @@ import { defineConfig } from "vitest/config";
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": dirname,
+    },
+  },
   test: {
     exclude: ["**/node_modules/**", "**/__e2e__/**"],
     coverage: {
@@ -24,6 +29,7 @@ export default defineConfig({
     },
     projects: [
       {
+        extends: true,
         test: {
           name: "unit",
           environment: "jsdom",
