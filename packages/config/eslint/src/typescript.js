@@ -1,4 +1,5 @@
 import { defineConfig } from "eslint/config";
+import jsdoc from 'eslint-plugin-jsdoc';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -40,12 +41,18 @@ export const tsRules = {
   'unused-imports/no-unused-imports': 'error',
   'unused-imports/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   'consistent-return': 'off',
+
+  'jsdoc/require-description-complete-sentence': 'warn',
+  'jsdoc/require-asterisk-prefix': 'warn',
+  'jsdoc/sort-tags': 'warn',
 };
 
 export default defineConfig([
   {
+    ...jsdoc.configs['flat/recommended-typescript'],
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
+      jsdoc,
       '@typescript-eslint': tseslint,
       'unused-imports': unusedImports,
       'simple-import-sort': simpleImportSort,
