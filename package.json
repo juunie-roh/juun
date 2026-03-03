@@ -1,7 +1,7 @@
 {
   "name": "juun",
   "version": "0.0.2",
-  "packageManager": "pnpm@10.30.2",
+  "packageManager": "pnpm@10.30.3",
   "private": true,
   "author": "juun",
   "type": "module",
@@ -51,7 +51,8 @@
       "hono": ">=4.11.4",
       "diff": ">=8.0.3",
       "lodash": ">=4.17.23",
-      "minimatch": ">=10.2.1"
+      "minimatch": ">=10.2.1",
+      "serialize-javascript": ">=7.0.3"
     }
   }
 }
