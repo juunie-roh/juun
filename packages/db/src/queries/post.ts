@@ -46,10 +46,10 @@ export type Input = {
 namespace post {
   export namespace select {
     /**
-     * Get all posts without contents for a specific locale
+     * Get all posts without contents for a specific locale.
      *
      * Posts are ordered by `created_at` descending (newest first)
-     * Falls back to default locale (ko) if translation not found
+     * Falls back to default locale (ko) if translation not found.
      */
     export async function all(
       locale: Locale = DEFAULT_LOCALE,
@@ -125,7 +125,7 @@ namespace post {
     }
 
     /**
-     * Get all posts having specific tags without contents
+     * Get all posts having specific tags without contents.
      */
     export async function byTags(
       tags: string[],
@@ -207,7 +207,7 @@ namespace post {
     }
 
     /**
-     * Get all posts classified with `category` without contents
+     * Get all posts classified with `category` without contents.
      *
      * @see {@link PostCategory}
      */
@@ -285,7 +285,7 @@ namespace post {
     }
 
     /**
-     * Get a single post by id with content for a specific locale
+     * Get a single post by id with content for a specific locale.
      */
     export async function byId(
       id: number,
@@ -344,10 +344,10 @@ namespace post {
 
   export namespace create {
     /**
-     * Create a new post with translations and tags
+     * Create a new post with translations and tags.
      *
      * Tags are created if they don't exist (connectOrCreate pattern)
-     * Word count is automatically calculated from content for each translation
+     * Word count is automatically calculated from content for each translation.
      */
     export async function one(input: Input): Promise<Post> {
       const { title, category, image, tags, translations } = input;
@@ -414,7 +414,7 @@ namespace post {
 
     /**
      * Calculate word count from content
-     * Counts words separated by whitespace, handling both English and Korean text
+     * Counts words separated by whitespace, handling both English and Korean text.
      */
     function calculateWordCount(content: string): number {
       return content
