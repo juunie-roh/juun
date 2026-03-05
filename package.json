@@ -23,11 +23,11 @@
     "db": "pnpm --filter @juun/db"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.2",
-    "@commitlint/config-conventional": "^20.4.2",
-    "@commitlint/cz-commitlint": "^20.4.1",
-    "@commitlint/format": "^20.4.0",
-    "@commitlint/types": "^20.4.0",
+    "@commitlint/cli": "^20.4.3",
+    "@commitlint/config-conventional": "^20.4.3",
+    "@commitlint/cz-commitlint": "^20.4.3",
+    "@commitlint/format": "^20.4.3",
+    "@commitlint/types": "^20.4.3",
     "@config/eslint": "workspace:^",
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.14",
@@ -35,9 +35,9 @@
     "commitizen": "^4.3.1",
     "eslint": "^10.0.2",
     "husky": "^9.1.7",
-    "lint-staged": "^16.3.1",
+    "lint-staged": "^16.3.2",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "turbo": "^2.8.12"
+    "turbo": "^2.8.13"
   },
   "config": {
     "commitizen": {
@@ -52,7 +52,8 @@
       "diff": ">=8.0.3",
       "lodash": ">=4.17.23",
       "minimatch": ">=10.2.1",
-      "serialize-javascript": ">=7.0.3"
+      "serialize-javascript": ">=7.0.3",
+      "@hono/node-server": ">=1.19.10"
     }
   }
 }
