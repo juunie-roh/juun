@@ -40,10 +40,10 @@ export type TimelineWithoutContent = TimelineBase & {
 namespace timeline {
   export namespace select {
     /**
-     * Get all timeline items with tags without details for a specific locale
+     * Get all timeline items with tags without details for a specific locale.
      *
      * Timeline items are ordered by `created_at` descending (newest first)
-     * Falls back to default locale (ko) if translation not found
+     * Falls back to default locale (ko) if translation not found.
      */
     export async function all(
       order: SortOrder | undefined,
@@ -118,7 +118,7 @@ namespace timeline {
     }
 
     /**
-     * Get a single timeline item by id with detail for a specific locale
+     * Get a single timeline item by id with detail for a specific locale.
      */
     export async function byId(
       id: number,

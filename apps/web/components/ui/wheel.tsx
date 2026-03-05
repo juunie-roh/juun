@@ -143,10 +143,10 @@ const calculatePoint = (angle: number, radius: number): Point => ({
 
 /**
  * Draw a circle having `radius` from `startAngle` to `endAngle`, excluding the circle having `innerRadius`.
- * @param startAngle Degree to start circle
- * @param endAngle Degree to end circle
- * @param radius Radius of outer circle
- * @param innerRadius Radius of inner circle to be excluded
+ * @param startAngle Degree to start circle.
+ * @param endAngle Degree to end circle.
+ * @param radius Radius of outer circle.
+ * @param innerRadius Radius of inner circle to be excluded.
  */
 const getSectorPath = ({
   startAngle,
@@ -324,9 +324,13 @@ WheelTitle.displayName = "WheelTitle";
 interface WheelProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect" | "children">,
     VariantProps<typeof wheelVariants> {
-  /** Callback to execute on menu selected */
+  /**
+   * Callback to execute on menu selected.
+   */
   onSelect?: (index: number, title?: string) => void;
-  /** WheelContent components */
+  /**
+   * WheelContent components.
+   */
   children: React.ReactNode;
   size?: number;
   radius?: number;

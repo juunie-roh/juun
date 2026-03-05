@@ -4,40 +4,35 @@ import { Fetcher } from "@/fetcher";
 import FetcherError from "@/fetcher/error";
 
 /**
- * React Query hook for mutations with Fetcher
+ * React Query hook for mutations with Fetcher.
  *
  * Wraps Fetcher mutations (POST, PUT, PATCH, DELETE) with React Query's useMutation.
  * Handles loading states, errors, and success callbacks automatically.
  *
- * @template TData - The expected response data type
- * @template TVariables - The mutation variables type (request body)
- * @param fetcher - Configured Fetcher instance
- * @param options - React Query mutation options
- * @returns React Query mutation result
- *
+ * @template TData - The expected response data type.
+ * @template TVariables - The mutation variables type (request body).
+ * @param fetcher - Configured Fetcher instance.
+ * @param options - React Query mutation options.
+ * @returns React Query mutation result.
  * @example
  * ```typescript
  * interface CreateUserData {
  *   name: string;
  *   email: string;
  * }
- *
  * function CreateUser() {
  *   const fetcher = Fetcher.json('https://api.example.com', {
  *     path: '/users',
  *     method: 'POST'
  *   });
- *
  *   const mutation = useMutator<User, CreateUserData>(fetcher, {
  *     onSuccess: (user) => {
  *       console.log('User created:', user);
  *     }
  *   });
- *
  *   const handleSubmit = (data: CreateUserData) => {
  *     mutation.mutate(data);
  *   };
- *
  *   return (
  *     <form onSubmit={handleSubmit}>
  *       {mutation.isPending && <p>Creating...</p>}
@@ -46,7 +41,6 @@ import FetcherError from "@/fetcher/error";
  *   );
  * }
  * ```
- *
  * @example
  * ```typescript
  * // With query invalidation
@@ -56,7 +50,6 @@ import FetcherError from "@/fetcher/error";
  *   }
  * });
  * ```
- *
  * @example
  * ```typescript
  * // Dynamic body updates

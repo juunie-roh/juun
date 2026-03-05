@@ -1,5 +1,5 @@
 /**
- * React Query integration for @juun/api
+ * React Query integration for @juun/api.
  *
  * This module provides React hooks for using Fetcher with TanStack Query (React Query).
  * It enables declarative data fetching with automatic caching, background updates,
@@ -7,7 +7,6 @@
  *
  * @module @juun/api/react
  * @requires @tanstack/react-query
- *
  * @example
  * ```typescript
  * import { useFetcher, useMutator } from '@juun/api/react';

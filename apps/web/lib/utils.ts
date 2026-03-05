@@ -22,9 +22,8 @@ type IconNode = [elementName: SVGElementType, attrs: Record<string, string>][];
  * intelligently merge Tailwind classes, removing conflicts (e.g., only keeps the last
  * spacing/color class when multiple are provided).
  *
- * @param inputs - Any number of class values (strings, objects, arrays, etc.)
- * @returns A single merged class name string
- *
+ * @param inputs - Any number of class values (strings, objects, arrays, etc.).
+ * @returns A single merged class name string.
  * @example
  * ```tsx
  * cn('px-2 py-1', 'px-4') // Returns: 'py-1 px-4'
@@ -41,12 +40,15 @@ export function cn(...inputs: ClassValue[]) {
  * Generates CSS properties for sticky column positioning with visual indicators:
  * - Positions pinned columns using `left` or `right` offsets
  * - Adds inset box shadows to the last left/first right pinned columns for visual separation
- * - Sets column width based on table configuration
+ * - Sets column width based on table configuration.
  *
- * @template TData - The type of data in the table rows
- * @param column - TanStack Table column instance
- * @returns React CSS properties object for inline styles
- *
+ * @template TData - The type of data in the table rows.
+ * @param column - TanStack Table column instance.
+ * @returns React CSS properties object for inline styles.
+ * @remarks
+ * - Must be used with `position: sticky` CSS class
+ * - Requires table to have `border-collapse: separate` for proper rendering
+ * - Shadow appears on the edge column to indicate scrollable content
  * @example
  * ```tsx
  * <TableHead style={getColumnPinningStyles(header.column)}>
@@ -54,10 +56,6 @@ export function cn(...inputs: ClassValue[]) {
  * </TableHead>
  * ```
  *
- * @remarks
- * - Must be used with `position: sticky` CSS class
- * - Requires table to have `border-collapse: separate` for proper rendering
- * - Shadow appears on the edge column to indicate scrollable content
  */
 export function getColumnPinningStyles<TData>(
   column: Column<TData>,
@@ -87,10 +85,17 @@ export function getColumnPinningStyles<TData>(
  * SVG element nodes and wrapping them with Lucide's icon API. This allows custom SVG
  * icons to be used seamlessly alongside Lucide icons with consistent sizing and styling.
  *
- * @param iconName - The name identifier for the icon (used for debugging/display)
- * @param Svg - A React functional component that renders an SVG element
- * @returns A Lucide icon component compatible with lucide-react
- *
+ * @param iconName - The name identifier for the icon (used for debugging/display).
+ * @param Svg - A React functional component that renders an SVG element.
+ * @returns A Lucide icon component compatible with lucide-react.
+ * @remarks
+ * **IMPORTANT:** The SVG must be stroke-based to be compatible with Lucide's styling system.
+ * - Use `stroke="currentColor"` instead of `fill` attributes
+ * - Set `fill="none"` on the SVG element
+ * - Use `strokeWidth`, `strokeLinecap`, and `strokeLinejoin` for styling
+ * - Avoid filled shapes; use outlined/stroked paths instead
+ * This ensures the icon inherits color from CSS and maintains consistency with Lucide icons.
+ * @see {@link createIconNode} for the internal SVG parsing logic
  * @example
  * ```tsx
  * const CustomLogo = () => (
@@ -103,16 +108,6 @@ export function getColumnPinningStyles<TData>(
  * // Use like any Lucide icon: <LogoIcon size={24} />
  * ```
  *
- * @remarks
- * **IMPORTANT:** The SVG must be stroke-based to be compatible with Lucide's styling system.
- * - Use `stroke="currentColor"` instead of `fill` attributes
- * - Set `fill="none"` on the SVG element
- * - Use `strokeWidth`, `strokeLinecap`, and `strokeLinejoin` for styling
- * - Avoid filled shapes; use outlined/stroked paths instead
- *
- * This ensures the icon inherits color from CSS and maintains consistency with Lucide icons.
- *
- * @see {@link createIconNode} for the internal SVG parsing logic
  */
 export function createIcon(
   iconName: string,

@@ -1,5 +1,5 @@
 /**
- * Base interface for both blog and portfolio post metadata
+ * Base interface for both blog and portfolio post metadata.
  */
 export interface BaseMetadata {
   title: string;
@@ -10,7 +10,7 @@ export interface BaseMetadata {
 }
 
 /**
- * Generic Post interface for both blog and portfolio posts
+ * Generic Post interface for both blog and portfolio posts.
  */
 export interface Post<T extends BaseMetadata> {
   metadata: T;

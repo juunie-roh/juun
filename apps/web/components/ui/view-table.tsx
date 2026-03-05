@@ -18,7 +18,7 @@ export interface ViewTableProps<TData> extends ComponentProps<typeof Table> {
 }
 
 /**
- * a simple table for viewing data.
+ * A simple table for viewing data.
  */
 export default function ViewTable<TData>({
   table,

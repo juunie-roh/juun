@@ -22,18 +22,22 @@ import { getImageDimensions } from "@/utils/server/image";
 
 namespace md {
   /**
-   * Parsed markdown content
+   * Parsed markdown content.
    */
   export interface ParsedContent {
-    /** Rendered React content */
+    /**
+     *  Rendered React content.
+     */
     content: ReactElement;
-    /** Frontmatter data */
+    /**
+     *  Frontmatter data.
+     */
     data: Record<string, any>;
   }
 
   /**
    * Custom component mappings for HTML elements
-   * Maps standard HTML elements to Next.js and custom components
+   * Maps standard HTML elements to Next.js and custom components.
    */
   const components: Partial<Components> = {
     // Map <a> to Next.js Link for client-side navigation
@@ -141,10 +145,10 @@ namespace md {
   };
 
   /**
-   * Parse markdown and convert to React elements (server-side)
+   * Parse markdown and convert to React elements (server-side).
    *
    * Uses the unified/remark/rehype ecosystem for robust markdown processing.
-   * The pipeline: markdown → mdast → hast → React JSX
+   * The pipeline: markdown → mdast → hast → React JSX.
    */
   export async function parse(markdown: string): Promise<ParsedContent> {
     const { data, content: markdownContent } = matter(markdown);
@@ -173,7 +177,7 @@ namespace md {
   }
 
   /**
-   * Render parsed markdown content with Prose styling (client-side)
+   * Render parsed markdown content with Prose styling (client-side).
    *
    * The content is already converted to React elements by rehype-react,
    * so we simply render it inside the Prose wrapper for styling.

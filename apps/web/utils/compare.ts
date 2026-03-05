@@ -1,16 +1,15 @@
 /**
- * Compares two values for use in Array.sort()
+ * Compares two values for use in Array.sort().
  *
  * Returns:
  * - negative number if a < b
  * - 0 if a equals b
- * - positive number if a > b
+ * - positive number if a > b.
  *
- * @template T compare value type
- *
- * @param a First value to compare
- * @param b Second value to compare
- * @returns number indicating sort order
+ * @template T Compare value type.
+ * @param a First value to compare.
+ * @param b Second value to compare.
+ * @returns Number indicating sort order.
  */
 export const compare = <T>(a: T, b: T): number => {
   // Handle null/undefined

@@ -24,9 +24,13 @@ function DraggableDialogContent({
   open,
   ...props
 }: React.ComponentProps<typeof DialogContent> & {
-  /** dialog open state */
+  /**
+   * Dialog open state.
+   */
   open: boolean;
-  /** Whether to allow interact outside the dialog */
+  /**
+   * Whether to allow interact outside the dialog.
+   */
   interactive?: boolean;
 }) {
   // drag target element ref

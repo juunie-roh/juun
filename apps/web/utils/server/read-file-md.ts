@@ -8,11 +8,11 @@ import type { BaseMetadata, Post } from "@/types/post.types";
 import { compare } from "@/utils/compare";
 
 /**
- * Extract common metadata properties from a file
+ * Extract common metadata properties from a file.
  *
- * @param filePath Path to the file
- * @param additionalExtractors Optional functions to extract additional metadata
- * @returns Metadata object
+ * @param filePath Path to the file.
+ * @param additionalExtractors Optional functions to extract additional metadata.
+ * @returns Metadata object.
  */
 export async function extractBaseMetadata<T extends BaseMetadata>(
   filePath: string,
@@ -95,12 +95,12 @@ export async function extractBaseMetadata<T extends BaseMetadata>(
 }
 
 /**
- * Generic function to get posts from a directory
+ * Generic function to get posts from a directory.
  *
- * @param postsDir Directory containing the posts
- * @param metadataExtractor Function to extract metadata from a file
- * @param sortDescending Whether to sort in descending order (newest first)
- * @returns Array of posts
+ * @param postsDir Directory containing the posts.
+ * @param metadataExtractor Function to extract metadata from a file.
+ * @param sortDescending Whether to sort in descending order (newest first).
+ * @returns Array of posts.
  */
 export function getPostsFromDirectory<T extends BaseMetadata>(
   postsDir: string,

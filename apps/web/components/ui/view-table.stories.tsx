@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Pin, PinOff } from "lucide-react";

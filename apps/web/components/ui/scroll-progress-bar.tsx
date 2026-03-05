@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 
 interface ScrollProgressBarProps {
   /**
-   * CSS class for the progress bar
+   * CSS class for the progress bar.
    */
   className?: string;
 }
 
 /**
  * Optimized scroll progress bar that shows scroll position as percentage of document height
- * Uses direct DOM manipulation for minimal latency
+ * Uses direct DOM manipulation for minimal latency.
  */
 export function ScrollProgressBar({ className }: ScrollProgressBarProps) {
   // Reference to the progress bar element
