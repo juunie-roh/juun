@@ -5,12 +5,12 @@ import path from "path";
 import probe from "probe-image-size";
 
 /**
- * Get image dimensions from a file path
+ * Get image dimensions from a file path.
  *
- * Supports both local files (public directory) and remote URLs
+ * Supports both local files (public directory) and remote URLs.
  *
- * @param src - Image source (local path or URL)
- * @returns Object with width and height, or null if unable to get dimensions
+ * @param src - Image source (local path or URL).
+ * @returns Object with width and height, or null if unable to get dimensions.
  */
 export async function getImageDimensions(
   src: string,

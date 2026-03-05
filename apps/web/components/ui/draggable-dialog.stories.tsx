@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { AlertTriangle, Bell, Save, Settings, User, X } from "lucide-react";
 import { useState } from "react";

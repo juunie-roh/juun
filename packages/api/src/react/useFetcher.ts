@@ -4,38 +4,32 @@ import { Fetcher } from "@/fetcher";
 import FetcherError from "@/fetcher/error";
 
 /**
- * React Query hook for fetching data with Fetcher
+ * React Query hook for fetching data with Fetcher.
  *
  * Wraps a Fetcher instance with React Query's useQuery hook, providing
  * automatic caching, background refetching, and state management.
  *
- * @param fetcher - Configured Fetcher instance
- * @param options - React Query options
- * @returns React Query result with data, loading, error states
- *
+ * @param fetcher - Configured Fetcher instance.
+ * @param options - React Query options.
+ * @returns React Query result with data, loading, error states.
  * @example
  * ```typescript
  * function Users({ page, filters }: Props) {
  *   // Query key derived from component state/props
  *   const queryKey = ['users', { page, filters }];
- *
  *   const fetcher = Fetcher.json('https://api.example.com', {
  *     path: '/users',
  *     queryParams: { page, ...filters }
  *   });
- *
  *   const { data, isLoading, error } = useFetcher<User[]>(
  *     fetcher,
  *     { queryKey }
  *   );
- *
  *   if (isLoading) return <div>Loading...</div>;
  *   if (error) return <div>Error: {error.message}</div>;
- *
  *   return <ul>{data.map(user => <li key={user.id}>{user.name}</li>)}</ul>;
  * }
  * ```
- *
  * @example
  * ```typescript
  * // With React Query options
@@ -49,7 +43,6 @@ import FetcherError from "@/fetcher/error";
  *   }
  * );
  * ```
- *
  * @example
  * ```typescript
  * // Using query key factory for organization

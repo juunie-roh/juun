@@ -1,14 +1,14 @@
 import FetcherError from "./error";
 
 /**
- * HTTP client for executing configured API requests
+ * HTTP client for executing configured API requests.
  *
  * The Fetcher class handles the actual execution of HTTP requests with support for:
  * - Automatic retry with exponential backoff
  * - Request/response transformation pipeline
  * - Timeout handling with AbortController
  * - JSON and text response parsing
- * - Comprehensive error handling
+ * - Comprehensive error handling.
  *
  * @example
  * ```typescript
@@ -19,10 +19,8 @@ import FetcherError from "./error";
  *   method: 'GET',
  *   retry: { maxRetries: 3 }
  * });
- *
  * const data = await fetcher.fetch();
  * ```
- *
  * @example
  * ```typescript
  * // With transformers and schema validation
@@ -49,34 +47,35 @@ class Fetcher {
     this._config = { ...config };
   }
 
-  /** Get a readonly copy of the current configuration */
+  /**
+   * Get a readonly copy of the current configuration .
+   */
   get config(): Readonly<Fetcher.Config> {
     return { ...this._config };
   }
 
   /**
-   * Execute the configured HTTP request with automatic retry and transformation
+   * Execute the configured HTTP request with automatic retry and transformation.
    *
    * This method performs the HTTP request using the fetch API, with support for:
+   *
    * - Automatic retry on transient failures (if configured)
    * - Response transformation pipeline
    * - JSON/text parsing based on Content-Type
    * - Timeout enforcement
-   * - Error wrapping with {@link FetcherError}
+   * - Error wrapping with {@link FetcherError}.
    *
-   * @template T - The expected response type after transformation
-   * @returns Promise resolving to the transformed response data
-   * @throws {Error} If baseUrl is not configured
-   * @throws {FetcherError} On HTTP errors (4xx, 5xx status codes)
-   * @throws {FetcherError} On request timeout (408 status code)
-   * @throws {Error} On network failures or other errors
-   *
+   * @template T The expected response type after transformation.
+   * @returns Promise resolving to the transformed response data.
+   * @throws {Error} If baseUrl is not configured.
+   * @throws {FetcherError} On HTTP errors (4xx, 5xx status codes).
+   * @throws {FetcherError} On request timeout (408 status code).
+   * @throws {Error} On network failures or other errors.
    * @example
    * ```typescript
    * // Basic GET request
    * const users = await fetcher.fetch<User[]>();
    * ```
-   *
    * @example
    * ```typescript
    * // With error handling
@@ -90,7 +89,6 @@ class Fetcher {
    *   }
    * }
    * ```
-   *
    * @example
    * ```typescript
    * // With retry monitoring
@@ -152,7 +150,7 @@ class Fetcher {
   }
 
   /**
-   * Perform the actual HTTP request
+   * Perform the actual HTTP request.
    */
   private async execute<T>(): Promise<T> {
     const { baseUrl, path, method, headers, timeout, queryParams, body } =
@@ -242,7 +240,7 @@ class Fetcher {
   }
 
   /**
-   * Determine if the error should trigger a retry
+   * Determine if the error should trigger a retry.
    */
   private shouldRetry(
     error: Error,
@@ -266,7 +264,7 @@ class Fetcher {
   }
 
   /**
-   * Calculate retry delay with exponential backoff and jitter
+   * Calculate retry delay with exponential backoff and jitter.
    */
   private calculateRetryDelay(
     attempt: number,
@@ -285,7 +283,7 @@ class Fetcher {
   }
 
   /**
-   * Sleep for specified milliseconds
+   * Sleep for specified milliseconds.
    */
   private sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -293,12 +291,12 @@ class Fetcher {
 }
 
 /**
- * Idempotent HTTP methods that are safe to retry per RFC 7231/9110
+ * Idempotent HTTP methods that are safe to retry per RFC 7231/9110.
  */
 const IDEMPOTENT_METHODS: Fetcher.HttpMethod[] = ["GET", "PUT", "DELETE"];
 
 /**
- * Default retry configuration following industry standards
+ * Default retry configuration following industry standards.
  */
 const DEFAULT_RETRY_CONFIG: Required<Fetcher.RetryConfig> = {
   maxRetries: 3,
@@ -312,7 +310,7 @@ const DEFAULT_RETRY_CONFIG: Required<Fetcher.RetryConfig> = {
 
 namespace Fetcher {
   /**
-   * Configuration options for the API builder
+   * Configuration options for the API builder.
    */
   export interface Config {
     baseUrl?: string;
@@ -327,27 +325,41 @@ namespace Fetcher {
   }
 
   /**
-   * Configuration for retry behavior following industry standards (AWS/GCP/axios-retry)
+   * Configuration for retry behavior following industry standards (AWS/GCP/axios-retry).
    */
   export interface RetryConfig {
-    /** Maximum retry attempts (default: 3) */
+    /**
+     * Maximum retry attempts (default: 3).
+     */
     maxRetries?: number;
-    /** Initial delay between retries in milliseconds (default: 100) */
+    /**
+     * Initial delay between retries in milliseconds (default: 100).
+     */
     initialDelay?: number;
-    /** Maximum delay cap for exponential backoff in milliseconds (default: 32000) */
+    /**
+     *  Maximum delay cap for exponential backoff in milliseconds (default: 32000).
+     */
     maxDelay?: number;
-    /** Use exponential backoff (default: true) */
+    /**
+     * Use exponential backoff (default: true).
+     */
     exponential?: boolean;
-    /** HTTP status codes that trigger a retry (default: [408, 429, 500, 502, 503, 504]) */
+    /**
+     * HTTP status codes that trigger a retry (default: [408, 429, 500, 502, 503, 504]).
+     */
     retryableStatuses?: number[];
-    /** Only retry idempotent methods per RFC 7231 (default: true) */
+    /**
+     * Only retry idempotent methods per RFC 7231 (default: true).
+     */
     onlyIdempotent?: boolean;
-    /** Callback fired on each retry attempt */
+    /**
+     *  Callback fired on each retry attempt.
+     */
     onRetry?: (attempt: number, error: Error, delayMs: number) => void;
   }
 
   /**
-   * HTTP methods supported by the API builder
+   * HTTP methods supported by the API builder.
    */
   export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -357,17 +369,16 @@ namespace Fetcher {
   ) => Output | Promise<Output>;
 
   /**
-   * Factory method: Create a Fetcher pre-configured for JSON APIs
+   * Factory method: Create a Fetcher pre-configured for JSON APIs.
    *
    * Sets up a fetcher with:
    * - JSON content-type header
    * - 30-second timeout
-   * - Specified base URL
+   * - Specified base URL.
    *
-   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com')
-   * @param config - Optional additional configuration to merge
-   * @returns Configured Fetcher instance ready to use
-   *
+   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com').
+   * @param config - Optional additional configuration to merge.
+   * @returns Configured Fetcher instance ready to use.
    * @example
    * ```typescript
    * const fetcher = Fetcher.json('https://api.example.com', {
@@ -391,18 +402,17 @@ namespace Fetcher {
   }
 
   /**
-   * Factory method: Create a Fetcher pre-configured for Bearer token authentication
+   * Factory method: Create a Fetcher pre-configured for Bearer token authentication.
    *
    * Sets up a fetcher with:
    * - Bearer token authentication
    * - JSON content-type header
-   * - Specified base URL
+   * - Specified base URL.
    *
-   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com')
-   * @param token - The bearer token (will be sent as 'Authorization: Bearer {token}')
-   * @param config - Optional additional configuration to merge
-   * @returns Configured Fetcher instance ready to use
-   *
+   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com').
+   * @param token - The bearer token (will be sent as 'Authorization: Bearer {token}').
+   * @param config - Optional additional configuration to merge.
+   * @returns Configured Fetcher instance ready to use.
    * @example
    * ```typescript
    * const fetcher = Fetcher.withBearer(
@@ -431,14 +441,13 @@ namespace Fetcher {
   }
 
   /**
-   * Factory method: Create a Fetcher from an existing configuration
+   * Factory method: Create a Fetcher from an existing configuration.
    *
    * Useful for creating variations of existing fetchers or
    * restoring fetchers from serialized configurations.
    *
-   * @param config - Fetcher configuration object
-   * @returns Fetcher initialized with the provided configuration
-   *
+   * @param config - Fetcher configuration object.
+   * @returns Fetcher initialized with the provided configuration.
    * @example
    * ```typescript
    * const config = {

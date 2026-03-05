@@ -1,11 +1,10 @@
 /**
- * Create a query key factory for a specific API
+ * Create a query key factory for a specific API.
  *
  * Useful for organizing and managing query keys across your application.
  *
- * @param baseUrl - Base URL for all queries in this factory
- * @returns Object with methods to create query keys
- *
+ * @param baseUrl - Base URL for all queries in this factory.
+ * @returns Object with methods to create query keys.
  * @example
  * ```typescript
  * const userKeys = createQueryKeyFactory('https://api.example.com');

@@ -1,12 +1,11 @@
 /**
- * Sanitize URLs to prevent XSS (Cross-Site Scripting) attacks
+ * Sanitize URLs to prevent XSS (Cross-Site Scripting) attacks.
  *
  * Blocks dangerous protocols like javascript:, data:, vbscript:, etc.
- * Only allows safe protocols: http, https, mailto, and relative URLs
+ * Only allows safe protocols: http, https, mailto, and relative URLs.
  *
- * @param uriComponent - URL string to sanitize
- * @returns Sanitized URL or null if invalid/dangerous
- *
+ * @param uriComponent - URL string to sanitize.
+ * @returns Sanitized URL or null if invalid/dangerous.
  * @example
  * safeUrl("https://example.com") // ✅ "https://example.com"
  * safeUrl("/internal/path") // ✅ "/internal/path"

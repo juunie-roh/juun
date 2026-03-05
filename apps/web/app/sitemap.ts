@@ -13,7 +13,7 @@ import { PLAYGROUND_ITEMS } from "./[locale]/playground/_data";
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
 /**
- * Create a sitemap entry with language alternates
+ * Create a sitemap entry with language alternates.
  */
 function createEntry(
   path: string,

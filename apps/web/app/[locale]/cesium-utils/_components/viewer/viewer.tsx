@@ -20,13 +20,23 @@ import { cn } from "@/lib/utils";
 import { useViewer } from "../../_contexts";
 
 export interface ViewerProps extends CesiumViewer.ConstructorOptions {
-  /** Whether to show the credit container. @default true */
+  /**
+   * Whether to show the credit container.
+   * @default true.
+   */
   bottomContainer?: boolean;
-  /** Initial location of the camera */
+  /**
+   * Initial location of the camera.
+   */
   flyTo?: Parameters<CesiumViewer["camera"]["flyTo"]>[0];
-  /** Additional CSS classes */
+  /**
+   * Additional CSS classes.
+   */
   className?: string;
-  /** It is applied in order from the top to Viewer as `viewer.extend(XXX);` after the viewer is mounted. Nothing happens even it is updated by itself. */
+  /**
+   * It is applied in order from the top to Viewer as `viewer.extend(XXX);`
+   * after the viewer is mounted. Nothing happens even it is updated by itself.
+   */
   extend?: CesiumViewer.ViewerMixin[] | CesiumViewer.ViewerMixin;
 }
 

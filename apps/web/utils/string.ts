@@ -1,16 +1,16 @@
 /**
  * Capitalize given string.
- * @param s string to capitalize
- * @returns capitalized string
+ * @param s String to capitalize.
+ * @returns Capitalized string.
  * @example
  * capitalize("helloworld") // "Helloworld"
  */
 export function capitalize(s: string): string;
 /**
  * Capitalize given string.
- * @param s string to capitalize
- * @param separator a separator to split string
- * @returns capitalized string
+ * @param s String to capitalize.
+ * @param separator A separator to split string.
+ * @returns Capitalized string.
  * @example
  * capitalize("CASE_STUDY", /[_]+/g) // "Case Study"
  */

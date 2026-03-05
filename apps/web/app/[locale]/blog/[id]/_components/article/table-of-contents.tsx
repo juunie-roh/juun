@@ -8,17 +8,17 @@ import { cn } from "@/lib/utils";
 
 interface TableOfContentsProps {
   /**
-   * CSS class for the container
+   * CSS class for the container.
    */
   className?: string;
   /**
    * Container selector where headers are located
-   * Defaults to '.prose' which is the standard blog content container
+   * Defaults to '.prose' which is the standard blog content container.
    */
   contentSelector?: string;
   /**
    * Header selectors to include in the ToC
-   * Defaults to h2 and h3 elements
+   * Defaults to h2 and h3 elements.
    */
   headingSelector?: string;
 }
@@ -32,7 +32,7 @@ type Heading = {
 
 /**
  * Extract ID from heading element
- * If no ID exists, generate one from the text content
+ * If no ID exists, generate one from the text content.
  * @param heading Target heading element to get ID from.
  */
 function getIdFromHeading(heading: Element): string {
@@ -87,7 +87,7 @@ function getHeadings(
 /**
  * Responsive Table of Contents
  * - Always expanded on xl screens and up
- * - Collapsible on smaller screens with just a bookmark icon
+ * - Collapsible on smaller screens with just a bookmark icon.
  */
 export default function TableOfContents({
   className,

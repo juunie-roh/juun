@@ -8,10 +8,10 @@ export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ?? ("https://juun.vercel.app" as const);
 
 /**
- * Build a full URL with locale prefix for a given path
- * @param locale - The locale code (e.g., "ko", "en")
+ * Build a full URL with locale prefix for a given path.
+ * @param locale - The locale code (e.g., "ko", "en").
  * @param path - The path without locale (e.g., "/blog", "/blog/1"). Root "/" and "" both resolve without trailing slash.
- * @returns Full URL string (e.g., "https://juun.vercel.app/ko/blog")
+ * @returns Full URL string (e.g., "https://juun.vercel.app/ko/blog").
  */
 export function buildLocalizedUrl(locale: string, path: string = "") {
   const normalizedPath =
@@ -21,9 +21,9 @@ export function buildLocalizedUrl(locale: string, path: string = "") {
 }
 
 /**
- * Generate language alternates for a given path
- * @param path - The path without locale (e.g., "/blog", "/blog/1", "/playground")
- * @returns Language alternates object for Next.js metadata
+ * Generate language alternates for a given path.
+ * @param path - The path without locale (e.g., "/blog", "/blog/1", "/playground").
+ * @returns Language alternates object for Next.js metadata.
  */
 export function getLanguageAlternates(path: string = "") {
   return {
@@ -38,10 +38,10 @@ export function getLanguageAlternates(path: string = "") {
 }
 
 /**
- * Generate canonical URL for a given path and locale
- * @param locale - The current locale
- * @param path - The path without locale (e.g., "/blog", "/blog/1")
- * @returns Canonical URL string
+ * Generate canonical URL for a given path and locale.
+ * @param locale - The current locale.
+ * @param path - The path without locale (e.g., "/blog", "/blog/1").
+ * @returns Canonical URL string.
  */
 export async function getCanonicalUrl(path: string = "") {
   const locale = await getLocale();
