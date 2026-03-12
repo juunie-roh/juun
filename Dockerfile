@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM node:25-alpine3.23 AS base
+FROM node:25-alpine AS base
 WORKDIR /app
 
 # Set common environment variables
@@ -8,7 +8,8 @@ ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
     PORT=3000 \
     HOSTNAME=0.0.0.0 \
-    PNPM_HOME="/pnpm"
+    PNPM_HOME="/pnpm" \
+    CXXFLAGS="-std=c++20"
 
 ENV PATH="$PNPM_HOME:$PATH"
 
@@ -21,7 +22,7 @@ FROM base AS deps
 
 # Update required dependencies
 RUN apk update && \
-    apk add --no-cache libc6-compat && \
+    apk add --no-cache python3 make g++ gcc libc6-compat && \
     # Set pnpm
     npm install -g pnpm && \
     # Clean up apk cache
@@ -62,7 +63,7 @@ RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \
     pnpm build --filter=@juun/web
 
 # Production image
-FROM node:25-alpine3.23 AS runner
+FROM node:25-alpine AS runner
 WORKDIR /app
 
 # Set production environment
