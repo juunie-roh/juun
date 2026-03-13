@@ -1,8 +1,8 @@
 "use client";
 
 import { HybridTerrainProvider } from "@juun-roh/cesium-utils";
-import { TerrainVisualizer } from "@juun-roh/cesium-utils/dev";
 import type { TerrainRegion } from "@juun-roh/cesium-utils/terrain";
+import { TerrainVisualizer } from "@juun-roh/cesium-utils/terrain/dev";
 import {
   EllipsoidTerrainProvider,
   Terrain,
