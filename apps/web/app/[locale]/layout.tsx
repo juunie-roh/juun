@@ -10,6 +10,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import { Suspense } from "react";
 
 import {
   attilaSansSharpTrial,
@@ -136,15 +137,17 @@ export default async function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <TooltipProvider>
-              <Header />
-              {children}
-              {dialog}
-              <Toaster />
-              <Analytics />
-            </TooltipProvider>
-          </NextIntlClientProvider>
+          <Suspense fallback={null}>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <TooltipProvider>
+                <Header />
+                {children}
+                {dialog}
+                <Toaster />
+                <Analytics />
+              </TooltipProvider>
+            </NextIntlClientProvider>
+          </Suspense>
         </ThemeProvider>
         <SpeedInsights />
       </body>
