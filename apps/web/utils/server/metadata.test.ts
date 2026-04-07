@@ -105,20 +105,18 @@ describe("metadata", () => {
   });
 
   describe("getCanonicalUrl", () => {
-    it("should return canonical URL for current locale", async () => {
-      const result = await getCanonicalUrl("/blog");
+    it("should return canonical URL for current locale", () => {
+      const result = getCanonicalUrl("ko", "/blog");
       expect(result).toBe(`${BASE_URL}/ko/blog`);
     });
 
-    it("should use getLocale to determine the locale", async () => {
-      vi.mocked(getLocale).mockResolvedValue("en");
-      const result = await getCanonicalUrl("/about");
+    it("should use getLocale to determine the locale", () => {
+      const result = getCanonicalUrl("en", "/about");
       expect(result).toBe(`${BASE_URL}/en/about`);
-      expect(getLocale).toHaveBeenCalledOnce();
     });
 
-    it("should handle empty path", async () => {
-      const result = await getCanonicalUrl();
+    it("should handle empty path", () => {
+      const result = getCanonicalUrl("ko");
       expect(result).toBe(`${BASE_URL}/ko`);
     });
   });

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Locale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
 import HeaderOffsetLayout from "@/layouts/header-offset";
@@ -8,11 +9,16 @@ import {
   getLanguageAlternates,
 } from "@/utils/server/metadata";
 
-export async function generateMetadata() {
-  const t = await getTranslations("/blog.metadata");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "/blog.metadata" });
 
   const path = "/blog";
-  const canonicalUrl = await getCanonicalUrl(path);
+  const canonicalUrl = getCanonicalUrl(locale, path);
 
   const metadata: Metadata = {
     alternates: {

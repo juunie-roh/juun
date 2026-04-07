@@ -5,8 +5,8 @@ if (typeof window !== "undefined" && process.env.CESIUM_BASE_URL) {
   window.CESIUM_BASE_URL = process.env.CESIUM_BASE_URL;
 }
 
-import "cesium/Build/Cesium/Widgets/widgets.css";
-import "cesium/Build/Cesium/Widgets/lighter.css";
+import "@/public/cesium/Widgets/widgets.css";
+import "@/public/cesium/Widgets/lighter.css";
 
 import {
   CameraEventType,
@@ -37,7 +37,7 @@ export interface ViewerProps extends CesiumViewer.ConstructorOptions {
    * It is applied in order from the top to Viewer as `viewer.extend(XXX);`
    * after the viewer is mounted. Nothing happens even it is updated by itself.
    */
-  extend?: CesiumViewer.ViewerMixin[] | CesiumViewer.ViewerMixin;
+  extend?: { mixin: CesiumViewer.ViewerMixin; options?: any };
 }
 
 const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
@@ -92,11 +92,7 @@ const Viewer = forwardRef<HTMLDivElement, ViewerProps>(
       ];
 
       if (extend) {
-        if (Array.isArray(extend)) {
-          extend.forEach((e) => viewer.extend(e, {}));
-        } else {
-          viewer.extend(extend);
-        }
+        viewer.extend(extend.mixin, extend.options);
       }
 
       // Cleanup function

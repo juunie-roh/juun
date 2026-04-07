@@ -1,4 +1,4 @@
-import { getLocale } from "next-intl/server";
+import { Locale } from "next-intl";
 
 import Timeline from "@/components/timeline";
 import HeaderOffsetLayout from "@/layouts/header-offset";
@@ -7,8 +7,12 @@ import cache from "@/lib/cache";
 
 import ArticleCarousel from "./_components/article-carousel";
 
-export default async function Home() {
-  const locale = await getLocale();
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
   const posts = await cache.post.select.byCategory("ANALYSIS", locale);
   const items = await cache.timeline.select.all("desc", locale);
 

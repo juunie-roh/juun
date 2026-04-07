@@ -1,37 +1,26 @@
-// copy-cesium-assets.js
-const fs = require("fs-extra");
+// Copies only the Cesium CSS files needed for the viewer widget styles.
+// The rest of Cesium is loaded from CDN at runtime via CESIUM_BASE_URL.
+const fs = require("fs");
 const path = require("path");
 
-// Path to node_modules cesium package
-const cesiumPackagePath = path.join(__dirname, "..", "node_modules", "cesium");
-// Destination in public folder
-const cesiumPublicPath = path.join(__dirname, "..", "public", "cesium");
+const cesiumWidgetsPath = path.join(
+  __dirname,
+  "..",
+  "node_modules",
+  "cesium",
+  "Build",
+  "Cesium",
+  "Widgets",
+);
+const destPath = path.join(__dirname, "..", "public", "cesium", "Widgets");
 
-async function copyCesiumAssets() {
-  console.log("Copying Cesium assets to public directory...");
+const files = ["widgets.css", "lighter.css"];
 
-  try {
-    // Check if the destination exists
-    if (fs.existsSync(cesiumPublicPath)) {
-      console.log("Removing existing cesium directory or symlink...");
-      // Remove it regardless of what it is (file, symlink, or directory)
-      await fs.remove(cesiumPublicPath);
-    }
+fs.mkdirSync(destPath, { recursive: true });
 
-    // Ensure the destination directory exists
-    await fs.ensureDir(cesiumPublicPath);
-
-    // Copy Build directory
-    await fs.copy(
-      path.join(cesiumPackagePath, "Build", "Cesium"),
-      cesiumPublicPath,
-    );
-
-    console.log("Cesium assets copied successfully!");
-  } catch (err) {
-    console.error("Error copying Cesium assets:", err);
-    process.exit(1);
-  }
+for (const file of files) {
+  const src = path.join(cesiumWidgetsPath, file);
+  const dest = path.join(destPath, file);
+  fs.copyFileSync(src, dest);
+  console.log(`Copied ${file} → public/cesium/Widgets/${file}`);
 }
-
-copyCesiumAssets();
