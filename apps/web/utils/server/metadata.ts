@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getLocale } from "next-intl/server";
+import type { Locale } from "next-intl";
 
 import { routing } from "@/i18n/routing";
 
@@ -43,7 +43,6 @@ export function getLanguageAlternates(path: string = "") {
  * @param path - The path without locale (e.g., "/blog", "/blog/1").
  * @returns Canonical URL string.
  */
-export async function getCanonicalUrl(path: string = "") {
-  const locale = await getLocale();
+export function getCanonicalUrl(locale: Locale, path: string = "") {
   return buildLocalizedUrl(locale, path);
 }

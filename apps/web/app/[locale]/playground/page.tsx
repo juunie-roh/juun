@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Locale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
 import BaseInnerLayout from "@/layouts/base-inner";
@@ -14,11 +15,19 @@ import {
 import PlaygroundItem from "./_components/item";
 import { PLAYGROUND_ITEMS } from "./_data";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("/playground.metadata");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: "/playground.metadata",
+  });
 
   const path = "/playground";
-  const canonicalUrl = await getCanonicalUrl(path);
+  const canonicalUrl = getCanonicalUrl(locale, path);
 
   return {
     alternates: {

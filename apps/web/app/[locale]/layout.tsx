@@ -4,9 +4,12 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Suspense } from "react";
+import { hasLocale, Locale, NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 
 import {
   attilaSansSharpTrial,
@@ -32,9 +35,14 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("/.metadata");
-  const canonicalUrl = await getCanonicalUrl();
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "/.metadata" });
+  const canonicalUrl = getCanonicalUrl(locale);
   const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
     alternates: {
@@ -119,6 +127,7 @@ export default async function RootLayout({
   }
   // Enable static rendering
   setRequestLocale(locale);
+  const messages = await getMessages({ locale });
 
   return (
     <html
@@ -127,19 +136,15 @@ export default async function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <Suspense fallback={null}>
-            <NextIntlClientProvider>
-              <TooltipProvider>
-                <Suspense fallback={null}>
-                  <Header />
-                </Suspense>
-                {children}
-                {dialog}
-                <Toaster />
-                <Analytics />
-              </TooltipProvider>
-            </NextIntlClientProvider>
-          </Suspense>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <TooltipProvider>
+              <Header />
+              {children}
+              {dialog}
+              <Toaster />
+              <Analytics />
+            </TooltipProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
         <SpeedInsights />
       </body>

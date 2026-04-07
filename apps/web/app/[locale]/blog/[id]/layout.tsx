@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getLocale } from "next-intl/server";
+import { Locale } from "next-intl";
 
 import { ScrollProgressBar } from "@/components/ui/scroll-progress-bar";
 import BaseInnerLayout from "@/layouts/base-inner";
@@ -22,10 +22,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: Locale; id: string }>;
 }): Promise<Metadata> {
-  const locale = await getLocale();
-  const { id } = await params;
+  const { id, locale } = await params;
 
   const posts = await cache.post.select.all(locale);
   const post = posts.find((post) => post.id === Number(id));
@@ -40,7 +39,7 @@ export async function generateMetadata({
   const path = `/blog/${id}`;
   const { title, category, image, tags, created_at, updated_at } = post;
   const { description } = post.translation;
-  const canonicalUrl = await getCanonicalUrl(path);
+  const canonicalUrl = getCanonicalUrl(locale, path);
 
   return {
     alternates: {

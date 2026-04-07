@@ -1,7 +1,8 @@
 import { ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getFormatter, getLocale } from "next-intl/server";
+import { Locale } from "next-intl";
+import { getFormatter } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
 import { Prose } from "@/components/ui/prose";
@@ -25,12 +26,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: Locale; id: string }>;
 }): Promise<Metadata> {
   const id = validateId((await params).id);
   if (!id) return {} satisfies Metadata;
 
-  const locale = await getLocale();
+  const { locale } = await params;
   const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) return {} satisfies Metadata;
@@ -38,7 +39,7 @@ export async function generateMetadata({
   const path = `/timeline/${id}`;
   const { title, tags, category, created_at, updated_at } = item;
   const { description } = item.translation;
-  const canonicalUrl = await getCanonicalUrl(path);
+  const canonicalUrl = getCanonicalUrl(locale, path);
 
   return {
     alternates: {
@@ -76,12 +77,12 @@ export async function generateMetadata({
 export default async function TimelineDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: Locale; id: string }>;
 }) {
   const id = validateId((await params).id);
   if (!id) notFound();
 
-  const locale = await getLocale();
+  const { locale } = await params;
   const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) notFound();
