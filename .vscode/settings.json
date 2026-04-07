@@ -93,6 +93,7 @@
     "**/node_modules": true
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.tsdk.path": "./node_modules/typescript/lib",
   "[css]": {
     "editor.suggest.insertMode": "replace",
     "editor.defaultFormatter": "esbenp.prettier-vscode",

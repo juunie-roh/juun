@@ -49,12 +49,12 @@
   "devDependencies": {
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
-    "@types/node": "^25.5.0",
-    "@vitest/coverage-v8": "^4.1.1",
+    "@types/node": "^25.5.2",
+    "@vitest/coverage-v8": "^4.1.2",
     "jsdom": "^29.0.1",
     "openapi-typescript": "^7.13.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.1"
+    "vitest": "^4.1.2"
   }
 }
