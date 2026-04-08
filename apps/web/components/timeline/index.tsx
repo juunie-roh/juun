@@ -1,4 +1,5 @@
 import type { TimelineWithoutContent } from "@juun/db/timeline";
+import type { Locale } from "next-intl";
 import { getFormatter } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
@@ -19,10 +20,11 @@ import TimelineTags from "./tag";
 
 interface TimelineProps {
   items: TimelineWithoutContent[];
+  locale: Locale;
 }
 
-export default async function Timeline({ items }: TimelineProps) {
-  const f = await getFormatter({ locale: "en" });
+export default async function Timeline({ items, locale }: TimelineProps) {
+  const f = await getFormatter({ locale });
 
   return (
     <ol>

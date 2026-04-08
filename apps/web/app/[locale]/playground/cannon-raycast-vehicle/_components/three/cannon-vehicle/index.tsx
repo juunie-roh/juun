@@ -1,11 +1,15 @@
-import { lazy, Suspense } from "react";
+"use client";
 
-const LazyCannonVehicle = lazy(() => import("./cannon-vehicle"));
+import dynamic from "next/dynamic";
+import type { ComponentProps } from "react";
 
-export default function CannonVehicle({ debug = false }: { debug: boolean }) {
-  return (
-    <Suspense fallback={null}>
-      <LazyCannonVehicle debug={debug} />
-    </Suspense>
-  );
+const LazyCannonVehicle = dynamic(
+  () => import("./cannon-vehicle").then((m) => m.default),
+  { ssr: false },
+);
+
+export default function CannonVehicle({
+  ...props
+}: ComponentProps<typeof LazyCannonVehicle>) {
+  return <LazyCannonVehicle {...props} />;
 }

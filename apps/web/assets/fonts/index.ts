@@ -19,7 +19,7 @@ export const geistMono = localFont({
 export const notoSansKR = Noto_Sans_KR({
   weight: "variable",
   variable: "--font-noto-sans-kr",
-  subsets: ["latin"], // Korean loaded dynamically via unicode-range
+  preload: false,
   display: "swap",
 });
 

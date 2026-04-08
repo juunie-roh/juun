@@ -1,16 +1,15 @@
-import { getLocale } from "next-intl/server";
-import { Suspense } from "react";
+import type { Locale } from "next-intl";
 
 import BaseInnerLayout from "@/layouts/base-inner";
 import MaxWidthLayout from "@/layouts/max-width";
 import cache from "@/lib/cache";
 
 import BlogItemsNotFoundAlert from "./_components/alert/items-not-found";
-import { BlogCard, BlogCardSkeleton } from "./_components/card";
+import { BlogCard } from "./_components/card";
 
-export default async function Blog() {
-  const locale = await getLocale();
-  const posts = await cache.post.select.all(locale);
+export default async function Blog({ params }: PageProps<"/[locale]/blog">) {
+  const { locale } = await params;
+  const posts = await cache.post.select.all(locale as Locale);
 
   return (
     <MaxWidthLayout>
@@ -21,10 +20,8 @@ export default async function Blog() {
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-4">
-            {posts.map((post) => (
-              <Suspense fallback={<BlogCardSkeleton />} key={post.id}>
-                <BlogCard metadata={post} />
-              </Suspense>
+            {posts.map((post, index) => (
+              <BlogCard metadata={post} index={index} key={post.id} />
             ))}
           </div>
         )}
