@@ -11,9 +11,16 @@ import { Link } from "@/i18n/navigation";
 import { safeUrl } from "@/utils/security";
 import { capitalize } from "@/utils/string";
 
-export function BlogCard({ metadata }: { metadata: PostWithoutContent }) {
+export function BlogCard({
+  metadata,
+  index = 0,
+}: {
+  metadata: PostWithoutContent;
+  index?: number;
+}) {
   const f = useFormatter();
   const t = useTranslations("/blog.card");
+  const isFirst = index === 0;
 
   // Prevent XSS (Cross-site scripting)
   const url = safeUrl(`/blog/${metadata.id}`);
@@ -54,8 +61,8 @@ export function BlogCard({ metadata }: { metadata: PostWithoutContent }) {
                   src={metadata.image}
                   alt={title || "Blog post image"}
                   fill
-                  loading="eager"
-                  fetchPriority="high"
+                  loading={isFirst ? "eager" : "lazy"}
+                  fetchPriority={isFirst ? "high" : "auto"}
                   className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"
                 />
               </LogoAvatar>
