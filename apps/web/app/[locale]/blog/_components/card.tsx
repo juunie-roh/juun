@@ -61,6 +61,7 @@ export function BlogCard({
                   src={metadata.image}
                   alt={title || "Blog post image"}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 25vw"
                   loading={isFirst ? "eager" : "lazy"}
                   fetchPriority={isFirst ? "high" : "auto"}
                   className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"

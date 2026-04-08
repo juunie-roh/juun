@@ -99,6 +99,7 @@ export default function PlaygroundItem({
               src={image}
               alt={`${title} Thumbnail`}
               fill
+              sizes="(max-width: 640px) 100vw, 50vw"
               style={imageStyle}
             />
           </React.Suspense>

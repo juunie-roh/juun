@@ -33,6 +33,7 @@ export default function BlogHeader({ metadata }: BlogHeaderProps) {
                 src={metadata.image}
                 alt={metadata.title}
                 className="size-full object-contain"
+                sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 75vw, 960px"
                 preload
                 fetchPriority="high"
                 fill

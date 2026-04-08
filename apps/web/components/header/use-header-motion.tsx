@@ -296,6 +296,7 @@ export function useHeaderMotion(
       animate(progress, 1, { duration: 1, ease: "easeInOut" });
     }
   }, [state, progress]);
+
   // prevent scroll on fully expanded state by toggle button
   React.useEffect(() => {
     if (state === "expanded") {
