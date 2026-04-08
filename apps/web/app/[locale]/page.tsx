@@ -95,8 +95,10 @@ export default async function Home({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  const posts = await cache.post.select.byCategory("ANALYSIS", locale);
-  const items = await cache.timeline.select.all("desc", locale);
+  const [posts, items] = await Promise.all([
+    cache.post.select.byCategory("ANALYSIS", locale),
+    cache.timeline.select.all("desc", locale),
+  ]);
 
   return (
     <HeaderOffsetLayout>
@@ -121,7 +123,7 @@ export default async function Home({
               </h2>
               {/* <TimelineOrderButton href="/" order={order} /> */}
             </div>
-            <Timeline items={items} />
+            <Timeline items={items} locale={locale} />
           </section>
         </MaxWidthLayout>
       </main>
