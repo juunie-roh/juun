@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/v0.40.0/schema/markdownlint-config-schema.json",
+  "no-blanks-blockquote": false,
+  "no-duplicate-heading": false,
+  "line-length": false,
+  "table-column-style": false,
+  "single-title": false,
+  "no-emphasis-as-heading": false
+}
