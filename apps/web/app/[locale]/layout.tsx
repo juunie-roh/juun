@@ -32,10 +32,6 @@ import {
   getLanguageAlternates,
 } from "@/utils/server/metadata";
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
 export async function generateMetadata({
   params,
 }: {

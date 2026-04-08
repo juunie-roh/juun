@@ -1,11 +1,16 @@
 import { Locale } from "next-intl";
 
 import Timeline from "@/components/timeline";
+import { routing } from "@/i18n/routing";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
 import cache from "@/lib/cache";
 
 import ArticleCarousel from "./_components/article-carousel";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function Home({
   params,
