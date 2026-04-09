@@ -8,7 +8,7 @@ import packageJson from "./package.json" with { type: "json" };
 // get cesium version from the project's package.json
 const CESIUM_VERSION = packageJson.dependencies.cesium.replace(/^[\^~]/, "");
 // use Cesium's official CDN URL with specified version dynamically
-const CESIUM_BASE_URL = `https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/`;
+const NEXT_PUBLIC_CESIUM_BASE_URL = `https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/`;
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -55,17 +55,12 @@ const cspDirectives = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
-  env: {
-    CESIUM_BASE_URL,
-  },
+  env: { NEXT_PUBLIC_CESIUM_BASE_URL },
 
   // turbopack configuration
   turbopack: {
     rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
-      },
+      "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" },
     },
   },
   output: "standalone",
@@ -80,8 +75,6 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
   reactCompiler: true,
-  // no longer needed since each packages are pre-built
-  // transpilePackages: ["@juun/api", "@juun/db"],
   // support old blog slug-based urls redirect to new id-based urls
   redirects() {
     return [
@@ -178,7 +171,7 @@ const nextConfig: NextConfig = {
     // cesium assets using official cdn
     config.plugins.push(
       new webpack.DefinePlugin({
-        CESIUM_BASE_URL: JSON.stringify(CESIUM_BASE_URL),
+        CESIUM_BASE_URL: JSON.stringify(NEXT_PUBLIC_CESIUM_BASE_URL),
       }),
     );
 
