@@ -83,7 +83,7 @@ importers:
         version: 5.2.2(react-hook-form@7.72.1(react@19.2.5))
       '@juun-roh/cesium-utils':
         specifier: ^0.4.4
-        version: 0.4.4(cesium@1.140.0)
+        version: 0.4.4(cesium@1.134.0)
       '@juun/api':
         specifier: workspace:^
         version: link:../../packages/api
@@ -217,8 +217,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(next@16.2.3(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(react@19.2.5)
       cesium:
-        specifier: ^1.140.0
-        version: 1.140.0
+        specifier: ^1.134.0
+        version: 1.134.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -247,8 +247,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       lucide-react:
-        specifier: ^1.7.0
-        version: 1.7.0(react@19.2.5)
+        specifier: ^1.8.0
+        version: 1.8.0(react@19.2.5)
       next:
         specifier: ^16.2.3
         version: 16.2.3(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -1169,15 +1169,15 @@ packages:
     resolution: {integrity: sha512-ctxtJ/eA+t+6q2++vj5j7FYX3nRu311q1wfYH3xjlLOsczhlhxAg2FWNUXhpGvAw3BWo1xBcvOV6/YLc2r5FJw==}
     hasBin: true
 
-  '@cesium/engine@24.0.0':
-    resolution: {integrity: sha512-zJ2gl0tyw/FFhBtvp6UYw+0JQJb2J9EiTJYvVSndc6+6qPR5GHLFzFjA1msLLxucfcpc7uI9R2pXNEPluheR/g==}
+  '@cesium/engine@21.0.1':
+    resolution: {integrity: sha512-V4MEHOcYMcg+zCxrPjPAVpUyJxmIw6K9qPz5Fd2fnYPoMSPV7FJsiZYoFns03yoPHOPIeqnXQNspZKLX5Xzgfw==}
     engines: {node: '>=20.19.0'}
 
   '@cesium/wasm-splats@0.1.0-alpha.2':
     resolution: {integrity: sha512-t9pMkknv31hhIbLpMa8yPvmqfpvs5UkUjgqlQv9SeO8VerCXOYnyP8/486BDaFrztM0A7FMbRjsXtNeKvqQghA==}
 
-  '@cesium/widgets@14.5.0':
-    resolution: {integrity: sha512-h/hKVooXyOtUQJUtrfyBFGMIXb+Q3RLwqE6FzXfzyC0JQuuThLXCz8nRzCPbyiRuAR/aAYT/jbbhQrUxfiWqhQ==}
+  '@cesium/widgets@13.2.1':
+    resolution: {integrity: sha512-VwJvw4UmEyK9slrDUImVcz3GFs5FDITH21BOiTVMSWuSsoqVDtMV0vTsoggFpIIqdYj6usHZjKuDnD9BT3vZAQ==}
     engines: {node: '>=20.19.0'}
 
   '@commitlint/cli@20.5.0':
@@ -3057,8 +3057,8 @@ packages:
     resolution: {integrity: sha512-TeheYy0ILzBEI/CO55CP6zJCSdSWeRtGnHy8U8dWSUH4I68iqTsy7HkMktR4xakThc9jotkPQUXT4ITdbV7cHA==}
     engines: {node: '>=18'}
 
-  '@spz-loader/core@0.3.1':
-    resolution: {integrity: sha512-8qJ1WIBXaJu8HjnJAjYniE0kYcr0kCe5Hp7kDzYiGVvvd7zyrOBwbF5imoW5mvwx1Qba0hxGEK5R9jEoaHKJFA==}
+  '@spz-loader/core@0.3.0':
+    resolution: {integrity: sha512-sbStwMHb/MIE29st7rRuMYWqhX1UmLSFzdpyGtUZUXLkFNIuYKblzjQdtiet8bau8sUf21uL1DQ451zuySGmcA==}
     engines: {node: '>=16', pnpm: '>=8'}
 
   '@standard-schema/spec@1.1.0':
@@ -4262,8 +4262,8 @@ packages:
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
 
-  cesium@1.140.0:
-    resolution: {integrity: sha512-3RvW0rvZWuXiS6regtNE5u9vt0uXohgpsRBIo6Qc922IIIamkitYiEdr4fg+u4qX4EoK9xS3BosCza7iPOExEQ==}
+  cesium@1.134.0:
+    resolution: {integrity: sha512-Ok7cvo+VuXo85tFRobJw3LaL5BfuSANt2MGNHOim/tNUR5apZik0ho1O7TRaOkjbfhOywPfVF12sVN1pQjHIVQ==}
     engines: {node: '>=20.19.0'}
 
   chai@5.3.3:
@@ -6029,8 +6029,8 @@ packages:
     resolution: {integrity: sha512-DqC6n3QQ77zdFpCMASA1a3Jlb64Hv2N2DciFGkO/4L9+q/IpIAuRlKOvCXabtRW6cQf8usbmM6BE/TOPysCdIA==}
     engines: {bun: '>=1.0.0', deno: '>=1.30.0', node: '>=8.0.0'}
 
-  lucide-react@1.7.0:
-    resolution: {integrity: sha512-yI7BeItCLZJTXikmK4KNUGCKoGzSvbKlfCvw44bU4fXAL6v3gYS4uHD1jzsLkfwODYwI6Drw5Tu9Z5ulDe0TSg==}
+  lucide-react@1.8.0:
+    resolution: {integrity: sha512-WuvlsjngSk7TnTBJ1hsCy3ql9V9VOdcPkd3PKcSmM34vJD8KG6molxz7m7zbYFgICwsanQWmJ13JlYs4Zp7Arw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -6143,11 +6143,11 @@ packages:
     peerDependencies:
       three: '>=0.137'
 
+  meshoptimizer@0.25.0:
+    resolution: {integrity: sha512-ewwuAo3ujPZ7T3Y2oTkEoLlXvNOqnr0cjyAxfv5djXJqwD9QlxDDO0qGtsqB4Z9QUVvhruKXg9q/xfK9I5S1xQ==}
+
   meshoptimizer@1.0.1:
     resolution: {integrity: sha512-Vix+QlA1YYT3FwmBBZ+49cE5y/b+pRrcXKqGpS5ouh33d3lSp2PoTpCw19E0cKDFWalembrHnIaZetf27a+W2g==}
-
-  meshoptimizer@1.1.0:
-    resolution: {integrity: sha512-KYYsWvWduDIm86HVtTKW1luZSusEv+tgSqYvgSJcKzaHIUNKL9/qQ+48YKcLxknAE8GQAeVi68mgvmEGrjwqjA==}
 
   micromark-core-commonmark@2.0.3:
     resolution: {integrity: sha512-RDBrHEMSxVFLg6xvnXmb1Ayr2WzLAWjeSATAoxwKYJV94TeNavgoIdA0a9ytzDSVzBy2YKFK+emCPOEibLeCrg==}
@@ -6795,8 +6795,8 @@ packages:
   property-information@7.1.0:
     resolution: {integrity: sha512-TwEZ+X+yCJmYfL7TPUOcvBZ4QfoT5YenQiJuX//0th53DE6w0xxLEtfK3iyryQFddXuvkIk51EEgrJQ0WJkOmQ==}
 
-  protobufjs@8.0.1:
-    resolution: {integrity: sha512-NWWCCscLjs+cOKF/s/XVNFRW7Yih0fdH+9brffR5NZCy8k42yRdl5KlWKMVXuI1vfCoy4o1z80XR/W/QUb3V3w==}
+  protobufjs@7.5.4:
+    resolution: {integrity: sha512-CvexbZtbov6jW2eXAvLukXjXUW1TzFaivC46BpWc/3BpcCysb5Vffu+B3XHMm8lVEuy2Mm4XGex8hBSg1yapPg==}
     engines: {node: '>=12.0.0'}
 
   punycode@2.3.1:
@@ -8897,10 +8897,10 @@ snapshots:
     dependencies:
       css-tree: 3.2.1
 
-  '@cesium/engine@24.0.0':
+  '@cesium/engine@21.0.1':
     dependencies:
       '@cesium/wasm-splats': 0.1.0-alpha.2
-      '@spz-loader/core': 0.3.1
+      '@spz-loader/core': 0.3.0
       '@tweenjs/tween.js': 25.0.0
       '@zip.js/zip.js': 2.8.26
       autolinker: 4.1.5
@@ -8914,18 +8914,18 @@ snapshots:
       ktx-parse: 1.1.0
       lerc: 2.0.0
       mersenne-twister: 1.1.0
-      meshoptimizer: 1.1.0
+      meshoptimizer: 0.25.0
       pako: 2.1.0
-      protobufjs: 8.0.1
+      protobufjs: 7.5.4
       rbush: 4.0.1
       topojson-client: 3.1.0
       urijs: 1.19.11
 
   '@cesium/wasm-splats@0.1.0-alpha.2': {}
 
-  '@cesium/widgets@14.5.0':
+  '@cesium/widgets@13.2.1':
     dependencies:
-      '@cesium/engine': 24.0.0
+      '@cesium/engine': 21.0.1
       nosleep.js: 0.12.0
 
   '@commitlint/cli@20.5.0(@types/node@25.5.2)(conventional-commits-parser@6.4.0)(typescript@5.9.3)':
@@ -9509,9 +9509,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@juun-roh/cesium-utils@0.4.4(cesium@1.140.0)':
+  '@juun-roh/cesium-utils@0.4.4(cesium@1.134.0)':
     dependencies:
-      cesium: 1.140.0
+      cesium: 1.134.0
 
   '@kurkle/color@0.3.4': {}
 
@@ -10677,7 +10677,7 @@ snapshots:
 
   '@sindresorhus/base62@1.0.0': {}
 
-  '@spz-loader/core@0.3.1': {}
+  '@spz-loader/core@0.3.0': {}
 
   '@standard-schema/spec@1.1.0': {}
 
@@ -11930,10 +11930,10 @@ snapshots:
 
   ccount@2.0.1: {}
 
-  cesium@1.140.0:
+  cesium@1.134.0:
     dependencies:
-      '@cesium/engine': 24.0.0
-      '@cesium/widgets': 14.5.0
+      '@cesium/engine': 21.0.1
+      '@cesium/widgets': 13.2.1
 
   chai@5.3.3:
     dependencies:
@@ -13851,7 +13851,7 @@ snapshots:
 
   lru.min@1.1.4: {}
 
-  lucide-react@1.7.0(react@19.2.5):
+  lucide-react@1.8.0(react@19.2.5):
     dependencies:
       react: 19.2.5
 
@@ -14062,9 +14062,9 @@ snapshots:
     dependencies:
       three: 0.183.2
 
-  meshoptimizer@1.0.1: {}
+  meshoptimizer@0.25.0: {}
 
-  meshoptimizer@1.1.0: {}
+  meshoptimizer@1.0.1: {}
 
   micromark-core-commonmark@2.0.3:
     dependencies:
@@ -14783,7 +14783,7 @@ snapshots:
 
   property-information@7.1.0: {}
 
-  protobufjs@8.0.1:
+  protobufjs@7.5.4:
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/base64': 1.1.2
