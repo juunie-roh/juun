@@ -2,8 +2,11 @@ import { PrismaPg } from "@prisma/adapter-pg";
 
 import { PrismaClient } from "@/generated/prisma/client";
 
+const url = new URL(process.env.DATABASE_URL!);
+url.searchParams.set("sslmode", "verify-full");
+
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: url.toString(),
 });
 
 const globalForPrisma = globalThis as unknown as {

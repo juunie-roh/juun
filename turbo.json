@@ -37,7 +37,9 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interactive": true,
+      "interruptible": true
     },
     "lint": {
       "dependsOn": ["^lint"]
