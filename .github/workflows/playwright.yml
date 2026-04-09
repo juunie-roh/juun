@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Install Playwright Browsers
-        run: pnpm --filter @juun/web exec playwright install --with-deps
+        run: pnpm --filter @juun/web exec playwright install --with-deps chromium
       - name: Build web app
         run: pnpm build --filter @juun/web
       - name: Run Playwright tests
