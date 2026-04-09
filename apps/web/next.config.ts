@@ -55,7 +55,10 @@ const cspDirectives = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
-  env: { NEXT_PUBLIC_CESIUM_BASE_URL },
+  env: {
+    NEXT_PUBLIC_CESIUM_BASE_URL,
+    CESIUM_ION_ACCESS_TOKEN: process.env.CESIUM_ION_ACCESS_TOKEN ?? "",
+  },
 
   // turbopack configuration
   turbopack: {
