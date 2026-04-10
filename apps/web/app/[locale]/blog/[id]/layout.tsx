@@ -8,7 +8,7 @@ export default function BlogItemLayout({
     <div className="relative">
       <BaseInnerLayout>
         <ScrollProgressBar />
-        <main>{children}</main>
+        {children}
       </BaseInnerLayout>
     </div>
   );

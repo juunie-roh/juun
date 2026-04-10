@@ -22,9 +22,11 @@ export default function Header() {
 
   // Non-home routes: render compact placeholder until mounted.
   // Home route: render full content tree immediately so <h1> is in the initial HTML (LCP).
+  // The ref must attach to a DOM node on every render path or motion's useScroll throws
+  // "Target ref is defined but not hydrated".
   if (!mounted && !isHome) {
     return (
-      <div className="h-auto overscroll-contain">
+      <div ref={containerRef} className="h-auto overscroll-contain">
         <header className="fixed top-0 z-50 w-full">
           <nav className="h-header border-b bg-background" />
         </header>
