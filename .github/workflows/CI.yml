@@ -11,61 +11,52 @@ on:
       - opened
 permissions:
   contents: read
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
-  build:
+  prepare:
     strategy:
       matrix:
         node-version:
           - 24.x # Backward compatibility
           - 25.x
-    name: Build with ${{ matrix.node-version }}
+    name: Check with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
-
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Cache turbo build setup
-        uses: actions/cache@v5
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-      - uses: pnpm/action-setup@v5
-      - name: Setup PNPM cache
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.pnpm-store
-            ${{ github.workspace }}/.pnpm-store
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      # Build sub packages to generate type declaration files
-      - name: Build packages
-        run: pnpm --filter @juun/db build && pnpm --filter @juun/api build
-      - name: Generate Next.js types
-        run: pnpm --filter @juun/web exec next typegen
+
+      - name: Setup Environments
+        uses: ./.github/actions/setup
+
       - name: esLinter
         run: pnpm lint
       - name: Type Checking
         run: pnpm check-types
-      # Storybook tests require playwright browsers
+
+  unit-test:
+    runs-on: ubuntu-latest
+    needs: prepare
+    strategy:
+      matrix:
+        node-version:
+          - 24.x # Backward compatibility
+          - 25.x
+
+    name: Test with ${{ matrix.node-version }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Environments
+        uses: ./.github/actions/setup
+       # Storybook tests require playwright browsers
       - name: Install Playwright browsers
         run: pnpm web exec playwright install --with-deps chromium
+
       - name: Run Tests
         run: pnpm test

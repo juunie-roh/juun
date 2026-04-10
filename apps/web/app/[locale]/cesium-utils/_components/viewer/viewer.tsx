@@ -1,18 +1,24 @@
 "use client";
 
 // Set Cesium base URL BEFORE importing Cesium (works with both webpack and Turbopack)
-if (typeof window !== "undefined" && process.env.CESIUM_BASE_URL) {
-  window.CESIUM_BASE_URL = process.env.CESIUM_BASE_URL;
+if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_CESIUM_BASE_URL) {
+  window.CESIUM_BASE_URL = process.env.NEXT_PUBLIC_CESIUM_BASE_URL;
 }
 
-import "@/public/cesium/Widgets/widgets.css";
-import "@/public/cesium/Widgets/lighter.css";
+import "cesium/Build/Cesium/Widgets/widgets.css";
+import "cesium/Build/Cesium/Widgets/lighter.css";
 
 import {
   CameraEventType,
+  Ion,
   KeyboardEventModifier,
   Viewer as CesiumViewer,
 } from "cesium";
+
+if (process.env.CESIUM_ION_ACCESS_TOKEN) {
+  Ion.defaultAccessToken = process.env.CESIUM_ION_ACCESS_TOKEN;
+}
+
 import { forwardRef, useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
