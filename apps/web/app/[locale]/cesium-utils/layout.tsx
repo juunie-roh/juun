@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function CesiumUtilsDemoLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: LayoutProps<"/[locale]/cesium-utils">) {
   return (
     <HeaderOffsetLayout>
       <CesiumUtilsProvider>

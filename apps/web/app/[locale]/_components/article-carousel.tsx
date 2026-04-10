@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { BlogCard, BlogCardSkeleton } from "../blog/_components/card";
+import { BlogCard } from "../blog/_components/card";
 
 export default function ArticleCarousel({
   posts,
@@ -21,9 +21,7 @@ export default function ArticleCarousel({
       <CarouselContent>
         {posts.map((post) => (
           <CarouselItem key={post.id} className="basis-full lg:basis-1/3">
-            <React.Suspense fallback={<BlogCardSkeleton />} key={post.id}>
-              <BlogCard metadata={post} />
-            </React.Suspense>
+            <BlogCard metadata={post} key={post.id} />
           </CarouselItem>
         ))}
       </CarouselContent>

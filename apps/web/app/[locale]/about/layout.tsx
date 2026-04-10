@@ -15,6 +15,6 @@ export const metadata: Metadata = {
 
 export default function AboutLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: LayoutProps<"/[locale]/about">) {
   return <main>{children}</main>;
 }

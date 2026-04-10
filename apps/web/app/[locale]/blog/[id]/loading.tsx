@@ -74,7 +74,7 @@ export default function BlogItemLoading() {
               </div>
 
               {/* Code block placeholder */}
-              <div className="mt-6 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+              <div className="mt-6 rounded-lg bg-muted p-4">
                 <div className="space-y-2">
                   <Skeleton className="h-3 w-1/3" />
                   <Skeleton className="h-3 w-full" />

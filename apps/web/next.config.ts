@@ -67,8 +67,12 @@ const nextConfig: NextConfig = {
     },
   },
   output: "standalone",
-  // Explicitly mark Prisma as server-side external package for Turbopack
-  serverExternalPackages: ["prisma", "cesium", "@juun-roh/cesium-utils"],
+  // Explicitly marked packages as server-side external for Turbopack
+  serverExternalPackages: [
+    "@prisma/client",
+    "cesium",
+    "@juun-roh/cesium-utils",
+  ],
   experimental: {
     // externalDir: true,
     // serverActions: {

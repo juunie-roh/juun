@@ -3,12 +3,12 @@ import BaseInnerLayout from "@/layouts/base-inner";
 
 export default function BlogItemLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: LayoutProps<"/[locale]/blog/[id]">) {
   return (
     <div className="relative">
       <BaseInnerLayout>
         <ScrollProgressBar />
-        <main>{children}</main>
+        {children}
       </BaseInnerLayout>
     </div>
   );

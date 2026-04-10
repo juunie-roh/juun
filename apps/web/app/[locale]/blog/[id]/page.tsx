@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { Locale } from "next-intl";
 
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
@@ -9,7 +8,7 @@ import {
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
-import { validateId } from "@/utils/validation";
+import { validateParams } from "@/utils/server/validate";
 
 import { BlogContent, BlogFooter, BlogHeader } from "./_components";
 
@@ -25,11 +24,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/blog/[id]">): Promise<Metadata> {
-  const { id: i, locale } = await params;
-  const id = validateId(i);
-  if (!id) return notFound();
+  const validated = await validateParams(params);
+  if (!validated) return {};
 
-  const post = await cache.post.select.byId(id, locale as Locale);
+  const { id, locale } = validated;
+
+  const post = await cache.post.select.byId(id, locale);
 
   if (!post) {
     return {
@@ -41,7 +41,7 @@ export async function generateMetadata({
   const path = `/blog/${id}`;
   const { title, category, image, tags, created_at, updated_at } = post;
   const { description } = post.translation;
-  const canonicalUrl = getCanonicalUrl(locale as Locale, path);
+  const canonicalUrl = getCanonicalUrl(locale, path);
 
   return {
     alternates: {
@@ -92,12 +92,12 @@ export async function generateMetadata({
 export default async function BlogItemPage({
   params,
 }: PageProps<"/[locale]/blog/[id]">) {
-  const id = validateId((await params).id);
-  if (!id) notFound();
+  const validated = await validateParams(params);
+  if (!validated) return notFound();
 
-  const { locale } = await params;
+  const { id, locale } = validated;
 
-  const post = await cache.post.select.byId(id, locale as Locale);
+  const post = await cache.post.select.byId(id, locale);
   if (!post) notFound();
 
   // Flatten translation fields for article components

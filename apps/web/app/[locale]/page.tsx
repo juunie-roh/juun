@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 
-import Timeline from "@/components/timeline";
+import EntriesList from "@/components/timeline/entries";
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
 import cache from "@/lib/cache";
@@ -11,14 +12,17 @@ import {
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
+import { validateParams } from "@/utils/server/validate";
 
 import ArticleCarousel from "./_components/article-carousel";
 
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]">): Promise<Metadata> {
-  const { locale: l } = await params;
-  const locale = l as Locale;
+  const validated = await validateParams(params);
+  if (!validated) return {};
+
+  const { locale } = validated;
   const t = await getTranslations({ locale, namespace: "/.metadata" });
   const canonicalUrl = getCanonicalUrl(locale as Locale);
   const metadata: Metadata = {
@@ -89,16 +93,24 @@ export async function generateMetadata({
   return metadata;
 }
 
-export default async function Home({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
-  const { locale } = await params;
-  const [posts, items] = await Promise.all([
+export default async function Home({ params }: PageProps<"/[locale]">) {
+  const validated = await validateParams(params);
+  if (!validated) return notFound();
+
+  const { locale } = validated;
+  const [posts, items, f] = await Promise.all([
     cache.post.select.byCategory("ANALYSIS", locale),
     cache.timeline.select.all("desc", locale),
+    getFormatter({ locale }),
   ]);
+
+  const entries = items.map((item) => ({
+    ...item,
+    formattedDate: f.dateTime(item.created_at, {
+      month: "short",
+      year: "numeric",
+    }),
+  }));
 
   return (
     <HeaderOffsetLayout>
@@ -117,13 +129,26 @@ export default async function Home({
 
           {/* Decision Records */}
           <section className="relative w-full" id="timeline">
-            <div className="flex items-center gap-2 border-b px-4 py-2">
-              <h2 className="font-stabil-grotesk text-3xl font-bold tracking-tight">
+            <header className="flex flex-col gap-3 border-b px-4 py-8 md:px-6 md:py-12">
+              <span className="font-mono text-xs font-medium tracking-widest text-muted-foreground uppercase">
+                Index
+              </span>
+              <h1 className="font-stabil-grotesk text-4xl leading-none font-bold tracking-tight md:text-6xl">
                 Decision Records
-              </h2>
-              {/* <TimelineOrderButton href="/" order={order} /> */}
-            </div>
-            <Timeline items={items} locale={locale} />
+              </h1>
+              <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
+                Architectural and product decisions across the project's
+                development
+              </p>
+            </header>
+
+            {entries.length === 0 ? (
+              <div className="px-4 py-16 text-center text-sm text-muted-foreground md:px-6">
+                No records yet.
+              </div>
+            ) : (
+              <EntriesList items={entries} />
+            )}
           </section>
         </MaxWidthLayout>
       </main>
