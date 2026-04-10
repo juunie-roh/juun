@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Locale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
 import HeaderOffsetLayout from "@/layouts/header-offset";
@@ -8,13 +7,15 @@ import {
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
+import { validateParams } from "@/utils/server/validate";
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
+}: PageProps<"/[locale]/blog">): Promise<Metadata> {
+  const validated = await validateParams(params);
+  if (!validated) return {};
+
+  const { locale } = validated;
   const t = await getTranslations({ locale, namespace: "/blog.metadata" });
 
   const path = "/blog";
@@ -48,7 +49,7 @@ export async function generateMetadata({
 
 export default function BlogLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: LayoutProps<"/[locale]/blog">) {
   return (
     <HeaderOffsetLayout>
       <main className="mx-auto">{children}</main>

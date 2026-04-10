@@ -1,19 +1,15 @@
-import { ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Locale } from "next-intl";
 import { getFormatter } from "next-intl/server";
 
-import { Button } from "@/components/ui/button";
 import { Prose } from "@/components/ui/prose";
-import { Link } from "@/i18n/navigation";
 import cache from "@/lib/cache";
 import md from "@/lib/server/md";
 import {
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
-import { validateId } from "@/utils/validation";
+import { validateParams } from "@/utils/server/validate";
 
 export async function generateStaticParams() {
   const items = await cache.timeline.select.all();
@@ -25,13 +21,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: Locale; id: string }>;
-}): Promise<Metadata> {
-  const id = validateId((await params).id);
-  if (!id) return {} satisfies Metadata;
+}: PageProps<"/[locale]/timeline/[id]">): Promise<Metadata> {
+  const validated = await validateParams(params);
+  if (!validated) return {} satisfies Metadata;
 
-  const { locale } = await params;
+  const { id, locale } = validated;
   const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) return {} satisfies Metadata;
@@ -76,29 +70,23 @@ export async function generateMetadata({
 
 export default async function TimelineDetailPage({
   params,
-}: {
-  params: Promise<{ locale: Locale; id: string }>;
-}) {
-  const id = validateId((await params).id);
-  if (!id) notFound();
+}: PageProps<"/[locale]/timeline/[id]">) {
+  const validated = await validateParams(params);
+  if (!validated) notFound();
 
-  const { locale } = await params;
+  const { id, locale } = validated;
+
   const item = await cache.timeline.select.byId(id, locale);
 
   if (!item) notFound();
 
-  const parsed = await md.parse(item.translation.content);
-  const f = await getFormatter({ locale });
+  const [parsed, f] = await Promise.all([
+    md.parse(item.translation.content),
+    getFormatter({ locale }),
+  ]);
 
   return (
     <article className="mx-auto max-w-4xl p-8">
-      <Button asChild>
-        <Link href="/">
-          <ChevronLeft />
-          Return
-        </Link>
-      </Button>
-
       <header className="mb-8">
         <h1 className="mb-2 text-4xl font-bold">{item.title}</h1>
         <p className="text-muted-foreground">
