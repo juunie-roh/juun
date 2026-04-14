@@ -1,21 +1,24 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ResizableViewerController } from "../_components";
-import { API_KEYS, getApiMetadata, isValidApi } from "../_data";
-interface PageProps {
-  params: Promise<{ api?: string }>;
-}
+import { validateParams } from "@/utils/server/validate";
 
-export default async function CesiumApiPage({ params }: PageProps) {
-  const { api } = await params;
+import { ResizableViewerController } from "../_components";
+import { API_KEYS, getApiMetadata } from "../_data";
+
+export default async function CesiumApiPage({
+  params,
+}: PageProps<"/[locale]/cesium-utils/[api]">) {
+  const validated = await validateParams(params);
 
   // Check if the slug is valid
-  if (!api || !isValidApi(api)) {
+  if (!validated) {
     notFound();
   }
 
-  return <ResizableViewerController />;
+  const { api } = validated;
+
+  return <ResizableViewerController api={api} />;
 }
 
 export async function generateStaticParams() {
@@ -26,15 +29,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
-  const { api } = await params;
+}: PageProps<"/[locale]/cesium-utils/[api]">): Promise<Metadata> {
+  const validated = await validateParams(params);
 
-  if (!api || !isValidApi(api)) {
+  if (!validated) {
     return {
       title: "Not Found",
       description: "The requested Cesium API demo was not found.",
     };
   }
+
+  const { api } = validated;
 
   const metadata = getApiMetadata(api);
   if (!metadata) {

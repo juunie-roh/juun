@@ -164,10 +164,6 @@ export function getFeatures(apiKey: string): Feature[] {
   return getApiConfig(apiKey)?.features || [];
 }
 
-export function isValidApi(apiKey: string): boolean {
-  return API_KEYS.includes(apiKey);
-}
-
 export function getApiOptions() {
   return CESIUM_APIS.map((api) => ({
     api: api.key,
