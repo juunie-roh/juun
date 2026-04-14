@@ -8,9 +8,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/navigation";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
-import { API_LABELS, getFeatures, isValidApi } from "../../_data";
+import { API_LABELS, getFeatures } from "../../_data";
 
-export default function ApiFeatureDetail() {
+export default function ApiFeatureDetail({ api }: { api?: string }) {
   const { feature } = useCesiumUtils();
 
   // For the base /cesium-utils route, show the default demo
@@ -20,8 +20,7 @@ export default function ApiFeatureDetail() {
       return <Default />;
     }
 
-    const api = pathname.split("/").pop();
-    if (!api || !isValidApi(api)) {
+    if (!api) {
       return <Default />;
     }
 

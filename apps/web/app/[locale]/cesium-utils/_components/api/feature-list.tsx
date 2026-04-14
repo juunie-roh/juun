@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 import {
@@ -10,19 +11,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { usePathname } from "@/i18n/navigation";
 
 import { useCesiumUtils } from "../../_contexts/cesium-utils";
-import { getFeatures, isValidApi } from "../../_data";
+import { getFeatures } from "../../_data";
 
 export default function ApiFeatureList() {
   const { feature, setFeature } = useCesiumUtils();
-  const pathname = usePathname();
 
   // Get current API from URL
-  const api = pathname.split("/").pop();
+  const { api } = useParams();
 
-  const features = api && isValidApi(api) ? getFeatures(api) : undefined;
+  const features = getFeatures(api as string);
 
   // Set initial active item as description (first item of features)
   useEffect(() => {

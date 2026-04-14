@@ -11,15 +11,17 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { usePathname } from "@/i18n/navigation";
 
 import { useCesiumUtils } from "../_contexts/cesium-utils";
-import { isValidApi } from "../_data";
 import ApiFeatureDetail from "./api/feature-detail";
 import Viewer from "./viewer";
 
 interface ResizableViewerControllerProps {
+  /** Validated on server-side. */
+  api?: string;
   showDefaultDemo?: boolean;
 }
 
 export default function ResizableViewerController({
+  api,
   showDefaultDemo = false,
 }: ResizableViewerControllerProps) {
   const { removeFeature } = useCesiumUtils();
@@ -44,10 +46,7 @@ export default function ResizableViewerController({
 
     // Get flyTo option based on current API
     const getFlyToOption = async () => {
-      const api = pathname.split("/").pop();
-      if (!api || !isValidApi(api)) {
-        return undefined;
-      }
+      if (!api) return undefined;
 
       try {
         const { Cartesian3, Math: CesiumMath } = await import("cesium");
@@ -87,7 +86,7 @@ export default function ResizableViewerController({
     };
 
     getFlyToOption().then(setFlyToOption);
-  }, [pathname, showDefaultDemo]);
+  }, [api, showDefaultDemo]);
 
   return (
     <ResizablePanelGroup
@@ -110,7 +109,7 @@ export default function ResizableViewerController({
       <ResizablePanel defaultSize={30} minSize={20}>
         <div className="relative flex size-full flex-col gap-2 p-2">
           <div className="size-full overflow-y-auto">
-            <ApiFeatureDetail />
+            <ApiFeatureDetail api={api} />
           </div>
         </div>
       </ResizablePanel>
