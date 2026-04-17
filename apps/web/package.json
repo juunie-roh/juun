@@ -69,7 +69,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/otel": "^2.1.2",
     "@vercel/speed-insights": "^2.0.0",
-    "cesium": "^1.140.0",
+    "cesium": "^1.134.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
