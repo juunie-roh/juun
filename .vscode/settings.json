@@ -66,12 +66,16 @@
     "Zawinski",
     "Zipkin"
   ],
+
   "editor.formatOnSave": false,
+
   "eslint.enable": true,
   "eslint.format.enable": true,
+
   "files.associations": {
     "*.css": "tailwindcss"
   },
+
   "i18n-ally.annotations": true,
   "i18n-ally.displayLanguage": "ko",
   "i18n-ally.sourceLanguage": "ko",
@@ -86,15 +90,20 @@
   "i18n-ally.theme.annotationBorder": "rgba(153, 153, 153, .8)",
   "i18n-ally.theme.annotationMissing": "#d37070",
   "i18n-ally.theme.annotationMissingBorder": "#d37070",
+
   "tailwindCSS.codeLens": true,
   "tailwindCSS.experimental.configFile": "packages/config/tailwind/globals.css",
+
   "prettier.singleQuote": true,
   "prettier.quoteProps": "preserve",
+
   "search.exclude": {
     "**/node_modules": true
   },
-  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.tsdk.path": "./node_modules/typescript/lib",
+  
   "[css]": {
     "editor.suggest.insertMode": "replace",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -137,5 +146,5 @@
   "[prisma]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "Prisma.prisma"
-  },
+  }
 }
