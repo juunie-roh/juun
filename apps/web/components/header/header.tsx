@@ -17,26 +17,12 @@ import { useHeaderMotion } from "./use-header-motion";
 
 export default function Header() {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const { motionStyles, state, setState, isHome, mounted } =
-    useHeaderMotion(containerRef);
-
-  // Non-home routes: render compact placeholder until mounted.
-  // Home route: render full content tree immediately so <h1> is in the initial HTML (LCP).
-  // The ref must attach to a DOM node on every render path or motion's useScroll throws
-  // "Target ref is defined but not hydrated".
-  if (!mounted && !isHome) {
-    return (
-      <div ref={containerRef} className="h-auto overscroll-contain">
-        <header className="fixed top-0 z-50 w-full">
-          <nav className="h-header border-b bg-background" />
-        </header>
-      </div>
-    );
-  }
-
-  // Pre-mount on home: motion styles suppressed (vh/vw are 0).
-  // Use 100dvh as the container height fallback — matches window.innerHeight on modern browsers.
-  const ms = mounted ? motionStyles : null;
+  const {
+    motionStyles: ms,
+    state,
+    setState,
+    isHome,
+  } = useHeaderMotion(containerRef);
 
   return (
     <div
@@ -49,8 +35,8 @@ export default function Header() {
         <motion.nav
           role="banner"
           aria-label="Site header"
-          className="relative isolate grid h-screen grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
-          style={ms?.container ?? { height: "100dvh" }}
+          className="relative isolate grid h-dvh grid-cols-responsive grid-rows-11 overflow-hidden border-b bg-background lg:grid-rows-15"
+          style={ms?.container}
         >
           {/* link blog */}
           <motion.div
