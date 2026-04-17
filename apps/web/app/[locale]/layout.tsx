@@ -41,7 +41,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} ${locale === "ko" ? notoSansKR.variable : ""} font-sans antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} ${notoSansKR.variable} font-sans antialiased`}
     >
       <body>
         <ThemeProvider>
