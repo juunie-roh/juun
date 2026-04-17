@@ -21,8 +21,6 @@ export function useHeaderMotion(
   const CONTAINER_7XL = 1280;
   // Same media query with tailwind "lg:" prefix
   const lg = useMediaQuery("(width >= 64rem)");
-  // Track if component is mounted to prevent CLS from hydration mismatch
-  const [mounted, setMounted] = React.useState(false);
   // Variables for screen ratio - initialize to 0, set actual values in useLayoutEffect
   const [vh, setVh] = React.useState(0);
   const [vw, setVw] = React.useState(0);
@@ -262,7 +260,6 @@ export function useHeaderMotion(
     // Match with css syntax, divide by 100
     setVh(window.innerHeight / 100);
     setVw(window.innerWidth / 100);
-    setMounted(true);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -312,6 +309,5 @@ export function useHeaderMotion(
     state,
     setState,
     isHome,
-    mounted,
   };
 }
