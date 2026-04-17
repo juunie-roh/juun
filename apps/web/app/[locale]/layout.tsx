@@ -8,12 +8,10 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 
 import {
-  attilaSansSharpTrial,
   geistMono,
   geistSans,
   notoSansKR,
   stabilGroteskTrial,
-  victorNarrowTrial,
   victorSerifTrial,
 } from "@/assets/fonts";
 import Header from "@/components/header";
@@ -40,11 +38,18 @@ export default async function RootLayout({
   setRequestLocale(locale);
   const messages = await getMessages({ locale });
 
+  const fontVars = [
+    geistSans.variable,
+    geistMono.variable,
+    stabilGroteskTrial.variable,
+    victorSerifTrial.variable,
+    locale === "ko" && notoSansKR.variable, // conditional
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <html
-      lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${stabilGroteskTrial.variable} ${victorNarrowTrial.variable} ${victorSerifTrial.variable} ${attilaSansSharpTrial.variable} font-sans antialiased`}
-    >
+    <html lang={locale} className={`${fontVars} font-sans antialiased`}>
       <body>
         <ThemeProvider>
           <Suspense fallback={null}>
