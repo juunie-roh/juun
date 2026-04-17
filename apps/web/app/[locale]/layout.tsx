@@ -38,18 +38,11 @@ export default async function RootLayout({
   setRequestLocale(locale);
   const messages = await getMessages({ locale });
 
-  const fontVars = [
-    geistSans.variable,
-    geistMono.variable,
-    stabilGroteskTrial.variable,
-    victorSerifTrial.variable,
-    locale === "ko" && notoSansKR.variable, // conditional
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <html lang={locale} className={`${fontVars} font-sans antialiased`}>
+    <html
+      lang={locale}
+      className={`${geistSans.variable} ${geistMono.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} ${locale === "ko" ? notoSansKR.variable : ""} font-sans antialiased`}
+    >
       <body>
         <ThemeProvider>
           <Suspense fallback={null}>
