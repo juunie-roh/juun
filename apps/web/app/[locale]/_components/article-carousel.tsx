@@ -19,9 +19,9 @@ export default function ArticleCarousel({
   return (
     <Carousel opts={{ align: "start" }} className="w-full px-12">
       <CarouselContent>
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <CarouselItem key={post.id} className="basis-full lg:basis-1/3">
-            <BlogCard metadata={post} key={post.id} />
+            <BlogCard metadata={post} key={post.id} index={index} />
           </CarouselItem>
         ))}
       </CarouselContent>

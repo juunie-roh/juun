@@ -78,7 +78,7 @@ const nextConfig: NextConfig = {
     // serverActions: {
     //   allowedOrigins: ["*"],
     // },
-    optimizePackageImports: ["lucide-react"],
+    optimizePackageImports: ["lucide-react", "framer-motion", "@radix-ui/*"],
   },
   cacheComponents: true,
   reactCompiler: true,
