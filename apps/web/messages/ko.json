@@ -1,7 +1,10 @@
 {
   "/": {
     "metadata": {
-      "title": { "template": "Juun | %s", "default": "Juun" },
+      "title": {
+        "template": "Juun | %s",
+        "default": "Juun"
+      },
       "description": "Technology-Agnostic Architectural Playground",
       "applicationName": "Juun's Playground",
       "generator": "Next.js",
@@ -18,6 +21,15 @@
       "theme": {
         "aria-label": "{label} 테마로 변경",
         "label": "테마 선택"
+      }
+    },
+    "section": {
+      "featured-articles": {
+        "description": "인프라, 성능 및 아키텍처 결정 등에 대한 심층 분석"
+      },
+      "decision-records": {
+        "description": "프로젝트 개발 전반에 걸친 아키텍처 및 제품에 대한 의사결정 기록",
+        "notFound": "아직 기록이 없습니다"
       }
     }
   },

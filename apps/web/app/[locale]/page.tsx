@@ -15,6 +15,7 @@ import {
 import { validateParams } from "@/utils/server/validate";
 
 import ArticleCarousel from "./_components/article-carousel";
+import SectionHeader from "./_components/section-header";
 
 export async function generateMetadata({
   params,
@@ -98,9 +99,10 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   if (!validated) return notFound();
 
   const { locale } = validated;
-  const [posts, items, f] = await Promise.all([
+  const [posts, items, t, f] = await Promise.all([
     cache.post.select.byCategory("ANALYSIS", locale),
     cache.timeline.select.all("desc", locale),
+    getTranslations("/.section"),
     getFormatter({ locale }),
   ]);
 
@@ -119,32 +121,27 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         <MaxWidthLayout borderX>
           {/* Blog Articles Carousel */}
           <section className="relative w-full border-b">
-            <h2 className="mb-4 border-b px-4 py-2 font-stabil-grotesk text-3xl font-bold tracking-tight">
-              Featured Articles
-            </h2>
-            <div className="px-4">
+            <SectionHeader
+              label="Featured"
+              title="Articles"
+              description={t("featured-articles.description")}
+            />
+            <div className="px-4 py-16">
               <ArticleCarousel posts={posts} />
             </div>
           </section>
 
           {/* Decision Records */}
           <section className="relative w-full" id="timeline">
-            <header className="flex flex-col gap-3 border-b px-4 py-8 md:px-6 md:py-12">
-              <span className="font-mono text-xs font-medium tracking-widest text-muted-foreground uppercase">
-                Index
-              </span>
-              <h1 className="font-stabil-grotesk text-4xl leading-none font-bold tracking-tight md:text-6xl">
-                Decision Records
-              </h1>
-              <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
-                Architectural and product decisions across the project's
-                development
-              </p>
-            </header>
+            <SectionHeader
+              label="Index"
+              title="Decision Records"
+              description={t("decision-records.description")}
+            />
 
             {entries.length === 0 ? (
               <div className="px-4 py-16 text-center text-sm text-muted-foreground md:px-6">
-                No records yet.
+                {t("decision-records.notFound")}
               </div>
             ) : (
               <EntriesList items={entries} />

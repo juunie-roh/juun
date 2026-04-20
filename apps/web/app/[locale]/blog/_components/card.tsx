@@ -11,13 +11,24 @@ import { Link } from "@/i18n/navigation";
 import { safeUrl } from "@/utils/security";
 import { capitalize } from "@/utils/string";
 
-export function BlogCard({
-  metadata,
-  index = 0,
-}: {
+interface BlogCardProps {
+  /**
+   * Metadata of the article to be displayed.
+   *
+   * @see {@link PostWithoutContent}
+   */
   metadata: PostWithoutContent;
+  /**
+   * An index used to determine the image fetch priority.
+   *
+   * For first element only, set `loading` and `fetchPriority`.
+   *
+   * @see {@link Image | `Next.Image`}
+   */
   index?: number;
-}) {
+}
+
+export function BlogCard({ metadata, index = 0 }: BlogCardProps) {
   const f = useFormatter();
   const t = useTranslations("/blog.card");
   const isFirst = index === 0;
