@@ -19,6 +19,15 @@
         "aria-label": "Switch to {label} theme",
         "label": "Switch Theme"
       }
+    },
+    "section": {
+      "featured-articles": {
+        "description": "In-depth write-ups on infrastructure, performance, and architecture decisions"
+      },
+      "decision-records": {
+        "description": "Architectural and product decisions across the project's development",
+        "notFound": "No records yet"
+      }
     }
   },
   "/blog": {
