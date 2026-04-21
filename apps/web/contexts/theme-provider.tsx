@@ -21,6 +21,12 @@ export default function ThemeProvider({
 
   return (
     <NextThemeProvider
+      // Workaround fix to bypass script execution warning.
+      scriptProps={
+        typeof window === "undefined"
+          ? undefined
+          : ({ type: "application/json" } as const)
+      }
       attribute="class"
       defaultTheme="light"
       enableSystem
