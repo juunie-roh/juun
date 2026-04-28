@@ -20,8 +20,7 @@ interface WheelContentProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactElement;
 }
 interface WheelSectorProps
-  extends VariantProps<typeof pathVariants>,
-    VariantProps<typeof iconVariants> {
+  extends VariantProps<typeof pathVariants>, VariantProps<typeof iconVariants> {
   index: number;
   angle: Angle;
   radius: number;
@@ -322,7 +321,8 @@ const WheelTitle = forwardRef<HTMLDivElement, WheelTitleProps>(
 WheelTitle.displayName = "WheelTitle";
 
 interface WheelProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect" | "children">,
+  extends
+    Omit<HTMLAttributes<HTMLDivElement>, "onSelect" | "children">,
     VariantProps<typeof wheelVariants> {
   /**
    * Callback to execute on menu selected.
