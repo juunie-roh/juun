@@ -1,0 +1,15 @@
+"github_actions":
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+
+":memo: documentation":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+
+":robot: dependencies":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "package.json"
+          - "pnpm-lock.yaml"
+          - "pnpm-workspace.yaml"
+          - "packages/**/package.json"
