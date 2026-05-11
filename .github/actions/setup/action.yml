@@ -32,7 +32,7 @@ runs:
         node-version: ${{ matrix.node-version }}
         cache: pnpm
 
-    - run: pnpm install --frozen-lockfile
+    - run: pnpm ci
       shell: bash
     # Build sub packages and generate types declarations
     - name: Build packages
