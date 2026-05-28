@@ -1,7 +1,7 @@
 {
   "name": "juun",
   "version": "0.0.2",
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@11.4.0",
   "private": true,
   "author": "juun",
   "type": "module",
@@ -38,7 +38,7 @@
     "lint-staged": "^17.0.5",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.9.14",
+    "turbo": "^2.9.15",
     "typescript": "5.9.3"
   },
   "config": {
