@@ -62,3 +62,10 @@ CLAUDE.local.md
 
 # prisma
 **/generated/prisma
+
+# expo
+apps/mobile/.expo
+apps/mobile/android
+apps/mobile/ios
+apps/mobile/web-build
+apps/mobile/expo-env.d.ts

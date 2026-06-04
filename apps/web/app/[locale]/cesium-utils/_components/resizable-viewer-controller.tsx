@@ -90,7 +90,7 @@ export default function ResizableViewerController({
 
   return (
     <ResizablePanelGroup
-      direction={isLargeScreen ? "horizontal" : "vertical"}
+      orientation={isLargeScreen ? "horizontal" : "vertical"}
       className="size-full overflow-hidden rounded-lg border"
     >
       <ResizablePanel defaultSize={70} minSize={40}>

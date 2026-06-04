@@ -7,12 +7,10 @@ allowBuilds:
   '@prisma/engines': true
   '@swc/core': true
   esbuild: true
+  msgpackr-extract: true
   prisma: true
   protobufjs: true
   sharp: true
-
-onlyBuiltDependencies:
-  - tree-sitter
 
 overrides:
   tmp: ">=0.2.4"

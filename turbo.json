@@ -48,6 +48,11 @@
     "test": {
       "cache": true,
       "dependsOn": ["^test"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "interactive": true
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "juun",
   "version": "0.0.2",
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@11.5.1",
   "private": true,
   "author": "juun",
   "type": "module",
@@ -20,25 +20,26 @@
     "check-types": "turbo check-types",
     "web": "pnpm --filter @juun/web",
     "api": "pnpm --filter @juun/api",
-    "db": "pnpm --filter @juun/db"
+    "db": "pnpm --filter @juun/db",
+    "mobile": "pnpm --filter @juun/mobile"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.0.1",
-    "@commitlint/config-conventional": "^21.0.1",
-    "@commitlint/cz-commitlint": "^21.0.1",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "@commitlint/cz-commitlint": "^21.0.2",
     "@commitlint/format": "^21.0.1",
     "@commitlint/types": "^21.0.1",
     "@config/eslint": "workspace:^",
     "@types/node": "^25.9.1",
-    "@types/react": "^19.2.15",
+    "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
     "commitizen": "^4.3.1",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.5",
+    "lint-staged": "^17.0.7",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.9.15",
+    "turbo": "^2.9.16",
     "typescript": "5.9.3"
   },
   "config": {
