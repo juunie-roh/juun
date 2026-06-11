@@ -44,7 +44,7 @@ export default function MarkdownInput({
   }, [value, router]);
 
   return (
-    <ResizablePanelGroup direction="horizontal" className="h-full">
+    <ResizablePanelGroup orientation="horizontal" className="h-full">
       <ResizablePanel className="flex flex-col p-4">
         <Textarea
           value={value}

@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "juun",
+    "slug": "juun",
+    "scheme": "juun",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.juun.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#000000"
+      },
+      "package": "com.juun.app"
+    }
+  }
+}
