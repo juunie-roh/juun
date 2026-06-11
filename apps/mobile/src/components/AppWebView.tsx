@@ -49,7 +49,7 @@ export default function AppWebView() {
       javaScriptEnabled
       // Prevent web page from navigating away from the app
       onShouldStartLoadWithRequest={(req) =>
-        req.url.startsWith("https://juun.vercel.app") || __DEV__
+        req.url.startsWith(WEB_URL) || __DEV__
       }
     />
   );
