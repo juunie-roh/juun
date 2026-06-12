@@ -30,7 +30,7 @@
     "@commitlint/format": "^21.0.1",
     "@commitlint/types": "^21.0.1",
     "@config/eslint": "workspace:^",
-    "@types/node": "^25.9.2",
+    "@types/node": "^25.9.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "commitizen": "^4.3.1",
@@ -39,7 +39,7 @@
     "lint-staged": "^17.0.7",
     "prettier": "^3.8.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.9.17",
+    "turbo": "^2.9.18",
     "typescript": "5.9.3"
   },
   "config": {
