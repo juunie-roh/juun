@@ -1,19 +1,21 @@
-name: Label Pull Requests
+name: Pull Request Labeler
+
 on:
-  - pull_request_target
-permissions:
-  issues: write
-  pull-requests: write
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
 jobs:
-  label-pr:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Add Labels for PR
-        uses: actions/labeler@v6
+      - uses: actions/labeler@v6
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          configuration-path: .github/labeler.yaml
           sync-labels: true
+
       - name: Add PR Size Labels for PR
         uses: codelytv/pr-size-labeler@v1
         with:
