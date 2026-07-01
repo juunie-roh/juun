@@ -3,5 +3,4 @@ export type WebToNative =
   | { type: "SHARE"; url: string; title: string };
 
 export type NativeToWeb =
-  | { type: "THEME"; value: "light" | "dark" }
-  | { type: "BACK" };
+  { type: "THEME"; value: "light" | "dark" } | { type: "BACK" };
