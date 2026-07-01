@@ -37,7 +37,7 @@ export default function AppWebView() {
   }
 
   return (
-    <WebView
+    <WebView<{}>
       ref={ref}
       source={{ uri: WEB_URL }}
       onMessage={onMessage}
