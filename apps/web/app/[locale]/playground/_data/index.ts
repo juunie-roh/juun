@@ -1,10 +1,7 @@
 import { ImageProps } from "next/image";
 
 export type PlaygroundCategory =
-  | "3D"
-  | "UI"
-  | "Content Management"
-  | "Not Found";
+  "3D" | "UI" | "Content Management" | "Not Found";
 
 export type PlaygroundItem = {
   title: string;
