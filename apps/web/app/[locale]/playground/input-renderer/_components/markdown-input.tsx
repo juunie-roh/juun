@@ -8,40 +8,51 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "@/i18n/navigation";
 
+import {
+  previewMarkdown,
+  type PreviewState,
+} from "../_actions/preview-markdown";
 import MarkdownPreview from "./markdown-preview";
 
 interface MarkdownInputProps {
   initialContent: string;
-  renderedContent?: React.ReactElement;
-  error: string | null;
+  initialRendered: React.ReactElement;
 }
 
 export default function MarkdownInput({
   initialContent,
-  renderedContent,
-  error,
+  initialRendered,
 }: MarkdownInputProps) {
-  const router = useRouter();
   const [value, setValue] = React.useState(initialContent);
+
+  const [state, runPreview, isPending] = React.useActionState<
+    PreviewState,
+    string
+  >(previewMarkdown, { content: initialRendered, error: null });
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
-  // Debounced URL update
+  // Debounced preview: re-render on the server 500ms after typing stops.
+  // The action posts the content in the request body (no URL length limit),
+  // and useActionState serializes calls so responses can't land out of order.
+  // Skip the initial mount to keep the server-rendered preview.
+  const isFirstRender = React.useRef(true);
   React.useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     const timer = setTimeout(() => {
-      const params = new URLSearchParams();
-      params.set("content", value);
-      router.replace(`/playground/input-renderer?${params.toString()}`, {
-        scroll: false,
-      });
+      // The useActionState dispatch must run inside a transition when called
+      // programmatically — this keeps the previous preview mounted while the
+      // server re-renders (no reload/flash) and lets isPending update.
+      React.startTransition(() => runPreview(value));
     }, 500);
-
     return () => clearTimeout(timer);
-  }, [value, router]);
+  }, [value, runPreview]);
 
   return (
     <ResizablePanelGroup orientation="horizontal" className="h-full">
@@ -55,7 +66,11 @@ export default function MarkdownInput({
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel className="flex flex-col">
-        <MarkdownPreview content={renderedContent} error={error} />
+        <MarkdownPreview
+          content={state.content ?? undefined}
+          error={state.error}
+          isPending={isPending}
+        />
       </ResizablePanel>
     </ResizablePanelGroup>
   );

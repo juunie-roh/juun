@@ -4,18 +4,24 @@ import { type ReactElement } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
 interface MarkdownPreviewProps {
   content?: ReactElement;
   error: string | null;
+  /** Whether a server re-render is in flight (dims the stale preview). */
+  isPending?: boolean;
 }
 
 export default function MarkdownPreview({
   content,
   error,
+  isPending,
 }: MarkdownPreviewProps) {
   return (
-    <ScrollArea className="h-full p-4">
+    <ScrollArea
+      className={cn("h-full p-4 transition-opacity", isPending && "opacity-60")}
+    >
       {error ? (
         <Alert variant="destructive">
           <AlertTitle>Parse Error</AlertTitle>
