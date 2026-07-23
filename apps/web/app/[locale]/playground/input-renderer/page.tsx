@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import md from "@/lib/server/md";
 
 import MarkdownInput from "./_components/markdown-input";
@@ -69,43 +67,18 @@ const rendered = md.render(parsed);
 > **Note**: This preview uses the exact same pipeline as the blog system.
 `;
 
-async function InputRendererContent({
-  searchParams,
-}: {
-  searchParams: Promise<{ content?: string }>;
-}) {
-  const params = await searchParams;
-  const content = params.content || INITIAL_CONTENT;
+export default async function InputRendererPage() {
+  // Render the initial preview server-side so there is no flash on load.
+  // Subsequent edits are rendered via the previewMarkdown Server Action.
+  const parsed = await md.parse(INITIAL_CONTENT);
+  const initialRendered = md.render(parsed);
 
-  let renderedContent;
-  let error: string | null = null;
-
-  try {
-    const parsed = await md.parse(content);
-    renderedContent = md.render(parsed);
-  } catch (e) {
-    error = e instanceof Error ? e.message : "Failed to parse markdown";
-  }
-
-  return (
-    <MarkdownInput
-      initialContent={content}
-      renderedContent={renderedContent}
-      error={error}
-    />
-  );
-}
-
-export default async function InputRendererPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ content?: string }>;
-}) {
   return (
     <div className="size-full overflow-hidden rounded-lg border">
-      <Suspense fallback={<div className="p-4">Loading...</div>}>
-        <InputRendererContent searchParams={searchParams} />
-      </Suspense>
+      <MarkdownInput
+        initialContent={INITIAL_CONTENT}
+        initialRendered={initialRendered}
+      />
     </div>
   );
 }
