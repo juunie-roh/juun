@@ -19,7 +19,7 @@ export default function AppWebView() {
   useEffect(() => {
     send({
       type: "THEME",
-      value: colorScheme === "unspecified" ? "light" : colorScheme,
+      value: colorScheme === null ? "light" : colorScheme,
     });
   }, [colorScheme]);
 
