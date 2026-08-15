@@ -122,12 +122,23 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // rewrite paths with i18n wrapped link for static html pages
   rewrites() {
-    return [
-      { source: "/ko/100days/:path*", destination: "/100days/:path*" },
-      { source: "/en/100days/:path*", destination: "/100days/:path*" },
-    ];
+    return {
+      // beforeFiles: intercept before static /public files so blog images are
+      // served from the private Blob store (via the proxy route), even though
+      // the originals still exist under public/images/blog.
+      beforeFiles: [
+        {
+          source: "/images/blog/:path*",
+          destination: "/api/blog/image/blog/:path*",
+        },
+      ],
+      // afterFiles: i18n-wrapped links for static html pages
+      afterFiles: [
+        { source: "/ko/100days/:path*", destination: "/100days/:path*" },
+        { source: "/en/100days/:path*", destination: "/100days/:path*" },
+      ],
+    };
   },
   // Security Headers
   // @see https://owasp.org/www-project-secure-headers/
@@ -165,6 +176,13 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // Allow next/image to load Vercel Blob-hosted images (public store)
+  // images: {
+  //   remotePatterns: [
+  //     { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
+  //   ],
+  // },
 
   // webpack configuration, for explicit webpack build (with --webpack)
   webpack(config, options) {
