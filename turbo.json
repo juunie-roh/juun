@@ -10,6 +10,11 @@
       "dependsOn": ["^build"],
       "env": [
         "DOCKER_BUILD",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "ADMIN_ALLOWED_EMAILS",
         "NEXT_PUBLIC_BASE_URL",
         "CESIUM_ION_ACCESS_TOKEN",
         "POSTGRES_URL",
