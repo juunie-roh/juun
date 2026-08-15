@@ -56,6 +56,9 @@ COPY --chown=nextjs:nodejs apps/web/ ./apps/web/
 
 USER nextjs
 
+# Opt this build into `output: "standalone"` (see apps/web/next.config.ts).
+ENV DOCKER_BUILD=1
+
 # Build with secrets and remove .env from standalone output
 RUN --mount=type=cache,id=turbo,target=/app/.turbo,uid=1001,gid=1001 \
     --mount=type=secret,id=env,target=/app/apps/web/.env,uid=1001,gid=1001 \

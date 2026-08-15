@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Pin, PinOff } from "lucide-react";
 
-import { useTable } from "@/hooks/use-table";
+import { type Features, useTable } from "@/hooks/use-table";
 
 import { Button } from "./button";
 import ViewTable from "./view-table";
@@ -96,7 +96,7 @@ const sampleProducts: Product[] = [
 ];
 
 // Column definitions
-const person = createColumnHelper<Person>();
+const person = createColumnHelper<Features, Person>();
 const peopleColumns = [
   person.accessor("firstName", {
     header: "First Name",
@@ -129,7 +129,7 @@ const peopleColumns = [
   }),
 ];
 
-const product = createColumnHelper<Product>();
+const product = createColumnHelper<Features, Product>();
 const productColumns = [
   product.accessor("name", {
     header: "Product Name",
@@ -296,7 +296,11 @@ export const CustomStyling: Story = {
 };
 
 // Simple columns example
-const simpleColumns: ColumnDef<{ name: string; value: string }>[] = [
+const simpleColumns: ColumnDef<
+  Features,
+  { name: string; value: string },
+  string
+>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -336,7 +340,7 @@ const pinnedColumns = [
         variant="ghost"
         size="sm"
         onClick={() =>
-          column.getIsPinned() ? column.pin(false) : column.pin("left")
+          column.getIsPinned() ? column.pin(false) : column.pin("start")
         }
       >
         ID {column.getIsPinned() ? <Pin /> : <PinOff />}
@@ -362,7 +366,7 @@ const pinnedColumns = [
         variant="ghost"
         size="sm"
         onClick={() =>
-          column.getIsPinned() ? column.pin(false) : column.pin("right")
+          column.getIsPinned() ? column.pin(false) : column.pin("end")
         }
       >
         Status {column.getIsPinned() ? <Pin /> : <PinOff />}
@@ -400,7 +404,7 @@ export const ColumnPinning: Story = {
     docs: {
       description: {
         story:
-          "Table with column pinning support. Columns can be pinned to the left or right using the table's column pinning API. The ID column is configured with a fixed size.",
+          "Table with column pinning support. Columns can be pinned to the logical start or end regions using the table's column pinning API (in LTR layouts these read as left and right). The ID column is configured with a fixed size.",
       },
     },
   },

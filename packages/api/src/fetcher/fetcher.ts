@@ -153,18 +153,18 @@ class Fetcher {
    * Perform the actual HTTP request.
    */
   private async execute<T>(): Promise<T> {
-    const { baseUrl, path, method, headers, timeout, queryParams, body } =
+    const { url, pathname, method, headers, timeout, queryParams, body } =
       this._config;
 
-    if (!baseUrl) {
+    if (!url) {
       throw new Error("Base URL is required");
     }
 
     // Construct full URL with query parameters
-    const url = new URL(path || "", baseUrl);
+    const fullUrl = new URL(pathname || "", url);
     if (queryParams) {
       Object.entries(queryParams).forEach(([key, value]) => {
-        url.searchParams.append(key, String(value));
+        fullUrl.searchParams.append(key, String(value));
       });
     }
 
@@ -187,7 +187,7 @@ class Fetcher {
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(fullUrl.toString(), {
         ...requestInit,
         signal: controller.signal,
       });
@@ -313,10 +313,10 @@ namespace Fetcher {
    * Configuration options for the API builder.
    */
   export interface Config {
-    baseUrl?: string;
-    path?: string;
+    url: string;
+    pathname?: string;
     method?: HttpMethod;
-    headers?: Record<string, string>;
+    headers?: HeadersInit;
     timeout?: number;
     queryParams?: Record<string, string | number | boolean>;
     body?: unknown;
@@ -376,7 +376,7 @@ namespace Fetcher {
    * - 30-second timeout
    * - Specified base URL.
    *
-   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com').
+   * @param url - The base URL for the API (e.g., 'https://api.example.com').
    * @param config - Optional additional configuration to merge.
    * @returns Configured Fetcher instance ready to use.
    * @example
@@ -389,10 +389,10 @@ namespace Fetcher {
    * const users = await fetcher.fetch<User[]>();
    * ```
    */
-  export function json(baseUrl: string, config?: Partial<Config>): Fetcher {
+  export function json(url: string, config?: Partial<Config>): Fetcher {
     return new Fetcher({
       ...config,
-      baseUrl,
+      url,
       timeout: config?.timeout ?? 30000,
       headers: {
         "Content-Type": "application/json",
@@ -409,7 +409,7 @@ namespace Fetcher {
    * - JSON content-type header
    * - Specified base URL.
    *
-   * @param baseUrl - The base URL for the API (e.g., 'https://api.example.com').
+   * @param url - The base URL for the API (e.g., 'https://api.example.com').
    * @param token - The bearer token (will be sent as 'Authorization: Bearer {token}').
    * @param config - Optional additional configuration to merge.
    * @returns Configured Fetcher instance ready to use.
@@ -425,13 +425,13 @@ namespace Fetcher {
    * ```
    */
   export function withBearer(
-    baseUrl: string,
+    url: string,
     token: string,
     config?: Partial<Config>,
   ): Fetcher {
     return new Fetcher({
       ...config,
-      baseUrl,
+      url,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

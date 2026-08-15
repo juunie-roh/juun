@@ -1,11 +1,44 @@
 import {
   ColumnDef,
+  columnOrderingFeature,
+  columnPinningFeature,
   ColumnPinningState,
-  getCoreRowModel,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  RowData,
+  rowSelectionFeature,
+  rowSortingFeature,
   SortingState,
-  useReactTable,
+  tableFeatures,
+  useTable as useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
+
+/**
+ * Feature set registered on every table created by {@link useTable}.
+ *
+ * TanStack Table v9 no longer bundles features automatically, so each one used
+ * anywhere in the render path has to be opted into here:
+ * - `columnPinningFeature` - `column.pin()` / `getIsPinned()`
+ * - `columnOrderingFeature` - `getIsFirstColumn()` / `getIsLastColumn()`
+ * - `columnSizingFeature` - `getSize()` / `getStart()` / `getAfter()`
+ * - `columnVisibilityFeature` - `row.getVisibleCells()`
+ * - `rowSelectionFeature` - `row.getIsSelected()`.
+ *
+ * Ordering and sizing exist for `getColumnPinningStyles`, which reads column
+ * offsets and edge positions to build its sticky styles; visibility and
+ * selection are used directly by `ViewTable`'s row rendering.
+ */
+export const features = tableFeatures({
+  columnOrderingFeature,
+  columnPinningFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+});
+
+export type Features = typeof features;
 
 interface TableOptions {
   enableColumnPinning?: boolean;
@@ -14,8 +47,8 @@ interface TableOptions {
   initialSorting?: SortingState;
 }
 
-export function useTable<TData>(
-  columns: ColumnDef<TData, any>[],
+export function useTable<TData extends RowData>(
+  columns: ColumnDef<Features, TData, any>[],
   data: TData[],
   options?: TableOptions,
 ) {
@@ -26,13 +59,13 @@ export function useTable<TData>(
     options?.initialSorting ?? [],
   );
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>(
-    options?.initialColumnPinning ?? { left: [], right: [] },
+    options?.initialColumnPinning ?? { start: [], end: [] },
   );
 
   const table = useReactTable({
+    features,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
     enableSorting,
     enableColumnPinning,
     // only set handlers if features are enabled

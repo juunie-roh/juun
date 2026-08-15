@@ -19,7 +19,7 @@ describe("Fetcher", () => {
 
   describe("constructor", () => {
     it("should create instance with config", () => {
-      const config = { baseUrl: "https://api.example.com", path: "/users" };
+      const config = { url: "https://api.example.com", path: "/users" };
       const fetcher = new Fetcher(config);
 
       expect(fetcher).toBeInstanceOf(Fetcher);
@@ -27,19 +27,19 @@ describe("Fetcher", () => {
     });
 
     it("should create a copy of the config", () => {
-      const config = { baseUrl: "https://api.example.com" };
+      const config = { url: "https://api.example.com" };
       const fetcher = new Fetcher(config);
 
-      config.baseUrl = "https://different.com";
+      config.url = "https://different.com";
 
-      expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+      expect(fetcher.config.url).toBe("https://api.example.com");
     });
   });
 
   describe("getConfig", () => {
     it("should return readonly copy of config", () => {
       const config = {
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         method: "GET" as const,
       };
       const fetcher = new Fetcher(config);
@@ -51,8 +51,8 @@ describe("Fetcher", () => {
   });
 
   describe("execute", () => {
-    it("should throw error if baseUrl is not set", async () => {
-      const fetcher = new Fetcher({});
+    it("should throw error if url is not set", async () => {
+      const fetcher = new Fetcher({} as any);
 
       await expect(fetcher.fetch()).rejects.toThrow("Base URL is required");
     });
@@ -66,8 +66,8 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
-        path: "/users",
+        url: "https://api.example.com",
+        pathname: "/users",
         method: "GET",
       });
 
@@ -90,8 +90,8 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
-        path: "/users",
+        url: "https://api.example.com",
+        pathname: "/users",
         queryParams: { page: 1, limit: 10, active: true },
       });
 
@@ -109,7 +109,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         headers: { Authorization: "Bearer token", "X-Custom": "value" },
       });
 
@@ -134,8 +134,8 @@ describe("Fetcher", () => {
 
       const body = { name: "John Doe", email: "john@example.com" };
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
-        path: "/users",
+        url: "https://api.example.com",
+        pathname: "/users",
         method: "POST",
         body,
       });
@@ -157,7 +157,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         method: "GET",
         body: { ignored: true },
       });
@@ -181,7 +181,7 @@ describe("Fetcher", () => {
         }),
       );
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
       const result = await fetcher.fetch<{ id: number; name: string }>();
 
       expect(result).toEqual(responseData);
@@ -195,7 +195,7 @@ describe("Fetcher", () => {
         }),
       );
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
       const result = await fetcher.fetch<string>();
 
       expect(result).toBe("Plain text response");
@@ -216,7 +216,7 @@ describe("Fetcher", () => {
 
       mockFetch.mockResolvedValueOnce(mockResponse);
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
       const result = await fetcher.fetch();
 
       expect(result).toEqual(responseData);
@@ -228,7 +228,7 @@ describe("Fetcher", () => {
         new Response(null, { status: 404, statusText: "Not Found" }),
       );
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
 
       await expect(fetcher.fetch()).rejects.toThrow(FetcherError);
       await expect(fetcher.fetch()).rejects.toThrow("HTTP 404: Not Found");
@@ -241,7 +241,7 @@ describe("Fetcher", () => {
       });
       mockFetch.mockResolvedValueOnce(errorResponse);
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
 
       try {
         await fetcher.fetch();
@@ -262,7 +262,7 @@ describe("Fetcher", () => {
       mockFetch.mockImplementationOnce(() => Promise.reject(abortError));
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         timeout: 5000,
       });
 
@@ -283,7 +283,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         timeout: 5000,
       });
 
@@ -305,7 +305,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         timeout: 5000,
       });
 
@@ -320,7 +320,7 @@ describe("Fetcher", () => {
       mockFetch.mockRejectedValueOnce(new Error("Network error"));
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         timeout: 5000,
       });
 
@@ -337,7 +337,7 @@ describe("Fetcher", () => {
         );
 
         const fetcher = new Fetcher({
-          baseUrl: "https://api.example.com",
+          url: "https://api.example.com",
           method,
         });
 
@@ -353,7 +353,7 @@ describe("Fetcher", () => {
     it("should handle network errors", async () => {
       mockFetch.mockRejectedValueOnce(new Error("Network failure"));
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
 
       await expect(fetcher.fetch()).rejects.toThrow("Network failure");
     });
@@ -363,7 +363,7 @@ describe("Fetcher", () => {
         new Response(JSON.stringify({}), { status: 200 }),
       );
 
-      const fetcher = new Fetcher({ baseUrl: "https://api.example.com" });
+      const fetcher = new Fetcher({ url: "https://api.example.com" });
 
       await fetcher.fetch();
 
@@ -379,8 +379,8 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
-        path: "",
+        url: "https://api.example.com",
+        pathname: "",
       });
 
       await fetcher.fetch();
@@ -402,7 +402,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         transformers: [(data: any) => data.data],
       });
 
@@ -420,7 +420,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         transformers: [
           (data: any) => data.data,
           (data: any) => data.items,
@@ -444,7 +444,7 @@ describe("Fetcher", () => {
       let capturedResponse: Response | undefined;
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         transformers: [
           (data: any, response: Response) => {
             capturedResponse = response;
@@ -470,7 +470,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         transformers: [
           async (data: any) => {
             await new Promise((resolve) => setTimeout(resolve, 10));
@@ -496,7 +496,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
       });
 
       const result = await fetcher.fetch<{ value: number }>();
@@ -533,7 +533,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: { maxRetries: 3, initialDelay: 10 },
       });
 
@@ -555,7 +555,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: { maxRetries: 3, initialDelay: 10 },
       });
 
@@ -571,7 +571,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: { maxRetries: 3 },
       });
 
@@ -585,7 +585,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: { maxRetries: 2, initialDelay: 10 },
       });
 
@@ -614,7 +614,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: { maxRetries: 3, initialDelay: 10, onRetry },
       });
 
@@ -656,7 +656,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: {
           maxRetries: 3,
           initialDelay: 100,
@@ -699,7 +699,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: {
           maxRetries: 3,
           initialDelay: 100,
@@ -741,7 +741,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: {
           maxRetries: 3,
           initialDelay: 10000,
@@ -767,7 +767,7 @@ describe("Fetcher", () => {
 
       // POST is not idempotent
       const postFetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         method: "POST",
         retry: { maxRetries: 3 },
       });
@@ -790,7 +790,7 @@ describe("Fetcher", () => {
         );
 
       const getFetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         method: "GET",
         retry: { maxRetries: 3, initialDelay: 10 },
       });
@@ -815,7 +815,7 @@ describe("Fetcher", () => {
         );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         method: "POST",
         retry: { maxRetries: 3, initialDelay: 10, onlyIdempotent: false },
       });
@@ -832,7 +832,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
         retry: { maxRetries: 3, initialDelay: 10, retryableStatuses: [418] },
       });
 
@@ -850,7 +850,7 @@ describe("Fetcher", () => {
       );
 
       const fetcher = new Fetcher({
-        baseUrl: "https://api.example.com",
+        url: "https://api.example.com",
       });
 
       const result = await fetcher.fetch();
@@ -866,7 +866,7 @@ describe("Fetcher", () => {
         const fetcher = Fetcher.json("https://api.example.com");
 
         expect(fetcher).toBeInstanceOf(Fetcher);
-        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.url).toBe("https://api.example.com");
         expect(fetcher.config.headers).toEqual({
           "Content-Type": "application/json",
         });
@@ -875,13 +875,13 @@ describe("Fetcher", () => {
 
       it("should merge additional config", () => {
         const fetcher = Fetcher.json("https://api.example.com", {
-          path: "/users",
+          pathname: "/users",
           timeout: 5000,
           headers: { "X-Custom": "value" },
         });
 
-        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
-        expect(fetcher.config.path).toBe("/users");
+        expect(fetcher.config.url).toBe("https://api.example.com");
+        expect(fetcher.config.pathname).toBe("/users");
         expect(fetcher.config.timeout).toBe(5000);
         expect(fetcher.config.headers).toEqual({
           "Content-Type": "application/json",
@@ -917,7 +917,7 @@ describe("Fetcher", () => {
           );
 
         const fetcher = Fetcher.json("https://api.example.com", {
-          path: "/users",
+          pathname: "/users",
           retry: { maxRetries: 3, initialDelay: 10 },
         });
 
@@ -936,7 +936,7 @@ describe("Fetcher", () => {
         );
 
         expect(fetcher).toBeInstanceOf(Fetcher);
-        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.url).toBe("https://api.example.com");
         expect(fetcher.config.headers).toEqual({
           Authorization: "Bearer token123",
           "Content-Type": "application/json",
@@ -949,7 +949,9 @@ describe("Fetcher", () => {
           "mytoken",
         );
 
-        expect(fetcher.config.headers?.Authorization).toBe("Bearer mytoken");
+        expect(new Headers(fetcher.config.headers).get("Authorization")).toBe(
+          "Bearer mytoken",
+        );
       });
 
       it("should merge additional config", () => {
@@ -957,13 +959,13 @@ describe("Fetcher", () => {
           "https://api.example.com",
           "token123",
           {
-            path: "/protected",
+            pathname: "/protected",
             headers: { "X-Request-ID": "abc" },
           },
         );
 
-        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
-        expect(fetcher.config.path).toBe("/protected");
+        expect(fetcher.config.url).toBe("https://api.example.com");
+        expect(fetcher.config.pathname).toBe("/protected");
         expect(fetcher.config.headers).toEqual({
           Authorization: "Bearer token123",
           "Content-Type": "application/json",
@@ -980,7 +982,9 @@ describe("Fetcher", () => {
           },
         );
 
-        expect(fetcher.config.headers?.Authorization).toBe("Custom auth");
+        expect(new Headers(fetcher.config.headers).get("Authorization")).toBe(
+          "Custom auth",
+        );
       });
 
       it("should make authenticated request", async () => {
@@ -994,7 +998,7 @@ describe("Fetcher", () => {
         const fetcher = Fetcher.withBearer(
           "https://api.example.com",
           "token123",
-          { path: "/me" },
+          { pathname: "/me" },
         );
 
         await fetcher.fetch();
@@ -1013,8 +1017,8 @@ describe("Fetcher", () => {
     describe("Fetcher.from", () => {
       it("should create fetcher from existing config", () => {
         const config: Fetcher.Config = {
-          baseUrl: "https://api.example.com",
-          path: "/users",
+          url: "https://api.example.com",
+          pathname: "/users",
           method: "POST",
           timeout: 5000,
         };
@@ -1030,8 +1034,8 @@ describe("Fetcher", () => {
         const transformer = (data: unknown) => data;
 
         const config: Fetcher.Config = {
-          baseUrl: "https://api.example.com",
-          path: "/users",
+          url: "https://api.example.com",
+          pathname: "/users",
           method: "POST",
           timeout: 5000,
           headers: { "X-Custom": "value" },
@@ -1048,8 +1052,8 @@ describe("Fetcher", () => {
 
         const fetcher = Fetcher.from(config);
 
-        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
-        expect(fetcher.config.path).toBe("/users");
+        expect(fetcher.config.url).toBe("https://api.example.com");
+        expect(fetcher.config.pathname).toBe("/users");
         expect(fetcher.config.method).toBe("POST");
         expect(fetcher.config.timeout).toBe(5000);
         expect(fetcher.config.headers).toEqual({ "X-Custom": "value" });
@@ -1062,14 +1066,14 @@ describe("Fetcher", () => {
 
       it("should create independent instance", () => {
         const config: Fetcher.Config = {
-          baseUrl: "https://api.example.com",
+          url: "https://api.example.com",
         };
 
         const fetcher = Fetcher.from(config);
 
-        config.baseUrl = "https://different.com";
+        config.url = "https://different.com";
 
-        expect(fetcher.config.baseUrl).toBe("https://api.example.com");
+        expect(fetcher.config.url).toBe("https://api.example.com");
       });
     });
   });

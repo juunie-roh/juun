@@ -1,6 +1,7 @@
-import { flexRender, Table as RTable } from "@tanstack/react-table";
+import { ReactTable, RowData } from "@tanstack/react-table";
 import { ComponentProps, ReactNode } from "react";
 
+import type { Features } from "@/hooks/use-table";
 import { cn, getColumnPinningStyles } from "@/lib/utils";
 
 import {
@@ -12,15 +13,17 @@ import {
   TableRow,
 } from "./table";
 
-export interface ViewTableProps<TData> extends ComponentProps<typeof Table> {
-  table: RTable<TData>;
+export interface ViewTableProps<TData extends RowData> extends ComponentProps<
+  typeof Table
+> {
+  table: ReactTable<Features, TData>;
   empty?: ReactNode;
 }
 
 /**
  * A simple table for viewing data.
  */
-export default function ViewTable<TData>({
+export default function ViewTable<TData extends RowData>({
   table,
   empty,
   className,
@@ -41,12 +44,9 @@ export default function ViewTable<TData>({
                 )}
                 style={getColumnPinningStyles(header.column)}
               >
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
+                {header.isPlaceholder ? null : (
+                  <table.FlexRender header={header} />
+                )}
               </TableHead>
             ))}
           </TableRow>
@@ -70,7 +70,7 @@ export default function ViewTable<TData>({
                   )}
                   style={getColumnPinningStyles(cell.column)}
                 >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  <table.FlexRender cell={cell} />
                 </TableCell>
               ))}
             </TableRow>

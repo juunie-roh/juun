@@ -1,8 +1,10 @@
-import { Column } from "@tanstack/react-table";
+import { Column, RowData } from "@tanstack/react-table";
 import { type ClassValue, clsx } from "clsx";
 import { createLucideIcon } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { twMerge } from "tailwind-merge";
+
+import type { Features } from "@/hooks/use-table";
 
 type SVGElementType =
   | "circle"
@@ -38,8 +40,8 @@ export function cn(...inputs: ClassValue[]) {
  * Calculates inline styles for column pinning in TanStack Table.
  *
  * Generates CSS properties for sticky column positioning with visual indicators:
- * - Positions pinned columns using `left` or `right` offsets
- * - Adds inset box shadows to the last left/first right pinned columns for visual separation
+ * - Positions pinned columns using logical `inset-inline-start`/`inset-inline-end` offsets
+ * - Adds inset box shadows to the last start/first end pinned columns for visual separation
  * - Sets column width based on table configuration.
  *
  * @template TData - The type of data in the table rows.
@@ -57,23 +59,25 @@ export function cn(...inputs: ClassValue[]) {
  * ```
  *
  */
-export function getColumnPinningStyles<TData>(
-  column: Column<TData>,
+export function getColumnPinningStyles<TData extends RowData>(
+  column: Column<Features, TData, unknown>,
 ): React.CSSProperties {
   const isPinned = column.getIsPinned();
-  const isLastLeftPinnedColumn =
-    isPinned === "left" && column.getIsLastColumn("left");
-  const isFirstRightPinnedColumn =
-    isPinned === "right" && column.getIsFirstColumn("right");
+  const isLastStartPinnedColumn =
+    isPinned === "start" && column.getIsLastColumn("start");
+  const isFirstEndPinnedColumn =
+    isPinned === "end" && column.getIsFirstColumn("end");
 
   return {
-    boxShadow: isLastLeftPinnedColumn
+    boxShadow: isLastStartPinnedColumn
       ? "-4px 0 4px -4px gray inset"
-      : isFirstRightPinnedColumn
+      : isFirstEndPinnedColumn
         ? "4px 0 4px -4px gray inset"
         : undefined,
-    left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
-    right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
+    insetInlineStart:
+      isPinned === "start" ? `${column.getStart("start")}px` : undefined,
+    insetInlineEnd:
+      isPinned === "end" ? `${column.getAfter("end")}px` : undefined,
     width: column.getSize(),
   };
 }
