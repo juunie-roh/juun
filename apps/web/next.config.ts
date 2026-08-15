@@ -66,7 +66,12 @@ const nextConfig: NextConfig = {
       "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" },
     },
   },
-  output: "standalone",
+  // Standalone output is only for the Docker image, which serves the app with
+  // `node .next/standalone/apps/web/server.js`. Vercel's builder produces its
+  // own serverless output and never reads `.next/standalone`, so building it
+  // there is wasted work — and it was failing there with an ENOENT on
+  // `.next/next-server.js.nft.json` during the standalone copy step.
+  output: process.env.DOCKER_BUILD ? "standalone" : undefined,
   // Explicitly marked packages as server-side external for Turbopack
   serverExternalPackages: [
     "@prisma/client",

@@ -7,7 +7,7 @@
   "scripts": {
     "analyze": "ANALYZE=true next experimental-analyze",
     "build": "next build",
-    "build:standalone": "next build && node scripts/post-build.js",
+    "build:standalone": "DOCKER_BUILD=1 next build",
     "check-types": "tsc -p ./tsconfig.json --noEmit",
     "dev": "next dev",
     "lint": "eslint .",
