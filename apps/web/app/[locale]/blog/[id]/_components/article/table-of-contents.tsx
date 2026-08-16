@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
 interface TableOfContentsProps {
@@ -191,11 +192,14 @@ export default function TableOfContents({
       )}
     >
       <h2 className="mb-4 px-6 font-medium">{t("table-of-contents")}</h2>
-      <nav
-        aria-label={t("table-of-contents")}
-        className="max-h-[50vh] overflow-hidden overflow-y-auto px-3"
-      >
-        {tocContent}
+      <nav aria-label={t("table-of-contents")} className="px-3">
+        {/* The cap goes on the viewport, not the Root: Radix only sets
+            `position: relative` on the Root, and the viewport's `size-full`
+            resolves to `auto` against an auto-height parent, so it would
+            never overflow. */}
+        <ScrollArea className="*:data-[slot=scroll-area-viewport]:max-h-[50vh]">
+          {tocContent}
+        </ScrollArea>
       </nav>
     </div>
   );

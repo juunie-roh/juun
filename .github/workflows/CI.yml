@@ -24,6 +24,8 @@ jobs:
         node-version:
           - 24.x # Backward compatibility
           - 25.x
+          - 26.x
+
     name: Check with ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
@@ -46,6 +48,7 @@ jobs:
         node-version:
           - 24.x # Backward compatibility
           - 25.x
+          - 26.x
 
     name: Test with ${{ matrix.node-version }}
 

@@ -39,19 +39,32 @@ const CSP = {
     ],
     workers: ["https://cdn.jsdelivr.net"],
   },
+  // Static pages under `public/100days/` are hand-written HTML that predates
+  // this app and loads its own vendor assets from CDNs. Permissions are split
+  // by directive so jQuery only gets script access and the icon packs only get
+  // style/font access, rather than widening every directive for all three.
+  hundredDays: {
+    scripts: ["https://code.jquery.com"], // day029 jQuery slim
+    styles: [
+      "https://cdnjs.cloudflare.com", // Font Awesome
+      "https://unpkg.com", // Boxicons
+    ],
+    // Both icon packs pull webfonts from the same origins as their stylesheets.
+    fonts: ["https://cdnjs.cloudflare.com", "https://unpkg.com"],
+  },
 } as const;
 
 // Build CSP directives
 const cspDirectives = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${[...CSP.cesium.scripts, ...CSP.vercel.scripts].join(" ")}`,
-  "style-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${[...CSP.cesium.scripts, ...CSP.vercel.scripts, ...CSP.hundredDays.scripts].join(" ")}`,
+  `style-src 'self' 'unsafe-inline' ${CSP.hundredDays.styles.join(" ")}`,
   "img-src 'self' data: https:",
-  "font-src 'self' data:",
+  `font-src 'self' data: ${CSP.hundredDays.fonts.join(" ")}`,
   `connect-src 'self' ${[...CSP.vercel.connect, ...CSP.cesium.connect].join(" ")}`,
   `worker-src 'self' blob: ${CSP.cesium.workers.join(" ")}`,
-  `frame-src ${CSP.vercel.frames.join(" ")}`,
-  "frame-ancestors 'none'",
+  `frame-src 'self' ${CSP.vercel.frames.join(" ")}`,
+  "frame-ancestors 'self'",
 ].join("; ");
 
 const nextConfig: NextConfig = {
@@ -152,8 +165,8 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
-          // Prevents click-jacking by blocking iframe embedding
-          { key: "X-Frame-Options", value: "DENY" },
+          // Allows same-origin framing; blocks third-party
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           // Prevents MIME-sniffing attacks (browser won't guess content types)
           { key: "X-Content-Type-Options", value: "nosniff" },
           // Controls referrer info sent to other sites (balances privacy/functionality)
