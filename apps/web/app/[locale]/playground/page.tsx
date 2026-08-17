@@ -43,14 +43,14 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
       url: canonicalUrl,
-      images: [`${BASE_URL}/images/juun.png`],
+      images: [`${BASE_URL}/juun.png`],
     },
 
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [`${BASE_URL}/images/juun.png`],
+      images: [`${BASE_URL}/juun.png`],
     },
   } satisfies Metadata;
 }

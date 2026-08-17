@@ -1,25 +1,43 @@
-import fs from "fs";
-import path from "path";
+import { get } from "@vercel/blob";
 import probe from "probe-image-size";
+import type { Readable } from "stream";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock server-only to prevent import errors in test environment
 vi.mock("server-only", () => ({}));
 
 // Mock dependencies
-vi.mock("fs");
+vi.mock("@vercel/blob");
 vi.mock("probe-image-size");
 
 import { getImageDimensions } from "./image";
+
+/**
+ * A stand-in for a successful `get()`.
+ *
+ * The stream is a real `ReadableStream` so `Readable.fromWeb` runs for real -
+ * mocking it out would hide a conversion break, which is the one piece of this
+ * function most likely to regress on a dependency bump.
+ */
+function blobHit() {
+  return {
+    statusCode: 200,
+    stream: new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(new Uint8Array([0x89, 0x50, 0x4e, 0x47]));
+        controller.close();
+      },
+    }),
+    blob: { contentType: "image/png" },
+  } as unknown as Awaited<ReturnType<typeof get>>;
+}
 
 describe("getImageDimensions", () => {
   const mockWidth = 800;
   const mockHeight = 600;
 
   beforeEach(() => {
-    // Reset all mocks before each test
     vi.clearAllMocks();
-    // Reset console.warn mock
     vi.spyOn(console, "warn").mockImplementation(() => {});
   });
 
@@ -50,6 +68,17 @@ describe("getImageDimensions", () => {
       expect(result).toEqual({ width: mockWidth, height: mockHeight });
     });
 
+    it("should not touch blob storage for remote URLs", async () => {
+      vi.mocked(probe).mockResolvedValue({
+        width: mockWidth,
+        height: mockHeight,
+      } as never);
+
+      await getImageDimensions("https://example.com/image.jpg");
+
+      expect(get).not.toHaveBeenCalled();
+    });
+
     it("should return null and warn on remote URL probe failure", async () => {
       const url = "https://example.com/invalid.jpg";
       const error = new Error("Network error");
@@ -59,256 +88,180 @@ describe("getImageDimensions", () => {
 
       expect(result).toBeNull();
       expect(console.warn).toHaveBeenCalledWith(
-        `[Image] Failed to get dimensions for: ${url}`,
+        `[Image] Failed to probe remote image: ${url}`,
         error,
       );
     });
 
-    it("should handle different image formats from remote URLs", async () => {
-      const formats = [
-        "https://example.com/image.jpg",
-        "https://example.com/image.png",
-        "https://example.com/image.webp",
-        "https://example.com/image.gif",
-        "https://example.com/image.svg",
-      ];
-
+    it("should handle URLs with query parameters and fragments", async () => {
       vi.mocked(probe).mockResolvedValue({
         width: mockWidth,
         height: mockHeight,
       } as never);
 
-      for (const url of formats) {
+      for (const url of [
+        "https://example.com/image.jpg?width=800&quality=high",
+        "https://example.com/image.jpg#section",
+      ]) {
         const result = await getImageDimensions(url);
         expect(result).toEqual({ width: mockWidth, height: mockHeight });
       }
     });
   });
 
-  describe("Local Files", () => {
-    const mockStream = {
-      destroy: vi.fn(),
-    };
-
-    beforeEach(() => {
-      vi.spyOn(fs, "createReadStream").mockReturnValue(
-        mockStream as unknown as fs.ReadStream,
-      );
-    });
-
-    it("should get dimensions from local file with leading slash", async () => {
-      const src = "/images/photo.jpg";
-      const expectedPath = path.join(
-        process.cwd(),
-        "public",
-        "images/photo.jpg",
-      );
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
+  describe("Blob-backed images", () => {
+    it("should map the URL to a blob key by dropping the leading slash", async () => {
+      vi.mocked(get).mockResolvedValue(blobHit());
       vi.mocked(probe).mockResolvedValue({
         width: mockWidth,
         height: mockHeight,
       } as never);
 
-      const result = await getImageDimensions(src);
+      const result = await getImageDimensions("/images/blog/photo.jpg");
 
-      expect(fs.existsSync).toHaveBeenCalledWith(expectedPath);
-      expect(fs.createReadStream).toHaveBeenCalledWith(expectedPath);
-      expect(probe).toHaveBeenCalledWith(mockStream);
-      expect(mockStream.destroy).toHaveBeenCalled();
+      expect(get).toHaveBeenCalledWith("images/blog/photo.jpg", {
+        access: "private",
+      });
       expect(result).toEqual({ width: mockWidth, height: mockHeight });
-    });
-
-    it("should get dimensions from local file without leading slash", async () => {
-      const src = "images/photo.jpg";
-      const expectedPath = path.join(
-        process.cwd(),
-        "public",
-        "images/photo.jpg",
-      );
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.mocked(probe).mockResolvedValue({
-        width: mockWidth,
-        height: mockHeight,
-      } as never);
-
-      const result = await getImageDimensions(src);
-
-      expect(fs.existsSync).toHaveBeenCalledWith(expectedPath);
-      expect(fs.createReadStream).toHaveBeenCalledWith(expectedPath);
-      expect(probe).toHaveBeenCalledWith(mockStream);
-      expect(mockStream.destroy).toHaveBeenCalled();
-      expect(result).toEqual({ width: mockWidth, height: mockHeight });
-    });
-
-    it("should return null when local file does not exist", async () => {
-      const src = "/images/missing.jpg";
-      const expectedPath = path.join(
-        process.cwd(),
-        "public",
-        "images/missing.jpg",
-      );
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(false);
-
-      const result = await getImageDimensions(src);
-
-      expect(fs.existsSync).toHaveBeenCalledWith(expectedPath);
-      expect(fs.createReadStream).not.toHaveBeenCalled();
-      expect(result).toBeNull();
-      expect(console.warn).toHaveBeenCalledWith(
-        `[Image] File not found: ${expectedPath}`,
-      );
-    });
-
-    it("should return null when probe fails on local file", async () => {
-      const src = "/images/corrupt.jpg";
-      const error = new Error("Corrupt image");
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.mocked(probe).mockRejectedValue(error);
-
-      const result = await getImageDimensions(src);
-
-      // Note: Stream is not destroyed on error - potential resource leak
-      // The stream.destroy() call only happens after successful probe
-      expect(result).toBeNull();
-      expect(console.warn).toHaveBeenCalledWith(
-        `[Image] Failed to get dimensions for: ${src}`,
-        error,
-      );
     });
 
     it("should handle nested directory paths", async () => {
-      const src = "/blog/2024/01/image.jpg";
-      const expectedPath = path.join(
-        process.cwd(),
-        "public",
-        "blog/2024/01/image.jpg",
-      );
+      vi.mocked(get).mockResolvedValue(blobHit());
+      vi.mocked(probe).mockResolvedValue({
+        width: 1200,
+        height: 630,
+      } as never);
 
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
+      const result = await getImageDimensions("/images/blog/2024/01/hero.jpg");
+
+      expect(get).toHaveBeenCalledWith("images/blog/2024/01/hero.jpg", {
+        access: "private",
+      });
+      expect(result).toEqual({ width: 1200, height: 630 });
+    });
+
+    it("should handle special characters in paths", async () => {
+      vi.mocked(get).mockResolvedValue(blobHit());
       vi.mocked(probe).mockResolvedValue({
         width: mockWidth,
         height: mockHeight,
       } as never);
 
-      const result = await getImageDimensions(src);
+      const result = await getImageDimensions(
+        "/images/blog/photo with spaces.jpg",
+      );
 
-      expect(fs.existsSync).toHaveBeenCalledWith(expectedPath);
+      expect(get).toHaveBeenCalledWith("images/blog/photo with spaces.jpg", {
+        access: "private",
+      });
       expect(result).toEqual({ width: mockWidth, height: mockHeight });
     });
-  });
 
-  describe("Error Handling", () => {
-    it("should return null and warn on probe error", async () => {
-      const src = "https://example.com/broken.jpg";
-      const error = new Error("Probe failed");
+    it("should destroy the stream after probing", async () => {
+      let captured: Readable | undefined;
+      vi.mocked(get).mockResolvedValue(blobHit());
+      vi.mocked(probe).mockImplementation(async (source) => {
+        captured = source as Readable;
+        return { width: mockWidth, height: mockHeight } as never;
+      });
 
-      vi.mocked(probe).mockRejectedValue(error);
+      await getImageDimensions("/images/blog/photo.jpg");
 
-      const result = await getImageDimensions(src);
+      // probe only reads the header - the rest of the download must be dropped.
+      expect(captured?.destroyed).toBe(true);
+    });
+
+    it("should destroy the stream even when probe throws", async () => {
+      let captured: Readable | undefined;
+      vi.mocked(get).mockResolvedValue(blobHit());
+      vi.mocked(probe).mockImplementation(async (source) => {
+        captured = source as Readable;
+        throw new Error("Corrupt image");
+      });
+
+      const result = await getImageDimensions("/images/blog/corrupt.jpg");
+
+      expect(result).toBeNull();
+      expect(captured?.destroyed).toBe(true);
+    });
+
+    it("should return null when the blob is missing", async () => {
+      vi.mocked(get).mockResolvedValue(null);
+
+      const result = await getImageDimensions("/images/blog/missing.jpg");
+
+      expect(result).toBeNull();
+      expect(probe).not.toHaveBeenCalled();
+    });
+
+    it("should return null on a non-200 blob response", async () => {
+      vi.mocked(get).mockResolvedValue({
+        statusCode: 404,
+      } as unknown as Awaited<ReturnType<typeof get>>);
+
+      const result = await getImageDimensions("/images/blog/missing.jpg");
+
+      expect(result).toBeNull();
+      expect(probe).not.toHaveBeenCalled();
+    });
+
+    it("should return null and warn when the blob read throws", async () => {
+      const error = new Error("Missing BLOB_READ_WRITE_TOKEN");
+      vi.mocked(get).mockRejectedValue(error);
+
+      const result = await getImageDimensions("/images/blog/photo.jpg");
 
       expect(result).toBeNull();
       expect(console.warn).toHaveBeenCalledWith(
-        `[Image] Failed to get dimensions for: ${src}`,
+        "[Image] Blob probe failed for: images/blog/photo.jpg",
         error,
       );
     });
+  });
 
-    it("should handle timeout errors gracefully", async () => {
-      const src = "https://slow-server.com/image.jpg";
-      const error = new Error("Request timeout");
-
-      vi.mocked(probe).mockRejectedValue(error);
-
+  describe("Non blob-backed sources", () => {
+    it.each([
+      ["a path outside /images/", "/uploads/users/avatar-123.png"],
+      ["a path without a leading slash", "images/photo.jpg"],
+      ["an empty string", ""],
+      ["a bare filename", "photo.jpg"],
+    ])("should return null and warn for %s", async (_label, src) => {
       const result = await getImageDimensions(src);
 
       expect(result).toBeNull();
-      expect(console.warn).toHaveBeenCalled();
-    });
-
-    it("should handle invalid probe responses", async () => {
-      const src = "https://example.com/image.jpg";
-
-      // Mock probe returning invalid data
-      vi.mocked(probe).mockResolvedValue({
-        width: undefined,
-        height: undefined,
-      } as never);
-
-      const result = await getImageDimensions(src);
-
-      // Should still return the result, even with undefined values
-      expect(result).toEqual({ width: undefined, height: undefined });
+      expect(get).not.toHaveBeenCalled();
+      expect(console.warn).toHaveBeenCalledWith(
+        `[Image] Not a blob-backed source: ${src}`,
+      );
     });
   });
 
-  describe("Edge Cases", () => {
-    it("should handle URLs with query parameters", async () => {
-      const url = "https://example.com/image.jpg?width=800&quality=high";
-
+  describe("Real-world Use Cases", () => {
+    it("should handle blog post images", async () => {
+      vi.mocked(get).mockResolvedValue(blobHit());
       vi.mocked(probe).mockResolvedValue({
-        width: mockWidth,
-        height: mockHeight,
+        width: 1200,
+        height: 630,
+      } as never);
+
+      const result = await getImageDimensions(
+        "/images/blog/featured-image.jpg",
+      );
+
+      expect(result).toEqual({ width: 1200, height: 630 });
+    });
+
+    it("should handle CDN URLs", async () => {
+      const url = "https://cdn.example.com/assets/images/hero.webp";
+      vi.mocked(probe).mockResolvedValue({
+        width: 1920,
+        height: 1080,
       } as never);
 
       const result = await getImageDimensions(url);
 
       expect(probe).toHaveBeenCalledWith(url);
-      expect(result).toEqual({ width: mockWidth, height: mockHeight });
-    });
-
-    it("should handle URLs with fragments", async () => {
-      const url = "https://example.com/image.jpg#section";
-
-      vi.mocked(probe).mockResolvedValue({
-        width: mockWidth,
-        height: mockHeight,
-      } as never);
-
-      const result = await getImageDimensions(url);
-
-      expect(result).toEqual({ width: mockWidth, height: mockHeight });
-    });
-
-    it("should handle special characters in local paths", async () => {
-      const src = "/images/photo with spaces.jpg";
-      const expectedPath = path.join(
-        process.cwd(),
-        "public",
-        "images/photo with spaces.jpg",
-      );
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.mocked(probe).mockResolvedValue({
-        width: mockWidth,
-        height: mockHeight,
-      } as never);
-
-      vi.spyOn(fs, "createReadStream").mockReturnValue({
-        destroy: vi.fn(),
-      } as unknown as fs.ReadStream);
-
-      const result = await getImageDimensions(src);
-
-      expect(fs.existsSync).toHaveBeenCalledWith(expectedPath);
-      expect(result).toEqual({ width: mockWidth, height: mockHeight });
-    });
-
-    it("should handle empty string input", async () => {
-      const src = "";
-      const expectedPath = path.join(process.cwd(), "public", "");
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(false);
-
-      const result = await getImageDimensions(src);
-
-      expect(result).toBeNull();
-      expect(console.warn).toHaveBeenCalledWith(
-        `[Image] File not found: ${expectedPath}`,
-      );
+      expect(result).toEqual({ width: 1920, height: 1080 });
     });
 
     it("should handle different image dimensions", async () => {
@@ -328,64 +281,6 @@ describe("getImageDimensions", () => {
 
         expect(result).toEqual(dimensions);
       }
-    });
-  });
-
-  describe("Real-world Use Cases", () => {
-    it("should handle blog post images", async () => {
-      const src = "/blog/posts/2024/featured-image.jpg";
-      const expectedPath = path.join(
-        process.cwd(),
-        "public",
-        "blog/posts/2024/featured-image.jpg",
-      );
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.mocked(probe).mockResolvedValue({
-        width: 1200,
-        height: 630,
-      } as never);
-
-      vi.spyOn(fs, "createReadStream").mockReturnValue({
-        destroy: vi.fn(),
-      } as unknown as fs.ReadStream);
-
-      const result = await getImageDimensions(src);
-
-      expect(fs.existsSync).toHaveBeenCalledWith(expectedPath);
-      expect(result).toEqual({ width: 1200, height: 630 });
-    });
-
-    it("should handle CDN URLs", async () => {
-      const url = "https://cdn.example.com/assets/images/hero.webp";
-
-      vi.mocked(probe).mockResolvedValue({
-        width: 1920,
-        height: 1080,
-      } as never);
-
-      const result = await getImageDimensions(url);
-
-      expect(probe).toHaveBeenCalledWith(url);
-      expect(result).toEqual({ width: 1920, height: 1080 });
-    });
-
-    it("should handle user-generated content paths", async () => {
-      const src = "/uploads/users/avatar-123.png";
-
-      vi.spyOn(fs, "existsSync").mockReturnValue(true);
-      vi.mocked(probe).mockResolvedValue({
-        width: 256,
-        height: 256,
-      } as never);
-
-      vi.spyOn(fs, "createReadStream").mockReturnValue({
-        destroy: vi.fn(),
-      } as unknown as fs.ReadStream);
-
-      const result = await getImageDimensions(src);
-
-      expect(result).toEqual({ width: 256, height: 256 });
     });
   });
 });

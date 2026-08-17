@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "About",
     description: "About this learning laboratory playground",
     siteName: `Juun - About`,
-    images: ["/images/juun.png"],
+    images: ["/juun.png"],
     url: "https://juun.vercel.app/about",
   },
 };

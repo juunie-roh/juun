@@ -36,7 +36,7 @@ export async function generateMetadata({
       title,
       description,
       siteName: `Juun - Timeline Detail`,
-      images: ["/images/juun.png"],
+      images: ["/juun.png"],
       url: `https://juun.vercel.app/timeline/${item.id}`,
     },
   } satisfies Metadata;
