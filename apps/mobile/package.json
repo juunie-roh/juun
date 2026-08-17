@@ -12,8 +12,8 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "expo": "^57.0.12",
-    "expo-constants": "^57.0.10",
+    "expo": "^57.0.13",
+    "expo-constants": "^57.0.11",
     "expo-status-bar": "^57.0.1",
     "react": "19.2.8",
     "react-native": "0.87.0",
