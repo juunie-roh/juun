@@ -6,7 +6,6 @@ import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
 import md from "@/lib/server/md";
 import {
-  BASE_URL,
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
@@ -43,14 +42,14 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
       url: canonicalUrl,
-      images: [`${BASE_URL}/juun.png`],
+      images: ["/juun.png"],
     },
 
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [`${BASE_URL}/juun.png`],
+      images: ["/juun.png"],
     },
   } satisfies Metadata;
 }

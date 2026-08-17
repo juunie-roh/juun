@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 
 import HeaderOffsetLayout from "@/layouts/header-offset";
 import {
-  BASE_URL,
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
@@ -40,7 +39,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [`${BASE_URL}/juun.png`],
+      images: ["/juun.png"],
     },
   };
 

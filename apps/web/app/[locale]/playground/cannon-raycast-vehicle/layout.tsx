@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Three Cannon Raycast Vehicle Example",
     description: "Three js Vehicle Demonstration with Cannon physics applied",
-    images: "/images/cannon-raycast-vehicle.png",
+    images: "/images/playground/cannon-raycast-vehicle.png",
     siteName: "Three Cannon Raycast Vehicle Example",
     url: "https://juun.vercel.app/playground/cannon-raycast-vehicle",
   },
