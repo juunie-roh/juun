@@ -10,6 +10,14 @@ vi.mock("server-only", () => ({}));
 vi.mock("@vercel/blob");
 vi.mock("probe-image-size");
 
+// `cacheLife`/`cacheTag` throw outside a Next request scope, which would abort
+// `probeBlob` before it ever reaches the blob read. Caching is a framework
+// concern; these tests cover the probing logic underneath it.
+vi.mock("next/cache", () => ({
+  cacheLife: vi.fn(),
+  cacheTag: vi.fn(),
+}));
+
 import { getImageDimensions } from "./image";
 
 /**

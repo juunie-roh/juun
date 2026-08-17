@@ -1,6 +1,8 @@
 import "server-only";
 
 import { get } from "@vercel/blob";
+import { cacheLife, cacheTag } from "next/cache";
+import { unstable_rethrow } from "next/navigation";
 import probe from "probe-image-size";
 import { Readable } from "stream";
 import type { ReadableStream as NodeReadableStream } from "stream/web";
@@ -27,8 +29,18 @@ function toBlobPathname(src: string): string | null {
  * A plain `probe(url)` cannot be used: the store is private, so its URLs
  * return 403 without the read-write token. Reading through `get()` is what
  * supplies the token.
+ *
+ * Cached because this is network I/O on the render path. Without it every
+ * pre-rendered post re-fetches each of its images, and under `cacheComponents`
+ * that uncached read forces the prerender to postpone. Blobs are immutable
+ * once written, so their dimensions never change - hence `max` and a per-key
+ * tag for the rare case where one is genuinely replaced.
  */
 async function probeBlob(pathname: string): Promise<Dimensions | null> {
+  "use cache";
+  cacheLife("max");
+  cacheTag(`image-dimensions:${pathname}`);
+
   const result = await get(pathname, { access: "private" });
   if (!result || result.statusCode !== 200) return null;
 
@@ -55,6 +67,11 @@ async function probeBlob(pathname: string): Promise<Dimensions | null> {
  * losing `next/image` optimization and the AspectRatio wrapper that prevents
  * layout shift. Each failure path warns for that reason.
  *
+ * Both catches call `unstable_rethrow` first. Next signals control flow with
+ * thrown errors - postpone, prerender-interrupt, redirect - and a bare
+ * `catch` here would swallow them, leaving a corrupted prerender that fails
+ * later with a stack pointing at this file rather than the real cause.
+ *
  * @param src - Image source (blob-backed `/images/*` path, or absolute URL).
  * @returns Object with width and height, or null if unable to get dimensions.
  */
@@ -66,6 +83,7 @@ export async function getImageDimensions(
       const result = await probe(src);
       return { width: result.width, height: result.height };
     } catch (error) {
+      unstable_rethrow(error);
       console.warn(`[Image] Failed to probe remote image: ${src}`, error);
       return null;
     }
@@ -80,6 +98,7 @@ export async function getImageDimensions(
   try {
     return await probeBlob(blobPathname);
   } catch (error) {
+    unstable_rethrow(error);
     console.warn(`[Image] Blob probe failed for: ${blobPathname}`, error);
     return null;
   }
