@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Markdown Input Renderer",
     description:
       "Input renderer demonstration with custom content management system. Turns markdown input text into react component in real-time.",
-    images: "/images/markdown-icon.png",
+    images: "/images/playground/markdown-icon.png",
     siteName: "Markdown Input Renderer",
     url: "https://juun.vercel.app/playground/input-renderer",
   },

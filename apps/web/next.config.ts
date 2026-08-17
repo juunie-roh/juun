@@ -142,13 +142,13 @@ const nextConfig: NextConfig = {
   },
   rewrites() {
     return {
-      // beforeFiles: intercept before static /public files so blog images are
+      // beforeFiles: intercept before static /public files so images are
       // served from the private Blob store (via the proxy route), even though
       // the originals still exist under public/images/blog.
       beforeFiles: [
         {
-          source: "/images/blog/:path*",
-          destination: "/api/blog/image/blog/:path*",
+          source: "/images/:path*",
+          destination: "/api/images/:path*",
         },
       ],
       // afterFiles: i18n-wrapped links for static html pages

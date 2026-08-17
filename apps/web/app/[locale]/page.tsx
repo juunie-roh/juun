@@ -8,7 +8,6 @@ import HeaderOffsetLayout from "@/layouts/header-offset";
 import MaxWidthLayout from "@/layouts/max-width";
 import cache from "@/lib/cache";
 import {
-  BASE_URL,
   getCanonicalUrl,
   getLanguageAlternates,
 } from "@/utils/server/metadata";
@@ -27,7 +26,6 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "/.metadata" });
   const canonicalUrl = getCanonicalUrl(locale as Locale);
   const metadata: Metadata = {
-    metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: canonicalUrl,
       languages: getLanguageAlternates(),
@@ -56,7 +54,7 @@ export async function generateMetadata({
       title: { template: t("title.template"), default: t("title.default") },
       description: t("description"),
       siteName: t("openGraph.siteName"),
-      images: [`${BASE_URL}/images/juun.png`],
+      images: ["/juun.png"],
       url: canonicalUrl,
     },
 
@@ -65,7 +63,7 @@ export async function generateMetadata({
       title: { template: t("title.template"), default: t("title.default") },
       description: t("description"),
       // creator: "@juun_roh", // if you have a Twitter handle
-      images: [`${BASE_URL}/images/juun.png`],
+      images: ["/juun.png"],
     },
 
     robots: {

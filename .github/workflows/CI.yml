@@ -16,6 +16,10 @@ env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
+  BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+  BLOB_STORE_ID: ${{ secrets.BLOB_STORE_ID}}
+  BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
 
 jobs:
   prepare:
