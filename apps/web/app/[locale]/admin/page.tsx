@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { requireAdminSession } from "@/lib/server/session";
+import { requireAdminSession } from "@/lib/server/auth";
 
 import SignOut from "./_components/sign-out";
 
