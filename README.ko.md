@@ -10,7 +10,7 @@
 > **A self-documenting knowledge system where the development process is the content.**
 
 이 프로젝트는 다양한 도메인(기술 구현, editorial design, 정보 및 지식 전달 구조 설계 등)에 걸친 architectural thinking 을 드러내기 위해 설계되었습니다.
-모든 결정과 실험을 기록 및 추적하며 프로젝트 자체가 포트폴리오와 배움을 위한 실험실 양방의 역할을 수행합니다.
+모든 결정과 실험을 기록 및 추적하며 프로젝트 자체가 포트폴리오이자 배움을 위한 실험실입니다.
 
 🌐 [Live Site](https://juun.vercel.app) · 📝 [Blog Articles](https://juun.vercel.app/blog) · 🎮 [Playground](https://juun.vercel.app/playground) · 📊 [Timeline](https://juun.vercel.app/#timeline)
 
@@ -130,7 +130,7 @@ juun/
 
 ### Prerequisites
 
-- Node.js 24.x 또는 25.x (CI 과정에서 테스트 진행 중인 버전들)
+- Node.js 24.x 또는 26.x (CI 과정에서 테스트 진행 중인 버전들)
 - PNPM 10.28.1 이상
 
 ### Installation
@@ -211,6 +211,4 @@ _All optimizations documented in [Timeline](https://juun.vercel.app/#timeline) e
 
 ---
 
-<p align="center">
-  <i>Every decision documented. Every experiment measured. Every failure owned.</i>
-</p>
+> Every decision documented. Every experiment measured. Every failure owned.
