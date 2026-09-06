@@ -50,6 +50,7 @@
     "@config/eslint": "workspace:^",
     "@config/typescript": "workspace:^",
     "@types/node": "^26.2.0",
+    "dotenv": "^17.4.2",
     "prisma": "^7.9.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"

@@ -130,7 +130,7 @@ juun/
 
 ### Prerequisites
 
-- Node.js 24.x or 25.x (both tested in CI)
+- Node.js 24.x or 26.x (both tested in CI)
 - PNPM 10.28.0 or higher
 
 ### Installation
@@ -214,6 +214,4 @@ git cz                    # Commitizen for conventional commits
 
 ---
 
-<p align="center">
-  <i>Every decision documented. Every experiment measured. Every failure owned.</i>
-</p>
+> Every decision documented. Every experiment measured. Every failure owned.

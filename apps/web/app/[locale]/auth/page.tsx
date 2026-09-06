@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { getAdminSession } from "@/lib/server/session";
+import { getAdminSession } from "@/lib/server/auth";
 
 import SignIn from "./_components/sign-in";
 
