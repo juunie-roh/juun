@@ -162,6 +162,7 @@ model Verification {
 enum PostCategory {
   ANALYSIS
   CASE_STUDY
+  FIELD_NOTES
   OPINION
 }
 
