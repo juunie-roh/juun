@@ -12,15 +12,15 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "expo": "^57.0.15",
-    "expo-constants": "^57.0.13",
+    "expo": "^57.0.26",
+    "expo-constants": "^57.0.20",
     "expo-status-bar": "^57.0.1",
-    "react": "19.2.8",
-    "react-native": "0.87.0",
+    "react": "19.3.0",
+    "react-native": "0.87.1",
     "react-native-webview": "^14.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.1",
+    "@babel/core": "^8.0.6",
     "@config/eslint": "workspace:^",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
