@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "prisma generate && tsup",
     "dev": "tsup --watch",
     "postinstall": "prisma generate",
     "generate": "prisma generate",
