@@ -1,41 +1,15 @@
-import {
-  type AbstractIntlMessages,
-  Formats,
-  hasLocale,
-  IntlErrorCode,
-} from "next-intl";
+import * as rootParams from "next/root-params";
+import { type AbstractIntlMessages, hasLocale, IntlErrorCode } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 
+import { formats } from "./formats";
 import { routing } from "./routing";
 
-export const formats = {
-  dateTime: {
-    short: {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    },
-    long: {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    },
-  },
-  number: {
-    precise: {
-      maximumFractionDigits: 5,
-    },
-  },
-  list: {
-    enumeration: {
-      style: "long",
-      type: "conjunction",
-    },
-  },
-} satisfies Formats;
-
-export default getRequestConfig(async ({ requestLocale }) => {
-  const requested = await requestLocale;
+export default getRequestConfig(async ({ locale: override }) => {
+  // An explicit `locale` (e.g. `getMessages({ locale })`) wins; otherwise read
+  // the `[locale]` root param. Invalid values fall back to the default locale -
+  // the root layout already 404s them, and its not-found UI still needs messages.
+  const requested = override ?? (await rootParams.locale());
   const locale = hasLocale(routing.locales, requested)
     ? requested
     : routing.defaultLocale;

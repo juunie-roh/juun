@@ -98,7 +98,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
 
   const { locale } = validated;
   const [posts, items, t, f] = await Promise.all([
-    cache.post.select.byCategory("ANALYSIS", locale),
+    cache.post.select.byCategory("FIELD_NOTES", locale),
     cache.timeline.select.all("desc", locale),
     getTranslations("/.section"),
     getFormatter({ locale }),
