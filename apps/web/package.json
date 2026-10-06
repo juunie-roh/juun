@@ -71,7 +71,7 @@
     "@vercel/otel": "^2.1.3",
     "@vercel/speed-insights": "^2.0.0",
     "better-auth": "^1.7.7",
-    "cesium": "^1.146.0",
+    "cesium": "~1.134.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
