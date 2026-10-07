@@ -51,7 +51,7 @@ export function BlogCard({ metadata, index = 0 }: BlogCardProps) {
   };
 
   // Use translation fields (title is on base object)
-  const { title } = metadata;
+  const { title, category, image, created_at } = metadata;
   const { description, word_count } = metadata.translation;
 
   // For now we might only have description, but this should be updated
@@ -66,10 +66,10 @@ export function BlogCard({ metadata, index = 0 }: BlogCardProps) {
             ratio={16 / 9}
             className="size-full overflow-hidden bg-muted"
           >
-            {metadata.image && (
+            {image ? (
               <LogoAvatar className="size-full rounded-none">
                 <Image
-                  src={metadata.image}
+                  src={image}
                   alt={title || "Blog post image"}
                   fill
                   sizes="(max-width: 1024px) 100vw, 25vw"
@@ -78,21 +78,21 @@ export function BlogCard({ metadata, index = 0 }: BlogCardProps) {
                   className="size-full object-contain px-2 transition-transform duration-300 group-hover:scale-105"
                 />
               </LogoAvatar>
+            ) : (
+              <BlogCardImagePlaceholder title={title} category={category} />
             )}
           </AspectRatio>
 
           <div className="relative flex items-center justify-between gap-3 text-xs text-muted-foreground">
             <div className="flex flex-wrap justify-self-start">
-              <Badge variant="default">
-                {capitalize(metadata.category, /[_]+/g)}
-              </Badge>
+              <Badge variant="default">{capitalize(category, /[_]+/g)}</Badge>
             </div>
 
             <div className="absolute right-0 flex flex-col items-start">
               <div className="flex items-center gap-1">
                 <Calendar className="size-3" />
-                <time dateTime={new Date(metadata.created_at).toISOString()}>
-                  {f.dateTime(metadata.created_at, "short")}
+                <time dateTime={new Date(created_at).toISOString()}>
+                  {f.dateTime(created_at, "short")}
                 </time>
               </div>
               <div className="flex items-center justify-end gap-1">
@@ -110,6 +110,26 @@ export function BlogCard({ metadata, index = 0 }: BlogCardProps) {
         </div>
       </div>
     </Link>
+  );
+}
+
+export function BlogCardImagePlaceholder({
+  title,
+  category,
+}: {
+  title: string;
+  category: string;
+}) {
+  return (
+    <div
+      aria-hidden
+      className="flex size-full flex-col justify-center px-2 transition-transform duration-300 group-hover:scale-105"
+    >
+      <div className="font-stabil-grotesk text-3xl font-bold tracking-tight">
+        {capitalize(category, /[_]+/g)}
+      </div>
+      <div className="text-right">{title}</div>
+    </div>
   );
 }
 
