@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import { Suspense } from "react";
 
 import {
@@ -48,8 +48,6 @@ export default async function RootLayout({
   if (!validated) return notFound();
 
   const { locale } = validated;
-  // Enable static rendering
-  setRequestLocale(locale);
   const messages = await getMessages({ locale });
 
   return (

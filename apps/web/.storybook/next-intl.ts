@@ -1,4 +1,4 @@
-import { formats } from "@/i18n/request";
+import { formats } from "@/i18n/formats";
 
 import en from "../messages/en.json";
 import ko from "../messages/ko.json";

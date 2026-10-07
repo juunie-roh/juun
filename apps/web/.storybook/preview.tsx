@@ -44,19 +44,28 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <NextIntlClientProvider locale="en">
-        <ThemeProvider>
-          <TooltipProvider>
-            <div
-              className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased`}
-            >
-              <Story />
-            </div>
-          </TooltipProvider>
-        </ThemeProvider>
-      </NextIntlClientProvider>
-    ),
+    (Story, { globals }) => {
+      // Vitest only applies this file's annotations, not the addon's, so this
+      // provider must carry messages and formats itself.
+      const locale = globals.locale ?? nextIntl.defaultLocale;
+      return (
+        <NextIntlClientProvider
+          locale={locale}
+          messages={nextIntl.messagesByLocale[locale]}
+          formats={nextIntl.formats}
+        >
+          <ThemeProvider>
+            <TooltipProvider>
+              <div
+                className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${stabilGroteskTrial.variable} ${victorSerifTrial.variable} font-sans antialiased`}
+              >
+                <Story />
+              </div>
+            </TooltipProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      );
+    },
   ],
 };
 
