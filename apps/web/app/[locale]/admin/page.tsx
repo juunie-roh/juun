@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { requireAdminSession } from "@/lib/server/auth";
 
+import RevalidateAll from "./_components/revalidate-all";
 import SignOut from "./_components/sign-out";
 
 export const metadata = {
@@ -27,7 +28,10 @@ async function AdminContent() {
         <p className="text-sm text-muted-foreground">Signed in as</p>
         <p className="font-medium">{session.user.email}</p>
       </div>
-      <SignOut />
+      <div className="flex gap-2">
+        <RevalidateAll />
+        <SignOut />
+      </div>
     </div>
   );
 }
