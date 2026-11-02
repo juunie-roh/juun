@@ -10,6 +10,8 @@ import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javasc
 import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
 import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
 import pure from "react-syntax-highlighter/dist/esm/languages/prism/pure";
+import python from "react-syntax-highlighter/dist/esm/languages/prism/python";
+import toml from "react-syntax-highlighter/dist/esm/languages/prism/toml";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import typescript from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
 import yaml from "react-syntax-highlighter/dist/esm/languages/prism/yaml";
@@ -32,6 +34,8 @@ SyntaxHighlighter.registerLanguage("yaml", yaml);
 SyntaxHighlighter.registerLanguage("ignore", ignore);
 SyntaxHighlighter.registerLanguage("pure", pure);
 SyntaxHighlighter.registerLanguage("diff", diff);
+SyntaxHighlighter.registerLanguage("python", python);
+SyntaxHighlighter.registerLanguage("toml", toml);
 
 /**
  * @see {@link https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_PRISM.MD AVAILABLE_LANGUAGES_PRISM}
@@ -47,7 +51,9 @@ type SupportedLanguage =
   | "yaml"
   | "ignore"
   | "pure" // monospaced plain text
-  | "diff";
+  | "diff"
+  | "python"
+  | "toml";
 
 const languageMap: Record<string, SupportedLanguage> = {
   ts: "typescript",
@@ -67,6 +73,9 @@ const languageMap: Record<string, SupportedLanguage> = {
   gitattributes: "pure",
   text: "pure",
   diff: "diff",
+  py: "python",
+  python: "python",
+  toml: "toml",
 };
 
 interface CodeBlockProps {
