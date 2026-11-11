@@ -42,40 +42,55 @@ await post.select.byId(1);
 import cache from "@/lib/cache";
 await cache.post.select.all();      // Cached version
 await cache.post.select.byId(1);    // Cached version
-await cache.post.revalidate();   // Cache invalidation
+await cache.post.create.one(input); // Write + invalidate "posts"
+await cache.post.revalidate();      // Cache invalidation
 ```
+
+`lib/cache/index.ts` also re-exports the `@juun/db/post` and `@juun/db/timeline` types, so pages can import types such as `Post` from `@/lib/cache`.
 
 ## Usage
 
 ### In Server Components
 
+Every query takes an optional `locale` (defaults to `routing.defaultLocale`, `ko`).
+
 ```typescript
 import cache from "@/lib/cache";
 
-// Get all posts (cached for 1 hour)
-const posts = await cache.post.select.all();
+// Get all posts for a locale (cached with the "weeks" preset)
+const posts = await cache.post.select.all(locale);
 
-// Get post by id (cached for 1 hour)
-const post = await cache.post.select.byId(1);
+// Other post queries
+const tagged = await cache.post.select.byTags(["docker"], locale);
+const notes = await cache.post.select.byCategory("FIELD_NOTES", locale);
+
+// Get post by id
+const post = await cache.post.select.byId(1, locale);
 
 if (!post) {
   notFound();
 }
+
+// Timeline (order defaults to "desc")
+const items = await cache.timeline.select.all("desc", locale);
+const item = await cache.timeline.select.byId(1, locale);
 ```
 
 ### Cache Invalidation
 
 ```typescript
-// Method 1: Using cache helper (recommended)
+// Method 1: Using cache helper
 import cache from "@/lib/cache";
 await cache.post.revalidate();
 await cache.timeline.revalidate();
 
 // Method 2: Using Next.js directly
-import { revalidateTag } from "next/cache";
-revalidateTag("posts", "max");      // Invalidate all post queries
-revalidateTag("timelines", "max");  // Invalidate all timeline queries
+import { revalidateTag, updateTag } from "next/cache";
+revalidateTag("posts", "max");  // Stale-while-revalidate for all post queries
+updateTag("posts");             // Server Actions only: expire now (read-your-own-writes)
 ```
+
+Writes through `cache.post.create.one()` invalidate the `"posts"` tag automatically. The admin page's temporary "revalidate all" action (`app/[locale]/admin/_actions/revalidate-all.ts`) uses `updateTag` on both tags for content inserted directly into the database.
 
 ## Adding New Cached Entities
 
@@ -85,44 +100,43 @@ Follow this pattern to add caching for other database entities:
 
 Create `lib/cache/{entity}/` directory structure:
 
-**`lib/cache/{entity}/get.ts`:**
+**`lib/cache/{entity}/select.ts`:**
 
 ```typescript
+import type { Locale } from "@juun/db";
 import entityQuery from "@juun/db/{entity}";
 import { cacheLife, cacheTag } from "next/cache";
 
-export async function all() {
+import { routing } from "@/i18n/routing";
+
+const DEFAULT_LOCALE: Locale = routing.defaultLocale;
+
+export async function all(locale: Locale = DEFAULT_LOCALE) {
   "use cache";
-  cacheLife("hours");
-  cacheTag("{entities}");
-  return await entityQuery.select.all();
+  cacheLife("weeks");
+  cacheTag("{entities}", `{entities}-${locale}`);
+  return await entityQuery.select.all(locale);
 }
 
-export async function byId(id: number) {
+export async function byId(id: number, locale: Locale = DEFAULT_LOCALE) {
   "use cache";
-  cacheLife("hours");
-  cacheTag("{entities}", `{entity}-${id}`);
-  return await entityQuery.select.byId(id);
+  cacheLife("weeks");
+  cacheTag("{entities}", `{entity}-${id}`, `{entity}-${id}-${locale}`);
+  return await entityQuery.select.byId(id, locale);
 }
 ```
 
 **`lib/cache/{entity}/index.ts`:**
 
 ```typescript
-import * as get from "./get";
+import * as select from "./select";
 
-export { get };
+export { select };
 
 export async function revalidate() {
   const { revalidateTag } = await import("next/cache");
   revalidateTag("{entities}", "max");
 }
-
-export const CACHE_CONFIG = {
-  revalidate: 3600,
-  staleTime: 3_600_000,  // 1 hour in milliseconds
-  tags: ["{entities}"],
-};
 ```
 
 ### Step 2: Update Index
@@ -132,6 +146,7 @@ Add to `lib/cache/index.ts`:
 ```typescript
 import * as {entity} from "./{entity}";
 
+export type * from "@juun/db/{entity}";
 export default { post, timeline, {entity} };
 ```
 
@@ -140,8 +155,8 @@ export default { post, timeline, {entity} };
 ```typescript
 import cache from "@/lib/cache";
 
-const entities = await cache.{entity}.select.all();
-const entity = await cache.{entity}.select.byId(1);
+const entities = await cache.{entity}.select.all(locale);
+const entity = await cache.{entity}.select.byId(1, locale);
 await cache.{entity}.revalidate();
 ```
 
@@ -151,37 +166,37 @@ await cache.{entity}.revalidate();
 
 | Setting | Value | Description |
 | --------- | ------- | ------------- |
-| `cacheLife` | `"hours"` (1 hour) | Cache lifetime preset |
-| `staleTime` | 3,600,000 ms (1 hour) | Maximum stale time |
-| `tags` | Entity-specific | For cache invalidation |
+| `cacheLife` | `"weeks"` | Revalidate after 1 week, expire after 30 days |
+| `tags` | Entity, locale and item tags | For cache invalidation |
 
 ### Cache Tags by Entity
 
-| Entity | Tags | Purpose |
+| Entity | Query | Tags |
 | -------- | ------ | --------- |
-| `post` | `["posts"]` | Invalidate all post queries |
-| `timeline` | `["timelines"]` | Invalidate all timeline queries |
+| `post` | `all` | `posts`, `posts-{locale}` |
+| `post` | `byTags` | `posts`, `posts-{locale}`, each tag name |
+| `post` | `byCategory` | `posts`, `posts-{locale}`, the category |
+| `post` | `byId` | `posts`, `post-{id}`, `post-{id}-{locale}` |
+| `timeline` | `all` | `timelines`, `timelines-{locale}`, the order |
+| `timeline` | `byId` | `timelines`, `timeline-{id}`, `timeline-{id}-{locale}` |
+
+Invalidating `posts` or `timelines` clears every query for that entity.
 
 ### Customizing Cache Duration
 
-Use Next.js 16's `cacheLife()` presets or custom durations:
+Use Next.js 16's `cacheLife()` presets or a custom profile:
 
 ```typescript
-// Using presets
 "use cache";
-cacheLife("seconds");  // 1 second
-cacheLife("minutes");  // 5 minutes
-cacheLife("hours");    // 1 hour (default for this project)
-cacheLife("days");     // 7 days
-cacheLife("weeks");    // 4 weeks
-cacheLife("max");      // Indefinite (manual revalidation only)
+cacheLife("seconds");  // revalidate 1s,   expire 1 min
+cacheLife("minutes");  // revalidate 1 min, expire 1 h
+cacheLife("hours");    // revalidate 1 h,  expire 1 day
+cacheLife("days");     // revalidate 1 day, expire 1 week
+cacheLife("weeks");    // revalidate 1 week, expire 30 days (used by this project)
+cacheLife("max");      // revalidate 30 days, expire 1 year
 
-// Custom configuration
-export const CACHE_CONFIG = {
-  revalidate: 60,         // Revalidate after 60 seconds
-  staleTime: 60_000,      // Serve stale for 60 seconds
-  tags: ["{entities}"],   // Cache tags for invalidation
-};
+// Custom profile (seconds)
+cacheLife({ stale: 300, revalidate: 3600, expire: 86400 });
 ```
 
 ## When NOT to Use This Layer
@@ -204,22 +219,15 @@ export const CACHE_CONFIG = {
 
 ### Per-Item Cache Tags
 
-For fine-grained cache control, use multiple tags:
+Each `byId` query carries item-specific tags for fine-grained control:
 
 ```typescript
-export async function byId(id: number) {
-  "use cache";
-  cacheLife("hours");
-  cacheTag("posts", `post-${id}`);  // Multiple tags for granular control
-  return await postQuery.select.byId(id);
-}
-
-// Invalidate specific post
 import { revalidateTag } from "next/cache";
-revalidateTag("post-1", "max");  // Invalidate only post with id=1
 
-// Invalidate all posts
-revalidateTag("posts", "max");   // Invalidate all posts
+revalidateTag("post-1", "max");     // Only post 1, every locale
+revalidateTag("post-1-en", "max");  // Only the English version of post 1
+revalidateTag("posts-ko", "max");   // Korean list queries
+revalidateTag("posts", "max");      // All post queries
 ```
 
 ### Conditional Caching
@@ -256,15 +264,14 @@ Monitor your logs for:
 ### Verify Cache Invalidation
 
 ```typescript
-// In API route or Server Action
-import { revalidateTag } from "next/cache";
+// In a Server Action
+"use server";
+import { updateTag } from "next/cache";
 
-export async function POST() {
+export async function invalidatePosts() {
   console.log("Invalidating posts cache...");
-  revalidateTag("posts", "max");  // "max" scope for maximum invalidation
+  updateTag("posts");
   console.log("Cache invalidated!");
-
-  return Response.json({ success: true });
 }
 ```
 
@@ -272,24 +279,25 @@ export async function POST() {
 
 ```text
 lib/cache/
-├── index.ts                # Main export (cache namespace)
+├── index.ts                # Main export (cache namespace + db type re-exports)
 ├── post/                   # Post cache directory
-│   ├── index.ts            # Post exports (get, revalidate, CACHE_CONFIG)
-│   └── get.ts              # Cached post.get queries (all, byId)
+│   ├── index.ts            # Post exports (select, create, revalidate)
+│   ├── select.ts           # Cached post.select queries (all, byTags, byCategory, byId)
+│   └── create.ts           # post.create.one + "posts" invalidation
 ├── timeline/               # Timeline cache directory
-│   ├── index.ts            # Timeline exports (get, revalidate, CACHE_CONFIG)
-│   └── get.ts              # Cached timeline.get queries (all, byId)
+│   ├── index.ts            # Timeline exports (select, revalidate)
+│   └── select.ts           # Cached timeline.select queries (all, byId)
 └── README.md               # This file
 ```
 
 ## Best Practices
 
 1. **Mirror DB Structure** - Keep the same namespace structure as `@juun/db`
-2. **Consistent Tags** - Use plural entity names for tags (`"posts"`, `"timelines"`)
-3. **Use `cacheLife()` Presets** - Prefer built-in presets (`"hours"`, `"days"`) over custom durations
+2. **Consistent Tags** - Use plural entity names for entity tags (`"posts"`, `"timelines"`) and add locale tags
+3. **Use `cacheLife()` Presets** - Prefer built-in presets (`"weeks"`, `"days"`) over custom durations
 4. **Per-Item Tags** - Add item-specific tags (e.g., `post-${id}`) for granular invalidation
 5. **Document Cache Duration** - Comment why specific durations are chosen
-6. **Test Invalidation** - Verify cache clears after mutations with `"max"` scope
+6. **Invalidate on Write** - Wrap mutations (like `create.one`) so they invalidate their entity tag
 7. **Monitor Performance** - Use cache debugging in development
 8. **Organize by Directory** - Group related cache functions in subdirectories (`post/`, `timeline/`)
 
@@ -311,7 +319,7 @@ export default async function Page() {
 import cache from "@/lib/cache";
 
 export default async function Page() {
-  const posts = await cache.post.select.all(); // Cached for 1 hour
+  const posts = await cache.post.select.all(); // Cached ("weeks" preset)
 }
 ```
 
@@ -322,4 +330,5 @@ export default async function Page() {
 - [`cacheLife()` API](https://nextjs.org/docs/app/api-reference/functions/cacheLife)
 - [`cacheTag()` API](https://nextjs.org/docs/app/api-reference/functions/cacheTag)
 - [`revalidateTag()` API](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)
+- [`updateTag()` API](https://nextjs.org/docs/app/api-reference/functions/updateTag)
 - [@juun/db Package](../../../../packages/db/README.md)

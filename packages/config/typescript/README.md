@@ -2,11 +2,18 @@
 
 Collection of internal TypeScript configurations.
 
-Override below after extending the common configurations.
+| Config | Used by | Notes |
+| --- | --- | --- |
+| `base.json` | `@juun/db`, `@juun/api` | Strict mode, `isolatedModules`, declarations and source maps |
+| `nextjs.json` | `@juun/web` | Next.js settings, plus `noUncheckedIndexedAccess` |
+| `react-library.json` | — | For React libraries; not currently used |
 
-* `baseUrl`: where to start resolution with absolute paths.
-* `rootDir`: specify the root directory of the package source files.
-* `paths`: specify where to start resolution, usually for paths start with `@/*`.
+`apps/mobile` extends `expo/tsconfig.base` instead.
+
+After extending a configuration, override these per project:
+
+* `rootDir`: the root directory of the package source files.
+* `paths`: path aliases, usually `@/*`.
 * `include`: file names, name patterns, or paths to include.
 * `exclude`: file names, name patterns, or paths to exclude.
 
@@ -19,7 +26,6 @@ Extend the appropriate configuration in your project's `tsconfig.json`:
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@config/typescript/nextjs.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "rootDir": ".",
     "paths": { "@/*": ["./*"] }
   },

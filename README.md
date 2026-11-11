@@ -63,6 +63,7 @@ In-depth blog articles covering:
 - **Cesium Utils Demo**: [@juun-roh/cesium-utils](https://www.npmjs.com/package/@juun-roh/cesium-utils) npm package showcase
 - **3D Graphics**: Three.js + Cannon physics simulations
 - **UI Experiments**: Custom components (Wheel, Marquee)
+- **100 Days of CSS**: Hand-written static CSS challenge pages
 
 ### 🏗️ Production-Grade Architecture
 
@@ -78,9 +79,11 @@ In-depth blog articles covering:
 
 | Layer | Technology |
 | ------- | ------------ |
-| **Framework** | Next.js 16, React 19.2, Turbopack |
+| **Framework** | Next.js 16, React 19.3, Turbopack |
 | **Language** | TypeScript 5.9 |
 | **Database** | Prisma ORM + Neon PostgreSQL |
+| **Auth & Storage** | Better Auth (Google OAuth) + Vercel Blob |
+| **Mobile** | Expo (React Native) |
 | **Build System** | Turborepo with remote caching |
 | **Package Manager** | PNPM (workspace protocol) |
 | **3D Graphics** | CesiumJS (Geospatial) + Three.js + Cannon |
@@ -107,17 +110,20 @@ In-depth blog articles covering:
 ```text
 juun/
 ├── apps/
-│   └── web/
-│       ├── app/
-│       │   ├── [locale]/
-│       │   │   ├── blog/[id]/
-│       │   │   ├── timeline/[id]/
-│       │   │   ├── playground/
-│       │   │   └── cesium-utils/
-│       │   └── @dialog/
-│       └── lib/
-│           └── cache/            # Next.js 16 "use cache" wrappers
-│       └── utils/                # Utilities (security, image, date)
+│   ├── web/
+│   │   ├── app/
+│   │   │   ├── [locale]/
+│   │   │   │   ├── blog/[id]/
+│   │   │   │   ├── timeline/[id]/
+│   │   │   │   ├── playground/
+│   │   │   │   ├── cesium-utils/
+│   │   │   │   ├── admin/        # Admin CMS (Better Auth + Google)
+│   │   │   │   └── @dialog/      # Intercepted timeline modal
+│   │   │   └── api/              # Auth, image proxy, admin uploads
+│   │   ├── lib/
+│   │   │   └── cache/            # Next.js 16 "use cache" wrappers
+│   │   └── utils/                # Utilities (security, string, image)
+│   └── mobile/                   # Expo (React Native) app
 ├── packages/
 │   ├── db/                       # Framework-agnostic Prisma layer
 │   ├── api/                      # HTTP client with retry
@@ -131,7 +137,7 @@ juun/
 ### Prerequisites
 
 - Node.js 24.x or 26.x (both tested in CI)
-- PNPM 10.28.0 or higher
+- PNPM 12 (the exact version is pinned in `packageManager`; run `corepack enable` to use it)
 
 ### Installation
 
@@ -143,9 +149,10 @@ cd juun
 # Install dependencies
 pnpm install
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your DATABASE_URL
+# Set up environment variables (no template is committed)
+# Create apps/web/.env and packages/db/.env with at least DATABASE_URL.
+# The admin CMS and image proxy also need BETTER_AUTH_*, GOOGLE_CLIENT_*,
+# ADMIN_ALLOWED_EMAILS and BLOB_READ_WRITE_TOKEN.
 
 # Generate Prisma Client
 pnpm db generate
@@ -170,6 +177,8 @@ pnpm check-types          # TypeScript type checking
 # Package shortcuts
 pnpm web <command>        # Run command in @juun/web
 pnpm db <command>         # Run command in @juun/db
+pnpm api <command>        # Run command in @juun/api
+pnpm mobile <command>     # Run command in @juun/mobile
 
 # Database operations
 pnpm db generate          # Generate Prisma Client
